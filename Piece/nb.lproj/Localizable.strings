@@ -1,0 +1,70 @@
+
+/* Warning that the app failed to save the recording. */
+"Can't Save" = "Kan ikke lagre";
+
+"Cancel" = "Avbryt";
+
+/* Delete a recording. */
+"Delete" = "Slett";
+
+/* Title of done button when editing recordings. */
+"Done" = "Ferdig";
+
+/* The title is not unique in the project and section. */
+"Duplicate title!" = "Duplikat tittel!";
+
+/* Title of done button before editing recordings. */
+"Edit" = "Rediger";
+
+/* Placeholder for new project title */
+"New Name to Project" = "Nytt navn til prosjekt";
+
+/* Placeholder for new recording title */
+"New Name to Recording" = "Nytt navn til opptak";
+
+/* Placeholder text for new name to section */
+"New Name to Section" = "Nytt navn til seksjon";
+
+/* Title of alert when creating a new project. */
+"New Project" = "Nytt prosjekt";
+
+/* Title of alert when creating new section. */
+"New Section" = "Ny seksjon";
+
+/* Warning when you try to select a section before selecting a project */
+"No Project" = "Ikke valgt prosjekt";
+
+/* Confirmation */
+"OK" = "OK";
+
+/* Placeholder text for text field in alert. */
+"Project Title" = "tittel på prosjekt";
+
+/* Rename project */
+"Rename" = "Gi nytt navn";
+
+"Save" = "Lagre";
+
+/* Placeholder text for title of new section. */
+"Section Title" = "Tittel på seksjon";
+
+/* Title of sections table view. */
+"Sections in \(project.title)" = "Seksjoner i \(project.title)";
+
+/* Title of record button before recording. */
+"Tap to Record" = "Trykk for å ta opp lyd";
+
+/* Title of record button after starting to recording. */
+"Tap to Stop" = "Trykk for å stoppe opptak";
+
+/* Warning that you must choose a project or create a new one before selecting a section. */
+"You must choose a project, or create a new one." = "Du må velge et prosjekt eller lage et nytt.";
+
+/* Warning when not setting a project. */
+"You must set a project." = "Du må velge et prosjekt.";
+
+/* Warning when not setting a project and a section. */
+"You must set a section and a project." = "Du må velge en seksjon og et prosjekt.";
+
+/* Warning when not setting a section. */
+"You must set a section." = "Du må velge en seksjon.";

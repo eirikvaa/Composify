@@ -1,0 +1,70 @@
+
+/* Warning that the app failed to save the recording. */
+"Can't Save" = "Can't Save";
+
+"Cancel" = "Cancel";
+
+/* Delete a recording. */
+"Delete" = "Delete";
+
+/* Title of done button when editing recordings. */
+"Done" = "Done";
+
+/* The title is not unique in the project and section. */
+"Duplicate title!" = "Duplicate title!";
+
+/* Title of done button before editing recordings. */
+"Edit" = "Edit";
+
+/* Placeholder for new project title */
+"New Name to Project" = "New Name to Project";
+
+/* Placeholder for new recording title */
+"New Name to Recording" = "New Name to Recording";
+
+/* Placeholder text for new name to section */
+"New Name to Section" = "New Name to Section";
+
+/* Title of alert when creating a new project. */
+"New Project" = "New Project";
+
+/* Title of alert when creating new section. */
+"New Section" = "New Section";
+
+/* Warning when you try to select a section before selecting a project */
+"No Project" = "No Project";
+
+/* Confirmation */
+"OK" = "OK";
+
+/* Placeholder text for text field in alert. */
+"Project Title" = "Project Title";
+
+/* Rename project */
+"Rename" = "Rename";
+
+"Save" = "Save";
+
+/* Placeholder text for title of new section. */
+"Section Title" = "Section Title";
+
+/* Title of sections table view. */
+"Sections in \(project.title)" = "Sections in \(project.title)";
+
+/* Title of record button before recording. */
+"Tap to Record" = "Tap to Record";
+
+/* Title of record button after starting to recording. */
+"Tap to Stop" = "Tap to Stop";
+
+/* Warning that you must choose a project or create a new one before selecting a section. */
+"You must choose a project, or create a new one." = "You must choose a project, or create a new one.";
+
+/* Warning when not setting a project. */
+"You must set a project." = "You must set a project.";
+
+/* Warning when not setting a project and a section. */
+"You must set a section and a project." = "You must set a section and a project.";
+
+/* Warning when not setting a section. */
+"You must set a section." = "You must set a section.";
