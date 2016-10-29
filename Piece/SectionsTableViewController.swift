@@ -15,10 +15,6 @@ extension SectionsTableViewController: NSFetchedResultsControllerDelegate {
 		tableView.beginUpdates()
 	}
 
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
-
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 		switch type {
 		case .insert:
@@ -38,6 +34,10 @@ extension SectionsTableViewController: NSFetchedResultsControllerDelegate {
 		}
 
 		sections = fetchedResultsController.fetchedObjects as! [Section]
+	}
+
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
 	}
 }
 
@@ -71,7 +71,7 @@ class SectionsTableViewController: UITableViewController {
 		super.viewWillAppear(animated)
 
 		fetchedResultsController.delegate = self
-		
+
 		// Must update the content every time the user navigates to it because it might have changed.
 		do {
 			try fetchedResultsController.performFetch()
@@ -106,12 +106,13 @@ class SectionsTableViewController: UITableViewController {
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Save section action"), style: .default, handler: { (alertAction) in
-				let title = renameAlert.textFields?.first!.text
-				let section = self.sections[indexPath.row]
+				if let title = renameAlert.textFields?.first?.text {
+					let section = self.sections[indexPath.row]
 
-				PIEFileManager().rename(section, from: section.title, to: title!)
-				section.title = title!
-				CoreDataStack.sharedInstance.saveContext()
+					PIEFileManager().rename(section, from: section.title, to: title)
+					section.title = title
+					CoreDataStack.sharedInstance.saveContext()
+				}
 			})
 			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of cancel button"), style: .destructive, handler: nil)
 
@@ -154,17 +155,17 @@ class SectionsTableViewController: UITableViewController {
 		}
 
 		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configSections."), style: .default) { (alertAction) in
-			let title = alert.textFields?.first?.text
+			if let title = alert.textFields?.first?.text {
+				let entityDescription = NSEntityDescription.entity(forEntityName: "Section", in: self.managedObjectContext)
 
-			let entityDescription = NSEntityDescription.entity(forEntityName: "Section", in: self.managedObjectContext)
+				if let entityDescription = entityDescription {
+					let section = NSManagedObject(entity: entityDescription, insertInto: self.managedObjectContext) as! Section
+					section.title = title
+					section.project = self.chosenProject
 
-			if let entityDescription = entityDescription {
-				let section = NSManagedObject(entity: entityDescription, insertInto: self.managedObjectContext) as! Section
-				section.title = title!
-				section.project = self.chosenProject
-
-				PIEFileManager().save(section)
-				CoreDataStack.sharedInstance.saveContext()
+					PIEFileManager().save(section)
+					CoreDataStack.sharedInstance.saveContext()
+				}
 			}
 		}
 
@@ -181,11 +182,13 @@ class SectionsTableViewController: UITableViewController {
 		if segue.identifier == "showRecordings" {
 			let sectionCell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!)
 			let sectionTitle = sectionCell?.textLabel?.text
-			let selectedSection = chosenProject.sections.filter { ($0 as! Section).title == sectionTitle }.first!
+			let selectedSection = chosenProject.sections.filter { ($0 as! Section).title == sectionTitle }.first
 
-			let destinationViewController = segue.destination as! RootViewController
-			destinationViewController.project = (selectedSection as AnyObject).project
-			destinationViewController.section = selectedSection as! Section
+			if let selectedSection = selectedSection {
+				let destinationViewController = segue.destination as! RootViewController
+				destinationViewController.project = (selectedSection as AnyObject).project
+				destinationViewController.section = selectedSection as! Section
+			}
 		}
 	}
 }
