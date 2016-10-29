@@ -75,7 +75,7 @@ class ProjectsTableViewController: UITableViewController {
 			try fetchedResultsController.performFetch()
 			projects = fetchedResultsController.fetchedObjects as! [Project]
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 		}
 	}
 
@@ -102,12 +102,14 @@ class ProjectsTableViewController: UITableViewController {
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save action"), style: .default, handler: { alertAction in
-				let title = renameAlert.textFields?.first!.text
-				let project = self.projects[indexPath.row]
-
-				PIEFileManager().rename(project, from: project.title, to: title!)
-				project.title = title!
-				CoreDataStack.sharedInstance.saveContext()
+				
+				
+				if let title = renameAlert.textFields?.first?.text {
+					let project = self.projects[indexPath.row]
+					PIEFileManager().rename(project, from: project.title, to: title)
+					project.title = title
+					CoreDataStack.sharedInstance.saveContext()
+				}
 			})
 
 			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of cancel button"), style: .destructive, handler: nil)
@@ -140,15 +142,15 @@ class ProjectsTableViewController: UITableViewController {
 		}
 
 		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configProjects."), style: .default) { alertAction in
-			let projectTitle = alert.textFields?.first?.text
-
-			let entityDescription = NSEntityDescription.entity(forEntityName: "Project", in: self.managedObjectContext)
-
-			if let entityDescription = entityDescription {
-				let project = NSManagedObject(entity: entityDescription, insertInto: self.managedObjectContext) as! Project
-				project.title = projectTitle!
-				PIEFileManager().save(project)
-				CoreDataStack.sharedInstance.saveContext()
+			if let projectTitle = alert.textFields?.first?.text {
+				let entityDescription = NSEntityDescription.entity(forEntityName: "Project", in: self.managedObjectContext)
+				
+				if let entityDescription = entityDescription {
+					let project = NSManagedObject(entity: entityDescription, insertInto: self.managedObjectContext) as! Project
+					project.title = projectTitle
+					PIEFileManager().save(project)
+					CoreDataStack.sharedInstance.saveContext()
+				}
 			}
 		}
 
@@ -163,10 +165,9 @@ class ProjectsTableViewController: UITableViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showSections" {
-			let indexPath = tableView.indexPathForSelectedRow
-
-			if let destVC = segue.destination as? SectionsTableViewController {
-				destVC.chosenProject = projects[indexPath!.row]
+			if let destVC = segue.destination as? SectionsTableViewController,
+				let indexPath = tableView.indexPathForSelectedRow {
+				destVC.chosenProject = projects[indexPath.row]
 			}
 		}
 	}
