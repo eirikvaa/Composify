@@ -158,7 +158,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !projectPicker.isHidden {
-			projectPicker.selectRow(0, inComponent: 0, animated: true)
+			let selectedIndex = projects.index(of: self.project!)
+			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			let index = projectPicker.selectedRow(inComponent: 0)
 			let project = projects[index]
 			self.project = project
@@ -166,7 +167,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !sectionPicker.isHidden {
-			sectionPicker.selectRow(0, inComponent: 0, animated: true)
+			let selectedIndex = self.project?.sections.index(of: self.section!)
+			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			let index = sectionPicker.selectedRow(inComponent: 0)
 			let section = project?.sections[index] as! Section
 			self.section = section
@@ -175,8 +177,6 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 		tableView.beginUpdates()
 		tableView.endUpdates()
-
-		print(self.section)
 
 		tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
 	}
