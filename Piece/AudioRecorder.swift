@@ -20,8 +20,8 @@ class AudioRecorder {
 
 	// MARK: Initialization
 	/**
-	Initializes the AudioPlayer class with a recording.
-	- Parameter url: The url of the location that the recording will be stored.
+	Initializes the AudioPlayer class with the url to a recording.
+	- Parameter url: url of recording to be played.
 	*/
 	convenience init?(url: URL) {
 		self.init()
@@ -39,7 +39,7 @@ class AudioRecorder {
 			try session.setCategory(AVAudioSessionCategoryRecord)
 			try recorder = AVAudioRecorder(url: url, settings: settings)
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 			return nil
 		}
 

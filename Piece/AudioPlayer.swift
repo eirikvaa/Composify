@@ -22,7 +22,7 @@ class AudioPlayer {
 	// MARK: Initialization
 	/**
 	Initializes the AudioPlayer class with a recording.
-	- Parameter recording: The recording the be played.
+	- Parameter url: url of the recording to be played.
 	*/
 	convenience init?(url: URL) {
 		self.init()
@@ -34,7 +34,7 @@ class AudioPlayer {
 			try player = AVAudioPlayer(contentsOf: url)
 
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 			return nil
 		}
 
