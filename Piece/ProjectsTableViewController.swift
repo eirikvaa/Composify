@@ -44,20 +44,19 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
 class ProjectsTableViewController: UITableViewController {
 
 	// MARK: Properties
-	private var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
 		let fetchRequest = Project.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
 		fetchRequest.sortDescriptors = [sortDescriptor]
 
 		let fetchedResultsController = NSFetchedResultsController(
-		                                                          fetchRequest: fetchRequest,
-		                                                          managedObjectContext: self.managedObjectContext,
-		                                                          sectionNameKeyPath: nil,
-		                                                          cacheName: nil)
+			fetchRequest: fetchRequest, managedObjectContext: self.managedContext,
+			sectionNameKeyPath: nil,
+			cacheName: nil)
 		fetchedResultsController.delegate = self
 		return fetchedResultsController
 	}()
+	private var managedContext = CoreDataStack.sharedInstance.managedContext
 	fileprivate var projects = [Project]()
 
 	// MARK: View controller life cycle
@@ -70,7 +69,7 @@ class ProjectsTableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		// Must update the content every time the user navigates to it because it might have changed.
+		// Fetches all objects every time the user navigates here because data might have changed.
 		do {
 			try fetchedResultsController.performFetch()
 			projects = fetchedResultsController.fetchedObjects as! [Project]
@@ -102,11 +101,11 @@ class ProjectsTableViewController: UITableViewController {
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save action"), style: .default, handler: { alertAction in
-				
-				
+
+
 				if let title = renameAlert.textFields?.first?.text {
 					let project = self.projects[indexPath.row]
-					PIEFileManager().rename(project, from: project.title, to: title)
+					PIEFileManager().rename(project, from: project.title, to: title, section: nil, project: nil)
 					project.title = title
 					CoreDataStack.sharedInstance.saveContext()
 				}
@@ -123,7 +122,7 @@ class ProjectsTableViewController: UITableViewController {
 		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "Title of delete action")) { (rowAction, indexPath) in
 			let project = self.projects[indexPath.row]
 			PIEFileManager().delete(project)
-			self.managedObjectContext.delete(project)
+			self.managedContext.delete(project)
 			CoreDataStack.sharedInstance.saveContext()
 		}
 
@@ -143,10 +142,10 @@ class ProjectsTableViewController: UITableViewController {
 
 		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configProjects."), style: .default) { alertAction in
 			if let projectTitle = alert.textFields?.first?.text {
-				let entityDescription = NSEntityDescription.entity(forEntityName: "Project", in: self.managedObjectContext)
-				
+				let entityDescription = NSEntityDescription.entity(forEntityName: "Project", in: self.managedContext)
+
 				if let entityDescription = entityDescription {
-					let project = NSManagedObject(entity: entityDescription, insertInto: self.managedObjectContext) as! Project
+					let project = NSManagedObject(entity: entityDescription, insertInto: self.managedContext) as! Project
 					project.title = projectTitle
 					PIEFileManager().save(project)
 					CoreDataStack.sharedInstance.saveContext()
@@ -165,9 +164,9 @@ class ProjectsTableViewController: UITableViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showSections" {
-			if let destVC = segue.destination as? SectionsTableViewController,
+			if let destinationViewController = segue.destination as? SectionsTableViewController,
 				let indexPath = tableView.indexPathForSelectedRow {
-				destVC.chosenProject = projects[indexPath.row]
+					destinationViewController.chosenProject = projects[indexPath.row]
 			}
 		}
 	}
