@@ -166,8 +166,17 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !sectionPicker.isHidden {
-			let selectedIndex = self.project?.sections.index(of: self.section!)
-			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
+			/*
+			let selectedIndex ... gives an exception. If you change project, then self.section will not be found in that project.
+			So to fix this I must check if self.section's project is the same as the project that's been selected. If not, set 
+			selected index to 0.
+			*/
+			var selectedIndex = 0
+			if section?.project.title == project?.title {
+				selectedIndex = (project?.sections.index(of: self.section!))!
+			}
+			
+			sectionPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
 			let index = sectionPicker.selectedRow(inComponent: 0)
 			section = project?.sections[index] as? Section
 			sectionDetailLabel.text = section?.title
