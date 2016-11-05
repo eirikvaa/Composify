@@ -57,7 +57,7 @@ class DataTableViewController: UITableViewController {
 	// MARK: Properties
 	private var audioPlayer: AudioPlayer?
 	var section: Section!
-	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
+	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.managedContext
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
 		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Recording.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
@@ -140,7 +140,7 @@ class DataTableViewController: UITableViewController {
 				let title = renameAlert.textFields?.first!.text
 				let recording = self.recordings[indexPath.row]
 
-				PIEFileManager().rename(recording, from: recording.title, to: title!)
+				PIEFileManager().rename(recording, from: recording.title, to: title!, section: nil, project: nil)
 				recording.title = title!
 				CoreDataStack.sharedInstance.saveContext()
 			})

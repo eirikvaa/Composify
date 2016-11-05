@@ -119,7 +119,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		fetchRequest.sortDescriptors = [sortDescriptor]
 
 		do {
-			projects = try CoreDataStack.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest) as! [Project]
+			projects = try CoreDataStack.sharedInstance.managedContext.fetch(fetchRequest) as! [Project]
 		} catch {
 			print(error)
 		}
@@ -145,8 +145,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 	}
 
-	func togglePicker(pickerViewTag: Int) {
-		switch pickerViewTag {
+	func togglePicker(tagged tag: Int) {
+		switch tag {
 		case 111:
 			projectPickerViewHidden = !projectPickerViewHidden
 			projectPicker.isHidden = !projectPicker.isHidden
@@ -161,18 +161,16 @@ class ConfigureRecordingTableViewController: UITableViewController {
 			let selectedIndex = projects.index(of: self.project!)
 			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			let index = projectPicker.selectedRow(inComponent: 0)
-			let project = projects[index]
-			self.project = project
-			projectDetailLabel.text = project.title
+			project = projects[index]
+			projectDetailLabel.text = project?.title
 		}
 
 		if !sectionPicker.isHidden {
 			let selectedIndex = self.project?.sections.index(of: self.section!)
 			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			let index = sectionPicker.selectedRow(inComponent: 0)
-			let section = project?.sections[index] as! Section
-			self.section = section
-			sectionDetailLabel.text = section.title
+			section = project?.sections[index] as? Section
+			sectionDetailLabel.text = section?.title
 		}
 
 		tableView.beginUpdates()
@@ -184,9 +182,9 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		switch (indexPath.section, indexPath.row) {
 		case (1, 0):
-			togglePicker(pickerViewTag: 111)
+			togglePicker(tagged: 111)
 		case (2, 0):
-			togglePicker(pickerViewTag: 222)
+			togglePicker(tagged: 222)
 		default:
 			break
 		}
@@ -212,34 +210,23 @@ class ConfigureRecordingTableViewController: UITableViewController {
 			return
 		}
 
-		guard let title = recordingTitleTextField.text, !isDuplicate(title) else {
+		guard let newTitle = recordingTitleTextField.text, !isDuplicate(newTitle) else {
 			showOKAlert(NSLocalizedString("Duplicate title!", comment: "The title is not unique in the project and section."), message: nil)
 			return
 		}
 
-		// The section and project can change.
-
-		recording.project = project
-		recording.section = section
-
 		// The audio file is already created, so we'll just rename it.
-		PIEFileManager().rename(recording, from: recording.title, to: title)
-
-		recording.title = title
-
-
+		PIEFileManager().rename(recording, from: recording.title, to: newTitle, section: section, project: project)
+		recording.title = newTitle
 		CoreDataStack.sharedInstance.saveContext()
-
 		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
 		/*
-		We'll delete the recording previously created in RecordAudioViewController because
-		the user is discarding it/canceling the modally presented screen.
 		TODO: Notify user that recording will be deleted.
 		*/
-		CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(recording)
+		CoreDataStack.sharedInstance.managedContext.delete(recording)
 		CoreDataStack.sharedInstance.saveContext()
 
 		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)

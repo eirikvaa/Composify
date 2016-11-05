@@ -28,7 +28,7 @@ class RecordAudioViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
+		let managedObjectContext = CoreDataStack.sharedInstance.managedContext
 		let entityDescription = NSEntityDescription.entity(forEntityName: "Recording", in: managedObjectContext)
 
 		if let entityDescription = entityDescription {

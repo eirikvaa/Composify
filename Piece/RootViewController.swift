@@ -25,7 +25,7 @@ private extension RootViewController {
 		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
 		dataTableViewController.section = sections[index]
 		section = sections[index]
-		self.delegate = dataTableViewController
+		delegate = dataTableViewController
 		return dataTableViewController
 	}
 
@@ -85,7 +85,7 @@ class RootViewController: UIViewController {
 	}
 
 	// MARK: Properties
-	private var pageViewController: UIPageViewController?
+	private var pageViewController: UIPageViewController!
 	var project: Project!
 	var section: Section!
 	var delegate: RootViewControllerDelegate!
@@ -95,8 +95,8 @@ class RootViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-		self.pageViewController?.delegate = self
+		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+		pageViewController.delegate = self
 
 		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
 		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
@@ -104,12 +104,12 @@ class RootViewController: UIViewController {
 
 		let startingViewController: DataTableViewController = viewControllerAtIndex(sectionIndex!, storyboard: self.storyboard!)!
 		let viewControllers = [startingViewController]
-		self.pageViewController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-		self.pageViewController?.dataSource = self
-		self.addChildViewController(pageViewController!)
-		self.view.addSubview(pageViewController!.view)
+		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+		pageViewController.dataSource = self
+		addChildViewController(pageViewController!)
+		view.addSubview(pageViewController!.view)
 
-		self.pageViewController?.didMove(toParentViewController: self)
+		self.pageViewController.didMove(toParentViewController: self)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -141,8 +141,8 @@ class RootViewController: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "addRecording" {
 			let nav = segue.destination as! UINavigationController
-			let recVC = nav.viewControllers.first! as! RecordAudioViewController
-			recVC.section = section
+			let recordAudioViewController = nav.viewControllers.first as! RecordAudioViewController
+			recordAudioViewController.section = section
 		}
 	}
 
