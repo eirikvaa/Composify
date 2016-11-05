@@ -84,8 +84,10 @@ class PIEFileManager {
         - object: An object conforming to the FileSystemPieceObject protocol.
         - from: the old title.
         - to: the new title.
+		- section: new section
+		- project: new project
     */
-    func rename<T: Any>(_ object: T, from: String, to new: String) where T: FileSystemObject {
+	func rename<T: Any>(_ object: T, from: String, to new: String, section: Section?, project: Project?) where T: FileSystemObject {
 		let source = object.fileSystemURL
 		var destination: URL!
 		
@@ -96,10 +98,26 @@ class PIEFileManager {
 				.appendingPathComponent(new)
 		case let recording as Recording:
 			destination = object.fileSystemURL
-				.deletingPathExtension()
-				.deletingLastPathComponent()
+				.deletingPathExtension()		// deletes caf
+				.deletingLastPathComponent()	// deletes title
+				.deletingLastPathComponent()	// deletes section
+				.deletingLastPathComponent()	// deletes project
+			
+			// If the user picks another project than it was originally recorded in, this changes that.
+			if let section = section, let project = project {
+				destination = destination
+					.appendingPathComponent(project.title)
+					.appendingPathComponent(section.title)
+			} else {
+				destination = destination
+					.appendingPathComponent(recording.project.title)
+					.appendingPathComponent(recording.section.title)
+			}
+			
+			destination = destination
 				.appendingPathComponent(new)
 				.appendingPathExtension(recording.fileExtension)
+			
 		default:
 			break
 		}
