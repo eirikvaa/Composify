@@ -45,7 +45,7 @@ class SectionsTableViewController: UITableViewController {
 
 	// MARK: Properties
 	var chosenProject: Project!
-	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
+	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.managedContext
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
 		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Section.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
@@ -109,7 +109,7 @@ class SectionsTableViewController: UITableViewController {
 				if let title = renameAlert.textFields?.first?.text {
 					let section = self.sections[indexPath.row]
 
-					PIEFileManager().rename(section, from: section.title, to: title)
+					PIEFileManager().rename(section, from: section.title, to: title, section: nil, project: nil)
 					section.title = title
 					CoreDataStack.sharedInstance.saveContext()
 				}
