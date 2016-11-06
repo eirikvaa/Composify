@@ -46,6 +46,10 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			guard projects.count > 0 else { return }
 			project = projects[row]
 			projectDetailLabel.text = project?.title
+			if !(project?.sections.contains(section))! {
+				section = project?.sections[0] as? Section
+				sectionDetailLabel.text = section?.title
+			}
 		case 222:
 			guard let project = project else { return }
 			guard project.sections.count > 0 else { return }
@@ -54,6 +58,7 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 		default:
 			break
 		}
+		print(project!.title, section!.title)
 	}
 }
 
@@ -160,8 +165,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		if !projectPicker.isHidden {
 			let selectedIndex = projects.index(of: self.project!)
 			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			let index = projectPicker.selectedRow(inComponent: 0)
-			project = projects[index]
+			//let index = projectPicker.selectedRow(inComponent: 0)
+			//project = projects[index]
 			projectDetailLabel.text = project?.title
 		}
 
@@ -172,8 +177,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 			}
 			
 			sectionPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
-			let index = sectionPicker.selectedRow(inComponent: 0)
-			section = project?.sections[index] as? Section
+			//let index = sectionPicker.selectedRow(inComponent: 0)
+			//section = project?.sections[index] as? Section
 			sectionDetailLabel.text = section?.title
 		}
 
@@ -196,7 +201,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	// MARK: @IBActions
 	@IBAction func save(_ sender: AnyObject) {
-		guard let project = self.project, let section = self.section else {
+		guard let project = project, let section = section else {
 			var message = ""
 
 			switch (self.project == nil, self.section == nil) {
@@ -222,6 +227,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		// The audio file is already created, so we'll just rename it.
 		PIEFileManager().rename(recording, from: recording.title, to: newTitle, section: section, project: project)
 		recording.title = newTitle
+		recording.section = section
+		recording.project = project
 		CoreDataStack.sharedInstance.saveContext()
 		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
