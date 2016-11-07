@@ -18,10 +18,20 @@ class RecordAudioViewController: UIViewController {
 			recordAudioButton.titleLabel?.textAlignment = .center
 		}
 	}
+	@IBAction func cancelButton(_ sender: Any) {
+		PIEFileManager().delete(recording)
+		CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(recording)
+		CoreDataStack.sharedInstance.saveContext()
+		dismiss(animated: true, completion: nil)
+	}
 
 	// MARK: Properties
 	private var audioRecorder: AudioRecorder?
-	var section: Section!
+	var section: Section! {
+		didSet {
+			print(section.title)
+		}
+	}
 	var recording: Recording!
 
 	// MARK: View controller life cycle
