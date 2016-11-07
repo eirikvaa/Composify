@@ -72,6 +72,7 @@ extension RootViewController: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
 		let title = (pageViewController.viewControllers?.first! as! DataTableViewController).section.title
 		navigationItem.title = title
+		section = project.sections.first(where: {($0 as! Section).title == title}) as! Section!
 	}
 }
 
