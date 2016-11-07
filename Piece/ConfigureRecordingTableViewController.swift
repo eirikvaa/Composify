@@ -44,21 +44,24 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 		switch pickerView.tag {
 		case 111:
 			guard projects.count > 0 else { return }
+			
 			project = projects[row]
 			projectDetailLabel.text = project?.title
-			if !(project?.sections.contains(section))! {
+						
+			if !(project?.sections.contains(section!))! {
 				section = project?.sections[0] as? Section
 				sectionDetailLabel.text = section?.title
 			}
 		case 222:
 			guard let project = project else { return }
 			guard project.sections.count > 0 else { return }
-			section = project.sections[row] as? Section
-			sectionDetailLabel.text = section?.title
+			
+			if let section = project.sections[row] as? Section {
+				sectionDetailLabel.text = section.title
+			}
 		default:
 			break
 		}
-		print(project!.title, section!.title)
 	}
 }
 
@@ -165,20 +168,12 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		if !projectPicker.isHidden {
 			let selectedIndex = projects.index(of: self.project!)
 			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			//let index = projectPicker.selectedRow(inComponent: 0)
-			//project = projects[index]
 			projectDetailLabel.text = project?.title
 		}
 
 		if !sectionPicker.isHidden {
-			var selectedIndex = 0
-			if section?.project.title == project?.title {
-				selectedIndex = (project?.sections.index(of: self.section!))!
-			}
-			
-			sectionPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
-			//let index = sectionPicker.selectedRow(inComponent: 0)
-			//section = project?.sections[index] as? Section
+			let selectedIndex = (project?.sections.contains(section!))! ? project?.sections.index(of: self.section!) : 0
+			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			sectionDetailLabel.text = section?.title
 		}
 
@@ -234,9 +229,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
-		/*
-		TODO: Notify user that recording will be deleted.
-		*/
+		// TODO: Notify user that recording will be deleted.
 		CoreDataStack.sharedInstance.managedContext.delete(recording)
 		CoreDataStack.sharedInstance.saveContext()
 
