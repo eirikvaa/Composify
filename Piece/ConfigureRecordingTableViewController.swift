@@ -12,8 +12,12 @@ import CoreData
 // MARK: Helper methods
 private extension ConfigureRecordingTableViewController {
 	func isDuplicate(_ title: String) -> Bool {
-		let count = section?.recordings.filter { ($0 as! Recording).title == title }.count
-		return count! > 0
+		
+		guard let recordings = section.recordings.array as? [Recording] else {
+			return false
+		}
+		
+		return recordings.filter { $0.title == title }.count > 0
 	}
 
 	func showOKAlert(_ title: String, message: String?) {
@@ -33,7 +37,6 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			guard projects.count > 0 else { return nil }
 			return projects[row].title
 		case 222:
-			guard let project = project else { return nil }
 			return (project.sections[row] as! Section).title
 		default:
 			return nil
@@ -46,14 +49,13 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			guard projects.count > 0 else { return }
 			
 			project = projects[row]
-			projectDetailLabel.text = project?.title
+			projectDetailLabel.text = project.title
 						
-			if !(project?.sections.contains(section!))! {
-				section = project?.sections[0] as? Section
-				sectionDetailLabel.text = section?.title
+			if !project.sections.contains(section) {
+				section = project.sections[0] as! Section
+				sectionDetailLabel.text = section.title
 			}
 		case 222:
-			guard let project = project else { return }
 			guard project.sections.count > 0 else { return }
 			
 			if let section = project.sections[row] as? Section {
@@ -76,7 +78,7 @@ extension ConfigureRecordingTableViewController: UIPickerViewDataSource {
 		case 111:
 			return projects.count
 		case 222:
-			return project?.sections.count ?? 0
+			return project.sections.count
 		default:
 			return 0
 		}
@@ -90,12 +92,12 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	@IBOutlet weak var recordingTitleTextField: UITextField!
 	@IBOutlet weak var sectionDetailLabel: UILabel! {
 		didSet {
-			sectionDetailLabel.text = section?.title ?? ""
+			sectionDetailLabel.text = section.title
 		}
 	}
 	@IBOutlet weak var projectDetailLabel: UILabel! {
 		didSet {
-			projectDetailLabel.text = section?.project.title ?? ""
+			projectDetailLabel.text = section.project.title
 		}
 	}
 	@IBOutlet weak var projectPicker: UIPickerView! {
@@ -115,8 +117,8 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	// MARK: Properties
 	fileprivate var audioPlayer: AudioPlayer?
-	var section: Section?
-	var project: Project?
+	var section: Section!
+	var project: Project!
 	var recording: Recording!
 	private var projectPickerViewHidden = true
 	private var sectionPickerViewHidden = true
@@ -196,23 +198,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	// MARK: @IBActions
 	@IBAction func save(_ sender: AnyObject) {
-		guard let project = project, let section = section else {
-			var message = ""
-
-			switch (self.project == nil, self.section == nil) {
-			case (true, true):
-				message = NSLocalizedString("You must set a section and a project.", comment: "Warning when not setting a project and a section.")
-			case (false, true):
-				message = NSLocalizedString("You must set a section.", comment: "Warning when not setting a section.")
-			case (true, false):
-				message = NSLocalizedString("You must set a project.", comment: "Warning when not setting a project.")
-			default:
-				break
-			}
-
-			showOKAlert(NSLocalizedString("Can't Save", comment: "Warning that the app failed to save the recording."), message: message)
-			return
-		}
+		guard let project = project, let section = section else { return }
 
 		guard let newTitle = recordingTitleTextField.text, !isDuplicate(newTitle) else {
 			showOKAlert(NSLocalizedString("Duplicate title!", comment: "The title is not unique in the project and section."), message: nil)
