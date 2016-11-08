@@ -24,10 +24,10 @@ class AudioPlayer {
 	Initializes the AudioPlayer class with a recording.
 	- Parameter url: url of the recording to be played.
 	*/
-	convenience init?(url: URL) {
+	convenience init(url: URL) {
 		self.init()
 
-		guard PIEFileManager().fileManager.fileExists(atPath: url.path) else { return nil }
+		guard PIEFileManager().fileManager.fileExists(atPath: url.path) else { return }
 
 		do {
 			try session.setCategory(AVAudioSessionCategoryPlayback)
@@ -35,7 +35,6 @@ class AudioPlayer {
 
 		} catch {
 			print(error.localizedDescription)
-			return nil
 		}
 
 		player.prepareToPlay()
