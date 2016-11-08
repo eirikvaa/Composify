@@ -229,12 +229,20 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
-		// TODO: Notify user that recording will be deleted.
-		PIEFileManager().delete(recording)
-		CoreDataStack.sharedInstance.managedContext.delete(recording)
-		CoreDataStack.sharedInstance.saveContext()
-
-		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		
+		// We'll notify the user if he/she tries to cancel the configuration of the recording.
+		let cancelAlert = UIAlertController(title: "Recording will be deleted. Procede?", message: nil, preferredStyle: .alert)
+		let yesAction = UIAlertAction(title: "OK", style: .default) { _ in
+			PIEFileManager().delete(self.recording)
+			CoreDataStack.sharedInstance.managedContext.delete(self.recording)
+			CoreDataStack.sharedInstance.saveContext()
+			
+			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		}
+		let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		cancelAlert.addAction(yesAction)
+		cancelAlert.addAction(noAction)
+		present(cancelAlert, animated: true, completion: nil)
 	}
 
 	@IBAction func playAudio(_ sender: AnyObject) {
