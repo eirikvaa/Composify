@@ -166,13 +166,13 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !projectPicker.isHidden {
-			let selectedIndex = projects.index(of: self.project!)
+			let selectedIndex = projects.index(of: project!)
 			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			projectDetailLabel.text = project?.title
 		}
 
 		if !sectionPicker.isHidden {
-			let selectedIndex = (project?.sections.contains(section!))! ? project?.sections.index(of: self.section!) : 0
+			let selectedIndex = (project?.sections.contains(section!))! ? project?.sections.index(of: section!) : 0
 			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			sectionDetailLabel.text = section?.title
 		}
@@ -225,15 +225,16 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		recording.section = section
 		recording.project = project
 		CoreDataStack.sharedInstance.saveContext()
-		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
 		// TODO: Notify user that recording will be deleted.
+		PIEFileManager().delete(recording)
 		CoreDataStack.sharedInstance.managedContext.delete(recording)
 		CoreDataStack.sharedInstance.saveContext()
 
-		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 
 	@IBAction func playAudio(_ sender: AnyObject) {
