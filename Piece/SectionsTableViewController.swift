@@ -64,7 +64,7 @@ class SectionsTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		navigationItem.title = chosenProject.title
-		navigationItem.rightBarButtonItem = self.editButtonItem
+		navigationItem.rightBarButtonItem = editButtonItem
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
