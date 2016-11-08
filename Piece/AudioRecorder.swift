@@ -23,7 +23,7 @@ class AudioRecorder {
 	Initializes the AudioPlayer class with the url to a recording.
 	- Parameter url: url of recording to be played.
 	*/
-	convenience init?(url: URL) {
+	convenience init(url: URL) {
 		self.init()
 
 		let session = AVAudioSession.sharedInstance()
@@ -40,7 +40,6 @@ class AudioRecorder {
 			try recorder = AVAudioRecorder(url: url, settings: settings)
 		} catch {
 			print(error.localizedDescription)
-			return nil
 		}
 
 		recorder.prepareToRecord()
