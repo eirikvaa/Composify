@@ -12,11 +12,11 @@ import CoreData
 // MARK: Helper methods
 private extension ConfigureRecordingTableViewController {
 	func isDuplicate(_ title: String) -> Bool {
-		
+
 		guard let recordings = section.recordings.array as? [Recording] else {
 			return false
 		}
-		
+
 		return recordings.filter { $0.title == title }.count > 0
 	}
 
@@ -47,17 +47,17 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 		switch pickerView.tag {
 		case 111:
 			guard projects.count > 0 else { return }
-			
+
 			project = projects[row]
 			projectDetailLabel.text = project.title
-						
+
 			if !project.sections.contains(section) {
 				section = project.sections[0] as! Section
 				sectionDetailLabel.text = section.title
 			}
 		case 222:
 			guard project.sections.count > 0 else { return }
-			
+
 			if let section = project.sections[row] as? Section {
 				sectionDetailLabel.text = section.title
 			}
@@ -116,7 +116,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	// MARK: Properties
-	fileprivate var audioPlayer: AudioPlayer?
+	fileprivate var audioPlayer: AudioPlayer!
 	var section: Section!
 	var project: Project!
 	var recording: Recording!
@@ -168,15 +168,15 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !projectPicker.isHidden {
-			let selectedIndex = projects.index(of: project!)
-			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			projectDetailLabel.text = project?.title
+			let selectedIndex = projects.index(of: project)!
+			projectPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
+			projectDetailLabel.text = project.title
 		}
 
 		if !sectionPicker.isHidden {
-			let selectedIndex = (project?.sections.contains(section!))! ? project?.sections.index(of: section!) : 0
-			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			sectionDetailLabel.text = section?.title
+			let selectedIndex = project.sections.contains(section) ? project.sections.index(of: section) : 0
+			sectionPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
+			sectionDetailLabel.text = section.title
 		}
 
 		tableView.beginUpdates()
@@ -215,14 +215,14 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
-		
+
 		// We'll notify the user if he/she tries to cancel the configuration of the recording.
 		let cancelAlert = UIAlertController(title: "Recording will be deleted. Procede?", message: nil, preferredStyle: .alert)
 		let yesAction = UIAlertAction(title: "OK", style: .default) { _ in
 			PIEFileManager().delete(self.recording)
 			CoreDataStack.sharedInstance.managedContext.delete(self.recording)
 			CoreDataStack.sharedInstance.saveContext()
-			
+
 			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 		}
 		let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -233,7 +233,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	@IBAction func playAudio(_ sender: AnyObject) {
 		audioPlayer = AudioPlayer(url: recording.fileSystemURL)
-		audioPlayer!.player.play()
+		audioPlayer.player.play()
 	}
 
 	// MARK: UITableViewDelegate
