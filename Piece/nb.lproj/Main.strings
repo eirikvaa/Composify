@@ -1,0 +1,57 @@
+
+/* Class = "UINavigationItem"; title = "Configure and Save Recording"; ObjectID = "B57-wo-cTR"; */
+"B57-wo-cTR.title" = "Konfigurer og lagre opptak";
+
+/* Class = "UITabBarItem"; title = "Library"; ObjectID = "K0r-xt-hFY"; */
+"K0r-xt-hFY.title" = "Bibliotek";
+
+/* Class = "UIButton"; normalTitle = "Tap to Record"; ObjectID = "Leg-cp-zGo"; */
+"Leg-cp-zGo.normalTitle" = "Start opptak";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "NZt-Jw-9QP"; */
+"NZt-Jw-9QP.title" = "Rediger";
+
+/* Class = "UINavigationItem"; title = "Projects"; ObjectID = "VPN-jI-FG1"; */
+"VPN-jI-FG1.title" = "Prosjekter";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "W22-T5-vG5"; */
+"W22-T5-vG5.title" = "Tittel";
+
+/* Class = "UITextField"; placeholder = "Recording Title"; ObjectID = "WWe-3B-f4Z"; */
+"WWe-3B-f4Z.placeholder" = "Tittel på opptak";
+
+/* Class = "UITableViewSection"; headerTitle = "Project"; ObjectID = "WuN-NI-zWC"; */
+"WuN-NI-zWC.headerTitle" = "Prosjekt";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "bIf-kX-e6D"; */
+"bIf-kX-e6D.text" = "Detaljer";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "caD-hw-bbK"; */
+"caD-hw-bbK.text" = "Detaljer";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "fSN-El-yPY"; */
+"fSN-El-yPY.text" = "Tittel";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "i64-T3-gIw"; */
+"i64-T3-gIw.headerTitle" = "Tittel";
+
+/* Class = "UIButton"; normalTitle = "Play Audio"; ObjectID = "j5M-wy-Q1s"; */
+"j5M-wy-Q1s.normalTitle" = "Spill lyd";
+
+/* Class = "UITableViewSection"; headerTitle = "Section"; ObjectID = "jSO-AX-lpd"; */
+"jSO-AX-lpd.headerTitle" = "Seksjon";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "jkp-9T-eKo"; */
+"jkp-9T-eKo.text" = "Tittel";
+
+/* Class = "UILabel"; text = "Project Title"; ObjectID = "nrN-6Z-u7V"; */
+"nrN-6Z-u7V.text" = "Tittel på prosjekt";
+
+/* Class = "UILabel"; text = "Section Title"; ObjectID = "raY-co-q2e"; */
+"raY-co-q2e.text" = "Tittel på seksjon";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "tFE-R3-tTI"; */
+"tFE-R3-tTI.text" = "Tittel";
+
+/* Class = "UITabBarItem"; title = "Record Audio"; ObjectID = "v6Q-Kl-aEx"; */
+"v6Q-Kl-aEx.title" = "Ta opp lyd";
