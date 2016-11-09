@@ -13,7 +13,7 @@ The `FileSystemObject` protocol gives information about where a `FileSystemPiece
 - Author: Eirik Vale Aase
 */
 protocol FileSystemObject {
-	var fileSystemURL: URL { get }
+	var url: URL { get }
 }
 
 /**
@@ -55,7 +55,7 @@ class PIEFileManager {
 		// The AudioRecorder will create the audio file.
 		if object is Project || object is Section {
 			do {
-				try fileManager.createDirectory(at: object.fileSystemURL, withIntermediateDirectories: true, attributes: nil)
+				try fileManager.createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
 			} catch {
 				print(error)
 			}
@@ -67,7 +67,7 @@ class PIEFileManager {
      - Parameter object: An object conforming to the FileSystemPieceObject protocol.
     */
     func delete<T: Any>(_ object: T) where T: FileSystemObject {
-		let url = object.fileSystemURL
+		let url = object.url
 		
 		do {
 			if fileManager.fileExists(atPath: url.path) {
@@ -88,16 +88,16 @@ class PIEFileManager {
 		- project: new project
     */
 	func rename<T: Any>(_ object: T, from: String, to new: String, section: Section?, project: Project?) where T: FileSystemObject {
-		let source = object.fileSystemURL
+		let source = object.url
 		var destination: URL!
 		
 		switch object {
 		case _ as Project, _ as Section:
-			destination = object.fileSystemURL
+			destination = object.url
 				.deletingLastPathComponent()
 				.appendingPathComponent(new)
 		case let recording as Recording:
-			destination = object.fileSystemURL
+			destination = object.url
 				.deletingPathExtension()		// deletes caf
 				.deletingLastPathComponent()	// deletes title
 				.deletingLastPathComponent()	// deletes section
