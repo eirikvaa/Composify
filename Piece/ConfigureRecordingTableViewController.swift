@@ -131,7 +131,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		do {
 			projects = try CoreDataStack.sharedInstance.managedContext.fetch(fetchRequest) as! [Project]
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 		}
 
 		return projects
@@ -142,6 +142,13 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		recordingTitleTextField.text = recording.title
+		
+		navigationItem.title = NSLocalizedString("Configure and Save Recording", comment: "Navigation bar title when configuring recording")
+		
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+		label.text = navigationItem.title
+		label.adjustsFontSizeToFitWidth = true
+		navigationItem.titleView = label
 
 		projectPicker.isHidden = true
 		sectionPicker.isHidden = true
@@ -215,9 +222,9 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
-
 		// We'll notify the user if he/she tries to cancel the configuration of the recording.
-		let cancelAlert = UIAlertController(title: "Recording will be deleted. Procede?", message: nil, preferredStyle: .alert)
+		let localizedTitle = NSLocalizedString("Recording will be deleted. Procede?", comment: "Alert when user cancels the recording.")
+		let cancelAlert = UIAlertController(title: localizedTitle, message: nil, preferredStyle: .alert)
 		let yesAction = UIAlertAction(title: "OK", style: .default) { _ in
 			PIEFileManager().delete(self.recording)
 			CoreDataStack.sharedInstance.managedContext.delete(self.recording)
@@ -225,14 +232,15 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 		}
-		let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let localizedCancel = NSLocalizedString("Cancel", comment: "Cancelling configuration")
+		let noAction = UIAlertAction(title: localizedCancel, style: .cancel, handler: nil)
 		cancelAlert.addAction(yesAction)
 		cancelAlert.addAction(noAction)
 		present(cancelAlert, animated: true, completion: nil)
 	}
 
 	@IBAction func playAudio(_ sender: AnyObject) {
-		audioPlayer = AudioPlayer(url: recording.fileSystemURL)
+		audioPlayer = AudioPlayer(url: recording.url)
 		audioPlayer.player.play()
 	}
 
