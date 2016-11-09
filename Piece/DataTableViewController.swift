@@ -15,10 +15,6 @@ extension DataTableViewController: NSFetchedResultsControllerDelegate {
 		tableView.beginUpdates()
 	}
 
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
-
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 		switch type {
 		case .insert:
@@ -39,6 +35,10 @@ extension DataTableViewController: NSFetchedResultsControllerDelegate {
 
 		recordings = fetchedResultsController.fetchedObjects as! [Recording]
 	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
+	}
 }
 
 // MARK: RootViewControllerDelegate
@@ -55,7 +55,7 @@ extension DataTableViewController: RootViewControllerDelegate {
 class DataTableViewController: UITableViewController {
 
 	// MARK: Properties
-	private var audioPlayer: AudioPlayer?
+	private var audioPlayer: AudioPlayer!
 	var section: Section!
 	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.managedContext
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
@@ -90,7 +90,7 @@ class DataTableViewController: UITableViewController {
 			try fetchedResultsController.performFetch()
 			recordings = fetchedResultsController.fetchedObjects as! [Recording]
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 		}
 
 		tableView.reloadData()
@@ -113,19 +113,13 @@ class DataTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 		let recording = recordings[indexPath.row]
-		audioPlayer = AudioPlayer(url: recording.fileSystemURL)
+		audioPlayer = AudioPlayer(url: recording.url)
 
-		/*
-		FIXME: If this is commented out, and you start a song in one section, switches section and plays another song, it crashes.
-		
-		if audioPlayer!.player.isPlaying {
-			audioPlayer?.player.stop()
+		audioPlayer.player.play()
+
+		if let indexPath = tableView.indexPathForSelectedRow {
+			tableView.deselectRow(at: indexPath, animated: true)
 		}
-		*/
-
-		audioPlayer!.player.play()
-
-		tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
 	}
 
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
