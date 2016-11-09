@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 extension Section: FileSystemObject {
-	var fileSystemURL: URL {
-		return project.fileSystemURL.appendingPathComponent(title)
+	var url: URL {
+		return project.url.appendingPathComponent(title)
 	}
 }
 
