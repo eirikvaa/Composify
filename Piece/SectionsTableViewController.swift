@@ -64,6 +64,13 @@ class SectionsTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		navigationItem.title = chosenProject.title
+		
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+		label.text = navigationItem.title
+		label.adjustsFontSizeToFitWidth = true
+		navigationItem.titleView = label
+		
+		
 		navigationItem.rightBarButtonItem = editButtonItem
 	}
 
@@ -77,7 +84,7 @@ class SectionsTableViewController: UITableViewController {
 			try fetchedResultsController.performFetch()
 			sections = fetchedResultsController.fetchedObjects as! [Section]
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 		}
 
 		tableView.reloadData()
