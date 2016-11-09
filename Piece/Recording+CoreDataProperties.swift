@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 extension Recording: FileSystemObject {
-	var fileSystemURL: URL {
-		return section.fileSystemURL
+	var url: URL {
+		return section.url
 			.appendingPathComponent(title)
 			.appendingPathExtension(fileExtension)
 	}

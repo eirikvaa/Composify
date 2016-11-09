@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension Project: FileSystemObject {
-	var fileSystemURL: URL {
+	var url: URL {
 		let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 		return documentDirectory
 			.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)

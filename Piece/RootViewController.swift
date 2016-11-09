@@ -47,7 +47,7 @@ extension RootViewController: UIPageViewControllerDataSource {
 
 		index -= 1
 
-		return viewControllerAtIndex(index, storyboard: self.storyboard!)
+		return viewControllerAtIndex(index, storyboard: storyboard!)
 	}
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -63,7 +63,7 @@ extension RootViewController: UIPageViewControllerDataSource {
 			return nil
 		}
 
-		return viewControllerAtIndex(index, storyboard: self.storyboard!)
+		return viewControllerAtIndex(index, storyboard: storyboard!)
 	}
 }
 
@@ -72,6 +72,7 @@ extension RootViewController: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
 		let title = (pageViewController.viewControllers?.first! as! DataTableViewController).section.title
 		navigationItem.title = title
+		section = project.sections.first(where: {($0 as! Section).title == title}) as! Section!
 	}
 }
 
@@ -100,16 +101,16 @@ class RootViewController: UIViewController {
 
 		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
 		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
-		let sectionIndex = sections.index(of: self.section)
+		let sectionIndex = sections.index(of: section)
 
-		let startingViewController: DataTableViewController = viewControllerAtIndex(sectionIndex!, storyboard: self.storyboard!)!
+		let startingViewController: DataTableViewController = viewControllerAtIndex(sectionIndex!, storyboard: storyboard!)!
 		let viewControllers = [startingViewController]
 		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
 		pageViewController.dataSource = self
 		addChildViewController(pageViewController!)
 		view.addSubview(pageViewController!.view)
 
-		self.pageViewController.didMove(toParentViewController: self)
+		pageViewController.didMove(toParentViewController: self)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {

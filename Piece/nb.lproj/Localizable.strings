@@ -1,7 +1,14 @@
 
+/* Alert when user cancels the recording. */
+"Recording will be deleted. Procede?" = "Opptak vil bli slettet. Fortsett?";
+
 /* Warning that the app failed to save the recording. */
 "Can't Save" = "Kan ikke lagre";
 
+/* Navigation bar title when configuring recording */
+"Configure and Save Recording" = "Konfigurer og lagre opptak";
+
+/* Every cancel button */
 "Cancel" = "Avbryt";
 
 /* Delete a recording. */
@@ -12,6 +19,9 @@
 
 /* The title is not unique in the project and section. */
 "Duplicate title!" = "Duplikat tittel!";
+
+/* Default title of recording */
+"MySong" = "MinSang";
 
 /* Title of done button before editing recordings. */
 "Edit" = "Rediger";

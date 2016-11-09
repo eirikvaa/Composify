@@ -178,9 +178,9 @@ class ProjectsTableViewController: UITableViewController {
 		// Only show the + button (add project) when in editing mode.
 		if editing {
 			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProject))
-			self.navigationItem.leftBarButtonItem = addButton
+			navigationItem.leftBarButtonItem = addButton
 		} else {
-			self.navigationItem.leftBarButtonItem = nil
+			navigationItem.leftBarButtonItem = nil
 		}
 	}
 }

@@ -12,8 +12,12 @@ import CoreData
 // MARK: Helper methods
 private extension ConfigureRecordingTableViewController {
 	func isDuplicate(_ title: String) -> Bool {
-		let count = section?.recordings.filter { ($0 as! Recording).title == title }.count
-		return count! > 0
+
+		guard let recordings = section.recordings.array as? [Recording] else {
+			return false
+		}
+
+		return recordings.filter { $0.title == title }.count > 0
 	}
 
 	func showOKAlert(_ title: String, message: String?) {
@@ -33,7 +37,6 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			guard projects.count > 0 else { return nil }
 			return projects[row].title
 		case 222:
-			guard let project = project else { return nil }
 			return (project.sections[row] as! Section).title
 		default:
 			return nil
@@ -44,13 +47,20 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 		switch pickerView.tag {
 		case 111:
 			guard projects.count > 0 else { return }
+
 			project = projects[row]
-			projectDetailLabel.text = project?.title
+			projectDetailLabel.text = project.title
+
+			if !project.sections.contains(section) {
+				section = project.sections[0] as! Section
+				sectionDetailLabel.text = section.title
+			}
 		case 222:
-			guard let project = project else { return }
 			guard project.sections.count > 0 else { return }
-			section = project.sections[row] as? Section
-			sectionDetailLabel.text = section?.title
+
+			if let section = project.sections[row] as? Section {
+				sectionDetailLabel.text = section.title
+			}
 		default:
 			break
 		}
@@ -68,7 +78,7 @@ extension ConfigureRecordingTableViewController: UIPickerViewDataSource {
 		case 111:
 			return projects.count
 		case 222:
-			return project?.sections.count ?? 0
+			return project.sections.count
 		default:
 			return 0
 		}
@@ -82,12 +92,12 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	@IBOutlet weak var recordingTitleTextField: UITextField!
 	@IBOutlet weak var sectionDetailLabel: UILabel! {
 		didSet {
-			sectionDetailLabel.text = section?.title ?? ""
+			sectionDetailLabel.text = section.title
 		}
 	}
 	@IBOutlet weak var projectDetailLabel: UILabel! {
 		didSet {
-			projectDetailLabel.text = section?.project.title ?? ""
+			projectDetailLabel.text = section.project.title
 		}
 	}
 	@IBOutlet weak var projectPicker: UIPickerView! {
@@ -106,9 +116,9 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	}
 
 	// MARK: Properties
-	fileprivate var audioPlayer: AudioPlayer?
-	var section: Section?
-	var project: Project?
+	fileprivate var audioPlayer: AudioPlayer!
+	var section: Section!
+	var project: Project!
 	var recording: Recording!
 	private var projectPickerViewHidden = true
 	private var sectionPickerViewHidden = true
@@ -121,7 +131,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		do {
 			projects = try CoreDataStack.sharedInstance.managedContext.fetch(fetchRequest) as! [Project]
 		} catch {
-			print(error)
+			print(error.localizedDescription)
 		}
 
 		return projects
@@ -132,6 +142,13 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		recordingTitleTextField.text = recording.title
+		
+		navigationItem.title = NSLocalizedString("Configure and Save Recording", comment: "Navigation bar title when configuring recording")
+		
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+		label.text = navigationItem.title
+		label.adjustsFontSizeToFitWidth = true
+		navigationItem.titleView = label
 
 		projectPicker.isHidden = true
 		sectionPicker.isHidden = true
@@ -158,28 +175,15 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 
 		if !projectPicker.isHidden {
-			let selectedIndex = projects.index(of: self.project!)
-			projectPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			let index = projectPicker.selectedRow(inComponent: 0)
-			project = projects[index]
-			projectDetailLabel.text = project?.title
+			let selectedIndex = projects.index(of: project)!
+			projectPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
+			projectDetailLabel.text = project.title
 		}
 
 		if !sectionPicker.isHidden {
-			/*
-			let selectedIndex ... gives an exception. If you change project, then self.section will not be found in that project.
-			So to fix this I must check if self.section's project is the same as the project that's been selected. If not, set 
-			selected index to 0.
-			*/
-			var selectedIndex = 0
-			if section?.project.title == project?.title {
-				selectedIndex = (project?.sections.index(of: self.section!))!
-			}
-			
+			let selectedIndex = project.sections.contains(section) ? project.sections.index(of: section) : 0
 			sectionPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
-			let index = sectionPicker.selectedRow(inComponent: 0)
-			section = project?.sections[index] as? Section
-			sectionDetailLabel.text = section?.title
+			sectionDetailLabel.text = section.title
 		}
 
 		tableView.beginUpdates()
@@ -201,23 +205,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	// MARK: @IBActions
 	@IBAction func save(_ sender: AnyObject) {
-		guard let project = self.project, let section = self.section else {
-			var message = ""
-
-			switch (self.project == nil, self.section == nil) {
-			case (true, true):
-				message = NSLocalizedString("You must set a section and a project.", comment: "Warning when not setting a project and a section.")
-			case (false, true):
-				message = NSLocalizedString("You must set a section.", comment: "Warning when not setting a section.")
-			case (true, false):
-				message = NSLocalizedString("You must set a project.", comment: "Warning when not setting a project.")
-			default:
-				break
-			}
-
-			showOKAlert(NSLocalizedString("Can't Save", comment: "Warning that the app failed to save the recording."), message: message)
-			return
-		}
+		guard let project = project, let section = section else { return }
 
 		guard let newTitle = recordingTitleTextField.text, !isDuplicate(newTitle) else {
 			showOKAlert(NSLocalizedString("Duplicate title!", comment: "The title is not unique in the project and section."), message: nil)
@@ -227,23 +215,33 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		// The audio file is already created, so we'll just rename it.
 		PIEFileManager().rename(recording, from: recording.title, to: newTitle, section: section, project: project)
 		recording.title = newTitle
+		recording.section = section
+		recording.project = project
 		CoreDataStack.sharedInstance.saveContext()
-		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 
 	@IBAction func cancel(_ sender: AnyObject) {
-		/*
-		TODO: Notify user that recording will be deleted.
-		*/
-		CoreDataStack.sharedInstance.managedContext.delete(recording)
-		CoreDataStack.sharedInstance.saveContext()
+		// We'll notify the user if he/she tries to cancel the configuration of the recording.
+		let localizedTitle = NSLocalizedString("Recording will be deleted. Procede?", comment: "Alert when user cancels the recording.")
+		let cancelAlert = UIAlertController(title: localizedTitle, message: nil, preferredStyle: .alert)
+		let yesAction = UIAlertAction(title: "OK", style: .default) { _ in
+			PIEFileManager().delete(self.recording)
+			CoreDataStack.sharedInstance.managedContext.delete(self.recording)
+			CoreDataStack.sharedInstance.saveContext()
 
-		self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		}
+		let localizedCancel = NSLocalizedString("Cancel", comment: "Cancelling configuration")
+		let noAction = UIAlertAction(title: localizedCancel, style: .cancel, handler: nil)
+		cancelAlert.addAction(yesAction)
+		cancelAlert.addAction(noAction)
+		present(cancelAlert, animated: true, completion: nil)
 	}
 
 	@IBAction func playAudio(_ sender: AnyObject) {
-		audioPlayer = AudioPlayer(url: recording.fileSystemURL)
-		audioPlayer!.player.play()
+		audioPlayer = AudioPlayer(url: recording.url)
+		audioPlayer.player.play()
 	}
 
 	// MARK: UITableViewDelegate
