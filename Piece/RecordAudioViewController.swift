@@ -18,20 +18,10 @@ class RecordAudioViewController: UIViewController {
 			recordAudioButton.titleLabel?.textAlignment = .center
 		}
 	}
-	@IBAction func cancelButton(_ sender: Any) {
-		PIEFileManager().delete(recording)
-		CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(recording)
-		CoreDataStack.sharedInstance.saveContext()
-		dismiss(animated: true, completion: nil)
-	}
 
 	// MARK: Properties
-	private var audioRecorder: AudioRecorder?
-	var section: Section! {
-		didSet {
-			print(section.title)
-		}
-	}
+	private var audioRecorder: AudioRecorder!
+	var section: Section!
 	var recording: Recording!
 
 	// MARK: View controller life cycle
@@ -43,13 +33,15 @@ class RecordAudioViewController: UIViewController {
 
 		if let entityDescription = entityDescription {
 			if let recording = NSManagedObject(entity: entityDescription, insertInto: managedObjectContext) as? Recording {
-				recording.title = "MySong"
+				recording.title = NSLocalizedString("MySong", comment: "Default title of recording")
 				recording.dateRecorded = Date()
 				recording.section = section
 				recording.project = section.project
 				recording.fileExtension = FileSystemExtensions.caf.rawValue
-				audioRecorder = audioRecorder ?? AudioRecorder(url: recording.fileSystemURL)
 				self.recording = recording
+				
+				// This must go here because recording.url is not set before recording is created.
+				audioRecorder = AudioRecorder(url: recording.url)
 			}
 		}
 	}
@@ -67,18 +59,23 @@ class RecordAudioViewController: UIViewController {
 	}
 
 	// MARK: @IBActions
+	@IBAction func cancelButton(_ sender: Any) {
+		PIEFileManager().delete(recording)
+		CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(recording)
+		CoreDataStack.sharedInstance.saveContext()
+		dismiss(animated: true, completion: nil)
+	}
+	
 	@IBAction func recordAudio(_ sender: AnyObject) {
-		guard let audioRecorder = audioRecorder, let recorder = audioRecorder.recorder else { return }
-
 		var recordButtonTitle = ""
 
-		if recorder.isRecording {
-			recorder.stop()
+		if audioRecorder.recorder.isRecording {
+			audioRecorder.recorder.stop()
 			recordButtonTitle = NSLocalizedString("Tap to Record", comment: "Title of record button before recording.")
 			performSegue(withIdentifier: "configureRecording", sender: self)
 			self.audioRecorder = nil
 		} else {
-			recorder.record()
+			audioRecorder.recorder.record()
 			recordButtonTitle = NSLocalizedString("Tap to Stop", comment: "Title of record button after starting to recording.")
 		}
 
