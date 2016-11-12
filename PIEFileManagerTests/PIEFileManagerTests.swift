@@ -18,6 +18,7 @@ class PIEFileManagerTests: XCTestCase {
 	let pieFileManager = PIEFileManager()
 	let fileManager = FileManager()
 	let managedContext = CoreDataStack.sharedInstance.managedContext
+	
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
@@ -105,6 +106,9 @@ class PIEFileManagerTests: XCTestCase {
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: recording.url.path))
 	}
 	
-	
+	func testRest() {
+		pieFileManager.reset()
+		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: userProjcts.path))
+	}
 }
 
