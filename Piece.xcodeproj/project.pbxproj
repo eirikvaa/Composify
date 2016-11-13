@@ -19,7 +19,6 @@
 		E56460351D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */; };
 		E564603B1D3B55AB00AA6557 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */; };
 		E564603D1D3B596200AA6557 /* SectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */; };
-		E56FC3051DD514EC00AD731D /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56FC3041DD514EC00AD731D /* AudioRecorderTests.swift */; };
 		E56FC3071DD5150500AD731D /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */; };
 		E57077581DD73BBA00B01940 /* ProjectsTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */; };
 		E576D9411D586652006F5D62 /* Piece.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E576D93F1D586652006F5D62 /* Piece.xcdatamodeld */; };
@@ -69,7 +68,6 @@
 		E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureRecordingTableViewController.swift; sourceTree = "<group>"; };
 		E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
 		E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableViewController.swift; sourceTree = "<group>"; };
-		E56FC3041DD514EC00AD731D /* AudioRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
 		E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E57077551DD73BBA00B01940 /* PieceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableTests.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				E54944A51DD4F35E0064F952 /* PIEFileManagerTests.swift */,
-				E56FC3041DD514EC00AD731D /* AudioRecorderTests.swift */,
 				E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */,
 			);
 			name = Model;
@@ -403,7 +400,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E56FC3051DD514EC00AD731D /* AudioRecorderTests.swift in Sources */,
 				E56FC3071DD5150500AD731D /* AudioPlayerTests.swift in Sources */,
 				E54944A61DD4F35E0064F952 /* PIEFileManagerTests.swift in Sources */,
 			);
