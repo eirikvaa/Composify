@@ -8,7 +8,6 @@
 
 import XCTest
 import CoreData
-@testable import Piece
 
 class ProjectsTableTests: XCTestCase {
 	
@@ -23,7 +22,7 @@ class ProjectsTableTests: XCTestCase {
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
 		app.launchArguments = [
-			"UI_TEST_MODE",
+			"UI_TEST_MODE_PROJECTS",
 			"-AppleLanguages", "(nb-NO)",
 			"-AppleLocale", "\"nb-NO\""
 		]
@@ -40,6 +39,7 @@ class ProjectsTableTests: XCTestCase {
     func testEmptyApplicationProjectsList() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+		XCTAssertTrue(app.tables.staticTexts.count == 0)
     }
 	
 	func testAddProject() {
@@ -58,6 +58,7 @@ class ProjectsTableTests: XCTestCase {
 		let table = app.tables.element
 		
 		XCTAssertTrue(table.staticTexts["Something New"].exists)
+		XCTAssertTrue(table.staticTexts.count == 1)
 	}
 	
 	func testRemoveProject() {
@@ -77,6 +78,7 @@ class ProjectsTableTests: XCTestCase {
 		
 		let table = app.tables.element
 		XCTAssertFalse(table.staticTexts["Into the West"].exists)
+		XCTAssertTrue(table.staticTexts.count == 0)
 	}
 	
 	func testRenameProject() {
