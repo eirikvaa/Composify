@@ -19,6 +19,9 @@ class PIEFileManagerTests: XCTestCase {
 	let fileManager = FileManager()
 	let managedContext = CoreDataStack.sharedInstance.managedContext
 	
+	var project2: Project!
+	var section2: Section!
+	
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
@@ -29,9 +32,16 @@ class PIEFileManagerTests: XCTestCase {
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
 		project.title = "UnitTestProject"
 		
+		project2 = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
+		project2.title = "UnitTestProject2"
+		
 		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
 		section.title = "UnitTestSection"
 		section.project = project
+		
+		section2 = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
+		section2.title = "UnitTestSection2"
+		section2.project = project2
 		
 		recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
 		recording.title = "UnitTestRecording"
@@ -42,13 +52,17 @@ class PIEFileManagerTests: XCTestCase {
 		
 		pieFileManager.save(project)
 		pieFileManager.save(section)
+		pieFileManager.save(project2)
+		pieFileManager.save(section2)
 		_ = AudioRecorder(url: recording.url)
 	}
 
 	override func tearDown() {
 		super.tearDown()
 		project = nil
+		project2 = nil
 		section = nil
+		section2 = nil
 		recording = nil
 		
 		do {
@@ -93,6 +107,22 @@ class PIEFileManagerTests: XCTestCase {
 			.appendingPathComponent(renamedProjectTitle)
 			.appendingPathComponent(renamedSectionTitle)
 			.appendingPathComponent(renamedRecordingTitle)
+			.appendingPathExtension(FileSystemExtensions.caf.rawValue).path))
+	}
+	
+	func testRename2() {
+		let renameRecordingTitle = "UnitTestRenamedRecording"
+		pieFileManager.rename(recording, from: recording.title, to: renameRecordingTitle, section: section2, project: project2)
+		print(recording.url)
+		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
+		recording.project = project2
+		recording.section = section2
+		recording.title = renameRecordingTitle
+		
+		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
+			.appendingPathComponent(recording.project.title)
+			.appendingPathComponent(recording.section.title)
+			.appendingPathComponent(recording.title)
 			.appendingPathExtension(FileSystemExtensions.caf.rawValue).path))
 	}
 
