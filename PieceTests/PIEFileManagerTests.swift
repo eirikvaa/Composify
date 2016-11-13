@@ -29,7 +29,7 @@ class PIEFileManagerTests: XCTestCase {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
 
-	override func setUp() {s
+	override func setUp() {
 		super.setUp()
 		
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project

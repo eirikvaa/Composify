@@ -12,17 +12,17 @@
 		E5228F411D42506500BBD008 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F401D42506500BBD008 /* RootViewController.swift */; };
 		E5228F451D4250E900BBD008 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F441D4250E900BBD008 /* DataTableViewController.swift */; };
 		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
-		E54944A61DD4F35E0064F952 /* PIEFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54944A51DD4F35E0064F952 /* PIEFileManagerTests.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E56460071D3B50B500AA6557 /* RecordAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460061D3B50B500AA6557 /* RecordAudioViewController.swift */; };
 		E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */; };
 		E56460351D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */; };
 		E564603B1D3B55AB00AA6557 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */; };
 		E564603D1D3B596200AA6557 /* SectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */; };
-		E56FC3071DD5150500AD731D /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */; };
 		E57077581DD73BBA00B01940 /* ProjectsTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */; };
 		E576D9411D586652006F5D62 /* Piece.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E576D93F1D586652006F5D62 /* Piece.xcdatamodeld */; };
 		E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576D9421D586795006F5D62 /* CoreDataStack.swift */; };
+		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
+		E58C57F71DD879C200348C65 /* PIEFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */; };
 		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
@@ -35,14 +35,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E54944A81DD4F35E0064F952 /* PBXContainerItemProxy */ = {
+		E570775A1DD73BBA00B01940 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5645FF91D3B50B500AA6557 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E56460001D3B50B500AA6557;
 			remoteInfo = Piece;
 		};
-		E570775A1DD73BBA00B01940 /* PBXContainerItemProxy */ = {
+		E58C57EE1DD8799D00348C65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5645FF91D3B50B500AA6557 /* Project object */;
 			proxyType = 1;
@@ -56,9 +56,6 @@
 		E5055BE01D44D07C00D2B796 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5228F401D42506500BBD008 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E5228F441D4250E900BBD008 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
-		E54944A31DD4F35E0064F952 /* PieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E54944A51DD4F35E0064F952 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
-		E54944A71DD4F35E0064F952 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Piece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56460041D3B50B500AA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E56460061D3B50B500AA6557 /* RecordAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAudioViewController.swift; sourceTree = "<group>"; };
@@ -68,13 +65,17 @@
 		E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureRecordingTableViewController.swift; sourceTree = "<group>"; };
 		E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
 		E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableViewController.swift; sourceTree = "<group>"; };
-		E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E57077551DD73BBA00B01940 /* PieceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableTests.swift; sourceTree = "<group>"; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E576D9401D586652006F5D62 /* Piece.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Piece.xcdatamodel; sourceTree = "<group>"; };
 		E576D9421D586795006F5D62 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E58C57E91DD8799D00348C65 /* PieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
+		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
+		E58C57F81DD87AD400348C65 /* PieceTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PieceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5B3C7351D4A34BD0021183A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -89,13 +90,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E54944A01DD4F35E0064F952 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5645FFE1D3B50B500AA6557 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,24 +104,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E58C57E61DD8799D00348C65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E54944A41DD4F35E0064F952 /* PieceTests */ = {
-			isa = PBXGroup;
-			children = (
-				E56FC3081DD5153000AD731D /* Model */,
-				E54944A71DD4F35E0064F952 /* Info.plist */,
-			);
-			name = PieceTests;
-			path = PIEFileManagerTests;
-			sourceTree = "<group>";
-		};
 		E5645FF81D3B50B500AA6557 = {
 			isa = PBXGroup;
 			children = (
 				E56460031D3B50B500AA6557 /* Piece */,
-				E54944A41DD4F35E0064F952 /* PieceTests */,
+				E58C57EA1DD8799D00348C65 /* PieceTests */,
 				E57077561DD73BBA00B01940 /* PieceUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
 			);
@@ -137,8 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				E56460011D3B50B500AA6557 /* Piece.app */,
-				E54944A31DD4F35E0064F952 /* PieceTests.xctest */,
 				E57077551DD73BBA00B01940 /* PieceUITests.xctest */,
+				E58C57E91DD8799D00348C65 /* PieceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,15 +188,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		E56FC3081DD5153000AD731D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E54944A51DD4F35E0064F952 /* PIEFileManagerTests.swift */,
-				E56FC3061DD5150500AD731D /* AudioPlayerTests.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		E57077561DD73BBA00B01940 /* PieceUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +205,17 @@
 				E576D93F1D586652006F5D62 /* Piece.xcdatamodeld */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		E58C57EA1DD8799D00348C65 /* PieceTests */ = {
+			isa = PBXGroup;
+			children = (
+				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
+				E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */,
+				E58C57ED1DD8799D00348C65 /* Info.plist */,
+				E58C57F81DD87AD400348C65 /* PieceTests-Bridging-Header.h */,
+			);
+			path = PieceTests;
 			sourceTree = "<group>";
 		};
 		E5B036A81D59957C00C66A69 /* Audio */ = {
@@ -266,24 +259,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E54944A21DD4F35E0064F952 /* PieceTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E54944AA1DD4F35E0064F952 /* Build configuration list for PBXNativeTarget "PieceTests" */;
-			buildPhases = (
-				E549449F1DD4F35E0064F952 /* Sources */,
-				E54944A01DD4F35E0064F952 /* Frameworks */,
-				E54944A11DD4F35E0064F952 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E54944A91DD4F35E0064F952 /* PBXTargetDependency */,
-			);
-			name = PieceTests;
-			productName = PIEFileManagerTests;
-			productReference = E54944A31DD4F35E0064F952 /* PieceTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		E56460001D3B50B500AA6557 /* Piece */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Piece" */;
@@ -319,6 +294,24 @@
 			productReference = E57077551DD73BBA00B01940 /* PieceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		E58C57E81DD8799D00348C65 /* PieceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "PieceTests" */;
+			buildPhases = (
+				E58C57E51DD8799D00348C65 /* Sources */,
+				E58C57E61DD8799D00348C65 /* Frameworks */,
+				E58C57E71DD8799D00348C65 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E58C57EF1DD8799D00348C65 /* PBXTargetDependency */,
+			);
+			name = PieceTests;
+			productName = PieceTests;
+			productReference = E58C57E91DD8799D00348C65 /* PieceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -329,11 +322,6 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Eirik Vale Aase";
 				TargetAttributes = {
-					E54944A21DD4F35E0064F952 = {
-						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = E56460001D3B50B500AA6557;
-					};
 					E56460001D3B50B500AA6557 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = N37KDKBFXC;
@@ -341,6 +329,12 @@
 					};
 					E57077541DD73BBA00B01940 = {
 						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E56460001D3B50B500AA6557;
+					};
+					E58C57E81DD8799D00348C65 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E56460001D3B50B500AA6557;
 					};
@@ -361,20 +355,13 @@
 			projectRoot = "";
 			targets = (
 				E56460001D3B50B500AA6557 /* Piece */,
-				E54944A21DD4F35E0064F952 /* PieceTests */,
+				E58C57E81DD8799D00348C65 /* PieceTests */,
 				E57077541DD73BBA00B01940 /* PieceUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E54944A11DD4F35E0064F952 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5645FFF1D3B50B500AA6557 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,18 +380,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		E549449F1DD4F35E0064F952 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		E58C57E71DD8799D00348C65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E56FC3071DD5150500AD731D /* AudioPlayerTests.swift in Sources */,
-				E54944A61DD4F35E0064F952 /* PIEFileManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		E5645FFD1D3B50B500AA6557 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -438,18 +423,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E58C57E51DD8799D00348C65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E58C57F71DD879C200348C65 /* PIEFileManagerTests.swift in Sources */,
+				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E54944A91DD4F35E0064F952 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E56460001D3B50B500AA6557 /* Piece */;
-			targetProxy = E54944A81DD4F35E0064F952 /* PBXContainerItemProxy */;
-		};
 		E570775B1DD73BBA00B01940 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E56460001D3B50B500AA6557 /* Piece */;
 			targetProxy = E570775A1DD73BBA00B01940 /* PBXContainerItemProxy */;
+		};
+		E58C57EF1DD8799D00348C65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E56460001D3B50B500AA6557 /* Piece */;
+			targetProxy = E58C57EE1DD8799D00348C65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -484,44 +478,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		E54944AB1DD4F35E0064F952 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = N37KDKBFXC;
-				INFOPLIST_FILE = PIEFileManagerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = ntnu.stud.PIEFileManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
-			};
-			name = Debug;
-		};
-		E54944AC1DD4F35E0064F952 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = N37KDKBFXC;
-				INFOPLIST_FILE = PIEFileManagerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = ntnu.stud.PIEFileManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
-			};
-			name = Release;
-		};
 		E56460271D3B50B500AA6557 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -692,18 +648,50 @@
 			};
 			name = Release;
 		};
+		E58C57F11DD8799D00348C65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = N37KDKBFXC;
+				INFOPLIST_FILE = PieceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ntnu.stud.PieceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "PieceTests/PieceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
+			};
+			name = Debug;
+		};
+		E58C57F21DD8799D00348C65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = N37KDKBFXC;
+				INFOPLIST_FILE = PieceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ntnu.stud.PieceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PieceTests/PieceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E54944AA1DD4F35E0064F952 /* Build configuration list for PBXNativeTarget "PieceTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E54944AB1DD4F35E0064F952 /* Debug */,
-				E54944AC1DD4F35E0064F952 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		E5645FFC1D3B50B500AA6557 /* Build configuration list for PBXProject "Piece" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -727,6 +715,15 @@
 			buildConfigurations = (
 				E570775D1DD73BBA00B01940 /* Debug */,
 				E570775E1DD73BBA00B01940 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "PieceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E58C57F11DD8799D00348C65 /* Debug */,
+				E58C57F21DD8799D00348C65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
