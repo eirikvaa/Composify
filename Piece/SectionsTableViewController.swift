@@ -110,6 +110,7 @@ class SectionsTableViewController: UITableViewController {
 			renameAlert.addTextField( configurationHandler: { (textField) in
 				textField.placeholder = NSLocalizedString("New Name to Section", comment: "Placeholder text for new name to section")
 				textField.autocapitalizationType = .words
+				textField.clearButtonMode = .whileEditing
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Save section action"), style: .default, handler: { (alertAction) in
@@ -159,6 +160,7 @@ class SectionsTableViewController: UITableViewController {
 		alert.addTextField { textField in
 			textField.placeholder = NSLocalizedString("Section Title", comment: "Placeholder text for title of new section.")
 			textField.autocapitalizationType = .words
+			textField.clearButtonMode = .whileEditing
 		}
 
 		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configSections."), style: .default) { (alertAction) in

@@ -98,6 +98,7 @@ class ProjectsTableViewController: UITableViewController {
 			renameAlert.addTextField(configurationHandler: { textField in
 				textField.placeholder = NSLocalizedString("New Name to Project", comment: "Placeholder for new project title")
 				textField.autocapitalizationType = .words
+				textField.clearButtonMode = .whileEditing
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save action"), style: .default, handler: { alertAction in
@@ -138,6 +139,7 @@ class ProjectsTableViewController: UITableViewController {
 		alert.addTextField { textField in
 			textField.placeholder = NSLocalizedString("Project Title", comment: "Placeholder text for text field in alert.")
 			textField.autocapitalizationType = .words
+			textField.clearButtonMode = .whileEditing
 		}
 
 		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configProjects."), style: .default) { alertAction in
