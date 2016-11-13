@@ -7,14 +7,47 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	var testing = false
+	
+	private func reset() {
+		// Wipe all projects.
+		let fetchRequest = Project.fetchRequest()
+		var projects = [Project]()
+		
+		do {
+			projects = try CoreDataStack.sharedInstance.managedContext.fetch(fetchRequest) as! [Project]
+		} catch {
+			print(error.localizedDescription)
+		}
+		
+		for project in projects {
+			PIEFileManager().delete(project)
+		}
+		
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+		
+		do {
+			try CoreDataStack.sharedInstance.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: CoreDataStack.sharedInstance.managedContext)
+		} catch {
+			print(error.localizedDescription)
+		}
+	}
 
-	private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
+		let args = ProcessInfo.processInfo.arguments
+		if args.contains("UI_TEST_MODE") {
+			testing = true
+			reset()
+		}
+		
 		return true
 	}
 
@@ -26,7 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationDidEnterBackground(_ application: UIApplication) {
 		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-		CoreDataStack.sharedInstance.saveContext()
+		if !testing {
+			CoreDataStack.sharedInstance.saveContext()
+		}
 	}
 
 	func applicationWillEnterForeground(_ application: UIApplication) {
@@ -39,7 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-		CoreDataStack.sharedInstance.saveContext()
+		
+		if !testing {
+			CoreDataStack.sharedInstance.saveContext()
+		} else {
+			reset()
+		}
+		
 	}
 
 

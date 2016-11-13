@@ -1,14 +1,15 @@
 //
-//  PieceTests.swift
+//  AudioPlayerTests.swift
 //  Piece
 //
-//  Created by Eirik Vale Aase on 08.11.2016.
+//  Created by Eirik Vale Aase on 10.11.2016.
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
 import XCTest
+@testable import Piece
 
-class PieceTests: XCTestCase {
+class AudioPlayerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -128,5 +128,16 @@ class PIEFileManager {
 			print(error)
 		}
 	}
-    
+	
+	/**
+	Removes the "User Projects" directory.
+	*/
+	func reset() {
+		do {
+			try fileManager.removeItem(at: userProjectsDirectory)
+		} catch {
+			print(error.localizedDescription)
+		}
+	}
+
 }
