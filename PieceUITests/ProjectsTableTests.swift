@@ -8,6 +8,7 @@
 
 import XCTest
 import CoreData
+@testable import Piece
 
 class ProjectsTableTests: XCTestCase {
 	
@@ -43,8 +44,6 @@ class ProjectsTableTests: XCTestCase {
     }
 	
 	func testAddProject() {
-		
-		let app = XCUIApplication()
 		let prosjekterNavigationBar = app.navigationBars["Prosjekter"]
 		prosjekterNavigationBar.buttons["Rediger"].tap()
 		prosjekterNavigationBar.buttons["Legg til"].tap()
