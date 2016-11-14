@@ -18,6 +18,7 @@
 		E56460351D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */; };
 		E564603B1D3B55AB00AA6557 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */; };
 		E564603D1D3B596200AA6557 /* SectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */; };
+		E56CC0C21DD9A74800217499 /* TestInitializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CC0C11DD9A74800217499 /* TestInitializerTests.swift */; };
 		E57077581DD73BBA00B01940 /* ProjectsTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */; };
 		E576D9411D586652006F5D62 /* Piece.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E576D93F1D586652006F5D62 /* Piece.xcdatamodeld */; };
 		E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576D9421D586795006F5D62 /* CoreDataStack.swift */; };
@@ -26,6 +27,9 @@
 		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
+		E5E53BDC1DD8B286005282E4 /* SectionsTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E53BDB1DD8B286005282E4 /* SectionsTableTests.swift */; };
+		E5E53BE01DD8EC56005282E4 /* RecordingsTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E53BDF1DD8EC56005282E4 /* RecordingsTableTests.swift */; };
+		E5E53BE31DD90410005282E4 /* TestInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E53BE21DD90410005282E4 /* TestInitializer.swift */; };
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B7E1D5B14AD000B4F7F /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7D1D5B14AD000B4F7F /* Project+CoreDataProperties.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
@@ -65,6 +69,7 @@
 		E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureRecordingTableViewController.swift; sourceTree = "<group>"; };
 		E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
 		E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableViewController.swift; sourceTree = "<group>"; };
+		E56CC0C11DD9A74800217499 /* TestInitializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInitializerTests.swift; sourceTree = "<group>"; };
 		E57077551DD73BBA00B01940 /* PieceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableTests.swift; sourceTree = "<group>"; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +85,9 @@
 		E5B3C7351D4A34BD0021183A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5CFDBAC1DD24E1A007252D6 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
+		E5E53BDB1DD8B286005282E4 /* SectionsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableTests.swift; sourceTree = "<group>"; };
+		E5E53BDF1DD8EC56005282E4 /* RecordingsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableTests.swift; sourceTree = "<group>"; };
+		E5E53BE21DD90410005282E4 /* TestInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInitializer.swift; sourceTree = "<group>"; };
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		E5F60B7D1D5B14AD000B4F7F /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -180,6 +188,7 @@
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E5E53BE11DD903E1005282E4 /* Testing */,
 				E576D93E1D58663E006F5D62 /* Core Data */,
 				E5B036A91D59958700C66A69 /* File Management */,
 				E5B036A81D59957C00C66A69 /* Audio */,
@@ -191,6 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				E57077571DD73BBA00B01940 /* ProjectsTableTests.swift */,
+				E5E53BDB1DD8B286005282E4 /* SectionsTableTests.swift */,
+				E5E53BDF1DD8EC56005282E4 /* RecordingsTableTests.swift */,
 				E57077591DD73BBA00B01940 /* Info.plist */,
 			);
 			path = PieceUITests;
@@ -211,6 +222,7 @@
 			children = (
 				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
 				E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */,
+				E56CC0C11DD9A74800217499 /* TestInitializerTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = PieceTests;
@@ -239,6 +251,14 @@
 				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 			);
 			name = Localization;
+			sourceTree = "<group>";
+		};
+		E5E53BE11DD903E1005282E4 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				E5E53BE21DD90410005282E4 /* TestInitializer.swift */,
+			);
+			name = Testing;
 			sourceTree = "<group>";
 		};
 		E5F60B681D5B0C80000B4F7F /* Managed Objects */ = {
@@ -408,6 +428,7 @@
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
 				E5F60B7E1D5B14AD000B4F7F /* Project+CoreDataProperties.swift in Sources */,
+				E5E53BE31DD90410005282E4 /* TestInitializer.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E5055BDF1D44BB5800D2B796 /* PIEFileManager.swift in Sources */,
 			);
@@ -417,6 +438,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5E53BE01DD8EC56005282E4 /* RecordingsTableTests.swift in Sources */,
+				E5E53BDC1DD8B286005282E4 /* SectionsTableTests.swift in Sources */,
 				E57077581DD73BBA00B01940 /* ProjectsTableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E58C57F71DD879C200348C65 /* PIEFileManagerTests.swift in Sources */,
+				E56CC0C21DD9A74800217499 /* TestInitializerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
