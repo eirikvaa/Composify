@@ -128,6 +128,7 @@ class DataTableViewController: UITableViewController {
 			renameAlert.addTextField( configurationHandler: { (textField) in
 				textField.placeholder = NSLocalizedString("New Name to Recording", comment: "Placeholder for new recording title")
 				textField.autocapitalizationType = .words
+				textField.clearButtonMode = .whileEditing
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Save action title"), style: .default, handler: { (alertAction) in
