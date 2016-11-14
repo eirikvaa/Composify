@@ -13,6 +13,8 @@ class TestInitializer {
 	
 	private(set) var active = false
 	private var arguments = [String]()
+	private(set) var project: Project!
+	private(set) var section: Section!
 	
 	init(arguments: [String]) {
 		self.arguments = arguments
@@ -51,17 +53,17 @@ class TestInitializer {
 	}
 	
 	private func addProject() {
-		let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
+		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
 		CoreDataStack.sharedInstance.saveContext()
 	}
 	
 	private func addProjectAndSection() {
-		let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
+		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
-		let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: CoreDataStack.sharedInstance.managedContext) as! Section
+		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: CoreDataStack.sharedInstance.managedContext) as! Section
 		section.title = "Intro"
 		section.project = project
 		PIEFileManager().save(section)
