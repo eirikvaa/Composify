@@ -32,7 +32,7 @@ class AudioRecorder {
 			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
 			AVSampleRateKey: 12000.0,
 			AVNumberOfChannelsKey: 1 as NSNumber,
-			AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+			AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
 		]
 
 		do {
