@@ -14,7 +14,7 @@ class RecordAudioViewController: UIViewController {
 	// MARK: @IBOutlets
 	@IBOutlet weak var recordAudioButton: UIButton! {
 		didSet {
-			recordAudioButton.layer.cornerRadius = 90
+			recordAudioButton.layer.cornerRadius = 15
 			recordAudioButton.titleLabel?.textAlignment = .center
 		}
 	}
