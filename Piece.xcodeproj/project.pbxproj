@@ -38,6 +38,17 @@
 		E5F60B861D5B153D000B4F7F /* Recording+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B851D5B153D000B4F7F /* Recording+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
 		E570775A1DD73BBA00B01940 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -82,9 +93,9 @@
 		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E5B3C7351D4A34BD0021183A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5CFDBAC1DD24E1A007252D6 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
+		E5E3EFD81DDBA04500D3C643 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5E53BDB1DD8B286005282E4 /* SectionsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableTests.swift; sourceTree = "<group>"; };
 		E5E53BDF1DD8EC56005282E4 /* RecordingsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableTests.swift; sourceTree = "<group>"; };
 		E5E53BE21DD90410005282E4 /* TestInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestInitializer.swift; sourceTree = "<group>"; };
@@ -284,8 +295,10 @@
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
+				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
 			);
 			buildRules = (
+				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -407,6 +420,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E5645FFD1D3B50B500AA6557 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -483,7 +512,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E5B3C7331D4A34BB0021183A /* Base */,
-				E5B3C7351D4A34BD0021183A /* nb */,
+				E5E3EFD81DDBA04500D3C643 /* nb */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
