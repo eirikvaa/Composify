@@ -8,6 +8,18 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+
+extension DataTableViewController: AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		if let indexPath = indexPathForSelectedCell {
+			let cell = tableView.cellForRow(at: indexPath)
+			cell?.textLabel?.text = recordings[indexPath.row].title
+			timer?.invalidate()
+			tableView.reloadData()
+		}
+	}
+}
 
 // MARK: NSFetchedResultsController
 extension DataTableViewController: NSFetchedResultsControllerDelegate {
@@ -52,10 +64,17 @@ extension DataTableViewController: RootViewControllerDelegate {
 	}
 }
 
+// TODO: Add current playing time to detail text label.
 class DataTableViewController: UITableViewController {
 
 	// MARK: Properties
-	private var audioPlayer: AudioPlayer!
+	// TODO: Make optional again
+	private var audioPlayer: AudioPlayer! {
+		didSet {
+			audioPlayer.player.delegate = self
+			audioPlayer.player.volume = 1
+		}
+	}
 	var section: Section!
 	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.managedContext
 	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
@@ -70,7 +89,19 @@ class DataTableViewController: UITableViewController {
 		return fetchedResultsController
 	}()
 	fileprivate var recordings = [Recording]()
-
+	fileprivate var indexPathForSelectedCell: IndexPath?
+	var timer: Timer?
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		// Only stop player if it has been started at some point. This should be fixed with making audioPlayer optional again.
+		if audioPlayer != nil {
+			audioPlayer.player.stop()
+		}
+		timer?.invalidate()
+	}
+	
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -103,22 +134,58 @@ class DataTableViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath)
-
-		cell.textLabel?.text = recordings[indexPath.row].title
+		
+		let recording = recordings[indexPath.row]
+		
+		cell.textLabel?.text = recording.title
+		
+		let audioAsset = AVURLAsset(url: recording.url)
+		let assetDuration = audioAsset.duration
+		let duration = CMTimeGetSeconds(assetDuration)
+		
+		let mins:Int = Int(duration) / 60
+		let secs:Int = Int(duration) % 60
+		
+		cell.detailTextLabel?.text = String(format: "0:00/%d:%0.2d", mins, secs)
 
 		return cell
 	}
 
 	// MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+		
+		timer?.invalidate()
+		
 		let recording = recordings[indexPath.row]
 		audioPlayer = AudioPlayer(url: recording.url)
 
 		audioPlayer.player.play()
 
 		if let indexPath = tableView.indexPathForSelectedRow {
+			// If we previously began playing a recording, deselect it.
+			if let ip = indexPathForSelectedCell {
+				let cell = tableView.cellForRow(at: ip)
+				cell?.textLabel?.text = recordings[ip.row].title
+				tableView.reloadData()
+			}
+			
+			indexPathForSelectedCell = indexPath
+			let cell = tableView.cellForRow(at: indexPath)
+			cell?.textLabel?.text = "\(recording.title) ..."
 			tableView.deselectRow(at: indexPath, animated: true)
+			let start = Date()
+			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+				let seconds = Int(Date().timeIntervalSince(start))
+				let cell = tableView.cellForRow(at: indexPath)
+				let mins = Int(seconds) / 60
+				let secs = Int(seconds) % 60
+				
+				let mins_d = Int(self.audioPlayer.player.duration) / 60
+				let secs_d = Int(self.audioPlayer.player.duration) % 60
+				
+				
+				cell?.detailTextLabel?.text = String(format: "%d:%0.2d/%d:%0.2d", mins, secs, mins_d, secs_d)
+			})
 		}
 	}
 

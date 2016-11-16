@@ -62,18 +62,14 @@ class RecordingsTableTests: XCTestCase {
 		app.buttons["Trykk for å stoppe opptak"].tap()
 		tablesQuery.cells.containing(.button, identifier:"Spill lyd").children(matching: .textField).element.tap()
 		tablesQuery.buttons["Fjern tekst"].tap()
-		tablesQuery.cells.containing(.button, identifier:"Spill lyd").children(matching: .textField).element.typeText("Sang")
+		tablesQuery.textFields.element.typeText("Sang")
 		app.navigationBars["Konfigurer og lagre opptak"].buttons["Arkiver"].tap()
 		introNavigationBar.buttons["Ferdig"].tap()
 		
-		let table = app.tables.element
-		
-		XCTAssertTrue(table.staticTexts["Sang"].exists)
-		XCTAssertTrue(table.staticTexts.count == 1)
+		XCTAssertTrue(app.tables.staticTexts["Sang"].exists)
     }
 	
 	func testRenameRecording() {
-		
 		let tablesQuery = app.tables
 		tablesQuery.staticTexts["Something New"].tap()
 		tablesQuery.staticTexts["Intro"].tap()
@@ -85,23 +81,21 @@ class RecordingsTableTests: XCTestCase {
 		app.buttons["Trykk for å stoppe opptak"].tap()
 		tablesQuery.cells.containing(.button, identifier:"Spill lyd").children(matching: .textField).element.tap()
 		tablesQuery.buttons["Fjern tekst"].tap()
-		tablesQuery.textFields.element.typeText("Sang")
+		tablesQuery.textFields.element.typeText("Here I Am")
 		app.navigationBars["Konfigurer og lagre opptak"].buttons["Arkiver"].tap()
-		tablesQuery.buttons["Slett Sang"].tap()
+		tablesQuery.buttons["Slett Here I Am, 0:00/0:01"].tap()
 		tablesQuery.buttons["Gi nytt navn"].tap()
 		
 		let giNyttNavnAlert = app.alerts["Gi nytt navn"]
-		let nyttNavnTilOpptakTextField = giNyttNavnAlert.collectionViews.textFields["Nytt navn til opptak"]
+		let nyttNavnTilOpptakTextField = giNyttNavnAlert.collectionViews.textFields.element
 		nyttNavnTilOpptakTextField.tap()
-		nyttNavnTilOpptakTextField.typeText("Renamed Sang")
+		nyttNavnTilOpptakTextField.typeText("I Am Not Here")
 		giNyttNavnAlert.buttons["Lagre"].tap()
 		introNavigationBar.buttons["Ferdig"].tap()
 		
 		let table = app.tables.element
-		
-		XCTAssertTrue(table.staticTexts["Renamed Sang"].exists)
-		XCTAssertTrue(table.staticTexts.count == 1)
-		
+		XCTAssertFalse(table.staticTexts["Here I Am"].exists)
+		XCTAssertTrue(table.staticTexts["I Am Not Here"].exists)
 	}
 	
 	func testDeleteRecording() {
@@ -118,12 +112,11 @@ class RecordingsTableTests: XCTestCase {
 		tablesQuery.buttons["Fjern tekst"].tap()
 		tablesQuery.textFields.element.typeText("Sang")
 		app.navigationBars["Konfigurer og lagre opptak"].buttons["Arkiver"].tap()
-		tablesQuery.buttons["Slett Sang"].tap()
+		tablesQuery.buttons["Slett Sang, 0:00/0:01"].tap()
 		tablesQuery.buttons["Slett"].tap()
 		
 		let table = app.tables.element
 		XCTAssertFalse(table.staticTexts["Sang"].exists)
-		XCTAssertTrue(table.staticTexts.count == 0)
 	}
     
 }

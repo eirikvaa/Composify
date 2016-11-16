@@ -1,14 +1,7 @@
 
-/* Alert when user cancels the recording. */
-"Recording will be deleted. Procede?" = "Opptak vil bli slettet. Fortsett?";
-
 /* Warning that the app failed to save the recording. */
-"Can't Save" = "Kan ikke lagre";
+"Can't Save" = "Kan ikke lagre!";
 
-/* Navigation bar title when configuring recording */
-"Configure and Save Recording" = "Konfigurer og lagre opptak";
-
-/* Every cancel button */
 "Cancel" = "Avbryt";
 
 /* Delete a recording. */
@@ -18,10 +11,7 @@
 "Done" = "Ferdig";
 
 /* The title is not unique in the project and section. */
-"Duplicate title!" = "Duplikat tittel!";
-
-/* Default title of recording */
-"MySong" = "MinSang";
+"Duplicate title!" = "En sang med denne tittelen finnes allerede.";
 
 /* Title of done button before editing recordings. */
 "Edit" = "Rediger";
@@ -42,13 +32,13 @@
 "New Section" = "Ny seksjon";
 
 /* Warning when you try to select a section before selecting a project */
-"No Project" = "Ikke valgt prosjekt";
+"No Project" = "Nytt prosjekt";
 
 /* Confirmation */
 "OK" = "OK";
 
 /* Placeholder text for text field in alert. */
-"Project Title" = "tittel på prosjekt";
+"Project Title" = "Tittel på prosjekt";
 
 /* Rename project */
 "Rename" = "Gi nytt navn";
@@ -58,23 +48,47 @@
 /* Placeholder text for title of new section. */
 "Section Title" = "Tittel på seksjon";
 
-/* Title of sections table view. */
-"Sections in \(project.title)" = "Seksjoner i \(project.title)";
-
 /* Title of record button before recording. */
-"Tap to Record" = "Trykk for å ta opp lyd";
+"Tap to Record" = "Start opptak";
 
 /* Title of record button after starting to recording. */
 "Tap to Stop" = "Trykk for å stoppe opptak";
 
 /* Warning that you must choose a project or create a new one before selecting a section. */
-"You must choose a project, or create a new one." = "Du må velge et prosjekt eller lage et nytt.";
+"You must choose a project, or create a new one." = "Du må velge et prosjekt, eller lage et nytt.";
 
 /* Warning when not setting a project. */
-"You must set a project." = "Du må velge et prosjekt.";
+"You must set a project." = "You må velge et prosjekt.";
 
 /* Warning when not setting a project and a section. */
 "You must set a section and a project." = "Du må velge en seksjon og et prosjekt.";
 
 /* Warning when not setting a section. */
 "You must set a section." = "Du må velge en seksjon.";
+
+/* Navigation bar title when configuring recording */
+"Configure and Save Recording" = "Konfigurer og lagre opptak";
+
+/* Default title of recording */
+"MySong" = "MinSang";
+
+/* Alert when user cancels the recording. */
+"Recording will be deleted. Procede?" = "Opptaket vil bli slettet. Fortsett?";
+
+/* Sections and recordings */
+"%d sections and %d recordings" = "%d seksjoner og %d opptak";
+
+/* Section and recording */
+"%d section and %d recording" = "%d seksjon og %d opptak";
+
+/* Section and recordings */
+"%d section and %d recordings" = "%d seksjon og %d opptak";
+
+/* Sections and recording */
+"%d sections and %d recording" = "%d seksjoner og %d opptak";
+
+/* Recording */
+"%d recording" = "%d opptak";
+
+/* Recordings */
+"%d recordings" = "%d opptak";

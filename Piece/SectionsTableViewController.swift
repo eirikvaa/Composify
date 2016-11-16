@@ -98,7 +98,22 @@ class SectionsTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath)
 
-		cell.textLabel?.text = sections[indexPath.row].title
+		let section = sections[indexPath.row]
+		
+		cell.textLabel?.text = section.title
+		
+		// FIXME: Localize
+		if section.recordings.count != 1 {
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d recordings", comment: "Recordings"),
+				section.recordings.count)
+			cell.detailTextLabel?.text = ls
+		} else {
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d recording", comment: "Recording"),
+				section.recordings.count)
+			cell.detailTextLabel?.text = ls
+		}
 
 		return cell
 	}
