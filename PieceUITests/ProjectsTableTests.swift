@@ -49,7 +49,7 @@ class ProjectsTableTests: XCTestCase {
 		prosjekterNavigationBar.buttons["Legg til"].tap()
 		
 		let nyttProsjektAlert = app.alerts["Nytt prosjekt"]
-		nyttProsjektAlert.collectionViews.textFields["tittel på prosjekt"].typeText("Something New")
+		nyttProsjektAlert.collectionViews.textFields["Tittel på prosjekt"].typeText("Something New")
 		nyttProsjektAlert.buttons["Lagre"].tap()
 		prosjekterNavigationBar.buttons["Ferdig"].tap()
 		
@@ -57,27 +57,25 @@ class ProjectsTableTests: XCTestCase {
 		let table = app.tables.element
 		
 		XCTAssertTrue(table.staticTexts["Something New"].exists)
-		XCTAssertTrue(table.staticTexts.count == 1)
 	}
 	
 	func testRemoveProject() {
+		
 		let prosjekterNavigationBar = app.navigationBars["Prosjekter"]
 		prosjekterNavigationBar.buttons["Rediger"].tap()
 		prosjekterNavigationBar.buttons["Legg til"].tap()
 		
 		let nyttProsjektAlert = app.alerts["Nytt prosjekt"]
-		nyttProsjektAlert.collectionViews.textFields["tittel på prosjekt"].typeText("Into The West")
+		nyttProsjektAlert.collectionViews.textFields["Tittel på prosjekt"].typeText("Into the West")
 		nyttProsjektAlert.buttons["Lagre"].tap()
 		
 		let tablesQuery = app.tables
-		tablesQuery.buttons["Slett Into The West"].tap()
+		tablesQuery.buttons["Slett Into the West, 0 seksjoner og 0 opptak"].tap()
 		tablesQuery.buttons["Slett"].tap()
 		prosjekterNavigationBar.buttons["Ferdig"].tap()
 		
-		
 		let table = app.tables.element
-		XCTAssertFalse(table.staticTexts["Into the West"].exists)
-		XCTAssertTrue(table.staticTexts.count == 0)
+		XCTAssertFalse(table.staticTexts["Into The West"].exists)
 	}
 	
 	func testRenameProject() {
@@ -86,11 +84,11 @@ class ProjectsTableTests: XCTestCase {
 		prosjekterNavigationBar.buttons["Legg til"].tap()
 		
 		let nyttProsjektAlert = app.alerts["Nytt prosjekt"]
-		nyttProsjektAlert.collectionViews.textFields["tittel på prosjekt"].typeText("Here I Am")
+		nyttProsjektAlert.collectionViews.textFields["Tittel på prosjekt"].typeText("Here I Am")
 		nyttProsjektAlert.buttons["Lagre"].tap()
 		
 		let tablesQuery = app.tables
-		tablesQuery.buttons["Slett Here I Am"].tap()
+		tablesQuery.buttons["Slett Here I Am, 0 seksjoner og 0 opptak"].tap()
 		tablesQuery.buttons["Gi nytt navn"].tap()
 		
 		let giNyttNavnAlert = app.alerts["Gi nytt navn"]
