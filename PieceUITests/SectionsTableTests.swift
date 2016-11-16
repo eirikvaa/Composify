@@ -61,7 +61,7 @@ class SectionsTableTests: XCTestCase {
 		let table = app.tables.element
 		
 		XCTAssertTrue(table.staticTexts["Intro"].exists)
-		XCTAssertTrue(table.staticTexts.count == 1)
+		XCTAssertTrue(table.cells.count == 1)
 	}
 	
 	func testRenameSection() {
@@ -75,7 +75,7 @@ class SectionsTableTests: XCTestCase {
 		let nySeksjonAlert = app.alerts["Ny seksjon"]
 		nySeksjonAlert.collectionViews.textFields["Tittel på seksjon"].typeText("Verse")
 		nySeksjonAlert.buttons["Lagre"].tap()
-		tablesQuery.buttons["Slett Verse"].tap()
+		tablesQuery.buttons["Slett Verse, 0 opptak"].tap()
 		tablesQuery.buttons["Gi nytt navn"].tap()
 		
 		let giNyttNavnAlert = app.alerts["Gi nytt navn"]
@@ -87,7 +87,6 @@ class SectionsTableTests: XCTestCase {
 		
 		XCTAssertTrue(table.staticTexts["Outro"].exists)
 		XCTAssertFalse(table.staticTexts["Verse"].exists)
-		XCTAssertTrue(table.staticTexts.count == 1)
 	}
 	
 	func testDeleteSection() {
@@ -101,14 +100,13 @@ class SectionsTableTests: XCTestCase {
 		let nySeksjonAlert = app.alerts["Ny seksjon"]
 		nySeksjonAlert.collectionViews.textFields["Tittel på seksjon"].typeText("Verse")
 		nySeksjonAlert.buttons["Lagre"].tap()
-		tablesQuery.buttons["Slett Verse"].tap()
+		tablesQuery.buttons["Slett Verse, 0 opptak"].tap()
 		tablesQuery.buttons["Slett"].tap()
 		somethingNewNavigationBar.buttons["Ferdig"].tap()
 		
 		let table = app.tables.element
 		
 		XCTAssertFalse(table.staticTexts["Verse"].exists)
-		XCTAssertTrue(table.staticTexts.count == 0)
 	}
     
 }
