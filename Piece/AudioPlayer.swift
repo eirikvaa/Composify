@@ -18,7 +18,7 @@ class AudioPlayer {
 	// MARK: Properties
 	private(set) var player = AVAudioPlayer()
 	private var session = AVAudioSession.sharedInstance()
-
+	
 	// MARK: Initialization
 	/**
 	Initializes the AudioPlayer class with a recording.
