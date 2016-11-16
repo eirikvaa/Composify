@@ -246,6 +246,9 @@ class ConfigureRecordingTableViewController: UITableViewController {
 
 	// MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		if indexPath.section == 0 && indexPath.row == 0 {
+			return nil
+		}
 		if (indexPath as NSIndexPath).section == 2 && project == nil {
 			let alert = UIAlertController(
 			                              title: NSLocalizedString("No Project", comment: "Warning when you try to select a section before selecting a project"),
