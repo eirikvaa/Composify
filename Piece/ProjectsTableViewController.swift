@@ -85,7 +85,34 @@ class ProjectsTableViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath)
-		cell.textLabel?.text = projects[indexPath.row].title
+		let project = projects[indexPath.row]
+		cell.textLabel?.text = project.title
+		
+		// FIXME: Localize
+		switch (project.sections.count != 1, project.recordings.count != 1) {
+		case (true, true):
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d sections and %d recordings", comment: "Sections and recordings"),
+				project.sections.count, project.recordings.count)
+			cell.detailTextLabel?.text = ls
+		case (true, false):
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d sections and %d recording", comment: "Sections and recording"),
+				project.sections.count, project.recordings.count)
+			cell.detailTextLabel?.text = ls
+		case (false, true):
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d section and %d recordings", comment: "Section and recordings"),
+				project.sections.count, project.recordings.count)
+			cell.detailTextLabel?.text = ls
+		case (false, false):
+			let ls = String.localizedStringWithFormat(
+				NSLocalizedString("%d section and %d recording", comment: "Section and recording"),
+				project.sections.count, project.recordings.count)
+			cell.detailTextLabel?.text = ls
+		}
+		
+		
 		return cell
 	}
 
