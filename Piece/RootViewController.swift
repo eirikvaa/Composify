@@ -46,6 +46,8 @@ extension RootViewController: UIPageViewControllerDataSource {
 		}
 
 		index -= 1
+		
+		self.index = index
 
 		return viewControllerAtIndex(index, storyboard: storyboard!)
 	}
@@ -62,8 +64,18 @@ extension RootViewController: UIPageViewControllerDataSource {
 		if index == project.sections.count {
 			return nil
 		}
+		
+		self.index = index
 
 		return viewControllerAtIndex(index, storyboard: storyboard!)
+	}
+	
+	func presentationCount(for pageViewController: UIPageViewController) -> Int {
+		return project.sections.count
+	}
+	
+	func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+		return index
 	}
 }
 
@@ -91,10 +103,21 @@ class RootViewController: UIViewController {
 	var section: Section!
 	var delegate: RootViewControllerDelegate!
 	fileprivate var userIsEditing = false
+	var index = 0
+	
+	private func stylePageControl() {
+		let pageControl = UIPageControl.appearance()
+		
+		pageControl.currentPageIndicatorTintColor = UIColor.black
+		pageControl.pageIndicatorTintColor = UIColor.gray
+	}
 
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// So the UIPageControl highlights correct dot.
+		index = project.sections.index(of: section)
 
 		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 		pageViewController.delegate = self
@@ -111,6 +134,8 @@ class RootViewController: UIViewController {
 		view.addSubview(pageViewController!.view)
 
 		pageViewController.didMove(toParentViewController: self)
+		
+		stylePageControl()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
