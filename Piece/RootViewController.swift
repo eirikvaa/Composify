@@ -115,9 +115,6 @@ class RootViewController: UIViewController {
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		// So the UIPageControl highlights correct dot.
-		index = project.sections.index(of: section)
 
 		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 		pageViewController.delegate = self

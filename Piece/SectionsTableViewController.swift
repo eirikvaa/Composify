@@ -208,10 +208,11 @@ class SectionsTableViewController: UITableViewController {
 			let sectionTitle = sectionCell?.textLabel?.text
 			let selectedSection = chosenProject.sections.filter { ($0 as! Section).title == sectionTitle }.first
 
-			if let selectedSection = selectedSection {
+			if let selectedSection = selectedSection, let index = tableView.indexPathForSelectedRow?.row {
 				let destinationViewController = segue.destination as! RootViewController
 				destinationViewController.project = (selectedSection as AnyObject).project
 				destinationViewController.section = selectedSection as! Section
+				destinationViewController.index = index
 			}
 		}
 	}
