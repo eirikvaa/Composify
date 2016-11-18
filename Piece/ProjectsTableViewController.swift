@@ -155,7 +155,7 @@ class ProjectsTableViewController: UITableViewController {
 		}
 
 		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 207.0 / 255.0, green: 0.0 / 255.0, blue: 15.0 / 255.0, alpha: 1.0)
+		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 
 		return [renameAction, deleteAction]
 	}
