@@ -22,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		testInitializer = TestInitializer(arguments: launchArguments)
 		testInitializer.setupTestingMode()
 		
+		let appearence = UINavigationBar.appearance()
+		appearence.barTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		appearence.isTranslucent = true
+		appearence.tintColor = UIColor.white
+		appearence.backgroundColor = UIColor.clear
+		appearence.barStyle = .blackTranslucent
+		appearence.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+		
 		return true
 	}
 
