@@ -148,10 +148,14 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
 		label.text = navigationItem.title
 		label.adjustsFontSizeToFitWidth = true
+		label.textColor = UIColor.white
+		label.textAlignment = .center
 		navigationItem.titleView = label
 
 		projectPicker.isHidden = true
 		sectionPicker.isHidden = true
+		
+		tableView.separatorStyle = .none
 	}
 
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
