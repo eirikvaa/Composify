@@ -24,7 +24,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Leg-cp-zGo">
                                 <rect key="frame" x="97.5" y="243.5" width="180" height="180"/>
-                                <color key="backgroundColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.81568627450980391" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="SCZ-ys-xJs"/>
                                     <constraint firstAttribute="height" constant="180" id="cF1-6a-Ph0"/>
