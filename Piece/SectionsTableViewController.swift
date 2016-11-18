@@ -68,6 +68,9 @@ class SectionsTableViewController: UITableViewController {
 		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
 		label.text = navigationItem.title
 		label.adjustsFontSizeToFitWidth = true
+		label.textColor = UIColor.white
+		label.textAlignment = .center
+		label.font = UIFont.boldSystemFont(ofSize: 17)
 		navigationItem.titleView = label
 		
 		
@@ -154,7 +157,7 @@ class SectionsTableViewController: UITableViewController {
 		}
 
 		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 207.0 / 255.0, green: 0.0 / 255.0, blue: 15.0 / 255.0, alpha: 1.0)
+		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 
 		return [renameAction, deleteAction]
 	}
