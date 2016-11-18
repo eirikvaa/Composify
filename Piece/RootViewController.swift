@@ -108,8 +108,9 @@ class RootViewController: UIViewController {
 	private func stylePageControl() {
 		let pageControl = UIPageControl.appearance()
 		
-		pageControl.currentPageIndicatorTintColor = UIColor.black
-		pageControl.pageIndicatorTintColor = UIColor.gray
+		
+		pageControl.currentPageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		pageControl.pageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 0.2)
 	}
 
 	// MARK: View controller life cycle
