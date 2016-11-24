@@ -20,7 +20,7 @@ class PIEFileManagerTests: XCTestCase {
 	var recording: Recording!
 	let pieFileManager = PIEFileManager()
 	let fileManager = FileManager()
-	let managedContext = CoreDataStack.sharedInstance.managedContext
+	let managedContext = CoreDataStack.sharedInstance.viewContext
 	
 	var project2: Project!
 	var section2: Section!
