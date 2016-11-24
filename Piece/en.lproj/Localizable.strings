@@ -48,9 +48,6 @@
 /* Placeholder text for title of new section. */
 "Section Title" = "Section Title";
 
-/* Title of sections table view. */
-"Sections in \(project.title)" = "Sections in \(project.title)";
-
 /* Title of record button before recording. */
 "Tap to Record" = "Tap to Record";
 
@@ -69,12 +66,6 @@
 /* Warning when not setting a section. */
 "You must set a section." = "You must set a section.";
 
-/* Sections 1 recording */
-"\(section.recordings.count) recording" = "\(section.recordings.count) recording";
-
-/* Sections not 1 recordings */
-"\(section.recordings.count) recordings" = "\(section.recordings.count) recordings";
-
 /* Navigation bar title when configuring recording */
 "Configure and Save Recording" = "Configure and Save Recording";
 
@@ -82,34 +73,43 @@
 "MySong" = "MySong";
 
 /* Alert when user cancels the recording. */
-"Recording will be deleted. Procede?" = "Recording will be deleted. Procede?";
-
-/* Section and recording */
-"\(project.sections.count) section and \(project.recordings.count) recording" = "\(project.sections.count) section and \(project.recordings.count) recording";
-
-/* Section and recordings */
-"\(project.sections.count) section and \(project.recordings.count) recordings" = "\(project.sections.count) section and \(project.recordings.count) recordings";
-
-/* Sections and recording */
-"\(project.sections.count) sections and \(project.recordings.count) recording" = "\(project.sections.count) sections and \(project.recordings.count) recording";
+"Recording will be deleted. Proceed?" = "Recording will be deleted. Proceed?";
 
 /* Sections and recordings */
-"\(project.sections.count) sections and \(project.recordings.count) recordings" = "\(project.sections.count) sections and \(project.recordings.count) recordings";
-
-/* Sections and recordings */
-"%d sections and %d recordings" = "";
+"%d sections and %d recordings" = "%d sections and %d recordings";
 
 /* Section and recording */
-"%d section and %d recording" = "";
+"%d section and %d recording" = "%d section and %d recording";
 
 /* Section and recordings */
-"%d section and %d recordings" = "";
+"%d section and %d recordings" = "%d section and %d recordings";
 
 /* Sections and recording */
-"%d sections and %d recording" = "";
+"%d sections and %d recording" = "%d sections and %d recording";
 
 /* Recording */
-"%d recording" = "";
+"%d recording" = "%d recording";
 
 /* Recordings */
-"%d recordings" = "";
+"%d recordings" = "%d recordings";
+
+/* Placeholder in projects search bar */
+"Search projects ..." = "Search projects ...";
+
+/* Placeholder in sections search bar */
+"Search sections ..." = "Search sections ...";
+
+/* Navigation title projects */
+"Projects" = "Projects";
+
+/* Title of record button before recording. */
+"Start recording" = "Start recording";
+
+/* Title of record button after starting to recording. */
+"Stop recording" = "Stop recording";
+
+/* Title of alert when picking project without sections */
+"No sections in project" = "No sections in project";
+
+/* Alert when user cancels the recording. */
+"Recording will be deleted. Procede?" = "";
