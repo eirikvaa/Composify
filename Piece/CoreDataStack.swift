@@ -12,7 +12,7 @@ import CoreData
 /**
 A class for setting up the core data stack. Uses the new features of Core Data to simplify this process.
 
-- Important: CoreDataStack implements a singletone - `sharedInstance` - since it only uses one context and a simple model. Because of this, it is important to note that the `init()` method is private so third parties can't instantiate it more than once.
+- Important: CoreDataStack implements a singletone - `sharedInstance` - since it only uses one context and a simple model. Because of this, it is important to note that the `init()` method is private so third parties can't instantiate it more than once. Also, remember to write `_ = CoreDataStack.sharedInstance.viewContext` in your AppDelegate.
 - Author: Eirik Vale Aase
 */
 class CoreDataStack {
@@ -30,19 +30,19 @@ class CoreDataStack {
 		return container
 	}()
 	
-	lazy var managedContext: NSManagedObjectContext =  {
+	lazy var viewContext: NSManagedObjectContext = {
 		return self.persistentContainer.viewContext
 	}()
-	
+		
 	// MARK: Initialization
 	private init() { }
 
 	// MARK: - Saving
 	func saveContext () {
-		guard managedContext.hasChanges else { return }
+		guard persistentContainer.viewContext.hasChanges else { return }
 		
 		do {
-			try managedContext.save()
+			try persistentContainer.viewContext.save()
 		} catch let error as NSError {
 			print("Unresolved error \(error), \(error.userInfo)")
 		}
