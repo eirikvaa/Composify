@@ -16,15 +16,6 @@
 /* Title of done button before editing recordings. */
 "Edit" = "Rediger";
 
-/* Placeholder for new project title */
-"New Name to Project" = "Nytt navn til prosjekt";
-
-/* Placeholder for new recording title */
-"New Name to Recording" = "Nytt navn til opptak";
-
-/* Placeholder text for new name to section */
-"New Name to Section" = "Nytt navn til seksjon";
-
 /* Title of alert when creating a new project. */
 "New Project" = "Nytt prosjekt";
 
@@ -49,10 +40,10 @@
 "Section Title" = "Tittel på seksjon";
 
 /* Title of record button before recording. */
-"Tap to Record" = "Start opptak";
+"Start recording" = "Start opptak";
 
 /* Title of record button after starting to recording. */
-"Tap to Stop" = "Trykk for å stoppe opptak";
+"Stop recording" = "Stopp opptak";
 
 /* Warning that you must choose a project or create a new one before selecting a section. */
 "You must choose a project, or create a new one." = "Du må velge et prosjekt, eller lage et nytt.";
@@ -72,9 +63,6 @@
 /* Default title of recording */
 "MySong" = "MinSang";
 
-/* Alert when user cancels the recording. */
-"Recording will be deleted. Procede?" = "Opptaket vil bli slettet. Fortsett?";
-
 /* Sections and recordings */
 "%d sections and %d recordings" = "%d seksjoner og %d opptak";
 
@@ -92,3 +80,21 @@
 
 /* Recordings */
 "%d recordings" = "%d opptak";
+
+/* Placeholder in projects search bar */
+"Search projects ..." = "Søk prosjekter";
+
+/* Placeholder in sections search bar */
+"Search sections ..." = "Søk seksjoner ...";
+
+/* Navigation title projects */
+"Projects" = "Prosjekter";
+
+/* Title of alert when picking project without sections */
+"No sections in project" = "Ingen seksjoner i prosjektet";
+
+/* No comment provided by engineer. */
+"Tap to Record" = "Ta opp lyd";
+
+/* Alert when user cancels the recording. */
+"Recording will be deleted. Proceed?" = "Opptaket vil bli slettet. Fortsett?";

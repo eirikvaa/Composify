@@ -19,7 +19,7 @@ class AudioPlayerTests: XCTestCase {
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
-	let managedContext = CoreDataStack.sharedInstance.managedContext
+	let managedContext = CoreDataStack.sharedInstance.viewContext
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()

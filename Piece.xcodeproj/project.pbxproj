@@ -11,6 +11,7 @@
 		E5055BE11D44D07C00D2B796 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5055BE01D44D07C00D2B796 /* Assets.xcassets */; };
 		E5228F411D42506500BBD008 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F401D42506500BBD008 /* RootViewController.swift */; };
 		E5228F451D4250E900BBD008 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F441D4250E900BBD008 /* DataTableViewController.swift */; };
+		E53A66F01DE093800025FD4F /* PageControllerDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */; };
 		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E56460071D3B50B500AA6557 /* RecordAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460061D3B50B500AA6557 /* RecordAudioViewController.swift */; };
@@ -71,6 +72,7 @@
 		E5055BE01D44D07C00D2B796 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5228F401D42506500BBD008 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E5228F441D4250E900BBD008 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
+		E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControllerDataSourceDelegate.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Piece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56460041D3B50B500AA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E56460061D3B50B500AA6557 /* RecordAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAudioViewController.swift; sourceTree = "<group>"; };
@@ -92,9 +94,11 @@
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		E5B34F0C1DE4531D004B5275 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
+		E5B34F0E1DE453D6004B5275 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		E5B34F0F1DE453F3004B5275 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E5CFDBAC1DD24E1A007252D6 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		E5E3EFD81DDBA04500D3C643 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5E53BDB1DD8B286005282E4 /* SectionsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsTableTests.swift; sourceTree = "<group>"; };
 		E5E53BDF1DD8EC56005282E4 /* RecordingsTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableTests.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E590FA901DE09BC500A11FE6 /* DataSourceDelegates */,
 				E5E53BE11DD903E1005282E4 /* Testing */,
 				E576D93E1D58663E006F5D62 /* Core Data */,
 				E5B036A91D59958700C66A69 /* File Management */,
@@ -237,6 +242,14 @@
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = PieceTests;
+			sourceTree = "<group>";
+		};
+		E590FA901DE09BC500A11FE6 /* DataSourceDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */,
+			);
+			name = DataSourceDelegates;
 			sourceTree = "<group>";
 		};
 		E5B036A81D59957C00C66A69 /* Audio */ = {
@@ -447,6 +460,7 @@
 				E564603B1D3B55AB00AA6557 /* ProjectsTableViewController.swift in Sources */,
 				E56460071D3B50B500AA6557 /* RecordAudioViewController.swift in Sources */,
 				E5F60B821D5B14ED000B4F7F /* Section+CoreDataProperties.swift in Sources */,
+				E53A66F01DE093800025FD4F /* PageControllerDataSourceDelegate.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
 				E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */,
 				E5228F451D4250E900BBD008 /* DataTableViewController.swift in Sources */,
@@ -513,6 +527,7 @@
 			children = (
 				E5B3C7331D4A34BB0021183A /* Base */,
 				E5E3EFD81DDBA04500D3C643 /* nb */,
+				E5B34F0F1DE453F3004B5275 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -521,7 +536,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E5CFDBAA1DD24E0D007252D6 /* Base */,
-				E5CFDBAC1DD24E1A007252D6 /* nb */,
+				E5B34F0C1DE4531D004B5275 /* nb */,
+				E5B34F0E1DE453D6004B5275 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -636,7 +652,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Piece/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -653,7 +669,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Piece/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

@@ -7,142 +7,80 @@
 //
 
 import UIKit
+import AVFoundation
 
-protocol RootViewControllerDelegate {
-	func userDidStartEditing()
-	func userDidEndEditing()
-}
-
-// MARK: Helper methods
+// MARK: Helper Methods
 private extension RootViewController {
-	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> DataTableViewController? {
-		if project.sections.count == 0 || index >= project.sections.count {
-			return nil
-		}
-
-		let dataTableViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! DataTableViewController
-		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
-		dataTableViewController.section = sections[index]
-		section = sections[index]
-		delegate = dataTableViewController
-		return dataTableViewController
+	@objc func addRecording() {
+		performSegue(withIdentifier: "addRecording", sender: self)
 	}
-
-	func indexOfViewController(_ viewController: DataTableViewController) -> Int {
-		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
-		return sections.index(of: viewController.section) ?? NSNotFound
-	}
-}
-
-// MARK: UIPageViewControllerDataSource
-extension RootViewController: UIPageViewControllerDataSource {
-	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! DataTableViewController)
-
-		if index == NSNotFound || index == 0 {
-			return nil
-		}
-
-		index -= 1
-
-		return viewControllerAtIndex(index, storyboard: storyboard!)
-	}
-
-	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! DataTableViewController)
-
-		if index == NSNotFound {
-			return nil
-		}
-
-		index += 1
-
-		if index == project.sections.count {
-			return nil
-		}
-
-		return viewControllerAtIndex(index, storyboard: storyboard!)
+	
+	func setupPageViewController() {
+		navigationItem.rightBarButtonItem = editButtonItem
+		
+		pageDataSourceDelegate.rootViewController = self
+		
+		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+		pageViewController.delegate = pageDataSourceDelegate
+		
+		let startingViewController = pageDataSourceDelegate.viewControllerAtIndex(sectionIndex, storyboard: storyboard!)!
+		
+		let viewControllers = [startingViewController]
+		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+		pageViewController.dataSource = pageDataSourceDelegate
+		addChildViewController(pageViewController)
+		view.addSubview(pageViewController.view)
+		
+		pageViewController.didMove(toParentViewController: self)
 	}
 }
 
-// MARK: UIPageViewControllerDelegate
-extension RootViewController: UIPageViewControllerDelegate {
-	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		let title = (pageViewController.viewControllers?.first! as! DataTableViewController).section.title
-		navigationItem.title = title
-		section = project.sections.first(where: {($0 as! Section).title == title}) as! Section!
-	}
-}
-
+/**
+`RootViewController` managed multiple `UITableView` instances.
+*/
+// TODO: Fix name to reflect that its a container for table views for recordings.
 class RootViewController: UIViewController {
 
-	// MARK: @IBOutlets
-	@IBOutlet weak var editBarButton: UIBarButtonItem! {
-		didSet {
-			editBarButton.style = .done
-		}
-	}
-
 	// MARK: Properties
-	private var pageViewController: UIPageViewController!
-	var project: Project!
+	fileprivate let pageDataSourceDelegate = SectionsPageViewController()
+	fileprivate var pageViewController: UIPageViewController!
 	var section: Section!
-	var delegate: RootViewControllerDelegate!
-	fileprivate var userIsEditing = false
-
+	var project: Project!
+	
+	// FIXME: Probably not using sectionIndex variable
+	var sectionIndex = 0
+	
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-		pageViewController.delegate = self
-
-		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-		let sections = project.sections.sortedArray(using: [sortDescriptor]) as! Array<Section>
-		let sectionIndex = sections.index(of: section)
-
-		let startingViewController: DataTableViewController = viewControllerAtIndex(sectionIndex!, storyboard: storyboard!)!
-		let viewControllers = [startingViewController]
-		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-		pageViewController.dataSource = self
-		addChildViewController(pageViewController!)
-		view.addSubview(pageViewController!.view)
-
-		pageViewController.didMove(toParentViewController: self)
+		
+		setupPageViewController()
 	}
-
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
-		navigationItem.title = section.title
 	}
-
-	func addRecording() {
-		performSegue(withIdentifier: "addRecording", sender: self)
-	}
-
-	@IBAction func edit(_ sender: UIBarButtonItem) {
-		switch userIsEditing {
-		case false:
-			delegate.userDidStartEditing()
-			sender.title = NSLocalizedString("Done", comment: "Title of done button when editing recordings.")
+	
+	// MARK: UITableView
+	override func setEditing(_ editing: Bool, animated: Bool) {
+		super.setEditing(editing, animated: animated)
+		
+		// This fixed the bug where edit mode wouldn't be activated.
+		pageViewController.viewControllers?.first?.setEditing(editing, animated: animated)
+		
+		if editing {
 			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRecording))
 			navigationItem.leftBarButtonItem = addButton
-		case true:
-			delegate.userDidEndEditing()
-			sender.title = NSLocalizedString("Edit", comment: "Title of done button before editing recordings.")
+		} else {
 			navigationItem.leftBarButtonItem = nil
 		}
-
-		userIsEditing = !userIsEditing
 	}
-
+	
+	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "addRecording" {
-			let nav = segue.destination as! UINavigationController
-			let recordAudioViewController = nav.viewControllers.first as! RecordAudioViewController
+			let navigationController = segue.destination as! UINavigationController
+			let recordAudioViewController = navigationController.viewControllers.first as! RecordAudioViewController
 			recordAudioViewController.section = section
 		}
 	}

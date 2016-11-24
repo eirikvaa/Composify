@@ -40,30 +40,30 @@ class TestInitializer {
 		var projects = [Project]()
 		
 		do {
-			projects = try CoreDataStack.sharedInstance.managedContext.fetch(fetchRequest) as! [Project]
+			projects = try CoreDataStack.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest) as! [Project]
 		} catch {
 			print(error.localizedDescription)
 		}
 		
 		for project in projects {
 			PIEFileManager().delete(project)
-			CoreDataStack.sharedInstance.managedContext.delete(project)
+			CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(project)
 		}
 		
 	}
 	
 	private func addProject() {
-		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
+		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
 		CoreDataStack.sharedInstance.saveContext()
 	}
 	
 	private func addProjectAndSection() {
-		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.managedContext) as! Project
+		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
-		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: CoreDataStack.sharedInstance.managedContext) as! Section
+		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Section
 		section.title = "Intro"
 		section.project = project
 		PIEFileManager().save(section)

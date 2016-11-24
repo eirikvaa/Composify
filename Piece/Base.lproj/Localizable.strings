@@ -16,15 +16,6 @@
 /* Title of done button before editing recordings. */
 "Edit" = "Edit";
 
-/* Placeholder for new project title */
-"New Name to Project" = "New Name to Project";
-
-/* Placeholder for new recording title */
-"New Name to Recording" = "New Name to Recording";
-
-/* Placeholder text for new name to section */
-"New Name to Section" = "New Name to Section";
-
 /* Title of alert when creating a new project. */
 "New Project" = "New Project";
 
@@ -49,10 +40,10 @@
 "Section Title" = "Section Title";
 
 /* Title of record button before recording. */
-"Tap to Record" = "Tap to Record";
+"Start recording" = "Start recording";
 
 /* Title of record button after starting to recording. */
-"Tap to Stop" = "Tap to Stop";
+"Stop recording" = "Stop recording";
 
 /* Warning that you must choose a project or create a new one before selecting a section. */
 "You must choose a project, or create a new one." = "You must choose a project, or create a new one.";
@@ -66,12 +57,6 @@
 /* Warning when not setting a section. */
 "You must set a section." = "You must set a section.";
 
-/* Sections 1 recording */
-"\(section.recordings.count) recording" = "\(section.recordings.count) recording";
-
-/* Sections not 1 recordings */
-"\(section.recordings.count) recordings" = "\(section.recordings.count) recordings";
-
 /* Navigation bar title when configuring recording */
 "Configure and Save Recording" = "Configure and Save Recording";
 
@@ -79,7 +64,7 @@
 "MySong" = "MySong";
 
 /* Alert when user cancels the recording. */
-"Recording will be deleted. Procede?" = "Recording will be deleted. Procede?";
+"Recording will be deleted. Proceed?" = "Recording will be deleted. Proceed?";
 
 /* Sections and recordings */
 "%d sections and %d recordings" = "%d sections and %d recordings";
@@ -98,3 +83,21 @@
 
 /* Recordings */
 "%d recordings" = "%d recordings";
+
+/* Placeholder in projects search bar */
+"Search projects ..." = "Search projects ...";
+
+/* Placeholder in sections search bar */
+"Search sections ..." = "Search sections ...";
+
+/* Navigation title projects */
+"Projects" = "Projects";
+
+/* Title of alert when picking project without sections */
+"No sections in project" = "No sections in project";
+
+/* No comment provided by engineer. */
+"Tap to Record" = "Tap to Record";
+
+/* Alert when user cancels the recording. */
+"Recording will be deleted. Procede?" = "";

@@ -10,18 +10,19 @@ import UIKit
 import CoreData
 import AVFoundation
 
+// MARK: AVAudioPlayerDelegate
 extension DataTableViewController: AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-		if let indexPath = indexPathForSelectedCell {
+		if let indexPath = previouslySelectedCellIndexPath {
 			let cell = tableView.cellForRow(at: indexPath)
-			cell?.textLabel?.text = recordings[indexPath.row].title
+			cell?.textLabel?.text = fetchedResultsController.object(at: indexPath).title
 			timer?.invalidate()
 			tableView.reloadData()
 		}
 	}
 }
 
-// MARK: NSFetchedResultsController
+// MARK: NSFetchedResultsControllerDelegate
 extension DataTableViewController: NSFetchedResultsControllerDelegate {
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView.beginUpdates()
@@ -41,11 +42,12 @@ extension DataTableViewController: NSFetchedResultsControllerDelegate {
 			if let indexPath = indexPath {
 				tableView.deleteRows(at: [indexPath], with: .fade)
 			}
-		default:
-			tableView.reloadData()
+		case .move:
+			if let indexPath = indexPath, let newIndexPath = newIndexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
 		}
-
-		recordings = fetchedResultsController.fetchedObjects as! [Recording]
 	}
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -53,20 +55,12 @@ extension DataTableViewController: NSFetchedResultsControllerDelegate {
 	}
 }
 
-// MARK: RootViewControllerDelegate
-extension DataTableViewController: RootViewControllerDelegate {
-	func userDidStartEditing() {
-		tableView.setEditing(true, animated: true)
-	}
-
-	func userDidEndEditing() {
-		tableView.setEditing(false, animated: true)
-	}
-}
-
-// TODO: Add current playing time to detail text label.
+/**
+`DataTableViewController` shows and managed recordings.
+*/
+// TODO: Fix name to something that reflects that it's about recordings.
 class DataTableViewController: UITableViewController {
-
+	
 	// MARK: Properties
 	// TODO: Make optional again
 	private var audioPlayer: AudioPlayer! {
@@ -76,22 +70,39 @@ class DataTableViewController: UITableViewController {
 		}
 	}
 	var section: Section!
-	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.managedContext
-	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
-		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Recording.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+	private var coreDataStack = CoreDataStack.sharedInstance
+	fileprivate var fetchedResultsController: NSFetchedResultsController<Recording>!
+	var pageIndex: Int!
+	private let pieFileManager = PIEFileManager()
+	
+	// FIXME: Do I need this? If I do, rename it.
+	fileprivate var previouslySelectedCellIndexPath: IndexPath?
+	var timer: Timer?
+	
+	// MARK: View Controller Life Cycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		let fetchRequest = Recording.fetchRequest() as! NSFetchRequest<Recording>
+		let sortDescriptor = NSSortDescriptor(key: #keyPath(Recording.title), ascending: true)
 		let predicate = NSPredicate(format: "project = %@ AND section = %@", self.section.project, self.section)
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		fetchRequest.predicate = predicate
-
-		let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+		
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
 		fetchedResultsController.delegate = self
-		return fetchedResultsController
-	}()
-	fileprivate var recordings = [Recording]()
-	fileprivate var indexPathForSelectedCell: IndexPath?
-	var timer: Timer?
-	
+		
+		do {
+			try fetchedResultsController.performFetch()
+		} catch {
+			print(error.localizedDescription)
+		}
+		
+		let statusBarHeight = UIApplication.shared.statusBarFrame.height
+		let edgeInsets = UIEdgeInsets(top: statusBarHeight + 44, left: 0, bottom: 0, right: 0)
+		tableView.contentInset = edgeInsets
+	}
+
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
@@ -101,44 +112,22 @@ class DataTableViewController: UITableViewController {
 		}
 		timer?.invalidate()
 	}
-	
-	// MARK: View controller life cycle
-	override func viewDidLoad() {
-		super.viewDidLoad()
-
-		navigationItem.title = section.title
-
-		let statusBarHeight = UIApplication.shared.statusBarFrame.height
-		tableView.contentInset = UIEdgeInsets(top: statusBarHeight + 44, left: 0, bottom: 0, right: 0)
-	}
-
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-
-		fetchedResultsController.delegate = self
-
-		do {
-			try fetchedResultsController.performFetch()
-			recordings = fetchedResultsController.fetchedObjects as! [Recording]
-		} catch {
-			print(error.localizedDescription)
-		}
-
-		tableView.reloadData()
-	}
 
 	// MARK: UITableViewDataSource
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return recordings.count
+		guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+		
+		return sectionInfo.numberOfObjects
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath)
 		
-		let recording = recordings[indexPath.row]
+		let recording = fetchedResultsController.object(at: indexPath)
 		
 		cell.textLabel?.text = recording.title
 		
+		// Get playing time of recording
 		let audioAsset = AVURLAsset(url: recording.url)
 		let assetDuration = audioAsset.duration
 		let duration = CMTimeGetSeconds(assetDuration)
@@ -152,24 +141,25 @@ class DataTableViewController: UITableViewController {
 	}
 
 	// MARK: UITableViewDelegate
+	// FIXME: Clean up this method
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		timer?.invalidate()
 		
-		let recording = recordings[indexPath.row]
+		let recording = fetchedResultsController.object(at: indexPath)
 		audioPlayer = AudioPlayer(url: recording.url)
 
 		audioPlayer.player.play()
 
 		if let indexPath = tableView.indexPathForSelectedRow {
 			// If we previously began playing a recording, deselect it.
-			if let ip = indexPathForSelectedCell {
+			if let ip = previouslySelectedCellIndexPath {
 				let cell = tableView.cellForRow(at: ip)
-				cell?.textLabel?.text = recordings[ip.row].title
+				cell?.textLabel?.text = fetchedResultsController.object(at: ip).title
 				tableView.reloadData()
 			}
 			
-			indexPathForSelectedCell = indexPath
+			previouslySelectedCellIndexPath = indexPath
 			let cell = tableView.cellForRow(at: indexPath)
 			cell?.textLabel?.text = "\(recording.title) ..."
 			tableView.deselectRow(at: indexPath, animated: true)
@@ -188,29 +178,35 @@ class DataTableViewController: UITableViewController {
 			})
 		}
 	}
-
+	
+	// FIXME: Clean up this method
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "Rename recording action")) { (rowAction, indexPath) in
 			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: "Rename recording alert"), message: nil, preferredStyle: .alert)
 			renameAlert.addTextField( configurationHandler: { (textField) in
-				textField.placeholder = NSLocalizedString("New Name to Recording", comment: "Placeholder for new recording title")
+				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
 				textField.autocapitalizationType = .words
 				textField.clearButtonMode = .whileEditing
 			})
 
 			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Save action title"), style: .default, handler: { (alertAction) in
 				let title = renameAlert.textFields?.first!.text
-				let recording = self.recordings[indexPath.row]
+				
+				if let recordings = self.fetchedResultsController.fetchedObjects {
+					if recordings.map({$0.title}).contains(title!) {
+						return
+					}
+				}
+				
+				
+				let recording = self.fetchedResultsController.object(at: indexPath)
 
-				PIEFileManager().rename(recording, from: recording.title, to: title!, section: nil, project: nil)
+				self.pieFileManager.rename(recording, from: recording.title, to: title!, section: nil, project: nil)
 				recording.title = title!
-				CoreDataStack.sharedInstance.saveContext()
+				self.coreDataStack.saveContext()
 			})
 
-			let cancelAction = UIAlertAction(
-			                                 title: NSLocalizedString("Cancel", comment: "Cancel action title"),
-			                                 style: .destructive,
-			                                 handler: nil)
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action title"), style: .destructive, handler: nil)
 
 			renameAlert.addAction(saveAction)
 			renameAlert.addAction(cancelAction)
@@ -218,18 +214,25 @@ class DataTableViewController: UITableViewController {
 			self.present(renameAlert, animated: true, completion: nil)
 		}
 
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "Deelte action title")) { (rowAction, indexPath) in
-			let recording = self.recordings[indexPath.row]
+		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "Delete action title")) { (rowAction, indexPath) in
+			let recording = self.fetchedResultsController.object(at: indexPath)
 
-			PIEFileManager().delete(recording)
-
-			CoreDataStack.sharedInstance.persistentContainer.viewContext.delete(recording)
-			CoreDataStack.sharedInstance.saveContext()
+			self.pieFileManager.delete(recording)
+			self.coreDataStack.viewContext.delete(recording)
+			self.coreDataStack.saveContext()
 		}
-
+		
+		let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (rowAction, indexPath) in
+			let recording = self.fetchedResultsController.object(at: indexPath)
+			let activity = UIActivityViewController(activityItems: [recording.url], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
+			self.present(activity, animated: true, completion: nil)
+		}
+		
 		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 207.0 / 255.0, green: 0.0 / 255.0, blue: 15.0 / 255.0, alpha: 1.0)
+		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		shareAction.backgroundColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
 
-		return [renameAction, deleteAction]
+		return [shareAction, renameAction, deleteAction]
 	}
 }

@@ -13,14 +13,26 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var testInitializer: TestInitializer!
+	private var testInitializer: TestInitializer!
 
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {		
+		// persistentContainer is marked 'lazy', so initializing it here.
+		_ = CoreDataStack.sharedInstance.viewContext
 		
 		let launchArguments = ProcessInfo.processInfo.arguments
 		testInitializer = TestInitializer(arguments: launchArguments)
 		testInitializer.setupTestingMode()
+		
+		let navigationBarAppearance = UINavigationBar.appearance()
+		navigationBarAppearance.barTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		navigationBarAppearance.isTranslucent = true
+		navigationBarAppearance.tintColor = UIColor.white
+		navigationBarAppearance.backgroundColor = UIColor.clear
+		navigationBarAppearance.barStyle = .blackTranslucent
+		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+		
+		let tableViewAppearance = UITableView.appearance()
+		tableViewAppearance.rowHeight = 55
 		
 		return true
 	}

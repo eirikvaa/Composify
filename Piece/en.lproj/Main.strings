@@ -1,60 +1,60 @@
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "4bp-Nl-YWW"; */
-"4bp-Nl-YWW.text" = "Undertittel";
+"4bp-Nl-YWW.text" = "Subtitle";
 
 /* Class = "UINavigationItem"; title = "Configure and Save Recording"; ObjectID = "B57-wo-cTR"; */
-"B57-wo-cTR.title" = "Konfigurer og lagre opptak";
+"B57-wo-cTR.title" = "Configure and Save Recording";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "KmU-FN-0Cw"; */
-"KmU-FN-0Cw.text" = "Undertittel";
+"KmU-FN-0Cw.text" = "Subtitle";
 
 /* Class = "UIButton"; normalTitle = "Tap to Record"; ObjectID = "Leg-cp-zGo"; */
-"Leg-cp-zGo.normalTitle" = "Start opptak";
+"Leg-cp-zGo.normalTitle" = "Tap to Record";
 
 /* Class = "UINavigationItem"; title = "Projects"; ObjectID = "VPN-jI-FG1"; */
-"VPN-jI-FG1.title" = "Prosjekter";
+"VPN-jI-FG1.title" = "Projects";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "W22-T5-vG5"; */
-"W22-T5-vG5.title" = "Tittel";
+"W22-T5-vG5.title" = "Title";
 
 /* Class = "UITextField"; placeholder = "Recording Title"; ObjectID = "WWe-3B-f4Z"; */
-"WWe-3B-f4Z.placeholder" = "Tittel på opptak";
+"WWe-3B-f4Z.placeholder" = "Recording Title";
 
 /* Class = "UITableViewSection"; headerTitle = "Project"; ObjectID = "WuN-NI-zWC"; */
-"WuN-NI-zWC.headerTitle" = "Prosjekt";
+"WuN-NI-zWC.headerTitle" = "Project";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "bGL-p5-wMU"; */
-"bGL-p5-wMU.text" = "Undertittel";
+"bGL-p5-wMU.text" = "Subtitle";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "bIf-kX-e6D"; */
-"bIf-kX-e6D.text" = "Detaljer";
+"bIf-kX-e6D.text" = "Detail";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "caD-hw-bbK"; */
-"caD-hw-bbK.text" = "Detaljer";
+"caD-hw-bbK.text" = "Detail";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "fSN-El-yPY"; */
-"fSN-El-yPY.text" = "Tittel";
+"fSN-El-yPY.text" = "Title";
 
 /* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "i64-T3-gIw"; */
-"i64-T3-gIw.headerTitle" = "Tittel";
+"i64-T3-gIw.headerTitle" = "Title";
 
 /* Class = "UIButton"; normalTitle = "Play Audio"; ObjectID = "j5M-wy-Q1s"; */
-"j5M-wy-Q1s.normalTitle" = "Spill av lyd";
+"j5M-wy-Q1s.normalTitle" = "Play Audio";
 
 /* Class = "UITableViewSection"; headerTitle = "Section"; ObjectID = "jSO-AX-lpd"; */
-"jSO-AX-lpd.headerTitle" = "Seksjon";
+"jSO-AX-lpd.headerTitle" = "Section";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "jkp-9T-eKo"; */
-"jkp-9T-eKo.text" = "Tittel";
+"jkp-9T-eKo.text" = "Title";
 
 /* Class = "UILabel"; text = "Project Title"; ObjectID = "nrN-6Z-u7V"; */
-"nrN-6Z-u7V.text" = "Tittel på prosjekt";
+"nrN-6Z-u7V.text" = "Project Title";
 
 /* Class = "UILabel"; text = "Section Title"; ObjectID = "raY-co-q2e"; */
-"raY-co-q2e.text" = "Tittel på seksjon";
+"raY-co-q2e.text" = "Section Title";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "tFE-R3-tTI"; */
-"tFE-R3-tTI.text" = "Tittel";
+"tFE-R3-tTI.text" = "Title";
 
 /* Class = "UITabBarItem"; title = "Record Audio"; ObjectID = "v6Q-Kl-aEx"; */
-"v6Q-Kl-aEx.title" = "Ta opp lyd";
+"v6Q-Kl-aEx.title" = "Record Audio";
