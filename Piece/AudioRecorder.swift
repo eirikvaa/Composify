@@ -29,7 +29,7 @@ class AudioRecorder {
 		let session = AVAudioSession.sharedInstance()
 
 		let settings: [String: Any] = [
-			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+			AVFormatIDKey: Int(kAudioFormatAppleIMA4),
 			AVSampleRateKey: 12000.0,
 			AVNumberOfChannelsKey: 1 as NSNumber,
 			AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
