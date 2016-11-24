@@ -65,12 +65,11 @@ class RootViewController: UIViewController {
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		
-		// This fixed the bug where edit mode wouldn't be activated.
 		pageViewController.viewControllers?.first?.setEditing(editing, animated: animated)
 		
 		if editing {
-			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRecording))
-			navigationItem.leftBarButtonItem = addButton
+			let recordButton = UIBarButtonItem(image: UIImage(named:"Microphone"), style: .plain, target: self, action: #selector(addRecording))
+			navigationItem.leftBarButtonItem = recordButton
 		} else {
 			navigationItem.leftBarButtonItem = nil
 		}
