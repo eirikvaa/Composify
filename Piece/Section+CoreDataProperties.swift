@@ -18,5 +18,5 @@ extension Section: FileSystemObject {
 extension Section {
 	@NSManaged var title: String
 	@NSManaged var project: Project
-	@NSManaged var recordings: NSOrderedSet
+	@NSManaged var recordings: Set<Recording>
 }
