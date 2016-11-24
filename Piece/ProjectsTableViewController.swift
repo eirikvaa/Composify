@@ -9,6 +9,43 @@
 import UIKit
 import CoreData
 
+// MARK: Helper Methods
+private extension ProjectsTableViewController {
+	@objc func addProject() {
+		let alert = UIAlertController(
+			title: NSLocalizedString("New Project", comment: "Title of alert when creating a new project."),
+			message: nil,
+			preferredStyle: .alert)
+		
+		alert.addTextField { textField in
+			textField.placeholder = NSLocalizedString("Project Title", comment: "Placeholder text for text field in alert.")
+			textField.autocapitalizationType = .words
+			textField.clearButtonMode = .whileEditing
+		}
+		
+		let save = UIAlertAction(
+			title: NSLocalizedString("Save", comment: "Title of save button in configProjects."),
+			style: .default,
+			handler: { alertAction in
+				if let projectTitle = alert.textFields?.first?.text, let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
+					project.title = projectTitle
+					self.pieFileManager.save(project)
+					self.coreDataStack.saveContext()
+				}
+		})
+		
+		let cancel = UIAlertAction(
+			title: NSLocalizedString("Cancel", comment: "Title of cancel button in configProjects."),
+			style: .destructive,
+			handler: nil)
+		
+		alert.addAction(save)
+		alert.addAction(cancel)
+		
+		present(alert, animated: true, completion: nil)
+	}
+}
+
 // MARK: NSFetchedResultsController
 extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -29,11 +66,12 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
 			if let indexPath = indexPath {
 				tableView.deleteRows(at: [indexPath], with: .fade)
 			}
-		default:
-			break
+		case .move:
+			if let indexPath = indexPath, let newIndexPath = newIndexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
 		}
-
-		projects = fetchedResultsController.fetchedObjects as! [Project]
 	}
 
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -41,170 +79,42 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
 	}
 }
 
+/**
+`ProjectsTableViewController` shows and managed projects.
+*/
 class ProjectsTableViewController: UITableViewController {
 
 	// MARK: Properties
-	fileprivate lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
-		let fetchRequest = Project.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-		fetchRequest.sortDescriptors = [sortDescriptor]
-
-		let fetchedResultsController = NSFetchedResultsController(
-			fetchRequest: fetchRequest, managedObjectContext: self.managedContext,
-			sectionNameKeyPath: nil,
-			cacheName: nil)
-		fetchedResultsController.delegate = self
-		return fetchedResultsController
-	}()
-	private var managedContext = CoreDataStack.sharedInstance.managedContext
-	fileprivate var projects = [Project]()
+	private var fetchedResultsController: NSFetchedResultsController<Project>!
+	fileprivate var coreDataStack = CoreDataStack.sharedInstance
+	fileprivate let pieFileManager = PIEFileManager()
 
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.rightBarButtonItem = self.editButtonItem
-	}
-
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-
-		// Fetches all objects every time the user navigates here because data might have changed.
+		let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest() as! NSFetchRequest<Project>
+		//let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+		let sortDescriptor = NSSortDescriptor(key: #keyPath(Project.title), ascending: true)
+		fetchRequest.sortDescriptors = [sortDescriptor]
+		
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+		fetchedResultsController.delegate = self
+		
 		do {
 			try fetchedResultsController.performFetch()
-			projects = fetchedResultsController.fetchedObjects as! [Project]
 		} catch {
 			print(error.localizedDescription)
 		}
-	}
-
-	// MARK: UITableViewDataSource
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return projects.count
-	}
-
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath)
-		let project = projects[indexPath.row]
-		cell.textLabel?.text = project.title
 		
-		// FIXME: Localize
-		switch (project.sections.count != 1, project.recordings.count != 1) {
-		case (true, true):
-			let ls = String.localizedStringWithFormat(
-				NSLocalizedString("%d sections and %d recordings", comment: "Sections and recordings"),
-				project.sections.count, project.recordings.count)
-			cell.detailTextLabel?.text = ls
-		case (true, false):
-			let ls = String.localizedStringWithFormat(
-				NSLocalizedString("%d sections and %d recording", comment: "Sections and recording"),
-				project.sections.count, project.recordings.count)
-			cell.detailTextLabel?.text = ls
-		case (false, true):
-			let ls = String.localizedStringWithFormat(
-				NSLocalizedString("%d section and %d recordings", comment: "Section and recordings"),
-				project.sections.count, project.recordings.count)
-			cell.detailTextLabel?.text = ls
-		case (false, false):
-			let ls = String.localizedStringWithFormat(
-				NSLocalizedString("%d section and %d recording", comment: "Section and recording"),
-				project.sections.count, project.recordings.count)
-			cell.detailTextLabel?.text = ls
-		}
-		
-		
-		return cell
+		navigationItem.rightBarButtonItem = self.editButtonItem
+		navigationItem.title = NSLocalizedString("Projects", comment: "")
 	}
-
-	// MARK: UITableViewDelegate
-	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "Rename project")) { (rowAction, indexPath) in
-
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: "Title of rename project alert"), message: nil, preferredStyle: .alert)
-
-			renameAlert.addTextField(configurationHandler: { textField in
-				textField.placeholder = NSLocalizedString("New Name to Project", comment: "Placeholder for new project title")
-				textField.autocapitalizationType = .words
-				textField.clearButtonMode = .whileEditing
-			})
-
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save action"), style: .default, handler: { alertAction in
-
-
-				if let title = renameAlert.textFields?.first?.text {
-					let project = self.projects[indexPath.row]
-					PIEFileManager().rename(project, from: project.title, to: title, section: nil, project: nil)
-					project.title = title
-					CoreDataStack.sharedInstance.saveContext()
-				}
-			})
-
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of cancel button"), style: .destructive, handler: nil)
-
-			renameAlert.addAction(saveAction)
-			renameAlert.addAction(cancelAction)
-
-			self.present(renameAlert, animated: true, completion: nil)
-		}
-
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "Title of delete action")) { (rowAction, indexPath) in
-			let project = self.projects[indexPath.row]
-			PIEFileManager().delete(project)
-			self.managedContext.delete(project)
-			CoreDataStack.sharedInstance.saveContext()
-		}
-
-		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
-
-		return [renameAction, deleteAction]
-	}
-
-	// Mus use @objc so #selector(addProject) can be used when addProject is a private method.
-	@objc private func addProject() {
-		let alert = UIAlertController(title: NSLocalizedString("New Project", comment: "Title of alert when creating a new project."), message: nil, preferredStyle: .alert)
-		alert.addTextField { textField in
-			textField.placeholder = NSLocalizedString("Project Title", comment: "Placeholder text for text field in alert.")
-			textField.autocapitalizationType = .words
-			textField.clearButtonMode = .whileEditing
-		}
-
-		let save = UIAlertAction(title: NSLocalizedString("Save", comment: "Title of save button in configProjects."), style: .default) { alertAction in
-			if let projectTitle = alert.textFields?.first?.text {
-				let entityDescription = NSEntityDescription.entity(forEntityName: "Project", in: self.managedContext)
-
-				if let entityDescription = entityDescription {
-					let project = NSManagedObject(entity: entityDescription, insertInto: self.managedContext) as! Project
-					project.title = projectTitle
-					PIEFileManager().save(project)
-					CoreDataStack.sharedInstance.saveContext()
-				}
-			}
-		}
-
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of cancel button in configProjects."), style: .destructive, handler: nil)
-
-		alert.addAction(save)
-		alert.addAction(cancel)
-
-		present(alert, animated: true, completion: nil)
-	}
-
-	// MARK: Navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "showSections" {
-			if let destinationViewController = segue.destination as? SectionsTableViewController,
-				let indexPath = tableView.indexPathForSelectedRow {
-					destinationViewController.chosenProject = projects[indexPath.row]
-			}
-		}
-	}
-
-	// MARK: Editing
+	
+	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
-
-		// Only show the + button (add project) when in editing mode.
+		
 		if editing {
 			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProject))
 			navigationItem.leftBarButtonItem = addButton
@@ -212,4 +122,120 @@ class ProjectsTableViewController: UITableViewController {
 			navigationItem.leftBarButtonItem = nil
 		}
 	}
+
+	// MARK: UITableViewDataSource
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+		
+		return sectionInfo.numberOfObjects
+	}
+
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath)
+		
+		let project = fetchedResultsController.object(at: indexPath)
+		
+		cell.textLabel?.text = project.title
+		cell.textLabel?.adjustsFontSizeToFitWidth = true
+		
+		var localizedString = ""
+		
+		switch (project.sections.count != 1, project.recordings.count != 1) {
+		case (true, true):
+			localizedString = String.localizedStringWithFormat(
+				NSLocalizedString("%d sections and %d recordings", comment: "Sections and recordings"),
+				project.sections.count, project.recordings.count)
+		case (false, true):
+			localizedString = String.localizedStringWithFormat(
+				NSLocalizedString("%d section and %d recordings", comment: "Section and recordings"),
+				project.sections.count, project.recordings.count)
+		case (true, false):
+			localizedString = String.localizedStringWithFormat(
+				NSLocalizedString("%d sections and %d recording", comment: "Section and recordings"),
+				project.sections.count, project.recordings.count)
+		case (false, false):
+			localizedString = String.localizedStringWithFormat(
+				NSLocalizedString("%d section and %d recording", comment: "Section and recording"),
+				project.sections.count, project.recordings.count)
+		}
+		
+		cell.detailTextLabel?.text = localizedString
+		
+		return cell
+	}
+
+	// MARK: UITableViewDelegate
+	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let renameAction = UITableViewRowAction(
+			style: .normal,
+			title: NSLocalizedString("Rename", comment: "Rename project"),
+			handler: { (rowAction, indexPath) in
+
+			let renameAlert = UIAlertController(
+				title: NSLocalizedString("Rename", comment: "Title of rename project alert"),
+				message: nil,
+				preferredStyle: .alert)
+
+			renameAlert.addTextField { textField in
+				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
+				textField.autocapitalizationType = .words
+				textField.clearButtonMode = .whileEditing
+			}
+
+			let saveAction = UIAlertAction(
+				title: NSLocalizedString("Save", comment: "Title of save action"),
+				style: .default,
+				handler: { alertAction in
+				if let title = renameAlert.textFields?.first?.text {
+					
+					let projects = self.fetchedResultsController.fetchedObjects!
+					
+					if projects.map({$0.title}).contains(title) {
+						return
+					}
+					
+					let project = self.fetchedResultsController.object(at: indexPath)
+					self.pieFileManager.rename(project, from: project.title, to: title, section: nil, project: nil)
+					project.title = title
+					self.coreDataStack.saveContext()
+				}
+			})
+
+			let cancelAction = UIAlertAction(
+				title: NSLocalizedString("Cancel", comment: "Title of cancel button"),
+				style: .destructive,
+				handler: nil)
+
+			renameAlert.addAction(saveAction)
+			renameAlert.addAction(cancelAction)
+
+			self.present(renameAlert, animated: true, completion: nil)
+		})
+
+		let deleteAction = UITableViewRowAction(
+			style: .normal,
+			title: NSLocalizedString("Delete", comment: "Title of delete action"),
+			handler: { (rowAction, indexPath) in
+				let project = self.fetchedResultsController.object(at: indexPath)
+				self.pieFileManager.delete(project)
+				self.coreDataStack.viewContext.delete(project)
+				self.coreDataStack.saveContext()
+		})
+
+		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
+		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+
+		return [renameAction, deleteAction]
+	}
+	
+	// MARK: Navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "showSections" {
+			if let destinationViewController = segue.destination as? SectionsTableViewController,
+				let indexPath = tableView.indexPathForSelectedRow {
+				destinationViewController.chosenProject = fetchedResultsController.object(at: indexPath)
+			}
+		}
+	}
+	
 }
