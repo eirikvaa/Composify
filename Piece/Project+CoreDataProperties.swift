@@ -20,6 +20,6 @@ extension Project: FileSystemObject {
 
 extension Project {
 	@NSManaged var title: String
-	@NSManaged var sections: NSOrderedSet
-	@NSManaged var recordings: NSOrderedSet
+	@NSManaged var sections: Set<Section>
+	@NSManaged var recordings: Set<Recording>
 }
