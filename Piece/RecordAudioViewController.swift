@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 // MARK: @IBActions
 private extension RecordAudioViewController {
@@ -66,6 +67,16 @@ class RecordAudioViewController: UIViewController {
 				
 			// This must go here because recording.url is not set before recording is created.
 			audioRecorder = AudioRecorder(url: recording.url)
+			
+			if audioRecorder.askForPermissions() {
+				recordAudioButton.isEnabled = true
+			} else {
+				let deniedAlert = UIAlertController(title: "Permission denied", message: "You have denied the application access to the microphone. Allow access in the Settings application.", preferredStyle: .alert)
+				let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+				deniedAlert.addAction(okAction)
+				recordAudioButton.isEnabled = false
+				present(deniedAlert, animated: true, completion: nil)
+			}
 		}
 	}
 
