@@ -17,6 +17,7 @@ class AudioRecorder {
 
 	// MARK: Properties
 	private(set) var recorder: AVAudioRecorder!
+	private var session = AVAudioSession.sharedInstance()
 
 	// MARK: Initialization
 	/**
@@ -25,8 +26,6 @@ class AudioRecorder {
 	*/
 	convenience init(url: URL) {
 		self.init()
-
-		let session = AVAudioSession.sharedInstance()
 
 		let settings: [String: Any] = [
 			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -44,6 +43,16 @@ class AudioRecorder {
 		}
 
 		recorder.prepareToRecord()
+	}
+	
+	func askForPermissions() -> Bool {
+		var permission = false
+		
+		session.requestRecordPermission { bool in
+			permission = bool
+		}
+		
+		return permission
 	}
 }
 
