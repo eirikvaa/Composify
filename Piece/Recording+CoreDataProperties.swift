@@ -23,4 +23,8 @@ extension Recording {
 	@NSManaged var project: Project
 	@NSManaged var section: Section
 	@NSManaged var fileExtension: String
+	
+	override var description: String {
+		return "Recording - title: \(title).\(fileExtension)"
+	}
 }

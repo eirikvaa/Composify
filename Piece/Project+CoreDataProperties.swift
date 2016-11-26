@@ -22,4 +22,8 @@ extension Project {
 	@NSManaged var title: String
 	@NSManaged var sections: Set<Section>
 	@NSManaged var recordings: Set<Recording>
+	
+	override var description: String {
+		return "[Project - Title: \(title) | Section: \(sections.description) | Recordings: \(recordings.description)"
+	}
 }
