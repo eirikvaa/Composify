@@ -12,32 +12,23 @@ import CoreData
 // MARK: Helper Methods
 private extension ProjectsTableViewController {
 	@objc func addProject() {
-		let alert = UIAlertController(
-			title: NSLocalizedString("New Project", comment: "Title of alert when creating a new project."),
-			message: nil,
-			preferredStyle: .alert)
+		let alert = UIAlertController(title: NSLocalizedString("New Project", comment: ""), message: nil, preferredStyle: .alert)
 		
 		alert.addTextField { textField in
-			textField.placeholder = NSLocalizedString("Project Title", comment: "Placeholder text for text field in alert.")
+			textField.placeholder = NSLocalizedString("Project Title", comment: "")
 			textField.autocapitalizationType = .words
 			textField.clearButtonMode = .whileEditing
 		}
 		
-		let save = UIAlertAction(
-			title: NSLocalizedString("Save", comment: "Title of save button in configProjects."),
-			style: .default,
-			handler: { alertAction in
-				if let projectTitle = alert.textFields?.first?.text, let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
-					project.title = projectTitle
-					self.pieFileManager.save(project)
-					self.coreDataStack.saveContext()
-				}
+		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { alertAction in
+			if let projectTitle = alert.textFields?.first?.text, let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
+				project.title = projectTitle
+				self.pieFileManager.save(project)
+				self.coreDataStack.saveContext()
+			}
 		})
 		
-		let cancel = UIAlertAction(
-			title: NSLocalizedString("Cancel", comment: "Title of cancel button in configProjects."),
-			style: .destructive,
-			handler: nil)
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 		
 		alert.addAction(save)
 		alert.addAction(cancel)
@@ -94,7 +85,6 @@ class ProjectsTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest() as! NSFetchRequest<Project>
-		//let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
 		let sortDescriptor = NSSortDescriptor(key: #keyPath(Project.title), ascending: true)
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		
@@ -134,7 +124,7 @@ class ProjectsTableViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath)
 		
 		let project = fetchedResultsController.object(at: indexPath)
-		
+						
 		cell.textLabel?.text = project.title
 		cell.textLabel?.adjustsFontSizeToFitWidth = true
 		
@@ -142,21 +132,17 @@ class ProjectsTableViewController: UITableViewController {
 		
 		switch (project.sections.count != 1, project.recordings.count != 1) {
 		case (true, true):
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d sections and %d recordings", comment: "Sections and recordings"),
-				project.sections.count, project.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d sections and %d recordings", comment: ""),
+			                                                   project.sections.count, project.recordings.count)
 		case (false, true):
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d section and %d recordings", comment: "Section and recordings"),
-				project.sections.count, project.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d section and %d recordings", comment: ""),
+			                                                   project.sections.count, project.recordings.count)
 		case (true, false):
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d sections and %d recording", comment: "Section and recordings"),
-				project.sections.count, project.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d sections and %d recording", comment: ""),
+			                                                   project.sections.count, project.recordings.count)
 		case (false, false):
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d section and %d recording", comment: "Section and recording"),
-				project.sections.count, project.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d section and %d recording", comment: ""),
+			                                                   project.sections.count, project.recordings.count)
 		}
 		
 		cell.detailTextLabel?.text = localizedString
@@ -166,28 +152,19 @@ class ProjectsTableViewController: UITableViewController {
 
 	// MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(
-			style: .normal,
-			title: NSLocalizedString("Rename", comment: "Rename project"),
-			handler: { (rowAction, indexPath) in
+		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: ""), handler: { (rowAction, indexPath) in
 
-			let renameAlert = UIAlertController(
-				title: NSLocalizedString("Rename", comment: "Title of rename project alert"),
-				message: nil,
-				preferredStyle: .alert)
+			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
 
 			renameAlert.addTextField { textField in
 				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
 				textField.autocapitalizationType = .words
 				textField.clearButtonMode = .whileEditing
+				textField.autocorrectionType = .default
 			}
 
-			let saveAction = UIAlertAction(
-				title: NSLocalizedString("Save", comment: "Title of save action"),
-				style: .default,
-				handler: { alertAction in
+			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { alertAction in
 				if let title = renameAlert.textFields?.first?.text {
-					
 					let projects = self.fetchedResultsController.fetchedObjects!
 					
 					if projects.map({$0.title}).contains(title) {
@@ -201,10 +178,7 @@ class ProjectsTableViewController: UITableViewController {
 				}
 			})
 
-			let cancelAction = UIAlertAction(
-				title: NSLocalizedString("Cancel", comment: "Title of cancel button"),
-				style: .destructive,
-				handler: nil)
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 
 			renameAlert.addAction(saveAction)
 			renameAlert.addAction(cancelAction)
@@ -212,10 +186,7 @@ class ProjectsTableViewController: UITableViewController {
 			self.present(renameAlert, animated: true, completion: nil)
 		})
 
-		let deleteAction = UITableViewRowAction(
-			style: .normal,
-			title: NSLocalizedString("Delete", comment: "Title of delete action"),
-			handler: { (rowAction, indexPath) in
+		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: ""), handler: { (rowAction, indexPath) in
 				let project = self.fetchedResultsController.object(at: indexPath)
 				self.pieFileManager.delete(project)
 				self.coreDataStack.viewContext.delete(project)

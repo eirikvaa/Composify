@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="7068" y="206"/>
         </scene>
-        <!--Data Table View Controller-->
+        <!--Recordings Table View Controller-->
         <scene sceneID="ftF-FZ-ZAY">
             <objects>
-                <tableViewController storyboardIdentifier="DataViewController" automaticallyAdjustsScrollViewInsets="NO" id="VBm-L9-4bN" customClass="DataTableViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RecordingsViewController" automaticallyAdjustsScrollViewInsets="NO" id="VBm-L9-4bN" customClass="RecordingsTableViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tEu-ux-8hh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -377,7 +377,7 @@
         <!--Title-->
         <scene sceneID="dB4-iL-siH">
             <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" id="egS-Gh-WJd" customClass="RootViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" id="egS-Gh-WJd" customClass="PageRootViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HCd-qL-XXB"/>
                         <viewControllerLayoutGuide type="bottom" id="69e-G4-J7M"/>

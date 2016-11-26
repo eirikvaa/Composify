@@ -12,39 +12,47 @@ import CoreData
 // MARK: Helper Methods
 private extension SectionsTableViewController {
 	@objc func addSection() {
-		let alert = UIAlertController(
-			title: NSLocalizedString("New Section", comment: "Title of alert when creating new section."),
-			message: nil,
-			preferredStyle: .alert)
+		let alert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
 		
 		alert.addTextField { textField in
-			textField.placeholder = NSLocalizedString("Section Title", comment: "Placeholder text for title of new section.")
+			textField.placeholder = NSLocalizedString("Section Title", comment: "")
 			textField.autocapitalizationType = .words
 			textField.clearButtonMode = .whileEditing
 		}
 		
-		let save = UIAlertAction(
-			title: NSLocalizedString("Save", comment: "Title of save button in configSections."),
-			style: .default,
-			handler: { (alertAction) in
-				if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
-					section.title = title
-					section.project = self.chosenProject
-					
-					self.pieFileManager.save(section)
-					self.coreDataStack.saveContext()
-				}
+		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { (alertAction) in
+			if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
+				section.title = title
+				section.project = self.chosenProject
+				
+				self.pieFileManager.save(section)
+				self.coreDataStack.saveContext()
+			}
 		})
 		
-		let cancel = UIAlertAction(
-			title: NSLocalizedString("Cancel", comment: "Title of cancel button in configSections."),
-			style: .destructive,
-			handler: nil)
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 		
 		alert.addAction(save)
 		alert.addAction(cancel)
 		
 		present(alert, animated: true, completion: nil)
+	}
+	
+	/**
+	Inserts a label that adjusts the font of the text to the width of the label.
+	- Parameters:
+		- text: Label text
+		- view: View that should be replaced with an adjustable label; we modify it directly (inout).
+	- Warning: This is just used for the titleView of the navigation item in the navigation bar.
+	*/
+	func insertAdjustableLabel(with text: String, in view: inout UIView?) {
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+		label.textAlignment = .center
+		label.textColor = UIColor.white
+		label.text = text
+		label.font = UIFont.boldSystemFont(ofSize: 16)
+		label.adjustsFontSizeToFitWidth = true
+		view = label
 	}
 }
 
@@ -111,14 +119,7 @@ class SectionsTableViewController: UITableViewController {
 		}
 		
 		navigationItem.rightBarButtonItem = editButtonItem
-		
-		let navigationItemLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-		navigationItemLabel.textAlignment = .center
-		navigationItemLabel.textColor = UIColor.white
-		navigationItemLabel.text = chosenProject.title
-		navigationItemLabel.font = UIFont.boldSystemFont(ofSize: 16)
-		navigationItemLabel.adjustsFontSizeToFitWidth = true
-		navigationItem.titleView = navigationItemLabel
+		insertAdjustableLabel(with: chosenProject.title, in: &navigationItem.titleView)
 	}
 
 	// MARK: UITableView
@@ -150,13 +151,11 @@ class SectionsTableViewController: UITableViewController {
 		var localizedString = ""
 		
 		if section.recordings.count != 1 {
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d recordings", comment: "Recordings"),
-				section.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d recordings", comment: ""),
+			                                                   section.recordings.count)
 		} else {
-			localizedString = String.localizedStringWithFormat(
-				NSLocalizedString("%d recording", comment: "Recording"),
-				section.recordings.count)
+			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d recording", comment: ""),
+			                                                   section.recordings.count)
 		}
 		
 		cell.detailTextLabel?.text = localizedString
@@ -166,37 +165,32 @@ class SectionsTableViewController: UITableViewController {
 
 	// MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(
-		style: .normal,
-		title: NSLocalizedString("Rename", comment: "Rename section action"),
-		handler: { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: "Rename alert title"), message: nil, preferredStyle: .alert)
+		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: ""), handler: { (rowAction, indexPath) in
+			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
 			
 			renameAlert.addTextField { textField in
 				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
 				textField.autocapitalizationType = .words
 				textField.clearButtonMode = .whileEditing
+				textField.autocorrectionType = .default
 			}
 
-			let saveAction = UIAlertAction(
-				title: NSLocalizedString("Save", comment: "Save section action"),
-				style: .default,
-				handler: { (alertAction) in
-					if let title = renameAlert.textFields?.first?.text {
-						
-						if let sections = self.fetchedResultsController.fetchedObjects {
-							if sections.map({$0.title}).contains(title) { return }
-						}
-						
-						let section = self.fetchedResultsController.object(at: indexPath)
+			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { (alertAction) in
+				if let title = renameAlert.textFields?.first?.text {
+					
+					if let sections = self.fetchedResultsController.fetchedObjects {
+						if sections.map({$0.title}).contains(title) { return }
+					}
+					
+					let section = self.fetchedResultsController.object(at: indexPath)
 
-						self.pieFileManager.rename(section, from: section.title, to: title, section:nil, project:nil)
-						section.title = title
-						self.coreDataStack.saveContext()
+					self.pieFileManager.rename(section, from: section.title, to: title, section:nil, project:nil)
+					section.title = title
+					self.coreDataStack.saveContext()
 				}
 			})
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of cancel button"), style: .destructive, handler: nil)
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 
 			renameAlert.addAction(saveAction)
 			renameAlert.addAction(cancelAction)
@@ -204,15 +198,12 @@ class SectionsTableViewController: UITableViewController {
 			self.present(renameAlert, animated: true, completion: nil)
 		})
 
-		let deleteAction = UITableViewRowAction(
-			style: .normal,
-			title: NSLocalizedString("Delete", comment: "Delete a recording."),
-			handler: { (rowAction, indexPath) in
-				let section = self.fetchedResultsController.object(at: indexPath)
+		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: ""), handler: { (rowAction, indexPath) in
+			let section = self.fetchedResultsController.object(at: indexPath)
 
-				self.pieFileManager.delete(section)
-				self.coreDataStack.viewContext.delete(section)
-				self.coreDataStack.saveContext()
+			self.pieFileManager.delete(section)
+			self.coreDataStack.viewContext.delete(section)
+			self.coreDataStack.saveContext()
 		})
 
 		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
@@ -225,20 +216,13 @@ class SectionsTableViewController: UITableViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showRecordings" {
 			if let sectionIndex = tableView.indexPathForSelectedRow?.row {
-				let destinationViewController = segue.destination as! RootViewController
+				let destinationViewController = segue.destination as! PageRootViewController
 				let section = self.fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
 				destinationViewController.project = section.project
 				destinationViewController.section = section
 				destinationViewController.sectionIndex = sectionIndex
 				destinationViewController.title = section.title
-				
-				let navigationItemLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-				navigationItemLabel.textAlignment = .center
-				navigationItemLabel.textColor = UIColor.white
-				navigationItemLabel.text = section.title
-				navigationItemLabel.font = UIFont.boldSystemFont(ofSize: 16)
-				navigationItemLabel.adjustsFontSizeToFitWidth = true
-				destinationViewController.navigationItem.titleView = navigationItemLabel
+				insertAdjustableLabel(with: section.title, in: &destinationViewController.navigationItem.titleView)
 			}
 		}
 	}

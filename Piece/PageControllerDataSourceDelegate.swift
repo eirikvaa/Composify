@@ -12,8 +12,8 @@ import CoreData
 // MARK: UIPageViewControllerDelegate
 extension SectionsPageViewController: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		if let viewControllers = pageViewController.viewControllers as? [DataTableViewController], let viewController = viewControllers.first {
-			rootViewController.section = viewController.section
+		if let viewControllers = pageViewController.viewControllers as? [RecordingsTableViewController], let viewController = viewControllers.first {
+			pageRootViewController.section = viewController.section
 			
 			let navigationItemLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
 			navigationItemLabel.textAlignment = .center
@@ -21,10 +21,10 @@ extension SectionsPageViewController: UIPageViewControllerDelegate {
 			navigationItemLabel.text = viewController.section.title
 			navigationItemLabel.font = UIFont.boldSystemFont(ofSize: 16)
 			navigationItemLabel.adjustsFontSizeToFitWidth = true
-			rootViewController.navigationItem.titleView = navigationItemLabel
+			pageRootViewController.navigationItem.titleView = navigationItemLabel
 			
 			
-			rootViewController.setEditing(false, animated: true)
+			pageRootViewController.setEditing(false, animated: true)
 		}
 		
 		if let previousViewController = previousViewControllers.first {
@@ -42,7 +42,7 @@ extension SectionsPageViewController: UIPageViewControllerDelegate {
 // MARK: UIPageViewControllerDataSource
 extension SectionsPageViewController: UIPageViewControllerDataSource {
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! DataTableViewController)
+		var index = indexOfViewController(viewController as! RecordingsTableViewController)
 		
 		if index == NSNotFound || index == 0 {
 			return nil
@@ -50,11 +50,11 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 		
 		index -= 1
 		
-		return viewControllerAtIndex(index, storyboard: rootViewController.storyboard!)
+		return viewControllerAtIndex(index, storyboard: pageRootViewController.storyboard!)
 	}
 	
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! DataTableViewController)
+		var index = indexOfViewController(viewController as! RecordingsTableViewController)
 		
 		if index == NSNotFound {
 			return nil
@@ -62,19 +62,19 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 		
 		index += 1
 		
-		if index == rootViewController.project.sections.count {
+		if index == pageRootViewController.project.sections.count {
 			return nil
 		}
 		
-		return viewControllerAtIndex(index, storyboard: rootViewController.storyboard!)
+		return viewControllerAtIndex(index, storyboard: pageRootViewController.storyboard!)
 	}
 	
 	func presentationCount(for pageViewController: UIPageViewController) -> Int {
-		return rootViewController.project.sections.count
+		return pageRootViewController.project.sections.count
 	}
 	
 	func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-		let viewController = pageViewController.viewControllers!.first as! DataTableViewController
+		let viewController = pageViewController.viewControllers!.first as! RecordingsTableViewController
 		
 		return viewController.pageIndex
 	}
@@ -84,9 +84,9 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 `SectionPageViewController` is a delegate and datasource for the UIPageViewController instance.
 */
 class SectionsPageViewController: NSObject {
-	var rootViewController: RootViewController!
+	var pageRootViewController: PageRootViewController!
 	fileprivate var sections: [Section] {		
-		return rootViewController.project.sections.sorted(by: {$0.title < $1.title})
+		return pageRootViewController.project.sections.sorted(by: {$0.title < $1.title})
 	}
 	
 	override init() {
@@ -95,20 +95,20 @@ class SectionsPageViewController: NSObject {
 		stylePageControl()
 	}
 	
-	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> DataTableViewController? {
-		if rootViewController.project.sections.count == 0 || index >= rootViewController.project.sections.count {
+	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> RecordingsTableViewController? {
+		if pageRootViewController.project.sections.count == 0 || index >= pageRootViewController.project.sections.count {
 			return nil
 		}
 		
-		let dataTableViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! DataTableViewController
-		dataTableViewController.section = sections[index]
-		dataTableViewController.title = sections[index].title
-		rootViewController.section = sections[index]
-		dataTableViewController.pageIndex = index
-		return dataTableViewController
+		let recordingsTableViewController = storyboard.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsTableViewController
+		recordingsTableViewController.section = sections[index]
+		recordingsTableViewController.title = sections[index].title
+		pageRootViewController.section = sections[index]
+		recordingsTableViewController.pageIndex = index
+		return recordingsTableViewController
 	}
 	
-	func indexOfViewController(_ viewController: DataTableViewController) -> Int {
+	func indexOfViewController(_ viewController: RecordingsTableViewController) -> Int {
 		return sections.index(of: viewController.section) ?? NSNotFound
 	}
 	

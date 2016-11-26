@@ -1,5 +1,5 @@
 //
-//  RootViewController.swift
+//  PageRootViewController.swift
 //  Piece
 //
 //  Created by Eirik Vale Aase on 22.07.2016.
@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 // MARK: Helper Methods
-private extension RootViewController {
+private extension PageRootViewController {
 	@objc func addRecording() {
 		performSegue(withIdentifier: "addRecording", sender: self)
 	}
@@ -18,7 +18,7 @@ private extension RootViewController {
 	func setupPageViewController() {
 		navigationItem.rightBarButtonItem = editButtonItem
 		
-		pageDataSourceDelegate.rootViewController = self
+		pageDataSourceDelegate.pageRootViewController = self
 		
 		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 		pageViewController.delegate = pageDataSourceDelegate
@@ -35,19 +35,15 @@ private extension RootViewController {
 	}
 }
 
-/**
-`RootViewController` managed multiple `UITableView` instances.
-*/
-// TODO: Fix name to reflect that its a container for table views for recordings.
-class RootViewController: UIViewController {
+
+//`PageRootViewController` managed multiple `UITableView` instances.
+class PageRootViewController: UIViewController {
 
 	// MARK: Properties
 	fileprivate let pageDataSourceDelegate = SectionsPageViewController()
 	fileprivate var pageViewController: UIPageViewController!
 	var section: Section!
 	var project: Project!
-	
-	// FIXME: Probably not using sectionIndex variable
 	var sectionIndex = 0
 	
 	// MARK: View controller life cycle
@@ -55,10 +51,6 @@ class RootViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setupPageViewController()
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
 	}
 	
 	// MARK: UITableView

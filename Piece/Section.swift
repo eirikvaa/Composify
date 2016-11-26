@@ -10,5 +10,10 @@ import Foundation
 import CoreData
 
 class Section: NSManagedObject {
-
+	static func ==(lhs: Section, rhs: Section) -> Bool {
+		return
+			lhs.title == rhs.title &&
+			lhs.project == rhs.project &&
+			lhs.recordings == rhs.recordings
+	}
 }

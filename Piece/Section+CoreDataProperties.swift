@@ -19,4 +19,8 @@ extension Section {
 	@NSManaged var title: String
 	@NSManaged var project: Project
 	@NSManaged var recordings: Set<Recording>
+	
+	override var description: String {
+		return "Section - title: \(title)"
+	}
 }

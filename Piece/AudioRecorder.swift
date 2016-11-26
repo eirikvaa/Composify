@@ -17,6 +17,7 @@ class AudioRecorder {
 
 	// MARK: Properties
 	private(set) var recorder: AVAudioRecorder!
+	private var session = AVAudioSession.sharedInstance()
 
 	// MARK: Initialization
 	/**
@@ -26,23 +27,32 @@ class AudioRecorder {
 	convenience init(url: URL) {
 		self.init()
 
-		let session = AVAudioSession.sharedInstance()
-
 		let settings: [String: Any] = [
-			AVFormatIDKey: Int(kAudioFormatAppleIMA4),
+			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
 			AVSampleRateKey: 12000.0,
-			AVNumberOfChannelsKey: 1 as NSNumber,
+			AVNumberOfChannelsKey: 1,
 			AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
 		]
 
 		do {
 			try session.setCategory(AVAudioSessionCategoryRecord)
+			try session.setActive(true)
 			try recorder = AVAudioRecorder(url: url, settings: settings)
 		} catch {
 			print(error.localizedDescription)
 		}
 
 		recorder.prepareToRecord()
+	}
+	
+	func askForPermissions() -> Bool {
+		var permission = false
+		
+		session.requestRecordPermission { bool in
+			permission = bool
+		}
+		
+		return permission
 	}
 }
 
