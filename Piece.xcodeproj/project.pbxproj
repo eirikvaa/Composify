@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		E5055BDF1D44BB5800D2B796 /* PIEFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* PIEFileManager.swift */; };
 		E5055BE11D44D07C00D2B796 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5055BE01D44D07C00D2B796 /* Assets.xcassets */; };
-		E5228F411D42506500BBD008 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F401D42506500BBD008 /* RootViewController.swift */; };
-		E5228F451D4250E900BBD008 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F441D4250E900BBD008 /* DataTableViewController.swift */; };
+		E5228F411D42506500BBD008 /* PageRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F401D42506500BBD008 /* PageRootViewController.swift */; };
+		E5228F451D4250E900BBD008 /* RecordingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5228F441D4250E900BBD008 /* RecordingsTableViewController.swift */; };
 		E53A66F01DE093800025FD4F /* PageControllerDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */; };
 		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
@@ -70,8 +70,8 @@
 /* Begin PBXFileReference section */
 		E5055BDE1D44BB5800D2B796 /* PIEFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManager.swift; sourceTree = "<group>"; };
 		E5055BE01D44D07C00D2B796 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E5228F401D42506500BBD008 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		E5228F441D4250E900BBD008 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
+		E5228F401D42506500BBD008 /* PageRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRootViewController.swift; sourceTree = "<group>"; };
+		E5228F441D4250E900BBD008 /* RecordingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewController.swift; sourceTree = "<group>"; };
 		E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControllerDataSourceDelegate.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Piece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piece.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56460041D3B50B500AA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 			children = (
 				E5B3C7151D4A29C20021183A /* Localization */,
 				E56460361D3B54B000AA6557 /* Application */,
-				E56460381D3B54BF00AA6557 /* View Controllers */,
+				E56460381D3B54BF00AA6557 /* Controllers */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -187,23 +187,23 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
-		E56460381D3B54BF00AA6557 /* View Controllers */ = {
+		E56460381D3B54BF00AA6557 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				E564603A1D3B55AB00AA6557 /* ProjectsTableViewController.swift */,
 				E564603C1D3B596200AA6557 /* SectionsTableViewController.swift */,
-				E5228F401D42506500BBD008 /* RootViewController.swift */,
-				E5228F441D4250E900BBD008 /* DataTableViewController.swift */,
+				E5228F401D42506500BBD008 /* PageRootViewController.swift */,
+				E5228F441D4250E900BBD008 /* RecordingsTableViewController.swift */,
 				E56460061D3B50B500AA6557 /* RecordAudioViewController.swift */,
 				E56460341D3B548E00AA6557 /* ConfigureRecordingTableViewController.swift */,
 			);
-			name = "View Controllers";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E590FA901DE09BC500A11FE6 /* DataSourceDelegates */,
+				E590FA901DE09BC500A11FE6 /* Delegates */,
 				E5E53BE11DD903E1005282E4 /* Testing */,
 				E576D93E1D58663E006F5D62 /* Core Data */,
 				E5B036A91D59958700C66A69 /* File Management */,
@@ -244,12 +244,12 @@
 			path = PieceTests;
 			sourceTree = "<group>";
 		};
-		E590FA901DE09BC500A11FE6 /* DataSourceDelegates */ = {
+		E590FA901DE09BC500A11FE6 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 				E53A66EF1DE093800025FD4F /* PageControllerDataSourceDelegate.swift */,
 			);
-			name = DataSourceDelegates;
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		E5B036A81D59957C00C66A69 /* Audio */ = {
@@ -463,8 +463,8 @@
 				E53A66F01DE093800025FD4F /* PageControllerDataSourceDelegate.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
 				E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */,
-				E5228F451D4250E900BBD008 /* DataTableViewController.swift in Sources */,
-				E5228F411D42506500BBD008 /* RootViewController.swift in Sources */,
+				E5228F451D4250E900BBD008 /* RecordingsTableViewController.swift in Sources */,
+				E5228F411D42506500BBD008 /* PageRootViewController.swift in Sources */,
 				E5F60B861D5B153D000B4F7F /* Recording+CoreDataProperties.swift in Sources */,
 				E576D9411D586652006F5D62 /* Piece.xcdatamodeld in Sources */,
 				E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */,
