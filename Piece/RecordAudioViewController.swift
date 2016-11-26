@@ -10,6 +10,22 @@ import UIKit
 import CoreData
 import AVFoundation
 
+// MARK: Helper Methods
+private extension RecordAudioViewController {
+	func showRecorderDeniedAccessAlert() {
+		let deniedAlert = UIAlertController(title: NSLocalizedString("Permission denied", comment: ""),
+		                                    message: NSLocalizedString("You have denied Piece access to the microphone. Allow access in the privacy settings.", comment: ""),
+		                                    preferredStyle: .alert)
+		
+		let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+		deniedAlert.addAction(okAction)
+		
+		recordAudioButton.isEnabled = false
+		
+		present(deniedAlert, animated: true, completion: nil)
+	}
+}
+
 // MARK: @IBActions
 private extension RecordAudioViewController {
 	@objc @IBAction func cancelButton(_ sender: Any) {
@@ -24,12 +40,12 @@ private extension RecordAudioViewController {
 		
 		if audioRecorder.recorder.isRecording {
 			audioRecorder.recorder.stop()
-			recordButtonTitle = NSLocalizedString("Start recording", comment: "Title of record button before recording.")
+			recordButtonTitle = NSLocalizedString("Start recording", comment: "")
 			performSegue(withIdentifier: "configureRecording", sender: self)
 			self.audioRecorder = nil
 		} else {
 			audioRecorder.recorder.record()
-			recordButtonTitle = NSLocalizedString("Stop recording", comment: "Title of record button after starting to recording.")
+			recordButtonTitle = NSLocalizedString("Stop recording", comment: "")
 		}
 		
 		recordAudioButton.setTitle(recordButtonTitle, for: .normal)
@@ -47,35 +63,24 @@ class RecordAudioViewController: UIViewController {
 	}
 
 	// MARK: Properties
-	fileprivate var audioRecorder: AudioRecorder!
 	fileprivate var coreDataStack = CoreDataStack.sharedInstance
 	fileprivate let pieFileManager = PIEFileManager()
-	var section: Section!
+	fileprivate var audioRecorder: AudioRecorder!
 	var recording: Recording!
+	var section: Section!
 
 	// MARK: View Controller Life Cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		if let recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: self.coreDataStack.viewContext) as? Recording {
-			recording.title = NSLocalizedString("MySong", comment: "Default title of recording")
-			recording.dateRecorded = Date()
-			recording.section = section
-			recording.project = section.project
-			recording.fileExtension = FileSystemExtensions.caf.rawValue
-			self.recording = recording
-				
-			// This must go here because recording.url is not set before recording is created.
+		
+		if let recording = Recording.init(with: NSLocalizedString("MySong", comment: ""), section: section, project: section.project, fileExtension: .caf, insertIntoManagedObjectContext: self.coreDataStack.viewContext) {
 			audioRecorder = AudioRecorder(url: recording.url)
+			self.recording = recording
 			
 			if audioRecorder.askForPermissions() {
 				recordAudioButton.isEnabled = true
 			} else {
-				let deniedAlert = UIAlertController(title: "Permission denied", message: "You have denied the application access to the microphone. Allow access in the Settings application.", preferredStyle: .alert)
-				let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-				deniedAlert.addAction(okAction)
-				recordAudioButton.isEnabled = false
-				present(deniedAlert, animated: true, completion: nil)
+				showRecorderDeniedAccessAlert()
 			}
 		}
 	}
@@ -83,7 +88,8 @@ class RecordAudioViewController: UIViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "configureRecording" {
-			if let navigationController = segue.destination as? UINavigationController, let configureRecordingTVC = navigationController.viewControllers.first as? ConfigureRecordingTableViewController {
+			if let navigationController = segue.destination as? UINavigationController,
+				let configureRecordingTVC = navigationController.viewControllers.first as? ConfigureRecordingTableViewController {
 					configureRecordingTVC.recording = recording
 					configureRecordingTVC.project = recording.project
 					configureRecordingTVC.section = recording.section
