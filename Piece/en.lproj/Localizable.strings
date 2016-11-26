@@ -2,6 +2,7 @@
 /* Warning that the app failed to save the recording. */
 "Can't Save" = "Can't Save";
 
+/* Cancelling configuration */
 "Cancel" = "Cancel";
 
 /* Delete a recording. */
@@ -43,6 +44,7 @@
 /* Rename project */
 "Rename" = "Rename";
 
+/* Save section action */
 "Save" = "Save";
 
 /* Placeholder text for title of new section. */
@@ -111,5 +113,11 @@
 /* Title of alert when picking project without sections */
 "No sections in project" = "No sections in project";
 
-/* Alert when user cancels the recording. */
-"Recording will be deleted. Procede?" = "";
+/* No comment provided by engineer. */
+"Share" = "Share";
+
+/* No comment provided by engineer. */
+"Permission denied" = "Permission denied";
+
+/* No comment provided by engineer. */
+"You have denied Piece access to the microphone. Allow access in the privacy settings." = "You have denied Piece access to the microphone. Allow access in the privacy settings.";
