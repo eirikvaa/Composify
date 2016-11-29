@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class TestInitializer {
+struct TestInitializer {
 	
 	private(set) var active = false
 	private var arguments = [String]()
@@ -20,7 +20,7 @@ class TestInitializer {
 		self.arguments = arguments
 	}
 	
-	func setupTestingMode() {
+	mutating func setupTestingMode() {
 		if arguments.contains("UI_TEST_MODE_PROJECTS") {
 			active = true
 			reset()
@@ -52,14 +52,14 @@ class TestInitializer {
 		
 	}
 	
-	private func addProject() {
+	mutating private func addProject() {
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
 		CoreDataStack.sharedInstance.saveContext()
 	}
 	
-	private func addProjectAndSection() {
+	mutating private func addProjectAndSection() {
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)

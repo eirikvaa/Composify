@@ -36,7 +36,7 @@ enum FileSystemExtensions: String {
 A class for saving, deleting and renaming projects, sections and recordings in the file system.
 - Author: Eirik Vale Aase
 */
-class PIEFileManager {
+struct PIEFileManager {
     
     // MARK: Properties
     let fileManager = FileManager.default
