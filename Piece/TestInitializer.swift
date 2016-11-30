@@ -9,13 +9,18 @@
 import Foundation
 import CoreData
 
+/**
+`TestInitializer` handles the setup when I'm testing projects, sections or recordings management.
+*/
 struct TestInitializer {
 	
+	// MARK: Properties
 	private(set) var active = false
 	private var arguments = [String]()
 	private(set) var project: Project!
 	private(set) var section: Section!
 	
+	// MARK: Initialization
 	init(arguments: [String]) {
 		self.arguments = arguments
 	}
@@ -34,7 +39,11 @@ struct TestInitializer {
 			addProjectAndSection()
 		}
 	}
-		
+	
+	/**
+	Deletes all of the projects created.
+	- Warning: This will actually delete all of the projects, and should probably be handled differently.
+	*/
 	func reset() {
 		let fetchRequest = Project.fetchRequest()
 		var projects = [Project]()
