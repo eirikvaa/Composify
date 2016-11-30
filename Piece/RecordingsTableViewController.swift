@@ -17,6 +17,11 @@ private extension RecordingsTableViewController {
 		let assetDuration = audioAsset.duration
 		return CMTimeGetSeconds(assetDuration)
 	}
+	
+	func stopPlaySession() {
+		audioPlayer?.player.stop()
+		timer?.invalidate()
+	}
 }
 
 // MARK: AVAudioPlayerDelegate
@@ -30,8 +35,6 @@ extension RecordingsTableViewController: AVAudioPlayerDelegate {
 			timer?.invalidate()
 			
 			tableView.reloadRows(at: [indexPath], with: .fade)
-			
-			
 		}
 	}
 }
@@ -79,15 +82,15 @@ class RecordingsTableViewController: UITableViewController {
 	fileprivate var previouslySelectedCellIndexPath: IndexPath?
 	private var coreDataStack = CoreDataStack.sharedInstance
 	private let pieFileManager = PIEFileManager()
-	private var audioPlayer: AudioPlayer? {
+	fileprivate var audioPlayer: AudioPlayer? {
 		didSet {
 			audioPlayer?.player.delegate = self
 			audioPlayer?.player.volume = 1
 		}
 	}
+	fileprivate var timer: Timer?
 	var section: Section!
 	var pageIndex: Int!
-	var timer: Timer?
 	
 	// MARK: View Controller Life Cycle
 	override func viewDidLoad() {
@@ -111,13 +114,32 @@ class RecordingsTableViewController: UITableViewController {
 		let statusBarHeight = UIApplication.shared.statusBarFrame.height
 		let edgeInsets = UIEdgeInsets(top: statusBarHeight + 44, left: 0, bottom: 0, right: 0)
 		tableView.contentInset = edgeInsets
+		
+		// Want to know when the application goes into the background so we can handle the audio session.
+		NotificationCenter.default.addObserver(self, selector: #selector(stopMusic), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+	}
+	
+	/**
+	Stops the audio player, invalidates the timer and resets the label.
+	*/
+	@objc private func stopMusic() {
+		stopPlaySession()
+		
+		if let previouslySelectedCellIndexPath = previouslySelectedCellIndexPath {
+			let duration = durationOfRecording(url: fetchedResultsController.object(at: previouslySelectedCellIndexPath).url)
+			let currentMinutes = Int(duration) / 60
+			let currentSeconds = Int(duration) % 60
+			
+			let cell = tableView.cellForRow(at: previouslySelectedCellIndexPath)!
+			
+			cell.detailTextLabel?.text = String(format: "0:00/%d:%0.2d", currentMinutes, currentSeconds)
+		}
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
-		audioPlayer?.player.stop()
-		timer?.invalidate()
+		stopPlaySession()
 	}
 
 	// MARK: UITableViewDataSource
