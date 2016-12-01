@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	private var testInitializer: TestInitializer!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {		
-		// persistentContainer is marked 'lazy', so initializing it here.
+		// `persistentContainer` is marked 'lazy', so initialize to ready it for use.
 		_ = CoreDataStack.sharedInstance.viewContext
 		
 		let launchArguments = ProcessInfo.processInfo.arguments

@@ -248,16 +248,12 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		
 		tableView.separatorStyle = .none
 	}
-
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if (projectPickerViewHidden && indexPath.section == 1 && indexPath.row == 1) ||
-			(sectionPickerViewHidden && indexPath.section == 2 && indexPath.row == 1) {
-			return 0
-		} else {
-			return super.tableView(tableView, heightForRowAt: indexPath)
-		}
+	
+	// MARK: UITableViewDelegate
+	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		return indexPath.section == 0 && indexPath.row == 0 ? nil : indexPath
 	}
-
+	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		switch (indexPath.section, indexPath.row) {
 		case (1, 0):
@@ -268,10 +264,14 @@ class ConfigureRecordingTableViewController: UITableViewController {
 			break
 		}
 	}
-
-	// MARK: UITableViewDelegate
-	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-		return indexPath.section == 0 && indexPath.row == 0 ? nil : indexPath
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if (projectPickerViewHidden && indexPath.section == 1 && indexPath.row == 1) ||
+			(sectionPickerViewHidden && indexPath.section == 2 && indexPath.row == 1) {
+			return 0
+		} else {
+			return super.tableView(tableView, heightForRowAt: indexPath)
+		}
 	}
 
 	// MARK: UIScrollViewDelegate
