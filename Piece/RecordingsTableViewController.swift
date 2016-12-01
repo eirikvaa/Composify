@@ -12,12 +12,6 @@ import AVFoundation
 
 // MARK: Helper Methods
 private extension RecordingsTableViewController {
-	func durationOfRecording(url: URL) -> Float64  {
-		let audioAsset = AVURLAsset(url: url)
-		let assetDuration = audioAsset.duration
-		return CMTimeGetSeconds(assetDuration)
-	}
-	
 	func stopPlaySession() {
 		audioPlayer?.player.stop()
 		timer?.invalidate()
@@ -126,7 +120,8 @@ class RecordingsTableViewController: UITableViewController {
 		stopPlaySession()
 		
 		if let previouslySelectedCellIndexPath = previouslySelectedCellIndexPath {
-			let duration = durationOfRecording(url: fetchedResultsController.object(at: previouslySelectedCellIndexPath).url)
+			//let duration = durationOfRecording(url: fetchedResultsController.object(at: previouslySelectedCellIndexPath).url)
+			let duration = fetchedResultsController.object(at: previouslySelectedCellIndexPath).duration
 			let currentMinutes = Int(duration) / 60
 			let currentSeconds = Int(duration) % 60
 			
@@ -156,7 +151,7 @@ class RecordingsTableViewController: UITableViewController {
 		
 		cell.textLabel?.text = recording.title
 		
-		let duration = durationOfRecording(url: recording.url)
+		let duration = recording.duration
 		let currentMinutes = Int(duration) / 60
 		let currentSeconds = Int(duration) % 60
 		
