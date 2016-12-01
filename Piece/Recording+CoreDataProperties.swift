@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import AVFoundation
 
 extension Recording: FileSystemObject {
 	var url: URL {
@@ -26,5 +27,11 @@ extension Recording {
 	
 	override var description: String {
 		return "Recording - title: \(title).\(fileExtension)"
+	}
+	
+	var duration: Float64 {
+		let audioAsset = AVURLAsset(url: url)
+		let assetDuration = audioAsset.duration
+		return CMTimeGetSeconds(assetDuration)
 	}
 }
