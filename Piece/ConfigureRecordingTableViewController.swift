@@ -58,8 +58,12 @@ private extension ConfigureRecordingTableViewController {
 
 // MARK: Helper Methods
 private extension ConfigureRecordingTableViewController {
+	/**
+	Checks if a recording already has the current title.
+	- parameter title: chosen title
+	*/
 	func isDuplicate(_ title: String) -> Bool {
-		return section.recordings.map { $0.title }.contains(title)
+		return section.recordings.contains { $0.title == title }
 	}
 
 	func showOKAlert(_ title: String, message: String?) {
