@@ -10,48 +10,6 @@ import UIKit
 import CoreData
 import AVFoundation
 
-// MARK: Helper Methods
-private extension RecordAudioViewController {
-	func showRecorderDeniedAccessAlert() {
-		let deniedAlert = UIAlertController(title: NSLocalizedString("Permission denied", comment: ""),
-		                                    message: NSLocalizedString("You have denied Piece access to the microphone. Allow access in the privacy settings.", comment: ""),
-		                                    preferredStyle: .alert)
-		
-		let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-		deniedAlert.addAction(okAction)
-		
-		recordAudioButton.isEnabled = false
-		
-		present(deniedAlert, animated: true, completion: nil)
-	}
-}
-
-// MARK: @IBActions
-private extension RecordAudioViewController {
-	@objc @IBAction func cancelButton(_ sender: Any) {
-		self.pieFileManager.delete(recording)
-		self.coreDataStack.viewContext.delete(recording)
-		self.coreDataStack.saveContext()
-		dismiss(animated: true, completion: nil)
-	}
-	
-	@objc @IBAction func recordAudio(_ sender: AnyObject) {
-		var recordButtonTitle = ""
-		
-		if audioRecorder.recorder.isRecording {
-			audioRecorder.recorder.stop()
-			recordButtonTitle = NSLocalizedString("Start recording", comment: "")
-			performSegue(withIdentifier: "configureRecording", sender: self)
-			self.audioRecorder = nil
-		} else {
-			audioRecorder.recorder.record()
-			recordButtonTitle = NSLocalizedString("Stop recording", comment: "")
-		}
-		
-		recordAudioButton.setTitle(recordButtonTitle, for: .normal)
-	}
-}
-
 class RecordAudioViewController: UIViewController {
 
 	// MARK: @IBOutlets
@@ -73,7 +31,7 @@ class RecordAudioViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if let recording = Recording.init(with: NSLocalizedString("MySong", comment: ""), section: section, project: section.project, fileExtension: .caf, insertIntoManagedObjectContext: self.coreDataStack.viewContext) {
+		if let recording = Recording.init(with: "MySong".localized, section: section, project: section.project, fileExtension: .caf, insertIntoManagedObjectContext: self.coreDataStack.viewContext) {
 			audioRecorder = AudioRecorder(url: recording.url)
 			self.recording = recording
 			
@@ -98,4 +56,45 @@ class RecordAudioViewController: UIViewController {
 	}
 }
 
+// MARK: Helper Methods
+private extension RecordAudioViewController {
+	func showRecorderDeniedAccessAlert() {
+		let deniedAlert = UIAlertController(title: "Permission denied".localized,
+		                                    message: "You have denied Piece access to the microphone. Allow access in the privacy settings.".localized,
+		                                    preferredStyle: .alert)
+		
+		let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+		deniedAlert.addAction(okAction)
+		
+		recordAudioButton.isEnabled = false
+		
+		present(deniedAlert, animated: true, completion: nil)
+	}
+}
+
+// MARK: @IBActions
+private extension RecordAudioViewController {
+	@objc @IBAction func cancelButton(_ sender: Any) {
+		self.pieFileManager.delete(recording)
+		self.coreDataStack.viewContext.delete(recording)
+		self.coreDataStack.saveContext()
+		dismiss(animated: true, completion: nil)
+	}
+	
+	@objc @IBAction func recordAudio(_ sender: AnyObject) {
+		var recordButtonTitle = ""
+		
+		if audioRecorder.recorder.isRecording {
+			audioRecorder.recorder.stop()
+			recordButtonTitle = "Start recording".localized
+			performSegue(withIdentifier: "configureRecording", sender: self)
+			self.audioRecorder = nil
+		} else {
+			audioRecorder.recorder.record()
+			recordButtonTitle = "Stop recording".localized
+		}
+		
+		recordAudioButton.setTitle(recordButtonTitle, for: .normal)
+	}
+}
 
