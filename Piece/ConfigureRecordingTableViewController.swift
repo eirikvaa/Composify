@@ -9,166 +9,6 @@
 import UIKit
 import CoreData
 
-// MARK: @IBActions
-private extension ConfigureRecordingTableViewController {
-	@objc @IBAction func playAudio(_ sender: AnyObject) {
-		audioPlayer = AudioPlayer(url: recording.url)
-		audioPlayer?.player.play()
-	}
-	
-	@objc @IBAction func save(_ sender: AnyObject) {
-		guard let project = project, let section = section else { return }
-		
-		guard let newTitle = recordingTitleTextField.text, !isDuplicate(newTitle) else {
-			showOKAlert(NSLocalizedString("Duplicate title!", comment: ""), message: nil)
-			return
-		}
-		
-		// The audio file is already created, so just rename it.
-		pieFileManager.rename(recording, from: recording.title, to: newTitle, section: section, project: project)
-		recording.title = newTitle
-		recording.section = section
-		recording.project = project
-		coreDataStack.saveContext()
-		
-		// Get the view controller that presented the view controller that presented this view controller.
-		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-	}
-	
-	@objc @IBAction func cancel(_ sender: AnyObject) {
-		// Notify the user if he/she tries to cancel the configuration of the recording.
-		let localizedTitle = NSLocalizedString("Recording will be deleted. Proceed?", comment: "")
-		let cancelAlert = UIAlertController(title: localizedTitle, message: nil, preferredStyle: .alert)
-		let yesAction = UIAlertAction(title: "OK", style: .default) { _ in
-			self.pieFileManager.delete(self.recording)
-			self.coreDataStack.viewContext.delete(self.recording)
-			self.coreDataStack.saveContext()
-			
-			// Get the view controller that presented the view controller that presented this view controller.
-			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-		}
-		
-		let noAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-		cancelAlert.addAction(yesAction)
-		cancelAlert.addAction(noAction)
-		
-		present(cancelAlert, animated: true, completion: nil)
-	}
-}
-
-// MARK: Helper Methods
-private extension ConfigureRecordingTableViewController {
-	/**
-	Checks if a recording already has the current title.
-	- parameter title: chosen title
-	*/
-	func isDuplicate(_ title: String) -> Bool {
-		return section.recordings.contains { $0.title == title }
-	}
-
-	func showOKAlert(_ title: String, message: String?) {
-		let alert = UIAlertController(title: title, message: message ?? nil, preferredStyle: .alert)
-		let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
-		alert.addAction(okAction)
-
-		present(alert, animated: true, completion: nil)
-	}
-	
-	func togglePicker(tagged tag: Int) {
-		switch tag {
-		case 111:
-			projectPickerViewHidden = !projectPickerViewHidden
-			projectPicker.isHidden = projectPickerViewHidden
-		case 222:
-			sectionPickerViewHidden = !sectionPickerViewHidden
-			sectionPicker.isHidden = sectionPickerViewHidden
-		default:
-			break
-		}
-		
-		if !projectPicker.isHidden {
-			let selectedIndex = projects.index(of: project)!
-			projectPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
-			projectDetailLabel.text = project.title
-		}
-		
-		if !sectionPicker.isHidden {
-			let selectedIndex = project.sections.contains(section) ? project.sections.sorted(by: {$0.title < $1.title}).index(of: section) : 0
-			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
-			sectionDetailLabel.text = section.title
-		}
-		
-		// We need this otherwise the table view won't show the contents of the cell, namely the picker.
-		tableView.beginUpdates()
-		tableView.endUpdates()
-		
-		tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
-	}
-}
-
-// MARK: UIPickerViewDelegate
-extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		switch pickerView.tag {
-		case 111:
-			guard projects.count > 0 else { return nil }
-			return projects[row].title
-		case 222:
-			guard project.sections.count > 0 else { return nil }
-			return project.sections.sorted(by: {$0.title < $1.title})[row].title
-		default:
-			return nil
-		}
-	}
-
-	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		
-		switch pickerView.tag {
-		case 111:
-			let selectedProject = projects[row]
-			
-			guard !selectedProject.sections.isEmpty else {
-				showOKAlert(NSLocalizedString("No sections in project", comment: ""), message: nil)
-				project = projects.first(where: { $0.sections.count > 0 })
-				pickerView.selectRow(projects.index(of: project)!, inComponent: component, animated: true)
-				
-				return
-			}
-			
-			// We don't want to change section if we bounce back to the same project in the projectPicker.
-			guard selectedProject != project else { return }
-			
-			project = selectedProject
-			section = project.sections.sorted(by: {$0.title < $1.title})[0]
-		case 222:
-			section = project.sections.sorted(by: {$0.title < $1.title})[row]
-		default:
-			break
-		}
-		
-		projectDetailLabel.text = project.title
-		sectionDetailLabel.text = section.title
-	}
-}
-
-// MARK: UIPickerViewDataSource
-extension ConfigureRecordingTableViewController: UIPickerViewDataSource {
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return 1
-	}
-
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		switch pickerView.tag {
-		case 111:
-			return projects.count
-		case 222:
-			return project.sections.count
-		default:
-			return 0
-		}
-	}
-}
-
 /**
 `ConfigureRecordingTableViewController` manages the configuration of a recording, primarily the title and the associated sectiona and project.
 */
@@ -243,7 +83,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		}
 		
 		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-		label.text = NSLocalizedString("Configure and Save Recording", comment: "")
+		label.text = "Configure and Save Recording".localized
 		label.adjustsFontSizeToFitWidth = true
 		label.textColor = UIColor.white
 		label.textAlignment = .center
@@ -283,4 +123,157 @@ class ConfigureRecordingTableViewController: UITableViewController {
 		recordingTitleTextField.resignFirstResponder()
 	}
 
+}
+
+// MARK: @IBActions
+private extension ConfigureRecordingTableViewController {
+	@objc @IBAction func playAudio(_ sender: AnyObject) {
+		audioPlayer = AudioPlayer(url: recording.url)
+		audioPlayer?.player.play()
+	}
+	
+	@objc @IBAction func save(_ sender: AnyObject) {
+		guard let project = project, let section = section else { return }
+		
+		guard let newTitle = recordingTitleTextField.text, !section.recordings.contains(where: {$0.title == newTitle}) else {
+			showOKAlert("Duplicate title!".localized, message: nil)
+			return
+		}
+		
+		// The audio file is already created, so just rename it.
+		pieFileManager.rename(recording, from: recording.title, to: newTitle, section: section, project: project)
+		recording.title = newTitle
+		recording.section = section
+		recording.project = project
+		coreDataStack.saveContext()
+		
+		// Get the view controller that presented the view controller that presented this view controller.
+		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+	}
+	
+	@objc @IBAction func cancel(_ sender: AnyObject) {
+		// Notify the user if he/she tries to cancel the configuration of the recording.
+		let localizedTitle = "Recording will be deleted. Proceed?".localized
+		let cancelAlert = UIAlertController(title: localizedTitle, message: nil, preferredStyle: .alert)
+		let yesAction = UIAlertAction(title: "OK".localized, style: .default) { alertAction in
+			self.pieFileManager.delete(self.recording)
+			self.coreDataStack.viewContext.delete(self.recording)
+			self.coreDataStack.saveContext()
+			
+			// Get the view controller that presented the view controller that presented this view controller.
+			self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+		}
+		
+		let noAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+		cancelAlert.addAction(yesAction)
+		cancelAlert.addAction(noAction)
+		
+		present(cancelAlert, animated: true, completion: nil)
+	}
+}
+
+// MARK: Helper Methods
+private extension ConfigureRecordingTableViewController {
+	func showOKAlert(_ title: String, message: String?) {
+		let alert = UIAlertController(title: title, message: message ?? nil, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+		alert.addAction(okAction)
+		
+		present(alert, animated: true, completion: nil)
+	}
+	
+	func togglePicker(tagged tag: Int) {
+		switch tag {
+		case 111:
+			projectPickerViewHidden = !projectPickerViewHidden
+			projectPicker.isHidden = projectPickerViewHidden
+		case 222:
+			sectionPickerViewHidden = !sectionPickerViewHidden
+			sectionPicker.isHidden = sectionPickerViewHidden
+		default:
+			break
+		}
+		
+		if !projectPicker.isHidden {
+			let selectedIndex = projects.index(of: project)!
+			projectPicker.selectRow(selectedIndex, inComponent: 0, animated: true)
+			projectDetailLabel.text = project.title
+		}
+		
+		if !sectionPicker.isHidden {
+			let selectedIndex = project.sections.contains(section) ? project.sections.sorted(by: {$0.title < $1.title}).index(of: section) : 0
+			
+			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
+			sectionDetailLabel.text = section.title
+		}
+		
+		// We need this otherwise the table view won't show the contents of the cell, namely the picker.
+		tableView.beginUpdates()
+		tableView.endUpdates()
+		
+		tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+	}
+}
+
+// MARK: UIPickerViewDelegate
+extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		switch pickerView.tag {
+		case 111:
+			guard projects.count > 0 else { return nil }
+			return projects[row].title
+		case 222:
+			guard project.sections.count > 0 else { return nil }
+			return project.sections.sorted(by: {$0.title < $1.title})[row].title
+		default:
+			return nil
+		}
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		
+		switch pickerView.tag {
+		case 111:
+			let selectedProject = projects[row]
+			
+			guard !selectedProject.sections.isEmpty else {
+				showOKAlert("No sections in project".localized, message: nil)
+				project = projects.first(where: { $0.sections.count > 0 })
+				pickerView.selectRow(projects.index(of: project)!, inComponent: component, animated: true)
+				
+				return
+			}
+			
+			// We don't want to change section if we bounce back to the same project in the projectPicker.
+			guard selectedProject != project else { return }
+			
+			project = selectedProject
+			section = project.sections.sorted(by: {$0.title < $1.title})[0]
+		case 222:
+			section = project.sections.sorted(by: {$0.title < $1.title})[row]
+		default:
+			break
+		}
+		
+		projectDetailLabel.text = project.title
+		sectionDetailLabel.text = section.title
+	}
+}
+
+// MARK: UIPickerViewDataSource
+extension ConfigureRecordingTableViewController: UIPickerViewDataSource {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		switch pickerView.tag {
+		case 111:
+			return projects.count
+		case 222:
+			return project.sections.count
+		default:
+			return 0
+		}
+	}
 }
