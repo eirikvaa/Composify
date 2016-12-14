@@ -10,62 +10,6 @@ import UIKit
 import CoreData
 import AVFoundation
 
-// MARK: Helper Methods
-private extension RecordingsTableViewController {
-	func stopPlaySession() {
-		audioPlayer?.player.stop()
-		timer?.invalidate()
-	}
-}
-
-// MARK: AVAudioPlayerDelegate
-extension RecordingsTableViewController: AVAudioPlayerDelegate {
-	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-		if let indexPath = previouslySelectedCellIndexPath {
-			let cell = tableView.cellForRow(at: indexPath)
-			cell?.textLabel?.text = fetchedResultsController.object(at: indexPath).title
-			
-			// As the audio is finished playing, we'll stop the timer.
-			timer?.invalidate()
-			
-			tableView.reloadRows(at: [indexPath], with: .fade)
-		}
-	}
-}
-
-// MARK: NSFetchedResultsControllerDelegate
-extension RecordingsTableViewController: NSFetchedResultsControllerDelegate {
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.beginUpdates()
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		switch type {
-		case .insert:
-			if let indexPath = newIndexPath {
-				tableView.insertRows(at: [indexPath], with: .fade)
-			}
-		case .update:
-			if let indexPath = indexPath {
-				tableView.reloadRows(at: [indexPath], with: .fade)
-			}
-		case .delete:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-		case .move:
-			if let indexPath = indexPath, let newIndexPath = newIndexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		}
-	}
-	
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
-}
-
 /**
 `RecordingsTableViewController` shows and managed recordings.
 */
@@ -120,7 +64,6 @@ class RecordingsTableViewController: UITableViewController {
 		stopPlaySession()
 		
 		if let previouslySelectedCellIndexPath = previouslySelectedCellIndexPath {
-			//let duration = durationOfRecording(url: fetchedResultsController.object(at: previouslySelectedCellIndexPath).url)
 			let duration = fetchedResultsController.object(at: previouslySelectedCellIndexPath).duration
 			let currentMinutes = Int(duration) / 60
 			let currentSeconds = Int(duration) % 60
@@ -187,7 +130,7 @@ class RecordingsTableViewController: UITableViewController {
 			tableView.deselectRow(at: indexPath, animated: true)
 			let start = Date()
 			
-			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
 				let secondsSinceStart = Int(Date().timeIntervalSince(start))
 				let cell = tableView.cellForRow(at: indexPath)
 				let currentMinutes = Int(secondsSinceStart) / 60
@@ -198,26 +141,26 @@ class RecordingsTableViewController: UITableViewController {
 				
 				
 				cell?.detailTextLabel?.text = String(format: "%d:%0.2d/%d:%0.2d", currentMinutes, currentSeconds, durationMinutes, durationSeconds)
-			})
+			}
 		}
 	}
 	
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
+		let renameAction = UITableViewRowAction(style: .normal, title: "Rename".localized) { (rowAction, indexPath) in
+			let renameAlert = UIAlertController(title: "Rename".localized, message: nil, preferredStyle: .alert)
 			
-			renameAlert.addTextField( configurationHandler: { (textField) in
-				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
-				textField.autocapitalizationType = .words
-				textField.clearButtonMode = .whileEditing
-				textField.autocorrectionType = .default
-			})
+			renameAlert.addTextField {
+				$0.placeholder = self.fetchedResultsController.object(at: indexPath).title
+				$0.autocapitalizationType = .words
+				$0.clearButtonMode = .whileEditing
+				$0.autocorrectionType = .default
+			}
 
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { (alertAction) in
+			let saveAction = UIAlertAction(title: "Save".localized, style: .default) { alertAction in
 				guard let title = renameAlert.textFields?.first?.text else { return }
 			
 				if let recordings = self.fetchedResultsController.fetchedObjects {
-					if recordings.map({$0.title}).contains(title) {
+					if recordings.contains(where: {$0.title == title}) {
 						return
 					}
 				}
@@ -227,9 +170,9 @@ class RecordingsTableViewController: UITableViewController {
 				self.pieFileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
 				recording.title = title
 				self.coreDataStack.saveContext()
-			})
+			}
 
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+			let cancelAction = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
 
 			renameAlert.addAction(saveAction)
 			renameAlert.addAction(cancelAction)
@@ -237,7 +180,7 @@ class RecordingsTableViewController: UITableViewController {
 			self.present(renameAlert, animated: true, completion: nil)
 		}
 
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
+		let deleteAction = UITableViewRowAction(style: .normal, title: "Delete".localized) { (rowAction, indexPath) in
 			let recording = self.fetchedResultsController.object(at: indexPath)
 
 			self.pieFileManager.delete(recording)
@@ -245,7 +188,7 @@ class RecordingsTableViewController: UITableViewController {
 			self.coreDataStack.saveContext()
 		}
 		
-		let shareAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Share", comment: "")) { (rowAction, indexPath) in
+		let shareAction = UITableViewRowAction(style: .normal, title: "Share".localized) { (rowAction, indexPath) in
 			let recording = self.fetchedResultsController.object(at: indexPath)
 			let activity = UIActivityViewController(activityItems: [recording.url], applicationActivities: nil)
 			activity.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
@@ -257,5 +200,61 @@ class RecordingsTableViewController: UITableViewController {
 		shareAction.backgroundColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
 
 		return [shareAction, renameAction, deleteAction]
+	}
+}
+
+// MARK: Helper Methods
+private extension RecordingsTableViewController {
+	func stopPlaySession() {
+		audioPlayer?.player.stop()
+		timer?.invalidate()
+	}
+}
+
+// MARK: AVAudioPlayerDelegate
+extension RecordingsTableViewController: AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		if let indexPath = previouslySelectedCellIndexPath {
+			let cell = tableView.cellForRow(at: indexPath)
+			cell?.textLabel?.text = fetchedResultsController.object(at: indexPath).title
+			
+			// As the audio is finished playing, we'll stop the timer.
+			timer?.invalidate()
+			
+			tableView.reloadRows(at: [indexPath], with: .fade)
+		}
+	}
+}
+
+// MARK: NSFetchedResultsControllerDelegate
+extension RecordingsTableViewController: NSFetchedResultsControllerDelegate {
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		switch type {
+		case .insert:
+			if let indexPath = newIndexPath {
+				tableView.insertRows(at: [indexPath], with: .fade)
+			}
+		case .update:
+			if let indexPath = indexPath {
+				tableView.reloadRows(at: [indexPath], with: .fade)
+			}
+		case .delete:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+		case .move:
+			if let indexPath = indexPath, let newIndexPath = newIndexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
 	}
 }
