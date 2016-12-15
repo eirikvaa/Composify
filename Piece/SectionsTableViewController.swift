@@ -13,11 +13,11 @@ import CoreData
 class SectionsTableViewController: UITableViewController {
 
 	// MARK: Properties
-	var chosenProject: Project!
 	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
 	fileprivate var coreDataStack = CoreDataStack.sharedInstance
 	fileprivate var fetchedResultsController: NSFetchedResultsController<Section>!
 	fileprivate let pieFileManager = PIEFileManager()
+	var chosenProject: Project!
 
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
