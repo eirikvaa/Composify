@@ -201,7 +201,7 @@ private extension ConfigureRecordingTableViewController {
 		}
 		
 		if !sectionPicker.isHidden {
-			let selectedIndex = project.sections.contains(section) ? project.sections.sorted(by: {$0.title < $1.title}).index(of: section) : 0
+			let selectedIndex = project.sections.contains(section) ? project.sections.sorted(by: <).index(of: section) : 0
 			
 			sectionPicker.selectRow(selectedIndex!, inComponent: 0, animated: true)
 			sectionDetailLabel.text = section.title
@@ -224,7 +224,7 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			return projects[row].title
 		case 222:
 			guard project.sections.count > 0 else { return nil }
-			return project.sections.sorted(by: {$0.title < $1.title})[row].title
+			return project.sections.sorted(by: <)[row].title
 		default:
 			return nil
 		}
@@ -239,18 +239,19 @@ extension ConfigureRecordingTableViewController: UIPickerViewDelegate {
 			guard !selectedProject.sections.isEmpty else {
 				showOKAlert("No sections in project".localized, message: nil)
 				project = projects.first(where: { $0.sections.count > 0 })
+				section = project.sections.sorted(by: <)[0]
 				pickerView.selectRow(projects.index(of: project)!, inComponent: component, animated: true)
 				
-				return
+				break
 			}
 			
 			// We don't want to change section if we bounce back to the same project in the projectPicker.
 			guard selectedProject != project else { return }
 			
 			project = selectedProject
-			section = project.sections.sorted(by: {$0.title < $1.title})[0]
+			section = project.sections.sorted(by: <)[0]
 		case 222:
-			section = project.sections.sorted(by: {$0.title < $1.title})[row]
+			section = project.sections.sorted(by: <)[row]
 		default:
 			break
 		}
