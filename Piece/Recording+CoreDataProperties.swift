@@ -10,6 +10,26 @@ import Foundation
 import CoreData
 import AVFoundation
 
+extension Recording: Comparable {
+	static func ==(lhs: Recording, rhs: Recording) -> Bool {
+		return
+			lhs.title == rhs.title &&
+				lhs.section == rhs.section &&
+				lhs.project == rhs.project &&
+				lhs.fileExtension == rhs.fileExtension &&
+				lhs.dateRecorded == rhs.dateRecorded
+	}
+	
+	static func <(lhs: Recording, rhs: Recording) -> Bool {
+		return
+			lhs.title < rhs.title &&
+			lhs.section < rhs.section &&
+			lhs.project < rhs.project &&
+			lhs.fileExtension < rhs.fileExtension &&
+			lhs.dateRecorded < rhs.dateRecorded
+	}
+}
+
 extension Recording: FileSystemObject {
 	var url: URL {
 		return section.url
