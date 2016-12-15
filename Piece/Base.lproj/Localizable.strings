@@ -80,6 +80,17 @@
 /* Sections and recording */
 "%d sections and %d recording" = "%d sections and %d recording";
 
+/* No comment provided by engineer. */
+"%d %@ and %d %@" = "%d %@ and %d %@";
+
+"section" = "section";
+
+"sections" = "sections";
+
+"recording" = "recording";
+
+"recordings" = "recordings";
+
 /* Recording */
 "%d recording" = "%d recording";
 

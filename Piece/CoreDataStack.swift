@@ -15,7 +15,7 @@ A class for setting up the core data stack. Uses the new features of Core Data t
 - Important: CoreDataStack implements a singletone - `sharedInstance` - since it only uses one context and a simple model. Because of this, it is important to note that the `init()` method is private so third parties can't instantiate it more than once. Also, remember to write `_ = CoreDataStack.sharedInstance.viewContext` in your AppDelegate.
 - Author: Eirik Vale Aase
 */
-class CoreDataStack {
+final class CoreDataStack {
 
 	// MARK: Properties
 	static let sharedInstance = CoreDataStack()

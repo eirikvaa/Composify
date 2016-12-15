@@ -20,13 +20,4 @@ class Recording: NSManagedObject {
 		self.fileExtension = fileExtension.rawValue
 		self.dateRecorded = Date()
 	}
-	
-	static func ==(lhs: Recording, rhs: Recording) -> Bool {
-		return
-			lhs.title == rhs.title &&
-			lhs.section == rhs.section &&
-			lhs.project == rhs.project &&
-			lhs.fileExtension == rhs.fileExtension &&
-			lhs.dateRecorded == rhs.dateRecorded
-	}
 }

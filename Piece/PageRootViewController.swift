@@ -9,33 +9,6 @@
 import UIKit
 import AVFoundation
 
-// MARK: Helper Methods
-private extension PageRootViewController {
-	@objc func addRecording() {
-		performSegue(withIdentifier: "addRecording", sender: self)
-	}
-	
-	func setupPageViewController() {
-		navigationItem.rightBarButtonItem = editButtonItem
-		
-		pageDataSourceDelegate.pageRootViewController = self
-		
-		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-		pageViewController.delegate = pageDataSourceDelegate
-		
-		let startingViewController = pageDataSourceDelegate.viewControllerAtIndex(sectionIndex, storyboard: storyboard!)!
-		
-		let viewControllers = [startingViewController]
-		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-		pageViewController.dataSource = pageDataSourceDelegate
-		addChildViewController(pageViewController)
-		view.addSubview(pageViewController.view)
-		
-		pageViewController.didMove(toParentViewController: self)
-	}
-}
-
-
 //`PageRootViewController` managed multiple `UITableView` instances.
 class PageRootViewController: UIViewController {
 
@@ -76,4 +49,30 @@ class PageRootViewController: UIViewController {
 		}
 	}
 
+}
+
+// MARK: Helper Methods
+private extension PageRootViewController {
+	@objc func addRecording() {
+		performSegue(withIdentifier: "addRecording", sender: self)
+	}
+	
+	func setupPageViewController() {
+		navigationItem.rightBarButtonItem = editButtonItem
+		
+		pageDataSourceDelegate.pageRootViewController = self
+		
+		pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+		pageViewController.delegate = pageDataSourceDelegate
+		pageViewController.dataSource = pageDataSourceDelegate
+		
+		let startingViewController = pageDataSourceDelegate.viewControllerAtIndex(sectionIndex, storyboard: storyboard!)!
+		
+		let viewControllers = [startingViewController]
+		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+		addChildViewController(pageViewController)
+		view.addSubview(pageViewController.view)
+		
+		pageViewController.didMove(toParentViewController: self)
+	}
 }

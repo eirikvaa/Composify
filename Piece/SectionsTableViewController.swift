@@ -9,95 +9,15 @@
 import UIKit
 import CoreData
 
-// MARK: Helper Methods
-private extension SectionsTableViewController {
-	@objc func addSection() {
-		let alert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
-		
-		alert.addTextField { textField in
-			textField.placeholder = NSLocalizedString("Section Title", comment: "")
-			textField.autocapitalizationType = .words
-			textField.clearButtonMode = .whileEditing
-		}
-		
-		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { (alertAction) in
-			if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
-				section.title = title
-				section.project = self.chosenProject
-				
-				self.pieFileManager.save(section)
-				self.coreDataStack.saveContext()
-			}
-		})
-		
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
-		
-		alert.addAction(save)
-		alert.addAction(cancel)
-		
-		present(alert, animated: true, completion: nil)
-	}
-	
-	/**
-	Inserts a label that adjusts the font of the text to the width of the label.
-	- Parameters:
-		- text: Label text
-		- view: View that should be replaced with an adjustable label; we modify it directly (inout).
-	- Warning: This is just used for the titleView of the navigation item in the navigation bar.
-	*/
-	func insertAdjustableLabel(with text: String, in view: inout UIView?) {
-		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-		label.textAlignment = .center
-		label.textColor = UIColor.white
-		label.text = text
-		label.font = UIFont.boldSystemFont(ofSize: 16)
-		label.adjustsFontSizeToFitWidth = true
-		view = label
-	}
-}
-
-// MARK: NSFetchedResultsController
-extension SectionsTableViewController: NSFetchedResultsControllerDelegate {
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.beginUpdates()
-	}
-
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		switch type {
-		case .update:
-			if let indexPath = indexPath {
-				tableView.reloadRows(at: [indexPath], with: .fade)
-			}
-		case .insert:
-			if let newIndexPath = newIndexPath {
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		case .delete:
-			if let indexPath = indexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-			}
-		case .move:
-			if let indexPath = indexPath, let newIndexPath = newIndexPath {
-				tableView.deleteRows(at: [indexPath], with: .fade)
-				tableView.insertRows(at: [newIndexPath], with: .fade)
-			}
-		}
-	}
-
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		tableView.endUpdates()
-	}
-}
 
 class SectionsTableViewController: UITableViewController {
 
 	// MARK: Properties
-	var chosenProject: Project!
 	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
 	fileprivate var coreDataStack = CoreDataStack.sharedInstance
 	fileprivate var fetchedResultsController: NSFetchedResultsController<Section>!
 	fileprivate let pieFileManager = PIEFileManager()
-
+	var chosenProject: Project!
 
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
@@ -147,16 +67,10 @@ class SectionsTableViewController: UITableViewController {
 		let section = fetchedResultsController.object(at: indexPath)
 		cell.textLabel?.text = section.title
 		cell.textLabel?.adjustsFontSizeToFitWidth = true
-		
-		var localizedString = ""
-		
-		if section.recordings.count != 1 {
-			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d recordings", comment: ""),
-			                                                   section.recordings.count)
-		} else {
-			localizedString = String.localizedStringWithFormat(NSLocalizedString("%d recording", comment: ""),
-			                                                   section.recordings.count)
-		}
+				
+		let localizedString = section.recordings.count == 1 ?
+			String.localizedStringWithFormat("%d recording".localized, section.recordings.count) :
+			String.localizedStringWithFormat("%d recordings".localized, section.recordings.count)
 		
 		cell.detailTextLabel?.text = localizedString
 
@@ -165,21 +79,21 @@ class SectionsTableViewController: UITableViewController {
 
 	// MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: ""), handler: { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
+		let renameAction = UITableViewRowAction(style: .normal, title: "Rename".localized) { (rowAction, indexPath) in
+			let renameAlert = UIAlertController(title: "Rename".localized, message: nil, preferredStyle: .alert)
 			
-			renameAlert.addTextField { textField in
-				textField.placeholder = self.fetchedResultsController.object(at: indexPath).title
-				textField.autocapitalizationType = .words
-				textField.clearButtonMode = .whileEditing
-				textField.autocorrectionType = .default
+			renameAlert.addTextField {
+				$0.placeholder = self.fetchedResultsController.object(at: indexPath).title
+				$0.autocapitalizationType = .words
+				$0.clearButtonMode = .whileEditing
+				$0.autocorrectionType = .default
 			}
 
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { (alertAction) in
+			let saveAction = UIAlertAction(title: "Save".localized, style: .default) { (alertAction) in
 				if let title = renameAlert.textFields?.first?.text {
 					
 					if let sections = self.fetchedResultsController.fetchedObjects {
-						if sections.map({$0.title}).contains(title) { return }
+						if sections.contains(where: {$0.title == title}) { return }
 					}
 					
 					let section = self.fetchedResultsController.object(at: indexPath)
@@ -188,23 +102,23 @@ class SectionsTableViewController: UITableViewController {
 					section.title = title
 					self.coreDataStack.saveContext()
 				}
-			})
+			}
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+			let cancelAction = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
 
 			renameAlert.addAction(saveAction)
 			renameAlert.addAction(cancelAction)
 
 			self.present(renameAlert, animated: true, completion: nil)
-		})
+		}
 
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: ""), handler: { (rowAction, indexPath) in
+		let deleteAction = UITableViewRowAction(style: .normal, title: "Delete".localized) { (rowAction, indexPath) in
 			let section = self.fetchedResultsController.object(at: indexPath)
 
 			self.pieFileManager.delete(section)
 			self.coreDataStack.viewContext.delete(section)
 			self.coreDataStack.saveContext()
-		})
+		}
 
 		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
 		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
@@ -227,4 +141,84 @@ class SectionsTableViewController: UITableViewController {
 		}
 	}
 	
+}
+
+// MARK: Helper Methods
+private extension SectionsTableViewController {
+	@objc func addSection() {
+		let alert = UIAlertController(title: "New Section".localized, message: nil, preferredStyle: .alert)
+		
+		alert.addTextField {
+			$0.placeholder = "Section Title".localized
+			$0.autocapitalizationType = .words
+			$0.clearButtonMode = .whileEditing
+		}
+		
+		let save = UIAlertAction(title: "Save".localized, style: .default) { (alertAction) in
+			if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
+				section.title = title
+				section.project = self.chosenProject
+				
+				self.pieFileManager.save(section)
+				self.coreDataStack.saveContext()
+			}
+		}
+		
+		let cancel = UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil)
+		
+		alert.addAction(save)
+		alert.addAction(cancel)
+		
+		present(alert, animated: true, completion: nil)
+	}
+	
+	/**
+	Inserts a label that adjusts the font of the text to the width of the label.
+	- Parameters:
+	- text: Label text
+	- view: View that should be replaced with an adjustable label; we modify it directly (inout).
+	- Warning: This is just used for the titleView of the navigation item in the navigation bar.
+	*/
+	func insertAdjustableLabel(with text: String, in view: inout UIView?) {
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+		label.textAlignment = .center
+		label.textColor = UIColor.white
+		label.text = text
+		label.font = UIFont.boldSystemFont(ofSize: 16)
+		label.adjustsFontSizeToFitWidth = true
+		view = label
+	}
+}
+
+// MARK: NSFetchedResultsController
+extension SectionsTableViewController: NSFetchedResultsControllerDelegate {
+	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.beginUpdates()
+	}
+	
+	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+		switch type {
+		case .insert:
+			if let newIndexPath = newIndexPath {
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+		case .update:
+			if let indexPath = indexPath {
+				tableView.reloadRows(at: [indexPath], with: .fade)
+			}
+		case .delete:
+			if let indexPath = indexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+			}
+		case .move:
+			if let indexPath = indexPath, let newIndexPath = newIndexPath {
+				tableView.deleteRows(at: [indexPath], with: .fade)
+				tableView.insertRows(at: [newIndexPath], with: .fade)
+			}
+		}
+	}
+	
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+		tableView.endUpdates()
+	}
 }

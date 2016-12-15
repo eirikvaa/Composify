@@ -36,7 +36,7 @@ enum FileSystemExtensions: String {
 A class for saving, deleting and renaming projects, sections and recordings in the file system.
 - Author: Eirik Vale Aase
 */
-class PIEFileManager {
+struct PIEFileManager {
     
     // MARK: Properties
     let fileManager = FileManager.default
@@ -98,12 +98,12 @@ class PIEFileManager {
 				.appendingPathComponent(new)
 		case let recording as Recording:
 			destination = object.url
-				.deletingPathExtension()		// deletes caf
+				.deletingPathExtension()		// deletes file extension
 				.deletingLastPathComponent()	// deletes title
 				.deletingLastPathComponent()	// deletes section
 				.deletingLastPathComponent()	// deletes project
 			
-			// If the user picks another project than it was originally recorded in, this changes that.
+			// If the user picks another project than it was originally recorded in, this handles that.
 			if let section = section, let project = project {
 				destination = destination
 					.appendingPathComponent(project.title)

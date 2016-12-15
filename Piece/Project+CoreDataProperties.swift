@@ -9,6 +9,18 @@
 import Foundation
 import CoreData
 
+extension Project: Comparable {
+	static func ==(lhs: Project, rhs: Project) -> Bool {
+		return
+			lhs.title == rhs.title
+	}
+	
+	static func <(lhs: Project, rhs: Project) -> Bool {
+		return
+			lhs.title < rhs.title
+	}
+}
+
 extension Project: FileSystemObject {
 	var url: URL {
 		let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

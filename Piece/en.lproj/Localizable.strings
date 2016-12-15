@@ -89,6 +89,17 @@
 /* Sections and recording */
 "%d sections and %d recording" = "%d sections and %d recording";
 
+/* No comment provided by engineer. */
+"%d %@ and %d %@" = "%d %@ and %d %@";
+
+"section" = "section";
+
+"sections" = "sections";
+
+"recording" = "recording";
+
+"recordings" = "recordings";
+
 /* Recording */
 "%d recording" = "%d recording";
 
@@ -121,3 +132,9 @@
 
 /* No comment provided by engineer. */
 "You have denied Piece access to the microphone. Allow access in the privacy settings." = "You have denied Piece access to the microphone. Allow access in the privacy settings.";
+
+/* No comment provided by engineer. */
+"%d %s and %d %s" = "";
+
+/* No comment provided by engineer. */
+"Tester" = "";

@@ -9,6 +9,45 @@
 import UIKit
 import CoreData
 
+/**
+`SectionPageViewController` is a delegate and datasource for the UIPageViewController instance.
+*/
+class SectionsPageViewController: NSObject {
+	var pageRootViewController: PageRootViewController!
+	fileprivate var sections: [Section] {
+		return pageRootViewController.project.sections.sorted(by: {$0.title < $1.title})
+	}
+	
+	override init() {
+		super.init()
+		
+		stylePageControl()
+	}
+	
+	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> RecordingsTableViewController? {
+		if pageRootViewController.project.sections.count == 0 || index >= pageRootViewController.project.sections.count {
+			return nil
+		}
+		
+		let recordingsTableViewController = storyboard.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsTableViewController
+		recordingsTableViewController.section = sections[index]
+		recordingsTableViewController.title = sections[index].title
+		pageRootViewController.section = sections[index]
+		recordingsTableViewController.pageIndex = index
+		return recordingsTableViewController
+	}
+	
+	func indexOfViewController(_ viewController: RecordingsTableViewController) -> Int {
+		return sections.index(of: viewController.section) ?? NSNotFound
+	}
+	
+	func stylePageControl() {
+		let pageControlAppearance = UIPageControl.appearance()
+		pageControlAppearance.currentPageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		pageControlAppearance.pageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 0.2)
+	}
+}
+
 // MARK: UIPageViewControllerDelegate
 extension SectionsPageViewController: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -77,44 +116,5 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 		let viewController = pageViewController.viewControllers!.first as! RecordingsTableViewController
 		
 		return viewController.pageIndex
-	}
-}
-
-/**
-`SectionPageViewController` is a delegate and datasource for the UIPageViewController instance.
-*/
-class SectionsPageViewController: NSObject {
-	var pageRootViewController: PageRootViewController!
-	fileprivate var sections: [Section] {		
-		return pageRootViewController.project.sections.sorted(by: {$0.title < $1.title})
-	}
-	
-	override init() {
-		super.init()
-		
-		stylePageControl()
-	}
-	
-	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> RecordingsTableViewController? {
-		if pageRootViewController.project.sections.count == 0 || index >= pageRootViewController.project.sections.count {
-			return nil
-		}
-		
-		let recordingsTableViewController = storyboard.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsTableViewController
-		recordingsTableViewController.section = sections[index]
-		recordingsTableViewController.title = sections[index].title
-		pageRootViewController.section = sections[index]
-		recordingsTableViewController.pageIndex = index
-		return recordingsTableViewController
-	}
-	
-	func indexOfViewController(_ viewController: RecordingsTableViewController) -> Int {
-		return sections.index(of: viewController.section) ?? NSNotFound
-	}
-	
-	func stylePageControl() {
-		let pageControlAppearance = UIPageControl.appearance()
-		pageControlAppearance.currentPageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
-		pageControlAppearance.pageIndicatorTintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 0.2)
 	}
 }

@@ -9,18 +9,23 @@
 import Foundation
 import CoreData
 
-class TestInitializer {
+/**
+`TestInitializer` handles the setup when I'm testing projects, sections or recordings management.
+*/
+struct TestInitializer {
 	
+	// MARK: Properties
 	private(set) var active = false
 	private var arguments = [String]()
 	private(set) var project: Project!
 	private(set) var section: Section!
 	
+	// MARK: Initialization
 	init(arguments: [String]) {
 		self.arguments = arguments
 	}
 	
-	func setupTestingMode() {
+	mutating func setupTestingMode() {
 		if arguments.contains("UI_TEST_MODE_PROJECTS") {
 			active = true
 			reset()
@@ -34,7 +39,11 @@ class TestInitializer {
 			addProjectAndSection()
 		}
 	}
-		
+	
+	/**
+	Deletes all of the projects created.
+	- Warning: This will actually delete all of the projects, and should probably be handled differently.
+	*/
 	func reset() {
 		let fetchRequest = Project.fetchRequest()
 		var projects = [Project]()
@@ -52,14 +61,14 @@ class TestInitializer {
 		
 	}
 	
-	private func addProject() {
+	mutating private func addProject() {
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)
 		CoreDataStack.sharedInstance.saveContext()
 	}
 	
-	private func addProjectAndSection() {
+	mutating private func addProjectAndSection() {
 		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: CoreDataStack.sharedInstance.persistentContainer.viewContext) as! Project
 		project.title = "Something New"
 		PIEFileManager().save(project)

@@ -77,6 +77,17 @@
 /* Sections and recording */
 "%d sections and %d recording" = "%d seksjoner og %d opptak";
 
+/* No comment provided by engineer. */
+"%d %@ and %d %@" = "%d %@ og %d %@";
+
+"section" = "seksjon";
+
+"sections" = "seksjoner";
+
+"recording" = "opptak";
+
+"recordings" = "opptak";
+
 /* Recording */
 "%d recording" = "%d opptak";
 
@@ -109,3 +120,9 @@
 
 /* No comment provided by engineer. */
 "You have denied Piece access to the microphone. Allow access in the privacy settings." = "Du har nektet Piece tilgang til mikrofonen. Gi tilgang i personvern-innstillingene.";
+
+/* No comment provided by engineer. */
+"%d %s and %d %s" = "";
+
+/* No comment provided by engineer. */
+"Tester" = "";
