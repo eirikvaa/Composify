@@ -15,7 +15,7 @@ import CoreData
 class SectionsPageViewController: NSObject {
 	var pageRootViewController: PageRootViewController!
 	fileprivate var sections: [Section] {
-		return pageRootViewController.project.sections.sorted(by: {$0.title < $1.title})
+		return pageRootViewController.project.sections.sorted(by: <)
 	}
 	
 	override init() {
