@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 
-
+/**
+`SectionsTableViewController` presents and managed all sections that a project has.
+*/
 class SectionsTableViewController: UITableViewController {
 
 	// MARK: Properties
@@ -83,10 +85,8 @@ class SectionsTableViewController: UITableViewController {
 			let renameAlert = UIAlertController(title: "Rename".localized, message: nil, preferredStyle: .alert)
 			
 			renameAlert.addTextField {
-				$0.placeholder = self.fetchedResultsController.object(at: indexPath).title
-				$0.autocapitalizationType = .words
-				$0.clearButtonMode = .whileEditing
-				$0.autocorrectionType = .default
+				var textField = $0
+				self.configure(&textField, placeholder: self.fetchedResultsController.object(at: indexPath).title)
 			}
 
 			let saveAction = UIAlertAction(title: "Save".localized, style: .default) { (alertAction) in
@@ -145,13 +145,25 @@ class SectionsTableViewController: UITableViewController {
 
 // MARK: Helper Methods
 private extension SectionsTableViewController {
+	/**
+	Configures a textfield to be consistent.
+	- Parameters:
+		- textField: textfield to be configured
+		- placeholder: placeholder of textfield
+	*/
+	func configure(_ textField: inout UITextField, placeholder: String) {
+		textField.autocapitalizationType = .words
+		textField.autocorrectionType = .default
+		textField.clearButtonMode = .whileEditing
+		textField.placeholder = placeholder
+	}
+	
 	@objc func addSection() {
 		let alert = UIAlertController(title: "New Section".localized, message: nil, preferredStyle: .alert)
 		
 		alert.addTextField {
-			$0.placeholder = "Section Title".localized
-			$0.autocapitalizationType = .words
-			$0.clearButtonMode = .whileEditing
+			var textField = $0
+			self.configure(&textField, placeholder: "Section Title".localized)
 		}
 		
 		let save = UIAlertAction(title: "Save".localized, style: .default) { (alertAction) in
@@ -175,8 +187,8 @@ private extension SectionsTableViewController {
 	/**
 	Inserts a label that adjusts the font of the text to the width of the label.
 	- Parameters:
-	- text: Label text
-	- view: View that should be replaced with an adjustable label; we modify it directly (inout).
+		- text: Label text
+		- view: View that should be replaced with an adjustable label; we modify it directly (inout).
 	- Warning: This is just used for the titleView of the navigation item in the navigation bar.
 	*/
 	func insertAdjustableLabel(with text: String, in view: inout UIView?) {

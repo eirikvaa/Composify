@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import AVFoundation
 
+/**
+`RecordAudioViewController` handles audio recording.
+*/
 class RecordAudioViewController: UIViewController {
 
 	// MARK: @IBOutlets

@@ -23,7 +23,7 @@ class ProjectsTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest() as! NSFetchRequest<Project>
+		let fetchRequest = Project.fetchRequest() as! NSFetchRequest<Project>
 		let sortDescriptor = NSSortDescriptor(key: #keyPath(Project.title), ascending: true)
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		
@@ -83,10 +83,8 @@ class ProjectsTableViewController: UITableViewController {
 			let renameAlert = UIAlertController(title: "Rename".localized, message: nil, preferredStyle: .alert)
 
 			renameAlert.addTextField {
-				$0.placeholder = self.fetchedResultsController.object(at: indexPath).title
-				$0.autocapitalizationType = .words
-				$0.clearButtonMode = .whileEditing
-				$0.autocorrectionType = .default
+				var textField = $0
+				self.configure(&textField, placeholder: self.fetchedResultsController.object(at: indexPath).title)
 			}
 
 			let saveAction = UIAlertAction(title: "Save".localized, style: .default) { alertAction in
@@ -145,13 +143,19 @@ extension String {
 
 // MARK: Helper Methods
 private extension ProjectsTableViewController {
+	func configure(_ textField: inout UITextField, placeholder: String) {
+		textField.autocapitalizationType = .words
+		textField.autocorrectionType = .default
+		textField.clearButtonMode = .whileEditing
+		textField.placeholder = placeholder
+	}
+	
 	@objc func addProject() {
 		let alert = UIAlertController(title: "New Project".localized, message: nil, preferredStyle: .alert)
 		
 		alert.addTextField {
-			$0.placeholder = "Project Title".localized
-			$0.autocapitalizationType = .words
-			$0.clearButtonMode = .whileEditing
+			var textField = $0
+			self.configure(&textField, placeholder: "Project Title".localized)
 		}
 		
 		let save = UIAlertAction(title: "Save".localized, style: .default) { alertAction in
