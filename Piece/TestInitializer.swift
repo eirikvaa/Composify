@@ -11,6 +11,7 @@ import CoreData
 
 /**
 `TestInitializer` handles the setup when I'm testing projects, sections or recordings management.
+- Author: Eirik Vale Aase
 */
 struct TestInitializer {
 	
