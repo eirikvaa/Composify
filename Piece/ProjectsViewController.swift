@@ -146,6 +146,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 }
 
+// MARK: String extensions
 extension String {
 	var localized: String {
 		return NSLocalizedString(self, comment: "")
