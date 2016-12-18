@@ -12,7 +12,7 @@ import CoreData
 /**
 `SectionsTableViewController` presents and managed all sections that a project has.
 */
-class SectionsTableViewController: UITableViewController {
+class SectionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 	// MARK: Properties
 	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
@@ -20,6 +20,12 @@ class SectionsTableViewController: UITableViewController {
 	fileprivate var fetchedResultsController: NSFetchedResultsController<Section>!
 	fileprivate let pieFileManager = PIEFileManager()
 	var chosenProject: Project!
+	@IBOutlet var tableView: UITableView! {
+		didSet {
+			tableView.delegate = self
+			tableView.dataSource = self
+		}
+	}
 
 	// MARK: View controller life cycle
 	override func viewDidLoad() {
@@ -47,6 +53,7 @@ class SectionsTableViewController: UITableViewController {
 	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
+		tableView.setEditing(editing, animated: animated)
 		
 		if editing {
 			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSection))
@@ -57,13 +64,13 @@ class SectionsTableViewController: UITableViewController {
 	}
 
 	// MARK: UITableViewDataSource
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
 		
 		return sectionInfo.numberOfObjects
 	}
 
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath)
 
 		let section = fetchedResultsController.object(at: indexPath)
@@ -80,7 +87,7 @@ class SectionsTableViewController: UITableViewController {
 	}
 
 	// MARK: UITableViewDelegate
-	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		let renameAction = UITableViewRowAction(style: .normal, title: "Rename".localized) { (rowAction, indexPath) in
 			let renameAlert = UIAlertController(title: "Rename".localized, message: nil, preferredStyle: .alert)
 			
@@ -126,6 +133,10 @@ class SectionsTableViewController: UITableViewController {
 		return [renameAction, deleteAction]
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showRecordings" {
@@ -144,7 +155,7 @@ class SectionsTableViewController: UITableViewController {
 }
 
 // MARK: Helper Methods
-private extension SectionsTableViewController {
+private extension SectionsViewController {
 	/**
 	Configures a textfield to be consistent.
 	- Parameters:
@@ -203,7 +214,7 @@ private extension SectionsTableViewController {
 }
 
 // MARK: NSFetchedResultsController
-extension SectionsTableViewController: NSFetchedResultsControllerDelegate {
+extension SectionsViewController: NSFetchedResultsControllerDelegate {
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		tableView.beginUpdates()
 	}

@@ -15,7 +15,7 @@ import CoreData
 class SectionsPageViewController: NSObject {
 	var pageRootViewController: PageRootViewController!
 	fileprivate var sections: [Section] {
-		return pageRootViewController.project.sections.sorted(by: {$0.title < $1.title})
+		return pageRootViewController.project.sections.sorted(by: <)
 	}
 	
 	override init() {
@@ -24,12 +24,12 @@ class SectionsPageViewController: NSObject {
 		stylePageControl()
 	}
 	
-	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> RecordingsTableViewController? {
+	func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> RecordingsViewController? {
 		if pageRootViewController.project.sections.count == 0 || index >= pageRootViewController.project.sections.count {
 			return nil
 		}
 		
-		let recordingsTableViewController = storyboard.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsTableViewController
+		let recordingsTableViewController = storyboard.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsViewController
 		recordingsTableViewController.section = sections[index]
 		recordingsTableViewController.title = sections[index].title
 		pageRootViewController.section = sections[index]
@@ -37,7 +37,7 @@ class SectionsPageViewController: NSObject {
 		return recordingsTableViewController
 	}
 	
-	func indexOfViewController(_ viewController: RecordingsTableViewController) -> Int {
+	func indexOfViewController(_ viewController: RecordingsViewController) -> Int {
 		return sections.index(of: viewController.section) ?? NSNotFound
 	}
 	
@@ -51,7 +51,7 @@ class SectionsPageViewController: NSObject {
 // MARK: UIPageViewControllerDelegate
 extension SectionsPageViewController: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		if let viewControllers = pageViewController.viewControllers as? [RecordingsTableViewController], let viewController = viewControllers.first {
+		if let viewControllers = pageViewController.viewControllers as? [RecordingsViewController], let viewController = viewControllers.first {
 			pageRootViewController.section = viewController.section
 			
 			let navigationItemLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
@@ -81,7 +81,7 @@ extension SectionsPageViewController: UIPageViewControllerDelegate {
 // MARK: UIPageViewControllerDataSource
 extension SectionsPageViewController: UIPageViewControllerDataSource {
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! RecordingsTableViewController)
+		var index = indexOfViewController(viewController as! RecordingsViewController)
 		
 		if index == NSNotFound || index == 0 {
 			return nil
@@ -93,7 +93,7 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 	}
 	
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! RecordingsTableViewController)
+		var index = indexOfViewController(viewController as! RecordingsViewController)
 		
 		if index == NSNotFound {
 			return nil
@@ -113,7 +113,7 @@ extension SectionsPageViewController: UIPageViewControllerDataSource {
 	}
 	
 	func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-		let viewController = pageViewController.viewControllers!.first as! RecordingsTableViewController
+		let viewController = pageViewController.viewControllers!.first as! RecordingsViewController
 		
 		return viewController.pageIndex
 	}
