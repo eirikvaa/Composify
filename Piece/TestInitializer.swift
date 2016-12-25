@@ -16,10 +16,10 @@ import CoreData
 struct TestInitializer {
 	
 	// MARK: Properties
-	private(set) var active = false
-	private var arguments = [String]()
 	private(set) var project: Project!
 	private(set) var section: Section!
+	private var arguments = [String]()
+	private(set) var active = false
 	
 	// MARK: Initialization
 	init(arguments: [String]) {
