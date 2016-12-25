@@ -145,9 +145,7 @@ extension ProjectsViewController: UITableViewDataSource {
 			NSLocalizedString("recording", comment: "") :
 			NSLocalizedString("recordings", comment: "")
 		
-		let localizedString = String.localizedStringWithFormat(NSLocalizedString("%d %@ and %d %@", comment: ""),
-		                                                       project.sections.count, sectionsWord,
-		                                                       project.recordings.count, recordingsWord)
+		let localizedString = String.localizedStringWithFormat(NSLocalizedString("%d %@ and %d %@", comment: ""), project.sections.count, sectionsWord, project.recordings.count, recordingsWord)
 		
 		cell.detailTextLabel?.text = localizedString
 		
