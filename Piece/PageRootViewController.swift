@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-//`PageRootViewController` managed multiple `UITableView` instances.
+//`PageRootViewController` manages multiple `UITableView` instances.
 class PageRootViewController: UIViewController {
 
 	// MARK: Properties
@@ -48,15 +48,20 @@ class PageRootViewController: UIViewController {
 			recordAudioViewController.section = section
 		}
 	}
-
 }
 
 // MARK: Helper Methods
 private extension PageRootViewController {
+	/**
+	Performs the `addRecording` segue.
+	*/
 	@objc func addRecording() {
 		performSegue(withIdentifier: "addRecording", sender: self)
 	}
 	
+	/**
+	Setups the UIPageViewController instance.
+	*/
 	func setupPageViewController() {
 		navigationItem.rightBarButtonItem = editButtonItem
 		
