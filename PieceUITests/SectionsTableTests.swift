@@ -65,28 +65,7 @@ class SectionsTableTests: XCTestCase {
 	}
 	
 	func testRenameSection() {
-		let tablesQuery = app.tables
-		tablesQuery.staticTexts["Something New"].tap()
 		
-		let somethingNewNavigationBar = app.navigationBars["Something New"]
-		somethingNewNavigationBar.buttons["Rediger"].tap()
-		somethingNewNavigationBar.buttons["Legg til"].tap()
-		
-		let nySeksjonAlert = app.alerts["Ny seksjon"]
-		nySeksjonAlert.collectionViews.textFields["Tittel på seksjon"].typeText("Verse")
-		nySeksjonAlert.buttons["Lagre"].tap()
-		tablesQuery.buttons["Slett Verse, 0 opptak"].tap()
-		tablesQuery.buttons["Gi nytt navn"].tap()
-		
-		let giNyttNavnAlert = app.alerts["Gi nytt navn"]
-		giNyttNavnAlert.collectionViews.textFields["Nytt navn til seksjon"].typeText("Outro")
-		giNyttNavnAlert.buttons["Lagre"].tap()
-		somethingNewNavigationBar.buttons["Ferdig"].tap()
-		
-		let table = app.tables.element
-		
-		XCTAssertTrue(table.staticTexts["Outro"].exists)
-		XCTAssertFalse(table.staticTexts["Verse"].exists)
 	}
 	
 	func testDeleteSection() {
