@@ -218,18 +218,18 @@ private extension ProjectsViewController {
 				if let projects = self.fetchedResultsController.fetchedObjects {
 					if projects.contains(where: { $0.title == projectTitle }) {
 						// If title is taken, just show a message and return.
-						let duplicateAlert = UIAlertController(title: NSLocalizedString("A project with this name already exists", comment: ""), message: nil, preferredStyle: .alert)
+						let duplicateAlert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A project with this title already exists.", comment: ""), preferredStyle: .alert)
 						let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
 						duplicateAlert.addAction(okAction)
 						self.present(duplicateAlert, animated: true, completion: nil)
 						
 						return
-					} else {
-						if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
-							project.title = projectTitle
-							self.pieFileManager.save(project)
-							self.coreDataStack.saveContext()
-						}
+					}
+					
+					if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
+						project.title = projectTitle
+						self.pieFileManager.save(project)
+						self.coreDataStack.saveContext()
 					}
 				}
 			}
