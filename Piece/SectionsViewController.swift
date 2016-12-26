@@ -10,12 +10,11 @@ import UIKit
 import CoreData
 
 /**
-`SectionsTableViewController` presents and managed all sections that a project has.
+`SectionsTableViewController` shows and manages sections of a project; you can add, delete and rename sections.
 */
 class SectionsViewController: UIViewController {
 
 	// MARK: Properties
-	fileprivate var managedObjectContext = CoreDataStack.sharedInstance.persistentContainer.viewContext
 	fileprivate var fetchedResultsController: NSFetchedResultsController<Section>!
 	fileprivate var coreDataStack = CoreDataStack.sharedInstance
 	fileprivate let pieFileManager = PIEFileManager()
@@ -39,7 +38,7 @@ class SectionsViewController: UIViewController {
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		fetchRequest.predicate = predicate
 		
-		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
 		fetchedResultsController.delegate = self
 		
 		do {
@@ -68,9 +67,9 @@ class SectionsViewController: UIViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showRecordings" {
-			if let sectionIndex = tableView.indexPathForSelectedRow?.row {
+			if let sectionIndex = tableView.indexPathForSelectedRow?.row, let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
 				let destinationViewController = segue.destination as! PageRootViewController
-				let section = self.fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
+				let section = self.fetchedResultsController.object(at: indexPathForSelectedRow)
 				destinationViewController.project = section.project
 				destinationViewController.section = section
 				destinationViewController.sectionIndex = sectionIndex
@@ -212,15 +211,24 @@ private extension SectionsViewController {
 	*/
 	// TODO: Handle duplicate title.
 	@objc func addSection() {
-		let alert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
+		let newSectionAlert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
 		
-		alert.addTextField {
+		newSectionAlert.addTextField {
 			var textField = $0
 			self.configure(&textField, placeholder: NSLocalizedString("Section Title", comment: ""))
 		}
 		
-		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-			if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
+		let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+			if let title = newSectionAlert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
+				
+				if self.chosenProject.sections.contains(where: {$0.title == title}) {
+					let duplicateAlert = UIAlertController(title: NSLocalizedString("A section with this name already exists", comment: ""), message: nil, preferredStyle: .alert)
+					let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+					duplicateAlert.addAction(okAction)
+					self.present(duplicateAlert, animated: true, completion: nil)
+					return
+				}
+				
 				section.title = title
 				section.project = self.chosenProject
 				
@@ -229,12 +237,12 @@ private extension SectionsViewController {
 			}
 		}
 		
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 		
-		alert.addAction(save)
-		alert.addAction(cancel)
+		newSectionAlert.addAction(saveAction)
+		newSectionAlert.addAction(cancelAction)
 		
-		present(alert, animated: true, completion: nil)
+		present(newSectionAlert, animated: true, completion: nil)
 	}
 	
 	/**
