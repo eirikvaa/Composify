@@ -465,7 +465,7 @@
         <scene sceneID="j6Z-1X-b60">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfH-w3-bAv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Record Audio" image="Record Audio Tab Bar Icon" selectedImage="Record Audio Tab Bar Icon" id="v6Q-Kl-aEx"/>
+                    <tabBarItem key="tabBarItem" title="Record Audio" id="v6Q-Kl-aEx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rej-rA-hag">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -499,7 +499,4 @@
             <point key="canvasLocation" x="1684" y="206"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Record Audio Tab Bar Icon" width="32" height="32"/>
-    </resources>
 </document>

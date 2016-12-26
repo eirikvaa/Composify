@@ -12,7 +12,7 @@ import CoreData
 /**
 `SectionPageViewController` is a delegate and datasource for the UIPageViewController instance.
 */
-class SectionsPageViewController: NSObject {
+final class SectionsPageViewController: NSObject {
 	var pageRootViewController: PageRootViewController!
 	fileprivate var sections: [Section] {
 		return pageRootViewController.project.sections.sorted(by: <)

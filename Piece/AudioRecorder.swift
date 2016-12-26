@@ -42,6 +42,10 @@ struct AudioRecorder {
 		recorder.prepareToRecord()
 	}
 	
+	/**
+	Asks the user for permission to use the microphone, and returns the answer.
+	- Returns: `true` if the user has permitted the use of the microphone, `false` otherwise.
+	*/
 	func askForPermissions() -> Bool {
 		var permission = false
 		

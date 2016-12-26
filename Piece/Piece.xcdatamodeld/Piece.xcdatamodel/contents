@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Project" representedClassName=".Project" syncable="YES">
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="recordings" toMany="YES" deletionRule="Cascade" destinationEntity="Recording" inverseName="project" inverseEntity="Recording" syncable="YES"/>
@@ -19,7 +19,7 @@
     </entity>
     <elements>
         <element name="Project" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Recording" positionX="241" positionY="72" width="128" height="118"/>
+        <element name="Recording" positionX="241" positionY="72" width="128" height="120"/>
         <element name="Section" positionX="-65" positionY="162" width="128" height="90"/>
     </elements>
 </model>

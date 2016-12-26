@@ -11,13 +11,11 @@ import CoreData
 
 extension Project: Comparable {
 	static func ==(lhs: Project, rhs: Project) -> Bool {
-		return
-			lhs.title == rhs.title
+		return lhs.title == rhs.title
 	}
 	
 	static func <(lhs: Project, rhs: Project) -> Bool {
-		return
-			lhs.title < rhs.title
+		return lhs.title < rhs.title
 	}
 }
 
