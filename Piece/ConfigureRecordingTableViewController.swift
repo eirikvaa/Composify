@@ -25,7 +25,17 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	fileprivate var projectPickerViewHidden = true
 	fileprivate var sectionPickerViewHidden = true
 	var projects = [Project]()
-	var recording: Recording!
+	var recording: Recording! {
+		didSet {
+			/*
+			Give the recording a temporarily obscure title so it can be saved as MySong. MySong is actually already saved, so if the user tried to save withouth this being done, the response would be that it was a duplicate, which it shouldn't be.
+			*/
+			let newTitle = UUID().uuidString
+			pieFileManager.rename(recording, from: recording.title, to: newTitle, section: nil, project: nil)
+			recording.title = newTitle
+			coreDataStack.saveContext()
+		}
+	}
 	var section: Section!
 	var project: Project!
 	
@@ -34,7 +44,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 	@IBOutlet weak var recordingTitleTextField: UITextField! {
 		didSet {
 			recordingTitleTextField.adjustsFontSizeToFitWidth = true
-			recordingTitleTextField.text = recording.title
+			recordingTitleTextField.text = NSLocalizedString("MySong", comment: "")
 			recordingTitleTextField.autocapitalizationType = .words
 			recordingTitleTextField.autocorrectionType = .default
 		}
@@ -199,7 +209,7 @@ private extension ConfigureRecordingTableViewController {
 		guard let project = project, let section = section else { return }
 		
 		guard let newTitle = recordingTitleTextField.text, !section.recordings.contains(where: {$0.title == newTitle}) else {
-			showOKAlert(NSLocalizedString("Duplicate title!", comment: ""), message: nil)
+			showOKAlert(NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A recording with this title already exists.", comment: ""))
 			return
 		}
 		
