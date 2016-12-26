@@ -9,7 +9,7 @@
 "%d recordings" = "%d opptak";
 
 /* No comment provided by engineer. */
-"A project with this name already exists" = "Et prosjekt med dette navnet eksisterer allerede";
+"A project with this title already exists." = "Et prosjekt med denne tittelen eksisterer allerede.";
 
 /* No comment provided by engineer. */
 "Cancel" = "Avbryt";
@@ -84,4 +84,7 @@
 "You have denied Piece access to the microphone. Allow access in the privacy settings." = "Du har nektet Piece tilgang til mikrofonen. Gi tilgang i personvern-innstillingene.";
 
 /* No comment provided by engineer. */
-"A section with this name already exists" = "En seksjon med dette navnet eksisterer allerede";
+"A section with this title already exists." = "En seksjon med denne tittelen eksisterer allerede.";
+
+/* No comment provided by engineer. */
+"A recording with this title already exists." = "Et opptak med denne tittelen eksisterer allerede.";

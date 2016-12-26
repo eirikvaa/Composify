@@ -9,7 +9,7 @@
 "%d recordings" = "%d recordings";
 
 /* No comment provided by engineer. */
-"A project with this name already exists" = "A project with this name already exists";
+"A project with this title already exists." = "A project with this title already exists.";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
@@ -84,4 +84,7 @@
 "You have denied Piece access to the microphone. Allow access in the privacy settings." = "You have denied Piece access to the microphone. Allow access in the privacy settings.";
 
 /* No comment provided by engineer. */
-"A section with this name already exists" = "A section with this name already exists";
+"A section with this title already exists." = "A section with this title already exists.";
+
+/* No comment provided by engineer. */
+"A recording with this title already exists." = "A recording with this title already exists.";
