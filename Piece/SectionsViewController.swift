@@ -222,7 +222,7 @@ private extension SectionsViewController {
 			if let title = newSectionAlert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
 				
 				if self.chosenProject.sections.contains(where: {$0.title == title}) {
-					let duplicateAlert = UIAlertController(title: NSLocalizedString("A section with this name already exists", comment: ""), message: nil, preferredStyle: .alert)
+					let duplicateAlert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A section with this title already exists.", comment: ""), preferredStyle: .alert)
 					let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
 					duplicateAlert.addAction(okAction)
 					self.present(duplicateAlert, animated: true, completion: nil)
