@@ -82,3 +82,6 @@
 
 /* No comment provided by engineer. */
 "You have denied Piece access to the microphone. Allow access in the privacy settings." = "You have denied Piece access to the microphone. Allow access in the privacy settings.";
+
+/* No comment provided by engineer. */
+"A section with this name already exists" = "A section with this name already exists";
