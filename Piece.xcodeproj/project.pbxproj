@@ -309,6 +309,7 @@
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
 				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
+				E57715531E113009002FE796 /* ShellScript */,
 			);
 			buildRules = (
 				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
@@ -434,6 +435,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E57715531E113009002FE796 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "function removeHeaders() {\n    find $BUILD_ROOT/Debug-iphonesimulator/  -name '*.h' -exec rm -f {} \\;\n}\nremoveHeaders";
+		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
