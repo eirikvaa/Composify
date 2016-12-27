@@ -13,7 +13,6 @@ import AVFoundation
 /**
 `RecordingsTableViewController` shows and managed recordings.
 */
-// TODO: Refactor class.
 class RecordingsViewController: UIViewController {
 	
 	// MARK: Properties
@@ -64,26 +63,30 @@ class RecordingsViewController: UIViewController {
 		}
 		
 		// Want to know when the application goes into the background so we can handle the audio session.
-		NotificationCenter.default.addObserver(self, selector: #selector(stopMusic), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(stopPlaySession), name: Notification.Name.UIApplicationWillResignActive, object: nil)
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(resetPlaySession), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(stopPlaySession), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		
-		resetPlaySession()
+		stopPlaySession()
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
+		super.viewWillDisappear(animated)
 		
 		stopPlaySession()
 	}
 	
+	
 	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
+		
+		// Subclassing UIViewController (not UITableViewController), so we must excplicitly set the state.
 		tableView.setEditing(editing, animated: animated)
 	}
 }
@@ -98,12 +101,10 @@ extension RecordingsViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath)
-		
 		let recording = fetchedResultsController.object(at: indexPath)
 		
 		cell.textLabel?.text = recording.title
 		
-		// TODO: Refactor this out.
 		let duration = recording.duration
 		let totalMinutes = Int(duration) / 60
 		let totalSeconds = Int(duration) % 60
@@ -153,18 +154,18 @@ extension RecordingsViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
+		let rename = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
+			let rename = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
 			
-			renameAlert.addTextField {
+			rename.addTextField {
 				$0.placeholder = self.fetchedResultsController.object(at: indexPath).title
 				$0.autocapitalizationType = .words
 				$0.clearButtonMode = .whileEditing
 				$0.autocorrectionType = .default
 			}
 			
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-				guard let title = renameAlert.textFields?.first?.text else { return }
+			let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+				guard let title = rename.textFields?.first?.text else { return }
 				
 				if let recordings = self.fetchedResultsController.fetchedObjects {
 					if recordings.contains(where: {$0.title == title}) {
@@ -179,15 +180,15 @@ extension RecordingsViewController: UITableViewDelegate {
 				self.coreDataStack.saveContext()
 			}
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 			
-			renameAlert.addAction(saveAction)
-			renameAlert.addAction(cancelAction)
+			rename.addAction(save)
+			rename.addAction(cancel)
 			
-			self.present(renameAlert, animated: true, completion: nil)
+			self.present(rename, animated: true, completion: nil)
 		}
 		
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
+		let delete = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
 			let recording = self.fetchedResultsController.object(at: indexPath)
 			
 			self.pieFileManager.delete(recording)
@@ -195,7 +196,7 @@ extension RecordingsViewController: UITableViewDelegate {
 			self.coreDataStack.saveContext()
 		}
 		
-		let shareAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Share", comment: "")) { (rowAction, indexPath) in
+		let share = UITableViewRowAction(style: .normal, title: NSLocalizedString("Share", comment: "")) { (rowAction, indexPath) in
 			let recording = self.fetchedResultsController.object(at: indexPath)
 			let activity = UIActivityViewController(activityItems: [recording.url], applicationActivities: nil)
 			activity.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
@@ -209,11 +210,11 @@ extension RecordingsViewController: UITableViewDelegate {
 			}
 		}
 		
-		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
-		shareAction.backgroundColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
+		rename.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
+		delete.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		share.backgroundColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
 		
-		return [shareAction, renameAction, deleteAction]
+		return [share, rename, delete]
 	}
 }
 
@@ -266,8 +267,10 @@ extension RecordingsViewController: NSFetchedResultsControllerDelegate {
 }
 
 // MARK: Helper Methods
-// TODO: OH MY GOD, refactor!
 private extension RecordingsViewController {
+	/**
+	Updates the label with the correct current time and duration.
+	*/
 	func update(detailLabel: inout UILabel, in indexPath: IndexPath, with secondsSinceStart: Int) {
 		let currentMinutes = Int(secondsSinceStart) / 60
 		let currentSeconds = Int(secondsSinceStart) % 60
@@ -281,24 +284,12 @@ private extension RecordingsViewController {
 	}
 	
 	/**
-	Stop the play session.
-	*/
-	func stopPlaySession() {
-		audioPlayer?.player.stop()
-		timer?.invalidate()
-	}
-	
-	/**
-	Stops the audio player, invalidates the timer and resets the label.
-	*/
-	@objc func stopMusic() {
-		stopPlaySession()
-	}
-	
-	/**
 	Resets the play session, specifically resets the detailTextLabel to 0:00/totalMinues:totalSeconds.
 	*/
-	@objc func resetPlaySession() {
+	@objc func stopPlaySession() {
+		audioPlayer?.player.stop()
+		timer?.invalidate()
+		
 		if let indexPath = previouslySelectedCellIndexPath {
 			let cell = tableView.cellForRow(at: indexPath)
 			let recording = fetchedResultsController.object(at: indexPath)
@@ -307,6 +298,7 @@ private extension RecordingsViewController {
 			let currentMinutes = Int(duration) / 60
 			let currentSeconds = Int(duration) % 60
 			
+			cell?.textLabel?.text = recording.title
 			cell?.detailTextLabel?.text = String(format: "0:00/%d:%0.2d", currentMinutes, currentSeconds)
 		}
 	}
