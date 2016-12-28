@@ -87,14 +87,14 @@ private extension RecordAudioViewController {
 // MARK: Helper Methods
 private extension RecordAudioViewController {
 	func showRecorderDeniedAccessAlert() {
-		let deniedAlert = UIAlertController(title: NSLocalizedString("Permission denied", comment: ""), message: NSLocalizedString("You have denied Piece access to the microphone. Allow access in the privacy settings.", comment: ""), preferredStyle: .alert)
+		let denied = UIAlertController(title: NSLocalizedString("Permission denied", comment: ""), message: NSLocalizedString("You have denied Piece access to the microphone. Allow access in the privacy settings.", comment: ""), preferredStyle: .alert)
 		
-		let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
-		deniedAlert.addAction(okAction)
+		let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+		denied.addAction(ok)
 		
 		recordAudioButton.isEnabled = false
 		
-		present(deniedAlert, animated: true, completion: nil)
+		present(denied, animated: true, completion: nil)
 	}
 }
 
