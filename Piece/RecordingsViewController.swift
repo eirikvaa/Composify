@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import AVFoundation
+import MediaPlayer
 
 /**
 `RecordingsTableViewController` shows and managed recordings.
@@ -121,10 +122,27 @@ extension RecordingsViewController: UITableViewDelegate {
 		let recording = fetchedResultsController.object(at: indexPath)
 		audioPlayer = AudioPlayer(url: recording.url)
 		
-		guard let audioPlayer = audioPlayer?.player else { return }
+		guard let audioPlayer = audioPlayer else { return }
 		
 		// This stops any currently playing recordings, and starts the one selected.
-		audioPlayer.play()
+		audioPlayer.player.play()
+		
+		let defaultCenter = MPNowPlayingInfoCenter.default()
+		defaultCenter.nowPlayingInfo = [
+			MPMediaItemPropertyTitle : recording.title,
+			MPMediaItemPropertyAlbumTitle : recording.project.title
+		]
+		
+		// Controls in control center
+		let commandCenter = MPRemoteCommandCenter.shared()
+		commandCenter.playCommand.isEnabled = true
+		commandCenter.playCommand.addTarget(self, action: #selector(play))
+		
+		commandCenter.pauseCommand.isEnabled = true
+		commandCenter.pauseCommand.addTarget(self, action: #selector(pause))
+		
+		commandCenter.stopCommand.isEnabled = true
+		commandCenter.stopCommand.addTarget(self, action: #selector(stop))
 		
 		if let indexPath = tableView.indexPathForSelectedRow {
 			// If we previously began playing a recording, deselect it.
@@ -138,13 +156,11 @@ extension RecordingsViewController: UITableViewDelegate {
 			let cell = tableView.cellForRow(at: indexPath)
 			cell?.textLabel?.text = "\(recording.title) ..."
 			tableView.deselectRow(at: indexPath, animated: true)
-			let start = Date()
 			
 			// Create timer and update detailTextLabel every second.
 			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-				let secondsSinceStart = Int(Date().timeIntervalSince(start))
 				if var detailLabel = cell?.detailTextLabel {
-					self.update(detailLabel: &detailLabel, in: indexPath, with: secondsSinceStart)
+					self.update(detailLabel: &detailLabel, in: indexPath, with: Int(audioPlayer.player.currentTime))
 				}
 			}
 		}
@@ -159,6 +175,7 @@ extension RecordingsViewController: UITableViewDelegate {
 				$0.autocapitalizationType = .words
 				$0.clearButtonMode = .whileEditing
 				$0.autocorrectionType = .default
+				$0.returnKeyType = .done
 			}
 			
 			let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
@@ -270,6 +287,31 @@ extension RecordingsViewController: NSFetchedResultsControllerDelegate {
 
 // MARK: Helper Methods
 private extension RecordingsViewController {
+	@objc func play() {
+		guard let player = audioPlayer?.player else { return }
+		
+		player.play()
+		
+		timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+			let currentTime = Int(player.currentTime)
+			if var detailLabel = self.tableView.cellForRow(at: self.previouslySelectedCellIndexPath!)?.detailTextLabel {
+				self.update(detailLabel: &detailLabel, in: self.previouslySelectedCellIndexPath!, with: currentTime)
+			}
+		})
+		
+		timer?.fire()
+	}
+	
+	@objc func pause() {
+		audioPlayer?.player.pause()
+		timer?.invalidate()
+	}
+	
+	@objc func stop() {
+		audioPlayer?.player.stop()
+		timer?.invalidate()
+	}
+	
 	/**
 	Updates the label with the correct current time and duration.
 	*/
