@@ -47,6 +47,7 @@ class ConfigureRecordingTableViewController: UITableViewController {
 			recordingTitleTextField.text = NSLocalizedString("MySong", comment: "")
 			recordingTitleTextField.autocapitalizationType = .words
 			recordingTitleTextField.autocorrectionType = .default
+			recordingTitleTextField.returnKeyType = .done
 		}
 	}
 	@IBOutlet weak var sectionDetailLabel: UILabel! {
