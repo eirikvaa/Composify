@@ -208,6 +208,7 @@ private extension ProjectsViewController {
 		textField.autocorrectionType = .default
 		textField.clearButtonMode = .whileEditing
 		textField.placeholder = placeholder
+		textField.returnKeyType = .done
 	}
 	
 	/**
