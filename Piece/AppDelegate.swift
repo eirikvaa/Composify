@@ -34,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let tableViewAppearance = UITableView.appearance()
 		tableViewAppearance.rowHeight = 55
 		
+		// To be able to get recording information and playback controls in control center.
+		UIApplication.shared.beginReceivingRemoteControlEvents()
+		
 		return true
 	}
 
