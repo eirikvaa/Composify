@@ -76,7 +76,7 @@ class RecordingsViewController: UIViewController {
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
+		super.viewDidDisappear(animated)
 		
 		stopPlaySession()
 	}
