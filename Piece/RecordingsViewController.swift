@@ -166,6 +166,11 @@ extension RecordingsViewController: UITableViewDelegate {
 				
 				if let recordings = self.fetchedResultsController.fetchedObjects {
 					if recordings.contains(where: {$0.title == title}) {
+						let alert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A recording with this title already exists.", comment: ""), preferredStyle: .alert)
+						let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+						alert.addAction(ok)
+						self.present(alert, animated: true, completion: nil)
+						
 						return
 					}
 				}
