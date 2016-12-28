@@ -52,7 +52,7 @@ class ProjectsViewController: UIViewController {
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		
-		// Subclassing UIViewController (not UITableViewController), so we must excplicitly set the state.
+		// Subclassing UIViewController (not UITableViewController), so we must excplicitly set the editing state.
 		tableView.setEditing(editing, animated: animated)
 		
 		if editing {
