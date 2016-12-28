@@ -51,11 +51,13 @@ class ProjectsViewController: UIViewController {
 	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
+		
+		// Subclassing UIViewController (not UITableViewController), so we must excplicitly set the editing state.
 		tableView.setEditing(editing, animated: animated)
 		
 		if editing {
-			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProject))
-			navigationItem.leftBarButtonItem = addButton
+			let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProject))
+			navigationItem.leftBarButtonItem = button
 		} else {
 			navigationItem.leftBarButtonItem = nil
 		}
@@ -75,18 +77,25 @@ class ProjectsViewController: UIViewController {
 // MARK: UITableViewDelegate
 extension ProjectsViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: ""), handler: { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
-			renameAlert.addTextField {
+		let rename = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
+			let alert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
+			
+			alert.addTextField {
 				var textField = $0
 				self.configure(&textField, placeholder: self.fetchedResultsController.object(at: indexPath).title)
 			}
 			
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-				if let title = renameAlert.textFields?.first?.text {
-					
+			let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+				if let title = alert.textFields?.first?.text {
 					guard let projects = self.fetchedResultsController.fetchedObjects,
-						!projects.contains(where: { $0.title == title }) else { return }
+						!projects.contains(where: { $0.title == title }) else {
+							let alert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A project with this title already exists.", comment: ""), preferredStyle: .alert)
+							let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+							alert.addAction(ok)
+							self.present(alert, animated: true, completion: nil)
+							
+							return
+					}
 					
 					let project = self.fetchedResultsController.object(at: indexPath)
 					self.pieFileManager.rename(project, from: project.title, to: title, section: nil, project: nil)
@@ -95,25 +104,25 @@ extension ProjectsViewController: UITableViewDelegate {
 				}
 			}
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 			
-			renameAlert.addAction(saveAction)
-			renameAlert.addAction(cancelAction)
+			alert.addAction(save)
+			alert.addAction(cancel)
 			
-			self.present(renameAlert, animated: true, completion: nil)
-		})
+			self.present(alert, animated: true, completion: nil)
+		}
 		
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
+		let delete = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
 			let project = self.fetchedResultsController.object(at: indexPath)
 			self.pieFileManager.delete(project)
 			self.coreDataStack.viewContext.delete(project)
 			self.coreDataStack.saveContext()
 		}
 		
-		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		rename.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
+		delete.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 		
-		return [renameAction, deleteAction]
+		return [rename, delete]
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -205,41 +214,38 @@ private extension ProjectsViewController {
 	Adds a new project. Returns if user tries to add a project with an existing title.
 	*/
 	@objc func addProject() {
-		let newProjectAlert = UIAlertController(title: NSLocalizedString("New Project", comment: ""), message: nil, preferredStyle: .alert)
+		let alert = UIAlertController(title: NSLocalizedString("New Project", comment: ""), message: nil, preferredStyle: .alert)
 		
-		newProjectAlert.addTextField {
+		alert.addTextField {
 			var textField = $0
 			self.configure(&textField, placeholder: NSLocalizedString("Project Title", comment: ""))
 		}
 		
-		let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-			if let projectTitle = newProjectAlert.textFields?.first?.text {
-				
-				if let projects = self.fetchedResultsController.fetchedObjects {
-					if projects.contains(where: { $0.title == projectTitle }) {
-						// If title is taken, just show a message and return.
-						let duplicateAlert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A project with this title already exists.", comment: ""), preferredStyle: .alert)
-						let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
-						duplicateAlert.addAction(okAction)
-						self.present(duplicateAlert, animated: true, completion: nil)
+		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+			if let title = alert.textFields?.first?.text {
+				guard let projects = self.fetchedResultsController.fetchedObjects,
+					!projects.contains(where: { $0.title == title }) else {
+						let alert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A project with this title already exists.", comment: ""), preferredStyle: .alert)
+						let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+						alert.addAction(ok)
+						self.present(alert, animated: true, completion: nil)
 						
 						return
-					}
-					
-					if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
-						project.title = projectTitle
-						self.pieFileManager.save(project)
-						self.coreDataStack.saveContext()
-					}
+				}
+				
+				if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.coreDataStack.viewContext) as? Project {
+					project.title = title
+					self.pieFileManager.save(project)
+					self.coreDataStack.saveContext()
 				}
 			}
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 		
-		newProjectAlert.addAction(saveAction)
-		newProjectAlert.addAction(cancelAction)
+		alert.addAction(save)
+		alert.addAction(cancel)
 		
-		present(newProjectAlert, animated: true, completion: nil)
+		present(alert, animated: true, completion: nil)
 	}
 }
