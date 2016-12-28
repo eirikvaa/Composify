@@ -63,10 +63,7 @@ class RecordingsViewController: UIViewController {
 		}
 		
 		// Want to know when the application goes into the background so we can handle the audio session.
-		NotificationCenter.default.addObserver(self, selector: #selector(stopPlaySession), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-		
-		NotificationCenter.default.addObserver(self, selector: #selector(stopPlaySession), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
-
+		NotificationCenter.default.addObserver(self, selector: #selector(stopPlaySession), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
