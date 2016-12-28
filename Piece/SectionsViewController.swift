@@ -54,11 +54,13 @@ class SectionsViewController: UIViewController {
 	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
+		
+		// Subclassing UIViewController (not UITableViewController), so we must excplicitly set the editing state.
 		tableView.setEditing(editing, animated: animated)
 		
 		if editing {
-			let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSection))
-			navigationItem.leftBarButtonItem = addButton
+			let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSection))
+			navigationItem.leftBarButtonItem = button
 		} else {
 			navigationItem.leftBarButtonItem = nil
 		}
@@ -67,9 +69,9 @@ class SectionsViewController: UIViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showRecordings" {
-			if let sectionIndex = tableView.indexPathForSelectedRow?.row, let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+			if let sectionIndex = tableView.indexPathForSelectedRow?.row, let indexPath = tableView.indexPathForSelectedRow {
 				let destinationViewController = segue.destination as! PageRootViewController
-				let section = self.fetchedResultsController.object(at: indexPathForSelectedRow)
+				let section = self.fetchedResultsController.object(at: indexPath)
 				destinationViewController.project = section.project
 				destinationViewController.section = section
 				destinationViewController.sectionIndex = sectionIndex
@@ -108,19 +110,26 @@ extension SectionsViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension SectionsViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let renameAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
-			let renameAlert = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
+		let rename = UITableViewRowAction(style: .normal, title: NSLocalizedString("Rename", comment: "")) { (rowAction, indexPath) in
+			let rename = UIAlertController(title: NSLocalizedString("Rename", comment: ""), message: nil, preferredStyle: .alert)
 			
-			renameAlert.addTextField {
+			rename.addTextField {
 				var textField = $0
 				self.configure(&textField, placeholder: self.fetchedResultsController.object(at: indexPath).title)
 			}
 			
-			let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-				if let title = renameAlert.textFields?.first?.text {
+			let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+				if let title = rename.textFields?.first?.text {
 					
 					if let sections = self.fetchedResultsController.fetchedObjects {
-						if sections.contains(where: {$0.title == title}) { return }
+						if sections.contains(where: {$0.title == title}) {
+							let duplicate = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A section with this title already exists.", comment: ""), preferredStyle: .alert)
+							let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+							duplicate.addAction(ok)
+							self.present(duplicate, animated: true, completion: nil)
+							
+							return
+						}
 					}
 					
 					let section = self.fetchedResultsController.object(at: indexPath)
@@ -131,15 +140,15 @@ extension SectionsViewController: UITableViewDelegate {
 				}
 			}
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 			
-			renameAlert.addAction(saveAction)
-			renameAlert.addAction(cancelAction)
+			rename.addAction(save)
+			rename.addAction(cancel)
 			
-			self.present(renameAlert, animated: true, completion: nil)
+			self.present(rename, animated: true, completion: nil)
 		}
 		
-		let deleteAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
+		let delete = UITableViewRowAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { (rowAction, indexPath) in
 			let section = self.fetchedResultsController.object(at: indexPath)
 			
 			self.pieFileManager.delete(section)
@@ -147,10 +156,10 @@ extension SectionsViewController: UITableViewDelegate {
 			self.coreDataStack.saveContext()
 		}
 		
-		renameAction.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+		rename.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
+		delete.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 		
-		return [renameAction, deleteAction]
+		return [rename, delete]
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -211,21 +220,21 @@ private extension SectionsViewController {
 	*/
 	// TODO: Handle duplicate title.
 	@objc func addSection() {
-		let newSectionAlert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
+		let alert = UIAlertController(title: NSLocalizedString("New Section", comment: ""), message: nil, preferredStyle: .alert)
 		
-		newSectionAlert.addTextField {
+		alert.addTextField {
 			var textField = $0
 			self.configure(&textField, placeholder: NSLocalizedString("Section Title", comment: ""))
 		}
 		
-		let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
-			if let title = newSectionAlert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
+		let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default) { alertAction in
+			if let title = alert.textFields?.first?.text, let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section {
 				
 				if self.chosenProject.sections.contains(where: {$0.title == title}) {
-					let duplicateAlert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A section with this title already exists.", comment: ""), preferredStyle: .alert)
-					let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
-					duplicateAlert.addAction(okAction)
-					self.present(duplicateAlert, animated: true, completion: nil)
+					let alert = UIAlertController(title: NSLocalizedString("Duplicate title!", comment: ""), message: NSLocalizedString("A section with this title already exists.", comment: ""), preferredStyle: .alert)
+					let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
+					alert.addAction(ok)
+					self.present(alert, animated: true, completion: nil)
 					return
 				}
 				
@@ -237,12 +246,12 @@ private extension SectionsViewController {
 			}
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
 		
-		newSectionAlert.addAction(saveAction)
-		newSectionAlert.addAction(cancelAction)
+		alert.addAction(save)
+		alert.addAction(cancel)
 		
-		present(newSectionAlert, animated: true, completion: nil)
+		present(alert, animated: true, completion: nil)
 	}
 	
 	/**
