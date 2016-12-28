@@ -9,7 +9,9 @@
 import UIKit
 import AVFoundation
 
-//`PageRootViewController` manages multiple `UITableView` instances.
+/**
+`PageRootViewController` manages multiple `UITableView` instances.
+*/
 class PageRootViewController: UIViewController {
 
 	// MARK: Properties
@@ -23,13 +25,14 @@ class PageRootViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		setupPageViewController()
+		configurePageViewController()
 	}
 	
 	// MARK: UITableView
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		
+		// It's a little bit weird, but the first UIViewController of the UIPageViewController is the one visible to the user, so we must explicitly set the editing state.
 		pageViewController.viewControllers?.first?.setEditing(editing, animated: animated)
 		
 		if editing {
@@ -43,9 +46,10 @@ class PageRootViewController: UIViewController {
 	// MARK: Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "addRecording" {
-			let navigationController = segue.destination as! UINavigationController
-			let recordAudioViewController = navigationController.viewControllers.first as! RecordAudioViewController
-			recordAudioViewController.section = section
+			if let navigationController = segue.destination as? UINavigationController,
+				let recordAudioViewController = navigationController.viewControllers.first as? RecordAudioViewController {
+				recordAudioViewController.section = section
+			}
 		}
 	}
 }
@@ -62,7 +66,7 @@ private extension PageRootViewController {
 	/**
 	Setups the UIPageViewController instance.
 	*/
-	func setupPageViewController() {
+	func configurePageViewController() {
 		navigationItem.rightBarButtonItem = editButtonItem
 		
 		pageDataSourceDelegate.pageRootViewController = self
@@ -72,7 +76,6 @@ private extension PageRootViewController {
 		pageViewController.dataSource = pageDataSourceDelegate
 		
 		let startingViewController = pageDataSourceDelegate.viewControllerAtIndex(sectionIndex, storyboard: storyboard!)!
-		
 		let viewControllers = [startingViewController]
 		pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
 		addChildViewController(pageViewController)
