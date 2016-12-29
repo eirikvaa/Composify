@@ -127,10 +127,13 @@ extension RecordingsViewController: UITableViewDelegate {
 		// This stops any currently playing recordings, and starts the one selected.
 		audioPlayer.player.play()
 		
+		// FIXME: PlaybackDuration and ElapsedPlaybackTime is a little off, but don't know why.
 		let defaultCenter = MPNowPlayingInfoCenter.default()
 		defaultCenter.nowPlayingInfo = [
 			MPMediaItemPropertyTitle : recording.title,
-			MPMediaItemPropertyAlbumTitle : recording.project.title
+			MPMediaItemPropertyAlbumTitle : recording.project.title,
+			MPMediaItemPropertyPlaybackDuration : audioPlayer.player.duration,
+			MPNowPlayingInfoPropertyElapsedPlaybackTime : audioPlayer.player.currentTime
 		]
 		
 		// Controls in control center
