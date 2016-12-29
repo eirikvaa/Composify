@@ -133,7 +133,8 @@ extension RecordingsViewController: UITableViewDelegate {
 			MPMediaItemPropertyTitle : recording.title,
 			MPMediaItemPropertyAlbumTitle : recording.project.title,
 			MPMediaItemPropertyPlaybackDuration : audioPlayer.player.duration,
-			MPNowPlayingInfoPropertyElapsedPlaybackTime : audioPlayer.player.currentTime
+			MPNowPlayingInfoPropertyElapsedPlaybackTime : audioPlayer.player.currentTime,
+			MPNowPlayingInfoPropertyPlaybackRate : 1.0
 		]
 		
 		// Controls in control center
@@ -161,7 +162,7 @@ extension RecordingsViewController: UITableViewDelegate {
 			tableView.deselectRow(at: indexPath, animated: true)
 			
 			// Create timer and update detailTextLabel every second.
-			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+			timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
 				if var detailLabel = cell?.detailTextLabel {
 					self.update(detailLabel: &detailLabel, in: indexPath, with: Int(audioPlayer.player.currentTime))
 				}
@@ -295,7 +296,7 @@ private extension RecordingsViewController {
 		
 		player.play()
 		
-		timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+		timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { timer in
 			let currentTime = Int(player.currentTime)
 			if var detailLabel = self.tableView.cellForRow(at: self.previouslySelectedCellIndexPath!)?.detailTextLabel {
 				self.update(detailLabel: &detailLabel, in: self.previouslySelectedCellIndexPath!, with: currentTime)
