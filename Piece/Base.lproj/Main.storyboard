@@ -335,14 +335,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Drq-9b-yU4">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Drq-9b-yU4">
                                 <rect key="frame" x="177" y="323" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Drq-9b-yU4" firstAttribute="centerY" secondItem="fGX-Po-3RZ" secondAttribute="centerY" id="3v5-0z-v9n"/>
                             <constraint firstItem="S88-Cc-InD" firstAttribute="top" secondItem="yuQ-m9-j94" secondAttribute="bottom" id="Eja-A0-nmd"/>
+                            <constraint firstItem="Drq-9b-yU4" firstAttribute="centerX" secondItem="fGX-Po-3RZ" secondAttribute="centerX" id="lsE-Vk-gL4"/>
                             <constraint firstAttribute="trailing" secondItem="S88-Cc-InD" secondAttribute="trailing" id="moI-3A-pvn"/>
                             <constraint firstItem="S88-Cc-InD" firstAttribute="leading" secondItem="fGX-Po-3RZ" secondAttribute="leading" id="vV5-ed-pny"/>
                             <constraint firstItem="afo-2e-2ao" firstAttribute="top" secondItem="S88-Cc-InD" secondAttribute="bottom" id="wqc-aQ-ZGN"/>
