@@ -12,11 +12,11 @@ import AVFoundation
 
 extension Recording: Comparable {
 	static func ==(lhs: Recording, rhs: Recording) -> Bool {
-		return lhs.title == rhs.title && lhs.fileExtension == rhs.fileExtension
+		return lhs.title == rhs.title
 	}
 	
 	static func <(lhs: Recording, rhs: Recording) -> Bool {
-		return lhs.title < rhs.title && lhs.fileExtension < rhs.fileExtension
+		return lhs.title < rhs.title
 	}
 }
 
