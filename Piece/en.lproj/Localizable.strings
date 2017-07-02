@@ -1,78 +1,27 @@
 
 /* No comment provided by engineer. */
-"%d %@ and %d %@" = "%d %@ and %d %@";
+"Add project" = "Add project";
 
 /* No comment provided by engineer. */
-"%d recording" = "%d recording";
+"Add project or section" = "Add project or section";
 
 /* No comment provided by engineer. */
-"%d recordings" = "%d recordings";
-
-/* No comment provided by engineer. */
-"A project with this title already exists." = "A project with this title already exists.";
+"Add section" = "Add section";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
 
 /* No comment provided by engineer. */
-"Configure and save recording" = "Configure and save recording";
+"Done" = "Done";
 
 /* No comment provided by engineer. */
-"Delete" = "Delete";
+"New project title" = "New project title";
 
 /* No comment provided by engineer. */
-"Duplicate title!" = "Duplicate title!";
+"New section title" = "New section title";
 
 /* No comment provided by engineer. */
-"MySong" = "MySong";
-
-/* No comment provided by engineer. */
-"New Project" = "New Project";
-
-/* No comment provided by engineer. */
-"New Section" = "New Section";
-
-/* No comment provided by engineer. */
-"No sections in project" = "No sections in project";
-
-/* No comment provided by engineer. */
-"OK" = "OK";
-
-/* No comment provided by engineer. */
-"Permission denied" = "Permission denied";
-
-/* No comment provided by engineer. */
-"Project Title" = "Project Title";
-
-/* No comment provided by engineer. */
-"Projects" = "Projects";
-
-/* No comment provided by engineer. */
-"recording" = "recording";
-
-/* No comment provided by engineer. */
-"Recording will be deleted. Proceed?" = "Recording will be deleted. Proceed?";
-
-/* No comment provided by engineer. */
-"recordings" = "recordings";
-
-/* No comment provided by engineer. */
-"Rename" = "Rename";
-
-/* No comment provided by engineer. */
-"Save" = "Save";
-
-/* No comment provided by engineer. */
-"section" = "section";
-
-/* No comment provided by engineer. */
-"Section Title" = "Section Title";
-
-/* No comment provided by engineer. */
-"sections" = "sections";
-
-/* No comment provided by engineer. */
-"Share" = "Share";
+"Piece" = "Piece";
 
 /* No comment provided by engineer. */
 "Start recording" = "Start recording";
@@ -81,10 +30,16 @@
 "Stop recording" = "Stop recording";
 
 /* No comment provided by engineer. */
-"You have denied Piece access to the microphone. Allow access in the privacy settings." = "You have denied Piece access to the microphone. Allow access in the privacy settings.";
+"You have no projects. Try adding one." = "You have no projects. Try adding one.";
 
 /* No comment provided by engineer. */
-"A section with this title already exists." = "A section with this title already exists.";
+"You have no sections. Try adding one." = "You have no sections. Try adding one.";
 
 /* No comment provided by engineer. */
-"A recording with this title already exists." = "A recording with this title already exists.";
+"Edit" = "Edit";
+
+/* No comment provided by engineer. */
+"Save" = "Save";
+
+/* No comment provided by engineer. */
+"Delete" = "Delete";
