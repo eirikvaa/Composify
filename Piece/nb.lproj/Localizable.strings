@@ -1,90 +1,45 @@
 
 /* No comment provided by engineer. */
-"%d %@ and %d %@" = "%d %@ og %d %@";
+"Add project" = "Legg til prosjekt";
 
 /* No comment provided by engineer. */
-"%d recording" = "%d opptak";
+"Add project or section" = "Legg til prosjekt eller seksjon";
 
 /* No comment provided by engineer. */
-"%d recordings" = "%d opptak";
-
-/* No comment provided by engineer. */
-"A project with this title already exists." = "Et prosjekt med denne tittelen eksisterer allerede.";
+"Add section" = "Legg til seksjon";
 
 /* No comment provided by engineer. */
 "Cancel" = "Avbryt";
 
 /* No comment provided by engineer. */
-"Configure and save recording" = "Konfigurer og lagre opptak";
+"Done" = "Ferdig";
 
 /* No comment provided by engineer. */
-"Delete" = "Slett";
+"New project title" = "Tittel på nytt prosjekt";
 
 /* No comment provided by engineer. */
-"Duplicate title!" = "Duplikat tittel!";
+"New section title" = "Tittel på ny seksjon";
 
 /* No comment provided by engineer. */
-"MySong" = "MinSang";
-
-/* No comment provided by engineer. */
-"New Project" = "Nytt prosjekt";
-
-/* No comment provided by engineer. */
-"New Section" = "Ny seksjon";
-
-/* No comment provided by engineer. */
-"No sections in project" = "Ingen seksjoner i prosjekt";
-
-/* No comment provided by engineer. */
-"OK" = "OK";
-
-/* No comment provided by engineer. */
-"Permission denied" = "Tillatelse nektet";
-
-/* No comment provided by engineer. */
-"Project Title" = "Tittel på prosjekt";
-
-/* No comment provided by engineer. */
-"Projects" = "Prosjekter";
-
-/* No comment provided by engineer. */
-"recording" = "opptak";
-
-/* No comment provided by engineer. */
-"Recording will be deleted. Proceed?" = "Opptaket vil bli slettet. Fortsett?";
-
-/* No comment provided by engineer. */
-"recordings" = "opptak";
-
-/* No comment provided by engineer. */
-"Rename" = "Gi nytt navn";
-
-/* No comment provided by engineer. */
-"Save" = "Lagre";
-
-/* No comment provided by engineer. */
-"section" = "seksjon";
-
-/* No comment provided by engineer. */
-"Section Title" = "Tittel på seksjon";
-
-/* No comment provided by engineer. */
-"sections" = "seksjoner";
-
-/* No comment provided by engineer. */
-"Share" = "Del";
+"Piece" = "Piece";
 
 /* No comment provided by engineer. */
 "Start recording" = "Start opptak";
 
 /* No comment provided by engineer. */
-"Stop recording" = "Avslutt opptak";
+"Stop recording" = "Stopp opptak";
 
 /* No comment provided by engineer. */
-"You have denied Piece access to the microphone. Allow access in the privacy settings." = "Du har nektet Piece tilgang til mikrofonen. Gi tilgang i personvern-innstillingene.";
+"You have no projects. Try adding one." = "Du har ingen prosjekter. Prøv å legge til ett.";
 
 /* No comment provided by engineer. */
-"A section with this title already exists." = "En seksjon med denne tittelen eksisterer allerede.";
+"You have no sections. Try adding one." = "Du har ingen seksjoner. Prøv å legge til en.";
 
 /* No comment provided by engineer. */
-"A recording with this title already exists." = "Et opptak med denne tittelen eksisterer allerede.";
+"Edit" = "Rediger";
+
+/* No comment provided by engineer. */
+"Save" = "Lagre";
+
+/* No comment provided by engineer. */
+"Delete" = "Slett";

@@ -1,60 +1,21 @@
 
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "4bp-Nl-YWW"; */
-"4bp-Nl-YWW.text" = "Subtitle";
+/* Class = "UILabel"; text = "Sections"; ObjectID = "0uj-SC-4Ng"; */
+"0uj-SC-4Ng.text" = "Sections";
 
-/* Class = "UINavigationItem"; title = "Configure and Save Recording"; ObjectID = "B57-wo-cTR"; */
-"B57-wo-cTR.title" = "Configure and Save Recording";
+/* Class = "UILabel"; text = "Project"; ObjectID = "3Le-7h-4aN"; */
+"3Le-7h-4aN.text" = "Project";
 
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "KmU-FN-0Cw"; */
-"KmU-FN-0Cw.text" = "Subtitle";
+/* Class = "UILabel"; text = "Title"; ObjectID = "XVP-EL-eJL"; */
+"XVP-EL-eJL.text" = "Title";
 
-/* Class = "UIButton"; normalTitle = "Tap to Record"; ObjectID = "Leg-cp-zGo"; */
-"Leg-cp-zGo.normalTitle" = "Tap to Record";
+/* Class = "UIButton"; normalTitle = "Start Recording"; ObjectID = "ibo-HO-ZNt"; */
+"ibo-HO-ZNt.normalTitle" = "Start recording";
 
-/* Class = "UINavigationItem"; title = "Projects"; ObjectID = "VPN-jI-FG1"; */
-"VPN-jI-FG1.title" = "Projects";
+/* Class = "UINavigationItem"; title = "Piece"; ObjectID = "l8w-mm-O0H"; */
+"l8w-mm-O0H.title" = "Piece";
 
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "W22-T5-vG5"; */
-"W22-T5-vG5.title" = "Title";
+/* Class = "UILabel"; text = "Section"; ObjectID = "o8V-lq-WMO"; */
+"o8V-lq-WMO.text" = "Section";
 
-/* Class = "UITextField"; placeholder = "Recording Title"; ObjectID = "WWe-3B-f4Z"; */
-"WWe-3B-f4Z.placeholder" = "Recording Title";
-
-/* Class = "UITableViewSection"; headerTitle = "Project"; ObjectID = "WuN-NI-zWC"; */
-"WuN-NI-zWC.headerTitle" = "Project";
-
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "bGL-p5-wMU"; */
-"bGL-p5-wMU.text" = "Subtitle";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "bIf-kX-e6D"; */
-"bIf-kX-e6D.text" = "Detail";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "caD-hw-bbK"; */
-"caD-hw-bbK.text" = "Detail";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "fSN-El-yPY"; */
-"fSN-El-yPY.text" = "Title";
-
-/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "i64-T3-gIw"; */
-"i64-T3-gIw.headerTitle" = "Title";
-
-/* Class = "UIButton"; normalTitle = "Play Audio"; ObjectID = "j5M-wy-Q1s"; */
-"j5M-wy-Q1s.normalTitle" = "Play Audio";
-
-/* Class = "UITableViewSection"; headerTitle = "Section"; ObjectID = "jSO-AX-lpd"; */
-"jSO-AX-lpd.headerTitle" = "Section";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "jkp-9T-eKo"; */
-"jkp-9T-eKo.text" = "Title";
-
-/* Class = "UILabel"; text = "Project Title"; ObjectID = "nrN-6Z-u7V"; */
-"nrN-6Z-u7V.text" = "Project Title";
-
-/* Class = "UILabel"; text = "Section Title"; ObjectID = "raY-co-q2e"; */
-"raY-co-q2e.text" = "Section Title";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "tFE-R3-tTI"; */
-"tFE-R3-tTI.text" = "Title";
-
-/* Class = "UITabBarItem"; title = "Record Audio"; ObjectID = "v6Q-Kl-aEx"; */
-"v6Q-Kl-aEx.title" = "Record Audio";
+/* Class = "UILabel"; text = "Projects"; ObjectID = "uTB-6L-Wmu"; */
+"uTB-6L-Wmu.text" = "Projects";

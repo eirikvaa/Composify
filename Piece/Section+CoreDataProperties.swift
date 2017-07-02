@@ -33,4 +33,8 @@ extension Section {
 	override var description: String {
 		return "Section - title: \(title)"
 	}
+	
+	var sortedRecordings: [Recording] {
+		return recordings.sorted()
+	}
 }
