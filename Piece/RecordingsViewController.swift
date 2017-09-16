@@ -53,7 +53,7 @@ class RecordingsViewController: UIViewController {
 }
 
 extension RecordingsViewController {
-	func refresh() {
+	@objc func refresh() {
 		tableView.reloadData()
 	}
 }

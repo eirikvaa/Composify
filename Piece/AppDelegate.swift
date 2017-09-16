@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.backgroundColor = UIColor.clear
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.titleTextAttributes = [
-			NSForegroundColorAttributeName: UIColor.white
+			NSAttributedStringKey.foregroundColor: UIColor.white
 		]
 
         // To be able to get recording information and playback controls in control center.
