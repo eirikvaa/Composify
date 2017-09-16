@@ -31,8 +31,4 @@ extension SectionCollectionViewDelegate: UICollectionViewDelegate {
 	}
 }
 
-extension SectionCollectionViewDelegate: RootPageDelegate {
-	func didSwipe(to indexPath: IndexPath) {		
-		
-	}
-}
+

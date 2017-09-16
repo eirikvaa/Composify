@@ -5,23 +5,17 @@
 
 import UIKit
 
-protocol RootPageDelegate {
-	func didSwipe(to indexPath: IndexPath)
-}
-
 class RootPageViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
-	var delegate: RootPageDelegate?
 }
 
 extension RootPageViewDelegate: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		if completed {
+		if finished {
 			if let top = pageViewController.viewControllers?.first as? RecordingsViewController {
 				let indexPath = IndexPath(item: top.pageIndex ?? 0, section: 0)
-				delegate?.didSwipe(to: indexPath)
+				libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
 			}
-			
 		}
 	}
 }

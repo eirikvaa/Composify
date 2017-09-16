@@ -121,8 +121,6 @@ class LibraryViewController: UIViewController {
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
         currentProject = projects.first
-		
-		rootPageViewDelegate.delegate = sectionCollectionViewDelegate
 
         navigationItem.rightBarButtonItem = editButtonItem
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
