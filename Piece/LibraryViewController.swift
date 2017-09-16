@@ -125,6 +125,7 @@ class LibraryViewController: UIViewController {
 		rootPageViewDelegate.delegate = sectionCollectionViewDelegate
 
         navigationItem.rightBarButtonItem = editButtonItem
+		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
 		
 		configurePageViewController()
 
@@ -135,17 +136,10 @@ class LibraryViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         rootPageViewController.viewControllers?.first?.setEditing(editing, animated: animated)
-
-        if editing {
-            let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
-            navigationItem.leftBarButtonItem = button
-        } else {
-            navigationItem.leftBarButtonItem = nil
-        }
     }
 
     // MARK: Helper Methods
-    func add(sender: UIBarButtonItem) {
+	@objc func add(sender: UIBarButtonItem) {
         let mainAdd = UIAlertController(
                 title: NSLocalizedString("Add project or section", comment: ""),
                 message: nil,

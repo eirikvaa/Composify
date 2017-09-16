@@ -25,6 +25,14 @@ extension ProjectCollectionViewDelegate: UICollectionViewDelegate {
 		libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
 		libraryViewController.setEmptyState()
 		
+		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
+		cell?.titleLabel.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
+		
 		libraryViewController.navigationItem.title = project.title
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
+		cell?.titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 	}
 }

@@ -10,7 +10,11 @@ import UIKit
 
 class LibraryCollectionViewCell: UICollectionViewCell {
 	// MARK: @IBOutlets
-	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var titleLabel: UILabel! {
+		didSet {
+			titleLabel.adjustsFontSizeToFitWidth = true
+		}
+	}
 	@IBOutlet weak var deleteButton: UIButton! {
 		didSet {
 			deleteButton.isHidden = true

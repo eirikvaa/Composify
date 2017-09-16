@@ -19,6 +19,8 @@ extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionCell", for: indexPath) as! LibraryCollectionViewCell
+		
+		cell.titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 
 		if let currentProject = libraryViewController.currentProject {
 			cell.titleLabel.text = currentProject.sortedSections[indexPath.row].title
