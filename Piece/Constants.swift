@@ -13,6 +13,6 @@ struct PieceNotifications {
 	static let PickedSectionNotification = "pickedSectionNotification"
 }
 
-struct PieceColors {
-	static let PieceRed = UIColor(red:0.91, green:0.40, blue:0.36, alpha:1.00)
+struct Colors {
+	static let red = UIColor(red: 0.91, green: 0.40, blue: 0.36, alpha: 1.00)
 }
