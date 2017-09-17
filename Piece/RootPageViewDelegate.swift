@@ -14,7 +14,7 @@ extension RootPageViewDelegate: UIPageViewControllerDelegate {
 		if finished {
 			if let top = pageViewController.viewControllers?.first as? RecordingsViewController {
 				let indexPath = IndexPath(item: top.pageIndex ?? 0, section: 0)
-				// TODO: Do something with this index path.
+				libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
 			}
 		}
 	}

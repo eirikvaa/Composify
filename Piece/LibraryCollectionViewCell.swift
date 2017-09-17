@@ -20,4 +20,20 @@ class LibraryCollectionViewCell: UICollectionViewCell {
 			deleteButton.isHidden = true
 		}
 	}
+	
+	override var isHighlighted: Bool {
+		didSet {
+			let fontSize = UIFont.systemFontSize
+			titleLabel.textColor = isHighlighted || isSelected ? Colors.red : .black
+			titleLabel.font = isHighlighted || isSelected ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+		}
+	}
+	
+	override var isSelected: Bool {
+		didSet {
+			let fontSize = UIFont.systemFontSize
+			titleLabel.textColor = isHighlighted || isSelected ? Colors.red : .black
+			titleLabel.font = isHighlighted || isSelected ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+		}
+	}
 }
