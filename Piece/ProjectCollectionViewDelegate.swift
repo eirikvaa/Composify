@@ -25,6 +25,11 @@ extension ProjectCollectionViewDelegate: UICollectionViewDelegate {
 		libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
 		libraryViewController.setEmptyState()
 		
+		if libraryViewController.sectionCollectionView.numberOfItems(inSection: 0) > 0 {
+			let indexPath = IndexPath(item: 0, section: 0)
+			libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+		}
+		
 		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
 		cell?.titleLabel.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
 		

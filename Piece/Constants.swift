@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct PieceNotifications {
-	static let PickedProjectNotification = "pickedProjectNotification"
-	static let PickedSectionNotification = "pickedSectionNotification"
+struct Notifications {
+	static let pickedProject = "pickedProjectNotification"
+	static let pickedSection = "pickedSectionNotification"
 }
 
 struct Colors {

@@ -38,12 +38,18 @@ class RecordingsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let notificationName = Notification.Name(rawValue: PieceNotifications.PickedProjectNotification)
+		let notificationName = Notification.Name(rawValue: Notifications.pickedProject)
 		let center = NotificationCenter.default
 		center.addObserver(self, selector: #selector(refresh), name: notificationName, object: nil)
 		
-		let sectionPicked = Notification.Name(rawValue: PieceNotifications.PickedSectionNotification)
+		let sectionPicked = Notification.Name(rawValue: Notifications.pickedSection)
 		center.addObserver(self, selector: #selector(refresh), name: sectionPicked, object: nil)
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		print("Hei!")
 	}
 
 	override func setEditing(_ editing: Bool, animated: Bool) {

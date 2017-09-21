@@ -65,16 +65,31 @@ class LibraryViewController: UIViewController {
     let pieFileManager = PIEFileManager()
     var currentProject: Project? {
         didSet {
-            let name = Notification.Name(rawValue: PieceNotifications.PickedProjectNotification)
+            let name = Notification.Name(rawValue: Notifications.pickedProject)
             center.post(Notification(name: name))
 			navigationItem.title = currentProject?.title ?? NSLocalizedString("Piece", comment: "Piece title")
-			currentSection = currentProject?.sections.sorted().first
+			
+			if let currentProject = currentProject,
+				let item = projects.index(of: currentProject) {
+				let indexPath = IndexPath(item: item, section: 0)
+				currentSection = currentProject.sections.sorted().first
+				projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+			}
         }
     }
     var currentSection: Section? {
         didSet {
-            let name = Notification.Name(rawValue: PieceNotifications.PickedSectionNotification)
+			let name = Notification.Name(rawValue: Notifications.pickedSection)
             center.post(Notification(name: name))
+			
+			if let currentProject = currentProject,
+				let currentSection = currentSection,
+				let item = currentProject.sortedSections.index(of: currentSection) {
+				let indexPath = IndexPath(item: item, section: 0)
+				print(indexPath.item)
+				
+				sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+			}
         }
     }
 	
@@ -165,8 +180,8 @@ class LibraryViewController: UIViewController {
                     self.pieFileManager.save(project)
                     self.coreDataStack.saveContext()
 
+					self.projects = Project.retrieveCoreDataProjects()
                     self.currentProject = project
-                    self.projects = Project.retrieveCoreDataProjects()
                     self.currentSection = nil
 
                     self.shouldRefresh(
