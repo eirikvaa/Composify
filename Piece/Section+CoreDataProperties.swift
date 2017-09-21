@@ -9,14 +9,32 @@
 import Foundation
 import CoreData
 
+extension Section: Comparable {
+	static func ==(lhs: Section, rhs: Section) -> Bool {
+		return lhs.title == rhs.title
+	}
+	
+	static func <(lhs: Section, rhs: Section) -> Bool {
+		return lhs.title < rhs.title
+	}
+}
+
 extension Section: FileSystemObject {
-	var fileSystemURL: URL {
-		return project.fileSystemURL.appendingPathComponent(title)
+	var url: URL {
+		return project.url.appendingPathComponent(title)
 	}
 }
 
 extension Section {
 	@NSManaged var title: String
 	@NSManaged var project: Project
-	@NSManaged var recordings: NSOrderedSet
+	@NSManaged var recordings: Set<Recording>
+	
+	override var description: String {
+		return "Section - title: \(title)"
+	}
+	
+	var sortedRecordings: [Recording] {
+		return recordings.sorted()
+	}
 }

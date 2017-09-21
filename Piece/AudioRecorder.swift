@@ -13,37 +13,47 @@ import AVFoundation
 A class for abstracting away the details regarding simple recording of audio.
 - Author: Eirik Vale Aase
 */
-class AudioRecorder {
 
-	// MARK: Properties
-	private(set) var recorder: AVAudioRecorder!
+struct AudioRecorder {
+    // MARK: Properties
+    private(set) var recorder: AVAudioRecorder!
+    private var session = AVAudioSession.sharedInstance()
 
-	// MARK: Initialization
-	/**
-	Initializes the AudioPlayer class with the url to a recording.
-	- Parameter url: url of recording to be played.
-	*/
-	convenience init?(url: URL) {
-		self.init()
+    // MARK: Initialization
+    /**
+    Initializes the AudioPlayer class with the url to a recording.
+    - Parameter url: url of recording to be played.
+    */
+    init(url: URL) {
+        let settings: [String: Any] = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 12000.0,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
+        ]
 
-		let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(AVAudioSessionCategoryRecord)
+            try session.setActive(true)
+            try recorder = AVAudioRecorder(url: url, settings: settings)
+        } catch {
+            print(error.localizedDescription)
+        }
 
-		let settings: [String: Any] = [
-			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-			AVSampleRateKey: 12000.0,
-			AVNumberOfChannelsKey: 1 as NSNumber,
-			AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-		]
+        recorder.prepareToRecord()
+    }
 
-		do {
-			try session.setCategory(AVAudioSessionCategoryRecord)
-			try recorder = AVAudioRecorder(url: url, settings: settings)
-		} catch {
-			print(error.localizedDescription)
-			return nil
-		}
+    /**
+    Asks the user for permission to use the microphone, and returns the answer.
+    - Returns: `true` if the user has permitted the use of the microphone, `false` otherwise.
+    */
+    func askForPermissions() -> Bool {
+        var permission = false
 
-		recorder.prepareToRecord()
-	}
+        session.requestRecordPermission { bool in
+            permission = bool
+        }
+
+        return permission
+    }
 }
-

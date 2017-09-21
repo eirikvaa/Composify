@@ -13,31 +13,30 @@ import AVFoundation
 A class for playing audio from Recording objects.
 - Author: Eirik Vale Aase
 */
-class AudioPlayer {
 
-	// MARK: Properties
-	private(set) var player = AVAudioPlayer()
-	private var session = AVAudioSession.sharedInstance()
+struct AudioPlayer {
+    // MARK: Properties
+    private(set) var player = AVAudioPlayer()
+    private var session = AVAudioSession.sharedInstance()
 
-	// MARK: Initialization
-	/**
-	Initializes the AudioPlayer class with a recording.
-	- Parameter url: url of the recording to be played.
-	*/
-	convenience init?(url: URL) {
-		self.init()
+    // MARK: Initialization
+    /**
+    Initializes the AudioPlayer class with a recording.
+    - Parameter url: url of the recording to be played.
+    */
+    init(url: URL) {
+        guard PIEFileManager().fileManager.fileExists(atPath: url.path) else {
+            return
+        }
 
-		guard PIEFileManager().fileManager.fileExists(atPath: url.path) else { return nil }
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try player = AVAudioPlayer(contentsOf: url)
 
-		do {
-			try session.setCategory(AVAudioSessionCategoryPlayback)
-			try player = AVAudioPlayer(contentsOf: url)
+        } catch {
+            print(error.localizedDescription)
+        }
 
-		} catch {
-			print(error.localizedDescription)
-			return nil
-		}
-
-		player.prepareToPlay()
-	}
+        player.prepareToPlay()
+    }
 }

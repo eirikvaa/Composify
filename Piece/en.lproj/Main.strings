@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Sections"; ObjectID = "0uj-SC-4Ng"; */
+"0uj-SC-4Ng.text" = "Sections";
+
+/* Class = "UILabel"; text = "Project"; ObjectID = "3Le-7h-4aN"; */
+"3Le-7h-4aN.text" = "Project";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "XVP-EL-eJL"; */
+"XVP-EL-eJL.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Start Recording"; ObjectID = "ibo-HO-ZNt"; */
+"ibo-HO-ZNt.normalTitle" = "Start recording";
+
+/* Class = "UINavigationItem"; title = "Piece"; ObjectID = "l8w-mm-O0H"; */
+"l8w-mm-O0H.title" = "Piece";
+
+/* Class = "UILabel"; text = "Section"; ObjectID = "o8V-lq-WMO"; */
+"o8V-lq-WMO.text" = "Section";
+
+/* Class = "UILabel"; text = "Projects"; ObjectID = "uTB-6L-Wmu"; */
+"uTB-6L-Wmu.text" = "Projects";
