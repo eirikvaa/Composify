@@ -185,6 +185,10 @@ class LibraryViewController: UIViewController {
                             recordingsTableView: true)
                     self.setEmptyState()
                     self.navigationItem.title = self.currentProject?.title
+					
+					let lastIndex = self.projects.count - 1
+					let indexPath = IndexPath(item: lastIndex, section: 0)
+					self.projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
                 }
             })
             let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
@@ -221,6 +225,13 @@ class LibraryViewController: UIViewController {
 
                     self.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
                     self.setEmptyState()
+					
+					if let currentProject = self.currentProject,
+						let currentSection = self.currentSection,
+						let index = currentProject.sortedSections.index(of: currentSection) {
+						let indexPath = IndexPath(item: index, section: 0)
+						self.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+					}
                 }
             })
             let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
