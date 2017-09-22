@@ -69,27 +69,13 @@ class LibraryViewController: UIViewController {
             center.post(Notification(name: name))
 			navigationItem.title = currentProject?.title ?? NSLocalizedString("Piece", comment: "Piece title")
 			
-			if let currentProject = currentProject,
-				let item = projects.index(of: currentProject) {
-				let indexPath = IndexPath(item: item, section: 0)
-				currentSection = currentProject.sections.sorted().first
-				projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-			}
+			currentSection = currentProject?.sortedSections.first
         }
     }
     var currentSection: Section? {
         didSet {
 			let name = Notification.Name(rawValue: Notifications.pickedSection)
             center.post(Notification(name: name))
-			
-			if let currentProject = currentProject,
-				let currentSection = currentSection,
-				let item = currentProject.sortedSections.index(of: currentSection) {
-				let indexPath = IndexPath(item: item, section: 0)
-				print(indexPath.item)
-				
-				sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-			}
         }
     }
 	
@@ -141,9 +127,18 @@ class LibraryViewController: UIViewController {
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
 		
 		configurePageViewController()
-
+		
         // This must come last because it uses the page view controller.
         setEmptyState()
+		
+		if currentProject != nil {
+			let indexPath = IndexPath(item: 0, section: 0)
+			projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+			
+			if currentSection != nil {
+				sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+			}
+		}
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {

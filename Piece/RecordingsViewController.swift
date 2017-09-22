@@ -45,12 +45,6 @@ class RecordingsViewController: UIViewController {
 		let sectionPicked = Notification.Name(rawValue: Notifications.pickedSection)
 		center.addObserver(self, selector: #selector(refresh), name: sectionPicked, object: nil)
 	}
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		print("Hei!")
-	}
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)

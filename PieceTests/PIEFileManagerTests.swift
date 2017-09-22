@@ -116,7 +116,6 @@ class PIEFileManagerTests: XCTestCase {
 	func testRename2() {
 		let renameRecordingTitle = "UnitTestRenamedRecording"
 		pieFileManager.rename(recording, from: recording.title, to: renameRecordingTitle, section: section2, project: project2)
-		print(recording.url)
 		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
 		recording.project = project2
 		recording.section = section2
