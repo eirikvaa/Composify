@@ -25,6 +25,8 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath) as! RecordingTableViewCell
+        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.titleLabel.adjustsFontForContentSizeCategory = true
 
 		cell.contentView.isUserInteractionEnabled = false
 		cell.selectionStyle = .none
