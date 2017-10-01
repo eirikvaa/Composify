@@ -25,6 +25,15 @@ class RecordingsViewController: UIViewController {
 	var project: Project?
 	var section: Section?
 	var pageIndex: Int?
+    var currentlyPlayingRecording: Recording?
+    var audioPlayer: AudioPlayer? {
+        didSet {
+            if audioPlayer != nil {
+                audioPlayer?.player.delegate = tableViewDelegate
+                audioPlayer?.player.play()
+            }
+        }
+    }
 
 	// MARK: @IBOutlets
 	@IBOutlet weak var tableView: UITableView! {

@@ -121,6 +121,7 @@ class LibraryViewController: UIViewController {
 
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
+        
         currentProject = projects.first
 
         navigationItem.rightBarButtonItem = editButtonItem

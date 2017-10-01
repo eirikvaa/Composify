@@ -32,7 +32,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 
 		let recording = parentViewController.section?.recordings.sorted()[indexPath.row]
 		
-		if audioPlayer?.player.isPlaying == true {
+		if parentViewController.currentlyPlayingRecording == recording {
 			cell.playButton.setImage(UIImage(named: "Pause"), for: .normal)
 		} else {
 			cell.playButton.setImage(UIImage(named: "Play"), for: .normal)

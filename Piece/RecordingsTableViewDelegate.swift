@@ -12,7 +12,6 @@ import AVFoundation
 class RecordingsTableViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
-	var audioPlayer: AudioPlayer?
 }
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
@@ -69,14 +68,14 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 		guard let recording = parentViewController.section?.sortedRecordings[indexPath.row] else {
 			return
 		}
-
-		audioPlayer = AudioPlayer(url: recording.url)
-		audioPlayer?.player.delegate = self
-		audioPlayer?.player.play()
-		
-
-		let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
-		cell.playButton.setImage(UIImage(named: "Pause"), for: .normal)
+        
+        if parentViewController.currentlyPlayingRecording != nil {
+            parentViewController.currentlyPlayingRecording = nil
+            parentViewController.audioPlayer?.player.stop()
+        } else {
+            parentViewController.audioPlayer = AudioPlayer(url: recording.url)
+            parentViewController.currentlyPlayingRecording = recording
+        }
 	}
 
 	func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
@@ -90,7 +89,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 
 extension RecordingsTableViewDelegate: AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-		
+		parentViewController.currentlyPlayingRecording = nil
 		libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: false, recordingsTableView: true)
 	}
 }
