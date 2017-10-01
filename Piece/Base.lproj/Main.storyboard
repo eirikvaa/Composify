@@ -33,6 +33,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="84m-K1-0eU">
                                 <rect key="frame" x="0.0" y="85" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qni-B4-3IG"/>
                                 </constraints>
@@ -70,6 +71,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="6y6-WK-YtT" appends="YES" id="69Q-CO-7DG"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uj-SC-4Ng">
                                 <rect key="frame" x="0.0" y="135" width="375" height="21"/>
@@ -83,6 +87,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PHP-3k-8wT">
                                 <rect key="frame" x="0.0" y="156" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="DUm-dF-EHP"/>
                                 </constraints>
@@ -108,6 +113,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="o8V-lq-WMO" secondAttribute="trailing" id="LIv-hb-rX2"/>
                                             <constraint firstItem="o8V-lq-WMO" firstAttribute="leading" secondItem="83I-GB-jFE" secondAttribute="leading" id="NSS-fI-yja"/>
@@ -120,6 +126,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="I0L-RR-Eiu" appends="YES" id="ypE-Ds-2yp"/>
+                                </connections>
                             </collectionView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
                                 <rect key="frame" x="0.0" y="214" width="375" height="355"/>
@@ -154,6 +163,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="top" secondItem="0uj-SC-4Ng" secondAttribute="bottom" id="4Kb-QX-2ct"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="5A3-32-jIT"/>
@@ -179,6 +189,8 @@
                     <navigationItem key="navigationItem" title="Piece" id="l8w-mm-O0H"/>
                     <connections>
                         <outlet property="containerView" destination="nUi-15-pxI" id="bXY-f0-07s"/>
+                        <outlet property="longHoldOnProjectsGesture" destination="6y6-WK-YtT" id="3oz-x4-9H1"/>
+                        <outlet property="longHoldOnSectionGesture" destination="I0L-RR-Eiu" id="Ekd-Dp-E50"/>
                         <outlet property="projectCollectionView" destination="84m-K1-0eU" id="761-k0-KvS"/>
                         <outlet property="recordAudioButton" destination="ibo-HO-ZNt" id="mVS-2h-thc"/>
                         <outlet property="recordAudioView" destination="1Cc-PW-NLT" id="J2O-Lu-y3h"/>
@@ -187,6 +199,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmz-Jv-U7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="I0L-RR-Eiu"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6y6-WK-YtT"/>
             </objects>
             <point key="canvasLocation" x="2679.1999999999998" y="-699.40029985007504"/>
         </scene>

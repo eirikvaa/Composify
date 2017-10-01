@@ -57,7 +57,58 @@ class LibraryViewController: UIViewController {
 	lazy var projects: [Project] = {
 		return Project.retrieveCoreDataProjects()
 	}()
-	
+    @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
+        didSet {
+            longHoldOnSectionGesture.addTarget(self, action: #selector(handleSectionsLongPress))
+        }
+    }
+    @IBOutlet var longHoldOnProjectsGesture: UILongPressGestureRecognizer! {
+        didSet {
+            longHoldOnProjectsGesture.addTarget(self, action: #selector(handleProjectsLongPress))
+        }
+    }
+    
+    @objc func handleProjectsLongPress(_ sender: UILongPressGestureRecognizer) {
+        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
+        
+       let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                let project = self.projects[indexPath.row]
+                self.pieFileManager.delete(project)
+                self.coreDataStack.viewContext.delete(project)
+                self.coreDataStack.saveContext()
+                self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: true)
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func handleSectionsLongPress(_ sender: UILongPressGestureRecognizer) {
+        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first,
+                let section = self.currentProject?.sortedSections[indexPath.row] {
+                self.pieFileManager.delete(section)
+                self.coreDataStack.viewContext.delete(section)
+                self.coreDataStack.saveContext()
+                self.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 	// MARK: Regular Properties
     var rootPageViewController: UIPageViewController!
     let coreDataStack = CoreDataStack.sharedInstance
