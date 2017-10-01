@@ -31,7 +31,7 @@ extension ProjectCollectionViewDelegate: UICollectionViewDelegate {
 		}
 		
 		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
-		cell?.titleLabel.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
+		cell?.titleLabel.font = UIFont.preferredBoldFont(for: .body)
 		
 		libraryViewController.navigationItem.title = project.title
 	}

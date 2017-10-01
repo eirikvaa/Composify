@@ -23,17 +23,15 @@ class LibraryCollectionViewCell: UICollectionViewCell {
 	
 	override var isHighlighted: Bool {
 		didSet {
-			let fontSize = UIFont.systemFontSize
 			titleLabel.textColor = isHighlighted || isSelected ? Colors.red : .black
-			titleLabel.font = isHighlighted || isSelected ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+			titleLabel.font = isHighlighted || isSelected ? UIFont.preferredBoldFont(for: .body) : UIFont.preferredFont(forTextStyle: .body)
 		}
 	}
 	
 	override var isSelected: Bool {
 		didSet {
-			let fontSize = UIFont.systemFontSize
 			titleLabel.textColor = isHighlighted || isSelected ? Colors.red : .black
-			titleLabel.font = isHighlighted || isSelected ? UIFont.boldSystemFont(ofSize: fontSize) : UIFont.systemFont(ofSize: fontSize)
+			titleLabel.font = isHighlighted || isSelected ? UIFont.preferredBoldFont(for: .body) : UIFont.preferredFont(forTextStyle: .body)
 		}
 	}
 }
