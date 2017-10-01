@@ -137,15 +137,11 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
-                                <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-HO-ZNt">
-                                        <rect key="frame" x="112" y="15" width="150" height="40"/>
+                                        <rect key="frame" x="16" y="8" width="343" height="66"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="7EM-cw-e8a"/>
-                                            <constraint firstAttribute="height" constant="40" id="s3r-iV-w9B"/>
-                                        </constraints>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" title="Start recording">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,32 +152,34 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="centerY" secondItem="1Cc-PW-NLT" secondAttribute="centerY" id="Ktv-ps-WlH"/>
-                                    <constraint firstAttribute="height" constant="70" id="mkp-tV-z0C"/>
-                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="centerX" secondItem="1Cc-PW-NLT" secondAttribute="centerX" id="o0M-Ik-hO8"/>
+                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="top" constant="8" id="9gO-I7-jwT"/>
+                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="leading" secondItem="1Cc-PW-NLT" secondAttribute="leading" constant="16" id="QhX-ZM-3U7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ibo-HO-ZNt" secondAttribute="bottom" constant="16" id="aIS-hW-Woz"/>
+                                    <constraint firstAttribute="trailing" secondItem="ibo-HO-ZNt" secondAttribute="trailing" constant="16" id="vJU-c9-hos"/>
+                                    <constraint firstAttribute="height" constant="90" id="vxM-CK-n9u"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" id="0X5-Nj-1jw"/>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="top" secondItem="0uj-SC-4Ng" secondAttribute="bottom" id="4Kb-QX-2ct"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="5A3-32-jIT"/>
                             <constraint firstItem="uTB-6L-Wmu" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="5Xg-us-DNP"/>
                             <constraint firstItem="uTB-6L-Wmu" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="7Ox-mc-dj1"/>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="7fp-rw-jh7"/>
                             <constraint firstAttribute="trailing" secondItem="uTB-6L-Wmu" secondAttribute="trailing" id="80V-Ix-76i"/>
+                            <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="CRD-UW-N1Y"/>
                             <constraint firstAttribute="trailing" secondItem="84m-K1-0eU" secondAttribute="trailing" id="D50-6O-EIu"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="PHP-3k-8wT" secondAttribute="leading" id="Kxl-n9-j63"/>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="M4d-Ty-AQY"/>
                             <constraint firstItem="84m-K1-0eU" firstAttribute="top" secondItem="uTB-6L-Wmu" secondAttribute="bottom" id="PLH-nl-cvc"/>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="28" id="WWr-OD-yKe"/>
                             <constraint firstItem="84m-K1-0eU" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="XzC-JG-co7"/>
-                            <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="aIv-gT-vGo"/>
+                            <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="aK9-wO-6tF"/>
                             <constraint firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="aa0-Jv-m2q"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="PHP-3k-8wT" secondAttribute="bottom" constant="8" symbolic="YES" id="awj-gm-jvl"/>
-                            <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="bTW-87-Ohs"/>
                             <constraint firstAttribute="trailing" secondItem="0uj-SC-4Ng" secondAttribute="trailing" id="e98-au-ObS"/>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="fw3-s5-Qps"/>
                             <constraint firstItem="0uj-SC-4Ng" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="kSF-PE-rej"/>
                             <constraint firstItem="0uj-SC-4Ng" firstAttribute="top" secondItem="84m-K1-0eU" secondAttribute="bottom" id="u33-x9-BU3"/>
                         </constraints>
@@ -202,7 +200,7 @@
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="I0L-RR-Eiu"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6y6-WK-YtT"/>
             </objects>
-            <point key="canvasLocation" x="2679.1999999999998" y="-699.40029985007504"/>
+            <point key="canvasLocation" x="2678.5" y="-699.5"/>
         </scene>
         <!--Recordings View Controller-->
         <scene sceneID="JGL-yU-Ry0">

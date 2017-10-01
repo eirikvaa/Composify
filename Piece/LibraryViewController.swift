@@ -166,7 +166,11 @@ class LibraryViewController: UIViewController {
             recordingsTableView.delegate = recordingsTableViewDelegate
         }
     }
-    @IBOutlet weak var recordAudioButton: UIButton!
+    @IBOutlet weak var recordAudioButton: UIButton! {
+        didSet {
+            recordAudioButton.layer.cornerRadius = 5
+        }
+    }
     @IBOutlet weak var recordAudioView: UIView!
     @IBOutlet weak var containerView: UIView!
 
