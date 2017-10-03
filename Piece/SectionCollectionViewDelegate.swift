@@ -15,10 +15,21 @@ extension SectionCollectionViewDelegate: UICollectionViewDelegate {
 		libraryViewController.currentSection = libraryViewController.currentProject?.sortedSections[indexPath.row]
 		
 		if let recordingViewController = libraryViewController.rootPageViewDataSource.viewController(at: indexPath.row, storyboard: libraryViewController.storyboard!) {
-			libraryViewController.rootPageViewController.setViewControllers([recordingViewController], direction: .forward, animated: false, completion: nil)
+            
+            if let vc = libraryViewController.rootPageViewController.viewControllers?.first as? RecordingsViewController {
+                if let index = vc.pageIndex {
+                    if index != indexPath.row {
+                        if index > indexPath.row {
+                            libraryViewController.rootPageViewController.setViewControllers([recordingViewController], direction: .reverse, animated: true, completion: nil)
+                        } else {
+                            libraryViewController.rootPageViewController.setViewControllers([recordingViewController], direction: .forward, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+			
 		}
-		
-		libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: false, recordingsTableView: true)
+        
 		libraryViewController.setEmptyState()
 	}
 }
