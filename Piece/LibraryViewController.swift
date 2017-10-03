@@ -81,9 +81,40 @@ class LibraryViewController: UIViewController {
             }
         }
         
+        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
+            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                    let project = self.projects[indexPath.row]
+                    textField.placeholder = project.title
+                }
+            })
+            
+            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+                if let textField = alertController.textFields?.first,
+                    let text = textField.text {
+                    if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                        let project = self.projects[indexPath.row]
+                        self.pieFileManager.rename(project, from: project.title, to: text, section: nil, project: nil)
+                        project.title = text
+                        self.coreDataStack.saveContext()
+                        self.shouldRefresh(projectCollectionView: true, sectionCollectionView: false, recordingsTableView: false)
+                    }
+                }
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(save)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(delete)
+        alert.addAction(rename)
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
@@ -101,9 +132,42 @@ class LibraryViewController: UIViewController {
             }
         }
         
+        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
+            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
+                    let section = self.currentProject?.sortedSections[indexPath.row]
+                    textField.placeholder = section?.title
+                }
+            })
+            
+            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+                if let textField = alertController.textFields?.first,
+                    let text = textField.text {
+                    if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
+                        if let section = self.currentProject?.sortedSections[indexPath.row] {
+                            self.pieFileManager.rename(section, from: section.title, to: text, section: nil, project: nil)
+                            section.title = text
+                            self.coreDataStack.saveContext()
+                            self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: false)
+                        }
+                        
+                    }
+                }
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(save)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(delete)
+        alert.addAction(rename)
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
