@@ -15,9 +15,11 @@ enum LibraryState {
 	case notEmpty
 	
 	func setState(in libraryViewController: LibraryViewController) {
-		let emptyStateLabel = UILabel(frame: libraryViewController.projectCollectionView.frame)
+		let emptyStateLabel = UILabel(frame: libraryViewController.view.frame)
 		emptyStateLabel.textAlignment = .center
 		emptyStateLabel.numberOfLines = 0
+        
+        
 		
 		var hideProjects = false,
 			hideSections = false,
@@ -29,10 +31,11 @@ enum LibraryState {
 		
 		switch self {
 		case .noProjects:
-			hideProjects = true
+			//hideProjects = true
 			hideSections = true
 			hideRecordings = true
 			removeSectionsEmptyLabel = true
+            hideRecordButton = true
 		case .noSections:
 			hideRecordButton = true
 			hideRecordView = true
@@ -54,6 +57,7 @@ enum LibraryState {
 			libraryViewController.projectCollectionView.reloadData()
 			emptyStateLabel.text = NSLocalizedString("You have no projects. Try adding one.", comment: "")
 			libraryViewController.projectCollectionView.backgroundView = emptyStateLabel
+            print("Yo")
 		}
 		
 		if removeSectionsEmptyLabel {
@@ -63,9 +67,41 @@ enum LibraryState {
 			emptyStateLabel.text = NSLocalizedString("You have no sections. Try adding one.", comment: "")
 			libraryViewController.sectionCollectionView.backgroundView = emptyStateLabel
 		}
+        
+        
 		
 		if let recordingViewController = libraryViewController.rootPageViewController.viewControllers?.first as? RecordingsViewController {
-			recordingViewController.tableView.isHidden = hideRecordings
+            
+            
+            if libraryViewController.currentSection?.recordings.count == 0 {
+                emptyStateLabel.text = NSLocalizedString("There are no recordings in this section. Try recording some audio.", comment: "No recordings in section")
+                recordingViewController.tableView.isHidden = false
+                recordingViewController.tableView.separatorStyle = .none
+                recordingViewController.tableView.backgroundView = emptyStateLabel
+            } else {
+                recordingViewController.tableView.separatorStyle = .singleLine
+                recordingViewController.tableView.backgroundView = nil
+                
+            }
+            
+            if libraryViewController.currentProject?.sections.count == 0 {
+                recordingViewController.tableView.separatorStyle = .none
+            }
+			
 		}
+        
+        switch self {
+        case .noProjects:
+            libraryViewController.sectionCollectionView.isHidden = true
+            (libraryViewController.rootPageViewController.viewControllers?.first as? RecordingsViewController)?.tableView.isHidden = true
+            libraryViewController.recordAudioButton.isHidden = true
+            libraryViewController.projectsTitle.isHidden = true
+            libraryViewController.sectionsTitle.isHidden = true
+            emptyStateLabel.text = NSLocalizedString("You have no projects. Try adding one.", comment: "")
+            libraryViewController.view.addSubview(emptyStateLabel)
+        default:
+            break
+        }
+        
 	}
 }

@@ -51,6 +51,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				self.libraryViewController.pieFileManager.delete(recording)
 				self.libraryViewController.coreDataStack.viewContext.delete(recording)
 				self.libraryViewController.coreDataStack.saveContext()
+                self.libraryViewController.setEmptyState()
 
 				self.parentViewController.tableView.reloadData()
 			}

@@ -190,10 +190,12 @@
                         <outlet property="longHoldOnProjectsGesture" destination="6y6-WK-YtT" id="3oz-x4-9H1"/>
                         <outlet property="longHoldOnSectionGesture" destination="I0L-RR-Eiu" id="Ekd-Dp-E50"/>
                         <outlet property="projectCollectionView" destination="84m-K1-0eU" id="761-k0-KvS"/>
+                        <outlet property="projectsTitle" destination="uTB-6L-Wmu" id="k3B-ZI-Cwn"/>
                         <outlet property="recordAudioButton" destination="ibo-HO-ZNt" id="mVS-2h-thc"/>
                         <outlet property="recordAudioView" destination="1Cc-PW-NLT" id="J2O-Lu-y3h"/>
                         <outlet property="recordingsTableView" destination="oja-eq-x0q" id="yan-Qu-Emi"/>
                         <outlet property="sectionCollectionView" destination="PHP-3k-8wT" id="Vk2-2S-5z7"/>
+                        <outlet property="sectionsTitle" destination="0uj-SC-4Ng" id="DZS-O4-Z9v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmz-Jv-U7j" userLabel="First Responder" sceneMemberID="firstResponder"/>

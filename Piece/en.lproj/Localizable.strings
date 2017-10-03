@@ -43,3 +43,6 @@
 
 /* No comment provided by engineer. */
 "Delete" = "Delete";
+
+/* No recordings in section */
+"There are no recordings in this section. Try recording some audio." = "";

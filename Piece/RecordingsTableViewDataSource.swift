@@ -22,6 +22,10 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return parentViewController.section?.recordings.count ?? 0
 	}
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return (libraryViewController.currentSection?.recordings.count ?? 0) > 0 ? 1 : 0
+    }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath) as! RecordingTableViewCell

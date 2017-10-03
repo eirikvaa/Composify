@@ -57,6 +57,8 @@ class LibraryViewController: UIViewController {
 	lazy var projects: [Project] = {
 		return Project.retrieveCoreDataProjects()
 	}()
+    @IBOutlet weak var sectionsTitle: UILabel!
+    @IBOutlet weak var projectsTitle: UILabel!
     @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
         didSet {
             longHoldOnSectionGesture.addTarget(self, action: #selector(handleSectionsLongPress))
@@ -76,8 +78,12 @@ class LibraryViewController: UIViewController {
                 let project = self.projects[indexPath.row]
                 self.pieFileManager.delete(project)
                 self.coreDataStack.viewContext.delete(project)
+                self.projects.remove(at: indexPath.row)
                 self.coreDataStack.saveContext()
+                if self.projects.count == 0 { self.currentProject = nil }
                 self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: true)
+                
+                self.setEmptyState()
             }
         }
         
@@ -128,7 +134,22 @@ class LibraryViewController: UIViewController {
                 self.pieFileManager.delete(section)
                 self.coreDataStack.viewContext.delete(section)
                 self.coreDataStack.saveContext()
+                if self.currentProject?.sections.count == 0 { self.currentSection = nil }
+                
+                if let index = self.currentProject?.sections.sorted().index(of: section),
+                    let recordingViewController = self.rootPageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
+                    self.rootPageViewController.setViewControllers([recordingViewController], direction: .forward, animated: false, completion: nil)
+                }
+                
                 self.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
+                self.setEmptyState()
+                
+                if let currentProject = self.currentProject,
+                    let currentSection = self.currentSection,
+                    let index = currentProject.sortedSections.index(of: currentSection) {
+                    let indexPath = IndexPath(item: index, section: 0)
+                    self.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+                }
             }
         }
         
@@ -259,6 +280,8 @@ class LibraryViewController: UIViewController {
 				sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
 			}
 		}
+        
+        setEmptyState()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -402,6 +425,8 @@ class LibraryViewController: UIViewController {
         recorder.stop()
         audioRecorder = nil
         recordAudioButton.setTitle(NSLocalizedString("Start recording", comment: ""), for: .normal)
+        
+        setEmptyState()
 
         // We refresh so that the pause button will turn to a play button.
         shouldRefresh(projectCollectionView: false, sectionCollectionView: false, recordingsTableView: true)
