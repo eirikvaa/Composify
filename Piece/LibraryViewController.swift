@@ -57,142 +57,6 @@ class LibraryViewController: UIViewController {
 	lazy var projects: [Project] = {
 		return Project.retrieveCoreDataProjects()
 	}()
-    @IBOutlet weak var sectionsTitle: UILabel!
-    @IBOutlet weak var projectsTitle: UILabel!
-    @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
-        didSet {
-            longHoldOnSectionGesture.addTarget(self, action: #selector(handleSectionsLongPress))
-        }
-    }
-    @IBOutlet var longHoldOnProjectsGesture: UILongPressGestureRecognizer! {
-        didSet {
-            longHoldOnProjectsGesture.addTarget(self, action: #selector(handleProjectsLongPress))
-        }
-    }
-    
-    @objc func handleProjectsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
-        
-       let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
-                let project = self.projects[indexPath.row]
-                self.pieFileManager.delete(project)
-                self.coreDataStack.viewContext.delete(project)
-                self.projects.remove(at: indexPath.row)
-                self.coreDataStack.saveContext()
-                if self.projects.count == 0 { self.currentProject = nil }
-                self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: true)
-                
-                self.setEmptyState()
-            }
-        }
-        
-        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: { (textField) in
-                if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
-                    let project = self.projects[indexPath.row]
-                    textField.placeholder = project.title
-                }
-            })
-            
-            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
-                if let textField = alertController.textFields?.first,
-                    let text = textField.text {
-                    if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
-                        let project = self.projects[indexPath.row]
-                        self.pieFileManager.rename(project, from: project.title, to: text, section: nil, project: nil)
-                        project.title = text
-                        self.coreDataStack.saveContext()
-                        self.shouldRefresh(projectCollectionView: true, sectionCollectionView: false, recordingsTableView: false)
-                    }
-                }
-            })
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alertController.addAction(save)
-            alertController.addAction(cancel)
-            
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(delete)
-        alert.addAction(rename)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    @objc func handleSectionsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first,
-                let section = self.currentProject?.sortedSections[indexPath.row] {
-                self.pieFileManager.delete(section)
-                self.coreDataStack.viewContext.delete(section)
-                self.coreDataStack.saveContext()
-                if self.currentProject?.sections.count == 0 { self.currentSection = nil }
-                
-                if let index = self.currentProject?.sections.sorted().index(of: section),
-                    let recordingViewController = self.rootPageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
-                    self.rootPageViewController.setViewControllers([recordingViewController], direction: .forward, animated: false, completion: nil)
-                }
-                
-                self.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
-                self.setEmptyState()
-                
-                if let currentProject = self.currentProject,
-                    let currentSection = self.currentSection,
-                    let index = currentProject.sortedSections.index(of: currentSection) {
-                    let indexPath = IndexPath(item: index, section: 0)
-                    self.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-                }
-            }
-        }
-        
-        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: { (textField) in
-                if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
-                    let section = self.currentProject?.sortedSections[indexPath.row]
-                    textField.placeholder = section?.title
-                }
-            })
-            
-            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
-                if let textField = alertController.textFields?.first,
-                    let text = textField.text {
-                    if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
-                        if let section = self.currentProject?.sortedSections[indexPath.row] {
-                            self.pieFileManager.rename(section, from: section.title, to: text, section: nil, project: nil)
-                            section.title = text
-                            self.coreDataStack.saveContext()
-                            self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: false)
-                        }
-                        
-                    }
-                }
-            })
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alertController.addAction(save)
-            alertController.addAction(cancel)
-            
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(delete)
-        alert.addAction(rename)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
     
 	// MARK: Regular Properties
     var rootPageViewController: UIPageViewController!
@@ -206,15 +70,26 @@ class LibraryViewController: UIViewController {
         }
     }
     var currentSection: Section?
-	
     var audioRecorder: AudioRecorder?
     var state: LibraryState = .noProjects {
         didSet {
-            state.setState(in: self)
+            setState(state)
         }
     }
 
     // MARK: @IBOutlet
+    @IBOutlet weak var sectionsTitle: UILabel!
+    @IBOutlet weak var projectsTitle: UILabel!
+    @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
+        didSet {
+            longHoldOnSectionGesture.addTarget(self, action: #selector(handleSectionsLongPress))
+        }
+    }
+    @IBOutlet var longHoldOnProjectsGesture: UILongPressGestureRecognizer! {
+        didSet {
+            longHoldOnProjectsGesture.addTarget(self, action: #selector(handleProjectsLongPress))
+        }
+    }
     @IBOutlet weak var projectCollectionView: UICollectionView! {
         didSet {
             projectCollectionView.dataSource = projectCollectionViewDataSource
@@ -384,17 +259,145 @@ class LibraryViewController: UIViewController {
 
         present(mainAdd, animated: true, completion: nil)
     }
+    
+    @objc func handleProjectsLongPress(_ sender: UILongPressGestureRecognizer) {
+        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                let project = self.projects[indexPath.row]
+                self.pieFileManager.delete(project)
+                self.coreDataStack.viewContext.delete(project)
+                self.projects.remove(at: indexPath.row)
+                self.coreDataStack.saveContext()
+                if self.projects.count == 0 { self.currentProject = nil }
+                self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: true)
+                
+                self.setEmptyState()
+            }
+        }
+        
+        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
+            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                    let project = self.projects[indexPath.row]
+                    textField.placeholder = project.title
+                }
+            })
+            
+            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+                if let textField = alertController.textFields?.first,
+                    let text = textField.text {
+                    if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
+                        let project = self.projects[indexPath.row]
+                        self.pieFileManager.rename(project, from: project.title, to: text, section: nil, project: nil)
+                        project.title = text
+                        self.coreDataStack.saveContext()
+                        self.shouldRefresh(projectCollectionView: true, sectionCollectionView: false, recordingsTableView: false)
+                    }
+                }
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(save)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(delete)
+        alert.addAction(rename)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func handleSectionsLongPress(_ sender: UILongPressGestureRecognizer) {
+        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first,
+                let section = self.currentProject?.sortedSections[indexPath.row] {
+                self.pieFileManager.delete(section)
+                self.coreDataStack.viewContext.delete(section)
+                self.coreDataStack.saveContext()
+                if self.currentProject?.sections.count == 0 { self.currentSection = nil }
+                
+                if let index = self.currentProject?.sections.sorted().index(of: section),
+                    let recordingViewController = self.rootPageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
+                    self.rootPageViewController.setViewControllers([recordingViewController], direction: .forward, animated: false, completion: nil)
+                }
+                
+                self.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
+                self.setEmptyState()
+                
+                if let currentProject = self.currentProject,
+                    let currentSection = self.currentSection,
+                    let index = currentProject.sortedSections.index(of: currentSection) {
+                    let indexPath = IndexPath(item: index, section: 0)
+                    self.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+                }
+            }
+        }
+        
+        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
+            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
+                    let section = self.currentProject?.sortedSections[indexPath.row]
+                    textField.placeholder = section?.title
+                }
+            })
+            
+            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+                if let textField = alertController.textFields?.first,
+                    let text = textField.text {
+                    if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
+                        if let section = self.currentProject?.sortedSections[indexPath.row] {
+                            self.pieFileManager.rename(section, from: section.title, to: text, section: nil, project: nil)
+                            section.title = text
+                            self.coreDataStack.saveContext()
+                            self.shouldRefresh(projectCollectionView: true, sectionCollectionView: true, recordingsTableView: false)
+                        }
+                        
+                    }
+                }
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(save)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(delete)
+        alert.addAction(rename)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
 
     func setEmptyState() {
         switch (currentProject, currentSection) {
         case (.some, .some):
             state = .notEmpty
-        case (.some, .none):
+       case (.some, .none):
             state = .noSections
         case (.none, .some):
             state = .noProjects
         case (.none, .none):
             state = .noProjects
+        }
+        
+        if currentSection?.recordings.count == 0 {
+            state = .noRecordings
         }
     }
 
@@ -479,4 +482,54 @@ private extension LibraryViewController {
 		containerView.addSubview(rootPageViewController.view)
 		rootPageViewController.didMove(toParentViewController: self)
 	}
+}
+
+extension LibraryViewController {
+    typealias LibraryState = LibraryViewController.State
+    
+    enum State {
+        case noProjects
+        case noSections
+        case noRecordings
+        case notEmpty
+    }
+    
+    func setState(_ state: State) {
+        guard let recordingsViewController = rootPageViewController.viewControllers?.first as? RecordingsViewController else { return }
+        
+        let emptyStateLabel = UILabel(frame: view.frame)
+        emptyStateLabel.textAlignment = .center
+        emptyStateLabel.numberOfLines = 0
+        
+        projectsTitle.isHidden = false
+        sectionsTitle.isHidden = false
+        recordAudioButton.isHidden = false
+        projectCollectionView.backgroundView = nil
+        sectionCollectionView.backgroundView = nil
+        recordingsViewController.tableView.backgroundView = nil
+        recordingsViewController.tableView.separatorStyle = .singleLine
+        recordingsViewController.tableView.isHidden = false
+        
+        switch state {
+        case .noProjects:
+            projectsTitle.isHidden = true
+            sectionsTitle.isHidden = true
+            recordAudioButton.isHidden = true
+            emptyStateLabel.text = "Ingen prosjekter"
+            projectCollectionView.backgroundView = emptyStateLabel
+            recordingsViewController.tableView.isHidden = true
+        case .noSections:
+            recordAudioButton.isHidden = true
+            sectionsTitle.isHidden = true
+            emptyStateLabel.text = "Ingen seksjoner"
+            sectionCollectionView.backgroundView = emptyStateLabel
+            recordingsViewController.tableView.isHidden = true
+        case .noRecordings:
+            emptyStateLabel.text = "Ingen opptak"
+            recordingsViewController.tableView.backgroundView = emptyStateLabel
+            recordingsViewController.tableView.separatorStyle = .none
+        default:
+            break
+        }
+    }
 }
