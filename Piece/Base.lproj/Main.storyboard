@@ -52,7 +52,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Le-7h-4aN">
-                                                    <rect key="frame" x="0.0" y="8" width="100" height="34"/>
+                                                    <rect key="frame" x="23" y="8" width="54.5" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -62,10 +62,24 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="3Le-7h-4aN" secondAttribute="bottom" constant="8" id="5c1-hN-8Vh"/>
                                             <constraint firstItem="3Le-7h-4aN" firstAttribute="top" secondItem="ofe-ea-mVJ" secondAttribute="top" constant="8" id="Hel-it-Aq1"/>
-                                            <constraint firstAttribute="trailing" secondItem="3Le-7h-4aN" secondAttribute="trailing" id="ldT-Fd-CzO"/>
-                                            <constraint firstItem="3Le-7h-4aN" firstAttribute="leading" secondItem="ofe-ea-mVJ" secondAttribute="leading" id="moN-Eq-c9i"/>
+                                            <constraint firstItem="3Le-7h-4aN" firstAttribute="centerY" secondItem="ofe-ea-mVJ" secondAttribute="centerY" id="esN-DB-f8A"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Le-7h-4aN" secondAttribute="trailing" id="ldT-Fd-CzO"/>
+                                            <constraint firstItem="3Le-7h-4aN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ofe-ea-mVJ" secondAttribute="leading" id="moN-Eq-c9i"/>
+                                            <constraint firstItem="3Le-7h-4aN" firstAttribute="centerX" secondItem="ofe-ea-mVJ" secondAttribute="centerX" id="q1r-Dz-3UX"/>
                                         </constraints>
                                         <size key="customSize" width="100" height="50"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="esN-DB-f8A"/>
+                                                <exclude reference="q1r-Dz-3UX"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="esN-DB-f8A"/>
+                                                <include reference="q1r-Dz-3UX"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <outlet property="titleLabel" destination="3Le-7h-4aN" id="LGJ-2L-SDe"/>
                                         </connections>
