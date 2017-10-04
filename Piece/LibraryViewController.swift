@@ -201,19 +201,11 @@ class LibraryViewController: UIViewController {
     let pieFileManager = PIEFileManager()
     var currentProject: Project? {
         didSet {
-            let name = Notification.Name(rawValue: Notifications.pickedProject)
-            center.post(Notification(name: name))
-			navigationItem.title = currentProject?.title ?? NSLocalizedString("Piece", comment: "Piece title")
-			
+            navigationItem.title = currentProject?.title ?? NSLocalizedString("Piece", comment: "Piece title")
 			currentSection = currentProject?.sortedSections.first
         }
     }
-    var currentSection: Section? {
-        didSet {
-			let name = Notification.Name(rawValue: Notifications.pickedSection)
-            center.post(Notification(name: name))
-        }
-    }
+    var currentSection: Section?
 	
     var audioRecorder: AudioRecorder?
     var state: LibraryState = .noProjects {
