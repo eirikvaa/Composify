@@ -515,17 +515,17 @@ extension LibraryViewController {
             projectsTitle.isHidden = true
             sectionsTitle.isHidden = true
             recordAudioButton.isHidden = true
-            emptyStateLabel.text = "Ingen prosjekter"
+            emptyStateLabel.text = NSLocalizedString("You have no projects. Try adding one.", comment: "No projects")
             projectCollectionView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.isHidden = true
         case .noSections:
             recordAudioButton.isHidden = true
             sectionsTitle.isHidden = true
-            emptyStateLabel.text = "Ingen seksjoner"
+            emptyStateLabel.text = NSLocalizedString("You have no sections. Try adding one.", comment: "No sections")
             sectionCollectionView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.isHidden = true
         case .noRecordings:
-            emptyStateLabel.text = "Ingen opptak"
+            emptyStateLabel.text = NSLocalizedString("There are no recordings in this section. Try recording some audio.", comment: "No recordings")
             recordingsViewController.tableView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.separatorStyle = .none
         default:
