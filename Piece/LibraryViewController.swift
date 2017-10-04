@@ -78,8 +78,16 @@ class LibraryViewController: UIViewController {
     }
 
     // MARK: @IBOutlet
-    @IBOutlet weak var sectionsTitle: UILabel!
-    @IBOutlet weak var projectsTitle: UILabel!
+    @IBOutlet weak var sectionsTitle: UILabel! {
+        didSet {
+            sectionsTitle.textColor = Colors.red
+        }
+    }
+    @IBOutlet weak var projectsTitle: UILabel! {
+        didSet {
+            projectsTitle.textColor = Colors.red
+        }
+    }
     @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
         didSet {
             longHoldOnSectionGesture.addTarget(self, action: #selector(handleSectionsLongPress))
