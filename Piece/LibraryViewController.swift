@@ -136,9 +136,6 @@ class LibraryViewController: UIViewController {
 		
 		configurePageViewController()
 		
-        // This must come last because it uses the page view controller.
-        setEmptyState()
-		
 		if currentProject != nil {
 			let indexPath = IndexPath(item: 0, section: 0)
 			projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
