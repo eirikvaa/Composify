@@ -163,8 +163,13 @@ class LibraryViewController: UIViewController {
 
     // MARK: Helper Methods
 	@objc func add(sender: UIBarButtonItem) {
+        var title: String? = NSLocalizedString("Add project or section", comment: "")
+        if projects.count == 0 {
+            title = nil
+        }
+        
         let mainAdd = UIAlertController(
-                title: NSLocalizedString("Add project or section", comment: ""),
+                title: title,
                 message: nil,
                 preferredStyle: .actionSheet)
         let addProject = UIAlertAction(
@@ -259,7 +264,11 @@ class LibraryViewController: UIViewController {
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 
         mainAdd.addAction(addProject)
-        mainAdd.addAction(addSection)
+        
+        if projects.count > 0 {
+            mainAdd.addAction(addSection)
+        }
+        
         mainAdd.addAction(cancel)
         
         let view = navigationItem.leftBarButtonItem?.value(forKey: "view") as? UIView
@@ -513,6 +522,7 @@ extension LibraryViewController {
         emptyStateLabel.textAlignment = .center
         emptyStateLabel.numberOfLines = 0
         
+        navigationItem.rightBarButtonItem = nil
         projectsTitle.isHidden = false
         sectionsTitle.isHidden = false
         recordAudioButton.isHidden = false
@@ -540,8 +550,8 @@ extension LibraryViewController {
             emptyStateLabel.text = NSLocalizedString("There are no recordings in this section. Try recording some audio.", comment: "No recordings")
             recordingsViewController.tableView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.separatorStyle = .none
-        default:
-            break
+        case .notEmpty:
+            navigationItem.rightBarButtonItem = editButtonItem
         }
     }
 }
