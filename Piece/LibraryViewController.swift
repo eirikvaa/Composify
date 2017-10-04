@@ -261,7 +261,12 @@ class LibraryViewController: UIViewController {
         mainAdd.addAction(addProject)
         mainAdd.addAction(addSection)
         mainAdd.addAction(cancel)
-
+        
+        let view = navigationItem.leftBarButtonItem?.value(forKey: "view") as? UIView
+        let frame = view?.frame
+        
+        mainAdd.popoverPresentationController?.sourceView = view
+        mainAdd.popoverPresentationController?.sourceRect = frame ?? .zero
         present(mainAdd, animated: true, completion: nil)
     }
     
