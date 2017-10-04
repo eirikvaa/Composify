@@ -265,8 +265,10 @@ class LibraryViewController: UIViewController {
         let view = navigationItem.leftBarButtonItem?.value(forKey: "view") as? UIView
         let frame = view?.frame
         
+        // We need these two lines when the app is used on an iPad.
         mainAdd.popoverPresentationController?.sourceView = view
         mainAdd.popoverPresentationController?.sourceRect = frame ?? .zero
+        
         present(mainAdd, animated: true, completion: nil)
     }
     
