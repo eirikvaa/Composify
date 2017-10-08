@@ -11,7 +11,7 @@ import CoreData
 
 class Recording: NSManagedObject {
     convenience init?(with title: String, section: Section, project: Project, fileExtension: FileSystemExtensions, insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-        let entity = NSEntityDescription.entity(forEntityName: "Recording", in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: Strings.CoreData.recordingEntity, in: context)!
         self.init(entity: entity, insertInto: context)
 
         self.title = title

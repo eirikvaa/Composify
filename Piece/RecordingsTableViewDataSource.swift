@@ -28,7 +28,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
     }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath) as! RecordingTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as! RecordingTableViewCell
         cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
 
@@ -39,9 +39,9 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 		let recording = parentViewController.section?.recordings.sorted()[indexPath.row]
 		
 		if parentViewController.currentlyPlayingRecording == recording {
-			cell.playButton.setImage(UIImage(named: "Pause"), for: .normal)
+			cell.playButton.setImage(Images.pause, for: .normal)
 		} else {
-			cell.playButton.setImage(UIImage(named: "Play"), for: .normal)
+			cell.playButton.setImage(Images.play, for: .normal)
 		}
 
 		if let recording = recording {

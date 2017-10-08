@@ -23,7 +23,7 @@ class RootPageViewDataSource: NSObject {
 			return nil
 		}
 
-		let recordingsViewController = storyboard.instantiateViewController(withIdentifier: "contentPageViewController") as! RecordingsViewController
+		let recordingsViewController = storyboard.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
 		recordingsViewController.project = libraryViewController.currentProject
 		recordingsViewController.section = libraryViewController.currentProject?.sortedSections[index]
 		recordingsViewController.tableViewDataSource.libraryViewController = libraryViewController

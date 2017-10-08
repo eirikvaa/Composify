@@ -46,3 +46,9 @@
 
 /* No recordings in section */
 "There are no recordings in this section. Try recording some audio." = "Det er ingen opptak i denne seksjonen. Prøv å ta opp litt lyd.";
+
+/* Actions */
+"Actions" = "Handlinger";
+
+/* Rename */
+"Rename" = "Gi nytt navn";

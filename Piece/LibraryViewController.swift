@@ -65,7 +65,7 @@ class LibraryViewController: UIViewController {
     let pieFileManager = PIEFileManager()
     var currentProject: Project? {
         didSet {
-            navigationItem.title = currentProject?.title ?? NSLocalizedString("Piece", comment: "Piece title")
+            navigationItem.title = currentProject?.title ?? .localized(.appTitle)
 			currentSection = currentProject?.sortedSections.first
         }
     }
@@ -163,7 +163,7 @@ class LibraryViewController: UIViewController {
 
     // MARK: Helper Methods
 	@objc func add(sender: UIBarButtonItem) {
-        var title: String? = NSLocalizedString("Add project or section", comment: "")
+        var title: String? = .localized(.addProjectSectionTitle)
         if projects.count == 0 {
             title = nil
         }
@@ -173,21 +173,21 @@ class LibraryViewController: UIViewController {
                 message: nil,
                 preferredStyle: .actionSheet)
         let addProject = UIAlertAction(
-                title: NSLocalizedString("Add project", comment: ""),
+                title: .localized(.addProject),
                 style: .default) { _ in
             let addProject = UIAlertController(
-                    title: NSLocalizedString("Add project", comment: ""),
+                    title: .localized(.addProject),
                     message: nil,
                     preferredStyle: .alert)
 
             addProject.addTextField {
-                $0.placeholder = NSLocalizedString("New project title", comment: "")
+                $0.placeholder = .localized(.addProjectTextFieldTitle)
                 $0.autocapitalizationType = .words
             }
 
-            let done = UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { _ in
+            let done = UIAlertAction(title: .localized(.done), style: .default, handler: { _ in
                 if let project = NSEntityDescription.insertNewObject(
-                        forEntityName: "Project",
+                        forEntityName: Strings.CoreData.projectEntity,
                         into: self.coreDataStack.viewContext) as? Project,
                    let title = addProject.textFields?.first?.text {
                     project.title = title
@@ -211,23 +211,23 @@ class LibraryViewController: UIViewController {
 					self.projectCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
                 }
             })
-            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
 
             addProject.addAction(done)
             addProject.addAction(cancel)
 
             self.present(addProject, animated: true, completion: nil)
         }
-        let addSection = UIAlertAction(title: NSLocalizedString("Add section", comment: ""), style: .default) { alertAction in
-            let addSection = UIAlertController(title: NSLocalizedString("Add section", comment: ""), message: nil, preferredStyle: .alert)
+        let addSection = UIAlertAction(title: .localized(.addSection), style: .default) { alertAction in
+            let addSection = UIAlertController(title: .localized(.addSection), message: nil, preferredStyle: .alert)
 
             addSection.addTextField {
-                $0.placeholder = NSLocalizedString("New section title", comment: "")
+                $0.placeholder = .localized(.addSectionTextFieldTitle)
                 $0.autocapitalizationType = .words
             }
 
-            let done = UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { alertAction in
-                if let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: self.coreDataStack.viewContext) as? Section,
+            let done = UIAlertAction(title: .localized(.done), style: .default, handler: { alertAction in
+                if let section = NSEntityDescription.insertNewObject(forEntityName: Strings.CoreData.sectionEntity, into: self.coreDataStack.viewContext) as? Section,
                    let currentProject = self.currentProject,
                    let title = addSection.textFields?.first?.text {
                     section.title = title
@@ -254,14 +254,14 @@ class LibraryViewController: UIViewController {
 					}
                 }
             })
-            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
 
             addSection.addAction(done)
             addSection.addAction(cancel)
 
             self.present(addSection, animated: true, completion: nil)
         }
-        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
 
         mainAdd.addAction(addProject)
         
@@ -271,7 +271,7 @@ class LibraryViewController: UIViewController {
         
         mainAdd.addAction(cancel)
         
-        let view = navigationItem.leftBarButtonItem?.value(forKey: "view") as? UIView
+        let view = navigationItem.leftBarButtonItem?.value(forKey: Strings.KeyValues.view) as? UIView
         let frame = view?.frame
         
         // We need these two lines when the app is used on an iPad.
@@ -282,9 +282,9 @@ class LibraryViewController: UIViewController {
     }
     
     @objc func handleProjectsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: .localized(.longPressTitle), message: nil, preferredStyle: .alert)
         
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let delete = UIAlertAction(title: .localized(.delete), style: .destructive) { _ in
             if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
                 let project = self.projects[indexPath.row]
                 self.pieFileManager.delete(project)
@@ -298,8 +298,8 @@ class LibraryViewController: UIViewController {
             }
         }
         
-        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+        let rename = UIAlertAction(title: .localized(.rename), style: .default) { _ in
+            let alertController = UIAlertController(title: .localized(.rename), message: nil, preferredStyle: .alert)
             alertController.addTextField(configurationHandler: { (textField) in
                 if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
                     let project = self.projects[indexPath.row]
@@ -307,7 +307,7 @@ class LibraryViewController: UIViewController {
                 }
             })
             
-            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+            let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let textField = alertController.textFields?.first,
                     let text = textField.text {
                     if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
@@ -320,7 +320,7 @@ class LibraryViewController: UIViewController {
                 }
             })
             
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
             
             alertController.addAction(save)
             alertController.addAction(cancel)
@@ -328,7 +328,7 @@ class LibraryViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
         
         alert.addAction(delete)
         alert.addAction(rename)
@@ -338,8 +338,8 @@ class LibraryViewController: UIViewController {
     }
     
     @objc func handleSectionsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: "Actions", message: nil, preferredStyle: .alert)
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let alert = UIAlertController(title: .localized(.longPressTitle), message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: .localized(.delete), style: .destructive) { _ in
             if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first,
                 let section = self.currentProject?.sortedSections[indexPath.row] {
                 self.pieFileManager.delete(section)
@@ -364,8 +364,8 @@ class LibraryViewController: UIViewController {
             }
         }
         
-        let rename = UIAlertAction(title: "Rename", style: .default) { _ in
-            let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+        let rename = UIAlertAction(title: .localized(.rename), style: .default) { _ in
+            let alertController = UIAlertController(title: .localized(.rename), message: nil, preferredStyle: .alert)
             alertController.addTextField(configurationHandler: { (textField) in
                 if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
                     let section = self.currentProject?.sortedSections[indexPath.row]
@@ -373,7 +373,7 @@ class LibraryViewController: UIViewController {
                 }
             })
             
-            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+            let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let textField = alertController.textFields?.first,
                     let text = textField.text {
                     if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first {
@@ -388,7 +388,7 @@ class LibraryViewController: UIViewController {
                 }
             })
             
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
             
             alertController.addAction(save)
             alertController.addAction(cancel)
@@ -396,7 +396,7 @@ class LibraryViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel, handler: nil)
         
         alert.addAction(delete)
         alert.addAction(rename)
@@ -430,7 +430,7 @@ class LibraryViewController: UIViewController {
                let recording = Recording.init(with: "\(currentSection.title) \(currentSection.recordings.count + 1)", section: currentSection, project: currentProject, fileExtension: .caf, insertIntoManagedObjectContext: coreDataStack.viewContext) {
                 audioRecorder = AudioRecorder(url: recording.url)
                 audioRecorder?.recorder.record()
-                recordAudioButton.setTitle(NSLocalizedString("Stop recording", comment: ""), for: .normal)
+                recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
 
                 coreDataStack.saveContext()
             }
@@ -440,7 +440,7 @@ class LibraryViewController: UIViewController {
 
         recorder.stop()
         audioRecorder = nil
-        recordAudioButton.setTitle(NSLocalizedString("Start recording", comment: ""), for: .normal)
+        recordAudioButton.setTitle(.localized(.startRecording), for: .normal)
         
         setEmptyState()
 
@@ -487,7 +487,7 @@ private extension LibraryViewController {
 		rootPageViewController.delegate = rootPageViewDelegate
 		rootPageViewDelegate.libraryViewController = self
 		
-		let startingViewController = storyboard?.instantiateViewController(withIdentifier: "contentPageViewController") as! RecordingsViewController
+		let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
 		startingViewController.project = currentProject
 		startingViewController.section = currentSection
 		startingViewController.pageIndex = 0
@@ -537,17 +537,17 @@ extension LibraryViewController {
             projectsTitle.isHidden = true
             sectionsTitle.isHidden = true
             recordAudioButton.isHidden = true
-            emptyStateLabel.text = NSLocalizedString("You have no projects. Try adding one.", comment: "No projects")
+            emptyStateLabel.text = .localized(.noProjects)
             projectCollectionView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.isHidden = true
         case .noSections:
             recordAudioButton.isHidden = true
             sectionsTitle.isHidden = true
-            emptyStateLabel.text = NSLocalizedString("You have no sections. Try adding one.", comment: "No sections")
+            emptyStateLabel.text = .localized(.noSections)
             sectionCollectionView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.isHidden = true
         case .noRecordings:
-            emptyStateLabel.text = NSLocalizedString("There are no recordings in this section. Try recording some audio.", comment: "No recordings")
+            emptyStateLabel.text = .localized(.noRecordings)
             recordingsViewController.tableView.backgroundView = emptyStateLabel
             recordingsViewController.tableView.separatorStyle = .none
         case .notEmpty:

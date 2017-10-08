@@ -18,7 +18,7 @@ extension ProjectCollectionViewDataSource: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! LibraryCollectionViewCell
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.Cells.projectCell, for: indexPath) as! LibraryCollectionViewCell
 		
 		cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true

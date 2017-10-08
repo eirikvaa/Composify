@@ -16,8 +16,8 @@ class RecordingsTableViewDelegate: NSObject {
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let edit = UITableViewRowAction(style: .default, title: NSLocalizedString("Edit", comment: "")) { (rowAction, indexPath) in
-			let edit = UIAlertController(title: NSLocalizedString("Edit", comment: ""), message: nil, preferredStyle: .alert)
+		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (rowAction, indexPath) in
+			let edit = UIAlertController(title: .localized(.edit), message: nil, preferredStyle: .alert)
 
 			edit.addTextField {
 				let recording = self.parentViewController.section?.sortedRecordings[indexPath.row]
@@ -25,17 +25,16 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				$0.autocapitalizationType = .words
 			}
 
-			let save = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { alertAction in
+			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { alertAction in
 				let recording = self.parentViewController.section?.sortedRecordings[indexPath.row] // DRY!
 				if let title = edit.textFields?.first?.text, let recording = recording {
 					self.libraryViewController.pieFileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
 					recording.title = title
 					self.libraryViewController.coreDataStack.saveContext()
-					//self.libraryViewController.recordingsTableView.reloadRows(at: [indexPath], with: .fade)
 					self.parentViewController.tableView.reloadData()
 				}
 			})
-			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil)
+			let cancel = UIAlertAction(title: .localized(.cancel), style: .default, handler: nil)
 
 			edit.addAction(save)
 			edit.addAction(cancel)
@@ -43,7 +42,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			self.libraryViewController.present(edit, animated: true, completion: nil)
 		}
 
-		let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { (
+		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (
 				rowAction, indexPath) in
 			if let currentSection = self.parentViewController.section {
 				let recording = currentSection.sortedRecordings[indexPath.row]
@@ -57,8 +56,8 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			}
 		}
 
-		edit.backgroundColor = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
-		delete.backgroundColor = UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
+		edit.backgroundColor = Colors.edit
+		delete.backgroundColor = Colors.delete
 
 		return [edit, delete]
 	}
