@@ -30,6 +30,7 @@
 		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
+		E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D1E0001F8BADD700246156 /* Recording.storyboard */; };
 		E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* Helpers.swift */; };
 		E5EC5A581ED1F03100D721CF /* ProjectCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A571ED1F03100D721CF /* ProjectCollectionViewDelegate.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
@@ -102,12 +103,12 @@
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
-		E594D0101F8B394600D41D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recording.storyboard; sourceTree = "<group>"; };
-		E594D0131F8B394D00D41D4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
-		E594D0151F8B394F00D41D4C /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Recording.strings; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E5D1DFFF1F8BADD700246156 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recording.storyboard; sourceTree = "<group>"; };
+		E5D1E0021F8BADDA00246156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
+		E5D1E0041F8BADDB00246156 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Recording.strings; sourceTree = "<group>"; };
 		E5D3EA291F818D28001D59ED /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E5EC5A571ED1F03100D721CF /* ProjectCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
@@ -349,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */,
-				E594D0111F8B394600D41D4C /* Recording.storyboard */,
+				E5D1E0001F8BADD700246156 /* Recording.storyboard */,
 				E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -467,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */,
 				E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */,
 				E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */,
 				E51E8BC81E30932F0022CF71 /* Assets.xcassets in Resources */,
@@ -583,16 +585,6 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		E594D0111F8B394600D41D4C /* Recording.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E594D0101F8B394600D41D4C /* Base */,
-				E594D0131F8B394D00D41D4C /* en */,
-				E594D0151F8B394F00D41D4C /* nb */,
-			);
-			name = Recording.storyboard;
-			sourceTree = "<group>";
-		};
 		E5B3C7341D4A34BB0021183A /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -611,6 +603,16 @@
 				E51E8BC41E308F390022CF71 /* nb */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E5D1E0001F8BADD700246156 /* Recording.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5D1DFFF1F8BADD700246156 /* Base */,
+				E5D1E0021F8BADDA00246156 /* en */,
+				E5D1E0041F8BADDB00246156 /* nb */,
+			);
+			name = Recording.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
