@@ -27,6 +27,7 @@
 		E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
 		E58C57F71DD879C200348C65 /* PIEFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */; };
+		E594D0071F8B388900D41D4C /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E594D0061F8B388900D41D4C /* Recording.storyboard */; };
 		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
@@ -102,6 +103,7 @@
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
+		E594D0061F8B388900D41D4C /* Recording.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recording.storyboard; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */,
+				E594D0061F8B388900D41D4C /* Recording.storyboard */,
 				E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -463,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E594D0071F8B388900D41D4C /* Recording.storyboard in Resources */,
 				E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */,
 				E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */,
 				E51E8BC81E30932F0022CF71 /* Assets.xcassets in Resources */,
