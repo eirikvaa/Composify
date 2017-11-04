@@ -54,9 +54,7 @@ class LibraryViewController: UIViewController {
         dataSource.libraryViewController = self
         return dataSource
     }()
-	lazy var projects: [Project] = {
-		return Project.retrieveCoreDataProjects()
-	}()
+    var projects: [Project] = []
     
 	// MARK: Regular Properties
     var rootPageViewController: UIPageViewController!
@@ -75,6 +73,16 @@ class LibraryViewController: UIViewController {
         didSet {
             setState(state)
         }
+    }
+    
+    func fetchProjects() -> [Project] {
+        let fetchRequest: NSFetchRequest<Project> = NSFetchRequest(entityName: "Project")
+        
+        if let projects = try? coreDataStack.persistentContainer.viewContext.fetch(fetchRequest) {
+            self.projects = projects
+        }
+        
+        return projects
     }
 
     // MARK: @IBOutlet
@@ -137,6 +145,7 @@ class LibraryViewController: UIViewController {
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
         
+        projects = fetchProjects()
         currentProject = projects.first
 
         navigationItem.rightBarButtonItem = editButtonItem
