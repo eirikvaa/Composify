@@ -30,7 +30,7 @@ struct Strings {
         static let projectEntity = "Project"
         static let sectionEntity = "Section"
         static let recordingEntity = "Recording"
-        static let modelName = "Piece"
+        static let modelName = "Composify"
     }
     
     struct KeyValues {
