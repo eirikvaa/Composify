@@ -8,6 +8,9 @@ DerivedData/
 
 .idea/
 
+*.cer
+*.mobileprovision
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
