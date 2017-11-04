@@ -188,9 +188,9 @@
 		E5645FF81D3B50B500AA6557 = {
 			isa = PBXGroup;
 			children = (
-				E56460031D3B50B500AA6557 /* Piece */,
-				E58C57EA1DD8799D00348C65 /* PieceTests */,
-				E57077561DD73BBA00B01940 /* PieceUITests */,
+				E56460031D3B50B500AA6557 /* Composify */,
+				E58C57EA1DD8799D00348C65 /* ComposifyTests */,
+				E57077561DD73BBA00B01940 /* ComposifyUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E56460031D3B50B500AA6557 /* Piece */ = {
+		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
 				E5B3C7151D4A29C20021183A /* Localization */,
@@ -214,7 +214,7 @@
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
-			path = Piece;
+			path = Composify;
 			sourceTree = "<group>";
 		};
 		E56460361D3B54B000AA6557 /* Application */ = {
@@ -260,12 +260,12 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		E57077561DD73BBA00B01940 /* PieceUITests */ = {
+		E57077561DD73BBA00B01940 /* ComposifyUITests */ = {
 			isa = PBXGroup;
 			children = (
 				E57077591DD73BBA00B01940 /* Info.plist */,
 			);
-			path = PieceUITests;
+			path = ComposifyUITests;
 			sourceTree = "<group>";
 		};
 		E576D93E1D58663E006F5D62 /* Core Data */ = {
@@ -278,14 +278,14 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
-		E58C57EA1DD8799D00348C65 /* PieceTests */ = {
+		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
 				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
 				E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
-			path = PieceTests;
+			path = ComposifyTests;
 			sourceTree = "<group>";
 		};
 		E590FA901DE09BC500A11FE6 /* Delegates */ = {
