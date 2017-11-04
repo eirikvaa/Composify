@@ -1,6 +1,6 @@
 //
 //  PIEFileManagerTests.swift
-//  PieceTests
+//  ComposifyTests
 //
 //  Created by Eirik Vale Aase on 10.11.2016.
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Piece
+@testable import Composify
 
 /*
 PIEFileManagerTests tests both PIEFileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.

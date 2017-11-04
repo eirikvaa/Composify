@@ -1,6 +1,6 @@
 //
 //  Strings.swift
-//  Piece
+//  Composify
 //
 //  Created by Eirik Vale Aase on 08.10.2017.
 //  Copyright © 2017 Eirik Vale Aase. All rights reserved.
@@ -11,7 +11,7 @@ import Foundation
 // MARK: Multi-subject localizations
 
 extension Localizable {
-    static let appTitle = Localizable(NSLocalizedString("Piece", comment: "Piece title"))
+    static let appTitle = Localizable(NSLocalizedString("Composify", comment: "Composify title"))
     static let addProjectSectionTitle = Localizable(NSLocalizedString("Add project or section", comment: ""))
     static let longPressTitle = Localizable(NSLocalizedString("Actions", comment: "Actions"))
 }

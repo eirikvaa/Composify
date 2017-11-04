@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Piece
+//  Composify
 //
 //  Created by Eirik Vale Aase on 17.07.2016.
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  PIEFileManager.swift
-//  Piece
+//  Composify
 //
 //  Created by Eirik Vale Aase on 24.07.2016.
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-The `FileSystemObject` protocol gives information about where a `FileSystemPieceObject` instance is in the file system.
+The `FileSystemObject` protocol gives information about where a `FileSystemComposifyObject` instance is in the file system.
 - Author: Eirik Vale Aase
 */
 protocol FileSystemObject {
@@ -48,8 +48,8 @@ struct PIEFileManager {
     }
     
     /**
-     Creates a directory in the file system for a `FileSystemPieceObject` instance.
-     - Parameter object: An object conforming to the `FileSystemPieceObject` protocol.
+     Creates a directory in the file system for a `FileSystemComposifyObject` instance.
+     - Parameter object: An object conforming to the `FileSystemComposifyObject` protocol.
     */
     func save<T: Any>(_ object: T) where T: FileSystemObject {
 		// The AudioRecorder will create the audio file.
@@ -63,8 +63,8 @@ struct PIEFileManager {
     }
     
     /**
-     Deletes the file or directory of a FileSystemPieceObject instance.
-     - Parameter object: An object conforming to the FileSystemPieceObject protocol.
+     Deletes the file or directory of a FileSystemComposifyObject instance.
+     - Parameter object: An object conforming to the FileSystemComposifyObject protocol.
     */
     func delete<T: Any>(_ object: T) where T: FileSystemObject {
 		let url = object.url
@@ -79,9 +79,9 @@ struct PIEFileManager {
     }
     
     /**
-     Renames a FileSystemPieceObject isntance.
+     Renames a FileSystemComposifyObject isntance.
      - Parameters:
-        - object: An object conforming to the FileSystemPieceObject protocol.
+        - object: An object conforming to the FileSystemComposifyObject protocol.
         - from: the old title.
         - to: the new title.
 		- section: new section

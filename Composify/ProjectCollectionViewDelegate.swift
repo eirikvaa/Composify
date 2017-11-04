@@ -1,6 +1,6 @@
 //
 //  ProjectCollectionViewDelegate.swift
-//  Piece
+//  Composify
 //
 //  Created by Eirik Vale Aase on 21.05.2017.
 //  Copyright © 2017 Eirik Vale Aase. All rights reserved.

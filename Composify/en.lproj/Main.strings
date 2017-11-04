@@ -11,8 +11,8 @@
 /* Class = "UIButton"; normalTitle = "Start Recording"; ObjectID = "ibo-HO-ZNt"; */
 "ibo-HO-ZNt.normalTitle" = "Start recording";
 
-/* Class = "UINavigationItem"; title = "Piece"; ObjectID = "l8w-mm-O0H"; */
-"l8w-mm-O0H.title" = "Piece";
+/* Class = "UINavigationItem"; title = "Composify"; ObjectID = "l8w-mm-O0H"; */
+"l8w-mm-O0H.title" = "Composify";
 
 /* Class = "UILabel"; text = "Section"; ObjectID = "o8V-lq-WMO"; */
 "o8V-lq-WMO.text" = "Section";

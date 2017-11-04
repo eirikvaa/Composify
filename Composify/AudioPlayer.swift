@@ -1,6 +1,6 @@
 //
 //  AudioPlayer.swift
-//  Piece
+//  Composify
 //
 //  Created by Eirik Vale Aase on 22.07.2016.
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
