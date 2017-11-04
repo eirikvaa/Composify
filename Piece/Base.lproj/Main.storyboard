@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Piece-->
+        <!--Composify-->
         <scene sceneID="0m5-Jn-6ad">
             <objects>
                 <viewController id="mO8-Ib-bxa" customClass="LibraryViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="tWS-Pa-CnK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2v3-Us-6Gb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTB-6L-Wmu">
-                                <rect key="frame" x="0.0" y="64" width="375" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="DQa-fB-nWM"/>
                                 </constraints>
@@ -31,7 +28,7 @@
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="84m-K1-0eU">
-                                <rect key="frame" x="0.0" y="85" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="21" width="600" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -90,7 +87,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uj-SC-4Ng">
-                                <rect key="frame" x="0.0" y="135" width="375" height="21"/>
+                                <rect key="frame" x="0.0" y="71" width="600" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="oRs-XX-qdk"/>
                                 </constraints>
@@ -99,7 +96,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PHP-3k-8wT">
-                                <rect key="frame" x="0.0" y="156" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -145,16 +142,16 @@
                                 </connections>
                             </collectionView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
-                                <rect key="frame" x="0.0" y="214" width="375" height="355"/>
+                                <rect key="frame" x="0.0" y="150" width="600" height="352"/>
                                 <connections>
                                     <segue destination="Dzl-1V-9Fq" kind="embed" id="xMb-ru-wLX"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
-                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-HO-ZNt">
-                                        <rect key="frame" x="16" y="8" width="343" height="66"/>
+                                        <rect key="frame" x="16" y="8" width="568" height="66"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" title="Start recording">
@@ -198,7 +195,7 @@
                             <constraint firstItem="0uj-SC-4Ng" firstAttribute="top" secondItem="84m-K1-0eU" secondAttribute="bottom" id="u33-x9-BU3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Piece" id="l8w-mm-O0H"/>
+                    <navigationItem key="navigationItem" title="Composify" id="l8w-mm-O0H"/>
                     <connections>
                         <outlet property="containerView" destination="nUi-15-pxI" id="bXY-f0-07s"/>
                         <outlet property="longHoldOnProjectsGesture" destination="6y6-WK-YtT" id="3oz-x4-9H1"/>
@@ -244,7 +241,7 @@
                         <viewControllerLayoutGuide type="bottom" id="keX-55-eJD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pxY-3f-4Qg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

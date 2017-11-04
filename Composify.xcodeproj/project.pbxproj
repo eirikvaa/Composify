@@ -87,19 +87,19 @@
 		E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
 		E51E8BC71E30932F0022CF71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E53C6A041ED5DBAA00971C40 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E56460011D3B50B500AA6557 /* Piece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piece.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E56460011D3B50B500AA6557 /* Composify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Composify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56460041D3B50B500AA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E564600E1D3B50B500AA6557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E56460101D3B50B500AA6557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E56460321D3B50DA00AA6557 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
-		E57077551DD73BBA00B01940 /* PieceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E576D9401D586652006F5D62 /* Piece.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Piece.xcdatamodel; sourceTree = "<group>"; };
 		E576D9421D586795006F5D62 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDataSource.swift; sourceTree = "<group>"; };
 		E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
-		E58C57E91DD8799D00348C65 /* PieceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PieceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
 		E58C57F51DD879C200348C65 /* PIEFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIEFileManagerTests.swift; sourceTree = "<group>"; };
@@ -198,9 +198,9 @@
 		E56460021D3B50B500AA6557 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E56460011D3B50B500AA6557 /* Piece.app */,
-				E57077551DD73BBA00B01940 /* PieceUITests.xctest */,
-				E58C57E91DD8799D00348C65 /* PieceTests.xctest */,
+				E56460011D3B50B500AA6557 /* Composify.app */,
+				E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */,
+				E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -359,9 +359,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E56460001D3B50B500AA6557 /* Piece */ = {
+		E56460001D3B50B500AA6557 /* Composify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Piece" */;
+			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
@@ -373,14 +373,14 @@
 			);
 			dependencies = (
 			);
-			name = Piece;
+			name = Composify;
 			productName = Piece;
-			productReference = E56460011D3B50B500AA6557 /* Piece.app */;
+			productReference = E56460011D3B50B500AA6557 /* Composify.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E57077541DD73BBA00B01940 /* PieceUITests */ = {
+		E57077541DD73BBA00B01940 /* ComposifyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "PieceUITests" */;
+			buildConfigurationList = E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "ComposifyUITests" */;
 			buildPhases = (
 				E57077511DD73BBA00B01940 /* Sources */,
 				E57077521DD73BBA00B01940 /* Frameworks */,
@@ -391,14 +391,14 @@
 			dependencies = (
 				E570775B1DD73BBA00B01940 /* PBXTargetDependency */,
 			);
-			name = PieceUITests;
+			name = ComposifyUITests;
 			productName = PieceUITests;
-			productReference = E57077551DD73BBA00B01940 /* PieceUITests.xctest */;
+			productReference = E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		E58C57E81DD8799D00348C65 /* PieceTests */ = {
+		E58C57E81DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "PieceTests" */;
+			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "ComposifyTests" */;
 			buildPhases = (
 				E58C57E51DD8799D00348C65 /* Sources */,
 				E58C57E61DD8799D00348C65 /* Frameworks */,
@@ -409,9 +409,9 @@
 			dependencies = (
 				E58C57EF1DD8799D00348C65 /* PBXTargetDependency */,
 			);
-			name = PieceTests;
+			name = ComposifyTests;
 			productName = PieceTests;
-			productReference = E58C57E91DD8799D00348C65 /* PieceTests.xctest */;
+			productReference = E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -442,7 +442,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E5645FFC1D3B50B500AA6557 /* Build configuration list for PBXProject "Piece" */;
+			buildConfigurationList = E5645FFC1D3B50B500AA6557 /* Build configuration list for PBXProject "Composify" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -456,9 +456,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E56460001D3B50B500AA6557 /* Piece */,
-				E58C57E81DD8799D00348C65 /* PieceTests */,
-				E57077541DD73BBA00B01940 /* PieceUITests */,
+				E56460001D3B50B500AA6557 /* Composify */,
+				E58C57E81DD8799D00348C65 /* ComposifyTests */,
+				E57077541DD73BBA00B01940 /* ComposifyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -565,12 +565,12 @@
 /* Begin PBXTargetDependency section */
 		E570775B1DD73BBA00B01940 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E56460001D3B50B500AA6557 /* Piece */;
+			target = E56460001D3B50B500AA6557 /* Composify */;
 			targetProxy = E570775A1DD73BBA00B01940 /* PBXContainerItemProxy */;
 		};
 		E58C57EF1DD8799D00348C65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E56460001D3B50B500AA6557 /* Piece */;
+			target = E56460001D3B50B500AA6557 /* Composify */;
 			targetProxy = E58C57EE1DD8799D00348C65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -669,6 +669,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -723,6 +724,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -828,7 +830,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Composify.app/Composify";
 			};
 			name = Debug;
 		};
@@ -848,14 +850,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Piece.app/Piece";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Composify.app/Composify";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E5645FFC1D3B50B500AA6557 /* Build configuration list for PBXProject "Piece" */ = {
+		E5645FFC1D3B50B500AA6557 /* Build configuration list for PBXProject "Composify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E56460271D3B50B500AA6557 /* Debug */,
@@ -864,7 +866,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Piece" */ = {
+		E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E564602A1D3B50B500AA6557 /* Debug */,
@@ -873,7 +875,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "PieceUITests" */ = {
+		E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "ComposifyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E570775D1DD73BBA00B01940 /* Debug */,
@@ -882,7 +884,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "PieceTests" */ = {
+		E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "ComposifyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E58C57F11DD8799D00348C65 /* Debug */,
