@@ -76,7 +76,7 @@ class LibraryViewController: UIViewController {
     }
     
     func fetchProjects() -> [Project] {
-        let fetchRequest: NSFetchRequest<Project> = NSFetchRequest(entityName: "Project")
+        let fetchRequest: NSFetchRequest<Project> = NSFetchRequest(entityName: Strings.CoreData.projectEntity)
         
         if let projects = try? coreDataStack.persistentContainer.viewContext.fetch(fetchRequest) {
             self.projects = projects
