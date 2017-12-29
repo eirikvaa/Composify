@@ -15,21 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // `persistentContainer` is marked 'lazy', so initialize to ready it for use.
-        _ = CoreDataStack.sharedInstance.viewContext
-
-        let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
-        navigationBarAppearance.isTranslucent = true
-        navigationBarAppearance.tintColor = UIColor.white
-        navigationBarAppearance.backgroundColor = UIColor.clear
-        navigationBarAppearance.barStyle = .blackTranslucent
-        navigationBarAppearance.titleTextAttributes = [
-			NSAttributedStringKey.foregroundColor: UIColor.white
-		]
-
-        // To be able to get recording information and playback controls in control center.
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        setupCoreData()
+        setupRemoteControlEvents()
+        registerNavigationBarAppearance()
 
         return true
     }
@@ -45,5 +34,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoreDataStack.sharedInstance.saveContext()
     }
 
+}
+
+private extension AppDelegate {
+    func setupCoreData() {
+        // `persistentContainer` is marked 'lazy', so initialize to ready it for use.
+        _ = CoreDataStack.sharedInstance.viewContext
+    }
+    
+    func setupRemoteControlEvents() {
+        // To be able to get recording information and playback controls in control center.
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+    }
+    
+    func registerNavigationBarAppearance() {
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.barTintColor = UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
+        navigationBarAppearance.isTranslucent = true
+        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.backgroundColor = UIColor.clear
+        navigationBarAppearance.barStyle = .blackTranslucent
+        navigationBarAppearance.titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UIColor.white
+        ]
+    }
 }
 
