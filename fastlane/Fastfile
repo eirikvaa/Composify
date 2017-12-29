@@ -34,7 +34,7 @@ platform :ios do
     cert
     sigh
     gym(
-	scheme: "Piece",
+	scheme: "Composify",
 	export_method: "app-store"
     ) # Build your app - more options available
     testflight(skip_waiting_for_build_processing: true)

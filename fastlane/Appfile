@@ -1,4 +1,4 @@
-app_identifier "no.aasesoftware.Piece" # The bundle identifier of your app
+app_identifier "no.aasesoftware.Composify" # The bundle identifier of your app
 apple_id "e.v.aase@gmail.com" # Your Apple email address
 
 team_id "N37KDKBFXC" # Developer Portal Team ID
