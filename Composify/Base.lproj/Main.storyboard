@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Composify-->
         <scene sceneID="0m5-Jn-6ad">
             <objects>
-                <viewController id="mO8-Ib-bxa" customClass="LibraryViewController" customModule="Piece" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mO8-Ib-bxa" customClass="LibraryViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qzq-cg-rI3"/>
                         <viewControllerLayoutGuide type="bottom" id="tWS-Pa-CnK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2v3-Us-6Gb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTB-6L-Wmu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="21"/>
+                                <rect key="frame" x="0.0" y="68" width="375" height="24.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="DQa-fB-nWM"/>
+                                    <constraint firstAttribute="height" constant="24.5" id="DQa-fB-nWM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
@@ -28,7 +32,7 @@
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="84m-K1-0eU">
-                                <rect key="frame" x="0.0" y="21" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="96.5" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -41,7 +45,7 @@
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProjectCell" id="ofe-ea-mVJ" customClass="LibraryCollectionViewCell" customModule="Piece" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProjectCell" id="ofe-ea-mVJ" customClass="LibraryCollectionViewCell" customModule="Composify" customModuleProvider="target">
                                         <rect key="frame" x="15" y="0.0" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -87,16 +91,16 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uj-SC-4Ng">
-                                <rect key="frame" x="0.0" y="71" width="600" height="21"/>
+                                <rect key="frame" x="0.0" y="146.5" width="375" height="24.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="oRs-XX-qdk"/>
+                                    <constraint firstAttribute="height" constant="24.5" id="oRs-XX-qdk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PHP-3k-8wT">
-                                <rect key="frame" x="0.0" y="92" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="171" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -109,7 +113,7 @@
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionCell" id="83I-GB-jFE" customClass="LibraryCollectionViewCell" customModule="Piece" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionCell" id="83I-GB-jFE" customClass="LibraryCollectionViewCell" customModule="Composify" customModuleProvider="target">
                                         <rect key="frame" x="15" y="0.0" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -142,16 +146,16 @@
                                 </connections>
                             </collectionView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
-                                <rect key="frame" x="0.0" y="150" width="600" height="352"/>
+                                <rect key="frame" x="0.0" y="229" width="375" height="340"/>
                                 <connections>
                                     <segue destination="Dzl-1V-9Fq" kind="embed" id="xMb-ru-wLX"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
-                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-HO-ZNt">
-                                        <rect key="frame" x="16" y="8" width="568" height="66"/>
+                                        <rect key="frame" x="16" y="8" width="343" height="66"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" title="Start recording">
@@ -178,20 +182,20 @@
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="top" secondItem="0uj-SC-4Ng" secondAttribute="bottom" id="4Kb-QX-2ct"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="5A3-32-jIT"/>
                             <constraint firstItem="uTB-6L-Wmu" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="5Xg-us-DNP"/>
-                            <constraint firstItem="uTB-6L-Wmu" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="7Ox-mc-dj1"/>
                             <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="7fp-rw-jh7"/>
                             <constraint firstAttribute="trailing" secondItem="uTB-6L-Wmu" secondAttribute="trailing" id="80V-Ix-76i"/>
                             <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="CRD-UW-N1Y"/>
                             <constraint firstAttribute="trailing" secondItem="84m-K1-0eU" secondAttribute="trailing" id="D50-6O-EIu"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="PHP-3k-8wT" secondAttribute="leading" id="Kxl-n9-j63"/>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="M4d-Ty-AQY"/>
-                            <constraint firstItem="84m-K1-0eU" firstAttribute="top" secondItem="uTB-6L-Wmu" secondAttribute="bottom" id="PLH-nl-cvc"/>
                             <constraint firstItem="84m-K1-0eU" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="XzC-JG-co7"/>
                             <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="aK9-wO-6tF"/>
                             <constraint firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="aa0-Jv-m2q"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="PHP-3k-8wT" secondAttribute="bottom" constant="8" symbolic="YES" id="awj-gm-jvl"/>
                             <constraint firstAttribute="trailing" secondItem="0uj-SC-4Ng" secondAttribute="trailing" id="e98-au-ObS"/>
+                            <constraint firstItem="uTB-6L-Wmu" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" constant="4" id="fUb-6A-kIW"/>
                             <constraint firstItem="0uj-SC-4Ng" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="kSF-PE-rej"/>
+                            <constraint firstItem="84m-K1-0eU" firstAttribute="top" secondItem="uTB-6L-Wmu" secondAttribute="bottom" constant="4" id="kam-kR-6Ia"/>
                             <constraint firstItem="0uj-SC-4Ng" firstAttribute="top" secondItem="84m-K1-0eU" secondAttribute="bottom" id="u33-x9-BU3"/>
                         </constraints>
                     </view>
@@ -241,7 +245,7 @@
                         <viewControllerLayoutGuide type="bottom" id="keX-55-eJD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pxY-3f-4Qg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
