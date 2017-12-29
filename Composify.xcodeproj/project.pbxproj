@@ -22,6 +22,7 @@
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */; };
 		E564A2261FAE66C700C4AC3E /* Composify.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = E564A2251FAE66C700C4AC3E /* Composify.xcdatamodel */; };
+		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576D9421D586795006F5D62 /* CoreDataStack.swift */; };
 		E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */; };
 		E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */; };
@@ -93,6 +94,7 @@
 		E56460101D3B50B500AA6557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E56460321D3B50DA00AA6557 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		E564A2251FAE66C700C4AC3E /* Composify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Composify.xcdatamodel; path = Piece.xcdatamodeld/Composify.xcdatamodel; sourceTree = "<group>"; };
+		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E576D9421D586795006F5D62 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +195,7 @@
 				E58C57EA1DD8799D00348C65 /* ComposifyTests */,
 				E57077561DD73BBA00B01940 /* ComposifyUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
+				E56C327B1FF6FB8A00AB8375 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -258,6 +262,14 @@
 				E5B036A81D59957C00C66A69 /* Audio */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E56C327B1FF6FB8A00AB8375 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E57077561DD73BBA00B01940 /* ComposifyUITests */ = {
@@ -744,6 +756,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Composify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -767,6 +780,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Composify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
