@@ -11,16 +11,16 @@ import Foundation
 // MARK: Multi-subject localizations
 
 extension Localizable {
-    static let appTitle = Localizable(NSLocalizedString("Composify", comment: "Composify title"))
+    static let composify = Localizable(NSLocalizedString("Composify", comment: "Composify title"))
     static let addProjectSectionTitle = Localizable(NSLocalizedString("Add project or section", comment: ""))
-    static let longPressTitle = Localizable(NSLocalizedString("Actions", comment: "Actions"))
+    static let actions = Localizable(NSLocalizedString("Actions", comment: "Actions"))
 }
 
 // MARK: Project localizations
 
 extension Localizable {
     static let addProject = Localizable(NSLocalizedString("Add project", comment: ""))
-    static let addProjectTextFieldTitle = Localizable(NSLocalizedString("New project title", comment: ""))
+    static let newProjectTitle = Localizable(NSLocalizedString("New project title", comment: ""))
     static let noProjects = Localizable(NSLocalizedString("You have no projects. Try adding one.", comment: "No projects"))
 }
 
@@ -28,7 +28,7 @@ extension Localizable {
 
 extension Localizable {
     static let addSection = Localizable(NSLocalizedString("Add section", comment: ""))
-    static let addSectionTextFieldTitle = Localizable(NSLocalizedString("New section title", comment: ""))
+    static let newSectionTitle = Localizable(NSLocalizedString("New section title", comment: ""))
     static let noSections = Localizable(NSLocalizedString("You have no sections. Try adding one.", comment: "No sections"))
 }
 
