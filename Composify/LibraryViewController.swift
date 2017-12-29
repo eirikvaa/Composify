@@ -60,10 +60,10 @@ class LibraryViewController: UIViewController {
     var rootPageViewController: UIPageViewController!
     let coreDataStack = CoreDataStack.sharedInstance
 	private let center = NotificationCenter.default
-    let pieFileManager = PIEFileManager()
+    let pieFileManager = CFileManager()
     var currentProject: Project? {
         didSet {
-            navigationItem.title = currentProject?.title ?? .localized(.appTitle)
+            navigationItem.title = currentProject?.title ?? .localized(.composify)
 			currentSection = currentProject?.sortedSections.first
         }
     }
@@ -190,7 +190,7 @@ class LibraryViewController: UIViewController {
                     preferredStyle: .alert)
 
             addProject.addTextField {
-                $0.placeholder = .localized(.addProjectTextFieldTitle)
+                $0.placeholder = .localized(.newProjectTitle)
                 $0.autocapitalizationType = .words
             }
 
@@ -231,7 +231,7 @@ class LibraryViewController: UIViewController {
             let addSection = UIAlertController(title: .localized(.addSection), message: nil, preferredStyle: .alert)
 
             addSection.addTextField {
-                $0.placeholder = .localized(.addSectionTextFieldTitle)
+                $0.placeholder = .localized(.newSectionTitle)
                 $0.autocapitalizationType = .words
             }
 
@@ -291,7 +291,7 @@ class LibraryViewController: UIViewController {
     }
     
     @objc func handleProjectsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: .localized(.longPressTitle), message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: .localized(.actions), message: nil, preferredStyle: .alert)
         
         let delete = UIAlertAction(title: .localized(.delete), style: .destructive) { _ in
             if let indexPath = self.projectCollectionView.indexPathsForSelectedItems?.first {
@@ -347,7 +347,7 @@ class LibraryViewController: UIViewController {
     }
     
     @objc func handleSectionsLongPress(_ sender: UILongPressGestureRecognizer) {
-        let alert = UIAlertController(title: .localized(.longPressTitle), message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: .localized(.actions), message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: .localized(.delete), style: .destructive) { _ in
             if let indexPath = self.sectionCollectionView.indexPathsForSelectedItems?.first,
                 let section = self.currentProject?.sortedSections[indexPath.row] {

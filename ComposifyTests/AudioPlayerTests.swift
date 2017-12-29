@@ -13,7 +13,6 @@ import AVFoundation
 @testable import Composify
 
 class AudioPlayerTests: XCTestCase {
-	
 	var audioPlayer: AudioPlayer!
 	var audioRecorder: AudioRecorder!
 	var project: Project!
@@ -23,7 +22,7 @@ class AudioPlayerTests: XCTestCase {
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
-	let pieFileManager = PIEFileManager()
+    let pieFileManager = CFileManager()
 	let fileManager = FileManager.default
     
     override func setUp() {

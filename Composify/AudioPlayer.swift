@@ -25,7 +25,7 @@ struct AudioPlayer {
     - Parameter url: url of the recording to be played.
     */
     init(url: URL) {
-        guard PIEFileManager().fileManager.fileExists(atPath: url.path) else {
+        guard CFileManager().fileManager.fileExists(atPath: url.path) else {
             return
         }
 

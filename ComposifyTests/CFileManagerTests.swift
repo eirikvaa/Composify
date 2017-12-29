@@ -1,5 +1,5 @@
 //
-//  PIEFileManagerTests.swift
+//  CFileManagerTests.swift
 //  ComposifyTests
 //
 //  Created by Eirik Vale Aase on 10.11.2016.
@@ -13,12 +13,12 @@ import CoreData
 /*
 PIEFileManagerTests tests both PIEFileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
 */
-class PIEFileManagerTests: XCTestCase {
+class CFileManagerTests: XCTestCase {
 	
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
-	let pieFileManager = PIEFileManager()
+	let pieFileManager = CFileManager()
 	let fileManager = FileManager()
 	let managedContext = CoreDataStack.sharedInstance.viewContext
 	
