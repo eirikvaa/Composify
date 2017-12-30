@@ -525,7 +525,7 @@ extension LibraryViewController {
     }
     
     func setState(_ state: State) {
-        guard let recordingsViewController = rootPageViewController.viewControllers?.first as? RecordingsViewController else { return }
+        let recordingsViewController = rootPageViewController.viewControllers?.first as? RecordingsViewController
         
         let emptyStateLabel = UILabel(frame: view.frame)
         emptyStateLabel.textAlignment = .center
@@ -537,9 +537,9 @@ extension LibraryViewController {
         recordAudioButton.isHidden = false
         projectCollectionView.backgroundView = nil
         sectionCollectionView.backgroundView = nil
-        recordingsViewController.tableView.backgroundView = nil
-        recordingsViewController.tableView.separatorStyle = .singleLine
-        recordingsViewController.tableView.isHidden = false
+        recordingsViewController?.tableView.backgroundView = nil
+        recordingsViewController?.tableView.separatorStyle = .singleLine
+        recordingsViewController?.tableView.isHidden = false
         
         switch state {
         case .noProjects:
@@ -548,17 +548,17 @@ extension LibraryViewController {
             recordAudioButton.isHidden = true
             emptyStateLabel.text = .localized(.noProjects)
             projectCollectionView.backgroundView = emptyStateLabel
-            recordingsViewController.tableView.isHidden = true
+            recordingsViewController?.tableView.isHidden = true
         case .noSections:
             recordAudioButton.isHidden = true
             sectionsTitle.isHidden = true
             emptyStateLabel.text = .localized(.noSections)
             sectionCollectionView.backgroundView = emptyStateLabel
-            recordingsViewController.tableView.isHidden = true
+            recordingsViewController?.tableView.isHidden = true
         case .noRecordings:
             emptyStateLabel.text = .localized(.noRecordings)
-            recordingsViewController.tableView.backgroundView = emptyStateLabel
-            recordingsViewController.tableView.separatorStyle = .none
+            recordingsViewController?.tableView.backgroundView = emptyStateLabel
+            recordingsViewController?.tableView.separatorStyle = .none
         case .notEmpty:
             navigationItem.rightBarButtonItem = editButtonItem
         }
