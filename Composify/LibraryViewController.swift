@@ -88,12 +88,12 @@ class LibraryViewController: UIViewController {
     // MARK: @IBOutlet
     @IBOutlet weak var sectionsTitle: UILabel! {
         didSet {
-            sectionsTitle.textColor = Colors.red
+            sectionsTitle.textColor = Colors.mainColor
         }
     }
     @IBOutlet weak var projectsTitle: UILabel! {
         didSet {
-            projectsTitle.textColor = Colors.red
+            projectsTitle.textColor = Colors.mainColor
         }
     }
     @IBOutlet var longHoldOnSectionGesture: UILongPressGestureRecognizer! {
@@ -137,6 +137,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
+            recordAudioButton.backgroundColor = Colors.secondaryColor
         }
     }
     @IBOutlet weak var recordAudioView: UIView!
@@ -148,7 +149,7 @@ class LibraryViewController: UIViewController {
         projects = fetchProjects()
         currentProject = projects.first
 
-        navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem = currentProject?.sections.first?.recordings.isEmpty == true ? nil : editButtonItem
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
 		
 		configurePageViewController()
@@ -555,12 +556,10 @@ extension LibraryViewController {
             emptyStateLabel.text = .localized(.noSections)
             sectionCollectionView.backgroundView = emptyStateLabel
             recordingsViewController?.tableView.isHidden = true
-        case .noRecordings:
-            emptyStateLabel.text = .localized(.noRecordings)
-            recordingsViewController?.tableView.backgroundView = emptyStateLabel
-            recordingsViewController?.tableView.separatorStyle = .none
         case .notEmpty:
             navigationItem.rightBarButtonItem = editButtonItem
+        default:
+            break
         }
     }
 }

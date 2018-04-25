@@ -11,12 +11,14 @@ class RootPageViewDelegate: NSObject {
 
 extension RootPageViewDelegate: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        reloadViewController(pageViewController)
+        let pageIndex = (pageViewController.viewControllers?.first as? RecordingsViewController)?.pageIndex
+        
+        if let pageIndex = pageIndex {
+            let indexPath = IndexPath(row: pageIndex, section: 0)
+            reloadViewController(pageViewController)
+            libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+        }
 	}
-    
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        reloadViewController(pageViewController)
-    }
 }
 
 private extension RootPageViewDelegate {
