@@ -30,14 +30,6 @@ extension ProjectCollectionViewDelegate: UICollectionViewDelegate {
 			libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
 		}
 		
-		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
-		cell?.titleLabel.font = UIFont.preferredBoldFont(for: .body)
-		
 		libraryViewController.navigationItem.title = project.title
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-		let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionViewCell
-		cell?.titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 	}
 }
