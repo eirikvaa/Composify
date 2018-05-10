@@ -49,4 +49,5 @@ extension Localizable {
     static let delete = Localizable(NSLocalizedString("Delete", comment: "Delete"))
     static let rename = Localizable(NSLocalizedString("Rename", comment: "Rename"))
     static let save = Localizable(NSLocalizedString("Save", comment: "Save"))
+    static let administrate = Localizable(NSLocalizedString("Administrate", comment: "Administrate"))
 }
