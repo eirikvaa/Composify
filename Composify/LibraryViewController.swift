@@ -113,7 +113,7 @@ class LibraryViewController: UIViewController {
             } else {
                 self.currentProject = self.projects?.first
             }
-            print("YOO")
+            
             if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
                 self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
             }
@@ -307,6 +307,7 @@ extension LibraryViewController {
             emptyStateLabel.text = .localized(.noSections)
             collectionView.backgroundView = emptyStateLabel
             recordingsViewController?.tableView.isHidden = true
+            
         case .notEmpty:
             navigationItem.rightBarButtonItem = editButtonItem
         case .noProjects:

@@ -70,10 +70,10 @@ extension RootPageViewDataSource: UIPageViewControllerDataSource {
 	}
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return libraryViewController.currentProject?.sections.sorted().count ?? 0
+        return libraryViewController.currentProject?.sections.count ?? 0
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
+        return (libraryViewController.currentProject?.sections.count ?? 0) > 0 ? 0 : -1
     }
 }
