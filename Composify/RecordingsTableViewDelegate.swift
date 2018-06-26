@@ -8,10 +8,12 @@
 
 import UIKit
 import AVFoundation
+import RealmSwift
 
 class RecordingsTableViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
+    private var realmStore = RealmStore.shared
 }
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
@@ -20,18 +22,17 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			let edit = UIAlertController(title: .localized(.edit), message: nil, preferredStyle: .alert)
 
 			edit.addTextField {
-				let recording = self.parentViewController.section?.sortedRecordings[indexPath.row]
+				let recording = self.parentViewController.section?.recordings[indexPath.row]
 				$0.placeholder = recording?.title
 				$0.autocapitalizationType = .words
 			}
 
 			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { alertAction in
-				let recording = self.parentViewController.section?.sortedRecordings[indexPath.row] // DRY!
+				let recording = self.parentViewController.section?.recordings[indexPath.row]
 				if let title = edit.textFields?.first?.text, let recording = recording {
-					self.libraryViewController.pieFileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
-					recording.title = title
-					self.libraryViewController.coreDataStack.saveContext()
-					self.parentViewController.tableView.reloadData()
+					self.libraryViewController.fileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
+					self.realmStore.rename(recording, to: title)
+					self.parentViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
 				}
 			})
 			let cancel = UIAlertAction(title: .localized(.cancel), style: .default, handler: nil)
@@ -45,14 +46,16 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (
 				rowAction, indexPath) in
 			if let currentSection = self.parentViewController.section {
-				let recording = currentSection.sortedRecordings[indexPath.row]
+				let recording = currentSection.recordings[indexPath.row]
 
-				self.libraryViewController.pieFileManager.delete(recording)
-				self.libraryViewController.coreDataStack.viewContext.delete(recording)
-				self.libraryViewController.coreDataStack.saveContext()
-                self.libraryViewController.setEmptyState()
-
-				self.parentViewController.tableView.reloadData()
+				self.libraryViewController.fileManager.delete(recording)
+                try! self.realmStore.realm.write {
+                    if let index = currentSection.recordingIDs.index(of: recording.id) {
+                        currentSection.recordingIDs.remove(at: index)
+                    }
+                }
+                self.realmStore.delete(recording)
+                self.libraryViewController.updateUI()
 			}
 		}
 
@@ -65,7 +68,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.reloadData()
 
-		guard let recording = parentViewController.section?.sortedRecordings[indexPath.row] else {
+		guard let recording = parentViewController.section?.recordings[indexPath.row] else {
 			return
 		}
         
@@ -90,6 +93,6 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 extension RecordingsTableViewDelegate: AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
 		parentViewController.currentlyPlayingRecording = nil
-		libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: false, recordingsTableView: true)
+		libraryViewController.updateUI()
 	}
 }

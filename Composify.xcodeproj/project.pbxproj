@@ -9,22 +9,25 @@
 /* Begin PBXBuildFile section */
 		3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */; };
 		3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */; };
+		7FD464CA0C1801D7EC1679DC /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51AFB8CC4847C21A6B84A87F /* Pods_Composify.framework */; };
+		8BFD7314C66FD55BFD70D401 /* Pods_ComposifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D64146E1F3BE5E7A70F6E3A /* Pods_ComposifyUITests.framework */; };
+		CEB40FE5607EDF2B600DEC86 /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC7174107E73563B22A62FA9 /* Pods_ComposifyTests.framework */; };
 		E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* CFileManager.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
 		E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */; };
-		E51700981E29507B00B7DAA8 /* ProjectCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700971E29507B00B7DAA8 /* ProjectCollectionViewDataSource.swift */; };
 		E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */; };
 		E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */; };
 		E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C6A041ED5DBAA00971C40 /* Constants.swift */; };
 		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */; };
-		E564A2261FAE66C700C4AC3E /* Composify.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = E564A2251FAE66C700C4AC3E /* Composify.xcdatamodel */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
-		E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576D9421D586795006F5D62 /* CoreDataStack.swift */; };
+		E56E3FE820D53D6300411F5F /* RealmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmStore.swift */; };
+		E571F54420983945008F29A6 /* AdministrateProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */; };
 		E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */; };
 		E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */; };
+		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
 		E58C57F71DD879C200348C65 /* CFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* CFileManagerTests.swift */; };
 		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
@@ -33,16 +36,13 @@
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D1E0001F8BADD700246156 /* Recording.storyboard */; };
 		E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* Helpers.swift */; };
-		E5EC5A581ED1F03100D721CF /* ProjectCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A571ED1F03100D721CF /* ProjectCollectionViewDelegate.swift */; };
+		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
 		E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DA91F8AB476002788F7 /* Localizable.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* Strings.swift */; };
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
-		E5F60B7E1D5B14AD000B4F7F /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7D1D5B14AD000B4F7F /* Project+CoreDataProperties.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
-		E5F60B821D5B14ED000B4F7F /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B811D5B14ED000B4F7F /* Section+CoreDataProperties.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
-		E5F60B861D5B153D000B4F7F /* Recording+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B851D5B153D000B4F7F /* Recording+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -75,13 +75,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2158013CAEBC8AC5F2339672 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDelegate.swift; sourceTree = "<group>"; };
+		4D64146E1F3BE5E7A70F6E3A /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51AFB8CC4847C21A6B84A87F /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9535D31F2B24FC19E9979C2A /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
+		BC7174107E73563B22A62FA9 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD197BC58D51E262D38277FA /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C5337D767B73A81772B17083 /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CAFBD6BE9A084F5453803FC8 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD04764143706796E189EAEB /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
 		E5055BDE1D44BB5800D2B796 /* CFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFileManager.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDataSource.swift; sourceTree = "<group>"; };
-		E51700971E29507B00B7DAA8 /* ProjectCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		E51E8BC21E308F390022CF71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC41E308F390022CF71 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
@@ -92,14 +100,15 @@
 		E564600E1D3B50B500AA6557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E56460101D3B50B500AA6557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E56460321D3B50DA00AA6557 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
-		E564A2251FAE66C700C4AC3E /* Composify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Composify.xcdatamodel; path = Piece.xcdatamodeld/Composify.xcdatamodel; sourceTree = "<group>"; };
 		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E56E3FE720D53D6300411F5F /* RealmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStore.swift; sourceTree = "<group>"; };
 		E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E576D9421D586795006F5D62 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewController.swift; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDataSource.swift; sourceTree = "<group>"; };
 		E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
+		E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
@@ -112,16 +121,13 @@
 		E5D1E0021F8BADDA00246156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
 		E5D1E0041F8BADDB00246156 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Recording.strings; sourceTree = "<group>"; };
 		E5D3EA291F818D28001D59ED /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		E5EC5A571ED1F03100D721CF /* ProjectCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5ED6DA91F8AB476002788F7 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		E5F60B7D1D5B14AD000B4F7F /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		E5F60B811D5B14ED000B4F7F /* Section+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Section+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
-		E5F60B851D5B153D000B4F7F /* Recording+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recording+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
+				7FD464CA0C1801D7EC1679DC /* Pods_Composify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BFD7314C66FD55BFD70D401 /* Pods_ComposifyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,19 +154,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB40FE5607EDF2B600DEC86 /* Pods_ComposifyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E527258E1F09814400B59235 /* ProjectCollectionView */ = {
+		CA90FC724AC1B0EBB16D64C5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E5EC5A571ED1F03100D721CF /* ProjectCollectionViewDelegate.swift */,
-				E51700971E29507B00B7DAA8 /* ProjectCollectionViewDataSource.swift */,
+				DD04764143706796E189EAEB /* Pods-Composify.debug.xcconfig */,
+				9535D31F2B24FC19E9979C2A /* Pods-Composify.release.xcconfig */,
+				BD197BC58D51E262D38277FA /* Pods-ComposifyTests.debug.xcconfig */,
+				2158013CAEBC8AC5F2339672 /* Pods-ComposifyTests.release.xcconfig */,
+				CAFBD6BE9A084F5453803FC8 /* Pods-ComposifyUITests.debug.xcconfig */,
+				C5337D767B73A81772B17083 /* Pods-ComposifyUITests.release.xcconfig */,
 			);
-			name = ProjectCollectionView;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		E527258F1F09815300B59235 /* SectionCollectionView */ = {
@@ -196,6 +209,7 @@
 				E57077561DD73BBA00B01940 /* ComposifyUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
 				E56C327B1FF6FB8A00AB8375 /* Frameworks */,
+				CA90FC724AC1B0EBB16D64C5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,6 +259,7 @@
 			children = (
 				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
 				E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */,
+				E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -257,7 +272,7 @@
 				E5D3EA291F818D28001D59ED /* Helpers.swift */,
 				E5ED6DA91F8AB476002788F7 /* Localizable.swift */,
 				E590FA901DE09BC500A11FE6 /* Delegates */,
-				E576D93E1D58663E006F5D62 /* Core Data */,
+				E576D93E1D58663E006F5D62 /* Realm */,
 				E5B036A91D59958700C66A69 /* File Management */,
 				E5B036A81D59957C00C66A69 /* Audio */,
 			);
@@ -268,6 +283,9 @@
 			isa = PBXGroup;
 			children = (
 				E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */,
+				51AFB8CC4847C21A6B84A87F /* Pods_Composify.framework */,
+				BC7174107E73563B22A62FA9 /* Pods_ComposifyTests.framework */,
+				4D64146E1F3BE5E7A70F6E3A /* Pods_ComposifyUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,14 +298,15 @@
 			path = ComposifyUITests;
 			sourceTree = "<group>";
 		};
-		E576D93E1D58663E006F5D62 /* Core Data */ = {
+		E576D93E1D58663E006F5D62 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				E5F60B681D5B0C80000B4F7F /* Managed Objects */,
-				E576D9421D586795006F5D62 /* CoreDataStack.swift */,
-				E564A2251FAE66C700C4AC3E /* Composify.xcdatamodel */,
+				E56E3FE720D53D6300411F5F /* RealmStore.swift */,
+				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
+				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
+				E5F60B831D5B1535000B4F7F /* Recording.swift */,
 			);
-			name = "Core Data";
+			name = Realm;
 			sourceTree = "<group>";
 		};
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
@@ -303,7 +322,6 @@
 		E590FA901DE09BC500A11FE6 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				E527258E1F09814400B59235 /* ProjectCollectionView */,
 				E527258F1F09815300B59235 /* SectionCollectionView */,
 				E52725901F09815E00B59235 /* RecordingsViewController */,
 				E52725911F09816700B59235 /* RootPageView */,
@@ -336,24 +354,13 @@
 			name = Localization;
 			sourceTree = "<group>";
 		};
-		E5F60B681D5B0C80000B4F7F /* Managed Objects */ = {
-			isa = PBXGroup;
-			children = (
-				E5F60B7D1D5B14AD000B4F7F /* Project+CoreDataProperties.swift */,
-				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
-				E5F60B811D5B14ED000B4F7F /* Section+CoreDataProperties.swift */,
-				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
-				E5F60B851D5B153D000B4F7F /* Recording+CoreDataProperties.swift */,
-				E5F60B831D5B1535000B4F7F /* Recording.swift */,
-			);
-			name = "Managed Objects";
-			sourceTree = "<group>";
-		};
 		E5FAB87C1F0985EA00634565 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */,
 				E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */,
+				E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */,
+				E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -375,10 +382,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
+				E9C1F6BE40977DF92CACAF42 /* [CP] Check Pods Manifest.lock */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
 				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
+				B7EB8973F1E1B87E3942732B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
@@ -394,6 +403,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "ComposifyUITests" */;
 			buildPhases = (
+				9A0537546D58E6DFB519A24E /* [CP] Check Pods Manifest.lock */,
 				E57077511DD73BBA00B01940 /* Sources */,
 				E57077521DD73BBA00B01940 /* Frameworks */,
 				E57077531DD73BBA00B01940 /* Resources */,
@@ -412,6 +422,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "ComposifyTests" */;
 			buildPhases = (
+				207BED152FF9501F0EBB5C87 /* [CP] Check Pods Manifest.lock */,
 				E58C57E51DD8799D00348C65 /* Sources */,
 				E58C57E61DD8799D00348C65 /* Frameworks */,
 				E58C57E71DD8799D00348C65 /* Resources */,
@@ -505,6 +516,62 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		207BED152FF9501F0EBB5C87 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ComposifyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A0537546D58E6DFB519A24E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ComposifyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7EB8973F1E1B87E3942732B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,6 +585,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi";
 		};
+		E9C1F6BE40977DF92CACAF42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Composify-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -527,28 +612,25 @@
 			files = (
 				E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */,
-				E51700981E29507B00B7DAA8 /* ProjectCollectionViewDataSource.swift in Sources */,
 				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,
-				E5F60B821D5B14ED000B4F7F /* Section+CoreDataProperties.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
-				E564A2261FAE66C700C4AC3E /* Composify.xcdatamodel in Sources */,
 				E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */,
-				E576D9431D586795006F5D62 /* CoreDataStack.swift in Sources */,
 				E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */,
 				E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */,
-				E5EC5A581ED1F03100D721CF /* ProjectCollectionViewDelegate.swift in Sources */,
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */,
-				E5F60B861D5B153D000B4F7F /* Recording+CoreDataProperties.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
+				E56E3FE820D53D6300411F5F /* RealmStore.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
-				E5F60B7E1D5B14AD000B4F7F /* Project+CoreDataProperties.swift in Sources */,
+				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,
+				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */,
+				E571F54420983945008F29A6 /* AdministrateProjectTableViewController.swift in Sources */,
 				E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */,
 				E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */,
 				3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */,
@@ -752,6 +834,7 @@
 		};
 		E564602A1D3B50B500AA6557 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD04764143706796E189EAEB /* Pods-Composify.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -760,7 +843,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -776,6 +859,7 @@
 		};
 		E564602B1D3B50B500AA6557 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9535D31F2B24FC19E9979C2A /* Pods-Composify.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -784,7 +868,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -799,6 +883,7 @@
 		};
 		E570775D1DD73BBA00B01940 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAFBD6BE9A084F5453803FC8 /* Pods-ComposifyUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -816,6 +901,7 @@
 		};
 		E570775E1DD73BBA00B01940 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5337D767B73A81772B17083 /* Pods-ComposifyUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -833,6 +919,7 @@
 		};
 		E58C57F11DD8799D00348C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD197BC58D51E262D38277FA /* Pods-ComposifyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -855,6 +942,7 @@
 		};
 		E58C57F21DD8799D00348C65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2158013CAEBC8AC5F2339672 /* Pods-ComposifyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;

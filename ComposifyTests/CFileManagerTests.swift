@@ -20,7 +20,7 @@ class CFileManagerTests: XCTestCase {
 	var recording: Recording!
 	let pieFileManager = CFileManager()
 	let fileManager = FileManager()
-	let managedContext = CoreDataStack.sharedInstance.viewContext
+	//let managedContext = CoreDataStack.sharedInstance.viewContext
 	
 	var project2: Project!
 	var section2: Section!
@@ -32,25 +32,25 @@ class CFileManagerTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		
-		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
+		//project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
 		project.title = "UnitTestProject"
 		
-		project2 = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
+		//project2 = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
 		project2.title = "UnitTestProject2"
 		
-		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
+		//section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
 		section.title = "UnitTestSection"
 		section.project = project
 		
-		section2 = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
+		//section2 = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
 		section2.title = "UnitTestSection2"
 		section2.project = project2
 		
-		recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
+		//recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
 		recording.title = "UnitTestRecording"
 		recording.dateRecorded = Date()
-		recording.project = project
-		recording.section = section
+		//recording.project = project
+		//recording.section = section
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		
 		pieFileManager.save(project)
@@ -117,13 +117,13 @@ class CFileManagerTests: XCTestCase {
 		let renameRecordingTitle = "UnitTestRenamedRecording"
 		pieFileManager.rename(recording, from: recording.title, to: renameRecordingTitle, section: section2, project: project2)
 		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
-		recording.project = project2
-		recording.section = section2
+		//recording.project = project2
+		//recording.section = section2
 		recording.title = renameRecordingTitle
 		
 		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-			.appendingPathComponent(recording.project.title)
-			.appendingPathComponent(recording.section.title)
+            .appendingPathComponent(recording.project!.title)
+			.appendingPathComponent(recording.section!.title)
 			.appendingPathComponent(recording.title)
 			.appendingPathExtension(FileSystemExtensions.caf.rawValue).path))
 	}

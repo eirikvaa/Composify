@@ -25,6 +25,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 	}
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard parentViewController.section?.isInvalidated == false else { return 0 }
         guard let recordings = parentViewController.section?.recordings else { return 0 }
         return recordings.count > 0 ? 1 : 0
     }
@@ -37,7 +38,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
         cell.contentView.isUserInteractionEnabled = false
         cell.selectionStyle = .none
         
-        let recording = parentViewController.section?.recordings.sorted()[indexPath.row]
+        let recording = parentViewController.section?.recordings[indexPath.row]
         let isCurrentlyPlayingRecording = parentViewController.currentlyPlayingRecording == recording
         
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)
@@ -51,7 +52,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .insert {
-			libraryViewController.recordingsTableView.insertRows(at: [indexPath], with: .fade)
+			libraryViewController.tableView.insertRows(at: [indexPath], with: .fade)
 		}
 	}
 }

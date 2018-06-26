@@ -12,22 +12,21 @@ class RootPageViewDelegate: NSObject {
 extension RootPageViewDelegate: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageIndex = (pageViewController.viewControllers?.first as? RecordingsViewController)?.pageIndex
-        
-        if let pageIndex = pageIndex {
-            let indexPath = IndexPath(row: pageIndex, section: 0)
-            reloadViewController(pageViewController)
-            libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-        }
+
+        reloadViewController(pageViewController, pageIndex: pageIndex!)
 	}
 }
 
 private extension RootPageViewDelegate {
-    func reloadViewController(_ pageViewController: UIPageViewController) {
+    func reloadViewController(_ pageViewController: UIPageViewController, pageIndex: Int) {
         guard let topViewController = pageViewController.viewControllers?.first as? RecordingsViewController else { return }
         guard let pageIndex = topViewController.pageIndex else { return }
-        libraryViewController.currentSection = libraryViewController.currentProject?.sortedSections[pageIndex]
+        guard let currentProject = libraryViewController.currentProject else { return }
+        guard currentProject.sections.sorted().count > 0 else { return }
+        libraryViewController.currentSection = currentProject.sections.sorted()[pageIndex]
         
-        libraryViewController.setEmptyState()
-        libraryViewController.shouldRefresh(projectCollectionView: false, sectionCollectionView: true, recordingsTableView: true)
+        let indexPath = IndexPath(row: pageIndex, section: 0)
+        libraryViewController.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+        libraryViewController.updateUI()
     }
 }

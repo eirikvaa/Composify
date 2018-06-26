@@ -18,32 +18,32 @@ class AudioPlayerTests: XCTestCase {
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
-	let managedContext = CoreDataStack.sharedInstance.viewContext
+	//let managedContext = CoreDataStack.sharedInstance.viewContext
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
-    let pieFileManager = CFileManager()
+    let cFileManager = CFileManager()
 	let fileManager = FileManager.default
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-		project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
+		//project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
 		project.title = "UnitTestProject"
 		
-		section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
+		//section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
 		section.title = "UnitTestSection"
 		section.project = project
 		
-		recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
+		//recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
 		recording.title = "UnitTestRecording"
-		recording.section = section
-		recording.project = project
+		//recording.section = section
+		//recording.project = project
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		recording.dateRecorded = Date()
 		
-		pieFileManager.save(project)
-		pieFileManager.save(section)
+		cFileManager.save(project)
+		cFileManager.save(section)
 		audioRecorder = AudioRecorder(url: recording.url)
     }
     
@@ -74,8 +74,8 @@ class AudioPlayerTests: XCTestCase {
 		audioPlayer = AudioPlayer(url: recording.url)
 		
 		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-			.appendingPathComponent(recording.project.title)
-			.appendingPathComponent(recording.section.title)
+            .appendingPathComponent(recording.project!.title)
+			.appendingPathComponent(recording.section!.title)
 			.appendingPathComponent(recording.title)
 			.appendingPathExtension(recording.fileExtension).path))
 		

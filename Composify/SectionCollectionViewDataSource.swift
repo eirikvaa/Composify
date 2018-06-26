@@ -14,7 +14,9 @@ class SectionCollectionViewDataSource: NSObject {
 
 extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return libraryViewController.currentProject?.sections.count ?? 0
+        guard let items = libraryViewController.currentProject?.sections.sorted() else { return 0 }
+		
+        return items.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -22,10 +24,7 @@ extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 		
 		cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
-
-		if let currentProject = libraryViewController.currentProject {
-			cell.titleLabel.text = currentProject.sortedSections[indexPath.row].title
-		}
+        cell.titleLabel.text = libraryViewController.currentProject?.sections.sorted()[indexPath.row].title
 		
 		return cell		
 	}
