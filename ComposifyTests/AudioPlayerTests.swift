@@ -18,7 +18,6 @@ class AudioPlayerTests: XCTestCase {
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
-	//let managedContext = CoreDataStack.sharedInstance.viewContext
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
@@ -28,17 +27,17 @@ class AudioPlayerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-		//project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as! Project
+		project = Project()
 		project.title = "UnitTestProject"
 		
-		//section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: managedContext) as! Section
+		section = Section()
 		section.title = "UnitTestSection"
 		section.project = project
 		
-		//recording = NSEntityDescription.insertNewObject(forEntityName: "Recording", into: managedContext) as! Recording
+		recording = Recording()
 		recording.title = "UnitTestRecording"
-		//recording.section = section
-		//recording.project = project
+		recording.section = section
+		recording.project = project
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		recording.dateRecorded = Date()
 		
@@ -84,12 +83,4 @@ class AudioPlayerTests: XCTestCase {
 		let duration = CMTimeGetSeconds(assetDuration)
 		XCTAssertTrue(3...5 ~= duration)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
