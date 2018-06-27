@@ -101,7 +101,7 @@ class LibraryViewController: UIViewController {
         
         configurePageViewController()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Meny", style: .plain, target: self, action: #selector(showMenu))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: .localized(.menu), style: .plain, target: self, action: #selector(showMenu))
         navigationItem.rightBarButtonItem = currentProject?.sections.sorted().first?.recordings.isEmpty == true ? nil : editButtonItem
         
         self.updateUI()
@@ -150,9 +150,9 @@ class LibraryViewController: UIViewController {
 extension LibraryViewController {
     @IBAction func showMenu(_ sender: UIBarButtonItem) {
         var administrate: UIAlertAction?
-        let alert = UIAlertController(title: "Menu", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: .localized(.menu), message: nil, preferredStyle: .actionSheet)
         if let currentProject = currentProject {
-            administrate = UIAlertAction(title: "Administrer prosjekt", style: .default) { _ in
+            administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
                 let administerVC = AdministrateProjectTableViewController()
                 administerVC.currentProject = currentProject
                 let nav = UINavigationController(rootViewController: administerVC)
@@ -160,13 +160,13 @@ extension LibraryViewController {
             }
         }
         
-        let addProject = UIAlertAction(title: "Legg til prosjekt", style: .default) { _ in
-            let addProjectAlert = UIAlertController(title: "Legg til prosjekt", message: nil, preferredStyle: .alert)
+        let addProject = UIAlertAction(title: .localized(.addProject), style: .default) { _ in
+            let addProjectAlert = UIAlertController(title: .localized(.addProject), message: nil, preferredStyle: .alert)
             addProjectAlert.addTextField { textField in
-                textField.placeholder = "Project title"
+                textField.placeholder = .localized(.projectTitle)
                 textField.returnKeyType = .done
             }
-            let save = UIAlertAction(title: "Save", style: .default, handler: { _ in
+            let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {
                     
                     let project = Project()
@@ -179,7 +179,7 @@ extension LibraryViewController {
                     self.updateUI()
                 }
             })
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            let cancel = UIAlertAction(title: .localized(.save), style: .cancel)
             addProjectAlert.addAction(save)
             addProjectAlert.addAction(cancel)
             
@@ -187,7 +187,7 @@ extension LibraryViewController {
         }
         
         projects?.forEach { project in
-            let projectAction = UIAlertAction(title: "Show \(project.title)", style: .default) { (action) in
+            let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { (action) in
                 self.currentProject = project
                 
                 UserDefaults.standard.persist(project: self.currentProject)
@@ -201,7 +201,7 @@ extension LibraryViewController {
             alert.addAction(projectAction)
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
         if let administrate = administrate {
             alert.addAction(administrate)
         }

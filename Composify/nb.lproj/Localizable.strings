@@ -55,3 +55,27 @@
 
 /* Administrate */
 "Administrate" = "Administrer";
+
+/* Administrate project */
+"Administrate project" = "Administrer prosjekt";
+
+/* Danger Zone */
+"Danger Zone" = "Farlig sone";
+
+/* Delete Project */
+"Delete Project" = "Slett prosjekt";
+
+/* Menu */
+"Menu" = "Meny";
+
+/* Meta Information */
+"Meta Information" = "Metainformasjon";
+
+/* Project title */
+"Project title" = "Prosjekttittel";
+
+/* Sections */
+"Sections" = "Seksjoner";
+
+/* Show %@ */
+"Show %@" = "Vis %@";

@@ -22,6 +22,9 @@ extension Localizable {
     static let addProject = Localizable(NSLocalizedString("Add project", comment: ""))
     static let newProjectTitle = Localizable(NSLocalizedString("New project title", comment: ""))
     static let noProjects = Localizable(NSLocalizedString("You have no projects. Try adding one.", comment: "No projects"))
+    static let projectTitle = Localizable(NSLocalizedString("Project title", comment: "Project title"))
+    static let showProject = Localizable(NSLocalizedString("Show %@", comment: "Show %@"))
+    static let deleteProejct = Localizable(NSLocalizedString("Delete Project", comment: "Delete Project"))
 }
 
 // MARK: Section localizatios
@@ -50,4 +53,19 @@ extension Localizable {
     static let rename = Localizable(NSLocalizedString("Rename", comment: "Rename"))
     static let save = Localizable(NSLocalizedString("Save", comment: "Save"))
     static let administrate = Localizable(NSLocalizedString("Administrate", comment: "Administrate"))
+}
+
+// MARK: Menu localization
+
+extension Localizable {
+    static let menu = Localizable(NSLocalizedString("Menu", comment: "Menu"))
+    static let administrateProject = Localizable(NSLocalizedString("Administrate project", comment: "Administrate project"))
+}
+
+// MARK: Administrate Project localization
+
+extension Localizable {
+    static let metaInformationHeader = Localizable(NSLocalizedString("Meta Information", comment: "Meta Information"))
+    static let sectionsHeader = Localizable(NSLocalizedString("Sections", comment: "Sections"))
+    static let dangerZoneHeader = Localizable(NSLocalizedString("Danger Zone", comment: "Danger Zone"))
 }

@@ -16,9 +16,9 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         didSet {
             tableView?.delegate = self
             tableView?.dataSource = self
-            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "AdministerCell")
-            tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: "DeleteCell")
-            tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: "Cell")
+            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: Strings.Cells.administerCell)
+            tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: Strings.Cells.deleteCell)
+            tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: Strings.Cells.cell)
             tableView?.setEditing(true, animated: false)
         }
     }
@@ -30,10 +30,10 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         2: 1    // Danger Zone
     ]
     private lazy var newValues: [T: String] = [:]
-    private var headers = [
-        "Meta Information",
-        "Sections",
-        "Danger Zone"
+    private var headers: [String] = [
+        .localized(.metaInformationHeader),
+        .localized(.sectionsHeader),
+        .localized(.dangerZoneHeader)
     ]
     let realmStore = RealmStore.shared
     var token: NotificationToken?
@@ -96,7 +96,7 @@ extension AdministrateProjectTableViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TextFieldTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as! TextFieldTableViewCell
         cell.textField.returnKeyType = .done
         cell.tag = 1234
         cell.textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
@@ -111,14 +111,14 @@ extension AdministrateProjectTableViewController {
         case (1, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
-                cell.textField.text = "Add new section"
+                cell.textField.text = .localized(.addSection)
             } else {
                 let section = currentProject?.sections.sorted()[indexPath.row]
                 cell.textField.placeholder = section?.title
             }
         case (2, _):
-            let deleteCell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath) as! ButtonTableViewCell
-            deleteCell.buttonTitle = "Delete Project"
+            let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as! ButtonTableViewCell
+            deleteCell.buttonTitle = .localized(.deleteProejct)
             deleteCell.action = {
                 self.fileManager.delete(self.currentProject!)
                 self.realmStore.delete(self.currentProject!)

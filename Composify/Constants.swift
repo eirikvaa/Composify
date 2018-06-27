@@ -25,6 +25,9 @@ struct Strings {
         static let projectCell = "ProjectCell"
         static let sectionCell = "SectionCell"
         static let recordingCell = "RecordingCell"
+        static let deleteCell = "DeleteCell"
+        static let cell = "Cell"
+        static let administerCell = "AdministerCell"
     }
     
     struct CoreData {
