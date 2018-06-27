@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import CoreData
 import Darwin
 import AVFoundation
 @testable import Composify
