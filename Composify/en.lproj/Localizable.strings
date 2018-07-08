@@ -1,81 +1,60 @@
 
-/* No comment provided by engineer. */
-"Add project" = "Add project";
+/* Title of delete button in table view. */
+"administrate-project.delete-button.title" = "Delete project";
 
-/* No comment provided by engineer. */
-"Add project or section" = "Add project or section";
+/* Title of section for the danger zone in administrate project. */
+"administrate-project.section-titles.danger-zone.label" = "Danger zone";
 
-/* No comment provided by engineer. */
-"Add section" = "Add section";
+/* Title of section for meta information in administrate project. */
+"administrate-project.section-titles.meta-information.label" = "Meta information";
 
-/* No comment provided by engineer. */
-"Cancel" = "Cancel";
+/* Title of section for project sections in administrate project. */
+"administrate-project.section-titles.sections.label" = "Sections";
 
-/* No comment provided by engineer. */
-"Done" = "Done";
+/* Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed. */
+"administrate-project.tableview.cell.add-section.title" = "Add section";
 
-/* No comment provided by engineer. */
-"New project title" = "New project title";
+/* The title of the application. Should not be localized, but is included for completeness sake. */
+"app.title" = "Composify";
 
-/* No comment provided by engineer. */
-"New section title" = "New section title";
+/* Generic word for administrate. */
+"general.administrate" = "Administrate";
 
-/* No comment provided by engineer. */
-"Composify" = "Composify";
+/* Generic word for cancel. */
+"general.cancel" = "Cancel";
 
-/* No comment provided by engineer. */
-"Start recording" = "Start recording";
+/* Generic word for delete. */
+"general.delete" = "Delete";
 
-/* No comment provided by engineer. */
-"Stop recording" = "Stop recording";
+/* Generic word for edit. */
+"general.edit" = "Edit";
 
-/* No comment provided by engineer. */
-"You have no projects. Try adding one." = "You have no projects. Try adding one.";
+/* Generic word for save. */
+"general.save" = "Save";
 
-/* No comment provided by engineer. */
-"You have no sections. Try adding one." = "You have no sections. Try adding one.";
+/* Label appearing when the user has no projects. */
+"library.empty-state.no-projects" = "You have no projects. Try adding one.";
 
-/* No comment provided by engineer. */
-"Edit" = "Edit";
+/* Label appearing when the user has no sections in a project. */
+"library.empty-state.no-sections" = "You have no sections. Try adding one.";
 
-/* No comment provided by engineer. */
-"Save" = "Save";
+/* Title of menu when tapping the corresponding menu button in the navigation bar. */
+"library.menu.action-sheet.title" = "Menu";
 
-/* No comment provided by engineer. */
-"Delete" = "Delete";
+/* Title of an alert appearing when user tries to add a project. */
+"library.menu.add-project.alert.title" = "Add project";
 
-/* No recordings in section */
-"There are no recordings in this section. Try recording some audio." = "There are no recordings in this section. Try recording some audio.";
+/* Placeholder of textfield in alert appearing when user tries to add a project. */
+"library.menu.add-project.textfield.placeholder" = "Project title";
 
-/* Actions */
-"Actions" = "Actions";
+/* Button in menu for administrating the current project. */
+"library.menu.administarte-project.label" = "Administrate project";
 
-/* Rename */
-"Rename" = "Rename";
+/* Title of button in menu for seeing a project. */
+"library.menu.show-project.label" = "Show %@";
 
-/* Administrate */
-"Administrate" = "";
+/* Title of button when user is not recording audio. */
+"library.record-button.start-recording.title" = "Start recording";
 
-/* Administrate project */
-"Administrate project" = "";
-
-/* Danger Zone */
-"Danger Zone" = "";
-
-/* Delete Project */
-"Delete Project" = "";
-
-/* Menu */
-"Menu" = "";
-
-/* Meta Information */
-"Meta Information" = "";
-
-/* Project title */
-"Project title" = "";
-
-/* Sections */
-"Sections" = "";
-
-/* Show %@ */
-"Show %@" = "";
+/* Title of button when user is recording audio. */
+"library.record-button.stop-recording.title" = "Stop recording";
