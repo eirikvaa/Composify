@@ -20,16 +20,16 @@ final class Project: Object {
 }
 
 extension Project {
+    static func projects() -> [Project] {
+        return RealmStore.shared.projectStore?.projectIDs
+            .compactMap { RealmStore.shared.realm.object(ofType: Project.self, forPrimaryKey: $0) }
+            .sorted() ?? []
+    }
+    
     var sections: [Section] {
         return sectionIDs
             .compactMap { RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: $0) }
             .sorted()
-    }
-    
-    static func allProjects() -> Results<Project> {
-        return RealmStore.shared.realm
-            .objects(Project.self)
-            .sorted(byKeyPath: "title")
     }
     
     var recordings: [Recording] {

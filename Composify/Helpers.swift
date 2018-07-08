@@ -53,3 +53,14 @@ extension UserDefaults {
         return RealmStore.shared.realm.object(ofType: Project.self, forPrimaryKey: id)
     }
 }
+
+extension Array where Element: Comparable {
+    
+    @discardableResult
+    mutating func removeFirst(_ element: Element) -> Element? {
+        guard let firstElement = self.first(where: { $0 == element }) else { return nil }
+        guard let index = self.index(of: firstElement) else { return nil }
+        let element = self.remove(at: index)
+        return element
+    }
+}

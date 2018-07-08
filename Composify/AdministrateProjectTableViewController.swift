@@ -26,7 +26,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
     private var fileManager = CFileManager()
     private lazy var rowCount = [
         0: 1,   // Meta Information
-        1: (self.currentProject?.sections.sorted().count ?? 0) + 1,   // Sections
+        1: (self.currentProject?.sectionIDs.count ?? 0) + 1,   // Sections
         2: 1    // Danger Zone
     ]
     private lazy var newValues: [T: String] = [:]
@@ -35,7 +35,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         .localized(.sectionsHeader),
         .localized(.dangerZoneHeader)
     ]
-    let realmStore = RealmStore.shared
+    var realmStore = RealmStore.shared
     var token: NotificationToken?
     
     // MARK: View Controller Life Cycle
@@ -49,8 +49,10 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         newValues[T((0, 0))] = currentProject?.title ?? ""
         
         if let currentProject = currentProject {
-            for (index, section) in (currentProject.sections.sorted().enumerated()) {
-                newValues[T((1, index))] = section.title
+            for (index, sectionID) in (currentProject.sectionIDs.enumerated()) {
+                if let section = Section.object(withID: sectionID) {
+                    newValues[T((1, index))] = section.title
+                }
             }
         }
         
@@ -91,7 +93,7 @@ extension AdministrateProjectTableViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return (currentProject?.sections.sorted().count ?? 0) + 1 }
+        if section == 1 { return (currentProject?.sectionIDs.count ?? 0) + 1 }
         return rowCount[section] ?? 0
     }
     
@@ -103,7 +105,7 @@ extension AdministrateProjectTableViewController {
         cell.textField.text = nil
         cell.textField.placeholder = nil
         cell.isUserInteractionEnabled = true
-        let insertRowIndex = currentProject?.sections.sorted().count ?? 0
+        let insertRowIndex = currentProject?.sectionIDs.count ?? 0
         
         switch (indexPath.section, indexPath.row) {
         case (0, _):
@@ -113,16 +115,18 @@ extension AdministrateProjectTableViewController {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = .localized(.addSection)
             } else {
-                let section = currentProject?.sections.sorted()[indexPath.row]
-                cell.textField.placeholder = section?.title
+                if let sectionID = currentProject?.sectionIDs[indexPath.row] {
+                    let section = Section.object(withID: sectionID)
+                    cell.textField.placeholder = section?.title
+                }
             }
         case (2, _):
             let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as! ButtonTableViewCell
             deleteCell.buttonTitle = .localized(.deleteProejct)
             deleteCell.action = {
-                self.fileManager.delete(self.currentProject!)
-                self.realmStore.delete(self.currentProject!)
-                self.realmStore.realm.refresh()
+                guard let currentProject = self.currentProject else { return }
+                self.fileManager.delete(currentProject)
+                self.realmStore.delete(currentProject)
                 self.dismiss(animated: true)
             }
             return deleteCell
@@ -148,7 +152,7 @@ extension AdministrateProjectTableViewController {
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         guard indexPath.section == 1 else { return .none }
         
-        let endIndex = currentProject?.sections.sorted().count ?? 0
+        let endIndex = currentProject?.sectionIDs.count ?? 0
         
         if indexPath.section == 1 && 0..<endIndex ~= indexPath.row {
             return .delete
@@ -170,20 +174,18 @@ extension AdministrateProjectTableViewController {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .insert {
             let section = Section()
-            let sectionsCount = currentProject?.sections.count ?? 0
+            let sectionsCount = currentProject?.sectionIDs.count ?? 0
             section.title = "Section \(sectionsCount + 1)"
             section.project = currentProject
-            
-            try! realmStore.realm.write {
-                self.currentProject?.sectionIDs.append(section.id)
-            }
             
             fileManager.save(section)
             realmStore.save(section, update: true)
             
             if let currentProject = currentProject {
-                for (index, section) in currentProject.sections.enumerated() {
-                    newValues[T((1, index))] = section.title
+                for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+                    if let section = Section.object(withID: sectionID) {
+                        newValues[T((1, index))] = section.title
+                    }
                 }
             }
             
@@ -194,20 +196,19 @@ extension AdministrateProjectTableViewController {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         } else if editingStyle == .delete {
             guard let currentProject = currentProject else { return }
-            guard !currentProject.sections.isEmpty else { return }
-            let sectionToDelete = currentProject.sections[indexPath.row]
+            guard !currentProject.sectionIDs.isEmpty else { return }
+            let sectionIDToDelete = currentProject.sectionIDs[indexPath.row]
+            let sectionToDelete = Section.object(withID: sectionIDToDelete)
             
-            try! realmStore.realm.write {
-                if let index = currentProject.sectionIDs.index(of: sectionToDelete.id) {
-                    self.currentProject?.sectionIDs.remove(at: index)
-                }
+            if let sectionToDelete = sectionToDelete {
+                fileManager.delete(sectionToDelete)
+                realmStore.delete(sectionToDelete)
             }
             
-            fileManager.delete(sectionToDelete)
-            realmStore.delete(sectionToDelete)
-            
-            for (index, section) in currentProject.sections.sorted().enumerated() {
-                newValues[T((1, index))] = section.title
+            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+                if let section = Section.object(withID: sectionID) {
+                    newValues[T((1, index))] = section.title
+                }
             }
             
             self.tableView?.deleteRows(at: [indexPath], with: .automatic)
@@ -252,7 +253,9 @@ extension AdministrateProjectTableViewController {
             }
         }
         
-        for (index, section) in (currentProject?.sections.sorted().enumerated())! {
+        for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
+            guard let section = Section.object(withID: sectionID) else { continue }
+            
             if newValues[T((1, index))] != section.title {
                 if let newTitle = newValues[T((1, index))], newTitle.count > 0 {
                     fileManager.rename(section, from: section.title, to: newTitle, section: section, project: currentProject)
@@ -260,7 +263,11 @@ extension AdministrateProjectTableViewController {
                 }
             }
         }
-        
-        realmStore.realm.refresh()
+    }
+}
+
+extension Section {
+    static func object(withID id: String) -> Section? {
+        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: id)
     }
 }

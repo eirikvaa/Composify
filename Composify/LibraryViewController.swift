@@ -46,19 +46,26 @@ class LibraryViewController: UIViewController {
     }()
     var pageViewController: UIPageViewController!
     let fileManager = CFileManager()
-    private var projects: Results<Project>?
+    private var projects: [Project] {
+        return Project.projects()
+    }
     private let center = NotificationCenter.default
-    let realmStore = RealmStore.shared
+    var realmStore = RealmStore.shared
     private var audioRecorder: AudioRecorder?
     let realm = try! Realm()
     var token: NotificationToken?
     var currentProject: Project? {
         didSet {
             navigationItem.title = currentProject?.title ?? .localized(.composify)
-			currentSection = currentProject?.sections.sorted().first
+            currentSectionID = currentProject?.sectionIDs.first
         }
     }
-    var currentSection: Section?
+    var currentSection: Section? {
+        guard let sectionID = currentSectionID else { return nil }
+        guard let section = Section.object(withID: sectionID) else { return nil }
+        return section
+    }
+    var currentSectionID: String?
     private var state: LibraryState = .noSections {
         didSet {
             setState(state)
@@ -66,6 +73,11 @@ class LibraryViewController: UIViewController {
     }
     
     // MARK: @IBOutlet
+    @IBOutlet weak var pageControl: UIPageControl! {
+        didSet {
+            pageControl.numberOfPages = self.projects.count
+        }
+    }
     @IBOutlet weak var administerBarButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -95,30 +107,30 @@ class LibraryViewController: UIViewController {
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
-        projects = Project.allProjects()
-        currentProject = projects?.first
+        currentProject = projects.first
         UserDefaults.standard.persist(project: currentProject)
         
         configurePageViewController()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: .localized(.menu), style: .plain, target: self, action: #selector(showMenu))
-        navigationItem.rightBarButtonItem = currentProject?.sections.sorted().first?.recordings.isEmpty == true ? nil : editButtonItem
+        
+        if let firstSectionID = currentProject?.sectionIDs.first,
+            let section = Section.object(withID: firstSectionID) {
+            navigationItem.rightBarButtonItem = section.recordings.isEmpty == true ? nil : editButtonItem
+        }
         
         self.updateUI()
         
         token = realm.observe { notification, realm in
-            self.projects = Project.allProjects()
-            if let lastProject = UserDefaults.standard.lastProject() {
-                self.currentProject = lastProject
-            } else {
-                self.currentProject = self.projects?.first
-            }
+            self.currentProject = self.projects.first
             
-            if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
-                self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+            DispatchQueue.main.async {
+                if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
+                    self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+                }
+                
+                self.updateUI()
             }
-            
-            self.updateUI()
         }
     }
     
@@ -179,14 +191,14 @@ extension LibraryViewController {
                     self.updateUI()
                 }
             })
-            let cancel = UIAlertAction(title: .localized(.save), style: .cancel)
+            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
             addProjectAlert.addAction(save)
             addProjectAlert.addAction(cancel)
             
             self.present(addProjectAlert, animated: true)
         }
         
-        projects?.forEach { project in
+        projects.forEach { project in
             let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { (action) in
                 self.currentProject = project
                 
@@ -230,11 +242,6 @@ extension LibraryViewController {
             audioRecorder = AudioRecorder(url: recording.url)
             audioRecorder?.recorder.record()
             recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
-            
-            try! realmStore.realm.write {
-                currentSection.recordingIDs.append(recording.id)
-            }
-            
             realmStore.save(recording)
             return
         }
@@ -248,20 +255,20 @@ extension LibraryViewController {
 extension LibraryViewController {
     func updateUI() {
         // Refresh collection view
-        self.collectionView.dataSource = nil
-        self.collectionView.delegate = nil
-        self.collectionView.dataSource = collectionViewDataSource
-        self.collectionView.delegate = collectionViewDelegate
+        collectionView.dataSource = nil
+        collectionView.delegate = nil
+        collectionView.dataSource = collectionViewDataSource
+        collectionView.delegate = collectionViewDelegate
         
-        self.collectionView.collectionViewLayout.invalidateLayout()
-        self.collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.reloadData()
         
         // Refresh table view
         if let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController {
             recordingsViewController.tableView.reloadData()
         }
         
-        if currentSection?.recordings.count == 0 {
+        if currentSection?.recordingIDs.count == 0 {
             state = .noRecordings
             return
         }
@@ -300,6 +307,8 @@ extension LibraryViewController {
         recordingsViewController?.tableView.backgroundView = nil
         recordingsViewController?.tableView.separatorStyle = .singleLine
         recordingsViewController?.tableView.isHidden = false
+        
+        pageControl.numberOfPages = currentProject?.sections.count ?? 0
         
         switch state {
         case .noSections:
@@ -345,8 +354,8 @@ private extension LibraryViewController {
 			completion: nil)
 		
         pageViewController.view.frame = containerView.bounds
-		addChildViewController(pageViewController)
+        addChildViewController(pageViewController)
 		containerView.addSubview(pageViewController.view)
-		pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParentViewController: self)
 	}
 }

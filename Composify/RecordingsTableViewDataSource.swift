@@ -50,9 +50,9 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
 		return cell
 	}
 
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		if editingStyle == .insert {
-			libraryViewController.tableView.insertRows(at: [indexPath], with: .fade)
-		}
-	}
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .insert {
+            libraryViewController.tableView.insertRows(at: [indexPath], with: .fade)
+        }
+    }
 }

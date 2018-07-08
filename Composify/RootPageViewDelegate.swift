@@ -22,11 +22,11 @@ private extension RootPageViewDelegate {
         guard let topViewController = pageViewController.viewControllers?.first as? RecordingsViewController else { return }
         guard let pageIndex = topViewController.pageIndex else { return }
         guard let currentProject = libraryViewController.currentProject else { return }
-        guard currentProject.sections.sorted().count > 0 else { return }
-        libraryViewController.currentSection = currentProject.sections.sorted()[pageIndex]
         
         let indexPath = IndexPath(row: pageIndex, section: 0)
         libraryViewController.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
         libraryViewController.updateUI()
+        libraryViewController.pageControl.currentPage = pageIndex
+        libraryViewController.currentProject = currentProject
     }
 }

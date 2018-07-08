@@ -21,10 +21,14 @@ extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.Cells.sectionCell, for: indexPath) as! LibraryCollectionViewCell
-		
-		cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
-        cell.titleLabel.text = libraryViewController.currentProject?.sections.sorted()[indexPath.row].title
+        
+        if let sectionID = libraryViewController.currentProject?.sectionIDs[indexPath.row] {
+            let section = RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: sectionID)
+            cell.titleLabel.text = section?.title
+        }
 		
 		return cell		
 	}

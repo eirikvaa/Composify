@@ -49,11 +49,6 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				let recording = currentSection.recordings[indexPath.row]
 
 				self.libraryViewController.fileManager.delete(recording)
-                try! self.realmStore.realm.write {
-                    if let index = currentSection.recordingIDs.index(of: recording.id) {
-                        currentSection.recordingIDs.remove(at: index)
-                    }
-                }
                 self.realmStore.delete(recording)
                 self.libraryViewController.updateUI()
 			}

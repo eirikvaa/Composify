@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,20 +18,20 @@
                         <viewControllerLayoutGuide type="bottom" id="tWS-Pa-CnK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2v3-Us-6Gb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
-                                <rect key="frame" x="0.0" y="128" width="600" height="374"/>
+                                <rect key="frame" x="0.0" y="122" width="375" height="402"/>
                                 <connections>
                                     <segue destination="Dzl-1V-9Fq" kind="embed" id="xMb-ru-wLX"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
-                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-HO-ZNt">
-                                        <rect key="frame" x="16" y="8" width="568" height="66"/>
+                                        <rect key="frame" x="16" y="8" width="343" height="66"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" title="Start recording">
@@ -47,7 +51,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PHP-3k-8wT">
-                                <rect key="frame" x="0.0" y="70" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -89,20 +93,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tym-dz-gQ7">
+                                <rect key="frame" x="16" y="532" width="343" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" id="0X5-Nj-1jw"/>
+                            <constraint firstItem="tym-dz-gQ7" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" id="2be-41-9p3"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="PHP-3k-8wT" secondAttribute="bottom" constant="8" id="4Ai-mk-dtB"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="5A3-32-jIT"/>
                             <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="7fp-rw-jh7"/>
                             <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="CRD-UW-N1Y"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="PHP-3k-8wT" secondAttribute="leading" id="Kxl-n9-j63"/>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="M4d-Ty-AQY"/>
+                            <constraint firstItem="tym-dz-gQ7" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leadingMargin" id="XVA-5k-QYA"/>
                             <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="aK9-wO-6tF"/>
                             <constraint firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="aa0-Jv-m2q"/>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="tym-dz-gQ7" secondAttribute="bottom" constant="8" id="noh-Cv-DYH"/>
                             <constraint firstItem="PHP-3k-8wT" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="vfp-iD-dQP"/>
+                            <constraint firstItem="tym-dz-gQ7" firstAttribute="trailing" secondItem="2v3-Us-6Gb" secondAttribute="trailingMargin" id="zpP-1C-CQD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Project 1 ▸" id="l8w-mm-O0H">
@@ -116,6 +128,7 @@
                         <outlet property="administerBarButton" destination="A5F-F3-Fdc" id="y2S-5G-yiM"/>
                         <outlet property="collectionView" destination="PHP-3k-8wT" id="Vk2-2S-5z7"/>
                         <outlet property="containerView" destination="nUi-15-pxI" id="bXY-f0-07s"/>
+                        <outlet property="pageControl" destination="tym-dz-gQ7" id="qMC-KI-qbp"/>
                         <outlet property="recordAudioButton" destination="ibo-HO-ZNt" id="mVS-2h-thc"/>
                         <outlet property="recordAudioView" destination="1Cc-PW-NLT" id="J2O-Lu-y3h"/>
                     </connections>
@@ -151,14 +164,14 @@
                         <viewControllerLayoutGuide type="bottom" id="keX-55-eJD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pxY-3f-4Qg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="380"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbw-T7-ayy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3442" y="-699"/>
+            <point key="canvasLocation" x="3613" y="-699"/>
         </scene>
         <!--contentPageViewController-->
         <scene sceneID="WFN-ba-pHK">
@@ -166,7 +179,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="contentPageViewController" storyboardName="Recording" referencedIdentifier="contentPageViewController" id="Le2-Hg-74I" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tal-3G-qg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3958" y="-701"/>
+            <point key="canvasLocation" x="4382" y="-701"/>
         </scene>
     </scenes>
 </document>

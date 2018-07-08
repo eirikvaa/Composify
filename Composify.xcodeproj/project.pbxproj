@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09A69B40E969BFFB7D32A218 /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */; };
 		3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */; };
 		3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */; };
-		58A72BC8F3EC1A82C6D099B9 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C724435FFE294930FD0B0552 /* Pods_Composify.framework */; };
-		64D76355D7D028D6664571C8 /* Pods_ComposifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17084F56A85AF5FCB099B829 /* Pods_ComposifyUITests.framework */; };
-		8771DD95D91E6C6AA87B4B9C /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BA803C9DE97A2D2D95C324 /* Pods_ComposifyTests.framework */; };
+		597EAD8504DADF22FA70D7C2 /* Pods_ComposifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */; };
+		66F05DD0CC5A39D15EE28B42 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */; };
 		E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* CFileManager.swift */; };
+		E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51248AD20E787DF00B178C2 /* LogicTests.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -77,17 +78,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0589A2F06D0F2D6D5C57D7A0 /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		17084F56A85AF5FCB099B829 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDelegate.swift; sourceTree = "<group>"; };
-		4BF2483BE36B9F5125B4042A /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
-		68F956AB3A3710EAB946E906 /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
-		99481AB45598DC6C81A695A1 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		9FB4505EDD490CF70EFC0426 /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
-		A1BA803C9DE97A2D2D95C324 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C724435FFE294930FD0B0552 /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
+		9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
+		DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5055BDE1D44BB5800D2B796 /* CFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFileManager.swift; sourceTree = "<group>"; };
+		E51248AD20E787DF00B178C2 /* LogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicTests.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -133,7 +136,6 @@
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F0546FDC5F1FAF254583600B /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
-				58A72BC8F3EC1A82C6D099B9 /* Pods_Composify.framework in Frameworks */,
+				66F05DD0CC5A39D15EE28B42 /* Pods_Composify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64D76355D7D028D6664571C8 /* Pods_ComposifyUITests.framework in Frameworks */,
+				597EAD8504DADF22FA70D7C2 /* Pods_ComposifyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,22 +160,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8771DD95D91E6C6AA87B4B9C /* Pods_ComposifyTests.framework in Frameworks */,
+				09A69B40E969BFFB7D32A218 /* Pods_ComposifyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D9F58BA7942BB8E5718A49F /* Pods */ = {
+		3DDC00F7836D0EC111594242 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9FB4505EDD490CF70EFC0426 /* Pods-Composify.debug.xcconfig */,
-				68F956AB3A3710EAB946E906 /* Pods-Composify.release.xcconfig */,
-				0589A2F06D0F2D6D5C57D7A0 /* Pods-ComposifyTests.debug.xcconfig */,
-				4BF2483BE36B9F5125B4042A /* Pods-ComposifyTests.release.xcconfig */,
-				99481AB45598DC6C81A695A1 /* Pods-ComposifyUITests.debug.xcconfig */,
-				F0546FDC5F1FAF254583600B /* Pods-ComposifyUITests.release.xcconfig */,
+				660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */,
+				D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */,
+				0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */,
+				3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */,
+				5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */,
+				9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -213,7 +215,7 @@
 				E57077561DD73BBA00B01940 /* ComposifyUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
 				E56C327B1FF6FB8A00AB8375 /* Frameworks */,
-				1D9F58BA7942BB8E5718A49F /* Pods */,
+				3DDC00F7836D0EC111594242 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -287,9 +289,9 @@
 			isa = PBXGroup;
 			children = (
 				E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */,
-				C724435FFE294930FD0B0552 /* Pods_Composify.framework */,
-				A1BA803C9DE97A2D2D95C324 /* Pods_ComposifyTests.framework */,
-				17084F56A85AF5FCB099B829 /* Pods_ComposifyUITests.framework */,
+				C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */,
+				E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */,
+				DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,6 +322,7 @@
 				E58C57F51DD879C200348C65 /* CFileManagerTests.swift */,
 				E590657320E3F4AF0028453D /* RealmTests.swift */,
 				E5152F4520E403760031572E /* ProjectTests.swift */,
+				E51248AD20E787DF00B178C2 /* LogicTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
@@ -388,12 +391,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
-				8878F5BEEEC68AB696A306AB /* [CP] Check Pods Manifest.lock */,
+				AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
 				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
-				0EC80569FC22A4C9398B634D /* [CP] Embed Pods Frameworks */,
+				E2D44F927E4BB27C842419FC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
@@ -409,7 +412,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "ComposifyUITests" */;
 			buildPhases = (
-				90C6E3E2726E8080CBBE57F5 /* [CP] Check Pods Manifest.lock */,
+				88B5784292CA4ECE4C3EB4DC /* [CP] Check Pods Manifest.lock */,
 				E57077511DD73BBA00B01940 /* Sources */,
 				E57077521DD73BBA00B01940 /* Frameworks */,
 				E57077531DD73BBA00B01940 /* Resources */,
@@ -428,7 +431,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "ComposifyTests" */;
 			buildPhases = (
-				C1FE070F267541A9E4AE9E37 /* [CP] Check Pods Manifest.lock */,
+				86626D488FAA0DC8D28898AC /* [CP] Check Pods Manifest.lock */,
 				E58C57E51DD8799D00348C65 /* Sources */,
 				E58C57E61DD8799D00348C65 /* Frameworks */,
 				E58C57E71DD8799D00348C65 /* Resources */,
@@ -522,27 +525,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0EC80569FC22A4C9398B634D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8878F5BEEEC68AB696A306AB /* [CP] Check Pods Manifest.lock */ = {
+		86626D488FAA0DC8D28898AC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -553,14 +536,14 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Composify-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ComposifyTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		90C6E3E2726E8080CBBE57F5 /* [CP] Check Pods Manifest.lock */ = {
+		88B5784292CA4ECE4C3EB4DC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -578,7 +561,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C1FE070F267541A9E4AE9E37 /* [CP] Check Pods Manifest.lock */ = {
+		AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,11 +572,31 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ComposifyTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Composify-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2D44F927E4BB27C842419FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
@@ -658,6 +661,7 @@
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
 				E58C57F71DD879C200348C65 /* CFileManagerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
+				E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -770,7 +774,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Composify;
@@ -778,7 +782,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -828,13 +832,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -842,7 +846,7 @@
 		};
 		E564602A1D3B50B500AA6557 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9FB4505EDD490CF70EFC0426 /* Pods-Composify.debug.xcconfig */;
+			baseConfigurationReference = 660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -854,7 +858,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.composify;
@@ -868,7 +872,7 @@
 		};
 		E564602B1D3B50B500AA6557 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68F956AB3A3710EAB946E906 /* Pods-Composify.release.xcconfig */;
+			baseConfigurationReference = D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -880,7 +884,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.composify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -893,13 +897,13 @@
 		};
 		E570775D1DD73BBA00B01940 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99481AB45598DC6C81A695A1 /* Pods-ComposifyUITests.debug.xcconfig */;
+			baseConfigurationReference = 5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				INFOPLIST_FILE = ComposifyUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -911,13 +915,13 @@
 		};
 		E570775E1DD73BBA00B01940 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0546FDC5F1FAF254583600B /* Pods-ComposifyUITests.release.xcconfig */;
+			baseConfigurationReference = 9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				INFOPLIST_FILE = ComposifyUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -929,7 +933,7 @@
 		};
 		E58C57F11DD8799D00348C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0589A2F06D0F2D6D5C57D7A0 /* Pods-ComposifyTests.debug.xcconfig */;
+			baseConfigurationReference = 0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -938,21 +942,21 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Composify.app/Composify";
 			};
 			name = Debug;
 		};
 		E58C57F21DD8799D00348C65 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BF2483BE36B9F5125B4042A /* Pods-ComposifyTests.release.xcconfig */;
+			baseConfigurationReference = 3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -961,13 +965,13 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Composify.app/Composify";
 			};
 			name = Release;
