@@ -71,6 +71,7 @@ class LibraryViewController: UIViewController {
             setState(state)
         }
     }
+    var errorViewController: ErrorViewController?
     
     // MARK: @IBOutlet
     @IBOutlet weak var pageControl: UIPageControl! {
@@ -295,35 +296,23 @@ extension LibraryViewController {
     }
     
     func setState(_ state: State) {
-        let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController
-        
-        let emptyStateLabel = UILabel(frame: view.frame)
-        emptyStateLabel.textAlignment = .center
-        emptyStateLabel.numberOfLines = 0
-        
         navigationItem.rightBarButtonItem = nil
-        recordAudioButton.isHidden = false
-        collectionView.backgroundView = nil
-        recordingsViewController?.tableView.backgroundView = nil
-        recordingsViewController?.tableView.separatorStyle = .singleLine
-        recordingsViewController?.tableView.isHidden = false
-        
         pageControl.numberOfPages = currentProject?.sections.count ?? 0
+        errorViewController?.remove()
         
         switch state {
         case .noSections:
-            recordAudioButton.isHidden = true
-            emptyStateLabel.text = .localized(.noSections)
-            collectionView.backgroundView = emptyStateLabel
-            recordingsViewController?.tableView.isHidden = true
-            
+            errorViewController = ErrorViewController(labelText: .localized(.noSections))
+            if let errorVieController = errorViewController {
+                add(errorVieController)
+            }
         case .notEmpty:
             navigationItem.rightBarButtonItem = editButtonItem
         case .noProjects:
-            recordAudioButton.isHidden = true
-            emptyStateLabel.text = .localized(.noProjects)
-            collectionView.backgroundView = emptyStateLabel
-            recordingsViewController?.tableView.isHidden = true
+            errorViewController = ErrorViewController(labelText: .localized(.noProjects))
+            if let errorViewController = errorViewController {
+                add(errorViewController)
+            }
         default:
             break
         }
