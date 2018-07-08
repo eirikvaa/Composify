@@ -138,7 +138,7 @@ class LibraryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationItem.title = self.currentProject?.title
+        self.navigationItem.title = self.currentProject?.title ?? .localized(.composify)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
