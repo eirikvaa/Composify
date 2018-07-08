@@ -13,7 +13,7 @@ import RealmSwift
 
 class RealmTests: XCTestCase {
 
-    let realmStore = RealmStore.shared
+    var realmStore = RealmStore.shared
     
     override func setUp() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = #file
