@@ -36,9 +36,17 @@ class ButtonTableViewCell: UITableViewCell {
 
 extension ButtonTableViewCell {
     func setupViews() {
-        button = UIButton(frame: contentView.frame)
+        button = UIButton(frame: .zero)
         button.setTitleColor(.red, for: .normal)
         
         contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: contentView.topAnchor),
+            button.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            button.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            button.heightAnchor.constraint(equalToConstant: 44)
+        ])
     }
 }

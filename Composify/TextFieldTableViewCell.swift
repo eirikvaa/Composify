@@ -26,10 +26,17 @@ class TextFieldTableViewCell: UITableViewCell {
 
 extension TextFieldTableViewCell {
     func setupViews() {
-        let frame = CGRect(x: separatorInset.left, y: 0, width: contentView.frame.width - separatorInset.left, height: contentView.frame.height)
-        textField = UITextField(frame: frame)
+        textField = UITextField(frame: .zero)
         textField.placeholder = placeholder
         
         contentView.addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: separatorInset.left),
+            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            textField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: separatorInset.right),
+            textField.heightAnchor.constraint(equalToConstant: 44)
+        ])
     }
 }

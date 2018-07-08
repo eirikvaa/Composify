@@ -176,8 +176,10 @@ extension LibraryViewController {
         let addProject = UIAlertAction(title: .localized(.addProject), style: .default) { _ in
             let addProjectAlert = UIAlertController(title: .localized(.addProject), message: nil, preferredStyle: .alert)
             addProjectAlert.addTextField { textField in
+                textField.autocapitalizationType = .words
                 textField.placeholder = .localized(.projectTitle)
                 textField.returnKeyType = .done
+                textField.clearButtonMode = .whileEditing
             }
             let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {

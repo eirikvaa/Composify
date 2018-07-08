@@ -110,6 +110,9 @@ extension AdministrateProjectTableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, _):
             cell.textField.placeholder = currentProject?.title
+            cell.textField.autocapitalizationType = .words
+            cell.textField.clearButtonMode = .whileEditing
+            cell.textField.returnKeyType = .done
         case (1, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
@@ -118,6 +121,9 @@ extension AdministrateProjectTableViewController {
                 if let sectionID = currentProject?.sectionIDs[indexPath.row] {
                     let section = Section.object(withID: sectionID)
                     cell.textField.placeholder = section?.title
+                    cell.textField.autocapitalizationType = .words
+                    cell.textField.clearButtonMode = .whileEditing
+                    cell.textField.returnKeyType = .done
                 }
             }
         case (2, _):
