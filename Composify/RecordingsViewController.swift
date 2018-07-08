@@ -28,9 +28,9 @@ class RecordingsViewController: UIViewController {
     var currentlyPlayingRecording: Recording?
     var audioPlayer: AudioPlayer? {
         didSet {
-            if audioPlayer != nil {
-                audioPlayer?.player.delegate = tableViewDelegate
-                audioPlayer?.player.play()
+            if let audioPlayer = audioPlayer {
+                audioPlayer.player.delegate = tableViewDelegate
+                audioPlayer.player.play()
             }
         }
     }

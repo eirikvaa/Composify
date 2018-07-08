@@ -12,20 +12,26 @@ class RootPageViewDataSource: NSObject {
 	var libraryViewController: LibraryViewController!
 
 	func indexOfViewController(_ viewController: RecordingsViewController) -> Int {
-		if let project = viewController.project, let section = viewController.section {
-			return project.sortedSections.index(of: section) ?? NSNotFound
-		}
-		return NSNotFound
+        return viewController.pageIndex ?? NSNotFound
 	}
 
 	func viewController(at index: Int, storyboard: UIStoryboard) -> RecordingsViewController? {
-		if libraryViewController.currentProject?.sections.count == 0 || index >= (libraryViewController.currentProject?.sections.count)! {
+        guard let count = libraryViewController.currentProject?.sectionIDs.count,
+            count > 0 && index < count else { return nil }
+        
+        //let count = libraryViewController.currentProject?.sections.count ?? 0
+        //guard count > 0 && index < count else { return nil }
+        
+        /*
+        if count == 0 || index >= count {
 			return nil
-		}
-
+		}*/
+        
+        // guard index < count else { return nil }
+        
 		let recordingsViewController = storyboard.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
 		recordingsViewController.project = libraryViewController.currentProject
-		recordingsViewController.section = libraryViewController.currentProject?.sortedSections[index]
+        recordingsViewController.section = libraryViewController.currentProject?.sections[index]
 		recordingsViewController.tableViewDataSource.libraryViewController = libraryViewController
 		recordingsViewController.tableViewDelegate.libraryViewController = libraryViewController
 		recordingsViewController.pageIndex = index
@@ -36,7 +42,8 @@ class RootPageViewDataSource: NSObject {
 
 extension RootPageViewDataSource: UIPageViewControllerDataSource {
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! RecordingsViewController)
+        guard let viewController = viewController as? RecordingsViewController else { return nil }
+		var index = indexOfViewController(viewController)
 
 		if index == NSNotFound || index == 0 {
 			return nil
@@ -48,7 +55,8 @@ extension RootPageViewDataSource: UIPageViewControllerDataSource {
 	}
 
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-		var index = indexOfViewController(viewController as! RecordingsViewController)
+        guard let viewController = viewController as? RecordingsViewController else { return nil }
+		var index = indexOfViewController(viewController)
 
 		if index == NSNotFound {
 			return nil
@@ -56,12 +64,10 @@ extension RootPageViewDataSource: UIPageViewControllerDataSource {
 
 		index += 1
 
-		if index == libraryViewController.currentProject?.sections.count {
+		if index == libraryViewController.currentProject?.sectionIDs.count ?? 0 {
 			return nil
 		}
 
 		return self.viewController(at: index, storyboard: libraryViewController.storyboard!)
 	}
 }
-
-

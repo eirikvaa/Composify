@@ -11,11 +11,22 @@ class RootPageViewDelegate: NSObject {
 
 extension RootPageViewDelegate: UIPageViewControllerDelegate {
 	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-		if finished {
-			if let top = pageViewController.viewControllers?.first as? RecordingsViewController {
-				let indexPath = IndexPath(item: top.pageIndex ?? 0, section: 0)
-				libraryViewController.sectionCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-			}
-		}
+        let pageIndex = (pageViewController.viewControllers?.first as? RecordingsViewController)?.pageIndex
+
+        reloadViewController(pageViewController, pageIndex: pageIndex!)
 	}
+}
+
+private extension RootPageViewDelegate {
+    func reloadViewController(_ pageViewController: UIPageViewController, pageIndex: Int) {
+        guard let topViewController = pageViewController.viewControllers?.first as? RecordingsViewController else { return }
+        guard let pageIndex = topViewController.pageIndex else { return }
+        guard let currentProject = libraryViewController.currentProject else { return }
+        
+        let indexPath = IndexPath(row: pageIndex, section: 0)
+        libraryViewController.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+        libraryViewController.updateUI()
+        libraryViewController.pageControl.currentPage = pageIndex
+        libraryViewController.currentProject = currentProject
+    }
 }

@@ -7,17 +7,40 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
+import AVFoundation
 
-class Recording: NSManagedObject {
-    convenience init?(with title: String, section: Section, project: Project, fileExtension: FileSystemExtensions, insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-        let entity = NSEntityDescription.entity(forEntityName: Strings.CoreData.recordingEntity, in: context)!
-        self.init(entity: entity, insertInto: context)
+class Recording: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var title = ""
+    @objc dynamic var project: Project?
+    @objc dynamic var section: Section?
+    @objc dynamic var dateRecorded = Date()
+    @objc dynamic var fileExtension = ""
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
 
-        self.title = title
-        self.section = section
-        self.project = project
-        self.fileExtension = fileExtension.rawValue
-        self.dateRecorded = Date()
+extension Recording: FileSystemObject {
+    var url: URL {
+        return section!.url
+            .appendingPathComponent(title)
+            .appendingPathExtension(fileExtension)
+    }
+}
+
+extension Recording {
+    var duration: Float64 {
+        let audioAsset = AVURLAsset(url: url)
+        let assetDuration = audioAsset.duration
+        return CMTimeGetSeconds(assetDuration)
+    }
+}
+
+extension Recording: Comparable {
+    static func < (lhs: Recording, rhs: Recording) -> Bool {
+        return lhs.title < rhs.title
     }
 }

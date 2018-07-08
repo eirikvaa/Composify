@@ -9,8 +9,9 @@
 import UIKit
 
 struct Colors {
-	static let red = UIColor(red: 0.91, green: 0.40, blue: 0.36, alpha: 1.00)
-    static let edit = UIColor(red: 68.0 / 255.0, green: 108.0 / 255.0, blue: 179.0 / 255.0, alpha: 1.0)
+	static let mainColor = UIColor(red: 0.20, green: 0.51, blue: 0.71, alpha: 1.00)
+    static let secondaryColor = UIColor(red: 0.94, green: 0.62, blue: 0.17, alpha: 1.00)
+    static let edit = Colors.mainColor
     static let delete = UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
 }
 
@@ -24,6 +25,9 @@ struct Strings {
         static let projectCell = "ProjectCell"
         static let sectionCell = "SectionCell"
         static let recordingCell = "RecordingCell"
+        static let deleteCell = "DeleteCell"
+        static let cell = "Cell"
+        static let administerCell = "AdministerCell"
     }
     
     struct CoreData {

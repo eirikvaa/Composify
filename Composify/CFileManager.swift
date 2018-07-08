@@ -110,8 +110,8 @@ struct CFileManager {
 					.appendingPathComponent(section.title)
 			} else {
 				destination = destination
-					.appendingPathComponent(recording.project.title)
-					.appendingPathComponent(recording.section.title)
+                    .appendingPathComponent(recording.project?.title ?? "")
+                    .appendingPathComponent(recording.section?.title ?? "")
 			}
 			
 			destination = destination

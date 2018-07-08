@@ -7,6 +7,36 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
-class Section: NSManagedObject {}
+class Section: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var title = ""
+    @objc dynamic var project: Project?
+    var recordingIDs = List<String>()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+extension Section {
+    var recordings: [Recording] {
+        return recordingIDs
+            .compactMap { RealmStore.shared.realm.object(ofType: Recording.self, forPrimaryKey: $0)}
+            .sorted()
+    }
+}
+
+extension Section: FileSystemObject {
+    var url: URL {
+        return project!.url
+            .appendingPathComponent(title)
+    }
+}
+
+extension Section: Comparable {
+    static func <(lhs: Section, rhs: Section) -> Bool {
+        return lhs.title <= rhs.title
+    }
+}

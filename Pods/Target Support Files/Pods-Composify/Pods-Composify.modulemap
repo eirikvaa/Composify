@@ -1,0 +1,6 @@
+framework module Pods_Composify {
+  umbrella header "Pods-Composify-umbrella.h"
+
+  export *
+  module * { export * }
+}

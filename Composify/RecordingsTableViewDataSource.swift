@@ -20,40 +20,39 @@ class RecordingsTableViewDataSource: NSObject {
 
 extension RecordingsTableViewDataSource: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return parentViewController.section?.recordings.count ?? 0
+        guard let recordings = parentViewController.section?.recordings else { return 0 }
+        return recordings.count
 	}
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (libraryViewController.currentSection?.recordings.count ?? 0) > 0 ? 1 : 0
+        guard parentViewController.section?.isInvalidated == false else { return 0 }
+        guard let recordings = parentViewController.section?.recordings else { return 0 }
+        return recordings.count > 0 ? 1 : 0
     }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as! RecordingTableViewCell
-        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as? RecordingTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.contentView.isUserInteractionEnabled = false
+        cell.selectionStyle = .none
+        
+        let recording = parentViewController.section?.recordings[indexPath.row]
+        let isCurrentlyPlayingRecording = parentViewController.currentlyPlayingRecording == recording
+        
+        cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
-
-		cell.contentView.isUserInteractionEnabled = false
-		cell.selectionStyle = .none
+        cell.titleLabel.text = recording?.title
 		cell.playButton.alpha = 1
-
-		let recording = parentViewController.section?.recordings.sorted()[indexPath.row]
-		
-		if parentViewController.currentlyPlayingRecording == recording {
-			cell.playButton.setImage(Images.pause, for: .normal)
-		} else {
-			cell.playButton.setImage(Images.play, for: .normal)
-		}
-
-		if let recording = recording {
-			cell.titleLabel.text = recording.title
-		}
-
+        cell.playButton.setImage(isCurrentlyPlayingRecording ? Images.pause : Images.play, for: .normal)
+        
 		return cell
 	}
 
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		if editingStyle == .insert {
-			libraryViewController.recordingsTableView.insertRows(at: [indexPath], with: .fade)
-		}
-	}
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .insert {
+            libraryViewController.tableView.insertRows(at: [indexPath], with: .fade)
+        }
+    }
 }
