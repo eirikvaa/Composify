@@ -117,7 +117,7 @@ class LibraryViewController: UIViewController {
         
         if let firstSectionID = currentProject?.sectionIDs.first,
             let section = Section.object(withID: firstSectionID) {
-            navigationItem.rightBarButtonItem = section.recordings.isEmpty == true ? nil : editButtonItem
+            navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
         }
         
         self.updateUI()
