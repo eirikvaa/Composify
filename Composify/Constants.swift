@@ -30,17 +30,6 @@ struct Strings {
         static let administerCell = "AdministerCell"
     }
     
-    struct CoreData {
-        static let projectEntity = "Project"
-        static let sectionEntity = "Section"
-        static let recordingEntity = "Recording"
-        static let modelName = "Composify"
-    }
-    
-    struct KeyValues {
-        static let view = "view"
-    }
-    
     struct StoryboardIDs {
         static let contentPageViewController = "contentPageViewController"
     }
