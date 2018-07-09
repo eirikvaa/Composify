@@ -22,7 +22,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
             tableView?.setEditing(true, animated: false)
         }
     }
-    var currentProject: Project? = nil
+    var currentProject: Project?
     private var fileManager = CFileManager()
     private lazy var rowCount = [
         0: 1,   // Meta Information
@@ -69,7 +69,6 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         tableView?.setEditing(editing, animated: animated)
     }
     
-    // TODO: This should NOT happen on text field change. I think.
     @objc func textFieldChange(_ textField: UITextField) {
         var view: UIView? = textField
         
@@ -98,7 +97,7 @@ extension AdministrateProjectTableViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as! TextFieldTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
         cell.textField.returnKeyType = .done
         cell.tag = 1234
         cell.textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
@@ -127,7 +126,7 @@ extension AdministrateProjectTableViewController {
                 }
             }
         case (2, _):
-            let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as! ButtonTableViewCell
+            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
             deleteCell.buttonTitle = .localized(.deleteProejct)
             deleteCell.action = {
                 guard let currentProject = self.currentProject else { return }
@@ -202,7 +201,7 @@ extension AdministrateProjectTableViewController {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         } else if editingStyle == .delete {
             guard let currentProject = currentProject else { return }
-            guard !currentProject.sectionIDs.isEmpty else { return }
+            guard currentProject.sectionIDs.hasElements else { return }
             let sectionIDToDelete = currentProject.sectionIDs[indexPath.row]
             let sectionToDelete = Section.object(withID: sectionIDToDelete)
             
@@ -253,7 +252,7 @@ extension AdministrateProjectTableViewController {
 extension AdministrateProjectTableViewController {
     func persistChanges() {
         if newValues[T((0, 0))] != currentProject?.title {
-            if let newTitle = newValues[T((0, 0))], newTitle.count > 0 {
+            if let newTitle = newValues[T((0, 0))], newTitle.hasElements {
                 realmStore.rename(currentProject!, to: newTitle)
             }
         }
@@ -262,7 +261,7 @@ extension AdministrateProjectTableViewController {
             guard let section = Section.object(withID: sectionID) else { continue }
             
             if newValues[T((1, index))] != section.title {
-                if let newTitle = newValues[T((1, index))], newTitle.count > 0 {
+                if let newTitle = newValues[T((1, index))], newTitle.hasElements {
                     realmStore.rename(section, to: newTitle)
                 }
             }

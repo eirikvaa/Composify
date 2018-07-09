@@ -23,7 +23,7 @@ extension T: Hashable {
 }
 
 extension T: Equatable {
-    static func ==(lhs: T, rhs: T) -> Bool {
+    static func == (lhs: T, rhs: T) -> Bool {
         return lhs.t.0 == rhs.t.0 && lhs.t.1 == rhs.t.1
     }
 }
@@ -35,7 +35,7 @@ extension T: CustomStringConvertible {
 }
 
 extension UIFont {
-    static func preferredBoldFont(for style: UIFontTextStyle) -> UIFont  {
+    static func preferredBoldFont(for style: UIFontTextStyle) -> UIFont {
         let font = UIFont.preferredFont(forTextStyle: style)
         let fontDescriptor = font.fontDescriptor.withSymbolicTraits(.traitBold)
         return UIFont(descriptor: fontDescriptor!, size: 0)
@@ -80,5 +80,11 @@ extension UIViewController {
         willMove(toParentViewController: nil)
         removeFromParentViewController()
         view.removeFromSuperview()
+    }
+}
+
+extension Collection {
+    var hasElements: Bool {
+        return !isEmpty
     }
 }

@@ -36,7 +36,7 @@ extension Section: FileSystemObject {
 }
 
 extension Section: Comparable {
-    static func <(lhs: Section, rhs: Section) -> Bool {
+    static func < (lhs: Section, rhs: Section) -> Bool {
         return lhs.title <= rhs.title
     }
 }

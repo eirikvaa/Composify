@@ -40,7 +40,7 @@ extension Project {
 }
 
 extension Project: Comparable {
-    static func <(lhs: Project, rhs: Project) -> Bool {
+    static func < (lhs: Project, rhs: Project) -> Bool {
         return lhs.title < rhs.title
     }
 }

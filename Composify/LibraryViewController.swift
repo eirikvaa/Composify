@@ -122,7 +122,7 @@ class LibraryViewController: UIViewController {
         
         self.updateUI()
         
-        token = realm.observe { notification, realm in
+        token = realm.observe { _, _ in
             self.currentProject = self.projects.first
             
             DispatchQueue.main.async {
@@ -202,7 +202,7 @@ extension LibraryViewController {
         }
         
         projects.forEach { project in
-            let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { (action) in
+            let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { _ in
                 self.currentProject = project
                 
                 UserDefaults.standard.persist(project: self.currentProject)
@@ -270,7 +270,7 @@ extension LibraryViewController {
             recordingsViewController.tableView.reloadData()
         }
         
-        if currentSection?.recordingIDs.count == 0 {
+        if currentSection?.recordingIDs.isEmpty == true {
             state = .noRecordings
             return
         }
@@ -331,21 +331,22 @@ private extension LibraryViewController {
 		pageViewController.delegate = pageViewDelegate
 		pageViewDelegate.libraryViewController = self
 		
-		let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
-		startingViewController.project = currentProject
-		startingViewController.section = currentSection
-		startingViewController.pageIndex = 0
-		startingViewController.tableViewDelegate.libraryViewController = self
-		startingViewController.tableViewDataSource.libraryViewController = self
-		pageViewController.setViewControllers(
-			[startingViewController],
-			direction: .forward,
-			animated: true,
-			completion: nil)
-		
-        pageViewController.view.frame = containerView.bounds
-        addChildViewController(pageViewController)
-		containerView.addSubview(pageViewController.view)
-        pageViewController.didMove(toParentViewController: self)
+        if let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController {
+            startingViewController.project = currentProject
+            startingViewController.section = currentSection
+            startingViewController.pageIndex = 0
+            startingViewController.tableViewDelegate.libraryViewController = self
+            startingViewController.tableViewDataSource.libraryViewController = self
+            pageViewController.setViewControllers(
+                [startingViewController],
+                direction: .forward,
+                animated: true,
+                completion: nil)
+            
+            pageViewController.view.frame = containerView.bounds
+            addChildViewController(pageViewController)
+            containerView.addSubview(pageViewController.view)
+            pageViewController.didMove(toParentViewController: self)
+        }
 	}
 }

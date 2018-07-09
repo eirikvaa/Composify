@@ -18,7 +18,7 @@ class RecordingsTableViewDelegate: NSObject {
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (rowAction, indexPath) in
+		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (_, indexPath) in
 			let edit = UIAlertController(title: .localized(.edit), message: nil, preferredStyle: .alert)
 
 			edit.addTextField {
@@ -27,7 +27,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				$0.autocapitalizationType = .words
 			}
 
-			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { alertAction in
+			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
 				let recording = self.parentViewController.section?.recordings[indexPath.row]
 				if let title = edit.textFields?.first?.text, let recording = recording {
 					self.realmStore.rename(recording, to: title)
@@ -42,8 +42,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			self.libraryViewController.present(edit, animated: true, completion: nil)
 		}
 
-		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (
-				rowAction, indexPath) in
+		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (_, indexPath) in
 			if let currentSection = self.parentViewController.section {
 				let recording = currentSection.recordings[indexPath.row]
 

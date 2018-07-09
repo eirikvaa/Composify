@@ -394,6 +394,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
+				E51B851720F4076700FB3D48 /* ShellScript */,
 				AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
@@ -601,6 +602,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E51B851720F4076700FB3D48 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

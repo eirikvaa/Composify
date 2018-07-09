@@ -27,7 +27,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard parentViewController.section?.isInvalidated == false else { return 0 }
         guard let recordings = parentViewController.section?.recordings else { return 0 }
-        return recordings.count > 0 ? 1 : 0
+        return recordings.hasElements ? 1 : 0
     }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
