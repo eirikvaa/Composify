@@ -181,7 +181,7 @@ extension AdministrateProjectTableViewController {
         if editingStyle == .insert {
             let section = Section()
             let sectionsCount = currentProject?.sectionIDs.count ?? 0
-            section.title = "Section \(sectionsCount + 1)"
+            section.title = "Section"
             section.project = currentProject
             
             fileManager.save(section)
