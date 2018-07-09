@@ -254,7 +254,6 @@ extension AdministrateProjectTableViewController {
     func persistChanges() {
         if newValues[T((0, 0))] != currentProject?.title {
             if let newTitle = newValues[T((0, 0))], newTitle.count > 0 {
-                fileManager.rename(currentProject!, from: currentProject?.title ?? "", to: newTitle, section: nil, project: nil)
                 realmStore.rename(currentProject!, to: newTitle)
             }
         }
@@ -264,7 +263,6 @@ extension AdministrateProjectTableViewController {
             
             if newValues[T((1, index))] != section.title {
                 if let newTitle = newValues[T((1, index))], newTitle.count > 0 {
-                    fileManager.rename(section, from: section.title, to: newTitle, section: section, project: currentProject)
                     realmStore.rename(section, to: newTitle)
                 }
             }

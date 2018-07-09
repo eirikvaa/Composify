@@ -43,7 +43,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
         
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
-        cell.titleLabel.text = recording?.title
+        cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateRecorded.description
 		cell.playButton.alpha = 1
         cell.playButton.setImage(isCurrentlyPlayingRecording ? Images.pause : Images.play, for: .normal)
         

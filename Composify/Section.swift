@@ -31,7 +31,7 @@ extension Section {
 extension Section: FileSystemObject {
     var url: URL {
         return project!.url
-            .appendingPathComponent(title)
+            .appendingPathComponent(id)
     }
 }
 

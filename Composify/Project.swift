@@ -50,6 +50,6 @@ extension Project: FileSystemObject {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return documentDirectory
             .appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-            .appendingPathComponent(title)
+            .appendingPathComponent(id)
     }
 }

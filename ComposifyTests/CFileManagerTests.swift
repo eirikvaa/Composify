@@ -81,50 +81,6 @@ class CFileManagerTests: XCTestCase {
 		XCTAssertTrue(pieFileManager.fileManager.fileExists(atPath: section.url.path))
 		XCTAssertTrue(pieFileManager.fileManager.fileExists(atPath: recording.url.path))
 	}
-	
-	func testRename1() {
-		let renamedProjectTitle = "UnitTestRenamedProject"
-		let renamedSectionTitle = "UnitTestRenamedSection"
-		let renamedRecordingTitle = "UnitTestRenamedRecording"
-		
-		pieFileManager.rename(project, from: project.title, to: renamedProjectTitle, section: nil, project: nil)
-		XCTAssertFalse(fileManager.fileExists(atPath: project.url.path))
-		project.title = renamedProjectTitle
-		
-		pieFileManager.rename(section, from: section.title, to: renamedSectionTitle, section: nil, project: nil)
-		XCTAssertFalse(fileManager.fileExists(atPath: section.url.path))
-		section.title = renamedSectionTitle
-		
-		pieFileManager.rename(recording, from: recording.title, to: renamedRecordingTitle, section: nil, project: nil)
-		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
-		recording.title = renamedRecordingTitle
-		
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-			.appendingPathComponent(renamedProjectTitle).path))
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-			.appendingPathComponent(renamedProjectTitle)
-			.appendingPathComponent(renamedSectionTitle).path))
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-			.appendingPathComponent(renamedProjectTitle)
-			.appendingPathComponent(renamedSectionTitle)
-			.appendingPathComponent(renamedRecordingTitle)
-			.appendingPathExtension(FileSystemExtensions.caf.rawValue).path))
-	}
-	
-	func testRename2() {
-		let renameRecordingTitle = "UnitTestRenamedRecording"
-		pieFileManager.rename(recording, from: recording.title, to: renameRecordingTitle, section: section2, project: project2)
-		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
-		recording.project = project2
-		recording.section = section2
-		recording.title = renameRecordingTitle
-		
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-            .appendingPathComponent(recording.project!.title)
-			.appendingPathComponent(recording.section!.title)
-			.appendingPathComponent(recording.title)
-			.appendingPathExtension(FileSystemExtensions.caf.rawValue).path))
-	}
 
 	func testDelete() {
 		pieFileManager.delete(project)
@@ -134,11 +90,6 @@ class CFileManagerTests: XCTestCase {
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: project.url.path))
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: section.url.path))
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: recording.url.path))
-	}
-	
-	func testRest() {
-		pieFileManager.reset()
-		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: userProjcts.path))
 	}
 }
 

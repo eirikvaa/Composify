@@ -26,7 +26,7 @@ class Recording: Object {
 extension Recording: FileSystemObject {
     var url: URL {
         return section!.url
-            .appendingPathComponent(title)
+            .appendingPathComponent(id)
             .appendingPathExtension(fileExtension)
     }
 }

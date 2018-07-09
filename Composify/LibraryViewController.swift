@@ -237,7 +237,6 @@ extension LibraryViewController {
             guard let currentSection = recordingsViewController.section else { return }
             
             let recording = Recording()
-            recording.title = "Recording"
             recording.project = currentProject
             recording.section = currentSection
             recording.fileExtension = "caf"

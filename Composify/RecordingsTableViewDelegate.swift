@@ -30,7 +30,6 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { alertAction in
 				let recording = self.parentViewController.section?.recordings[indexPath.row]
 				if let title = edit.textFields?.first?.text, let recording = recording {
-					self.libraryViewController.fileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
 					self.realmStore.rename(recording, to: title)
 					self.parentViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
 				}
