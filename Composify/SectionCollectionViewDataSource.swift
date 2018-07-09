@@ -27,6 +27,11 @@ extension SectionCollectionViewDataSource: UICollectionViewDataSource {
         
         if let sectionID = libraryViewController.currentProject?.sectionIDs[indexPath.row] {
             let section = RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: sectionID)
+            
+            if sectionID == libraryViewController.currentSectionID {
+                cell.titleLabel.font = UIFont.preferredBoldFont(for: .body)
+            }
+            
             cell.titleLabel.text = section?.title
         }
 		
