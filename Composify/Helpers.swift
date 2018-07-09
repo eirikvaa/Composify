@@ -52,6 +52,10 @@ extension UserDefaults {
         guard let id = UserDefaults.standard.string(forKey: "lastProjectID") else { return nil }
         return RealmStore.shared.realm.object(ofType: Project.self, forPrimaryKey: id)
     }
+    
+    var projectStoreID: String? {
+        return value(forKey: "projectStoreID") as? String
+    }
 }
 
 extension Array where Element: Comparable {

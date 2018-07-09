@@ -26,6 +26,10 @@ extension Section {
             .compactMap { RealmStore.shared.realm.object(ofType: Recording.self, forPrimaryKey: $0)}
             .sorted()
     }
+    
+    static func object(withID id: String) -> Section? {
+        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: id)
+    }
 }
 
 extension Section: FileSystemObject {

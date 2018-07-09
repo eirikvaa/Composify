@@ -268,9 +268,3 @@ extension AdministrateProjectTableViewController {
         }
     }
 }
-
-extension Section {
-    static func object(withID id: String) -> Section? {
-        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: id)
-    }
-}

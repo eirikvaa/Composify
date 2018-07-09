@@ -9,15 +9,6 @@
 import Foundation
 import RealmSwift
 
-final class ProjectStore: Object {
-    @objc dynamic var id = UUID().uuidString
-    var projectIDs = List<String>()
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-}
-
 typealias ComposifyObject = Object & FileSystemObject
 
 struct RealmStore {
@@ -108,11 +99,5 @@ struct RealmStore {
                 break
             }
         }
-    }
-}
-
-extension UserDefaults {
-    var projectStoreID: String? {
-        return value(forKey: "projectStoreID") as? String
     }
 }

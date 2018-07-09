@@ -19,6 +19,7 @@
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
 		E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */; };
 		E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */; };
+		E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B851820F423E300FB3D48 /* ProjectStore.swift */; };
 		E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */; };
 		E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C6A041ED5DBAA00971C40 /* Constants.swift */; };
 		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
@@ -97,6 +98,7 @@
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDataSource.swift; sourceTree = "<group>"; };
 		E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		E51B851820F423E300FB3D48 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		E51E8BC21E308F390022CF71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC41E308F390022CF71 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				E56E3FE720D53D6300411F5F /* RealmStore.swift */,
+				E51B851820F423E300FB3D48 /* ProjectStore.swift */,
 				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
 				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
@@ -661,6 +664,7 @@
 				E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */,
 				E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */,
 				3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */,
+				E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */,
 				3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
