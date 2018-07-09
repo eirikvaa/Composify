@@ -20,16 +20,4 @@ class LibraryCollectionViewCell: UICollectionViewCell {
 			deleteButton.isHidden = true
 		}
 	}
-	
-	override var isHighlighted: Bool {
-		didSet {
-			titleLabel.textColor = isHighlighted ? Colors.mainColor : .black
-		}
-	}
-	
-	override var isSelected: Bool {
-		didSet {
-			titleLabel.textColor = isSelected ? Colors.mainColor : .black
-		}
-	}
 }
