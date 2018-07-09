@@ -32,6 +32,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				if let title = edit.textFields?.first?.text, let recording = recording {
 					self.realmStore.rename(recording, to: title)
 					self.parentViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    self.libraryViewController.setEditing(false, animated: true)
 				}
 			})
 			let cancel = UIAlertAction(title: .localized(.cancel), style: .default, handler: nil)
