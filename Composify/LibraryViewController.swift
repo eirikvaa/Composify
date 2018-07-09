@@ -230,6 +230,7 @@ extension LibraryViewController {
         defer {
             self.updateUI()
         }
+        
         guard let recorder = audioRecorder?.recorder else {
             guard let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController
                 else { return }
@@ -331,22 +332,22 @@ private extension LibraryViewController {
 		pageViewController.delegate = pageViewDelegate
 		pageViewDelegate.libraryViewController = self
 		
-        if let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController {
-            startingViewController.project = currentProject
-            startingViewController.section = currentSection
-            startingViewController.pageIndex = 0
-            startingViewController.tableViewDelegate.libraryViewController = self
-            startingViewController.tableViewDataSource.libraryViewController = self
-            pageViewController.setViewControllers(
-                [startingViewController],
-                direction: .forward,
-                animated: true,
-                completion: nil)
-            
-            pageViewController.view.frame = containerView.bounds
-            addChildViewController(pageViewController)
-            containerView.addSubview(pageViewController.view)
-            pageViewController.didMove(toParentViewController: self)
-        }
+        guard let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController else { return }
+        
+        startingViewController.project = currentProject
+        startingViewController.section = currentSection
+        startingViewController.pageIndex = 0
+        startingViewController.tableViewDelegate.libraryViewController = self
+        startingViewController.tableViewDataSource.libraryViewController = self
+        pageViewController.setViewControllers(
+            [startingViewController],
+            direction: .forward,
+            animated: true,
+            completion: nil)
+        
+        pageViewController.view.frame = containerView.bounds
+        addChildViewController(pageViewController)
+        containerView.addSubview(pageViewController.view)
+        pageViewController.didMove(toParentViewController: self)
 	}
 }
