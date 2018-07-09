@@ -66,7 +66,7 @@ class LibraryViewController: UIViewController {
         return section
     }
     var currentSectionID: String?
-    private var state: LibraryState = .noSections {
+    private var state: LibraryViewController.State = .noSections {
         didSet {
             setState(state)
         }
@@ -271,29 +271,19 @@ extension LibraryViewController {
             recordingsViewController.tableView.reloadData()
         }
         
-        if currentSection?.recordingIDs.isEmpty == true {
-            state = .noRecordings
-            return
-        }
-        
         switch (currentProject, currentSection) {
         case (.some, .some):
             state = .notEmpty
         case (.some, .none):
             state = .noSections
-        case (.none, .some):
-            state = .noProjects
-        case (.none, .none):
+        case (.none, _):
             state = .noProjects
         }
     }
     
-    typealias LibraryState = LibraryViewController.State
-    
     enum State {
         case noProjects
         case noSections
-        case noRecordings
         case notEmpty
     }
     
@@ -303,11 +293,6 @@ extension LibraryViewController {
         errorViewController?.remove()
         
         switch state {
-        case .noSections:
-            errorViewController = ErrorViewController(labelText: .localized(.noSections))
-            if let errorVieController = errorViewController {
-                add(errorVieController)
-            }
         case .notEmpty:
             navigationItem.rightBarButtonItem = editButtonItem
         case .noProjects:
@@ -315,8 +300,11 @@ extension LibraryViewController {
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
-        default:
-            break
+        case .noSections:
+            errorViewController = ErrorViewController(labelText: .localized(.noSections))
+            if let errorVieController = errorViewController {
+                add(errorVieController)
+            }
         }
     }
 }
