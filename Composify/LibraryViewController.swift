@@ -271,6 +271,11 @@ extension LibraryViewController {
             recordingsViewController.tableView.reloadData()
         }
         
+        navigationItem.rightBarButtonItem =
+            currentSection?.recordingIDs.hasElements == true ?
+            editButtonItem :
+            nil
+        
         switch (currentProject, currentSection) {
         case (.some, .some):
             state = .notEmpty
@@ -288,13 +293,12 @@ extension LibraryViewController {
     }
     
     func setState(_ state: State) {
-        navigationItem.rightBarButtonItem = nil
         pageControl.numberOfPages = currentProject?.sections.count ?? 0
         errorViewController?.remove()
         
         switch state {
         case .notEmpty:
-            navigationItem.rightBarButtonItem = editButtonItem
+            break
         case .noProjects:
             errorViewController = ErrorViewController(labelText: .localized(.noProjects))
             if let errorViewController = errorViewController {
