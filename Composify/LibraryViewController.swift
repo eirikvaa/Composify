@@ -131,7 +131,7 @@ class LibraryViewController: UIViewController {
             self.currentSectionID = UserDefaults.standard.lastSection()?.id ?? self.currentProject?.sectionIDs.first
             
             DispatchQueue.main.async {
-                if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
+                if let viewController = self.pageViewDataSource.viewController(at: self.indexOfCurrentSection() ?? 0, storyboard: self.storyboard!) {
                     self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
                 }
                 
