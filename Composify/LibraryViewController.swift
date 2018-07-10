@@ -62,7 +62,7 @@ class LibraryViewController: UIViewController {
     }
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section = Section.object(withID: sectionID) else { return nil }
+        guard let section = sectionID.correspondingSection else { return nil }
         return section
     }
     var currentSectionID: String?
@@ -119,8 +119,7 @@ class LibraryViewController: UIViewController {
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: .localized(.menu), style: .plain, target: self, action: #selector(showMenu))
         
-        if let firstSectionID = currentProject?.sectionIDs.first,
-            let section = Section.object(withID: firstSectionID) {
+        if let section = currentProject?.sectionIDs.first?.correspondingSection {
             navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
         }
         

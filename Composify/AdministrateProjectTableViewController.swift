@@ -50,7 +50,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         
         if let currentProject = currentProject {
             for (index, sectionID) in (currentProject.sectionIDs.enumerated()) {
-                if let section = Section.object(withID: sectionID) {
+                if let section = sectionID.correspondingSection {
                     newValues[T((1, index))] = section.title
                 }
             }
@@ -117,9 +117,8 @@ extension AdministrateProjectTableViewController {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = .localized(.addSection)
             } else {
-                if let sectionID = currentProject?.sectionIDs[indexPath.row] {
-                    let section = Section.object(withID: sectionID)
-                    cell.textField.placeholder = section?.title
+                if let section = currentProject?.sectionIDs[indexPath.row].correspondingSection {
+                    cell.textField.placeholder = section.title
                     cell.textField.autocapitalizationType = .words
                     cell.textField.clearButtonMode = .whileEditing
                     cell.textField.returnKeyType = .done
@@ -196,7 +195,7 @@ extension AdministrateProjectTableViewController {
             
             if let currentProject = currentProject {
                 for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                    if let section = Section.object(withID: sectionID) {
+                    if let section = sectionID.correspondingSection {
                         newValues[T((1, index))] = section.title
                     }
                 }
@@ -210,8 +209,7 @@ extension AdministrateProjectTableViewController {
         case .delete:
             guard let currentProject = currentProject else { return }
             guard currentProject.sectionIDs.hasElements else { return }
-            let sectionIDToDelete = currentProject.sectionIDs[indexPath.row]
-            let sectionToDelete = Section.object(withID: sectionIDToDelete)
+            let sectionToDelete = currentProject.sectionIDs[indexPath.row].correspondingSection
             
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()
@@ -223,7 +221,7 @@ extension AdministrateProjectTableViewController {
             }
             
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                if let section = Section.object(withID: sectionID) {
+                if let section = sectionID.correspondingSection {
                     newValues[T((1, index))] = section.title
                 }
             }
@@ -272,7 +270,7 @@ extension AdministrateProjectTableViewController {
         }
         
         for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
-            guard let section = Section.object(withID: sectionID) else { continue }
+            guard let section = sectionID.correspondingSection else { continue }
             
             if newValues[T((1, index))] != section.title {
                 if let newTitle = newValues[T((1, index))], newTitle.hasElements {
