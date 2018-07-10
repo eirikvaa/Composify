@@ -193,12 +193,18 @@ extension AdministrateProjectTableViewController {
             fileManager.save(section)
             realmStore.save(section, update: true)
             
-            if let currentProject = currentProject {
-                for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                    if let section = sectionID.correspondingSection {
-                        newValues[T((1, index))] = section.title
-                    }
-                }
+            guard let currentProject = currentProject else { return }
+            
+            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+                guard let section = sectionID.correspondingSection else { continue }
+                
+                // We're skipping the entries that have a title different
+                // from the corresponding section title, because that means the
+                // section was renamed. Without this check, if a section is renamed
+                // and a section later added, the rename will be ignored.
+                guard let existingTitle = newValues[T((1, index))], existingTitle == section.title else { continue }
+                
+                newValues[T((1, index))] = section.title
             }
             
             // It's important that we reload the previously last row after we
