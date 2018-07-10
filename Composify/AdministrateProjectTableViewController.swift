@@ -264,7 +264,7 @@ extension AdministrateProjectTableViewController {
 extension AdministrateProjectTableViewController {
     func persistChanges() {
         if newValues[T((0, 0))] != currentProject?.title {
-            if let newTitle = newValues[T((0, 0))], newTitle.hasElements {
+            if let newTitle = newValues[T((0, 0))], newTitle.hasPositiveCharacterCount {
                 realmStore.rename(currentProject!, to: newTitle)
             }
         }
@@ -273,7 +273,7 @@ extension AdministrateProjectTableViewController {
             guard let section = sectionID.correspondingSection else { continue }
             
             if newValues[T((1, index))] != section.title {
-                if let newTitle = newValues[T((1, index))], newTitle.hasElements {
+                if let newTitle = newValues[T((1, index))], newTitle.hasPositiveCharacterCount {
                     realmStore.rename(section, to: newTitle)
                 }
             }

@@ -110,3 +110,9 @@ extension Collection {
         return !isEmpty
     }
 }
+
+extension String {
+    var hasPositiveCharacterCount: Bool {
+        return !isEmpty
+    }
+}
