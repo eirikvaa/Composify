@@ -130,6 +130,13 @@ extension AdministrateProjectTableViewController {
             deleteCell.buttonTitle = .localized(.deleteProejct)
             deleteCell.action = {
                 guard let currentProject = self.currentProject else { return }
+                
+                let standard = UserDefaults.standard
+                if standard.lastProject() == currentProject {
+                    standard.resetLastProject()
+                    standard.resetLastSection()
+                }
+                
                 self.fileManager.delete(currentProject)
                 self.realmStore.delete(currentProject)
                 self.dismiss(animated: true)
@@ -177,7 +184,8 @@ extension AdministrateProjectTableViewController {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .insert {
+        switch editingStyle {
+        case .insert:
             let section = Section()
             let sectionsCount = currentProject?.sectionIDs.count ?? 0
             section.title = "Section"
@@ -199,11 +207,15 @@ extension AdministrateProjectTableViewController {
             let newIndexPath = IndexPath(row: sectionsCount, section: 1)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             tableView.reloadRows(at: [indexPath], with: .automatic)
-        } else if editingStyle == .delete {
+        case .delete:
             guard let currentProject = currentProject else { return }
             guard currentProject.sectionIDs.hasElements else { return }
             let sectionIDToDelete = currentProject.sectionIDs[indexPath.row]
             let sectionToDelete = Section.object(withID: sectionIDToDelete)
+            
+            if UserDefaults.standard.lastSection() == sectionToDelete {
+                UserDefaults.standard.resetLastSection()
+            }
             
             if let sectionToDelete = sectionToDelete {
                 fileManager.delete(sectionToDelete)
@@ -217,6 +229,8 @@ extension AdministrateProjectTableViewController {
             }
             
             self.tableView?.deleteRows(at: [indexPath], with: .automatic)
+        case .none:
+            break
         }
     }
 }

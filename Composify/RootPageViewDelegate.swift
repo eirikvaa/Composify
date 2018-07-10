@@ -29,5 +29,8 @@ private extension RootPageViewDelegate {
         libraryViewController.currentProject = currentProject
         libraryViewController.currentSectionID = currentProject.sectionIDs[indexPath.row]
         libraryViewController.updateUI()
+        
+        UserDefaults.standard.persist(project: currentProject)
+        UserDefaults.standard.persist(section: libraryViewController.currentSection)
     }
 }

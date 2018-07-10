@@ -57,7 +57,7 @@ class LibraryViewController: UIViewController {
     var currentProject: Project? {
         didSet {
             navigationItem.title = currentProject?.title ?? .localized(.composify)
-            currentSectionID = currentProject?.sectionIDs.first
+            //currentSectionID = currentProject?.sectionIDs.first
         }
     }
     var currentSection: Section? {
@@ -77,6 +77,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl! {
         didSet {
             pageControl.numberOfPages = self.projects.count
+            pageControl.hidesForSinglePage = true
         }
     }
     @IBOutlet weak var administerBarButton: UIBarButtonItem!
@@ -108,8 +109,11 @@ class LibraryViewController: UIViewController {
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
-        currentProject = projects.first
+        currentProject = UserDefaults.standard.lastProject() ?? projects.first
+        currentSectionID = UserDefaults.standard.lastSection()?.id ?? currentProject?.sectionIDs.first
+        
         UserDefaults.standard.persist(project: currentProject)
+        UserDefaults.standard.persist(section: currentSection)
         
         configurePageViewController()
 
@@ -123,7 +127,8 @@ class LibraryViewController: UIViewController {
         self.updateUI()
         
         token = realm.observe { _, _ in
-            self.currentProject = self.projects.first
+            self.currentProject = UserDefaults.standard.lastProject() ?? self.projects.first
+            self.currentSectionID = UserDefaults.standard.lastSection()?.id ?? self.currentProject?.sectionIDs.first
             
             DispatchQueue.main.async {
                 if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
@@ -133,6 +138,8 @@ class LibraryViewController: UIViewController {
                 self.updateUI()
             }
         }
+        
+        pageControl.currentPage = indexOfCurrentSection() ?? 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,11 +151,13 @@ class LibraryViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UserDefaults.standard.persist(project: self.currentProject)
+        UserDefaults.standard.persist(project: currentProject)
+        UserDefaults.standard.persist(section: currentSection)
     }
     
     deinit {
-        UserDefaults.standard.persist(project: self.currentProject)
+        UserDefaults.standard.persist(project: currentProject)
+        UserDefaults.standard.persist(section: currentSection)
         token?.invalidate()
     }
 
@@ -206,6 +215,7 @@ extension LibraryViewController {
                 self.currentProject = project
                 
                 UserDefaults.standard.persist(project: self.currentProject)
+                UserDefaults.standard.persist(section: self.currentSection)
                 
                 if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
                     self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
@@ -328,7 +338,7 @@ private extension LibraryViewController {
         
         startingViewController.project = currentProject
         startingViewController.section = currentSection
-        startingViewController.pageIndex = 0
+        startingViewController.pageIndex = indexOfCurrentSection() ?? 0
         startingViewController.tableViewDelegate.libraryViewController = self
         startingViewController.tableViewDataSource.libraryViewController = self
         pageViewController.setViewControllers(
@@ -342,4 +352,12 @@ private extension LibraryViewController {
         containerView.addSubview(pageViewController.view)
         pageViewController.didMove(toParentViewController: self)
 	}
+    
+    func indexOfCurrentSection() -> Int? {
+        guard let currentProject = currentProject else { return nil }
+        guard let currentSectionID = currentSectionID else { return nil }
+        guard let index = currentProject.sectionIDs.index(of: currentSectionID) else { return nil }
+        
+        return index
+    }
 }

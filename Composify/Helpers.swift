@@ -48,9 +48,27 @@ extension UserDefaults {
         setValue(project.id, forKey: "lastProjectID")
     }
     
+    func persist(section: Section?) {
+        guard let section = section else { return }
+        setValue(section.id, forKey: "lastSectionID")
+    }
+    
     func lastProject() -> Project? {
         guard let id = UserDefaults.standard.string(forKey: "lastProjectID") else { return nil }
         return RealmStore.shared.realm.object(ofType: Project.self, forPrimaryKey: id)
+    }
+    
+    func lastSection() -> Section? {
+        guard let id = UserDefaults.standard.string(forKey: "lastSectionID") else { return nil }
+        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: id)
+    }
+    
+    func resetLastProject() {
+        setValue(nil, forKey: "lastProjectID")
+    }
+    
+    func resetLastSection() {
+        setValue(nil, forKey: "lastSectionID")
     }
     
     var projectStoreID: String? {
