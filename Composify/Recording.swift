@@ -44,3 +44,9 @@ extension Recording: Comparable {
         return lhs.title < rhs.title
     }
 }
+
+extension String {
+    var correspondingRecording: Recording? {
+        return RealmStore.shared.realm.object(ofType: Recording.self, forPrimaryKey: self)
+    }
+}
