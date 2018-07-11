@@ -195,6 +195,7 @@ extension AdministrateProjectTableViewController {
             
             guard let currentProject = currentProject else { return }
             
+            newValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 guard let section = sectionID.correspondingSection else { continue }
                 
@@ -226,6 +227,7 @@ extension AdministrateProjectTableViewController {
                 realmStore.delete(sectionToDelete)
             }
             
+            newValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 if let section = sectionID.correspondingSection {
                     newValues[T((1, index))] = section.title
