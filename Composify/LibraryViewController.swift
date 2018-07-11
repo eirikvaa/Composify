@@ -72,6 +72,7 @@ class LibraryViewController: UIViewController {
         }
     }
     var errorViewController: ErrorViewController?
+    private var recording: Recording?
     
     // MARK: @IBOutlet
     @IBOutlet weak var pageControl: UIPageControl! {
@@ -236,31 +237,38 @@ extension LibraryViewController {
     }
     
     @IBAction func recordAudio(_ sender: UIButton) {
-        defer {
-            self.updateUI()
-        }
-        
         guard let recorder = audioRecorder?.recorder else {
             guard let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController
                 else { return }
             guard let currentProject = recordingsViewController.project else { return }
             guard let currentSection = recordingsViewController.section else { return }
             
-            let recording = Recording()
-            recording.project = currentProject
-            recording.section = currentSection
-            recording.fileExtension = "caf"
-            fileManager.save(recording)
-            audioRecorder = AudioRecorder(url: recording.url)
+            recording = Recording()
+            recording?.project = currentProject
+            recording?.section = currentSection
+            recording?.fileExtension = "caf"
+            
+            if let recording = recording {
+                audioRecorder = AudioRecorder(url: recording.url)
+            }
+            
             audioRecorder?.recorder.record()
             recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
-            realmStore.save(recording)
             return
         }
         
         recorder.stop()
+        
+        if let recording = recording {
+            fileManager.save(recording)
+            realmStore.save(recording, update: true)
+        }
+        
+        recording = nil
         audioRecorder = nil
         recordAudioButton.setTitle(.localized(.startRecording), for: .normal)
+        
+        updateUI()
     }
 }
 
