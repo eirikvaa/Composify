@@ -21,7 +21,7 @@ class RootPageViewDataSource: NSObject {
         guard let recordingsViewController = storyboard.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController else { return nil }
         
 		recordingsViewController.project = libraryViewController.currentProject
-        recordingsViewController.section = libraryViewController.currentProject?.sections[index]
+        recordingsViewController.section = libraryViewController.currentProject?.sectionIDs[index].correspondingSection
 		recordingsViewController.tableViewDataSource.libraryViewController = libraryViewController
         recordingsViewController.tableViewDelegate.libraryViewController = libraryViewController
 		recordingsViewController.pageIndex = index
