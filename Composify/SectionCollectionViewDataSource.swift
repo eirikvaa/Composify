@@ -22,17 +22,15 @@ extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.Cells.sectionCell, for: indexPath) as? LibraryCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
         
-        if let sectionID = libraryViewController.currentProject?.sectionIDs[indexPath.row] {
-            let section = RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: sectionID)
-            
-            if sectionID == libraryViewController.currentSectionID {
-                cell.titleLabel.font = UIFont.preferredBoldFont(for: .body)
+        if let section = libraryViewController.currentProject?.sectionIDs[indexPath.row].correspondingSection {
+            if section.id == libraryViewController.currentSectionID {
+                cell.titleLabel.font = .preferredBoldFont(for: .body)
             }
             
-            cell.titleLabel.text = section?.title
+            cell.titleLabel.text = section.title
         }
 		
 		return cell		
