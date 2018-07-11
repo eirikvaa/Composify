@@ -57,7 +57,6 @@ class LibraryViewController: UIViewController {
     var currentProject: Project? {
         didSet {
             navigationItem.title = currentProject?.title ?? .localized(.composify)
-            //currentSectionID = currentProject?.sectionIDs.first
         }
     }
     var currentSection: Section? {
