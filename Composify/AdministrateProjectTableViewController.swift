@@ -7,11 +7,18 @@
 //
 
 import UIKit
-import RealmSwift
+
+protocol AdministrateProjectDelegate: class {
+    func userDidAddSectionToProject(_ section: Section)
+    func userDidDeleteSectionFromProject()
+    func userDidEditTitleOfObjects()
+    func userDidDeleteProject()
+}
 
 class AdministrateProjectTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Properties
+    weak var administrateProjectDelegate: AdministrateProjectDelegate?
     private var tableView: UITableView? {
         didSet {
             tableView?.delegate = self
@@ -23,6 +30,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         }
     }
     var currentProject: Project?
+    var databaseService = DatabaseServiceFactory.defaultService
     private var fileManager = CFileManager()
     private lazy var rowCount = [
         0: 1,   // Meta Information
@@ -35,8 +43,6 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         .localized(.sectionsHeader),
         .localized(.dangerZoneHeader)
     ]
-    var realmStore = RealmStore.shared
-    var token: NotificationToken?
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
@@ -49,7 +55,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         newValues[T((0, 0))] = currentProject?.title ?? ""
         
         if let currentProject = currentProject {
-            for (index, sectionID) in (currentProject.sectionIDs.enumerated()) {
+            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 if let section = sectionID.correspondingSection {
                     newValues[T((1, index))] = section.title
                 }
@@ -59,10 +65,6 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
         configureViews()
     }
     
-    deinit {
-        token?.invalidate()
-    }
-    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
@@ -70,13 +72,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
     }
     
     @objc func textFieldChange(_ textField: UITextField) {
-        var view: UIView? = textField
-        
-        while (view?.superview?.tag != 1234) {
-            view = view?.superview
-        }
-        
-        if let cell = view?.superview as? TextFieldTableViewCell {
+        if let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell {
             if let indexPath = tableView?.indexPath(for: cell) {
                 newValues[T((indexPath.section, indexPath.row))] = cell.textField.text ?? ""
             }
@@ -98,6 +94,7 @@ extension AdministrateProjectTableViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
+        
         cell.textField.returnKeyType = .done
         cell.tag = 1234
         cell.textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
@@ -137,7 +134,9 @@ extension AdministrateProjectTableViewController {
                 }
                 
                 self.fileManager.delete(currentProject)
-                self.realmStore.delete(currentProject)
+                self.databaseService.delete(currentProject)
+                self.administrateProjectDelegate?.userDidDeleteProject()
+                
                 self.dismiss(animated: true)
             }
             return deleteCell
@@ -191,7 +190,8 @@ extension AdministrateProjectTableViewController {
             section.project = currentProject
             
             fileManager.save(section)
-            realmStore.save(section, update: true)
+            databaseService.save(section)
+            administrateProjectDelegate?.userDidAddSectionToProject(section)
             
             guard let currentProject = currentProject else { return }
             
@@ -224,7 +224,8 @@ extension AdministrateProjectTableViewController {
             
             if let sectionToDelete = sectionToDelete {
                 fileManager.delete(sectionToDelete)
-                realmStore.delete(sectionToDelete)
+                databaseService.delete(sectionToDelete)
+                administrateProjectDelegate?.userDidDeleteSectionFromProject()
             }
             
             newValues.removeAll()
@@ -271,9 +272,11 @@ extension AdministrateProjectTableViewController {
 
 extension AdministrateProjectTableViewController {
     func persistChanges() {
+        var hadChanges = false
         if newValues[T((0, 0))] != currentProject?.title {
             if let newTitle = newValues[T((0, 0))], newTitle.hasPositiveCharacterCount {
-                realmStore.rename(currentProject!, to: newTitle)
+                databaseService.rename(currentProject!, to: newTitle)
+                hadChanges = true
             }
         }
         
@@ -282,9 +285,14 @@ extension AdministrateProjectTableViewController {
             
             if newValues[T((1, index))] != section.title {
                 if let newTitle = newValues[T((1, index))], newTitle.hasPositiveCharacterCount {
-                    realmStore.rename(section, to: newTitle)
+                    databaseService.rename(section, to: newTitle)
+                    hadChanges = true
                 }
             }
+        }
+        
+        if hadChanges {
+            administrateProjectDelegate?.userDidEditTitleOfObjects()
         }
     }
 }

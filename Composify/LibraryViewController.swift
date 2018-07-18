@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 /// The view controller for almost all of the functionality; shows projects, sections and recordings.
 
@@ -44,34 +43,33 @@ class LibraryViewController: UIViewController {
         dataSource.libraryViewController = self
         return dataSource
     }()
-    var pageViewController: UIPageViewController!
+    private var pageViewController: UIPageViewController!
     let fileManager = CFileManager()
     private var projects: [Project] {
         return Project.projects()
     }
     private let center = NotificationCenter.default
-    var realmStore = RealmStore.shared
     private var audioRecorder: AudioRecorder?
-    let realm = try! Realm()
-    var token: NotificationToken?
     var currentProject: Project? {
-        didSet {
-            navigationItem.title = currentProject?.title ?? .localized(.composify)
-        }
+        guard let projectID = currentProjectID else { return nil }
+        guard let project = projectID.correspondingProject else { return nil }
+        return project
     }
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
         guard let section = sectionID.correspondingSection else { return nil }
         return section
     }
+    var currentProjectID: String?
     var currentSectionID: String?
     private var state: LibraryViewController.State = .noSections {
         didSet {
             setState(state)
         }
     }
-    var errorViewController: ErrorViewController?
+    private var errorViewController: ErrorViewController?
     private var recording: Recording?
+    private var databaseService = DatabaseServiceFactory.defaultService
     
     // MARK: @IBOutlet
     @IBOutlet weak var pageControl: UIPageControl! {
@@ -109,11 +107,8 @@ class LibraryViewController: UIViewController {
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
-        currentProject = UserDefaults.standard.lastProject() ?? projects.first
-        currentSectionID = UserDefaults.standard.lastSection()?.id ?? currentProject?.sectionIDs.first
-        
-        UserDefaults.standard.persist(project: currentProject)
-        UserDefaults.standard.persist(section: currentSection)
+        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentSectionID = currentProject?.sectionIDs.first
         
         configurePageViewController()
 
@@ -125,19 +120,6 @@ class LibraryViewController: UIViewController {
         
         self.updateUI()
         
-        token = realm.observe { _, _ in
-            self.currentProject = UserDefaults.standard.lastProject() ?? self.projects.first
-            self.currentSectionID = UserDefaults.standard.lastSection()?.id ?? self.currentProject?.sectionIDs.first
-            
-            DispatchQueue.main.async {
-                if let viewController = self.pageViewDataSource.viewController(at: self.indexOfCurrentSection() ?? 0, storyboard: self.storyboard!) {
-                    self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-                }
-                
-                self.updateUI()
-            }
-        }
-        
         pageControl.currentPage = indexOfCurrentSection() ?? 0
     }
     
@@ -145,19 +127,6 @@ class LibraryViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationItem.title = self.currentProject?.title ?? .localized(.composify)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        UserDefaults.standard.persist(project: currentProject)
-        UserDefaults.standard.persist(section: currentSection)
-    }
-    
-    deinit {
-        UserDefaults.standard.persist(project: currentProject)
-        UserDefaults.standard.persist(section: currentSection)
-        token?.invalidate()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -176,6 +145,7 @@ extension LibraryViewController {
             administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
                 let administerVC = AdministrateProjectTableViewController()
                 administerVC.currentProject = currentProject
+                administerVC.administrateProjectDelegate = self
                 let nav = UINavigationController(rootViewController: administerVC)
                 self.present(nav, animated: true)
             }
@@ -194,9 +164,10 @@ extension LibraryViewController {
                     
                     let project = Project()
                     project.title = projectTitle
-                    self.currentProject = project
+                    self.currentProjectID = project.id
+                    self.currentSectionID = project.sectionIDs.first
                     
-                    self.realmStore.save(project)
+                    self.databaseService.save(project)
                     self.fileManager.save(project)
                     
                     self.updateUI()
@@ -211,10 +182,8 @@ extension LibraryViewController {
         
         projects.forEach { project in
             let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { _ in
-                self.currentProject = project
-                
-                UserDefaults.standard.persist(project: self.currentProject)
-                UserDefaults.standard.persist(section: self.currentSection)
+                self.currentProjectID = project.id
+                self.currentSectionID = self.currentProject?.sectionIDs.first
                 
                 if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
                     self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
@@ -260,7 +229,7 @@ extension LibraryViewController {
         
         if let recording = recording {
             fileManager.save(recording)
-            realmStore.save(recording, update: true)
+            databaseService.save(recording)
         }
         
         recording = nil
@@ -271,7 +240,39 @@ extension LibraryViewController {
     }
 }
 
+extension LibraryViewController: AdministrateProjectDelegate {
+    func userDidAddSectionToProject(_ section: Section) {
+        currentSectionID = section.id
+        
+        updatePageViewController()
+    }
+    
+    func userDidDeleteSectionFromProject() {
+        currentSectionID = currentProject?.sectionIDs.sorted().first
+        updatePageViewController()
+    }
+    
+    func userDidEditTitleOfObjects() {}
+    
+    func userDidDeleteProject() {
+        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentSectionID = currentProject?.sectionIDs.first
+        
+        updatePageViewController()
+    }
+}
+
 extension LibraryViewController {
+    func updatePageViewController() {
+        DispatchQueue.main.async {
+            if let viewController = self.pageViewDataSource.viewController(at: self.indexOfCurrentSection() ?? 0, storyboard: self.storyboard!) {
+                self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+            }
+            
+            self.updateUI()
+        }
+    }
+    
     func updateUI() {
         // Refresh collection view
         collectionView.dataSource = nil
@@ -326,6 +327,8 @@ extension LibraryViewController {
                 add(errorVieController)
             }
         }
+        
+        navigationItem.title = currentProject?.title ?? .localized(.composify)
     }
 }
 

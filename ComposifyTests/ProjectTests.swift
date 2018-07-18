@@ -13,14 +13,12 @@ import RealmSwift
 
 class ProjectTests: XCTestCase {
     
-    let realmStore = RealmStore.shared
+    var databaseService = DatabaseServiceFactory.defaultService
+    let realm = try! Realm()
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = #file
-        
-        try! realmStore.realm.write {
-            realmStore.realm.deleteAll()
+        try! realm.write {
+            realm.deleteAll()
         }
     }
 
@@ -31,12 +29,17 @@ class ProjectTests: XCTestCase {
         let recording = Recording()
         let recording2 = Recording()
         
-        try! realmStore.realm.write {
+        try! realm.write {
             project.sectionIDs.append(objectsIn: [section.id, section2.id])
             section.recordingIDs.append(recording.id)
             section2.recordingIDs.append(recording2.id)
-            realmStore.realm.add([project, section, section2, recording, recording2])
         }
+        
+        databaseService.save(project)
+        databaseService.save(section)
+        databaseService.save(section2)
+        databaseService.save(recording)
+        databaseService.save(recording2)
         
         XCTAssertEqual(project.recordings.count, 2)
     }

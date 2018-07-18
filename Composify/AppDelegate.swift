@@ -7,33 +7,28 @@
 //
 
 import UIKit
-import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: "projectStoreID") as? String == nil {
-            RealmStore.shared.projectStore = ProjectStore()
-        }
         
-        setupRemoteControlEvents()
+        registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        
-        let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .darkGray
+        registerPageControlAppearance()
         
         return true
     }
 }
 
 private extension AppDelegate {
-    func setupRemoteControlEvents() {
-        // To be able to get recording information and playback controls in control center.
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+    func registerFoundationStoreObjectIfNeeded() {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.value(forKey: "projectStoreID") as? String == nil {
+            var defaultService = DatabaseServiceFactory.defaultService
+            defaultService.foundationStore = ProjectStore()
+        }
     }
     
     func registerNavigationBarAppearance() {
@@ -44,8 +39,14 @@ private extension AppDelegate {
         navigationBarAppearance.backgroundColor = UIColor.clear
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.white
+            .foregroundColor: UIColor.white
         ]
+    }
+    
+    func registerPageControlAppearance() {
+        let pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .darkGray
     }
 }
 

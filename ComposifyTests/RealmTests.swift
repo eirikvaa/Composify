@@ -13,35 +13,34 @@ import RealmSwift
 
 class RealmTests: XCTestCase {
 
-    var realmStore = RealmStore.shared
+    var databaseService = DatabaseServiceFactory.defaultService
+    let realm = try! Realm()
     
     override func setUp() {
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = #file
-        
-        try! realmStore.realm.write {
-            realmStore.realm.deleteAll()
+        try! realm.write {
+            realm.deleteAll()
         }
     }
 
     func testCreateProject() {
         let project = Project()
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 0)
         
-        realmStore.save(project)
+        databaseService.save(project)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
     }
     
     func testDeleteProject() {
         let project = Project()
-        realmStore.save(project)
+        databaseService.save(project)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
         
-        realmStore.delete(project)
+        databaseService.delete(project)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 0)
     }
     
     func testDeleteProjectWhichAlsoDeletesSections() {
@@ -49,18 +48,18 @@ class RealmTests: XCTestCase {
         let section = Section()
         let section2 = Section()
         
-        try! realmStore.realm.write {
+        try! realm.write {
             project.sectionIDs.append(objectsIn: [section.id, section2.id])
-            realmStore.realm.add([project, section, section2])
+            realm.add([project, section, section2])
         }
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 2)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 2)
         
-        realmStore.delete(project)
+        databaseService.delete(project)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 0)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 0)
+        XCTAssertEqual(realm.objects(Section.self).count, 0)
     }
     
     func testDeleteProjectWhichAlsoDeletesSectionsAndRecordings() {
@@ -68,21 +67,21 @@ class RealmTests: XCTestCase {
         let section = Section()
         let recording = Recording()
         
-        try! realmStore.realm.write {
+        try! realm.write {
             project.sectionIDs.append(objectsIn: [section.id])
             section.recordingIDs.append(recording.id)
-            realmStore.realm.add([project, section, recording])
+            realm.add([project, section, recording])
         }
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 1)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 1)
+        XCTAssertEqual(realm.objects(Recording.self).count, 1)
         
-        realmStore.delete(project)
+        databaseService.delete(project)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 0)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 0)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 0)
+        XCTAssertEqual(realm.objects(Section.self).count, 0)
+        XCTAssertEqual(realm.objects(Recording.self).count, 0)
     }
     
     func testDeleteSectionWhichAlsoDeletesRecordings() {
@@ -90,21 +89,21 @@ class RealmTests: XCTestCase {
         let section = Section()
         let recording = Recording()
         
-        try! realmStore.realm.write {
+        try! realm.write {
             project.sectionIDs.append(objectsIn: [section.id])
             section.recordingIDs.append(recording.id)
-            realmStore.realm.add([project, section, recording])
+            realm.add([project, section, recording])
         }
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 1)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 1)
+        XCTAssertEqual(realm.objects(Recording.self).count, 1)
         
-        realmStore.delete(section)
+        databaseService.delete(section)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 0)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 0)
+        XCTAssertEqual(realm.objects(Recording.self).count, 0)
     }
     
     func testDeleteRecording() {
@@ -112,21 +111,21 @@ class RealmTests: XCTestCase {
         let section = Section()
         let recording = Recording()
         
-        try! realmStore.realm.write {
+        try! realm.write {
             project.sectionIDs.append(objectsIn: [section.id])
             section.recordingIDs.append(recording.id)
-            realmStore.realm.add([project, section, recording])
+            realm.add([project, section, recording])
         }
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 1)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 1)
+        XCTAssertEqual(realm.objects(Recording.self).count, 1)
         
-        realmStore.delete(recording)
+        databaseService.delete(recording)
         
-        XCTAssertEqual(realmStore.realm.objects(Project.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Section.self).count, 1)
-        XCTAssertEqual(realmStore.realm.objects(Recording.self).count, 0)
+        XCTAssertEqual(realm.objects(Project.self).count, 1)
+        XCTAssertEqual(realm.objects(Section.self).count, 1)
+        XCTAssertEqual(realm.objects(Recording.self).count, 0)
     }
     
     func testRenameProject() {
@@ -136,15 +135,15 @@ class RealmTests: XCTestCase {
         let project = Project()
         project.title = oldTitle
         
-        realmStore.save(project, update: true)
+        databaseService.save(project)
         
-        XCTAssertTrue(realmStore.realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertFalse(realmStore.realm.objects(Project.self).contains(where: { $0.title == newTitle }))
+        XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
         
-        realmStore.rename(project, to: newTitle)
+        databaseService.rename(project, to: newTitle)
         
-        XCTAssertFalse(realmStore.realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertTrue(realmStore.realm.objects(Project.self).contains(where: { $0.title == newTitle }))
+        XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
     }
     
     func testRenameSection() {
@@ -154,15 +153,15 @@ class RealmTests: XCTestCase {
         let section = Section()
         section.title = oldTitle
         
-        realmStore.save(section, update: true)
+        databaseService.save(section)
         
-        XCTAssertTrue(realmStore.realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertFalse(realmStore.realm.objects(Section.self).contains(where: { $0.title == newTitle }))
+        XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
         
-        realmStore.rename(section, to: newTitle)
+        databaseService.rename(section, to: newTitle)
         
-        XCTAssertFalse(realmStore.realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertTrue(realmStore.realm.objects(Section.self).contains(where: { $0.title == newTitle }))
+        XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
     }
     
     func testRenameRecording() {
@@ -172,14 +171,14 @@ class RealmTests: XCTestCase {
         let recording = Recording()
         recording.title = oldTitle
         
-        realmStore.save(recording, update: true)
+        databaseService.save(recording)
         
-        XCTAssertTrue(realmStore.realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertFalse(realmStore.realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
+        XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
         
-        realmStore.rename(recording, to: newTitle)
+        databaseService.rename(recording, to: newTitle)
         
-        XCTAssertFalse(realmStore.realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
-        XCTAssertTrue(realmStore.realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
+        XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
+        XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
     }
 }

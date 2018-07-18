@@ -26,11 +26,8 @@ private extension RootPageViewDelegate {
         let indexPath = IndexPath(row: pageIndex, section: 0)
         libraryViewController.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
         libraryViewController.pageControl.currentPage = pageIndex
-        libraryViewController.currentProject = currentProject
+        libraryViewController.currentProjectID = currentProject.id
         libraryViewController.currentSectionID = currentProject.sectionIDs[indexPath.row]
         libraryViewController.updateUI()
-        
-        UserDefaults.standard.persist(project: currentProject)
-        UserDefaults.standard.persist(section: libraryViewController.currentSection)
     }
 }

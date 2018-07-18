@@ -8,12 +8,11 @@
 
 import UIKit
 import AVFoundation
-import RealmSwift
 
 class RecordingsTableViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
-    private var realmStore = RealmStore.shared
+    var databaseService = DatabaseServiceFactory.defaultService
 }
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
@@ -30,7 +29,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
 				let recording = self.parentViewController.section?.recordingIDs[indexPath.row].correspondingRecording
 				if let title = edit.textFields?.first?.text, let recording = recording {
-					self.realmStore.rename(recording, to: title)
+                    self.databaseService.rename(recording, to: title)
 					self.parentViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
                     self.libraryViewController.setEditing(false, animated: true)
 				}
@@ -47,7 +46,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			if let currentSection = self.parentViewController.section,
                 let recording = currentSection.recordingIDs[indexPath.row].correspondingRecording {
 				self.libraryViewController.fileManager.delete(recording)
-                self.realmStore.delete(recording)
+                self.databaseService.delete(recording)
                 self.libraryViewController.updateUI()
 			}
 		}

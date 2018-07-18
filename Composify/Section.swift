@@ -11,6 +11,7 @@ import RealmSwift
 
 class Section: Object {
     @objc dynamic var id = UUID().uuidString
+    @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
     var recordingIDs = List<String>()
@@ -20,11 +21,23 @@ class Section: Object {
     }
 }
 
+extension Section: MinMaxType {}
+
+extension Section: DatabaseObject {}
+
 extension Section {
     var recordings: [Recording] {
         return recordingIDs
-            .compactMap { RealmStore.shared.realm.object(ofType: Recording.self, forPrimaryKey: $0)}
+            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0)}
             .sorted()
+    }
+}
+
+extension UserDefaults {
+    func lastSection() -> Section? {
+        guard let realm = try? Realm() else { return nil }
+        guard let id = UserDefaults.standard.string(forKey: "lastSectionID") else { return nil }
+        return realm.object(ofType: Section.self, forPrimaryKey: id)
     }
 }
 
@@ -43,6 +56,7 @@ extension Section: Comparable {
 
 extension String {
     var correspondingSection: Section? {
-        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: self)
+        guard let realm = try? Realm() else { return nil }
+        return realm.object(ofType: Section.self, forPrimaryKey: self)
     }
 }

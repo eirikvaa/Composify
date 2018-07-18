@@ -1,5 +1,5 @@
 //
-//  RealmStore.swift
+//  RealmDatabaseService.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 16.06.2018.
@@ -11,39 +11,40 @@ import RealmSwift
 
 typealias ComposifyObject = Object & FileSystemObject
 
-struct RealmStore {
+struct RealmDatabaseService: DatabaseService {
     
-    let realm = try! Realm()
-    
-    static var shared = RealmStore()
-    private init() {}
-    
-    private var _projectStore: ProjectStore?
-    var projectStore: ProjectStore? {
+    var foundationStore: DatabaseFoundationObject? {
+        get {
+            return realm.objects(ProjectStore.self).first
+        }
         set {
-            guard let projectStore = newValue else { return }
-            UserDefaults.standard.set(projectStore.id, forKey: "projectStoreID")
-            try! realm.write {
-                realm.add(projectStore, update: true)
+            guard let foundationStore = newValue as? ProjectStore else { return }
+            if !realm.isInWriteTransaction && !realm.objects(ProjectStore.self).contains(foundationStore) {
+                try! realm.write {
+                    realm.add(foundationStore, update: true)
+                }
+                UserDefaults.standard.set(foundationStore.identification, forKey: "projectStoreID")
             }
-            _projectStore = newValue
-        } get {
-            guard let id = UserDefaults.standard.projectStoreID else { return nil }
-            return realm.object(ofType: ProjectStore.self, forPrimaryKey: id)
         }
     }
     
-    mutating func save(_ object: ComposifyObject, update: Bool = false) {
-        defer {
-            try! realm.write {
-                realm.add(object, update: update)
-            }
+    let realm = try! Realm()
+    
+    private init() {}
+    static var sharedInstance: DatabaseService?
+    static func defaultService() -> DatabaseService {
+        if sharedInstance == nil {
+            sharedInstance = RealmDatabaseService()
         }
         
+        return sharedInstance!
+    }
+    
+    mutating func save(_ object: DatabaseObject) {
         try! realm.write {
             switch object {
             case let project as Project:
-                projectStore?.projectIDs.append(project.id)
+                foundationStore?.projectIDs.append(project.id)
             case let section as Section:
                 section.project?.sectionIDs.append(section.id)
             case let recording as Recording:
@@ -51,19 +52,23 @@ struct RealmStore {
             default:
                 break
             }
+            
+            if let realmObject = object as? Object {
+                realm.add(realmObject, update: true)
+            }
         }
     }
     
-    mutating func delete(_ object: ComposifyObject) {
+    mutating func delete(_ object: DatabaseObject) {
+        let _self = self
         try! realm.write {
             switch object {
             case let project as Project:
-                if let index = projectStore?.projectIDs.index(of: project.id) {
-                    projectStore?.projectIDs.remove(at: index)
+                if let index = foundationStore?.projectIDs.index(of: project.id) {
+                    foundationStore?.projectIDs.remove(at: index)
                 }
-                let realm = RealmStore.shared.realm
                 project.sectionIDs
-                    .compactMap { realm.object(ofType: Section.self, forPrimaryKey: $0) }
+                    .compactMap { _self.realm.object(ofType: Section.self, forPrimaryKey: $0) }
                     .forEach {
                         realm.delete($0.recordings)
                         realm.delete($0)
@@ -86,15 +91,15 @@ struct RealmStore {
         }
     }
     
-    func rename(_ object: ComposifyObject, to title: String) {
+    func rename(_ object: DatabaseObject, to newName: String) {
         try! realm.write {
             switch object {
             case let project as Project:
-                project.title = title
+                project.title = newName
             case let section as Section:
-                section.title = title
+                section.title = newName
             case let recording as Recording:
-                recording.title = title
+                recording.title = newName
             default:
                 break
             }

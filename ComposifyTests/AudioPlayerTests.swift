@@ -62,20 +62,13 @@ class AudioPlayerTests: XCTestCase {
 	}
 	
     func testPlayRecordedAudio() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-		
 		audioRecorder.recorder.record()
 		sleep(4)
 		audioRecorder.recorder.stop()
 		
 		audioPlayer = AudioPlayer(url: recording.url)
 		
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-            .appendingPathComponent(recording.project!.title)
-			.appendingPathComponent(recording.section!.title)
-			.appendingPathComponent(recording.title)
-			.appendingPathExtension(recording.fileExtension).path))
+		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
 		
 		let audioAsset = AVURLAsset(url: recording.url)
 		let assetDuration = audioAsset.duration

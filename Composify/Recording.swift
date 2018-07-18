@@ -23,6 +23,8 @@ class Recording: Object {
     }
 }
 
+extension Recording: DatabaseObject {}
+
 extension Recording: FileSystemObject {
     var url: URL {
         return section!.url
@@ -47,6 +49,7 @@ extension Recording: Comparable {
 
 extension String {
     var correspondingRecording: Recording? {
-        return RealmStore.shared.realm.object(ofType: Recording.self, forPrimaryKey: self)
+        guard let realm = try? Realm() else { return nil }
+        return realm.object(ofType: Recording.self, forPrimaryKey: self)
     }
 }

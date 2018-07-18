@@ -43,24 +43,18 @@ extension UIFont {
 }
 
 extension UserDefaults {
-    func persist(project: Project?) {
-        guard let project = project else { return }
-        setValue(project.id, forKey: "lastProjectID")
-    }
-    
-    func persist(section: Section?) {
-        guard let section = section else { return }
-        setValue(section.id, forKey: "lastSectionID")
-    }
-    
-    func lastProject() -> Project? {
-        guard let id = UserDefaults.standard.string(forKey: "lastProjectID") else { return nil }
-        return RealmStore.shared.realm.object(ofType: Project.self, forPrimaryKey: id)
-    }
-    
-    func lastSection() -> Section? {
-        guard let id = UserDefaults.standard.string(forKey: "lastSectionID") else { return nil }
-        return RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: id)
+    /// Persist a database object to the user defaults.
+    func persist(databaseObjects: [DatabaseObject?]) {
+        databaseObjects.forEach {
+            switch $0 {
+            case let project as Project:
+                setValue(project.id, forKey: "lastProjectID")
+            case let section as Section:
+                setValue(section.id, forKey: "lastSectionID")
+            default:
+                break
+            }
+        }
     }
     
     func resetLastProject() {
@@ -78,6 +72,7 @@ extension UserDefaults {
 
 extension Array where Element: Comparable {
     
+    /// Remove the first element of an array and return it. Return `nil` if not found.
     @discardableResult
     mutating func removeFirst(_ element: Element) -> Element? {
         guard let firstElement = self.first(where: { $0 == element }) else { return nil }
@@ -88,12 +83,14 @@ extension Array where Element: Comparable {
 }
 
 extension UIViewController {
+    /// Add a view controller to another view controller.
     func add(_ child: UIViewController) {
         addChildViewController(child)
         view.addSubview(child.view)
         child.didMove(toParentViewController: self)
     }
     
+    /// Remove a view controller from another view controller.
     func remove() {
         guard parent != nil else {
             return
@@ -106,13 +103,33 @@ extension UIViewController {
 }
 
 extension Collection {
+    /// A happy-path method for checking if a collection consists of at
+    /// least one element.
     var hasElements: Bool {
         return !isEmpty
     }
 }
 
 extension String {
+    /// A happy-path method for checking if a string consists of at
+    /// least one character.
     var hasPositiveCharacterCount: Bool {
         return !isEmpty
+    }
+}
+
+/// Start from the bottom view and keep moving upwards
+/// while checking for a specific tag unntil it returns
+/// or nothing is found
+extension UIView {
+    static func findSuperView(withTag tag: Int, fromBottomView bottomView: UIView?) -> UIView? {
+        var view: UIView? = bottomView
+        
+        while (view?.superview?.tag != tag) {
+            view = view?.superview
+        }
+        
+        // We stopped one level below the view we want, so return the superview.
+        return view?.superview
     }
 }
