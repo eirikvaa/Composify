@@ -287,7 +287,6 @@ extension LibraryViewController {
             let index = self.indexOfCurrentSection() ?? 0
             if let viewController = self.pageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
                 self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-                self.pageControl.currentPage = index
             }
             
             self.updateUI()
@@ -332,6 +331,7 @@ extension LibraryViewController {
     
     func setState(_ state: State) {
         pageControl.numberOfPages = currentProject?.sections.count ?? 0
+        pageControl.currentPage = indexOfCurrentSection() ?? 0
         errorViewController?.remove()
         
         switch state {
