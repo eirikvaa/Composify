@@ -16,6 +16,23 @@ protocol FileSystemObject {
 	var url: URL { get }
 }
 
+extension FileSystemObject {
+    func getTitle() -> String? {
+        switch self {
+        case let project as Project:
+            return project.title
+        case let section as Section:
+            return section.title
+        case let recording as Recording:
+            return recording.title
+        default:
+            break
+        }
+        
+        return nil
+    }
+}
+
 /**
 An enum containing important directories in the `FileSystemObject` hierarchy.
 - Author: Eirik Vale Aase
@@ -30,6 +47,11 @@ An enum consisting of file extensions.
 */
 enum FileSystemExtensions: String {
 	case caf
+}
+
+enum CFileManagerError: Error {
+    case unableToSaveObject(object: FileSystemObject)
+    case unableToDeleteObject(object: FileSystemObject)
 }
 
 /**
@@ -51,13 +73,13 @@ struct CFileManager {
      Creates a directory in the file system for a `FileSystemComposifyObject` instance.
      - Parameter object: An object conforming to the `FileSystemComposifyObject` protocol.
     */
-    func save<T: Any>(_ object: T) where T: FileSystemObject {
+    func save<T: FileSystemObject>(_ object: T) throws {
 		// The AudioRecorder will create the audio file.
 		if object is Project || object is Section {
 			do {
 				try fileManager.createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
 			} catch {
-				print(error)
+				throw CFileManagerError.unableToSaveObject(object: object)
 			}
 		}
     }
@@ -66,7 +88,7 @@ struct CFileManager {
      Deletes the file or directory of a FileSystemComposifyObject instance.
      - Parameter object: An object conforming to the FileSystemComposifyObject protocol.
     */
-    func delete<T: Any>(_ object: T) where T: FileSystemObject {
+    func delete<T: FileSystemObject>(_ object: T) throws {
 		let url = object.url
 		
 		do {
@@ -74,7 +96,7 @@ struct CFileManager {
 				try fileManager.removeItem(at: url)
 			}
 		} catch {
-			print(error)
+            throw CFileManagerError.unableToDeleteObject(object: object)
 		}
     }
 }

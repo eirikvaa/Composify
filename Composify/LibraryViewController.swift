@@ -168,7 +168,13 @@ extension LibraryViewController {
                     self.currentSectionID = project.sectionIDs.first
                     
                     self.databaseService.save(project)
-                    self.fileManager.save(project)
+                    do {
+                        try self.fileManager.save(project)
+                    } catch let error as CFileManagerError {
+                        self.handleError(error)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                     
                     self.updateUI()
                 }
@@ -212,12 +218,19 @@ extension LibraryViewController {
             guard let currentSection = recordingsViewController.section else { return }
             
             recording = Recording()
+            recording?.title = .localized(.recording)
             recording?.project = currentProject
             recording?.section = currentSection
             recording?.fileExtension = "caf"
             
             if let recording = recording {
-                audioRecorder = AudioRecorder(url: recording.url)
+                do {
+                    audioRecorder = try AudioRecorder(url: recording.url)
+                } catch let error as AudioRecorderError {
+                    handleError(error)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
             
             audioRecorder?.recorder.record()
@@ -228,7 +241,13 @@ extension LibraryViewController {
         recorder.stop()
         
         if let recording = recording {
-            fileManager.save(recording)
+            do {
+                try fileManager.save(recording)
+            } catch let error as CFileManagerError {
+                handleError(error)
+            } catch {
+                print(error.localizedDescription)
+            }
             databaseService.save(recording)
         }
         
@@ -265,8 +284,10 @@ extension LibraryViewController: AdministrateProjectDelegate {
 extension LibraryViewController {
     func updatePageViewController() {
         DispatchQueue.main.async {
-            if let viewController = self.pageViewDataSource.viewController(at: self.indexOfCurrentSection() ?? 0, storyboard: self.storyboard!) {
+            let index = self.indexOfCurrentSection() ?? 0
+            if let viewController = self.pageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
                 self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+                self.pageControl.currentPage = index
             }
             
             self.updateUI()

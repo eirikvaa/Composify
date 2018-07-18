@@ -133,7 +133,14 @@ extension AdministrateProjectTableViewController {
                     standard.resetLastSection()
                 }
                 
-                self.fileManager.delete(currentProject)
+                do {
+                    try self.fileManager.delete(currentProject)
+                } catch let error as CFileManagerError {
+                    self.handleError(error)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
                 self.databaseService.delete(currentProject)
                 self.administrateProjectDelegate?.userDidDeleteProject()
                 
@@ -186,10 +193,17 @@ extension AdministrateProjectTableViewController {
         case .insert:
             let section = Section()
             let sectionsCount = currentProject?.sectionIDs.count ?? 0
-            section.title = "Section"
+            section.title = .localized(.section)
             section.project = currentProject
             
-            fileManager.save(section)
+            do {
+                try fileManager.save(section)
+            } catch let error as CFileManagerError {
+                handleError(error)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
             databaseService.save(section)
             administrateProjectDelegate?.userDidAddSectionToProject(section)
             
@@ -223,7 +237,15 @@ extension AdministrateProjectTableViewController {
             }
             
             if let sectionToDelete = sectionToDelete {
-                fileManager.delete(sectionToDelete)
+                
+                do {
+                    try self.fileManager.delete(sectionToDelete)
+                } catch let error as CFileManagerError {
+                    self.handleError(error)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
                 databaseService.delete(sectionToDelete)
                 administrateProjectDelegate?.userDidDeleteSectionFromProject()
             }

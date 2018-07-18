@@ -100,6 +100,54 @@ extension UIViewController {
         removeFromParentViewController()
         view.removeFromSuperview()
     }
+    
+    func handleError(_ error: Error) {
+        let title: String
+        let message: String
+        
+        if let error = error as? AudioPlayerError {
+            switch error {
+            case .unableToConfigurePlayingSession:
+                title = .localized(.missingRecordingAlertTitle)
+                message = .localized(.missingRecordingAlertMessage)
+            case .unableToPlayRecording:
+                title = .localized(.unableToPlayRecordingTitle)
+                message = .localized(.unableToPlayRecordingMessage)
+            }
+        } else if let error = error as? CFileManagerError {
+            switch error {
+            case .unableToSaveObject(let object):
+                let objectTitle = object.getTitle() ?? ""
+                title = .localized(.unableToSaveObjectTitle)
+                message = String.localizedStringWithFormat(.localized(.unableToSaveObjectMessage), objectTitle)
+            case .unableToDeleteObject(let object):
+                let objectTitle = object.getTitle() ?? ""
+                title = .localized(.unableToDeleteObjectTitle)
+                message = String.localizedStringWithFormat(.localized(.unableToDeleteObjectMessage), objectTitle)
+            }
+        } else if let error = error as? AudioRecorderError {
+            switch error {
+            case .unableToConfigureRecordingSession:
+                title = .localized(.unableToConfigureRecordingSessionTitle)
+                message = .localized(.unableToConfigureRecordingSessionMessage)
+            }
+        } else {
+            return
+        }
+        
+        let alert = UIAlertController.createErrorAlert(title: title, message: message)
+        present(alert, animated: true)
+    }
+}
+
+extension UIAlertController {
+    static func createErrorAlert(title: String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: .localized(.ok), style: .default)
+        alert.addAction(ok)
+        
+        return alert
+    }
 }
 
 extension Collection {

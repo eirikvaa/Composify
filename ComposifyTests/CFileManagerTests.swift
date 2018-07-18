@@ -51,11 +51,11 @@ class CFileManagerTests: XCTestCase {
 		recording.section = section
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		
-		pieFileManager.save(project)
-		pieFileManager.save(section)
-		pieFileManager.save(project2)
-		pieFileManager.save(section2)
-		_ = AudioRecorder(url: recording.url)
+		try! pieFileManager.save(project)
+		try! pieFileManager.save(section)
+		try! pieFileManager.save(project2)
+		try! pieFileManager.save(section2)
+		_ = try! AudioRecorder(url: recording.url)
 	}
 
 	override func tearDown() {
@@ -83,9 +83,9 @@ class CFileManagerTests: XCTestCase {
 	}
 
 	func testDelete() {
-		pieFileManager.delete(project)
-		pieFileManager.delete(section)
-		pieFileManager.delete(recording)
+		try! pieFileManager.delete(project)
+		try! pieFileManager.delete(section)
+		try! pieFileManager.delete(recording)
 		
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: project.url.path))
 		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: section.url.path))

@@ -45,7 +45,15 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (_, indexPath) in
 			if let currentSection = self.parentViewController.section,
                 let recording = currentSection.recordingIDs[indexPath.row].correspondingRecording {
-				self.libraryViewController.fileManager.delete(recording)
+                
+                do {
+                    try self.libraryViewController.fileManager.delete(recording)
+                } catch let errror as CFileManagerError {
+                    self.parentViewController.handleError(errror)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
                 self.databaseService.delete(recording)
                 self.libraryViewController.updateUI()
 			}
@@ -68,7 +76,14 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
             parentViewController.currentlyPlayingRecording = nil
             parentViewController.audioPlayer?.player.stop()
         } else {
-            parentViewController.audioPlayer = AudioPlayer(url: recording.url)
+            do {
+                try parentViewController.audioPlayer = AudioPlayer(url: recording.url)
+            } catch let error as AudioPlayerError {
+                parentViewController.handleError(error)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
             parentViewController.currentlyPlayingRecording = recording
         }
 	}

@@ -9,6 +9,11 @@
 import Foundation
 import AVFoundation
 
+enum AudioPlayerError: Error {
+    case unableToConfigurePlayingSession
+    case unableToPlayRecording
+}
+
 /**
 A class for playing audio from Recording objects.
 - Author: Eirik Vale Aase
@@ -24,7 +29,7 @@ struct AudioPlayer {
     Initializes the AudioPlayer class with a recording.
     - Parameter url: url of the recording to be played.
     */
-    init(url: URL) {
+    init(url: URL) throws {
         guard CFileManager().fileManager.fileExists(atPath: url.path) else {
             return
         }
@@ -32,9 +37,8 @@ struct AudioPlayer {
         do {
             try session.setCategory(AVAudioSessionCategoryPlayback)
             try player = AVAudioPlayer(contentsOf: url)
-
         } catch {
-            print(error.localizedDescription)
+            throw AudioPlayerError.unableToConfigurePlayingSession
         }
 
         player.prepareToPlay()

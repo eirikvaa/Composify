@@ -29,6 +29,9 @@
 /* Generic word for edit. */
 "general.edit" = "Edit";
 
+/* Generic word for ok */
+"general.ok" = "Ok";
+
 /* Generic word for save. */
 "general.save" = "Save";
 
@@ -58,3 +61,42 @@
 
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Stop recording";
+
+/* Message when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.message" = "It seems the recording can't be found in the filesystem.";
+
+/* Title when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.title" = "Couldn't find recording!";
+
+/* Message when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.message" = "Unable to configure a recording session!";;
+
+/* Title when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.title" = "The application was unable to configure a recording session!";
+
+/* Title when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.title" = "recordings.error.unable-to-configure-recording-session.alert.title";
+
+/* Message when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.message" = "The application was unable to delete the object named %@.";
+
+/* Title when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.title" = "Unable to delete object!";
+
+/* Message when the audio player was unable to play the recording. */
+"recordings.error.unable-to-play-recording.alert.message" = "It seems the recording couldn't be played.";
+
+/* Title when the audio player was unable to play the recording. */
+"recordings.error.unable-to-play-recording.alert.title" = "Unable to play recording!";
+
+/* Message when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.message" = "The application was unable to save the object named %@.";
+
+/* Title when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.title" = "Unable to save object!";
+
+/* Generic name for a new recording */
+"recordings.recording" = "Recording";
+
+/* Generic name for a new section */
+"sections.section" = "Section";

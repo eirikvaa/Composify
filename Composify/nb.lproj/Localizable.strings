@@ -29,6 +29,9 @@
 /* Generic word for edit. */
 "general.edit" = "Rediger";
 
+/* Generic word for ok */
+"general.ok" = "Ok";
+
 /* Generic word for save. */
 "general.save" = "Lagre";
 
@@ -58,3 +61,39 @@
 
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Avslutt opptak";
+
+/* Message when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.message" = "It seems the recording can't be found in the filesystem.";
+
+/* Title when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.title" = "Kunne ikke finne opptaket!";
+
+/* Message when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.message" = "Kunne ikke konfigurere en opptaksøkt!";
+
+/* Title when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.title" = "Applikasjonen kunne ikke konfigurere en opptaksøk.";
+
+/* Message when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.message" = "Applikasjonen kunne ikke slette objektet kalt %@";
+
+/* Title when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.title" = "Kunne ikke slette objektet!";
+
+/* Message when the audio player was unable to play the recording. */
+"recordings.error.unable-to-play-recording.alert.message" = "Det ser ut til at opptaket ikke kunne spilles av.";
+
+/* Title when the audio player was unable to play the recording. */
+"recordings.error.unable-to-play-recording.alert.title" = "Kan ikke spille av opptaket!";
+
+/* Message when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.message" = "Applikasjonen kunne ikke lagre objektet kalt %@.";
+
+/* Title when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.title" = "Kunne ikke lagre objektet!";
+
+/* Generic name for a new recording */
+"recordings.recording" = "Opptak";
+
+/* Generic name for a new section */
+"sections.section" = "Seksjon";

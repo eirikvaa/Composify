@@ -29,6 +29,7 @@ extension Localizable {
 extension Localizable {
     static let addSection = Localizable(NSLocalizedString("administrate-project.tableview.cell.add-section.title", comment: "Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed."))
     static let noSections = Localizable(NSLocalizedString("library.empty-state.no-sections", comment: "Label appearing when the user has no sections in a project."))
+    static let section = Localizable(NSLocalizedString("sections.section", comment: "Generic name for a new section"))
 }
 
 // MARK: Recording localizations
@@ -36,6 +37,7 @@ extension Localizable {
 extension Localizable {
     static let startRecording = Localizable(NSLocalizedString("library.record-button.start-recording.title", comment: "Title of button when user is not recording audio."))
     static let stopRecording = Localizable(NSLocalizedString("library.record-button.stop-recording.title", comment: "Title of button when user is recording audio."))
+    static let recording = Localizable(NSLocalizedString("recordings.recording", comment: "Generic name for a new recording"))
 }
 
 // MARK: Generic localizations
@@ -46,6 +48,7 @@ extension Localizable {
     static let delete = Localizable(NSLocalizedString("general.delete", comment: "Generic word for delete."))
     static let save = Localizable(NSLocalizedString("general.save", comment: "Generic word for save."))
     static let administrate = Localizable(NSLocalizedString("general.administrate", comment: "Generic word for administrate."))
+    static let ok = Localizable(NSLocalizedString("general.ok", comment: "Generic word for ok"))
 }
 
 // MARK: Menu localization
@@ -61,4 +64,28 @@ extension Localizable {
     static let metaInformationHeader = Localizable(NSLocalizedString("administrate-project.section-titles.meta-information.label", comment: "Title of section for meta information in administrate project."))
     static let sectionsHeader = Localizable(NSLocalizedString("administrate-project.section-titles.sections.label", comment: "Title of section for project sections in administrate project."))
     static let dangerZoneHeader = Localizable(NSLocalizedString("administrate-project.section-titles.danger-zone.label", comment: "Title of section for the danger zone in administrate project."))
+}
+
+// MARK: Recordings view controller localization
+
+extension Localizable {
+    static let missingRecordingAlertTitle = Localizable(NSLocalizedString("recordings.error.missing-recording.alert.title", comment: "Title when recording can't be found in the file system."))
+    
+    static let missingRecordingAlertMessage = Localizable(NSLocalizedString("recordings.error.missing-recording.alert.message", comment: "Message when recording can't be found in the file system."))
+    
+    static let unableToPlayRecordingTitle = Localizable(NSLocalizedString("recordings.error.unable-to-play-recording.alert.title", comment: "Title when the audio player was unable to play the recording."))
+    
+    static let unableToPlayRecordingMessage = Localizable(NSLocalizedString("recordings.error.unable-to-play-recording.alert.message", comment: "Message when the audio player was unable to play the recording."))
+    
+    static let unableToSaveObjectTitle = Localizable(NSLocalizedString("recordings.error.unable-to-save-recording.alert.title", comment: "Title when application was unable to save the recording."))
+    
+    static let unableToSaveObjectMessage = Localizable(NSLocalizedString("recordings.error.unable-to-save-recording.alert.message", comment: "Message when application was unable to save the recording."))
+    
+    static let unableToDeleteObjectTitle = Localizable(NSLocalizedString("recordings.error.unable-to-delete-object.alert.title", comment: "Title when trying to delete object from filesystem."))
+    
+    static let unableToDeleteObjectMessage = Localizable(NSLocalizedString("recordings.error.unable-to-delete-object.alert.message", comment: "Message when trying to delete object from filesystem."))
+    
+    static let unableToConfigureRecordingSessionTitle = Localizable(NSLocalizedString("recordings.error.unable-to-configure-recording-session.alert.title", comment: "Title when application is unable to configure a recording session."))
+    
+    static let unableToConfigureRecordingSessionMessage = Localizable(NSLocalizedString("recordings.error.unable-to-configure-recording-session.alert.message", comment: "Message when application is unable to configure a recording session."))
 }

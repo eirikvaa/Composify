@@ -40,9 +40,9 @@ class AudioPlayerTests: XCTestCase {
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		recording.dateRecorded = Date()
 		
-		cFileManager.save(project)
-		cFileManager.save(section)
-		audioRecorder = AudioRecorder(url: recording.url)
+		try! cFileManager.save(project)
+		try! cFileManager.save(section)
+		audioRecorder = try! AudioRecorder(url: recording.url)
     }
     
 	override func tearDown() {
@@ -66,7 +66,7 @@ class AudioPlayerTests: XCTestCase {
 		sleep(4)
 		audioRecorder.recorder.stop()
 		
-		audioPlayer = AudioPlayer(url: recording.url)
+        audioPlayer = try! AudioPlayer(url: recording.url)
 		
 		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
 		

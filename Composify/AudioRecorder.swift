@@ -9,6 +9,10 @@
 import Foundation
 import AVFoundation
 
+enum AudioRecorderError: Error {
+    case unableToConfigureRecordingSession
+}
+
 /**
 A class for abstracting away the details regarding simple recording of audio.
 - Author: Eirik Vale Aase
@@ -24,7 +28,7 @@ struct AudioRecorder {
     Initializes the AudioPlayer class with the url to a recording.
     - Parameter url: url of recording to be played.
     */
-    init(url: URL) {
+    init(url: URL) throws {
         let settings: [String: Any] = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
                 AVSampleRateKey: 12000.0,
@@ -37,7 +41,7 @@ struct AudioRecorder {
             try session.setActive(true)
             try recorder = AVAudioRecorder(url: url, settings: settings)
         } catch {
-            print(error.localizedDescription)
+            throw AudioRecorderError.unableToConfigureRecordingSession
         }
 
         recorder.prepareToRecord()
