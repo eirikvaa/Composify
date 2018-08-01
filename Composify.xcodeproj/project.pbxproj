@@ -411,8 +411,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
-				E51B851720F4076700FB3D48 /* ShellScript */,
 				AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */,
+				E51B851720F4076700FB3D48 /* ShellScript */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
@@ -886,7 +886,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -912,7 +912,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
