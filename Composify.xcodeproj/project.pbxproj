@@ -39,7 +39,7 @@
 		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
-		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
+		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
@@ -133,7 +133,7 @@
 		E590657320E3F4AF0028453D /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
-		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */,
-				E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */,
+				E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */,
 			);
 			name = AVFoundation;
 			sourceTree = "<group>";
@@ -687,7 +687,7 @@
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
-				E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */,
+				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,

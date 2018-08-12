@@ -1,5 +1,5 @@
 //
-//  AudioPlayer.swift
+//  AVAudioPlayerService.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 22.07.2016.
