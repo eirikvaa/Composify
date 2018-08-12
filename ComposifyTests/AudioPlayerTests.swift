@@ -8,20 +8,18 @@
 
 import XCTest
 import Darwin
-import AVFoundation
 @testable import Composify
 
 class AudioPlayerTests: XCTestCase {
-	var audioPlayer: AudioPlayer!
-	var audioRecorder: AudioRecorder!
+	var audioPlayer: AudioPlayerService!
+	var audioRecorder: AudioRecorderService!
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
-    let cFileManager = CFileManager()
-	let fileManager = FileManager.default
+    let fileManager = FileManager.default
     
     override func setUp() {
         super.setUp()
@@ -40,9 +38,9 @@ class AudioPlayerTests: XCTestCase {
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		recording.dateRecorded = Date()
 		
-		try! cFileManager.save(project)
-		try! cFileManager.save(section)
-		audioRecorder = try! AudioRecorder(url: recording.url)
+		try! fileManager.save(project)
+		try! fileManager.save(section)
+		audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
     }
     
 	override func tearDown() {
@@ -62,17 +60,13 @@ class AudioPlayerTests: XCTestCase {
 	}
 	
     func testPlayRecordedAudio() {
-		audioRecorder.recorder.record()
+		audioRecorder.record()
 		sleep(4)
-		audioRecorder.recorder.stop()
+		audioRecorder.stop()
 		
-        audioPlayer = try! AudioPlayer(url: recording.url)
+        audioPlayer = try! AudioPlayerServiceFactory.defaultService(withObject: recording)
 		
 		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
-		
-		let audioAsset = AVURLAsset(url: recording.url)
-		let assetDuration = audioAsset.duration
-		let duration = CMTimeGetSeconds(assetDuration)
-		XCTAssertTrue(3...5 ~= duration)
+		XCTAssertTrue(3...5 ~= recording.duration)
     }
 }

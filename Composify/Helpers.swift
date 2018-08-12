@@ -43,20 +43,6 @@ extension UIFont {
 }
 
 extension UserDefaults {
-    /// Persist a database object to the user defaults.
-    func persist(databaseObjects: [DatabaseObject?]) {
-        databaseObjects.forEach {
-            switch $0 {
-            case let project as Project:
-                setValue(project.id, forKey: "lastProjectID")
-            case let section as Section:
-                setValue(section.id, forKey: "lastSectionID")
-            default:
-                break
-            }
-        }
-    }
-    
     func resetLastProject() {
         setValue(nil, forKey: "lastProjectID")
     }
@@ -67,18 +53,6 @@ extension UserDefaults {
     
     var projectStoreID: String? {
         return value(forKey: "projectStoreID") as? String
-    }
-}
-
-extension Array where Element: Comparable {
-    
-    /// Remove the first element of an array and return it. Return `nil` if not found.
-    @discardableResult
-    mutating func removeFirst(_ element: Element) -> Element? {
-        guard let firstElement = self.first(where: { $0 == element }) else { return nil }
-        guard let index = self.index(of: firstElement) else { return nil }
-        let element = self.remove(at: index)
-        return element
     }
 }
 

@@ -19,28 +19,52 @@ A class for playing audio from Recording objects.
 - Author: Eirik Vale Aase
 */
 
-struct AudioPlayer {
-    // MARK: Properties
-    private(set) var player = AVAudioPlayer()
-    private var session = AVAudioSession.sharedInstance()
+class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
+    var audioDidFinishBlock: ((Bool) -> Void)?
+    
+    private var player: AVAudioPlayer?
+    private let session = AVAudioSession.sharedInstance()
+    private var playableObject: AudioPlayable?
+    
+    convenience required init(_ object: AudioPlayable) throws {
+        self.init()
+        try setup(withObject: object)
+    }
+    
+    func play() {
+        player?.play()
+    }
+    
+    func pause() {
+        player?.pause()
+    }
+    
+    func stop() {
+        player?.stop()
+    }
+    
+    func setup(withObject object: AudioPlayable) throws {
+        guard player == nil else { return }
+        guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.playableNotFound }
+        
+        try session.setCategory(AVAudioSessionCategoryPlayback)
+        player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
+        
+        player?.prepareToPlay()
+        player?.delegate = self
+        
+        self.playableObject = object
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        audioDidFinishBlock?(flag)
+    }
+}
 
-    // MARK: Initialization
-    /**
-    Initializes the AudioPlayer class with a recording.
-    - Parameter url: url of the recording to be played.
-    */
-    init(url: URL) throws {
-        guard CFileManager().fileManager.fileExists(atPath: url.path) else {
-            return
-        }
-
-        do {
-            try session.setCategory(AVAudioSessionCategoryPlayback)
-            try player = AVAudioPlayer(contentsOf: url)
-        } catch {
-            throw AudioPlayerError.unableToConfigurePlayingSession
-        }
-
-        player.prepareToPlay()
+extension AudioPlayable {
+    var duration: Float64 {
+        let audioAsset = AVURLAsset(url: url)
+        let assetDuration = audioAsset.duration
+        return CMTimeGetSeconds(assetDuration)
     }
 }

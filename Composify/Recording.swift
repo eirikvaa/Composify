@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import AVFoundation
 
 class Recording: Object {
     @objc dynamic var id = UUID().uuidString
@@ -24,20 +23,13 @@ class Recording: Object {
 }
 
 extension Recording: DatabaseObject {}
+extension Recording: AudioPlayable {}
 
 extension Recording: FileSystemObject {
     var url: URL {
         return section!.url
             .appendingPathComponent(id)
             .appendingPathExtension(fileExtension)
-    }
-}
-
-extension Recording {
-    var duration: Float64 {
-        let audioAsset = AVURLAsset(url: url)
-        let assetDuration = audioAsset.duration
-        return CMTimeGetSeconds(assetDuration)
     }
 }
 

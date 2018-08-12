@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import AVFoundation
 
 class RecordingsTableViewDataSource: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
-	var audioPlayer: AudioPlayer?
 }
 
 // MARK: UITableViewDataSource
@@ -38,13 +36,13 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
         cell.selectionStyle = .none
         
         let recording = parentViewController.section?.recordingIDs[indexPath.row].correspondingRecording
-        let isCurrentlyPlayingRecording = parentViewController.currentlyPlayingRecording == recording
+        let isCurrentlyPlayingRecording = parentViewController.currentlyPlayingRecording?.id == recording?.id
         
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
         cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateRecorded.description
 		cell.playButton.alpha = 1
-        cell.playButton.setImage(isCurrentlyPlayingRecording ? Images.pause : Images.play, for: .normal)
+        cell.playButton.setImage(isCurrentlyPlayingRecording ? .pause : .play, for: .normal)
         
 		return cell
 	}

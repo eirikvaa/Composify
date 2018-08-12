@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import AVFoundation
 
 class RecordingsTableViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
     var databaseService = DatabaseServiceFactory.defaultService
+    var audioDefaultService: AudioPlayerService?
 }
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
@@ -59,8 +59,8 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			}
 		}
 
-		edit.backgroundColor = Colors.edit
-		delete.backgroundColor = Colors.delete
+		edit.backgroundColor = .mainColor
+		delete.backgroundColor = .delete
 
 		return [edit, delete]
 	}
@@ -74,17 +74,23 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
         
         if parentViewController.currentlyPlayingRecording != nil {
             parentViewController.currentlyPlayingRecording = nil
-            parentViewController.audioPlayer?.player.stop()
+            audioDefaultService?.stop()
         } else {
             do {
-                try parentViewController.audioPlayer = AudioPlayer(url: recording.url)
+                audioDefaultService = try AudioPlayerServiceFactory.defaultService(withObject: recording)
             } catch let error as AudioPlayerError {
                 parentViewController.handleError(error)
             } catch let error {
                 print(error.localizedDescription)
             }
             
+            audioDefaultService?.audioDidFinishBlock = { _ in
+                self.parentViewController.currentlyPlayingRecording = nil
+                self.libraryViewController.updateUI()
+            }
+            
             parentViewController.currentlyPlayingRecording = recording
+            audioDefaultService?.play()
         }
 	}
 
@@ -94,12 +100,5 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
 		libraryViewController.setEditing(false, animated: true)
-	}
-}
-
-extension RecordingsTableViewDelegate: AVAudioPlayerDelegate {
-	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-		parentViewController.currentlyPlayingRecording = nil
-		libraryViewController.updateUI()
 	}
 }

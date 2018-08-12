@@ -44,12 +44,11 @@ class LibraryViewController: UIViewController {
         return dataSource
     }()
     private var pageViewController: UIPageViewController!
-    let fileManager = CFileManager()
+    let fileManager = FileManager.default
     private var projects: [Project] {
         return Project.projects()
     }
-    private let center = NotificationCenter.default
-    private var audioRecorder: AudioRecorder?
+    private var audioRecorderDefaultService: AudioRecorderService?
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
         guard let project = projectID.correspondingProject else { return nil }
@@ -99,7 +98,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = Colors.secondaryColor
+            recordAudioButton.backgroundColor = .secondaryColor
         }
     }
     @IBOutlet weak var recordAudioView: UIView!
@@ -143,7 +142,7 @@ extension LibraryViewController {
         let alert = UIAlertController(title: .localized(.menu), message: nil, preferredStyle: .actionSheet)
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
-                let administerVC = AdministrateProjectTableViewController()
+                let administerVC = AdministrateProjectViewController()
                 administerVC.currentProject = currentProject
                 administerVC.administrateProjectDelegate = self
                 let nav = UINavigationController(rootViewController: administerVC)
@@ -211,7 +210,7 @@ extension LibraryViewController {
     }
     
     @IBAction func recordAudio(_ sender: UIButton) {
-        guard let recorder = audioRecorder?.recorder else {
+        guard let recorder = audioRecorderDefaultService else {
             guard let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController
                 else { return }
             guard let currentProject = recordingsViewController.project else { return }
@@ -225,7 +224,7 @@ extension LibraryViewController {
             
             if let recording = recording {
                 do {
-                    audioRecorder = try AudioRecorder(url: recording.url)
+                    audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
                 } catch let error as AudioRecorderError {
                     handleError(error)
                 } catch {
@@ -233,7 +232,7 @@ extension LibraryViewController {
                 }
             }
             
-            audioRecorder?.recorder.record()
+            audioRecorderDefaultService?.record()
             recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
             return
         }
@@ -252,7 +251,7 @@ extension LibraryViewController {
         }
         
         recording = nil
-        audioRecorder = nil
+        audioRecorderDefaultService = nil
         recordAudioButton.setTitle(.localized(.startRecording), for: .normal)
         
         updateUI()

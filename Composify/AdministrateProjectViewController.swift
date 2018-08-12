@@ -1,5 +1,5 @@
 //
-//  AdministrateProjectTableViewController.swift
+//  AdministrateProjectViewController.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 01.05.2018.
@@ -15,7 +15,7 @@ protocol AdministrateProjectDelegate: class {
     func userDidDeleteProject()
 }
 
-class AdministrateProjectTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AdministrateProjectViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Properties
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
@@ -31,7 +31,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
     }
     var currentProject: Project?
     var databaseService = DatabaseServiceFactory.defaultService
-    private var fileManager = CFileManager()
+    private var fileManager = FileManager.default
     private lazy var rowCount = [
         0: 1,   // Meta Information
         1: (self.currentProject?.sectionIDs.count ?? 0) + 1,   // Sections
@@ -82,7 +82,7 @@ class AdministrateProjectTableViewController: UIViewController, UITableViewDataS
 
 // MARK: UITableViewDataSource
 
-extension AdministrateProjectTableViewController {
+extension AdministrateProjectViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         return rowCount.count
     }
@@ -161,7 +161,7 @@ extension AdministrateProjectTableViewController {
 
 // MARK: UITableViewDelegate
 
-extension AdministrateProjectTableViewController {
+extension AdministrateProjectViewController {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -264,7 +264,7 @@ extension AdministrateProjectTableViewController {
     }
 }
 
-extension AdministrateProjectTableViewController {
+extension AdministrateProjectViewController {
     func configureViews() {
         if let tableView = tableView {
             view.addSubview(tableView)
@@ -292,7 +292,7 @@ extension AdministrateProjectTableViewController {
     }
 }
 
-extension AdministrateProjectTableViewController {
+extension AdministrateProjectViewController {
     func persistChanges() {
         var hadChanges = false
         if newValues[T((0, 0))] != currentProject?.title {

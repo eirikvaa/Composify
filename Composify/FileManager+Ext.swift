@@ -58,16 +58,7 @@ enum CFileManagerError: Error {
 A class for saving, deleting and renaming projects, sections and recordings in the file system.
 - Author: Eirik Vale Aase
 */
-struct CFileManager {
-    
-    // MARK: Properties
-    let fileManager = FileManager.default
-    private var documentDirectory: URL {
-		return fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-    }
-    private var userProjectsDirectory: URL {
-        return documentDirectory.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-    }
+extension FileManager {
     
     /**
      Creates a directory in the file system for a `FileSystemComposifyObject` instance.
@@ -77,7 +68,7 @@ struct CFileManager {
 		// The AudioRecorder will create the audio file.
 		if object is Project || object is Section {
 			do {
-				try fileManager.createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
+				try createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
 			} catch {
 				throw CFileManagerError.unableToSaveObject(object: object)
 			}
@@ -92,8 +83,8 @@ struct CFileManager {
 		let url = object.url
 		
 		do {
-			if fileManager.fileExists(atPath: url.path) {
-				try fileManager.removeItem(at: url)
+			if fileExists(atPath: url.path) {
+				try removeItem(at: url)
 			}
 		} catch {
             throw CFileManagerError.unableToDeleteObject(object: object)

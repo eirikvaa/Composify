@@ -12,13 +12,12 @@ import XCTest
 /*
 PIEFileManagerTests tests both PIEFileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
 */
-class CFileManagerTests: XCTestCase {
+class FileManagerTests: XCTestCase {
 	
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
-	let pieFileManager = CFileManager()
-	let fileManager = FileManager()
+	let fileManager = FileManager.default
 	
 	var project2: Project!
 	var section2: Section!
@@ -51,11 +50,11 @@ class CFileManagerTests: XCTestCase {
 		recording.section = section
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		
-		try! pieFileManager.save(project)
-		try! pieFileManager.save(section)
-		try! pieFileManager.save(project2)
-		try! pieFileManager.save(section2)
-		_ = try! AudioRecorder(url: recording.url)
+		try! fileManager.save(project)
+		try! fileManager.save(section)
+		try! fileManager.save(project2)
+		try! fileManager.save(section2)
+		_ = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
 	}
 
 	override func tearDown() {
@@ -77,19 +76,19 @@ class CFileManagerTests: XCTestCase {
 	}
 
 	func testSave() {
-		XCTAssertTrue(pieFileManager.fileManager.fileExists(atPath: project.url.path))
-		XCTAssertTrue(pieFileManager.fileManager.fileExists(atPath: section.url.path))
-		XCTAssertTrue(pieFileManager.fileManager.fileExists(atPath: recording.url.path))
+		XCTAssertTrue(fileManager.fileExists(atPath: project.url.path))
+		XCTAssertTrue(fileManager.fileExists(atPath: section.url.path))
+		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
 	}
 
 	func testDelete() {
-		try! pieFileManager.delete(project)
-		try! pieFileManager.delete(section)
-		try! pieFileManager.delete(recording)
+		try! fileManager.delete(project)
+		try! fileManager.delete(section)
+		try! fileManager.delete(recording)
 		
-		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: project.url.path))
-		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: section.url.path))
-		XCTAssertFalse(pieFileManager.fileManager.fileExists(atPath: recording.url.path))
+		XCTAssertFalse(fileManager.fileExists(atPath: project.url.path))
+		XCTAssertFalse(fileManager.fileExists(atPath: section.url.path))
+		XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
 	}
 }
 
