@@ -207,10 +207,8 @@ extension LibraryViewController {
             if let recording = recording {
                 do {
                     audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-                } catch let error as AudioRecorderError {
-                    handleError(error)
                 } catch {
-                    print(error.localizedDescription)
+                    handleError(error)
                 }
             }
             
@@ -224,10 +222,8 @@ extension LibraryViewController {
         if let recording = recording {
             do {
                 try fileManager.save(recording)
-            } catch let error as CFileManagerError {
-                handleError(error)
             } catch {
-                print(error.localizedDescription)
+                handleError(error)
             }
             databaseService.save(recording)
         }
