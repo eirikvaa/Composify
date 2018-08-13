@@ -48,6 +48,8 @@
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
+		E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */; };
+		E5E2315C21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
 		E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DA91F8AB476002788F7 /* Localizable.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* Strings.swift */; };
@@ -144,6 +146,8 @@
 		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableVieDelegate.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5ED6DA91F8AB476002788F7 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
+				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
+				E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */,
 			);
 			name = AdministrateProject;
 			sourceTree = "<group>";
@@ -684,7 +690,9 @@
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */,
+				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
+				E5E2315C21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,

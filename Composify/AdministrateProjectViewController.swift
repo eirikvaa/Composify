@@ -15,14 +15,16 @@ protocol AdministrateProjectDelegate: class {
     func userDidDeleteProject()
 }
 
-class AdministrateProjectViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AdministrateProjectViewController: UIViewController {
     
     // MARK: Properties
+    lazy var tableViewDataSource = AdministrateProjectTableViewDataSource(administrateProjectViewController: self)
+    lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
-    private var tableView: UITableView? {
+    private(set) var tableView: UITableView? {
         didSet {
-            tableView?.delegate = self
-            tableView?.dataSource = self
+            tableView?.delegate = tableViewDelegate
+            tableView?.dataSource = tableViewDataSource
             tableView?.register(UITableViewCell.self, forCellReuseIdentifier: Strings.Cells.administerCell)
             tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: Strings.Cells.deleteCell)
             tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: Strings.Cells.cell)
@@ -32,13 +34,13 @@ class AdministrateProjectViewController: UIViewController, UITableViewDataSource
     var currentProject: Project?
     var databaseService = DatabaseServiceFactory.defaultService
     private var fileManager = FileManager.default
-    private lazy var rowCount = [
-        0: 1,   // Meta Information
-        1: (self.currentProject?.sectionIDs.count ?? 0) + 1,   // Sections
-        2: 1    // Danger Zone
+    private(set) lazy var rowCount = [
+        0: 1,                                                   // Meta Information
+        1: (self.currentProject?.sectionIDs.count ?? 0) + 1,    // Sections
+        2: 1                                                    // Danger Zone
     ]
-    private lazy var newValues: [T: String] = [:]
-    private var headers: [String] = [
+    lazy var newValues: [T: String] = [:]
+    private(set) var headers: [String] = [
         .localized(.metaInformationHeader),
         .localized(.sectionsHeader),
         .localized(.dangerZoneHeader)
@@ -80,113 +82,8 @@ class AdministrateProjectViewController: UIViewController, UITableViewDataSource
     }
 }
 
-// MARK: UITableViewDataSource
-
 extension AdministrateProjectViewController {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return rowCount.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return (currentProject?.sectionIDs.count ?? 0) + 1 }
-        return rowCount[section] ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
-        
-        cell.textField.returnKeyType = .done
-        cell.tag = 1234
-        cell.textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
-        cell.textField.text = nil
-        cell.textField.placeholder = nil
-        cell.isUserInteractionEnabled = true
-        let insertRowIndex = currentProject?.sectionIDs.count ?? 0
-        
-        switch (indexPath.section, indexPath.row) {
-        case (0, _):
-            cell.textField.placeholder = currentProject?.title
-            cell.textField.autocapitalizationType = .words
-            cell.textField.clearButtonMode = .whileEditing
-            cell.textField.returnKeyType = .done
-        case (1, _):
-            if indexPath.row == insertRowIndex {
-                cell.textField.isUserInteractionEnabled = false
-                cell.textField.text = .localized(.addSection)
-            } else {
-                if let section = currentProject?.sectionIDs[indexPath.row].correspondingSection {
-                    cell.textField.placeholder = section.title
-                    cell.textField.autocapitalizationType = .words
-                    cell.textField.clearButtonMode = .whileEditing
-                    cell.textField.returnKeyType = .done
-                }
-            }
-        case (2, _):
-            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-            deleteCell.buttonTitle = .localized(.deleteProejct)
-            deleteCell.action = {
-                guard let currentProject = self.currentProject else { return }
-                
-                let standard = UserDefaults.standard
-                if standard.lastProject() == currentProject {
-                    standard.resetLastProject()
-                    standard.resetLastSection()
-                }
-                
-                do {
-                    try self.fileManager.delete(currentProject)
-                } catch {
-                    self.handleError(error)
-                }
-                
-                self.databaseService.delete(currentProject)
-                self.administrateProjectDelegate?.userDidDeleteProject()
-                
-                self.dismiss(animated: true)
-            }
-            return deleteCell
-        default:
-            break
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headers[section]
-    }
-}
-
-// MARK: UITableViewDelegate
-
-extension AdministrateProjectViewController {
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        guard indexPath.section == 1 else { return .none }
-        
-        let endIndex = currentProject?.sectionIDs.count ?? 0
-        
-        if indexPath.section == 1 && 0..<endIndex ~= indexPath.row {
-            return .delete
-        } else if indexPath.section == 1 && indexPath.row == endIndex {
-            return .insert
-        } else {
-            return .none
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        guard indexPath.section == 1 else { return false }
-        
-        if indexPath.row == rowCount[indexPath.section] ?? 0 { return false }
-        
-        return true
-    }
-    
-    private func deleteSection(_ sectionToDelete: Section?, then completionHandler: () -> Void) {
+    func deleteSection(_ sectionToDelete: Section?, then completionHandler: () -> Void) {
         guard let sectionToDelete = sectionToDelete else { return }
         
         do {
@@ -200,7 +97,7 @@ extension AdministrateProjectViewController {
         completionHandler()
     }
     
-    private func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
+    func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
         let section = Section()
         section.title = .localized(.section)
         section.project = currentProject
@@ -216,61 +113,9 @@ extension AdministrateProjectViewController {
         
         completionHandler(section)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .insert:
-            guard let currentProject = currentProject else { return }
-            
-            insertNewSection {
-                self.administrateProjectDelegate?.userDidAddSectionToProject($0)
-            }
-            
-            newValues.removeAll()
-            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                // We're skipping the entries that have a title different
-                // from the corresponding section title, because that means the
-                // section was renamed. Without this check, if a section is renamed
-                // and a section later added, the rename will be ignored.
-                guard let section = sectionID.correspondingSection,
-                    let existingTitle = newValues[T((1, index))], existingTitle == section.title else { continue }
-                
-                newValues[T((1, index))] = section.title
-            }
-            
-            // It's important that we reload the previously last row after we
-            // insert the new row so there's no problem with indexes.
-            let newIndexPath = IndexPath(row: currentProject.sectionIDs.count, section: 1)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        case .delete:
-            guard let currentProject = currentProject,
-                currentProject.sectionIDs.hasElements else { return }
-            let sectionToDelete = currentProject.sectionIDs[indexPath.row].correspondingSection
-            
-            if UserDefaults.standard.lastSection() == sectionToDelete {
-                UserDefaults.standard.resetLastSection()
-            }
-            
-            deleteSection(sectionToDelete) {
-                self.administrateProjectDelegate?.userDidDeleteSectionFromProject()
-            }
-            
-            newValues.removeAll()
-            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                if let section = sectionID.correspondingSection {
-                    newValues[T((1, index))] = section.title
-                }
-            }
-            
-            self.tableView?.deleteRows(at: [indexPath], with: .automatic)
-        case .none:
-            break
-        }
-    }
 }
 
-extension AdministrateProjectViewController {
+private extension AdministrateProjectViewController {
     func configureViews() {
         if let tableView = tableView {
             view.addSubview(tableView)
@@ -281,7 +126,7 @@ extension AdministrateProjectViewController {
                 tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
                 tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
                 tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+                ])
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
@@ -291,9 +136,7 @@ extension AdministrateProjectViewController {
         persistChanges()
         dismiss(animated: true)
     }
-}
-
-extension AdministrateProjectViewController {
+    
     func persistChanges() {
         var hadChanges = false
         if newValues[T((0, 0))] != currentProject?.title {
