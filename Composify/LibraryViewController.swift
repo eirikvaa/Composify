@@ -142,11 +142,7 @@ extension LibraryViewController {
         let alert = UIAlertController(title: .localized(.menu), message: nil, preferredStyle: .actionSheet)
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
-                let administerVC = AdministrateProjectViewController()
-                administerVC.currentProject = currentProject
-                administerVC.administrateProjectDelegate = self
-                let nav = UINavigationController(rootViewController: administerVC)
-                self.present(nav, animated: true)
+                self.presentAdministrateViewController(project: currentProject)
             }
         }
         
@@ -160,22 +156,15 @@ extension LibraryViewController {
             }
             let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {
-                    
-                    let project = Project()
-                    project.title = projectTitle
-                    self.currentProjectID = project.id
-                    self.currentSectionID = project.sectionIDs.first
-                    
-                    self.databaseService.save(project)
                     do {
-                        try self.fileManager.save(project)
-                    } catch let error as CFileManagerError {
-                        self.handleError(error)
+                        try Project.createProject(withTitle: projectTitle, then: { project in
+                            self.currentProjectID = project.id
+                            self.currentSectionID = project.sectionIDs.first
+                            self.updateUI()
+                        })
                     } catch {
-                        print(error.localizedDescription)
+                        self.handleError(error)
                     }
-                    
-                    self.updateUI()
                 }
             })
             let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
@@ -187,14 +176,7 @@ extension LibraryViewController {
         
         projects.forEach { project in
             let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { _ in
-                self.currentProjectID = project.id
-                self.currentSectionID = self.currentProject?.sectionIDs.first
-                
-                if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
-                    self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-                }
-                
-                self.updateUI()
+                self.setCurrentProject(project)
             }
             alert.addAction(projectAction)
         }
@@ -353,6 +335,25 @@ extension LibraryViewController {
 }
 
 private extension LibraryViewController {
+    func presentAdministrateViewController(project: Project) {
+        let administerVC = AdministrateProjectViewController()
+        administerVC.currentProject = project
+        administerVC.administrateProjectDelegate = self
+        let nav = UINavigationController(rootViewController: administerVC)
+        self.present(nav, animated: true)
+    }
+    
+    func setCurrentProject(_ project: Project) {
+        self.currentProjectID = project.id
+        self.currentSectionID = self.currentProject?.sectionIDs.first
+        
+        if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
+            self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+        }
+        
+        self.updateUI()
+    }
+    
 	func configurePageViewController() {
 		pageViewController = UIPageViewController(
 			transitionStyle: .scroll,

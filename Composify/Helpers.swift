@@ -106,6 +106,7 @@ extension UIViewController {
                 message = .localized(.unableToConfigureRecordingSessionMessage)
             }
         } else {
+            print(error.localizedDescription)
             return
         }
         

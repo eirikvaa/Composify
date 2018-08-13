@@ -75,3 +75,17 @@ extension String {
         return realm.object(ofType: Project.self, forPrimaryKey: self)
     }
 }
+
+extension Project {
+    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
+        let project = Project()
+        project.title = title
+        
+        var databaseService = DatabaseServiceFactory.defaultService
+        databaseService.save(project)
+        
+        try FileManager.default.save(project)
+        
+        completionHandler(project)
+    }
+}
