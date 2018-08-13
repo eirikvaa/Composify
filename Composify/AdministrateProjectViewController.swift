@@ -135,10 +135,8 @@ extension AdministrateProjectViewController {
                 
                 do {
                     try self.fileManager.delete(currentProject)
-                } catch let error as CFileManagerError {
-                    self.handleError(error)
                 } catch {
-                    print(error.localizedDescription)
+                    self.handleError(error)
                 }
                 
                 self.databaseService.delete(currentProject)
@@ -188,66 +186,74 @@ extension AdministrateProjectViewController {
         return true
     }
     
+    private func deleteSection(_ sectionToDelete: Section?, then completionHandler: () -> Void) {
+        guard let sectionToDelete = sectionToDelete else { return }
+        
+        do {
+            try self.fileManager.delete(sectionToDelete)
+        } catch {
+            self.handleError(error)
+        }
+        
+        databaseService.delete(sectionToDelete)
+        
+        completionHandler()
+    }
+    
+    private func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
+        let section = Section()
+        section.title = .localized(.section)
+        section.project = currentProject
+        
+        do {
+            try fileManager.save(section)
+        } catch {
+            handleError(error)
+        }
+        
+        databaseService.save(section)
+        administrateProjectDelegate?.userDidAddSectionToProject(section)
+        
+        completionHandler(section)
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .insert:
-            let section = Section()
-            let sectionsCount = currentProject?.sectionIDs.count ?? 0
-            section.title = .localized(.section)
-            section.project = currentProject
-            
-            do {
-                try fileManager.save(section)
-            } catch let error as CFileManagerError {
-                handleError(error)
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-            databaseService.save(section)
-            administrateProjectDelegate?.userDidAddSectionToProject(section)
-            
             guard let currentProject = currentProject else { return }
+            
+            insertNewSection {
+                self.administrateProjectDelegate?.userDidAddSectionToProject($0)
+            }
             
             newValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                guard let section = sectionID.correspondingSection else { continue }
-                
                 // We're skipping the entries that have a title different
                 // from the corresponding section title, because that means the
                 // section was renamed. Without this check, if a section is renamed
                 // and a section later added, the rename will be ignored.
-                guard let existingTitle = newValues[T((1, index))], existingTitle == section.title else { continue }
+                guard let section = sectionID.correspondingSection,
+                    let existingTitle = newValues[T((1, index))], existingTitle == section.title else { continue }
                 
                 newValues[T((1, index))] = section.title
             }
             
             // It's important that we reload the previously last row after we
             // insert the new row so there's no problem with indexes.
-            let newIndexPath = IndexPath(row: sectionsCount, section: 1)
+            let newIndexPath = IndexPath(row: currentProject.sectionIDs.count, section: 1)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         case .delete:
-            guard let currentProject = currentProject else { return }
-            guard currentProject.sectionIDs.hasElements else { return }
+            guard let currentProject = currentProject,
+                currentProject.sectionIDs.hasElements else { return }
             let sectionToDelete = currentProject.sectionIDs[indexPath.row].correspondingSection
             
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()
             }
             
-            if let sectionToDelete = sectionToDelete {
-                
-                do {
-                    try self.fileManager.delete(sectionToDelete)
-                } catch let error as CFileManagerError {
-                    self.handleError(error)
-                } catch {
-                    print(error.localizedDescription)
-                }
-                
-                databaseService.delete(sectionToDelete)
-                administrateProjectDelegate?.userDidDeleteSectionFromProject()
+            deleteSection(sectionToDelete) {
+                self.administrateProjectDelegate?.userDidDeleteSectionFromProject()
             }
             
             newValues.removeAll()
@@ -283,12 +289,7 @@ extension AdministrateProjectViewController {
     
     @objc func dismissVC(_ sender: UIBarButtonItem) {
         persistChanges()
-        
-        dismiss(animated: true) {
-            if let presenting = self.presentingViewController as? LibraryViewController {
-                presenting.updateUI()
-            }
-        }
+        dismiss(animated: true)
     }
 }
 

@@ -248,7 +248,9 @@ extension LibraryViewController: AdministrateProjectDelegate {
         updatePageViewController()
     }
     
-    func userDidEditTitleOfObjects() {}
+    func userDidEditTitleOfObjects() {
+        self.updateUI()
+    }
     
     func userDidDeleteProject() {
         currentProjectID = databaseService.foundationStore?.projectIDs.first
