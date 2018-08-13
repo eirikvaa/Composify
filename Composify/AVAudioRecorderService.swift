@@ -9,10 +9,6 @@
 import Foundation
 import AVFoundation
 
-enum AudioRecorderError: Error {
-    case unableToConfigureRecordingSession
-}
-
 /**
 A class for abstracting away the details regarding simple recording of audio.
 - Author: Eirik Vale Aase
@@ -41,7 +37,7 @@ struct AVAudioRecorderService: AudioRecorderService {
             try session.setActive(true)
             try recorder = AVAudioRecorder(url: url, settings: settings)
         } catch {
-            throw AudioRecorderError.unableToConfigureRecordingSession
+            throw AudioRecorderServiceError.unableToConfigureRecordingSession
         }
 
         recorder.prepareToRecord()

@@ -44,15 +44,15 @@ extension UIFont {
 
 extension UserDefaults {
     func resetLastProject() {
-        setValue(nil, forKey: "lastProjectID")
+        setValue(nil, forKey: Strings.UserDefaults.lastProjectID)
     }
     
     func resetLastSection() {
-        setValue(nil, forKey: "lastSectionID")
+        setValue(nil, forKey: Strings.UserDefaults.lastSectionID)
     }
     
     var projectStoreID: String? {
-        return value(forKey: "projectStoreID") as? String
+        return value(forKey: Strings.UserDefaults.projectStoreID) as? String
     }
 }
 
@@ -79,14 +79,14 @@ extension UIViewController {
         let title: String
         let message: String
         
-        if let error = error as? AudioPlayerError {
+        if let error = error as? AudioPlayerServiceError {
             switch error {
             case .unableToConfigurePlayingSession:
                 title = .localized(.missingRecordingAlertTitle)
                 message = .localized(.missingRecordingAlertMessage)
-            case .unableToPlayRecording:
-                title = .localized(.unableToPlayRecordingTitle)
-                message = .localized(.unableToPlayRecordingMessage)
+            case .unableToFindPlayable:
+                title = .localized(.unableToFindRecordingTitle)
+                message = .localized(.unableToFindRecordingMessage)
             }
         } else if let error = error as? CFileManagerError {
             switch error {
@@ -99,7 +99,7 @@ extension UIViewController {
                 title = .localized(.unableToDeleteObjectTitle)
                 message = .localizedLocale(.unableToDeleteObjectMessage, objectTitle)
             }
-        } else if let error = error as? AudioRecorderError {
+        } else if let error = error as? AudioRecorderServiceError {
             switch error {
             case .unableToConfigureRecordingSession:
                 title = .localized(.unableToConfigureRecordingSessionTitle)

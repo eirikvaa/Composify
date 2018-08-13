@@ -73,9 +73,9 @@ extension Localizable {
     
     static let missingRecordingAlertMessage = Localizable(NSLocalizedString("recordings.error.missing-recording.alert.message", comment: "Message when recording can't be found in the file system."))
     
-    static let unableToPlayRecordingTitle = Localizable(NSLocalizedString("recordings.error.unable-to-play-recording.alert.title", comment: "Title when the audio player was unable to play the recording."))
+    static let unableToFindRecordingTitle = Localizable(NSLocalizedString("recordings.error.unable-to-find-recording.alert.title", comment: "Title when the audio player was unable to play the recording."))
     
-    static let unableToPlayRecordingMessage = Localizable(NSLocalizedString("recordings.error.unable-to-play-recording.alert.message", comment: "Message when the audio player was unable to play the recording."))
+    static let unableToFindRecordingMessage = Localizable(NSLocalizedString("recordings.error.unable-to-find-recording.alert.message", comment: "Message when the audio player was unable to play the recording."))
     
     static let unableToSaveObjectTitle = Localizable(NSLocalizedString("recordings.error.unable-to-save-recording.alert.title", comment: "Title when application was unable to save the recording."))
     

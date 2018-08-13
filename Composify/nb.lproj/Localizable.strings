@@ -81,10 +81,10 @@
 "recordings.error.unable-to-delete-object.alert.title" = "Kunne ikke slette objektet!";
 
 /* Message when the audio player was unable to play the recording. */
-"recordings.error.unable-to-play-recording.alert.message" = "Det ser ut til at opptaket ikke kunne spilles av.";
+"recordings.error.unable-to-find-recording.alert.message" = "recordings.error.unable-to-find-recording.alert.message";
 
 /* Title when the audio player was unable to play the recording. */
-"recordings.error.unable-to-play-recording.alert.title" = "Kan ikke spille av opptaket!";
+"recordings.error.unable-to-find-recording.alert.title" = "recordings.error.unable-to-find-recording.alert.title";
 
 /* Message when application was unable to save the recording. */
 "recordings.error.unable-to-save-recording.alert.message" = "Applikasjonen kunne ikke lagre objektet kalt %@.";

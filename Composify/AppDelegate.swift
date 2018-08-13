@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     func registerFoundationStoreObjectIfNeeded() {
         let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: "projectStoreID") as? String == nil {
+        if userDefaults.value(forKey: Strings.UserDefaults.projectStoreID) as? String == nil {
             var defaultService = DatabaseServiceFactory.defaultService
             defaultService.foundationStore = ProjectStore()
         }

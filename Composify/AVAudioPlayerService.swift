@@ -9,11 +9,6 @@
 import Foundation
 import AVFoundation
 
-enum AudioPlayerError: Error {
-    case unableToConfigurePlayingSession
-    case unableToPlayRecording
-}
-
 /**
 A class for playing audio from Recording objects.
 - Author: Eirik Vale Aase
@@ -45,10 +40,14 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
     
     func setup(withObject object: AudioPlayable) throws {
         guard player == nil else { return }
-        guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.playableNotFound }
+        guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.unableToFindPlayable }
         
-        try session.setCategory(AVAudioSessionCategoryPlayback)
-        player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
+        } catch {
+            throw AudioPlayerServiceError.unableToConfigurePlayingSession
+        }
         
         player?.prepareToPlay()
         player?.delegate = self

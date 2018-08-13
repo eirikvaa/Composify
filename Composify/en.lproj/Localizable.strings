@@ -84,10 +84,10 @@
 "recordings.error.unable-to-delete-object.alert.title" = "Unable to delete object!";
 
 /* Message when the audio player was unable to play the recording. */
-"recordings.error.unable-to-play-recording.alert.message" = "It seems the recording couldn't be played.";
+"recordings.error.unable-to-find-recording.alert.message" = "recordings.error.unable-to-find-recording.alert.message";
 
 /* Title when the audio player was unable to play the recording. */
-"recordings.error.unable-to-play-recording.alert.title" = "Unable to play recording!";
+"recordings.error.unable-to-find-recording.alert.title" = "recordings.error.unable-to-find-recording.alert.title";
 
 /* Message when application was unable to save the recording. */
 "recordings.error.unable-to-save-recording.alert.message" = "The application was unable to save the object named %@.";

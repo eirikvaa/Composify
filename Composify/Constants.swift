@@ -36,4 +36,10 @@ struct Strings {
         static let play = "Play"
         static let pause = "Pause"
     }
+    
+    struct UserDefaults {
+        static let projectStoreID = "projectStoreID"
+        static let lastProjectID = "lastProjectID"
+        static let lastSectionID = "lastSectionID"
+    }
 }

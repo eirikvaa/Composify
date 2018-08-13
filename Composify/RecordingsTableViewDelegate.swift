@@ -78,10 +78,8 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
         } else {
             do {
                 audioDefaultService = try AudioPlayerServiceFactory.defaultService(withObject: recording)
-            } catch let error as AudioPlayerError {
+            } catch {
                 parentViewController.handleError(error)
-            } catch let error {
-                print(error.localizedDescription)
             }
             
             audioDefaultService?.audioDidFinishBlock = { _ in
