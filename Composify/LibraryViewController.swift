@@ -175,7 +175,7 @@ extension LibraryViewController {
         }
         
         projects.forEach { project in
-            let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { _ in
+            let projectAction = UIAlertAction(title: .localizedLocale(.showProject, project.title), style: .default) { _ in
                 self.setCurrentProject(project)
             }
             alert.addAction(projectAction)

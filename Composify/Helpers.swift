@@ -93,11 +93,11 @@ extension UIViewController {
             case .unableToSaveObject(let object):
                 let objectTitle = object.getTitle() ?? ""
                 title = .localized(.unableToSaveObjectTitle)
-                message = String.localizedStringWithFormat(.localized(.unableToSaveObjectMessage), objectTitle)
+                message = .localizedLocale(.unableToSaveObjectMessage, objectTitle)
             case .unableToDeleteObject(let object):
                 let objectTitle = object.getTitle() ?? ""
                 title = .localized(.unableToDeleteObjectTitle)
-                message = String.localizedStringWithFormat(.localized(.unableToDeleteObjectMessage), objectTitle)
+                message = .localizedLocale(.unableToDeleteObjectMessage, objectTitle)
             }
         } else if let error = error as? AudioRecorderError {
             switch error {
