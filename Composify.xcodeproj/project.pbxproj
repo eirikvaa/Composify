@@ -51,7 +51,7 @@
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D1E0001F8BADD700246156 /* Recording.storyboard */; };
-		E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* Helpers.swift */; };
+		E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* HashableTuple.swift */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
@@ -156,7 +156,7 @@
 		E5D1DFFF1F8BADD700246156 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recording.storyboard; sourceTree = "<group>"; };
 		E5D1E0021F8BADDA00246156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
 		E5D1E0041F8BADDB00246156 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Recording.strings; sourceTree = "<group>"; };
-		E5D3EA291F818D28001D59ED /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		E5D3EA291F818D28001D59ED /* HashableTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTuple.swift; sourceTree = "<group>"; };
 		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 			children = (
 				E53C6A041ED5DBAA00971C40 /* Constants.swift */,
 				E5ED6DAB1F8AB48A002788F7 /* Strings.swift */,
-				E5D3EA291F818D28001D59ED /* Helpers.swift */,
+				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 				E5ED6DA91F8AB476002788F7 /* Localizable.swift */,
 				E576D93E1D58663E006F5D62 /* Realm */,
 				E5B036A91D59958700C66A69 /* File Management */,
@@ -739,7 +739,7 @@
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
-				E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */,
+				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
