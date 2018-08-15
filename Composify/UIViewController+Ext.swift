@@ -40,7 +40,7 @@ extension UIViewController {
                 title = .localized(.unableToFindRecordingTitle)
                 message = .localized(.unableToFindRecordingMessage)
             }
-        } else if let error = error as? CFileManagerError {
+        } else if let error = error as? FileManagerError {
             switch error {
             case .unableToSaveObject(let object):
                 let objectTitle = object.getTitle() ?? ""

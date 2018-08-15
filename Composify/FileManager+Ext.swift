@@ -49,7 +49,7 @@ enum FileSystemExtensions: String {
 	case caf
 }
 
-enum CFileManagerError: Error {
+enum FileManagerError: Error {
     case unableToSaveObject(object: FileSystemObject)
     case unableToDeleteObject(object: FileSystemObject)
 }
@@ -70,7 +70,7 @@ extension FileManager {
 			do {
 				try createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
 			} catch {
-				throw CFileManagerError.unableToSaveObject(object: object)
+				throw FileManagerError.unableToSaveObject(object: object)
 			}
 		}
     }
@@ -87,7 +87,7 @@ extension FileManager {
 				try removeItem(at: url)
 			}
 		} catch {
-            throw CFileManagerError.unableToDeleteObject(object: object)
+            throw FileManagerError.unableToDeleteObject(object: object)
 		}
     }
 }

@@ -48,7 +48,7 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
                 
                 do {
                     try self.libraryViewController.fileManager.delete(recording)
-                } catch let errror as CFileManagerError {
+                } catch let errror as FileManagerError {
                     self.parentViewController.handleError(errror)
                 } catch {
                     print(error.localizedDescription)
