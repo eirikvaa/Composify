@@ -39,7 +39,7 @@ class AdministrateProjectViewController: UIViewController {
         1: (self.currentProject?.sectionIDs.count ?? 0) + 1,    // Sections
         2: 1                                                    // Danger Zone
     ]
-    lazy var newValues: [T: String] = [:]
+    lazy var newValues: [HashableTuple: String] = [:]
     private(set) var headers: [String] = [
         .localized(.metaInformationHeader),
         .localized(.sectionsHeader),
@@ -54,12 +54,12 @@ class AdministrateProjectViewController: UIViewController {
         
         tableView = UITableView(frame: view.frame, style: .grouped)
         
-        newValues[T((0, 0))] = currentProject?.title ?? ""
+        newValues[HashableTuple((0, 0))] = currentProject?.title ?? ""
         
         if let currentProject = currentProject {
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 if let section = sectionID.correspondingSection {
-                    newValues[T((1, index))] = section.title
+                    newValues[HashableTuple((1, index))] = section.title
                 }
             }
         }
@@ -76,7 +76,7 @@ class AdministrateProjectViewController: UIViewController {
     @objc func textFieldChange(_ textField: UITextField) {
         if let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell {
             if let indexPath = tableView?.indexPath(for: cell) {
-                newValues[T((indexPath.section, indexPath.row))] = cell.textField.text ?? ""
+                newValues[HashableTuple((indexPath.section, indexPath.row))] = cell.textField.text ?? ""
             }
         }
     }
@@ -139,8 +139,8 @@ private extension AdministrateProjectViewController {
     
     func persistChanges() {
         var hadChanges = false
-        if newValues[T((0, 0))] != currentProject?.title {
-            if let newTitle = newValues[T((0, 0))], newTitle.hasPositiveCharacterCount {
+        if newValues[HashableTuple((0, 0))] != currentProject?.title {
+            if let newTitle = newValues[HashableTuple((0, 0))], newTitle.hasPositiveCharacterCount {
                 databaseService.rename(currentProject!, to: newTitle)
                 hadChanges = true
             }
@@ -149,8 +149,8 @@ private extension AdministrateProjectViewController {
         for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
             guard let section = sectionID.correspondingSection else { continue }
             
-            if newValues[T((1, index))] != section.title {
-                if let newTitle = newValues[T((1, index))], newTitle.hasPositiveCharacterCount {
+            if newValues[HashableTuple((1, index))] != section.title {
+                if let newTitle = newValues[HashableTuple((1, index))], newTitle.hasPositiveCharacterCount {
                     databaseService.rename(section, to: newTitle)
                     hadChanges = true
                 }

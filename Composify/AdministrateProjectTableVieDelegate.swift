@@ -59,9 +59,9 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
                 // section was renamed. Without this check, if a section is renamed
                 // and a section later added, the rename will be ignored.
                 guard let section = sectionID.correspondingSection,
-                    let existingTitle = administrateProjectViewController.newValues[T((1, index))], existingTitle == section.title else { continue }
+                    let existingTitle = administrateProjectViewController.newValues[HashableTuple((1, index))], existingTitle == section.title else { continue }
                 
-                administrateProjectViewController.newValues[T((1, index))] = section.title
+                administrateProjectViewController.newValues[HashableTuple((1, index))] = section.title
             }
             
             // It's important that we reload the previously last row after we
@@ -85,7 +85,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
             administrateProjectViewController.newValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 if let section = sectionID.correspondingSection {
-                    administrateProjectViewController.newValues[T((1, index))] = section.title
+                    administrateProjectViewController.newValues[HashableTuple((1, index))] = section.title
                 }
             }
             
