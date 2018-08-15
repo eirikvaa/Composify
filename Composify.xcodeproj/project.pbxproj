@@ -56,7 +56,7 @@
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
 		E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */; };
-		E5E2315C21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */; };
+		E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
 		E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DA91F8AB476002788F7 /* Localizable.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* Strings.swift */; };
@@ -161,7 +161,7 @@
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDataSource.swift; sourceTree = "<group>"; };
-		E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableVieDelegate.swift; sourceTree = "<group>"; };
+		E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5ED6DA91F8AB476002788F7 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -251,6 +251,24 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		E53C017B21242CFE00F98E65 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */,
+				E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		E53C017C21242D0200F98E65 /* AudioRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				E598475521208C2F00330B2D /* AudioRecorderService.swift */,
+				E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */,
+			);
+			path = AudioRecorder;
+			sourceTree = "<group>";
+		};
 		E5645FF81D3B50B500AA6557 = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +335,6 @@
 				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 				E5ED6DA91F8AB476002788F7 /* Localizable.swift */,
 				E576D93E1D58663E006F5D62 /* Realm */,
-				E5B036A91D59958700C66A69 /* File Management */,
 				E5B036A81D59957C00C66A69 /* AVFoundation */,
 			);
 			name = Model;
@@ -357,8 +374,9 @@
 		E589E71320F7B05800CF51FC /* Common Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				E53C017C21242D0200F98E65 /* AudioRecorder */,
+				E53C017B21242CFE00F98E65 /* AudioPlayer */,
 				E5D6BDEE211258F7009B2E9F /* Database */,
-				E5D6BDED211258D3009B2E9F /* Media */,
 			);
 			name = "Common Interfaces";
 			sourceTree = "<group>";
@@ -385,13 +403,6 @@
 			name = AVFoundation;
 			sourceTree = "<group>";
 		};
-		E5B036A91D59958700C66A69 /* File Management */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "File Management";
-			sourceTree = "<group>";
-		};
 		E5B3C7151D4A29C20021183A /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,7 +416,7 @@
 			children = (
 				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
 				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
-				E5E2315B21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift */,
+				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
 			);
 			name = AdministrateProject;
 			sourceTree = "<group>";
@@ -416,17 +427,6 @@
 				E587605D20F24A600050C0BD /* ErrorViewController.swift */,
 			);
 			name = ErrorViewController;
-			sourceTree = "<group>";
-		};
-		E5D6BDED211258D3009B2E9F /* Media */ = {
-			isa = PBXGroup;
-			children = (
-				E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */,
-				E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */,
-				E598475521208C2F00330B2D /* AudioRecorderService.swift */,
-				E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */,
-			);
-			path = Media;
 			sourceTree = "<group>";
 		};
 		E5D6BDEE211258F7009B2E9F /* Database */ = {
@@ -726,7 +726,7 @@
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
-				E5E2315C21221B5600B55583 /* AdministrateProjectTableVieDelegate.swift in Sources */,
+				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
