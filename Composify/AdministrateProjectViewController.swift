@@ -126,7 +126,7 @@ private extension AdministrateProjectViewController {
                 tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
                 tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
                 tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ])
+            ])
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
