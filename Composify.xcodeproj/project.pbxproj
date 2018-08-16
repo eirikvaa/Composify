@@ -15,6 +15,7 @@
 		E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */; };
 		E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51248AD20E787DF00B178C2 /* LogicTests.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
+		E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516FFB22125544C0030D94A /* UIScreen+Ext.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
 		E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */; };
@@ -109,6 +110,7 @@
 		E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
 		E51248AD20E787DF00B178C2 /* LogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicTests.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
+		E516FFB22125544C0030D94A /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				E53C0175212427E000F98E65 /* UIView+Ext.swift */,
 				E53C0177212427F000F98E65 /* Collection+Ext.swift */,
 				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
+				E516FFB22125544C0030D94A /* UIScreen+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */,
+				E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
 				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,

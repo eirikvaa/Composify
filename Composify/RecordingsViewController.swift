@@ -32,6 +32,7 @@ class RecordingsViewController: UIViewController {
 		didSet {
 			tableView.delegate = tableViewDelegate
 			tableView.dataSource = tableViewDataSource
+            tableView.rowHeight = UIScreen.main.isSmall ? 44 : 55
 		}
 	}
 
