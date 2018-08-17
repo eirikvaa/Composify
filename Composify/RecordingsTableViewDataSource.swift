@@ -28,7 +28,7 @@ extension RecordingsTableViewDataSource: UITableViewDataSource {
     }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as? RecordingTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as? RecordingTableViewCell2 else {
             return UITableViewCell()
         }
         

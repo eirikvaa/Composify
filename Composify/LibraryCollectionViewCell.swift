@@ -9,15 +9,29 @@
 import UIKit
 
 class LibraryCollectionViewCell: UICollectionViewCell {
-	// MARK: @IBOutlets
-	@IBOutlet weak var titleLabel: UILabel! {
-		didSet {
-			titleLabel.adjustsFontSizeToFitWidth = true
-		}
-	}
-	@IBOutlet weak var deleteButton: UIButton! {
-		didSet {
-			deleteButton.isHidden = true
-		}
-	}
+    lazy var titleLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureViews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        configureViews()
+    }
+    
+    private func configureViews() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+        ])
+    }
 }

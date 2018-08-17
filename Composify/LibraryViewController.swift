@@ -83,6 +83,7 @@ class LibraryViewController: UIViewController {
             collectionView.dataSource = collectionViewDataSource
             collectionView.delegate = collectionViewDelegate
             collectionView.allowsMultipleSelection = false
+            collectionView.register(LibraryCollectionViewCell.self, forCellWithReuseIdentifier: Strings.Cells.sectionCell)
 
             if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 flowLayout.estimatedItemSize = CGSize(width: 100, height: 50)

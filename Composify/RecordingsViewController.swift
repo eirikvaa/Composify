@@ -33,6 +33,7 @@ class RecordingsViewController: UIViewController {
 			tableView.delegate = tableViewDelegate
 			tableView.dataSource = tableViewDataSource
             tableView.rowHeight = UIScreen.main.isSmall ? 44 : 55
+            tableView.register(RecordingTableViewCell2.self, forCellReuseIdentifier: Strings.Cells.recordingCell)
 		}
 	}
 
