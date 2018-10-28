@@ -11,9 +11,9 @@ import UIKit
 extension UIViewController {
     /// Add a view controller to another view controller.
     func add(_ child: UIViewController) {
-        addChildViewController(child)
+        addChild(child)
         view.addSubview(child.view)
-        child.didMove(toParentViewController: self)
+        child.didMove(toParent: self)
     }
     
     /// Remove a view controller from another view controller.
@@ -22,8 +22,8 @@ extension UIViewController {
             return
         }
         
-        willMove(toParentViewController: nil)
-        removeFromParentViewController()
+        willMove(toParent: nil)
+        removeFromParent()
         view.removeFromSuperview()
     }
     

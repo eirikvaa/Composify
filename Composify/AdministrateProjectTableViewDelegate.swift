@@ -21,7 +21,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
         return false
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         guard indexPath.section == 1 else { return .none }
         
         let endIndex = administrateProjectViewController.currentProject?.sectionIDs.count ?? 0

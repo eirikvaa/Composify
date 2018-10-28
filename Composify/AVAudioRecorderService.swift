@@ -33,7 +33,7 @@ struct AVAudioRecorderService: AudioRecorderService {
         ]
 
         do {
-            try session.setCategory(AVAudioSessionCategoryRecord)
+            try session.setCategory(.record, mode: .default, options: [])
             try session.setActive(true)
             try recorder = AVAudioRecorder(url: url, settings: settings)
         } catch {

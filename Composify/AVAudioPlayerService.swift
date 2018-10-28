@@ -43,7 +43,7 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
         guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.unableToFindPlayable }
         
         do {
-            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setCategory(.playback, mode: .default, options: [])
             player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
         } catch {
             throw AudioPlayerServiceError.unableToConfigurePlayingSession

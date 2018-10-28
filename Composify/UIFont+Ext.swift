@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIFont {
-    static func preferredBoldFont(for style: UIFontTextStyle) -> UIFont {
+    static func preferredBoldFont(for style: UIFont.TextStyle) -> UIFont {
         let font = UIFont.preferredFont(forTextStyle: style)
         let fontDescriptor = font.fontDescriptor.withSymbolicTraits(.traitBold)
         return UIFont(descriptor: fontDescriptor!, size: 0)

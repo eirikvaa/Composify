@@ -377,9 +377,9 @@ private extension LibraryViewController {
             completion: nil)
         
         pageViewController.view.frame = containerView.bounds
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         containerView.addSubview(pageViewController.view)
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
 	}
     
     func indexOfCurrentSection() -> Int? {
