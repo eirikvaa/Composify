@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-	static let mainColor = UIColor(red: 0.20, green: 0.51, blue: 0.71, alpha: 1.00)
+	static let mainColor = UIColor(red:0.78, green:0.13, blue:0.20, alpha:1.00)
     static let secondaryColor = UIColor(red: 0.94, green: 0.62, blue: 0.17, alpha: 1.00)
     static let delete = UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
 }

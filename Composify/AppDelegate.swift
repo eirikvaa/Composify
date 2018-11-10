@@ -33,7 +33,7 @@ private extension AppDelegate {
     
     func registerNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = UIColor(red:0.20, green:0.51, blue:0.71, alpha:1.00)
+        navigationBarAppearance.barTintColor = .mainColor
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.backgroundColor = UIColor.clear
