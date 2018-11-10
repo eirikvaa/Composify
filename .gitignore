@@ -12,6 +12,8 @@ DerivedData/
 
 *.cer
 *.mobileprovision
+*.certSigningRequest
+*.p12
 
 ## Various settings
 *.pbxuser
