@@ -176,10 +176,12 @@ extension LibraryViewController {
         }
         
         projects.forEach { project in
-            let projectAction = UIAlertAction(title: .localizedLocale(.showProject, project.title), style: .default) { _ in
-                self.setCurrentProject(project)
+            if project != currentProject {
+                let projectAction = UIAlertAction(title: .localizedLocale(.showProject, project.title), style: .default) { _ in
+                    self.setCurrentProject(project)
+                }
+                alert.addAction(projectAction)
             }
-            alert.addAction(projectAction)
         }
         
         let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
