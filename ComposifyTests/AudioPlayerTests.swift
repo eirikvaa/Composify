@@ -8,20 +8,18 @@
 
 import XCTest
 import Darwin
-import AVFoundation
 @testable import Composify
 
 class AudioPlayerTests: XCTestCase {
-	var audioPlayer: AudioPlayer!
-	var audioRecorder: AudioRecorder!
+	var audioPlayer: AudioPlayerService!
+	var audioRecorder: AudioRecorderService!
 	var project: Project!
 	var section: Section!
 	var recording: Recording!
 	let userProjcts: URL = {
 		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
 	}()
-    let cFileManager = CFileManager()
-	let fileManager = FileManager.default
+    let fileManager = FileManager.default
     
     override func setUp() {
         super.setUp()
@@ -40,9 +38,9 @@ class AudioPlayerTests: XCTestCase {
 		recording.fileExtension = FileSystemExtensions.caf.rawValue
 		recording.dateRecorded = Date()
 		
-		cFileManager.save(project)
-		cFileManager.save(section)
-		audioRecorder = AudioRecorder(url: recording.url)
+		try! fileManager.save(project)
+		try! fileManager.save(section)
+		audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
     }
     
 	override func tearDown() {
@@ -62,24 +60,13 @@ class AudioPlayerTests: XCTestCase {
 	}
 	
     func testPlayRecordedAudio() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-		
-		audioRecorder.recorder.record()
+		audioRecorder.record()
 		sleep(4)
-		audioRecorder.recorder.stop()
+		audioRecorder.stop()
 		
-		audioPlayer = AudioPlayer(url: recording.url)
+        audioPlayer = try! AudioPlayerServiceFactory.defaultService(withObject: recording)
 		
-		XCTAssertTrue(fileManager.fileExists(atPath: userProjcts
-            .appendingPathComponent(recording.project!.title)
-			.appendingPathComponent(recording.section!.title)
-			.appendingPathComponent(recording.title)
-			.appendingPathExtension(recording.fileExtension).path))
-		
-		let audioAsset = AVURLAsset(url: recording.url)
-		let assetDuration = audioAsset.duration
-		let duration = CMTimeGetSeconds(assetDuration)
-		XCTAssertTrue(3...5 ~= duration)
+		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
+		XCTAssertTrue(3...5 ~= recording.duration)
     }
 }

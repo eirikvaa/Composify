@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,35 +63,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionCell" id="83I-GB-jFE" customClass="LibraryCollectionViewCell" customModule="Composify" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="0.0" width="100" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8V-lq-WMO">
-                                                    <rect key="frame" x="0.0" y="8" width="100" height="34"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </view>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="o8V-lq-WMO" secondAttribute="trailing" id="LIv-hb-rX2"/>
-                                            <constraint firstItem="o8V-lq-WMO" firstAttribute="leading" secondItem="83I-GB-jFE" secondAttribute="leading" id="NSS-fI-yja"/>
-                                            <constraint firstAttribute="bottom" secondItem="o8V-lq-WMO" secondAttribute="bottom" constant="8" id="Qe2-Qv-fKr"/>
-                                            <constraint firstItem="o8V-lq-WMO" firstAttribute="top" secondItem="83I-GB-jFE" secondAttribute="top" constant="8" id="pXB-oC-Puv"/>
-                                        </constraints>
-                                        <size key="customSize" width="100" height="50"/>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="o8V-lq-WMO" id="Wwq-iH-GtD"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tym-dz-gQ7">
                                 <rect key="frame" x="16" y="532" width="343" height="37"/>

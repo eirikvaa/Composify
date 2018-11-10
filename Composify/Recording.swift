@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import AVFoundation
 
 class Recording: Object {
     @objc dynamic var id = UUID().uuidString
@@ -23,24 +22,26 @@ class Recording: Object {
     }
 }
 
+extension Recording: DatabaseObject {}
+extension Recording: AudioPlayable {}
+
 extension Recording: FileSystemObject {
     var url: URL {
         return section!.url
-            .appendingPathComponent(title)
+            .appendingPathComponent(id)
             .appendingPathExtension(fileExtension)
-    }
-}
-
-extension Recording {
-    var duration: Float64 {
-        let audioAsset = AVURLAsset(url: url)
-        let assetDuration = audioAsset.duration
-        return CMTimeGetSeconds(assetDuration)
     }
 }
 
 extension Recording: Comparable {
     static func < (lhs: Recording, rhs: Recording) -> Bool {
         return lhs.title < rhs.title
+    }
+}
+
+extension String {
+    var correspondingRecording: Recording? {
+        guard let realm = try? Realm() else { return nil }
+        return realm.object(ofType: Recording.self, forPrimaryKey: self)
     }
 }

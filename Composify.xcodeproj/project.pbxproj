@@ -7,40 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09A69B40E969BFFB7D32A218 /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */; };
+		2C80281B0EF2E7AC99C46C22 /* Pods_ComposifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */; };
 		3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */; };
 		3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */; };
-		597EAD8504DADF22FA70D7C2 /* Pods_ComposifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */; };
-		66F05DD0CC5A39D15EE28B42 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */; };
-		E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* CFileManager.swift */; };
+		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
+		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
+		E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */; };
 		E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51248AD20E787DF00B178C2 /* LogicTests.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
+		E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516FFB22125544C0030D94A /* UIScreen+Ext.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
 		E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */; };
 		E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */; };
+		E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B851820F423E300FB3D48 /* ProjectStore.swift */; };
 		E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */; };
+		E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016D2124278000F98E65 /* UIFont+Ext.swift */; };
+		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
+		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
+		E53C0174212427D000F98E65 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0173212427D000F98E65 /* String+Ext.swift */; };
+		E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0175212427E000F98E65 /* UIView+Ext.swift */; };
+		E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0177212427F000F98E65 /* Collection+Ext.swift */; };
+		E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */; };
 		E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C6A041ED5DBAA00971C40 /* Constants.swift */; };
-		E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AudioRecorder.swift */; };
+		E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */; };
+		E55B0EFD219794C400816CBC /* ComposifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B0EFC219794C400816CBC /* ComposifyUITests.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
-		E56E3FE820D53D6300411F5F /* RealmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmStore.swift */; };
-		E571F54420983945008F29A6 /* AdministrateProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */; };
+		E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */; };
+		E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */; };
 		E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */; };
 		E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */; };
 		E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E587605D20F24A600050C0BD /* ErrorViewController.swift */; };
+		E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71420F7B07300CF51FC /* DatabaseService.swift */; };
+		E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */; };
 		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
-		E58C57F71DD879C200348C65 /* CFileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* CFileManagerTests.swift */; };
+		E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* FileManagerTests.swift */; };
 		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
-		E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */; };
+		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
+		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
+		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D1E0001F8BADD700246156 /* Recording.storyboard */; };
-		E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* Helpers.swift */; };
+		E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* HashableTuple.swift */; };
+		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
+		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
+		E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */; };
+		E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
 		E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DA91F8AB476002788F7 /* Localizable.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* Strings.swift */; };
@@ -57,7 +75,7 @@
 			isEditable = 1;
 			outputFiles = (
 			);
-			script = "";
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 /* End PBXBuildRule section */
 
@@ -79,57 +97,73 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
+		040BEA34384C1A29FC770BAD /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		09FADEF9DFFDE4A8496F0519 /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
+		3EB05677ACD596052B95EAF8 /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDelegate.swift; sourceTree = "<group>"; };
-		5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
-		9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
-		DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5055BDE1D44BB5800D2B796 /* CFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFileManager.swift; sourceTree = "<group>"; };
+		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
+		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
 		E51248AD20E787DF00B178C2 /* LogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicTests.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
+		E516FFB22125544C0030D94A /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDataSource.swift; sourceTree = "<group>"; };
 		E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		E51B851820F423E300FB3D48 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		E51E8BC21E308F390022CF71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC41E308F390022CF71 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
+		E53C016D2124278000F98E65 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		E53C0173212427D000F98E65 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		E53C0175212427E000F98E65 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		E53C0177212427F000F98E65 /* Collection+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Ext.swift"; sourceTree = "<group>"; };
+		E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Ext.swift"; sourceTree = "<group>"; };
 		E53C6A041ED5DBAA00971C40 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E55B0EFB219794C400816CBC /* ComposifyUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ComposifyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		E55B0EFC219794C400816CBC /* ComposifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyUITests.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Composify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Composify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56460041D3B50B500AA6557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E564600E1D3B50B500AA6557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E56460101D3B50B500AA6557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E56460321D3B50DA00AA6557 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioRecorderService.swift; sourceTree = "<group>"; };
 		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		E56E3FE720D53D6300411F5F /* RealmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStore.swift; sourceTree = "<group>"; };
+		E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabaseService.swift; sourceTree = "<group>"; };
 		E57077551DD73BBA00B01940 /* ComposifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57077591DD73BBA00B01940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewController.swift; sourceTree = "<group>"; };
+		E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectViewController.swift; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDataSource.swift; sourceTree = "<group>"; };
 		E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
 		E587605D20F24A600050C0BD /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		E589E71420F7B07300CF51FC /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceFactory.swift; sourceTree = "<group>"; };
 		E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
-		E58C57F51DD879C200348C65 /* CFileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFileManagerTests.swift; sourceTree = "<group>"; };
+		E58C57F51DD879C200348C65 /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
 		E590657320E3F4AF0028453D /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
-		E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
+		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
+		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5D1DFFF1F8BADD700246156 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recording.storyboard; sourceTree = "<group>"; };
 		E5D1E0021F8BADDA00246156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
 		E5D1E0041F8BADDB00246156 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Recording.strings; sourceTree = "<group>"; };
-		E5D3EA291F818D28001D59ED /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		E5D3EA291F818D28001D59ED /* HashableTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTuple.swift; sourceTree = "<group>"; };
+		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
+		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
 		E5ED6DA91F8AB476002788F7 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -138,6 +172,9 @@
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
-				66F05DD0CC5A39D15EE28B42 /* Pods_Composify.framework in Frameworks */,
+				6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				597EAD8504DADF22FA70D7C2 /* Pods_ComposifyUITests.framework in Frameworks */,
+				2C80281B0EF2E7AC99C46C22 /* Pods_ComposifyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,51 +199,80 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09A69B40E969BFFB7D32A218 /* Pods_ComposifyTests.framework in Frameworks */,
+				8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3DDC00F7836D0EC111594242 /* Pods */ = {
+		03AD4D0AAF3CE06D6615BF5C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */,
-				D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */,
-				0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */,
-				3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */,
-				5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */,
-				9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */,
+				09FADEF9DFFDE4A8496F0519 /* Pods-Composify.debug.xcconfig */,
+				921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */,
+				3EB05677ACD596052B95EAF8 /* Pods-ComposifyTests.debug.xcconfig */,
+				F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */,
+				E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */,
+				F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		E527258F1F09815300B59235 /* SectionCollectionView */ = {
+		E512A01C2112663900A70A75 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
+				3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */,
+				E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */,
 				3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */,
 				E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */,
 			);
-			name = SectionCollectionView;
+			name = Library;
 			sourceTree = "<group>";
 		};
-		E52725901F09815E00B59235 /* RecordingsViewController */ = {
+		E512A01D2112664800A70A75 /* Recordings */ = {
 			isa = PBXGroup;
 			children = (
+				E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */,
 				E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */,
 				E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */,
 			);
-			name = RecordingsViewController;
+			name = Recordings;
 			sourceTree = "<group>";
 		};
-		E52725911F09816700B59235 /* RootPageView */ = {
+		E53C016C2124275900F98E65 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */,
-				E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */,
+				E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */,
+				E53C016D2124278000F98E65 /* UIFont+Ext.swift */,
+				E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */,
+				E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */,
+				E53C0173212427D000F98E65 /* String+Ext.swift */,
+				E53C0175212427E000F98E65 /* UIView+Ext.swift */,
+				E53C0177212427F000F98E65 /* Collection+Ext.swift */,
+				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
+				E516FFB22125544C0030D94A /* UIScreen+Ext.swift */,
 			);
-			name = RootPageView;
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		E53C017B21242CFE00F98E65 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */,
+				E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		E53C017C21242D0200F98E65 /* AudioRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				E598475521208C2F00330B2D /* AudioRecorderService.swift */,
+				E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */,
+			);
+			path = AudioRecorder;
 			sourceTree = "<group>";
 		};
 		E5645FF81D3B50B500AA6557 = {
@@ -217,7 +283,7 @@
 				E57077561DD73BBA00B01940 /* ComposifyUITests */,
 				E56460021D3B50B500AA6557 /* Products */,
 				E56C327B1FF6FB8A00AB8375 /* Frameworks */,
-				3DDC00F7836D0EC111594242 /* Pods */,
+				03AD4D0AAF3CE06D6615BF5C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,9 +300,14 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
+				E53C016C2124275900F98E65 /* Extensions */,
+				E5BD121E21126695000ED703 /* ErrorViewController */,
+				E5BD121D21126684000ED703 /* AdministrateProject */,
+				E512A01D2112664800A70A75 /* Recordings */,
+				E512A01C2112663900A70A75 /* Library */,
+				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E5B3C7151D4A29C20021183A /* Localization */,
 				E56460361D3B54B000AA6557 /* Application */,
-				E56460381D3B54BF00AA6557 /* Controllers */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -262,28 +333,15 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
-		E56460381D3B54BF00AA6557 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
-				E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */,
-				E571F54320983945008F29A6 /* AdministrateProjectTableViewController.swift */,
-				E587605D20F24A600050C0BD /* ErrorViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				E53C6A041ED5DBAA00971C40 /* Constants.swift */,
 				E5ED6DAB1F8AB48A002788F7 /* Strings.swift */,
-				E5D3EA291F818D28001D59ED /* Helpers.swift */,
+				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 				E5ED6DA91F8AB476002788F7 /* Localizable.swift */,
-				E590FA901DE09BC500A11FE6 /* Delegates */,
 				E576D93E1D58663E006F5D62 /* Realm */,
-				E5B036A91D59958700C66A69 /* File Management */,
-				E5B036A81D59957C00C66A69 /* Audio */,
+				E5B036A81D59957C00C66A69 /* AVFoundation */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -292,9 +350,9 @@
 			isa = PBXGroup;
 			children = (
 				E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */,
-				C8EF8421D958F78F1B0FB8A4 /* Pods_Composify.framework */,
-				E4335452628D0393A939F08D /* Pods_ComposifyTests.framework */,
-				DF6B92F94C861F4432648699 /* Pods_ComposifyUITests.framework */,
+				040BEA34384C1A29FC770BAD /* Pods_Composify.framework */,
+				6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */,
+				DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,6 +361,8 @@
 			isa = PBXGroup;
 			children = (
 				E57077591DD73BBA00B01940 /* Info.plist */,
+				E55B0EFC219794C400816CBC /* ComposifyUITests.swift */,
+				E55B0EFB219794C400816CBC /* ComposifyUITests-Bridging-Header.h */,
 			);
 			path = ComposifyUITests;
 			sourceTree = "<group>";
@@ -310,7 +370,8 @@
 		E576D93E1D58663E006F5D62 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				E56E3FE720D53D6300411F5F /* RealmStore.swift */,
+				E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */,
+				E51B851820F423E300FB3D48 /* ProjectStore.swift */,
 				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
 				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
@@ -318,11 +379,21 @@
 			name = Realm;
 			sourceTree = "<group>";
 		};
+		E589E71320F7B05800CF51FC /* Common Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				E53C017C21242D0200F98E65 /* AudioRecorder */,
+				E53C017B21242CFE00F98E65 /* AudioPlayer */,
+				E5D6BDEE211258F7009B2E9F /* Database */,
+			);
+			name = "Common Interfaces";
+			sourceTree = "<group>";
+		};
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
 				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
-				E58C57F51DD879C200348C65 /* CFileManagerTests.swift */,
+				E58C57F51DD879C200348C65 /* FileManagerTests.swift */,
 				E590657320E3F4AF0028453D /* RealmTests.swift */,
 				E5152F4520E403760031572E /* ProjectTests.swift */,
 				E51248AD20E787DF00B178C2 /* LogicTests.swift */,
@@ -331,31 +402,13 @@
 			path = ComposifyTests;
 			sourceTree = "<group>";
 		};
-		E590FA901DE09BC500A11FE6 /* Delegates */ = {
+		E5B036A81D59957C00C66A69 /* AVFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				E527258F1F09815300B59235 /* SectionCollectionView */,
-				E52725901F09815E00B59235 /* RecordingsViewController */,
-				E52725911F09816700B59235 /* RootPageView */,
+				E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */,
+				E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */,
 			);
-			name = Delegates;
-			sourceTree = "<group>";
-		};
-		E5B036A81D59957C00C66A69 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				E56460321D3B50DA00AA6557 /* AudioRecorder.swift */,
-				E59ECDBC1D42322300C8F018 /* AudioPlayer.swift */,
-			);
-			name = Audio;
-			sourceTree = "<group>";
-		};
-		E5B036A91D59958700C66A69 /* File Management */ = {
-			isa = PBXGroup;
-			children = (
-				E5055BDE1D44BB5800D2B796 /* CFileManager.swift */,
-			);
-			name = "File Management";
+			name = AVFoundation;
 			sourceTree = "<group>";
 		};
 		E5B3C7151D4A29C20021183A /* Localization */ = {
@@ -364,6 +417,33 @@
 				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 			);
 			name = Localization;
+			sourceTree = "<group>";
+		};
+		E5BD121D21126684000ED703 /* AdministrateProject */ = {
+			isa = PBXGroup;
+			children = (
+				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
+				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
+				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
+			);
+			name = AdministrateProject;
+			sourceTree = "<group>";
+		};
+		E5BD121E21126695000ED703 /* ErrorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E587605D20F24A600050C0BD /* ErrorViewController.swift */,
+			);
+			name = ErrorViewController;
+			sourceTree = "<group>";
+		};
+		E5D6BDEE211258F7009B2E9F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E589E71420F7B07300CF51FC /* DatabaseService.swift */,
+				E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		E5FAB87C1F0985EA00634565 /* Cells */ = {
@@ -394,12 +474,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
-				AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */,
+				61B2B7D52623F71A28422112 /* [CP] Check Pods Manifest.lock */,
+				E51B851720F4076700FB3D48 /* ShellScript */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
 				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
-				E2D44F927E4BB27C842419FC /* [CP] Embed Pods Frameworks */,
+				D3262428F336E7174CB2747A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
@@ -415,7 +496,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E570775C1DD73BBA00B01940 /* Build configuration list for PBXNativeTarget "ComposifyUITests" */;
 			buildPhases = (
-				88B5784292CA4ECE4C3EB4DC /* [CP] Check Pods Manifest.lock */,
+				1D4DF07DFEC9C6882A71F045 /* [CP] Check Pods Manifest.lock */,
 				E57077511DD73BBA00B01940 /* Sources */,
 				E57077521DD73BBA00B01940 /* Frameworks */,
 				E57077531DD73BBA00B01940 /* Resources */,
@@ -434,7 +515,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E58C57F01DD8799D00348C65 /* Build configuration list for PBXNativeTarget "ComposifyTests" */;
 			buildPhases = (
-				86626D488FAA0DC8D28898AC /* [CP] Check Pods Manifest.lock */,
+				481257D0F9F5DC8344E7E8DE /* [CP] Check Pods Manifest.lock */,
 				E58C57E51DD8799D00348C65 /* Sources */,
 				E58C57E61DD8799D00348C65 /* Frameworks */,
 				E58C57E71DD8799D00348C65 /* Resources */,
@@ -466,6 +547,7 @@
 					};
 					E57077541DD73BBA00B01940 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E56460001D3B50B500AA6557;
 					};
@@ -528,34 +610,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		86626D488FAA0DC8D28898AC /* [CP] Check Pods Manifest.lock */ = {
+		1D4DF07DFEC9C6882A71F045 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ComposifyTests-checkManifestLockResult.txt",
+			outputFileListPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		88B5784292CA4ECE4C3EB4DC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-ComposifyUITests-checkManifestLockResult.txt",
 			);
@@ -564,16 +632,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AE50A598E196C5CB99746006 /* [CP] Check Pods Manifest.lock */ = {
+		481257D0F9F5DC8344E7E8DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ComposifyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61B2B7D52623F71A28422112 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Composify-checkManifestLockResult.txt",
 			);
@@ -582,25 +676,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E2D44F927E4BB27C842419FC /* [CP] Embed Pods Frameworks */ = {
+		D3262428F336E7174CB2747A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E51B851720F4076700FB3D48 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -613,7 +724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -a\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+			shellScript = "if which bartycrouch > /dev/null; then\n# Incrementally update all Storyboards/XIBs strings files\nbartycrouch interfaces -p \"$PROJECT_DIR\"\n\n# Add new keys to Localizable.strings files from NSLocalizedString in code\nbartycrouch code -p \"$PROJECT_DIR\" -l \"$PROJECT_DIR\" -s -k -c\nelse\necho \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -622,32 +733,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */,
 				E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */,
-				E547EC711DD3C721005D5986 /* AudioRecorder.swift in Sources */,
+				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
+				E53C0174212427D000F98E65 /* String+Ext.swift in Sources */,
 				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
 				E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */,
+				E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */,
+				E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */,
 				E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */,
 				E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */,
+				E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */,
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
+				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */,
+				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
+				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
-				E56E3FE820D53D6300411F5F /* RealmStore.swift in Sources */,
+				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
+				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
-				E59ECDBD1D42322300C8F018 /* AudioPlayer.swift in Sources */,
+				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */,
+				E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
 				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,
 				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
-				E5D3EA2A1F818D28001D59ED /* Helpers.swift in Sources */,
-				E571F54420983945008F29A6 /* AdministrateProjectTableViewController.swift in Sources */,
-				E5055BDF1D44BB5800D2B796 /* CFileManager.swift in Sources */,
+				E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */,
+				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
+				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
+				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
+				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
+				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
+				E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */,
 				E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */,
 				3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */,
+				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
+				E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */,
 				3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */,
+				E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55B0EFD219794C400816CBC /* ComposifyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,7 +792,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
-				E58C57F71DD879C200348C65 /* CFileManagerTests.swift in Sources */,
+				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
 				E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
@@ -778,7 +907,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Composify;
@@ -836,7 +965,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
@@ -850,9 +979,9 @@
 		};
 		E564602A1D3B50B500AA6557 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 660E554892C9F3AEF4F1E4CE /* Pods-Composify.debug.xcconfig */;
+			baseConfigurationReference = 09FADEF9DFFDE4A8496F0519 /* Pods-Composify.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -860,9 +989,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.composify;
@@ -870,15 +999,15 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		E564602B1D3B50B500AA6557 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D11E698267B45128F8A5BF2D /* Pods-Composify.release.xcconfig */;
+			baseConfigurationReference = 921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -886,58 +1015,71 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.composify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 		E570775D1DD73BBA00B01940 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BFED4D8C3128054965F3537 /* Pods-ComposifyUITests.debug.xcconfig */;
+			baseConfigurationReference = E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				INFOPLIST_FILE = ComposifyUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.1;
+				SWIFT_OBJC_BRIDGING_HEADER = "ComposifyUITests/ComposifyUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				TEST_TARGET_NAME = Composify;
 			};
 			name = Debug;
 		};
 		E570775E1DD73BBA00B01940 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C5D2C1F259A4DB79904ABBC /* Pods-ComposifyUITests.release.xcconfig */;
+			baseConfigurationReference = F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				INFOPLIST_FILE = ComposifyUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ComposifyUITests/ComposifyUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				TEST_TARGET_NAME = Composify;
 			};
 			name = Release;
 		};
 		E58C57F11DD8799D00348C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D64726563378BBB37121233 /* Pods-ComposifyTests.debug.xcconfig */;
+			baseConfigurationReference = 3EB05677ACD596052B95EAF8 /* Pods-ComposifyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -946,7 +1088,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -960,7 +1102,7 @@
 		};
 		E58C57F21DD8799D00348C65 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3165F9A2B3BEA9B231728F73 /* Pods-ComposifyTests.release.xcconfig */;
+			baseConfigurationReference = F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -969,7 +1111,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

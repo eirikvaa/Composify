@@ -7,45 +7,46 @@
 //
 
 import UIKit
-import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: "projectStoreID") as? String == nil {
-            RealmStore.shared.projectStore = ProjectStore()
-        }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setupRemoteControlEvents()
+        registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        
-        let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .darkGray
+        registerPageControlAppearance()
         
         return true
     }
 }
 
 private extension AppDelegate {
-    func setupRemoteControlEvents() {
-        // To be able to get recording information and playback controls in control center.
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+    func registerFoundationStoreObjectIfNeeded() {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.value(forKey: Strings.UserDefaults.projectStoreID) as? String == nil {
+            var defaultService = DatabaseServiceFactory.defaultService
+            defaultService.foundationStore = ProjectStore()
+        }
     }
     
     func registerNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = UIColor(red:0.20, green:0.51, blue:0.71, alpha:1.00)
+        navigationBarAppearance.barTintColor = .mainColor
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.backgroundColor = UIColor.clear
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.white
+            .foregroundColor: UIColor.white
         ]
+    }
+    
+    func registerPageControlAppearance() {
+        let pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .darkGray
     }
 }
 

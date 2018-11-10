@@ -25,21 +25,15 @@ class RecordingsViewController: UIViewController {
 	var project: Project?
 	var section: Section?
 	var pageIndex: Int?
-    var currentlyPlayingRecording: Recording?
-    var audioPlayer: AudioPlayer? {
-        didSet {
-            if let audioPlayer = audioPlayer {
-                audioPlayer.player.delegate = tableViewDelegate
-                audioPlayer.player.play()
-            }
-        }
-    }
+    var currentlyPlayingRecording: AudioPlayable?
 
 	// MARK: @IBOutlets
 	@IBOutlet weak var tableView: UITableView! {
 		didSet {
 			tableView.delegate = tableViewDelegate
 			tableView.dataSource = tableViewDataSource
+            tableView.rowHeight = UIScreen.main.isSmall ? 44 : 55
+            tableView.register(RecordingTableViewCell2.self, forCellReuseIdentifier: Strings.Cells.recordingCell)
 		}
 	}
 

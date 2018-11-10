@@ -1,81 +1,99 @@
 
-/* No comment provided by engineer. */
-"Add project" = "Legg til prosjekt";
+/* Title of delete button in table view. */
+"administrate-project.delete-button.title" = "Slett prosjekt";
 
-/* No comment provided by engineer. */
-"Add project or section" = "Legg til prosjekt eller seksjon";
+/* Title of section for the danger zone in administrate project. */
+"administrate-project.section-titles.danger-zone.label" = "Farlig sone";
 
-/* No comment provided by engineer. */
-"Add section" = "Legg til seksjon";
+/* Title of section for meta information in administrate project. */
+"administrate-project.section-titles.meta-information.label" = "Meta informasjon";
 
-/* No comment provided by engineer. */
-"Cancel" = "Avbryt";
+/* Title of section for project sections in administrate project. */
+"administrate-project.section-titles.sections.label" = "Seksjoner";
 
-/* No comment provided by engineer. */
-"Done" = "Ferdig";
+/* Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed. */
+"administrate-project.tableview.cell.add-section.title" = "Legg til seksjon";
 
-/* No comment provided by engineer. */
-"New project title" = "Tittel på nytt prosjekt";
+/* The title of the application. Should not be localized, but is included for completeness sake. */
+"app.title" = "Composify";
 
-/* No comment provided by engineer. */
-"New section title" = "Tittel på ny seksjon";
+/* Generic word for administrate. */
+"general.administrate" = "Administrer";
 
-/* No comment provided by engineer. */
-"Composify" = "Composify";
+/* Generic word for cancel. */
+"general.cancel" = "Avbryt";
 
-/* No comment provided by engineer. */
-"Start recording" = "Start opptak";
+/* Generic word for delete. */
+"general.delete" = "Slett";
 
-/* No comment provided by engineer. */
-"Stop recording" = "Stopp opptak";
+/* Generic word for edit. */
+"general.edit" = "Rediger";
 
-/* No comment provided by engineer. */
-"You have no projects. Try adding one." = "Du har ingen prosjekter. Prøv å legge til ett.";
+/* Generic word for ok */
+"general.ok" = "Ok";
 
-/* No comment provided by engineer. */
-"You have no sections. Try adding one." = "Du har ingen seksjoner. Prøv å legge til en.";
+/* Generic word for save. */
+"general.save" = "Lagre";
 
-/* No comment provided by engineer. */
-"Edit" = "Rediger";
+/* Label appearing when the user has no projects. */
+"library.empty-state.no-projects" = "Du har ingen prosjekter. Prøv å legge til et.";
 
-/* No comment provided by engineer. */
-"Save" = "Lagre";
+/* Label appearing when the user has no sections in a project. */
+"library.empty-state.no-sections" = "Du har ingen seksjoner. Prøv å legge til en.";
 
-/* No comment provided by engineer. */
-"Delete" = "Slett";
+/* Title of menu when tapping the corresponding menu button in the navigation bar. */
+"library.menu.action-sheet.title" = "Meny";
 
-/* No recordings in section */
-"There are no recordings in this section. Try recording some audio." = "Det er ingen opptak i denne seksjonen. Prøv å ta opp litt lyd.";
+/* Title of an alert appearing when user tries to add a project. */
+"library.menu.add-project.alert.title" = "Legg til prosjekt";
 
-/* Actions */
-"Actions" = "Handlinger";
+/* Placeholder of textfield in alert appearing when user tries to add a project. */
+"library.menu.add-project.textfield.placeholder" = "Prosjekttittel";
 
-/* Rename */
-"Rename" = "Gi nytt navn";
+/* Button in menu for administrating the current project. */
+"library.menu.administarte-project.label" = "Administrer prosjekt";
 
-/* Administrate */
-"Administrate" = "Administrer";
+/* Title of button in menu for seeing a project. */
+"library.menu.show-project.label" = "Vis %@";
 
-/* Administrate project */
-"Administrate project" = "Administrer prosjekt";
+/* Title of button when user is not recording audio. */
+"library.record-button.start-recording.title" = "Start opptak";
 
-/* Danger Zone */
-"Danger Zone" = "Farlig sone";
+/* Title of button when user is recording audio. */
+"library.record-button.stop-recording.title" = "Avslutt opptak";
 
-/* Delete Project */
-"Delete Project" = "Slett prosjekt";
+/* Message when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.message" = "It seems the recording can't be found in the filesystem.";
 
-/* Menu */
-"Menu" = "Meny";
+/* Title when recording can't be found in the file system. */
+"recordings.error.missing-recording.alert.title" = "Kunne ikke finne opptaket!";
 
-/* Meta Information */
-"Meta Information" = "Metainformasjon";
+/* Message when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.message" = "Kunne ikke konfigurere en opptaksøkt!";
 
-/* Project title */
-"Project title" = "Prosjekttittel";
+/* Title when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.title" = "Applikasjonen kunne ikke konfigurere en opptaksøk.";
 
-/* Sections */
-"Sections" = "Seksjoner";
+/* Message when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.message" = "Applikasjonen kunne ikke slette objektet kalt %@";
 
-/* Show %@ */
-"Show %@" = "Vis %@";
+/* Title when trying to delete object from filesystem. */
+"recordings.error.unable-to-delete-object.alert.title" = "Kunne ikke slette objektet!";
+
+/* Message when the audio player was unable to play the recording. */
+"recordings.error.unable-to-find-recording.alert.message" = "recordings.error.unable-to-find-recording.alert.message";
+
+/* Title when the audio player was unable to play the recording. */
+"recordings.error.unable-to-find-recording.alert.title" = "recordings.error.unable-to-find-recording.alert.title";
+
+/* Message when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.message" = "Applikasjonen kunne ikke lagre objektet kalt %@.";
+
+/* Title when application was unable to save the recording. */
+"recordings.error.unable-to-save-recording.alert.title" = "Kunne ikke lagre objektet!";
+
+/* Generic name for a new recording */
+"recordings.recording" = "Opptak";
+
+/* Generic name for a new section */
+"sections.section" = "Seksjon";

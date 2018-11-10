@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 /// The view controller for almost all of the functionality; shows projects, sections and recordings.
 
@@ -44,39 +43,38 @@ class LibraryViewController: UIViewController {
         dataSource.libraryViewController = self
         return dataSource
     }()
-    var pageViewController: UIPageViewController!
-    let fileManager = CFileManager()
+    private var pageViewController: UIPageViewController!
+    let fileManager = FileManager.default
     private var projects: [Project] {
         return Project.projects()
     }
-    private let center = NotificationCenter.default
-    var realmStore = RealmStore.shared
-    private var audioRecorder: AudioRecorder?
-    let realm = try! Realm()
-    var token: NotificationToken?
+    private var audioRecorderDefaultService: AudioRecorderService?
     var currentProject: Project? {
-        didSet {
-            navigationItem.title = currentProject?.title ?? .localized(.composify)
-            currentSectionID = currentProject?.sectionIDs.first
-        }
+        guard let projectID = currentProjectID else { return nil }
+        guard let project = projectID.correspondingProject else { return nil }
+        return project
     }
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section = Section.object(withID: sectionID) else { return nil }
+        guard let section = sectionID.correspondingSection else { return nil }
         return section
     }
+    var currentProjectID: String?
     var currentSectionID: String?
-    private var state: LibraryState = .noSections {
+    private var state: LibraryViewController.State = .noSections {
         didSet {
             setState(state)
         }
     }
-    var errorViewController: ErrorViewController?
+    private var errorViewController: ErrorViewController?
+    private var recording: Recording?
+    private var databaseService = DatabaseServiceFactory.defaultService
     
     // MARK: @IBOutlet
     @IBOutlet weak var pageControl: UIPageControl! {
         didSet {
             pageControl.numberOfPages = self.projects.count
+            pageControl.hidesForSinglePage = true
         }
     }
     @IBOutlet weak var administerBarButton: UIBarButtonItem!
@@ -85,6 +83,7 @@ class LibraryViewController: UIViewController {
             collectionView.dataSource = collectionViewDataSource
             collectionView.delegate = collectionViewDelegate
             collectionView.allowsMultipleSelection = false
+            collectionView.register(LibraryCollectionViewCell.self, forCellWithReuseIdentifier: Strings.Cells.sectionCell)
 
             if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 flowLayout.estimatedItemSize = CGSize(width: 100, height: 50)
@@ -100,7 +99,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = Colors.secondaryColor
+            recordAudioButton.backgroundColor = .secondaryColor
         }
     }
     @IBOutlet weak var recordAudioView: UIView!
@@ -108,48 +107,26 @@ class LibraryViewController: UIViewController {
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
-        currentProject = projects.first
-        UserDefaults.standard.persist(project: currentProject)
+        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentSectionID = currentProject?.sectionIDs.first
         
         configurePageViewController()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: .localized(.menu), style: .plain, target: self, action: #selector(showMenu))
         
-        if let firstSectionID = currentProject?.sectionIDs.first,
-            let section = Section.object(withID: firstSectionID) {
-            navigationItem.rightBarButtonItem = section.recordings.isEmpty == true ? nil : editButtonItem
+        if let section = currentProject?.sectionIDs.first?.correspondingSection {
+            navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
         }
         
         self.updateUI()
         
-        token = realm.observe { notification, realm in
-            self.currentProject = self.projects.first
-            
-            DispatchQueue.main.async {
-                if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
-                    self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-                }
-                
-                self.updateUI()
-            }
-        }
+        pageControl.currentPage = indexOfCurrentSection() ?? 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationItem.title = self.currentProject?.title ?? .localized(.composify)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        UserDefaults.standard.persist(project: self.currentProject)
-    }
-    
-    deinit {
-        UserDefaults.standard.persist(project: self.currentProject)
-        token?.invalidate()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -166,30 +143,29 @@ extension LibraryViewController {
         let alert = UIAlertController(title: .localized(.menu), message: nil, preferredStyle: .actionSheet)
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
-                let administerVC = AdministrateProjectTableViewController()
-                administerVC.currentProject = currentProject
-                let nav = UINavigationController(rootViewController: administerVC)
-                self.present(nav, animated: true)
+                self.presentAdministrateViewController(project: currentProject)
             }
         }
         
         let addProject = UIAlertAction(title: .localized(.addProject), style: .default) { _ in
             let addProjectAlert = UIAlertController(title: .localized(.addProject), message: nil, preferredStyle: .alert)
             addProjectAlert.addTextField { textField in
+                textField.autocapitalizationType = .words
                 textField.placeholder = .localized(.projectTitle)
                 textField.returnKeyType = .done
+                textField.clearButtonMode = .whileEditing
             }
             let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {
-                    
-                    let project = Project()
-                    project.title = projectTitle
-                    self.currentProject = project
-                    
-                    self.realmStore.save(project)
-                    self.fileManager.save(project)
-                    
-                    self.updateUI()
+                    do {
+                        try Project.createProject(withTitle: projectTitle, then: { project in
+                            self.currentProjectID = project.id
+                            self.currentSectionID = project.sectionIDs.first
+                            self.updateUI()
+                        })
+                    } catch {
+                        self.handleError(error)
+                    }
                 }
             })
             let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
@@ -200,18 +176,12 @@ extension LibraryViewController {
         }
         
         projects.forEach { project in
-            let projectAction = UIAlertAction(title: String.localizedStringWithFormat(.localized(.showProject), project.title), style: .default) { (action) in
-                self.currentProject = project
-                
-                UserDefaults.standard.persist(project: self.currentProject)
-                
-                if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
-                    self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+            if project != currentProject {
+                let projectAction = UIAlertAction(title: .localizedLocale(.showProject, project.title), style: .default) { _ in
+                    self.setCurrentProject(project)
                 }
-                
-                self.updateUI()
+                alert.addAction(projectAction)
             }
-            alert.addAction(projectAction)
         }
         
         let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
@@ -225,35 +195,86 @@ extension LibraryViewController {
     }
     
     @IBAction func recordAudio(_ sender: UIButton) {
-        defer {
-            self.updateUI()
-        }
-        guard let recorder = audioRecorder?.recorder else {
+        guard let recorder = audioRecorderDefaultService else {
             guard let recordingsViewController = pageViewController.viewControllers?.first as? RecordingsViewController
                 else { return }
             guard let currentProject = recordingsViewController.project else { return }
             guard let currentSection = recordingsViewController.section else { return }
             
-            let recording = Recording()
-            recording.title = "Recording \(currentSection.recordings.count + 1)"
-            recording.project = currentProject
-            recording.section = currentSection
-            recording.fileExtension = "caf"
-            fileManager.save(recording)
-            audioRecorder = AudioRecorder(url: recording.url)
-            audioRecorder?.recorder.record()
+            recording = Recording()
+            recording?.title = .localized(.recording)
+            recording?.project = currentProject
+            recording?.section = currentSection
+            recording?.fileExtension = "caf"
+            
+            if let recording = recording {
+                do {
+                    audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+                } catch {
+                    handleError(error)
+                }
+            }
+            
+            audioRecorderDefaultService?.record()
             recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
-            realmStore.save(recording)
             return
         }
         
         recorder.stop()
-        audioRecorder = nil
+        
+        if let recording = recording {
+            do {
+                try fileManager.save(recording)
+            } catch {
+                handleError(error)
+            }
+            databaseService.save(recording)
+        }
+        
+        recording = nil
+        audioRecorderDefaultService = nil
         recordAudioButton.setTitle(.localized(.startRecording), for: .normal)
+        
+        updateUI()
+    }
+}
+
+extension LibraryViewController: AdministrateProjectDelegate {
+    func userDidAddSectionToProject(_ section: Section) {
+        currentSectionID = section.id
+        
+        updatePageViewController()
+    }
+    
+    func userDidDeleteSectionFromProject() {
+        currentSectionID = currentProject?.sectionIDs.sorted().first
+        updatePageViewController()
+    }
+    
+    func userDidEditTitleOfObjects() {
+        self.updateUI()
+    }
+    
+    func userDidDeleteProject() {
+        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentSectionID = currentProject?.sectionIDs.first
+        
+        updatePageViewController()
     }
 }
 
 extension LibraryViewController {
+    func updatePageViewController() {
+        DispatchQueue.main.async {
+            let index = self.indexOfCurrentSection() ?? 0
+            if let viewController = self.pageViewDataSource.viewController(at: index, storyboard: self.storyboard!) {
+                self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+            }
+            
+            self.updateUI()
+        }
+    }
+    
     func updateUI() {
         // Refresh collection view
         collectionView.dataSource = nil
@@ -269,57 +290,71 @@ extension LibraryViewController {
             recordingsViewController.tableView.reloadData()
         }
         
-        if currentSection?.recordingIDs.count == 0 {
-            state = .noRecordings
-            return
-        }
+        navigationItem.rightBarButtonItem =
+            currentSection?.recordingIDs.hasElements == true ?
+            editButtonItem :
+            nil
         
         switch (currentProject, currentSection) {
         case (.some, .some):
             state = .notEmpty
         case (.some, .none):
             state = .noSections
-        case (.none, .some):
-            state = .noProjects
-        case (.none, .none):
+        case (.none, _):
             state = .noProjects
         }
     }
     
-    typealias LibraryState = LibraryViewController.State
-    
     enum State {
         case noProjects
         case noSections
-        case noRecordings
         case notEmpty
     }
     
     func setState(_ state: State) {
-        navigationItem.rightBarButtonItem = nil
         pageControl.numberOfPages = currentProject?.sections.count ?? 0
+        pageControl.currentPage = indexOfCurrentSection() ?? 0
         errorViewController?.remove()
         
         switch state {
-        case .noSections:
-            errorViewController = ErrorViewController(labelText: .localized(.noSections))
-            if let errorVieController = errorViewController {
-                add(errorVieController)
-            }
         case .notEmpty:
-            navigationItem.rightBarButtonItem = editButtonItem
+            break
         case .noProjects:
             errorViewController = ErrorViewController(labelText: .localized(.noProjects))
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
-        default:
-            break
+        case .noSections:
+            errorViewController = ErrorViewController(labelText: .localized(.noSections))
+            if let errorVieController = errorViewController {
+                add(errorVieController)
+            }
         }
+        
+        navigationItem.title = currentProject?.title ?? .localized(.composify)
     }
 }
 
 private extension LibraryViewController {
+    func presentAdministrateViewController(project: Project) {
+        let administerVC = AdministrateProjectViewController()
+        administerVC.currentProject = project
+        administerVC.administrateProjectDelegate = self
+        let nav = UINavigationController(rootViewController: administerVC)
+        self.present(nav, animated: true)
+    }
+    
+    func setCurrentProject(_ project: Project) {
+        self.currentProjectID = project.id
+        self.currentSectionID = self.currentProject?.sectionIDs.first
+        
+        if let viewController = self.pageViewDataSource.viewController(at: 0, storyboard: self.storyboard!) {
+            self.pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
+        }
+        
+        self.updateUI()
+    }
+    
 	func configurePageViewController() {
 		pageViewController = UIPageViewController(
 			transitionStyle: .scroll,
@@ -330,21 +365,30 @@ private extension LibraryViewController {
 		pageViewController.delegate = pageViewDelegate
 		pageViewDelegate.libraryViewController = self
 		
-		let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
-		startingViewController.project = currentProject
-		startingViewController.section = currentSection
-		startingViewController.pageIndex = 0
-		startingViewController.tableViewDelegate.libraryViewController = self
-		startingViewController.tableViewDataSource.libraryViewController = self
-		pageViewController.setViewControllers(
-			[startingViewController],
-			direction: .forward,
-			animated: true,
-			completion: nil)
-		
+        guard let startingViewController = storyboard?.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController else { return }
+        
+        startingViewController.project = currentProject
+        startingViewController.section = currentSection
+        startingViewController.pageIndex = indexOfCurrentSection() ?? 0
+        startingViewController.tableViewDelegate.libraryViewController = self
+        startingViewController.tableViewDataSource.libraryViewController = self
+        pageViewController.setViewControllers(
+            [startingViewController],
+            direction: .forward,
+            animated: true,
+            completion: nil)
+        
         pageViewController.view.frame = containerView.bounds
-        addChildViewController(pageViewController)
-		containerView.addSubview(pageViewController.view)
-        pageViewController.didMove(toParentViewController: self)
+        addChild(pageViewController)
+        containerView.addSubview(pageViewController.view)
+        pageViewController.didMove(toParent: self)
 	}
+    
+    func indexOfCurrentSection() -> Int? {
+        guard let currentProject = currentProject else { return nil }
+        guard let currentSectionID = currentSectionID else { return nil }
+        guard let index = currentProject.sectionIDs.index(of: currentSectionID) else { return nil }
+        
+        return index
+    }
 }

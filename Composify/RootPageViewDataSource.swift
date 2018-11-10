@@ -16,24 +16,14 @@ class RootPageViewDataSource: NSObject {
 	}
 
 	func viewController(at index: Int, storyboard: UIStoryboard) -> RecordingsViewController? {
-        guard let count = libraryViewController.currentProject?.sectionIDs.count,
-            count > 0 && index < count else { return nil }
+        guard let sectionIDs = libraryViewController.currentProject?.sectionIDs else { return nil }
+        guard sectionIDs.hasElements && index < sectionIDs.count else { return nil }
+        guard let recordingsViewController = storyboard.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as? RecordingsViewController else { return nil }
         
-        //let count = libraryViewController.currentProject?.sections.count ?? 0
-        //guard count > 0 && index < count else { return nil }
-        
-        /*
-        if count == 0 || index >= count {
-			return nil
-		}*/
-        
-        // guard index < count else { return nil }
-        
-		let recordingsViewController = storyboard.instantiateViewController(withIdentifier: Strings.StoryboardIDs.contentPageViewController) as! RecordingsViewController
 		recordingsViewController.project = libraryViewController.currentProject
-        recordingsViewController.section = libraryViewController.currentProject?.sections[index]
+        recordingsViewController.section = libraryViewController.currentProject?.sectionIDs[index].correspondingSection
 		recordingsViewController.tableViewDataSource.libraryViewController = libraryViewController
-		recordingsViewController.tableViewDelegate.libraryViewController = libraryViewController
+        recordingsViewController.tableViewDelegate.libraryViewController = libraryViewController
 		recordingsViewController.pageIndex = index
 
 		return recordingsViewController

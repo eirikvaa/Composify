@@ -7,18 +7,17 @@
 //
 
 import UIKit
-import AVFoundation
-import RealmSwift
 
 class RecordingsTableViewDelegate: NSObject {
 	var libraryViewController: LibraryViewController!
 	var parentViewController: RecordingsViewController!
-    private var realmStore = RealmStore.shared
+    var databaseService = DatabaseServiceFactory.defaultService
+    var audioDefaultService: AudioPlayerService?
 }
 
 extension RecordingsTableViewDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (rowAction, indexPath) in
+		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (_, indexPath) in
 			let edit = UIAlertController(title: .localized(.edit), message: nil, preferredStyle: .alert)
 
 			edit.addTextField {
@@ -27,12 +26,12 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 				$0.autocapitalizationType = .words
 			}
 
-			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { alertAction in
-				let recording = self.parentViewController.section?.recordings[indexPath.row]
+			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
+				let recording = self.parentViewController.section?.recordingIDs[indexPath.row].correspondingRecording
 				if let title = edit.textFields?.first?.text, let recording = recording {
-					self.libraryViewController.fileManager.rename(recording, from: recording.title, to: title, section: nil, project: nil)
-					self.realmStore.rename(recording, to: title)
+                    self.databaseService.rename(recording, to: title)
 					self.parentViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    self.libraryViewController.setEditing(false, animated: true)
 				}
 			})
 			let cancel = UIAlertAction(title: .localized(.cancel), style: .default, handler: nil)
@@ -43,19 +42,25 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 			self.libraryViewController.present(edit, animated: true, completion: nil)
 		}
 
-		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (
-				rowAction, indexPath) in
-			if let currentSection = self.parentViewController.section {
-				let recording = currentSection.recordings[indexPath.row]
-
-				self.libraryViewController.fileManager.delete(recording)
-                self.realmStore.delete(recording)
+		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (_, indexPath) in
+			if let currentSection = self.parentViewController.section,
+                let recording = currentSection.recordingIDs[indexPath.row].correspondingRecording {
+                
+                do {
+                    try self.libraryViewController.fileManager.delete(recording)
+                } catch let errror as FileManagerError {
+                    self.parentViewController.handleError(errror)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+                self.databaseService.delete(recording)
                 self.libraryViewController.updateUI()
 			}
 		}
 
-		edit.backgroundColor = Colors.edit
-		delete.backgroundColor = Colors.delete
+		edit.backgroundColor = .mainColor
+		delete.backgroundColor = .delete
 
 		return [edit, delete]
 	}
@@ -63,16 +68,27 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.reloadData()
 
-		guard let recording = parentViewController.section?.recordings[indexPath.row] else {
+		guard let recording = parentViewController.section?.recordingIDs[indexPath.row].correspondingRecording else {
 			return
 		}
         
         if parentViewController.currentlyPlayingRecording != nil {
             parentViewController.currentlyPlayingRecording = nil
-            parentViewController.audioPlayer?.player.stop()
+            audioDefaultService?.stop()
         } else {
-            parentViewController.audioPlayer = AudioPlayer(url: recording.url)
+            do {
+                audioDefaultService = try AudioPlayerServiceFactory.defaultService(withObject: recording)
+            } catch {
+                parentViewController.handleError(error)
+            }
+            
+            audioDefaultService?.audioDidFinishBlock = { _ in
+                self.parentViewController.currentlyPlayingRecording = nil
+                self.libraryViewController.updateUI()
+            }
+            
             parentViewController.currentlyPlayingRecording = recording
+            audioDefaultService?.play()
         }
 	}
 
@@ -82,12 +98,5 @@ extension RecordingsTableViewDelegate: UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
 		libraryViewController.setEditing(false, animated: true)
-	}
-}
-
-extension RecordingsTableViewDelegate: AVAudioPlayerDelegate {
-	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-		parentViewController.currentlyPlayingRecording = nil
-		libraryViewController.updateUI()
 	}
 }

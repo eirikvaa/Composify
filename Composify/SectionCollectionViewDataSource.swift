@@ -14,20 +14,23 @@ class SectionCollectionViewDataSource: NSObject {
 
 extension SectionCollectionViewDataSource: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let items = libraryViewController.currentProject?.sections.sorted() else { return 0 }
+        guard let items = libraryViewController.currentProject?.sectionIDs else { return 0 }
 		
         return items.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.Cells.sectionCell, for: indexPath) as! LibraryCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.Cells.sectionCell, for: indexPath) as? LibraryCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
         
-        if let sectionID = libraryViewController.currentProject?.sectionIDs[indexPath.row] {
-            let section = RealmStore.shared.realm.object(ofType: Section.self, forPrimaryKey: sectionID)
-            cell.titleLabel.text = section?.title
+        if let section = libraryViewController.currentProject?.sectionIDs[indexPath.row].correspondingSection {
+            if section.id == libraryViewController.currentSectionID {
+                cell.titleLabel.font = .preferredBoldFont(for: .body)
+            }
+            
+            cell.titleLabel.text = section.title
         }
 		
 		return cell		

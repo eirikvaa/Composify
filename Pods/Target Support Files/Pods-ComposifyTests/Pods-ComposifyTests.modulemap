@@ -1,6 +1,0 @@
-framework module Pods_ComposifyTests {
-  umbrella header "Pods-ComposifyTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
