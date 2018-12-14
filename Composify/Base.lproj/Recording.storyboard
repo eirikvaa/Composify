@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Recordings View Controller-->
+        <!--Section View Controller-->
         <scene sceneID="JGL-yU-Ry0">
             <objects>
-                <viewController storyboardIdentifier="contentPageViewController" id="r2m-fP-SrA" customClass="RecordingsViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="contentPageViewController" id="r2m-fP-SrA" customClass="SectionViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rG7-vO-dMe"/>
                         <viewControllerLayoutGuide type="bottom" id="RCv-kF-3yl"/>
@@ -20,23 +20,8 @@
                     <view key="view" contentMode="scaleToFill" id="F51-Yn-gDP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oja-eq-x0q">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="oja-eq-x0q" secondAttribute="trailing" id="Tl9-gS-OWW"/>
-                            <constraint firstItem="RCv-kF-3yl" firstAttribute="top" secondItem="oja-eq-x0q" secondAttribute="bottom" id="Xga-4D-1CY"/>
-                            <constraint firstItem="oja-eq-x0q" firstAttribute="leading" secondItem="F51-Yn-gDP" secondAttribute="leading" id="aJL-uP-wba"/>
-                            <constraint firstItem="oja-eq-x0q" firstAttribute="top" secondItem="rG7-vO-dMe" secondAttribute="bottom" id="wBo-Lc-kx8"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="tableView" destination="oja-eq-x0q" id="Y2j-5q-j9a"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgs-J9-xdd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

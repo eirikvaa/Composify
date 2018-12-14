@@ -8,13 +8,9 @@ target 'Composify' do
   # Pods for Composify
   pod 'RealmSwift'
   pod 'SwiftLint'
+  pod 'Parchment'
 
   target 'ComposifyTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'ComposifyUITests' do
     inherit! :search_paths
     # Pods for testing
   end

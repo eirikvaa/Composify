@@ -7,31 +7,46 @@
 //
 
 import UIKit
+import Parchment
 
-class LibraryCollectionViewCell: UICollectionViewCell {
-    lazy var titleLabel = UILabel()
+class LibraryCollectionViewCell: PagingCell {
+    
+    lazy var sectionLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        configureViews()
+        configure()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        configureViews()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
     }
     
-    private func configureViews() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(titleLabel)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            sectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+    }
+    
+    fileprivate func configure() {
+        sectionLabel.backgroundColor = .white
+        sectionLabel.textAlignment = .center
+        
+        contentView.addSubview(sectionLabel)
+    }
+    
+    override func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
+        guard let sectionItem = pagingItem as? SectionPageItem else { return }
+        sectionLabel.text = sectionItem.section?.title ?? "N/A"
     }
 }

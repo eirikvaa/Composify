@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        registerPageControlAppearance()
         
         return true
     }
@@ -41,12 +40,6 @@ private extension AppDelegate {
         navigationBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
-    }
-    
-    func registerPageControlAppearance() {
-        let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .darkGray
     }
 }
 

@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */; };
-		3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */; };
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
 		E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */; };
+		E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5089E3A21C4128A0026478C /* UIColor+Ext.swift */; };
 		E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51248AD20E787DF00B178C2 /* LogicTests.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516FFB22125544C0030D94A /* UIScreen+Ext.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
-		E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */; };
-		E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */; };
+		E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift */; };
 		E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B851820F423E300FB3D48 /* ProjectStore.swift */; };
 		E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */; };
 		E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016D2124278000F98E65 /* UIFont+Ext.swift */; };
@@ -35,8 +33,7 @@
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */; };
 		E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */; };
-		E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */; };
-		E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */; };
+		E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* SectionViewController.swift */; };
 		E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E587605D20F24A600050C0BD /* ErrorViewController.swift */; };
 		E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71420F7B07300CF51FC /* DatabaseService.swift */; };
 		E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */; };
@@ -49,15 +46,18 @@
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
+		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
+		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D1E0051F8BAE0900246156 /* Recording.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D1E0001F8BADD700246156 /* Recording.storyboard */; };
 		E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* HashableTuple.swift */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
+		E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
 		E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */; };
 		E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */; };
-		E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */; };
+		E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */; };
 		E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DA91F8AB476002788F7 /* Localizable.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* Strings.swift */; };
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
@@ -91,19 +91,17 @@
 		040BEA34384C1A29FC770BAD /* Pods_Composify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Composify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09FADEF9DFFDE4A8496F0519 /* Pods-Composify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.debug.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.debug.xcconfig"; sourceTree = "<group>"; };
 		3EB05677ACD596052B95EAF8 /* Pods-ComposifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDelegate.swift; sourceTree = "<group>"; };
-		3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDelegate.swift; sourceTree = "<group>"; };
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
+		E5089E3A21C4128A0026478C /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		E51248AD20E787DF00B178C2 /* LogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicTests.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E516FFB22125544C0030D94A /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
-		E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDataSource.swift; sourceTree = "<group>"; };
-		E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		E51700951E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		E51B851820F423E300FB3D48 /* ProjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStore.swift; sourceTree = "<group>"; };
 		E51E8BC21E308F390022CF71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E51E8BC41E308F390022CF71 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
@@ -125,8 +123,7 @@
 		E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabaseService.swift; sourceTree = "<group>"; };
 		E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectViewController.swift; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPageViewDataSource.swift; sourceTree = "<group>"; };
-		E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
+		E57D16571E31DF2200BD0802 /* SectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		E587605D20F24A600050C0BD /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		E589E71420F7B07300CF51FC /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceFactory.swift; sourceTree = "<group>"; };
@@ -141,6 +138,8 @@
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPageItem.swift; sourceTree = "<group>"; };
+		E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDataSource.swift"; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5D1DFFF1F8BADD700246156 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recording.storyboard; sourceTree = "<group>"; };
 		E5D1E0021F8BADDA00246156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recording.strings; sourceTree = "<group>"; };
@@ -148,10 +147,11 @@
 		E5D3EA291F818D28001D59ED /* HashableTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTuple.swift; sourceTree = "<group>"; };
 		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
+		E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDataSource.swift; sourceTree = "<group>"; };
 		E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableViewDelegate.swift; sourceTree = "<group>"; };
-		E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewDelegate.swift; sourceTree = "<group>"; };
+		E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		E5ED6DA91F8AB476002788F7 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -202,22 +202,21 @@
 			isa = PBXGroup;
 			children = (
 				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
-				3FDC9D58680BA682A911488B /* RootPageViewDelegate.swift */,
-				E57D16551E31DC8D00BD0802 /* RootPageViewDataSource.swift */,
-				3FDC90370EC2CBDC6E65E3BF /* SectionCollectionViewDelegate.swift */,
-				E51700991E29517100B7DAA8 /* SectionCollectionViewDataSource.swift */,
+				E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */,
+				E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
 		};
-		E512A01D2112664800A70A75 /* Recordings */ = {
+		E512A01D2112664800A70A75 /* Section */ = {
 			isa = PBXGroup;
 			children = (
-				E57D16571E31DF2200BD0802 /* RecordingsViewController.swift */,
-				E5EC5A591ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift */,
-				E51700951E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift */,
+				E57D16571E31DF2200BD0802 /* SectionViewController.swift */,
+				E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */,
+				E51700951E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift */,
+				E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */,
 			);
-			name = Recordings;
+			name = Section;
 			sourceTree = "<group>";
 		};
 		E53C016C2124275900F98E65 /* Extensions */ = {
@@ -232,6 +231,7 @@
 				E53C0177212427F000F98E65 /* Collection+Ext.swift */,
 				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
 				E516FFB22125544C0030D94A /* UIScreen+Ext.swift */,
+				E5089E3A21C4128A0026478C /* UIColor+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -239,8 +239,8 @@
 		E53C017B21242CFE00F98E65 /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */,
 				E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */,
+				E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */,
 			);
 			path = AudioPlayer;
 			sourceTree = "<group>";
@@ -248,8 +248,8 @@
 		E53C017C21242D0200F98E65 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				E598475521208C2F00330B2D /* AudioRecorderService.swift */,
 				E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */,
+				E598475521208C2F00330B2D /* AudioRecorderService.swift */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -280,8 +280,8 @@
 				E53C016C2124275900F98E65 /* Extensions */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
 				E5BD121D21126684000ED703 /* AdministrateProject */,
-				E512A01D2112664800A70A75 /* Recordings */,
 				E512A01C2112663900A70A75 /* Library */,
+				E512A01D2112664800A70A75 /* Section */,
 				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E5B3C7151D4A29C20021183A /* Localization */,
 				E56460361D3B54B000AA6557 /* Application */,
@@ -407,8 +407,8 @@
 		E5D6BDEE211258F7009B2E9F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				E589E71420F7B07300CF51FC /* DatabaseService.swift */,
 				E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */,
+				E589E71420F7B07300CF51FC /* DatabaseService.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -467,7 +467,6 @@
 				E58C57E51DD8799D00348C65 /* Sources */,
 				E58C57E61DD8799D00348C65 /* Frameworks */,
 				E58C57E71DD8799D00348C65 /* Resources */,
-				CDA6745FABD11ED3D2E3F376 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -589,30 +588,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDA6745FABD11ED3D2E3F376 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D3262428F336E7174CB2747A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +597,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
@@ -629,6 +605,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
@@ -671,8 +648,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */,
-				E517009A1E29517100B7DAA8 /* SectionCollectionViewDataSource.swift in Sources */,
+				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
+				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E53C0174212427D000F98E65 /* String+Ext.swift in Sources */,
 				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
@@ -681,19 +659,20 @@
 				E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */,
 				E5ED6DAA1F8AB476002788F7 /* Localizable.swift in Sources */,
 				E53C6A051ED5DBAA00971C40 /* Constants.swift in Sources */,
+				E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */,
 				E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */,
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
-				E51700961E294F0E00B7DAA8 /* RecordingsTableViewDataSource.swift in Sources */,
+				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
-				E5EC5A5A1ED1F3AD00D721CF /* RecordingsTableViewDelegate.swift in Sources */,
+				E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */,
+				E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
-				E57D16561E31DC8D00BD0802 /* RootPageViewDataSource.swift in Sources */,
 				E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
@@ -707,11 +686,9 @@
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
 				E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */,
-				E57D16581E31DF2200BD0802 /* RecordingsViewController.swift in Sources */,
-				3FDC91F47B73EE00C5956783 /* SectionCollectionViewDelegate.swift in Sources */,
+				E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */,
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
 				E51B851920F423E300FB3D48 /* ProjectStore.swift in Sources */,
-				3FDC9ED97EC3138303A079BB /* RootPageViewDelegate.swift in Sources */,
 				E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
