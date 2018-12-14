@@ -45,6 +45,7 @@ private extension SectionViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecordingTableViewCell.self, forCellReuseIdentifier: Strings.Cells.recordingCell)
+        tableView.rowHeight =  UIScreen.main.isSmall ? 66 : 55
         
         view.addSubview(tableView)
         

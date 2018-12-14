@@ -58,8 +58,19 @@ class LibraryViewController: UIViewController {
         currentSectionID = currentProject?.sectionIDs.first
         
         configurePagingViewController()
+        setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         updateUI()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        pagingViewController.pageViewController.selectedViewController?.setEditing(editing, animated: animated)
     }
 }
 
@@ -174,6 +185,10 @@ extension LibraryViewController {
         self.updateUI()
     }
     
+    func setupUI() {
+        navigationItem.leftBarButtonItem?.title = .localized(.menu)
+    }
+    
     /// Update the user interface, mainly concerned with updating the state
     func updateUI() {
         switch (currentProject, currentSection) {
@@ -185,6 +200,7 @@ extension LibraryViewController {
             state = .noProjects
         }
         
+        // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
         pagingViewController.reloadData()
         
         if let section = currentProject?.sectionIDs.first?.correspondingSection {
@@ -235,6 +251,7 @@ extension LibraryViewController {
     /// Configure the paging view controller
     func configurePagingViewController() {
         pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
+        pagingViewController.indicatorColor = .mainColor
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
         
@@ -255,22 +272,17 @@ extension LibraryViewController {
 extension LibraryViewController: AdministrateProjectDelegate {
     func userDidAddSectionToProject(_ section: Section) {
         currentSectionID = section.id
-        updateUI()
     }
     
     func userDidDeleteSectionFromProject() {
         currentSectionID = currentProject?.sectionIDs.sorted().first
-        updateUI()
     }
     
     func userDidEditTitleOfObjects() {
-        updateUI()
     }
     
     func userDidDeleteProject() {
         currentProjectID = databaseService.foundationStore?.projectIDs.first
         currentSectionID = currentProject?.sectionIDs.first
-        
-        updateUI()
     }
 }

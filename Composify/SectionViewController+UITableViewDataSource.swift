@@ -14,10 +14,6 @@ extension SectionViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.section?.recordingIDs.count ?? 0
 	}
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(#function)
@@ -29,7 +25,7 @@ extension SectionViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         let recording = section?.recordingIDs[indexPath.row].correspondingRecording
-        //let isCurrentlyPlayingRecording = parentViewController.currentlyPlayingRecording?.id == recording?.id
+        let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
         
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)
         cell.titleLabel.adjustsFontForContentSizeCategory = true
@@ -38,14 +34,14 @@ extension SectionViewController: UITableViewDataSource {
         // so the date of recording is used instead.
         cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateRecorded.description
 		cell.playButton.alpha = 1
-        //cell.playButton.setImage(isCurrentlyPlayingRecording ? .pause : .play, for: .normal)
+        cell.playButton.setImage(isCurrentlyPlayingRecording ? .pause : .play, for: .normal)
         
 		return cell
 	}
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .insert {
-            //libraryViewController.tableView.insertRows(at: [indexPath], with: .fade)
+            tableView.insertRows(at: [indexPath], with: .fade)
         }
     }
 }

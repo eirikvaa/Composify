@@ -21,6 +21,8 @@ struct SectionPageItem: PagingItem, Hashable, Comparable {
     }
     
     static func == (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
+        guard lhs.section?.isInvalidated == false else { return false }
+        guard rhs.section?.isInvalidated == false else { return false }
         return lhs.section?.dateCreated == rhs.section?.dateCreated
     }
     

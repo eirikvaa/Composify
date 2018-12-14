@@ -14,11 +14,16 @@ extension LibraryViewController: PagingViewControllerDelegate {
         guard let sectionPageItem = pagingItem as? SectionPageItem else { return }
         currentSectionID = sectionPageItem.section?.id
     }
+    
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, widthForPagingItem pagingItem: T, isSelected: Bool) -> CGFloat? where T : PagingItem, T : Comparable, T : Hashable {
-        let fullWidth = view.frame.width
-        guard let sectionIDs = currentProject?.sectionIDs, sectionIDs.hasElements else {
-            return fullWidth
+        let widthPerItem: CGFloat = 100
+        let count = CGFloat(currentProject?.sections.count ?? 0)
+        
+        // Avoid having too small page items by constraining the width to 100 when the count is too high
+        if widthPerItem * count > view.frame.width {
+            return widthPerItem
         }
-        return fullWidth / CGFloat(sectionIDs.count)
+        
+        return view.frame.width / CGFloat(count)
     }
 }
