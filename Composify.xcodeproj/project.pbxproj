@@ -332,7 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				E523959A21C6824300D3004F /* Resources */,
-				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
+				E582893821C6A1F900E438B5 /* Common */,
 				E576D93E1D58663E006F5D62 /* Realm */,
 				E5B036A81D59957C00C66A69 /* AVFoundation */,
 			);
@@ -360,6 +360,14 @@
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
 			);
 			name = Realm;
+			sourceTree = "<group>";
+		};
+		E582893821C6A1F900E438B5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		E589E71320F7B05800CF51FC /* Common Interfaces */ = {
