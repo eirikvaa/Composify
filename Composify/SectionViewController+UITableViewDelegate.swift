@@ -51,10 +51,18 @@ extension SectionViewController: UITableViewDelegate {
             }
         }
 
+        let export = UITableViewRowAction(style: .default, title: R.Loc.export) { _, indexPath in
+            if let section = self.section {
+                let url: [Any] = [section.recordings[indexPath.row].url]
+                let activityVC = UIActivityViewController(activityItems: url, applicationActivities: nil)
+                self.present(activityVC, animated: true)
+            }
+        }
+
         edit.backgroundColor = R.Colors.mainColor
         delete.backgroundColor = R.Colors.delete
 
-        return [edit, delete]
+        return [edit, delete, export]
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

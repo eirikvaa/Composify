@@ -29,6 +29,9 @@
 /* Generic word for edit. */
 "general.edit" = "Rediger";
 
+/* Generic word for export */
+"general.export" = "Eksporter";
+
 /* Generic word for ok */
 "general.ok" = "Ok";
 

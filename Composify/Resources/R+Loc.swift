@@ -33,10 +33,12 @@ extension R.Loc {
         comment: "Placeholder of textfield in alert appearing when user tries to add a project."
     )
     static func showProject(named name: String) -> String {
-        return String.localizedStringWithFormat(NSLocalizedString(
-            "library.menu.show-project.label",
-            comment: "Title of button in menu for seeing a project."
-        ), name)
+        return String.localizedStringWithFormat(
+            NSLocalizedString(
+                "library.menu.show-project.label",
+                comment: "Title of button in menu for seeing a project."
+            ), name
+        )
     }
 
     static let deleteProejct = NSLocalizedString(
@@ -106,6 +108,10 @@ extension R.Loc {
         "general.ok",
         comment: "Generic word for ok"
     )
+    static let export = NSLocalizedString(
+        "general.export",
+        comment: "Generic word for export"
+    )
 }
 
 // MARK: Menu localization
@@ -167,10 +173,12 @@ extension R.Loc {
     )
 
     static func unableToSaveObjectMessage(withTitle title: String) -> String {
-        return String.localizedStringWithFormat(NSLocalizedString(
-            "recordings.error.unable-to-save-recording.alert.message",
-            comment: "Message when application was unable to save the recording."
-        ), title)
+        return String.localizedStringWithFormat(
+            NSLocalizedString(
+                "recordings.error.unable-to-save-recording.alert.message",
+                comment: "Message when application was unable to save the recording."
+            ), title
+        )
     }
 
     static let unableToDeleteObjectTitle = NSLocalizedString(
@@ -179,10 +187,12 @@ extension R.Loc {
     )
 
     static func unableToDeleteObjectMessage(withTitle title: String) -> String {
-        return String.localizedStringWithFormat(NSLocalizedString(
-            "recordings.error.unable-to-delete-object.alert.message",
-            comment: "Message when trying to delete object from filesystem."
-        ), title)
+        return String.localizedStringWithFormat(
+            NSLocalizedString(
+                "recordings.error.unable-to-delete-object.alert.message",
+                comment: "Message when trying to delete object from filesystem."
+            ), title
+        )
     }
 
     static let unableToConfigureRecordingSessionTitle = NSLocalizedString(
