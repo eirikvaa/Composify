@@ -18,7 +18,7 @@ class Recording: Object {
     @objc dynamic var fileExtension = ""
     
     override static func primaryKey() -> String? {
-        return "id"
+        return R.DatabaseKeys.id
     }
 }
 

@@ -23,6 +23,7 @@
 		E523959521C681F800D3004F /* R+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959421C681F800D3004F /* R+Cells.swift */; };
 		E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959621C6820700D3004F /* R+UserDefaults.swift */; };
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
+		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
 		E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016D2124278000F98E65 /* UIFont+Ext.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
@@ -112,6 +113,7 @@
 		E523959421C681F800D3004F /* R+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Cells.swift"; sourceTree = "<group>"; };
 		E523959621C6820700D3004F /* R+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+UserDefaults.swift"; sourceTree = "<group>"; };
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
+		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
 		E53C016D2124278000F98E65 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				E523959421C681F800D3004F /* R+Cells.swift */,
 				E523959621C6820700D3004F /* R+UserDefaults.swift */,
 				E523959821C6821C00D3004F /* R+Colors.swift */,
+				E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
 				E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */,
+				E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */,
 				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E53C0174212427D000F98E65 /* String+Ext.swift in Sources */,
 				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,

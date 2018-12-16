@@ -14,7 +14,7 @@ final class ProjectStore: Object {
     var _projectIDs = List<String>()
     
     override static func primaryKey() -> String? {
-        return "id"
+        return R.DatabaseKeys.id
     }
 }
 

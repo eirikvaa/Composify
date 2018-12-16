@@ -16,7 +16,7 @@ final class Project: Object {
     var sectionIDs = List<String>()
     
     override static func primaryKey() -> String? {
-        return "id"
+        return R.DatabaseKeys.id
     }
 }
 
@@ -25,7 +25,7 @@ extension Project: DatabaseObject {}
 extension UserDefaults {
     func lastProject() -> Project? {
         guard let realm = try? Realm() else { return nil }
-        guard let id = UserDefaults.standard.string(forKey: "lastProjectID") else { return nil }
+        guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else { return nil }
         return realm.object(ofType: Project.self, forPrimaryKey: id)
     }
 }

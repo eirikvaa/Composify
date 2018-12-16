@@ -24,4 +24,7 @@ struct R {
     
     /// Custom colors
     struct Colors {}
+    
+    /// Database keys
+    struct DatabaseKeys {}
 }
