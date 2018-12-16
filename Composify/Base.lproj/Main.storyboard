@@ -95,13 +95,5 @@
             </objects>
             <point key="canvasLocation" x="1683.75" y="-698.23943661971828"/>
         </scene>
-        <!--contentPageViewController-->
-        <scene sceneID="WFN-ba-pHK">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="contentPageViewController" storyboardName="Recording" referencedIdentifier="contentPageViewController" id="Le2-Hg-74I" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tal-3G-qg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3290" y="-701"/>
-        </scene>
     </scenes>
 </document>
