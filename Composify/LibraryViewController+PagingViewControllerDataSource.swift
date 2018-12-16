@@ -27,9 +27,7 @@ extension LibraryViewController: PagingViewControllerDataSource {
             return UIViewController()
         }
 
-        guard let section = currentProject.sectionIDs[index].correspondingSection else {
-            return UIViewController()
-        }
+        let section = currentProject.getSection(at: index)
 
         let sectionViewController = SectionViewController(section: section)
         sectionViewController.libraryViewController = self

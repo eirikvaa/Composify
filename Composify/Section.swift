@@ -11,6 +11,7 @@ import RealmSwift
 
 class Section: Object {
     @objc dynamic var id = UUID().uuidString
+    @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
@@ -50,7 +51,7 @@ extension Section: FileSystemObject {
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
-        return lhs.title <= rhs.title
+        return lhs.index <= rhs.index
     }
 }
 

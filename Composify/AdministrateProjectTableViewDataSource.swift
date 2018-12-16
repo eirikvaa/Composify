@@ -48,7 +48,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = R.Loc.addSection
             } else {
-                if let section = administrateProjectViewController.currentProject?.sectionIDs[indexPath.row].correspondingSection {
+                if let section = administrateProjectViewController.currentProject?.getSection(at: indexPath.row) {
                     cell.textField.placeholder = section.title
                     cell.textField.autocapitalizationType = .words
                     cell.textField.clearButtonMode = .whileEditing
@@ -139,6 +139,18 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             administrateProjectViewController.tableView?.deleteRows(at: [indexPath], with: .automatic)
         case .none:
             break
+        }
+    }
+
+    func tableView(_: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let currentProject = administrateProjectViewController.currentProject else { return }
+        var databaseService = administrateProjectViewController.databaseService
+        let sourceSection = currentProject.getSection(at: sourceIndexPath.row)
+        let destinationSection = currentProject.getSection(at: destinationIndexPath.row)
+
+        databaseService.performOperation {
+            sourceSection?.index = destinationIndexPath.row
+            destinationSection?.index = sourceIndexPath.row
         }
     }
 }

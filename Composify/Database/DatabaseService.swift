@@ -20,4 +20,5 @@ protocol DatabaseService {
     mutating func save(_ object: DatabaseObject)
     mutating func delete(_ object: DatabaseObject)
     mutating func rename(_ object: DatabaseObject, to newName: String)
+    mutating func performOperation(_ operation: () -> Void)
 }

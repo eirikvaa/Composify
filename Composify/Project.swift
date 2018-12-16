@@ -52,6 +52,21 @@ extension Project {
             }
             .sorted()
     }
+
+    /// Get the section that corresponds to the passed-in index
+    /// - parameter index: An index that won't necessarily correspond to the
+    /// order that sections were created.
+    func getSection(at index: Int) -> Section? {
+        var section: Section?
+        for sectionID in sectionIDs {
+            let _section = sectionID.correspondingSection
+            if _section?.index == index {
+                section = _section
+            }
+        }
+
+        return section
+    }
 }
 
 extension Project: Comparable {
@@ -87,5 +102,10 @@ extension Project {
         try FileManager.default.save(project)
 
         completionHandler(project)
+    }
+
+    var nextSectionIndex: Int {
+        let lastSectionIndex = sectionIDs.last?.correspondingSection?.index ?? 0
+        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 }

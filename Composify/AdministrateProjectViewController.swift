@@ -94,9 +94,16 @@ extension AdministrateProjectViewController {
     }
 
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
+        guard let currentProject = currentProject else {
+            // This will never happen, because a prerequisite for showing the administrate view
+            // is that there has been created a project.
+            return
+        }
+
         let section = Section()
         section.title = R.Loc.section
         section.project = currentProject
+        section.index = currentProject.nextSectionIndex
 
         do {
             try fileManager.save(section)
@@ -112,6 +119,17 @@ extension AdministrateProjectViewController {
 }
 
 private extension AdministrateProjectViewController {
+    /// This will normalize the section indices such as when one is deleted, any
+    /// holes in the counting is filled.
+    func normalizeSectionIndices() {
+        guard let currentProject = currentProject else { return }
+        databaseService.performOperation {
+            for (index, section) in currentProject.sections.enumerated() {
+                section.index = index
+            }
+        }
+    }
+
     func configureViews() {
         if let tableView = tableView {
             view.addSubview(tableView)

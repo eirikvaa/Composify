@@ -102,4 +102,10 @@ struct RealmDatabaseService: DatabaseService {
             }
         }
     }
+
+    func performOperation(_ operation: () -> Void) {
+        try! realm.write {
+            operation()
+        }
+    }
 }
