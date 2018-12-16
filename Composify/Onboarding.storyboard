@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,34 +15,34 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingRoot" id="irm-83-YfJ" customClass="OnboardingRootViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z6P-Vg-bM8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXa-Yw-v2C">
-                                <rect key="frame" x="20" y="832" width="30" height="30"/>
-                                <state key="normal" title="Skip"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfa-nO-KBw">
-                                <rect key="frame" x="362" y="832" width="32" height="30"/>
-                                <state key="normal" title="Next"/>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAq-FG-KE0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <connections>
                                     <segue destination="yBK-vp-FK1" kind="embed" id="fEq-Yf-AVr"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXa-Yw-v2C">
+                                <rect key="frame" x="33" y="673" width="30" height="30"/>
+                                <state key="normal" title="Skip"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfa-nO-KBw">
+                                <rect key="frame" x="349" y="673" width="32" height="30"/>
+                                <state key="normal" title="Next"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Dfa-nO-KBw" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" id="CXc-Pb-tNU"/>
-                            <constraint firstItem="cAq-FG-KE0" firstAttribute="trailing" secondItem="aTK-KV-pgM" secondAttribute="trailing" id="GcO-sY-ydd"/>
-                            <constraint firstItem="cAq-FG-KE0" firstAttribute="top" secondItem="z6P-Vg-bM8" secondAttribute="top" id="Ztj-pH-CW6"/>
-                            <constraint firstItem="JXa-Yw-v2C" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" id="bGV-Ng-UZ4"/>
-                            <constraint firstItem="cAq-FG-KE0" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" id="mDv-5D-6qX"/>
-                            <constraint firstItem="aTK-KV-pgM" firstAttribute="trailing" secondItem="Dfa-nO-KBw" secondAttribute="trailing" constant="20" id="oF9-4t-Bpe"/>
-                            <constraint firstAttribute="bottom" secondItem="cAq-FG-KE0" secondAttribute="bottom" id="sKN-dg-9Tw"/>
-                            <constraint firstItem="JXa-Yw-v2C" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" constant="20" id="sta-or-SK3"/>
+                            <constraint firstItem="Dfa-nO-KBw" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" constant="-33" id="CXc-Pb-tNU"/>
+                            <constraint firstItem="aTK-KV-pgM" firstAttribute="top" secondItem="cAq-FG-KE0" secondAttribute="top" constant="20" id="Ukd-bW-jnO"/>
+                            <constraint firstItem="JXa-Yw-v2C" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" constant="-33" id="bGV-Ng-UZ4"/>
+                            <constraint firstItem="aTK-KV-pgM" firstAttribute="trailing" secondItem="Dfa-nO-KBw" secondAttribute="trailing" constant="33" id="oF9-4t-Bpe"/>
+                            <constraint firstItem="JXa-Yw-v2C" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" constant="33" id="sta-or-SK3"/>
+                            <constraint firstItem="cAq-FG-KE0" firstAttribute="trailing" secondItem="aTK-KV-pgM" secondAttribute="trailing" id="wtM-p9-zGe"/>
+                            <constraint firstItem="cAq-FG-KE0" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" id="xf4-5L-JGl"/>
+                            <constraint firstItem="aTK-KV-pgM" firstAttribute="bottom" secondItem="cAq-FG-KE0" secondAttribute="bottom" id="ycP-7m-AcV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aTK-KV-pgM"/>
                     </view>
@@ -54,18 +54,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dlw-e1-aSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1168.1159420289855" y="154.6875"/>
+            <point key="canvasLocation" x="-1169.5652173913045" y="153.2608695652174"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="mwi-ur-9WE">
             <objects>
                 <viewController storyboardIdentifier="OnboardingPage" id="yBK-vp-FK1" customClass="OnboardingViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ozh-eG-U0I">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TXz-qf-vLR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

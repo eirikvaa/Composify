@@ -20,6 +20,7 @@ class OnboardingRootViewController: UIViewController {
 
     @IBOutlet private var nextButton: UIButton! {
         didSet {
+            nextButton.setTitle(R.Loc.onboardingNextButtonTitleNext, for: .normal)
             nextButton.tintColor = .white
         }
     }
