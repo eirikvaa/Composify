@@ -10,7 +10,7 @@ import UIKit
 
 struct HashableTuple {
     var t: (Int, Int)
-    
+
     init(_ t: (Int, Int)) {
         self.t = t
     }

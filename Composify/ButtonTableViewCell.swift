@@ -9,7 +9,6 @@
 import UIKit
 
 class ButtonTableViewCell: UITableViewCell {
-    
     private var button: UIButton!
     var buttonTitle: String? {
         didSet {
@@ -17,19 +16,20 @@ class ButtonTableViewCell: UITableViewCell {
             button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
         }
     }
+
     var action: (() -> Void)?
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     @objc func buttonTap() {
         action?()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         setupViews()
     }
 }
@@ -38,7 +38,7 @@ extension ButtonTableViewCell {
     func setupViews() {
         button = UIButton(frame: .zero)
         button.setTitleColor(.red, for: .normal)
-        
+
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -46,7 +46,7 @@ extension ButtonTableViewCell {
             button.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             button.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            button.heightAnchor.constraint(equalToConstant: 44)
+            button.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 }

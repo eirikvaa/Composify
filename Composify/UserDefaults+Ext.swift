@@ -12,11 +12,11 @@ extension UserDefaults {
     func resetLastProject() {
         setValue(nil, forKey: R.UserDefaults.lastProjectID)
     }
-    
+
     func resetLastSection() {
         setValue(nil, forKey: R.UserDefaults.lastSectionID)
     }
-    
+
     var projectStoreID: String? {
         return value(forKey: R.UserDefaults.projectStoreID) as? String
     }

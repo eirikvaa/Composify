@@ -458,6 +458,7 @@
 			buildPhases = (
 				61B2B7D52623F71A28422112 /* [CP] Check Pods Manifest.lock */,
 				E51B851720F4076700FB3D48 /* ShellScript */,
+				E523959D21C6919000D3004F /* ShellScript */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
@@ -640,6 +641,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		E523959D21C6919000D3004F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\nswiftformat .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

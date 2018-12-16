@@ -14,11 +14,11 @@ import UIKit
 extension UIView {
     static func findSuperView(withTag tag: Int, fromBottomView bottomView: UIView?) -> UIView? {
         var view: UIView? = bottomView
-        
-        while (view?.superview?.tag != tag) {
+
+        while view?.superview?.tag != tag {
             view = view?.superview
         }
-        
+
         // We stopped one level below the view we want, so return the superview.
         return view?.superview
     }

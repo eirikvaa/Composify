@@ -10,13 +10,11 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        
+
         return true
     }
 }
@@ -29,7 +27,7 @@ private extension AppDelegate {
             defaultService.foundationStore = ProjectStore()
         }
     }
-    
+
     func registerNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.barTintColor = R.Colors.mainColor
@@ -38,8 +36,7 @@ private extension AppDelegate {
         navigationBarAppearance.backgroundColor = UIColor.clear
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.white,
         ]
     }
 }
-

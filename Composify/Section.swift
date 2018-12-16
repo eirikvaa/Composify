@@ -15,7 +15,7 @@ class Section: Object {
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
     var recordingIDs = List<String>()
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
@@ -28,7 +28,7 @@ extension Section: DatabaseObject {}
 extension Section {
     var recordings: [Recording] {
         return recordingIDs
-            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0)}
+            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0) }
             .sorted()
     }
 }

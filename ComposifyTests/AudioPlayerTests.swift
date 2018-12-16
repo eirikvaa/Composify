@@ -6,67 +6,68 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import XCTest
-import Darwin
 @testable import Composify
+import Darwin
+import XCTest
 
 class AudioPlayerTests: XCTestCase {
-	var audioPlayer: AudioPlayerService!
-	var audioRecorder: AudioRecorderService!
-	var project: Project!
-	var section: Section!
-	var recording: Recording!
-	let userProjcts: URL = {
-		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-	}()
+    var audioPlayer: AudioPlayerService!
+    var audioRecorder: AudioRecorderService!
+    var project: Project!
+    var section: Section!
+    var recording: Recording!
+    let userProjcts: URL = {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
+    }()
+
     let fileManager = FileManager.default
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-		project = Project()
-		project.title = "UnitTestProject"
-		
-		section = Section()
-		section.title = "UnitTestSection"
-		section.project = project
-		
-		recording = Recording()
-		recording.title = "UnitTestRecording"
-		recording.section = section
-		recording.project = project
-		recording.fileExtension = FileSystemExtensions.caf.rawValue
-		recording.dateRecorded = Date()
-		
-		try! fileManager.save(project)
-		try! fileManager.save(section)
-		audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+        project = Project()
+        project.title = "UnitTestProject"
+
+        section = Section()
+        section.title = "UnitTestSection"
+        section.project = project
+
+        recording = Recording()
+        recording.title = "UnitTestRecording"
+        recording.section = section
+        recording.project = project
+        recording.fileExtension = FileSystemExtensions.caf.rawValue
+        recording.dateRecorded = Date()
+
+        try! fileManager.save(project)
+        try! fileManager.save(section)
+        audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
     }
-    
-	override func tearDown() {
-		super.tearDown()
-		project = nil
-		section = nil
-		recording = nil
-		
-		do {
-			let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path).filter { $0.hasPrefix("UnitTest") }
-			for file in unitTestProjects {
-				try fileManager.removeItem(at: userProjcts.appendingPathComponent(file))
-			}
-		} catch {
-			print(error.localizedDescription)
-		}
-	}
-	
+
+    override func tearDown() {
+        super.tearDown()
+        project = nil
+        section = nil
+        recording = nil
+
+        do {
+            let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path).filter { $0.hasPrefix("UnitTest") }
+            for file in unitTestProjects {
+                try fileManager.removeItem(at: userProjcts.appendingPathComponent(file))
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     func testPlayRecordedAudio() {
-		audioRecorder.record()
-		sleep(4)
-		audioRecorder.stop()
-		
+        audioRecorder.record()
+        sleep(4)
+        audioRecorder.stop()
+
         audioPlayer = try! AudioPlayerServiceFactory.defaultService(withObject: recording)
-		
-		XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
-		XCTAssertTrue(3...5 ~= recording.duration)
+
+        XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
+        XCTAssertTrue(3 ... 5 ~= recording.duration)
     }
 }

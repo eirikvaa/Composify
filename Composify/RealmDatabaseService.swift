@@ -12,14 +12,13 @@ import RealmSwift
 typealias ComposifyObject = Object & FileSystemObject
 
 struct RealmDatabaseService: DatabaseService {
-    
     var foundationStore: DatabaseFoundationObject? {
         get {
             return realm.objects(ProjectStore.self).first
         }
         set {
             guard let foundationStore = newValue as? ProjectStore else { return }
-            if !realm.isInWriteTransaction && !realm.objects(ProjectStore.self).contains(foundationStore) {
+            if !realm.isInWriteTransaction, !realm.objects(ProjectStore.self).contains(foundationStore) {
                 try! realm.write {
                     realm.add(foundationStore, update: true)
                 }
@@ -27,19 +26,19 @@ struct RealmDatabaseService: DatabaseService {
             }
         }
     }
-    
+
     let realm = try! Realm()
-    
+
     private init() {}
     static var sharedInstance: DatabaseService?
     static func defaultService() -> DatabaseService {
         if sharedInstance == nil {
             sharedInstance = RealmDatabaseService()
         }
-        
+
         return sharedInstance!
     }
-    
+
     mutating func save(_ object: DatabaseObject) {
         try! realm.write {
             switch object {
@@ -52,13 +51,13 @@ struct RealmDatabaseService: DatabaseService {
             default:
                 break
             }
-            
+
             if let realmObject = object as? Object {
                 realm.add(realmObject, update: true)
             }
         }
     }
-    
+
     mutating func delete(_ object: DatabaseObject) {
         let _self = self
         try! realm.write {
@@ -72,7 +71,7 @@ struct RealmDatabaseService: DatabaseService {
                     .forEach {
                         realm.delete($0.recordings)
                         realm.delete($0)
-                }
+                    }
                 realm.delete(project)
             case let section as Section:
                 if let index = section.project?.sectionIDs.index(of: section.id) {
@@ -90,7 +89,7 @@ struct RealmDatabaseService: DatabaseService {
             }
         }
     }
-    
+
     func rename(_ object: DatabaseObject, to newName: String) {
         try! realm.write {
             switch object {

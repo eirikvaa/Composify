@@ -12,7 +12,7 @@ import RealmSwift
 final class ProjectStore: Object {
     @objc dynamic var id = UUID().uuidString
     var _projectIDs = List<String>()
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
@@ -28,7 +28,7 @@ extension ProjectStore: DatabaseObject, DatabaseFoundationObject {
             newValue.forEach { _projectIDs.append($0) }
         }
     }
-    
+
     var identification: String {
         return id
     }

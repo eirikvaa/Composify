@@ -14,7 +14,7 @@ final class Project: Object {
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     var sectionIDs = List<String>()
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
@@ -38,17 +38,17 @@ extension Project {
             .compactMap { realm.object(ofType: Project.self, forPrimaryKey: $0) }
             .sorted() ?? []
     }
-    
+
     var sections: [Section] {
         return sectionIDs
             .compactMap { self.realm?.object(ofType: Section.self, forPrimaryKey: $0) }
             .sorted()
     }
-    
+
     var recordings: [Recording] {
         return sections
             .reduce([]) { (recordings: [Recording], section: Section) -> [Recording] in
-                return recordings + section.recordings
+                recordings + section.recordings
             }
             .sorted()
     }
@@ -80,12 +80,12 @@ extension Project {
     static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
         let project = Project()
         project.title = title
-        
+
         var databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
-        
+
         try FileManager.default.save(project)
-        
+
         completionHandler(project)
     }
 }

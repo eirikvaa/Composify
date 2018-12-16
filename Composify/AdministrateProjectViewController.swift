@@ -12,20 +12,20 @@ protocol AdministrateProjectDelegate: class {
     /// User aded a section to a project
     /// - parameter section: The section that was added
     func userDidAddSectionToProject(_ section: Section)
-    
+
     /// The user deleted a section from the project
     func userDidDeleteSectionFromProject()
-    
+
     /// The user edited the title of one or more sections and/or the project itself
     func userDidEditTitleOfObjects()
-    
+
     /// The user deleted the project
     func userDidDeleteProject()
 }
 
 class AdministrateProjectViewController: UIViewController {
-    
     // MARK: Properties
+
     lazy var tableViewDataSource = AdministrateProjectTableViewDataSource(administrateProjectViewController: self)
     lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
@@ -40,31 +40,33 @@ class AdministrateProjectViewController: UIViewController {
             tableView?.rowHeight = UIScreen.main.isSmall ? 44 : 55
         }
     }
+
     var currentProject: Project?
     var databaseService = DatabaseServiceFactory.defaultService
     private var fileManager = FileManager.default
     private(set) lazy var rowCount = [
-        0: 1,                                                   // Meta Information
-        1: (self.currentProject?.sectionIDs.count ?? 0) + 1,    // Sections
-        2: 1                                                    // Danger Zone
+        0: 1, // Meta Information
+        1: (self.currentProject?.sectionIDs.count ?? 0) + 1, // Sections
+        2: 1, // Danger Zone
     ]
     lazy var newValues: [HashableTuple: String] = [:]
     private(set) var headers: [String] = [
         R.Loc.metaInformationHeader,
         R.Loc.sectionsHeader,
-        R.Loc.dangerZoneHeader
+        R.Loc.dangerZoneHeader,
     ]
-    
+
     // MARK: View Controller Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = R.Loc.administrate
-        
+
         tableView = UITableView(frame: view.frame, style: .grouped)
-        
+
         newValues[HashableTuple((0, 0))] = currentProject?.title ?? ""
-        
+
         if let currentProject = currentProject {
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 if let section = sectionID.correspondingSection {
@@ -72,16 +74,16 @@ class AdministrateProjectViewController: UIViewController {
                 }
             }
         }
-        
+
         configureViews()
     }
-    
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
+
         tableView?.setEditing(editing, animated: animated)
     }
-    
+
     @objc func textFieldChange(_ textField: UITextField) {
         if let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell {
             if let indexPath = tableView?.indexPath(for: cell) {
@@ -94,32 +96,32 @@ class AdministrateProjectViewController: UIViewController {
 extension AdministrateProjectViewController {
     func deleteSection(_ sectionToDelete: Section?, then completionHandler: () -> Void) {
         guard let sectionToDelete = sectionToDelete else { return }
-        
+
         do {
-            try self.fileManager.delete(sectionToDelete)
+            try fileManager.delete(sectionToDelete)
         } catch {
-            self.handleError(error)
+            handleError(error)
         }
-        
+
         databaseService.delete(sectionToDelete)
-        
+
         completionHandler()
     }
-    
+
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
         let section = Section()
         section.title = R.Loc.section
         section.project = currentProject
-        
+
         do {
             try fileManager.save(section)
         } catch {
             handleError(error)
         }
-        
+
         databaseService.save(section)
         administrateProjectDelegate?.userDidAddSectionToProject(section)
-        
+
         completionHandler(section)
     }
 }
@@ -128,24 +130,24 @@ private extension AdministrateProjectViewController {
     func configureViews() {
         if let tableView = tableView {
             view.addSubview(tableView)
-            
+
             tableView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 tableView.topAnchor.constraint(equalTo: view.topAnchor),
                 tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
                 tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
         }
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }
-    
-    @objc func dismissVC(_ sender: UIBarButtonItem) {
+
+    @objc func dismissVC(_: UIBarButtonItem) {
         persistChanges()
         dismiss(animated: true)
     }
-    
+
     func persistChanges() {
         var hadChanges = false
         if newValues[HashableTuple((0, 0))] != currentProject?.title {
@@ -154,10 +156,10 @@ private extension AdministrateProjectViewController {
                 hadChanges = true
             }
         }
-        
+
         for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
             guard let section = sectionID.correspondingSection else { continue }
-            
+
             if newValues[HashableTuple((1, index))] != section.title {
                 if let newTitle = newValues[HashableTuple((1, index))], newTitle.hasPositiveCharacterCount {
                     databaseService.rename(section, to: newTitle)
@@ -165,7 +167,7 @@ private extension AdministrateProjectViewController {
                 }
             }
         }
-        
+
         if hadChanges {
             administrateProjectDelegate?.userDidEditTitleOfObjects()
         }

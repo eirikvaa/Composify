@@ -13,7 +13,7 @@ extension UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: R.Loc.ok, style: .default)
         alert.addAction(ok)
-        
+
         return alert
     }
 }

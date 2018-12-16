@@ -28,7 +28,7 @@ protocol DatabaseService {
     var foundationStore: DatabaseFoundationObject? { get set }
     static var sharedInstance: DatabaseService? { get set }
     static func defaultService() -> DatabaseService
-    
+
     mutating func save(_ object: DatabaseObject)
     mutating func delete(_ object: DatabaseObject)
     mutating func rename(_ object: DatabaseObject, to newName: String)
