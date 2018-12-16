@@ -23,7 +23,7 @@ struct RealmDatabaseService: DatabaseService {
                 try! realm.write {
                     realm.add(foundationStore, update: true)
                 }
-                UserDefaults.standard.set(foundationStore.identification, forKey: "projectStoreID")
+                UserDefaults.standard.set(foundationStore.identification, forKey: R.UserDefaults.projectStoreID)
             }
         }
     }

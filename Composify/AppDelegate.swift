@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        registerPageControlAppearance()
         
         return true
     }
@@ -25,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     func registerFoundationStoreObjectIfNeeded() {
         let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: Strings.UserDefaults.projectStoreID) as? String == nil {
+        if userDefaults.value(forKey: R.UserDefaults.projectStoreID) as? String == nil {
             var defaultService = DatabaseServiceFactory.defaultService
             defaultService.foundationStore = ProjectStore()
         }
@@ -33,7 +32,7 @@ private extension AppDelegate {
     
     func registerNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = .mainColor
+        navigationBarAppearance.barTintColor = R.Colors.mainColor
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.backgroundColor = UIColor.clear
@@ -41,12 +40,6 @@ private extension AppDelegate {
         navigationBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
-    }
-    
-    func registerPageControlAppearance() {
-        let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .darkGray
     }
 }
 

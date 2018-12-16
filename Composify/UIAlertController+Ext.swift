@@ -11,7 +11,7 @@ import UIKit
 extension UIAlertController {
     static func createErrorAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: .localized(.ok), style: .default)
+        let ok = UIAlertAction(title: R.Loc.ok, style: .default)
         alert.addAction(ok)
         
         return alert

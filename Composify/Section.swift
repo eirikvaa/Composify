@@ -17,7 +17,7 @@ class Section: Object {
     var recordingIDs = List<String>()
     
     override static func primaryKey() -> String? {
-        return "id"
+        return R.DatabaseKeys.id
     }
 }
 
@@ -36,7 +36,7 @@ extension Section {
 extension UserDefaults {
     func lastSection() -> Section? {
         guard let realm = try? Realm() else { return nil }
-        guard let id = UserDefaults.standard.string(forKey: "lastSectionID") else { return nil }
+        guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastSectionID) else { return nil }
         return realm.object(ofType: Section.self, forPrimaryKey: id)
     }
 }

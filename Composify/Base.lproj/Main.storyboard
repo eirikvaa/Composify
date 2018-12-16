@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rhT-eZ-Wgm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,85 +22,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
-                                <rect key="frame" x="0.0" y="122" width="375" height="402"/>
-                                <connections>
-                                    <segue destination="Dzl-1V-9Fq" kind="embed" id="xMb-ru-wLX"/>
-                                </connections>
+                                <rect key="frame" x="0.0" y="64" width="375" height="513"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
-                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="585" width="375" height="82"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-HO-ZNt">
-                                        <rect key="frame" x="16" y="8" width="343" height="66"/>
+                                        <rect key="frame" x="16" y="8" width="343" height="58"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" title="Start recording">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="recordAudio:" destination="mO8-Ib-bxa" eventType="touchUpInside" id="FNF-3C-InB"/>
+                                            <action selector="recordAudio:" destination="mO8-Ib-bxa" eventType="touchUpInside" id="9kW-Ty-bzw"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="top" constant="8" id="9gO-I7-jwT"/>
-                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="leading" secondItem="1Cc-PW-NLT" secondAttribute="leading" constant="16" id="QhX-ZM-3U7"/>
-                                    <constraint firstAttribute="bottom" secondItem="ibo-HO-ZNt" secondAttribute="bottom" constant="16" id="aIS-hW-Woz"/>
-                                    <constraint firstAttribute="trailing" secondItem="ibo-HO-ZNt" secondAttribute="trailing" constant="16" id="vJU-c9-hos"/>
-                                    <constraint firstAttribute="height" constant="90" id="vxM-CK-n9u"/>
+                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="leading" secondItem="1Cc-PW-NLT" secondAttribute="leading" constant="16" id="CGA-Sy-N7h"/>
+                                    <constraint firstAttribute="bottom" secondItem="ibo-HO-ZNt" secondAttribute="bottom" constant="16" id="LJ7-qi-hRW"/>
+                                    <constraint firstAttribute="trailing" secondItem="ibo-HO-ZNt" secondAttribute="trailing" constant="16" id="lPy-jq-7p6"/>
+                                    <constraint firstItem="ibo-HO-ZNt" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="top" constant="8" id="o9w-RI-ouA"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PHP-3k-8wT">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="DUm-dF-EHP"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="30" id="nT9-fh-q2k">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tym-dz-gQ7">
-                                <rect key="frame" x="16" y="532" width="343" height="37"/>
-                                <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="tym-dz-gQ7" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" id="2be-41-9p3"/>
-                            <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="PHP-3k-8wT" secondAttribute="bottom" constant="8" id="4Ai-mk-dtB"/>
-                            <constraint firstItem="nUi-15-pxI" firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="5A3-32-jIT"/>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="7fp-rw-jh7"/>
-                            <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="CRD-UW-N1Y"/>
-                            <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="PHP-3k-8wT" secondAttribute="leading" id="Kxl-n9-j63"/>
-                            <constraint firstItem="PHP-3k-8wT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="M4d-Ty-AQY"/>
-                            <constraint firstItem="tym-dz-gQ7" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leadingMargin" id="XVA-5k-QYA"/>
-                            <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="aK9-wO-6tF"/>
-                            <constraint firstAttribute="trailing" secondItem="PHP-3k-8wT" secondAttribute="trailing" id="aa0-Jv-m2q"/>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="tym-dz-gQ7" secondAttribute="bottom" constant="8" id="noh-Cv-DYH"/>
-                            <constraint firstItem="PHP-3k-8wT" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="vfp-iD-dQP"/>
-                            <constraint firstItem="tym-dz-gQ7" firstAttribute="trailing" secondItem="2v3-Us-6Gb" secondAttribute="trailingMargin" id="zpP-1C-CQD"/>
+                            <constraint firstAttribute="trailing" secondItem="nUi-15-pxI" secondAttribute="trailing" id="1Td-2L-sMg"/>
+                            <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="De6-JY-Riu"/>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" symbolic="YES" id="Lao-eN-HCz"/>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="ewi-pd-juK"/>
+                            <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="eyT-r9-XSy"/>
+                            <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="tpl-Or-8aW"/>
+                            <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="up9-ju-10F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Project 1 ▸" id="l8w-mm-O0H">
                         <barButtonItem key="leftBarButtonItem" title="Administrate" id="A5F-F3-Fdc">
                             <connections>
-                                <action selector="showMenu:" destination="mO8-Ib-bxa" id="Fsb-Px-hv1"/>
+                                <action selector="administrateProject:" destination="mO8-Ib-bxa" id="hZV-Ga-z2a"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="administerBarButton" destination="A5F-F3-Fdc" id="y2S-5G-yiM"/>
-                        <outlet property="collectionView" destination="PHP-3k-8wT" id="Vk2-2S-5z7"/>
                         <outlet property="containerView" destination="nUi-15-pxI" id="bXY-f0-07s"/>
-                        <outlet property="pageControl" destination="tym-dz-gQ7" id="qMC-KI-qbp"/>
                         <outlet property="recordAudioButton" destination="ibo-HO-ZNt" id="mVS-2h-thc"/>
                         <outlet property="recordAudioView" destination="1Cc-PW-NLT" id="J2O-Lu-y3h"/>
                     </connections>
@@ -126,32 +94,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gyj-bY-H2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1683.75" y="-698.23943661971828"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="hGx-L7-nKe">
-            <objects>
-                <viewController id="Dzl-1V-9Fq" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="i8g-ri-hoJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="keX-55-eJD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pxY-3f-4Qg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gbw-T7-ayy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3613" y="-699"/>
-        </scene>
-        <!--contentPageViewController-->
-        <scene sceneID="WFN-ba-pHK">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="contentPageViewController" storyboardName="Recording" referencedIdentifier="contentPageViewController" id="Le2-Hg-74I" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tal-3G-qg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4382" y="-701"/>
         </scene>
     </scenes>
 </document>
