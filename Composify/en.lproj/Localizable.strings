@@ -74,9 +74,6 @@
 /* Title when application is unable to configure a recording session. */
 "recordings.error.unable-to-configure-recording-session.alert.title" = "The application was unable to configure a recording session!";
 
-/* Title when application is unable to configure a recording session. */
-"recordings.error.unable-to-configure-recording-session.alert.title" = "recordings.error.unable-to-configure-recording-session.alert.title";
-
 /* Message when trying to delete object from filesystem. */
 "recordings.error.unable-to-delete-object.alert.message" = "The application was unable to delete the object named %@.";
 
@@ -84,10 +81,10 @@
 "recordings.error.unable-to-delete-object.alert.title" = "Unable to delete object!";
 
 /* Message when the audio player was unable to play the recording. */
-"recordings.error.unable-to-find-recording.alert.message" = "recordings.error.unable-to-find-recording.alert.message";
+"recordings.error.unable-to-find-recording.alert.message" = "The application was unable to find the recording!";
 
 /* Title when the audio player was unable to play the recording. */
-"recordings.error.unable-to-find-recording.alert.title" = "recordings.error.unable-to-find-recording.alert.title";
+"recordings.error.unable-to-find-recording.alert.title" = "Unable to find recording!";
 
 /* Message when application was unable to save the recording. */
 "recordings.error.unable-to-save-recording.alert.message" = "The application was unable to save the object named %@.";
