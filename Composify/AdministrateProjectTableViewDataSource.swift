@@ -153,4 +153,9 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             destinationSection?.index = sourceIndexPath.row
         }
     }
+
+    func tableView(_: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Only the section that contains sections should contain movable cells
+        return indexPath.section == 1
+    }
 }
