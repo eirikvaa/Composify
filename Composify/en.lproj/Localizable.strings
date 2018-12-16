@@ -74,6 +74,9 @@
 /* Title when application is unable to configure a recording session. */
 "recordings.error.unable-to-configure-recording-session.alert.title" = "The application was unable to configure a recording session!";
 
+/* Title when application is unable to configure a recording session. */
+"recordings.error.unable-to-configure-recording-session.alert.title" = "recordings.error.unable-to-configure-recording-session.alert.title";
+
 /* Message when trying to delete object from filesystem. */
 "recordings.error.unable-to-delete-object.alert.message" = "The application was unable to delete the object named %@.";
 

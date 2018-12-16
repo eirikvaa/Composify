@@ -26,7 +26,6 @@ class SectionViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    // FIXME: setEditing is never called.
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		tableView.setEditing(editing, animated: animated)

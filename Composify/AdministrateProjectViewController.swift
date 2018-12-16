@@ -14,15 +14,12 @@ protocol AdministrateProjectDelegate: class {
     func userDidAddSectionToProject(_ section: Section)
     
     /// The user deleted a section from the project
-    /// TODO: Possibly pass title of string that was deleted in case this should be used
     func userDidDeleteSectionFromProject()
     
     /// The user edited the title of one or more sections and/or the project itself
-    /// TODO: Possibly provide the old value
     func userDidEditTitleOfObjects()
     
     /// The user deleted the project
-    /// TODO: Possibly provide the title of the deleted project
     func userDidDeleteProject()
 }
 
