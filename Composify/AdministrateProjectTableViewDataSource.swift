@@ -156,6 +156,10 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
 
     func tableView(_: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Only the section that contains sections should contain movable cells
-        return indexPath.section == 1
+        // Also we don't want to be able to reorder the last row in that section,
+        // because that's the green adding row. Also it doesn't make sense to show
+        // the re-ordering controls if there is only a single section.
+        let numberOfSections = administrateProjectViewController.currentProject?.sections.count ?? 0
+        return indexPath.section == 1 && indexPath.row < numberOfSections && numberOfSections > 1
     }
 }
