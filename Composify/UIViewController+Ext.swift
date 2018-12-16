@@ -65,4 +65,14 @@ extension UIViewController {
         let alert = UIAlertController.createErrorAlert(title: title, message: message)
         present(alert, animated: true)
     }
+
+    static func onboardingRootViewController() -> OnboardingRootViewController {
+        let storyboard = UIStoryboard.onboardingStoryboard()
+        return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingRoot) as! OnboardingRootViewController
+    }
+
+    static func onboardingPageViewController() -> OnboardingViewController {
+        let storyboard = UIStoryboard.onboardingStoryboard()
+        return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingPage) as! OnboardingViewController
+    }
 }

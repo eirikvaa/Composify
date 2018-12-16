@@ -45,6 +45,12 @@
 		E582894221C6A32500E438B5 /* DatabaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894121C6A32500E438B5 /* DatabaseObject.swift */; };
 		E582894421C6A33600E438B5 /* DatabaseFoundationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894321C6A33600E438B5 /* DatabaseFoundationObject.swift */; };
 		E582894621C6A36D00E438B5 /* ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894521C6A36D00E438B5 /* ComposifyObject.swift */; };
+		E582894921C6BE9D00E438B5 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582894821C6BE9D00E438B5 /* Onboarding.storyboard */; };
+		E582894B21C6BF1500E438B5 /* OboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894A21C6BF1500E438B5 /* OboardingViewController.swift */; };
+		E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894C21C6C59800E438B5 /* OnboardingRootViewController.swift */; };
+		E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */; };
+		E582895121C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */; };
+		E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */; };
 		E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E587605D20F24A600050C0BD /* ErrorViewController.swift */; };
 		E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71420F7B07300CF51FC /* DatabaseService.swift */; };
 		E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */; };
@@ -145,6 +151,12 @@
 		E582894121C6A32500E438B5 /* DatabaseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObject.swift; sourceTree = "<group>"; };
 		E582894321C6A33600E438B5 /* DatabaseFoundationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFoundationObject.swift; sourceTree = "<group>"; };
 		E582894521C6A36D00E438B5 /* ComposifyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyObject.swift; sourceTree = "<group>"; };
+		E582894821C6BE9D00E438B5 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		E582894A21C6BF1500E438B5 /* OboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OboardingViewController.swift; sourceTree = "<group>"; };
+		E582894C21C6C59800E438B5 /* OnboardingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRootViewController.swift; sourceTree = "<group>"; };
+		E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Storyboards.swift"; sourceTree = "<group>"; };
+		E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+ViewControllerIdentifiers.swift"; sourceTree = "<group>"; };
+		E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		E587605D20F24A600050C0BD /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		E589E71420F7B07300CF51FC /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceFactory.swift; sourceTree = "<group>"; };
@@ -247,6 +259,8 @@
 				E523959621C6820700D3004F /* R+UserDefaults.swift */,
 				E523959821C6821C00D3004F /* R+Colors.swift */,
 				E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */,
+				E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */,
+				E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -264,6 +278,7 @@
 				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
 				E516FFB22125544C0030D94A /* UIScreen+Ext.swift */,
 				E5089E3A21C4128A0026478C /* UIColor+Ext.swift */,
+				E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +327,7 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
+				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E53C016C2124275900F98E65 /* Extensions */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
 				E5BD121D21126684000ED703 /* AdministrateProject */,
@@ -386,6 +402,15 @@
 				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		E582894721C6BE6D00E438B5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E582894C21C6C59800E438B5 /* OnboardingRootViewController.swift */,
+				E582894A21C6BF1500E438B5 /* OboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		E589E71320F7B05800CF51FC /* Common Interfaces */ = {
@@ -473,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */,
+				E582894821C6BE9D00E438B5 /* Onboarding.storyboard */,
 				E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -572,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */,
+				E582894921C6BE9D00E438B5 /* Onboarding.storyboard in Resources */,
 				E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */,
 				E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */,
 				E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */,
@@ -708,12 +735,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E582894B21C6BF1500E438B5 /* OboardingViewController.swift in Sources */,
 				E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */,
 				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
 				E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */,
 				E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */,
 				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
+				E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */,
 				E53C0174212427D000F98E65 /* String+Ext.swift in Sources */,
 				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
@@ -726,6 +755,7 @@
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
 				E582894621C6A36D00E438B5 /* ComposifyObject.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
+				E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
@@ -738,6 +768,7 @@
 				E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */,
 				E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
+				E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E516FFB32125544C0030D94A /* UIScreen+Ext.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
@@ -745,6 +776,7 @@
 				E582894421C6A33600E438B5 /* DatabaseFoundationObject.swift in Sources */,
 				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,
 				E582893E21C6A2EE00E438B5 /* AudioPlayerServiceError.swift in Sources */,
+				E582895121C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift in Sources */,
 				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E5E6DC8121C445650061254B /* R.swift in Sources */,

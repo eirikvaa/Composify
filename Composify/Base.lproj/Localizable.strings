@@ -65,6 +65,27 @@
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Stop recording";
 
+/* Next button title when at the last page */
+"onboarding.next-button-title.dismiss" = "Dismiss";
+
+/* Next button title when not at the last page */
+"onboarding.next-button-title.next" = "Next";
+
+/* onboarding.page1 */
+"onboarding.page1" = "Onboarding1";
+
+/* onboarding.page2 */
+"onboarding.page2" = "Onboarding2";
+
+/* onboarding.page3 */
+"onboarding.page3" = "Onboarding3";
+
+/* onboarding.page4 */
+"onboarding.page4" = "Onboarding4";
+
+/* Title of skip button */
+"onboarding.skipButton.title" = "Skip";
+
 /* Message when recording can't be found in the file system. */
 "recordings.error.missing-recording.alert.message" = "It seems the recording can't be found in the filesystem.";
 

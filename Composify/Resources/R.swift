@@ -27,4 +27,10 @@ struct R {
 
     /// Database keys
     struct DatabaseKeys {}
+
+    /// Storyboards
+    struct Storyboards {}
+
+    /// View controller identifiers
+    struct ViewControllerIdentifiers {}
 }

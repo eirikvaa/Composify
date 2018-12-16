@@ -65,6 +65,27 @@
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Avslutt opptak";
 
+/* Next button title when at the last page */
+"onboarding.next-button-title.dismiss" = "Fullfør";
+
+/* Next button title when not at the last page */
+"onboarding.next-button-title.next" = "Neste";
+
+/* onboarding.page1 */
+"onboarding.page1" = "Onboarding1NB";
+
+/* onboarding.page2 */
+"onboarding.page2" = "Onboarding2NB";
+
+/* onboarding.page3 */
+"onboarding.page3" = "Onboarding3NB";
+
+/* onboarding.page4 */
+"onboarding.page4" = "Onboarding4NB";
+
+/* Title of skip button */
+"onboarding.skipButton.title" = "Hopp over";
+
 /* Message when recording can't be found in the file system. */
 "recordings.error.missing-recording.alert.message" = "Opptaket ble ikke funnet i filsystemet!";
 

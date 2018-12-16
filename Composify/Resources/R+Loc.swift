@@ -17,6 +17,39 @@ extension R.Loc {
     )
 }
 
+// MARK: Onboarding
+
+extension R.Loc {
+    static let onboardingSkipButtonTitle = NSLocalizedString(
+        "onboarding.skipButton.title",
+        comment: "Title of skip button"
+    )
+    static let onboardingNextButtonTitleNext = NSLocalizedString(
+        "onboarding.next-button-title.next",
+        comment: "Next button title when not at the last page"
+    )
+    static let onboardingNextButtonTitleDismiss = NSLocalizedString(
+        "onboarding.next-button-title.dismiss",
+        comment: "Next button title when at the last page"
+    )
+    static let onboardingPage1 = NSLocalizedString(
+        "onboarding.page1",
+        comment: "onboarding.page1"
+    )
+    static let onboardingPage2 = NSLocalizedString(
+        "onboarding.page2",
+        comment: "onboarding.page2"
+    )
+    static let onboardingPage3 = NSLocalizedString(
+        "onboarding.page3",
+        comment: "onboarding.page3"
+    )
+    static let onboardingPage4 = NSLocalizedString(
+        "onboarding.page4",
+        comment: "onboarding.page4"
+    )
+}
+
 // MARK: Project localizations
 
 extension R.Loc {

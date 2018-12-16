@@ -58,6 +58,8 @@ class LibraryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        possiblyShowOnboarding()
+
         currentProjectID = databaseService.foundationStore?.projectIDs.first
         currentSectionID = currentProject?.sectionIDs.first
 
@@ -271,6 +273,17 @@ extension LibraryViewController {
             pagingViewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             pagingViewController.view.topAnchor.constraint(equalTo: containerView.topAnchor),
         ])
+    }
+
+    /// Possibly show onboarding
+    func possiblyShowOnboarding() {
+        let userDefaults = UserDefaults.standard
+        let hasSeenOnboarding = userDefaults.bool(forKey: R.UserDefaults.hasSeenOnboarding)
+
+        if !hasSeenOnboarding {
+            let onboardingRootViewController = UIViewController.onboardingRootViewController()
+            present(onboardingRootViewController, animated: true)
+        }
     }
 }
 

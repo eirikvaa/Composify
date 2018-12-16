@@ -16,7 +16,6 @@ extension SectionViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.libraryRecordingCell, for: indexPath) as? RecordingTableViewCell else {
             return UITableViewCell()
         }
