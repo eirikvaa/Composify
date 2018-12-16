@@ -8,23 +8,6 @@
 
 import Foundation
 
-/// Errors for errors occurring before or during playing a playable object.
-enum AudioPlayerServiceError: Error {
-    /// The playable object was not found in the file system.
-    case unableToFindPlayable
-    case unableToConfigurePlayingSession
-}
-
-/// An `AudioPlayable` object is something that can be played, and corresponds
-/// to recordings.
-protocol AudioPlayable {
-    var id: String { get }
-    var title: String { get set }
-    var url: URL { get }
-    var dateRecorded: Date { get }
-    var fileExtension: String { get set }
-}
-
 /// An `AudioPlayerService` performs different actions with playable objects.
 protocol AudioPlayerService {
     init(_ object: AudioPlayable) throws

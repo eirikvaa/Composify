@@ -9,8 +9,6 @@
 import Foundation
 import RealmSwift
 
-typealias ComposifyObject = Object & FileSystemObject
-
 struct RealmDatabaseService: DatabaseService {
     var foundationStore: DatabaseFoundationObject? {
         get {
