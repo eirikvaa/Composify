@@ -17,7 +17,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = .secondaryColor
+            recordAudioButton.backgroundColor = R.Colors.secondaryColor
         }
     }
     @IBOutlet weak var recordAudioView: UIView!
@@ -78,22 +78,22 @@ class LibraryViewController: UIViewController {
 extension LibraryViewController {
     @IBAction func administrateProject(_ sender: UIBarButtonItem) {
         var administrate: UIAlertAction?
-        let alert = UIAlertController(title: .localized(.menu), message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: R.Loc.menu, message: nil, preferredStyle: .actionSheet)
         if let currentProject = currentProject {
-            administrate = UIAlertAction(title: .localized(.administrateProject), style: .default) { _ in
+            administrate = UIAlertAction(title: R.Loc.administrateProject, style: .default) { _ in
                 self.presentAdministrateViewController(project: currentProject)
             }
         }
         
-        let addProject = UIAlertAction(title: .localized(.addProject), style: .default) { _ in
-            let addProjectAlert = UIAlertController(title: .localized(.addProject), message: nil, preferredStyle: .alert)
+        let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
+            let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
             addProjectAlert.addTextField { textField in
                 textField.autocapitalizationType = .words
-                textField.placeholder = .localized(.projectTitle)
+                textField.placeholder = R.Loc.projectTitle
                 textField.returnKeyType = .done
                 textField.clearButtonMode = .whileEditing
             }
-            let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
+            let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {
                     do {
                         try Project.createProject(withTitle: projectTitle, then: { project in
@@ -106,7 +106,7 @@ extension LibraryViewController {
                     }
                 }
             })
-            let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
+            let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
             addProjectAlert.addAction(save)
             addProjectAlert.addAction(cancel)
             
@@ -115,14 +115,14 @@ extension LibraryViewController {
         
         projects.forEach { project in
             if project != currentProject {
-                let projectAction = UIAlertAction(title: .localizedLocale(.showProject, project.title), style: .default) { _ in
+                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { _ in
                     self.setCurrentProject(project)
                 }
                 alert.addAction(projectAction)
             }
         }
         
-        let cancel = UIAlertAction(title: .localized(.cancel), style: .cancel)
+        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
         if let administrate = administrate {
             alert.addAction(administrate)
         }
@@ -138,7 +138,7 @@ extension LibraryViewController {
             guard let currentSection = currentSection else { return }
             
             recording = Recording()
-            recording?.title = .localized(.recording)
+            recording?.title = R.Loc.recording
             recording?.project = currentProject
             recording?.section = currentSection
             recording?.fileExtension = "caf"
@@ -152,7 +152,7 @@ extension LibraryViewController {
             }
             
             audioRecorderDefaultService?.record()
-            recordAudioButton.setTitle(.localized(.stopRecording), for: .normal)
+            recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
             return
         }
         
@@ -169,7 +169,7 @@ extension LibraryViewController {
         
         recording = nil
         audioRecorderDefaultService = nil
-        recordAudioButton.setTitle(.localized(.startRecording), for: .normal)
+        recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
         
         updateUI()
     }
@@ -186,7 +186,7 @@ extension LibraryViewController {
     }
     
     func setupUI() {
-        navigationItem.leftBarButtonItem?.title = .localized(.menu)
+        navigationItem.leftBarButtonItem?.title = R.Loc.menu
     }
     
     /// Update the user interface, mainly concerned with updating the state
@@ -217,18 +217,18 @@ extension LibraryViewController {
         case .notEmpty:
             break
         case .noProjects:
-            errorViewController = ErrorViewController(labelText: .localized(.noProjects))
+            errorViewController = ErrorViewController(labelText: R.Loc.noProjects)
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
         case .noSections:
-            errorViewController = ErrorViewController(labelText: .localized(.noSections))
+            errorViewController = ErrorViewController(labelText: R.Loc.noSections)
             if let errorVieController = errorViewController {
                 add(errorVieController)
             }
         }
         
-        navigationItem.title = currentProject?.title ?? .localized(.composify)
+        navigationItem.title = currentProject?.title ?? R.Loc.composify
     }
     
     /// State enum for the user interface
@@ -251,7 +251,7 @@ extension LibraryViewController {
     /// Configure the paging view controller
     func configurePagingViewController() {
         pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
-        pagingViewController.indicatorColor = .mainColor
+        pagingViewController.indicatorColor = R.Colors.mainColor
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
         

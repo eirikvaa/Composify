@@ -10,8 +10,8 @@ import UIKit
 
 extension SectionViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		let edit = UITableViewRowAction(style: .default, title: .localized(.edit)) { (_, indexPath) in
-            let edit = UIAlertController(title: .localized(.edit), message: nil, preferredStyle: .alert)
+		let edit = UITableViewRowAction(style: .default, title: R.Loc.edit) { (_, indexPath) in
+            let edit = UIAlertController(title: R.Loc.edit, message: nil, preferredStyle: .alert)
 
 			edit.addTextField {
 				let recording = self.section?.recordings[indexPath.row]
@@ -19,7 +19,7 @@ extension SectionViewController: UITableViewDelegate {
 				$0.autocapitalizationType = .words
 			}
 
-			let save = UIAlertAction(title: .localized(.save), style: .default, handler: { _ in
+			let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
 				let recording = self.section?.recordingIDs[indexPath.row].correspondingRecording
 				if let title = edit.textFields?.first?.text, let recording = recording {
                     self.databaseService.rename(recording, to: title)
@@ -27,7 +27,7 @@ extension SectionViewController: UITableViewDelegate {
                     self.setEditing(false, animated: true)
 				}
 			})
-			let cancel = UIAlertAction(title: .localized(.cancel), style: .default, handler: nil)
+			let cancel = UIAlertAction(title: R.Loc.cancel, style: .default, handler: nil)
 
 			edit.addAction(save)
 			edit.addAction(cancel)
@@ -35,7 +35,7 @@ extension SectionViewController: UITableViewDelegate {
 			self.present(edit, animated: true, completion: nil)
 		}
 
-		let delete = UITableViewRowAction(style: .destructive, title: .localized(.delete)) { (_, indexPath) in
+		let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { (_, indexPath) in
 			if let currentSection = self.section,
                 let recording = currentSection.recordingIDs[indexPath.row].correspondingRecording {
                 
@@ -52,8 +52,8 @@ extension SectionViewController: UITableViewDelegate {
 			}
 		}
 
-		edit.backgroundColor = .mainColor
-		delete.backgroundColor = .delete
+		edit.backgroundColor = R.Colors.mainColor
+		delete.backgroundColor = R.Colors.delete
 
 		return [edit, delete]
 	}

@@ -17,7 +17,7 @@ extension SectionViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(#function)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.recordingCell, for: indexPath) as? RecordingTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.libraryRecordingCell, for: indexPath) as? RecordingTableViewCell else {
             return UITableViewCell()
         }
         
@@ -34,7 +34,7 @@ extension SectionViewController: UITableViewDataSource {
         // so the date of recording is used instead.
         cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateRecorded.description
 		cell.playButton.alpha = 1
-        cell.playButton.setImage(isCurrentlyPlayingRecording ? .pause : .play, for: .normal)
+        cell.playButton.setImage(isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play, for: .normal)
         
 		return cell
 	}

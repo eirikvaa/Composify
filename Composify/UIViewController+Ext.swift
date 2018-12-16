@@ -34,28 +34,28 @@ extension UIViewController {
         if let error = error as? AudioPlayerServiceError {
             switch error {
             case .unableToConfigurePlayingSession:
-                title = .localized(.missingRecordingAlertTitle)
-                message = .localized(.missingRecordingAlertMessage)
+                title = R.Loc.missingRecordingAlertTitle
+                message = R.Loc.missingRecordingAlertMessage
             case .unableToFindPlayable:
-                title = .localized(.unableToFindRecordingTitle)
-                message = .localized(.unableToFindRecordingMessage)
+                title = R.Loc.unableToFindRecordingTitle
+                message = R.Loc.unableToFindRecordingMessage
             }
         } else if let error = error as? FileManagerError {
             switch error {
             case .unableToSaveObject(let object):
                 let objectTitle = object.getTitle() ?? ""
-                title = .localized(.unableToSaveObjectTitle)
-                message = .localizedLocale(.unableToSaveObjectMessage, objectTitle)
+                title = R.Loc.unableToSaveObjectTitle
+                message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
             case .unableToDeleteObject(let object):
                 let objectTitle = object.getTitle() ?? ""
-                title = .localized(.unableToDeleteObjectTitle)
-                message = .localizedLocale(.unableToDeleteObjectMessage, objectTitle)
+                title = R.Loc.unableToDeleteObjectTitle
+                message = R.Loc.unableToDeleteObjectMessage(withTitle: objectTitle)
             }
         } else if let error = error as? AudioRecorderServiceError {
             switch error {
             case .unableToConfigureRecordingSession:
-                title = .localized(.unableToConfigureRecordingSessionTitle)
-                message = .localized(.unableToConfigureRecordingSessionMessage)
+                title = R.Loc.unableToConfigureRecordingSessionTitle
+                message = R.Loc.unableToConfigureRecordingSessionMessage
             }
         } else {
             print(error.localizedDescription)

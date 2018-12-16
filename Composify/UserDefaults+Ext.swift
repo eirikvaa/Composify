@@ -10,14 +10,14 @@ import Foundation
 
 extension UserDefaults {
     func resetLastProject() {
-        setValue(nil, forKey: Strings.UserDefaults.lastProjectID)
+        setValue(nil, forKey: R.UserDefaults.lastProjectID)
     }
     
     func resetLastSection() {
-        setValue(nil, forKey: Strings.UserDefaults.lastSectionID)
+        setValue(nil, forKey: R.UserDefaults.lastSectionID)
     }
     
     var projectStoreID: String? {
-        return value(forKey: Strings.UserDefaults.projectStoreID) as? String
+        return value(forKey: R.UserDefaults.projectStoreID) as? String
     }
 }

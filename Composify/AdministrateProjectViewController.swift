@@ -36,9 +36,9 @@ class AdministrateProjectViewController: UIViewController {
         didSet {
             tableView?.delegate = tableViewDelegate
             tableView?.dataSource = tableViewDataSource
-            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: Strings.Cells.administerCell)
-            tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: Strings.Cells.deleteCell)
-            tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: Strings.Cells.cell)
+            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
+            tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
+            tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
             tableView?.setEditing(true, animated: false)
             tableView?.rowHeight = UIScreen.main.isSmall ? 44 : 55
         }
@@ -53,16 +53,16 @@ class AdministrateProjectViewController: UIViewController {
     ]
     lazy var newValues: [HashableTuple: String] = [:]
     private(set) var headers: [String] = [
-        .localized(.metaInformationHeader),
-        .localized(.sectionsHeader),
-        .localized(.dangerZoneHeader)
+        R.Loc.metaInformationHeader,
+        R.Loc.sectionsHeader,
+        R.Loc.dangerZoneHeader
     ]
     
     // MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = .localized(.administrate)
+        navigationItem.title = R.Loc.administrate
         
         tableView = UITableView(frame: view.frame, style: .grouped)
         
@@ -111,7 +111,7 @@ extension AdministrateProjectViewController {
     
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
         let section = Section()
-        section.title = .localized(.section)
+        section.title = R.Loc.section
         section.project = currentProject
         
         do {

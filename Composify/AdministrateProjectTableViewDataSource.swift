@@ -27,7 +27,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.cell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateSectionCell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
         
         cell.textField.returnKeyType = .done
         cell.tag = 1234
@@ -46,7 +46,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         case (1, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
-                cell.textField.text = .localized(.addSection)
+                cell.textField.text = R.Loc.addSection
             } else {
                 if let section = administrateProjectViewController.currentProject?.sectionIDs[indexPath.row].correspondingSection {
                     cell.textField.placeholder = section.title
@@ -56,8 +56,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 }
             }
         case (2, _):
-            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: Strings.Cells.deleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
-            deleteCell.buttonTitle = .localized(.deleteProejct)
+            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
+            deleteCell.buttonTitle = R.Loc.deleteProejct
             deleteCell.action = {
                 guard let currentProject = self.administrateProjectViewController.currentProject else { return }
                 
