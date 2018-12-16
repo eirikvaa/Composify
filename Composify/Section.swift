@@ -11,11 +11,12 @@ import RealmSwift
 
 class Section: Object {
     @objc dynamic var id = UUID().uuidString
+    @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
     var recordingIDs = List<String>()
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
@@ -28,7 +29,7 @@ extension Section: DatabaseObject {}
 extension Section {
     var recordings: [Recording] {
         return recordingIDs
-            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0)}
+            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0) }
             .sorted()
     }
 }
@@ -50,7 +51,7 @@ extension Section: FileSystemObject {
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
-        return lhs.title <= rhs.title
+        return lhs.index <= rhs.index
     }
 }
 

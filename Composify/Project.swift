@@ -14,7 +14,7 @@ final class Project: Object {
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     var sectionIDs = List<String>()
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
@@ -38,19 +38,34 @@ extension Project {
             .compactMap { realm.object(ofType: Project.self, forPrimaryKey: $0) }
             .sorted() ?? []
     }
-    
+
     var sections: [Section] {
         return sectionIDs
             .compactMap { self.realm?.object(ofType: Section.self, forPrimaryKey: $0) }
             .sorted()
     }
-    
+
     var recordings: [Recording] {
         return sections
             .reduce([]) { (recordings: [Recording], section: Section) -> [Recording] in
-                return recordings + section.recordings
+                recordings + section.recordings
             }
             .sorted()
+    }
+
+    /// Get the section that corresponds to the passed-in index
+    /// - parameter index: An index that won't necessarily correspond to the
+    /// order that sections were created.
+    func getSection(at index: Int) -> Section? {
+        var section: Section?
+        for sectionID in sectionIDs {
+            let _section = sectionID.correspondingSection
+            if _section?.index == index {
+                section = _section
+            }
+        }
+
+        return section
     }
 }
 
@@ -80,12 +95,17 @@ extension Project {
     static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
         let project = Project()
         project.title = title
-        
+
         var databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
-        
+
         try FileManager.default.save(project)
-        
+
         completionHandler(project)
+    }
+
+    var nextSectionIndex: Int {
+        let lastSectionIndex = sectionIDs.last?.correspondingSection?.index ?? 0
+        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 }

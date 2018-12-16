@@ -6,56 +6,56 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 /**
-A class for playing audio from Recording objects.
-- Author: Eirik Vale Aase
-*/
+ A class for playing audio from Recording objects.
+ - Author: Eirik Vale Aase
+ */
 
 class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
     var audioDidFinishBlock: ((Bool) -> Void)?
-    
+
     private var player: AVAudioPlayer?
     private let session = AVAudioSession.sharedInstance()
     private var playableObject: AudioPlayable?
-    
-    convenience required init(_ object: AudioPlayable) throws {
+
+    required convenience init(_ object: AudioPlayable) throws {
         self.init()
         try setup(withObject: object)
     }
-    
+
     func play() {
         player?.play()
     }
-    
+
     func pause() {
         player?.pause()
     }
-    
+
     func stop() {
         player?.stop()
     }
-    
+
     func setup(withObject object: AudioPlayable) throws {
         guard player == nil else { return }
         guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.unableToFindPlayable }
-        
+
         do {
             try session.setCategory(.playback, mode: .default, options: [])
             player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
         } catch {
             throw AudioPlayerServiceError.unableToConfigurePlayingSession
         }
-        
+
         player?.prepareToPlay()
         player?.delegate = self
-        
-        self.playableObject = object
+
+        playableObject = object
     }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+
+    func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully flag: Bool) {
         audioDidFinishBlock?(flag)
     }
 }

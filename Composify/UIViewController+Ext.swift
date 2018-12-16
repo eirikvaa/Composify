@@ -15,22 +15,22 @@ extension UIViewController {
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
-    
+
     /// Remove a view controller from another view controller.
     func remove() {
         guard parent != nil else {
             return
         }
-        
+
         willMove(toParent: nil)
         removeFromParent()
         view.removeFromSuperview()
     }
-    
+
     func handleError(_ error: Error) {
         let title: String
         let message: String
-        
+
         if let error = error as? AudioPlayerServiceError {
             switch error {
             case .unableToConfigurePlayingSession:
@@ -42,11 +42,11 @@ extension UIViewController {
             }
         } else if let error = error as? FileManagerError {
             switch error {
-            case .unableToSaveObject(let object):
+            case let .unableToSaveObject(object):
                 let objectTitle = object.getTitle() ?? ""
                 title = R.Loc.unableToSaveObjectTitle
                 message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-            case .unableToDeleteObject(let object):
+            case let .unableToDeleteObject(object):
                 let objectTitle = object.getTitle() ?? ""
                 title = R.Loc.unableToDeleteObjectTitle
                 message = R.Loc.unableToDeleteObjectMessage(withTitle: objectTitle)
@@ -61,8 +61,18 @@ extension UIViewController {
             print(error.localizedDescription)
             return
         }
-        
+
         let alert = UIAlertController.createErrorAlert(title: title, message: message)
         present(alert, animated: true)
+    }
+
+    static func onboardingRootViewController() -> OnboardingRootViewController {
+        let storyboard = UIStoryboard.onboardingStoryboard()
+        return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingRoot) as! OnboardingRootViewController
+    }
+
+    static func onboardingPageViewController() -> OnboardingViewController {
+        let storyboard = UIStoryboard.onboardingStoryboard()
+        return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingPage) as! OnboardingViewController
     }
 }

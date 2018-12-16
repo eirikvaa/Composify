@@ -6,46 +6,45 @@
 //  Copyright © 2017 Eirik Vale Aase. All rights reserved.
 //
 
-import UIKit
 import Parchment
+import UIKit
 
 class LibraryCollectionViewCell: PagingCell {
-    
     lazy var sectionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         NSLayoutConstraint.activate([
             sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            sectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            sectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
-    
+
     fileprivate func configure() {
         sectionLabel.backgroundColor = .white
         sectionLabel.textAlignment = .center
-        
+
         contentView.addSubview(sectionLabel)
     }
-    
-    override func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
+
+    override func setPagingItem(_ pagingItem: PagingItem, selected _: Bool, options _: PagingOptions) {
         guard let sectionItem = pagingItem as? SectionPageItem else { return }
         sectionLabel.text = sectionItem.section?.title ?? "N/A"
     }

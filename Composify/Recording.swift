@@ -16,7 +16,7 @@ class Recording: Object {
     @objc dynamic var section: Section?
     @objc dynamic var dateRecorded = Date()
     @objc dynamic var fileExtension = ""
-    
+
     override static func primaryKey() -> String? {
         return R.DatabaseKeys.id
     }
