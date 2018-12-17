@@ -16,6 +16,7 @@ class AdministrateProjectViewController: UIViewController {
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
     private(set) var tableView: UITableView? {
         didSet {
+            tableView?.keyboardDismissMode = .onDrag
             tableView?.delegate = tableViewDelegate
             tableView?.dataSource = tableViewDataSource
             tableView?.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
