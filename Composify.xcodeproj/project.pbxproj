@@ -51,7 +51,6 @@
 		E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */; };
 		E582895121C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */; };
 		E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */; };
-		E582899C21C6F59E00E438B5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E582899B21C6F59D00E438B5 /* Info.plist */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
 		E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E587605D20F24A600050C0BD /* ErrorViewController.swift */; };
 		E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71420F7B07300CF51FC /* DatabaseService.swift */; };
@@ -605,7 +604,6 @@
 				E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */,
 				E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */,
 				E582894921C6BE9D00E438B5 /* Onboarding.storyboard in Resources */,
-				E582899C21C6F59E00E438B5 /* Info.plist in Resources */,
 				E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */,
 				E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */,
 				E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */,
