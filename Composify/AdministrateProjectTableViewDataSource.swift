@@ -105,7 +105,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 // from the corresponding section title, because that means the
                 // section was renamed. Without this check, if a section is renamed
                 // and a section later added, the rename will be ignored.
-                guard let section = sectionID.correspondingSection,
+                guard let section: Section = sectionID.correspondingComposifyObject(),
                     let existingTitle = administrateProjectViewController.newValues[HashableTuple((1, index))], existingTitle == section.title else { continue }
 
                 administrateProjectViewController.newValues[HashableTuple((1, index))] = section.title
@@ -119,7 +119,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         case .delete:
             guard let currentProject = administrateProjectViewController.currentProject,
                 currentProject.sectionIDs.hasElements else { return }
-            let sectionToDelete = currentProject.sectionIDs[indexPath.row].correspondingSection
+            let sectionToDelete: Section? = currentProject.sectionIDs[indexPath.row].correspondingComposifyObject()
 
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()
@@ -131,7 +131,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
 
             administrateProjectViewController.newValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                if let section = sectionID.correspondingSection {
+                if let section: Section = sectionID.correspondingComposifyObject() {
                     administrateProjectViewController.newValues[HashableTuple((1, index))] = section.title
                 }
             }

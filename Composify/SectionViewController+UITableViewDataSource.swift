@@ -23,7 +23,7 @@ extension SectionViewController: UITableViewDataSource {
         cell.contentView.isUserInteractionEnabled = false
         cell.selectionStyle = .none
 
-        let recording = section?.recordingIDs[indexPath.row].correspondingRecording
+        let recording: Recording? = section?.recordingIDs[indexPath.row].correspondingComposifyObject()
         let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
 
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)

@@ -38,10 +38,3 @@ extension Recording: Comparable {
         return lhs.title < rhs.title
     }
 }
-
-extension String {
-    var correspondingRecording: Recording? {
-        guard let realm = try? Realm() else { return nil }
-        return realm.object(ofType: Recording.self, forPrimaryKey: self)
-    }
-}

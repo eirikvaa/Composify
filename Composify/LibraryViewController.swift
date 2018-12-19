@@ -33,13 +33,13 @@ class LibraryViewController: UIViewController {
 
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
-        guard let project = projectID.correspondingProject else { return nil }
+        guard let project: Project = projectID.correspondingComposifyObject() else { return nil }
         return project
     }
 
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section = sectionID.correspondingSection else { return nil }
+        guard let section: Section = sectionID.correspondingComposifyObject() else { return nil }
         return section
     }
 
@@ -210,7 +210,7 @@ extension LibraryViewController {
         // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
         pagingViewController.reloadData()
 
-        if let section = currentProject?.sectionIDs.first?.correspondingSection {
+        if let section: Section = currentProject?.sectionIDs.first?.correspondingComposifyObject() {
             navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
         }
     }

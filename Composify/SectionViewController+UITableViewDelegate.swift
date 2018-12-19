@@ -20,7 +20,7 @@ extension SectionViewController: UITableViewDelegate {
             }
 
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-                let recording = self.section?.recordingIDs[indexPath.row].correspondingRecording
+                let recording: Recording? = self.section?.recordingIDs[indexPath.row].correspondingComposifyObject()
                 if let title = edit.textFields?.first?.text, let recording = recording {
                     self.databaseService.rename(recording, to: title)
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -37,7 +37,7 @@ extension SectionViewController: UITableViewDelegate {
 
         let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { _, indexPath in
             if let currentSection = self.section,
-                let recording = currentSection.recordingIDs[indexPath.row].correspondingRecording {
+                let recording: Recording = currentSection.recordingIDs[indexPath.row].correspondingComposifyObject() {
                 do {
                     try self.libraryViewController?.fileManager.delete(recording)
                 } catch let errror as FileManagerError {
@@ -68,7 +68,7 @@ extension SectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
 
-        guard let recording = section?.recordingIDs[indexPath.row].correspondingRecording else {
+        guard let recording: Recording = section?.recordingIDs[indexPath.row].correspondingComposifyObject() else {
             return
         }
 

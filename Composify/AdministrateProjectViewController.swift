@@ -55,7 +55,8 @@ class AdministrateProjectViewController: UIViewController {
 
         if let currentProject = currentProject {
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                if let section = sectionID.correspondingSection {
+                let _section: Section? = sectionID.correspondingComposifyObject()
+                if let section = _section {
                     newValues[HashableTuple((1, index))] = section.title
                 }
             }
@@ -162,7 +163,7 @@ private extension AdministrateProjectViewController {
         }
 
         for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
-            guard let section = sectionID.correspondingSection else { continue }
+            guard let section: Section = sectionID.correspondingComposifyObject() else { continue }
 
             if newValues[HashableTuple((1, index))] != section.title {
                 if let newTitle = newValues[HashableTuple((1, index))], newTitle.hasPositiveCharacterCount {

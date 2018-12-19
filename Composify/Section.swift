@@ -54,10 +54,3 @@ extension Section: Comparable {
         return lhs.index < rhs.index
     }
 }
-
-extension String {
-    var correspondingSection: Section? {
-        guard let realm = try? Realm() else { return nil }
-        return realm.object(ofType: Section.self, forPrimaryKey: self)
-    }
-}

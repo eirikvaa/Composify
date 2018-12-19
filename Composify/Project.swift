@@ -59,7 +59,7 @@ extension Project {
     func getSection(at index: Int) -> Section? {
         var section: Section?
         for sectionID in sectionIDs {
-            let _section = sectionID.correspondingSection
+            let _section: Section? = sectionID.correspondingComposifyObject()
             if _section?.index == index {
                 section = _section
             }
@@ -84,13 +84,6 @@ extension Project: FileSystemObject {
     }
 }
 
-extension String {
-    var correspondingProject: Project? {
-        guard let realm = try? Realm() else { return nil }
-        return realm.object(ofType: Project.self, forPrimaryKey: self)
-    }
-}
-
 extension Project {
     static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
         let project = Project()
@@ -105,7 +98,8 @@ extension Project {
     }
 
     var nextSectionIndex: Int {
-        let lastSectionIndex = sectionIDs.last?.correspondingSection?.index ?? 0
+        let _section: Section? = sectionIDs.last?.correspondingComposifyObject()
+        let lastSectionIndex = _section?.index ?? 0
         return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 }

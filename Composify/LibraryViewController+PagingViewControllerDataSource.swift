@@ -15,7 +15,7 @@ extension LibraryViewController: PagingViewControllerDataSource {
             return SectionPageItem(section: nil) as! T
         }
 
-        guard let section = currentProject.sectionIDs[index].correspondingSection else {
+        guard let section: Section = currentProject.sectionIDs[index].correspondingComposifyObject() else {
             return SectionPageItem(section: nil) as! T
         }
 
