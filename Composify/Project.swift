@@ -71,7 +71,7 @@ extension Project {
 
 extension Project: Comparable {
     static func < (lhs: Project, rhs: Project) -> Bool {
-        return lhs.title < rhs.title
+        return lhs.dateCreated < rhs.dateCreated
     }
 }
 
