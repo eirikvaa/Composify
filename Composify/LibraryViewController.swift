@@ -65,11 +65,6 @@ class LibraryViewController: UIViewController {
 
         configurePagingViewController()
         setupUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         updateUI()
     }
 
@@ -210,9 +205,7 @@ extension LibraryViewController {
         // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
         pagingViewController.reloadData()
 
-        if let section: Section = currentProject?.sectionIDs.first?.correspondingComposifyObject() {
-            navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
-        }
+        navigationItem.rightBarButtonItem = currentSection?.recordings.hasElements ?? false ? editButtonItem : nil
     }
 
     /// Set the state of the user interface
@@ -290,18 +283,28 @@ extension LibraryViewController {
 extension LibraryViewController: AdministrateProjectDelegate {
     func userDidAddSectionToProject(_ section: Section) {
         currentSectionID = section.id
+
+        updateUI()
     }
 
     func userDidDeleteSectionFromProject() {
         currentSectionID = currentProject?.sectionIDs.sorted().first
+
+        updateUI()
     }
 
-    func userDidEditTitleOfObjects() {}
+    func userDidEditTitleOfObjects() {
+        updateUI()
+    }
 
     func userDidDeleteProject() {
         currentProjectID = databaseService.foundationStore?.projectIDs.first
         currentSectionID = currentProject?.sectionIDs.first
+
+        updateUI()
     }
 
-    func userDidReorderSections() {}
+    func userDidReorderSections() {
+        updateUI()
+    }
 }
