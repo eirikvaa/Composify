@@ -152,6 +152,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             sourceSection?.index = destinationIndexPath.row
             destinationSection?.index = sourceIndexPath.row
         }
+
+        administrateProjectViewController.administrateProjectDelegate?.userDidReorderSections()
     }
 
     func tableView(_: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

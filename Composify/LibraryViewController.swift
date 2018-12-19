@@ -302,4 +302,6 @@ extension LibraryViewController: AdministrateProjectDelegate {
         currentProjectID = databaseService.foundationStore?.projectIDs.first
         currentSectionID = currentProject?.sectionIDs.first
     }
+
+    func userDidReorderSections() {}
 }

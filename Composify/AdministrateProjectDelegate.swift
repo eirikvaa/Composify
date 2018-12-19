@@ -21,4 +21,7 @@ protocol AdministrateProjectDelegate: class {
 
     /// The user deleted the project
     func userDidDeleteProject()
+
+    /// The user reordered one or more sections
+    func userDidReorderSections()
 }
