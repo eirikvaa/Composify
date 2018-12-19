@@ -58,7 +58,7 @@ class LibraryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        possiblyShowOnboarding()
+        showOnboardingIfNeeded()
 
         currentProjectID = databaseService.foundationStore?.projectIDs.first
         currentSectionID = currentProject?.sectionIDs.first
@@ -276,7 +276,7 @@ extension LibraryViewController {
     }
 
     /// Possibly show onboarding
-    func possiblyShowOnboarding() {
+    func showOnboardingIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenOnboarding = userDefaults.bool(forKey: R.UserDefaults.hasSeenOnboarding)
 
