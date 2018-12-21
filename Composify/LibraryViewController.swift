@@ -241,11 +241,11 @@ extension LibraryViewController {
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
     func presentAdministrateViewController(project: Project) {
-        let administerVC = AdministrateProjectViewController()
-        administerVC.currentProject = project
-        administerVC.administrateProjectDelegate = self
-        let nav = UINavigationController(rootViewController: administerVC)
-        present(nav, animated: true)
+        let administerViewController = AdministrateProjectViewController()
+        administerViewController.currentProject = project
+        administerViewController.administrateProjectDelegate = self
+        let navigationController = UINavigationController(rootViewController: administerViewController)
+        present(navigationController, animated: true)
     }
 
     /// Configure the paging view controller
