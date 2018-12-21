@@ -256,8 +256,6 @@ extension LibraryViewController {
         pagingViewController.delegate = self
 
         add(pagingViewController)
-        containerView.addSubview(pagingViewController.view)
-        pagingViewController.didMove(toParent: self)
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
