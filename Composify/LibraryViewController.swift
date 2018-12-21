@@ -25,11 +25,7 @@ class LibraryViewController: UIViewController {
 
     // Properties
     private var errorViewController: ErrorViewController?
-    private var state: LibraryViewController.State = .noSections {
-        didSet {
-            setState(state)
-        }
-    }
+    private var state: LibraryViewController.State = .noSections
 
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
@@ -201,6 +197,8 @@ extension LibraryViewController {
         case (.none, _):
             state = .noProjects
         }
+
+        setState(state)
 
         // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
         pagingViewController.reloadData()
