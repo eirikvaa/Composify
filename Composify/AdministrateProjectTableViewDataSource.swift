@@ -119,7 +119,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         case .delete:
             guard let currentProject = administrateProjectViewController.currentProject,
                 currentProject.sectionIDs.hasElements else { return }
-            let sectionToDelete: Section? = currentProject.sectionIDs[indexPath.row].correspondingComposifyObject()
+            let sectionToDelete: Section? = currentProject.getSection(at: indexPath.row)
 
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()

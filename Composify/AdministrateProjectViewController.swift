@@ -90,6 +90,8 @@ extension AdministrateProjectViewController {
             handleError(error)
         }
 
+        normalizeSectionIndices(from: sectionToDelete.index)
+
         databaseService.delete(sectionToDelete)
 
         completionHandler()
@@ -123,11 +125,18 @@ extension AdministrateProjectViewController {
 private extension AdministrateProjectViewController {
     /// This will normalize the section indices such as when one is deleted, any
     /// holes in the counting is filled.
-    func normalizeSectionIndices() {
+    /// If we delete a section, it will create a whole unless we delete the last one.
+    /// Say we have indices 0 - 1 - 2 and delete the middle, then we have 0 - 2 and the
+    /// application will crash, because it only goes from 0 - 1. Solve this by getting all sections with an
+    /// index greater than the passed in index and subtract one to close the gap.
+    /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
+    func normalizeSectionIndices(from index: Int) {
         guard let currentProject = currentProject else { return }
-        databaseService.performOperation {
-            for (index, section) in currentProject.sections.enumerated() {
-                section.index = index
+
+        for i in (index + 1) ..< currentProject.sectionIDs.count {
+            let section = currentProject.getSection(at: i)
+            databaseService.performOperation {
+                section?.index -= 1
             }
         }
     }
