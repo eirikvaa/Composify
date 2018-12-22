@@ -334,8 +334,8 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
-				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E53C016C2124275900F98E65 /* Extensions */,
+				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
 				E5BD121D21126684000ED703 /* AdministrateProject */,
 				E512A01C2112663900A70A75 /* Library */,

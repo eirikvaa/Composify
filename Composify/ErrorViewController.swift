@@ -12,8 +12,8 @@ class ErrorViewController: UIViewController {
     private var text: String
     private var label = UILabel()
 
-    init(labelText: String) {
-        text = labelText
+    init(text: String) {
+        self.text = text
 
         super.init(nibName: nil, bundle: nil)
     }

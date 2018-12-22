@@ -200,7 +200,6 @@ extension LibraryViewController {
 
         setState(state)
 
-        // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
         pagingViewController.reloadData()
 
         navigationItem.rightBarButtonItem = currentSection?.recordings.hasElements ?? false ? editButtonItem : nil
@@ -215,12 +214,12 @@ extension LibraryViewController {
         case .notEmpty:
             break
         case .noProjects:
-            errorViewController = ErrorViewController(labelText: R.Loc.noProjects)
+            errorViewController = ErrorViewController(text: R.Loc.noProjects)
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
         case .noSections:
-            errorViewController = ErrorViewController(labelText: R.Loc.noSections)
+            errorViewController = ErrorViewController(text: R.Loc.noSections)
             if let errorVieController = errorViewController {
                 add(errorVieController)
             }
