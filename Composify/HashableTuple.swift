@@ -39,6 +39,8 @@ extension HashableTuple: Equatable {
 
 extension HashableTuple: CustomStringConvertible {
     var description: String {
-        return "(\(t.0), \(t.1))"
+        let first = t.0
+        let second = t.1
+        return "(\(first), \(second))"
     }
 }

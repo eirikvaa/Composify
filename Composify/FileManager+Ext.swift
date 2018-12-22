@@ -65,12 +65,12 @@ extension FileManager {
      */
     func save<T: FileSystemObject>(_ object: T) throws {
         // The AudioRecorder will create the audio file.
-        if object is Project || object is Section {
-            do {
-                try createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                throw FileManagerError.unableToSaveObject(object: object)
-            }
+        guard object is Project || object is Section else { return }
+
+        do {
+            try createDirectory(at: object.url, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            throw FileManagerError.unableToSaveObject(object: object)
         }
     }
 
@@ -80,11 +80,10 @@ extension FileManager {
      */
     func delete<T: FileSystemObject>(_ object: T) throws {
         let url = object.url
+        guard fileExists(atPath: url.path) else { return }
 
         do {
-            if fileExists(atPath: url.path) {
-                try removeItem(at: url)
-            }
+            try removeItem(at: url)
         } catch {
             throw FileManagerError.unableToDeleteObject(object: object)
         }

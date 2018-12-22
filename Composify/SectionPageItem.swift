@@ -28,6 +28,8 @@ struct SectionPageItem: PagingItem, Hashable, Comparable {
     }
 
     static func < (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
-        return lhs.section?.index ?? 0 < rhs.section?.index ?? 0
+        let _lhs = lhs.section?.index ?? 0
+        let _rhs = rhs.section?.index ?? 0
+        return _lhs < _rhs
     }
 }

@@ -42,8 +42,12 @@ extension SectionViewController: UITableViewDelegate {
 
             do {
                 try self.libraryViewController?.fileManager.delete(recording)
-            } catch let errror as FileManagerError {
-                self.handleError(errror)
+            } catch let FileManagerError.unableToDeleteObject(object) {
+                let objectTitle = object.getTitle() ?? ""
+                let title = R.Loc.unableToSaveObjectTitle
+                let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
+                let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                self.libraryViewController?.present(alert, animated: true)
             } catch {
                 print(error.localizedDescription)
             }
@@ -77,8 +81,18 @@ extension SectionViewController: UITableViewDelegate {
         } else {
             do {
                 audioDefaultService = try AudioPlayerServiceFactory.defaultService(withObject: recording)
+            } catch AudioPlayerServiceError.unableToFindPlayable {
+                let title = R.Loc.unableToFindRecordingTitle
+                let message = R.Loc.unableToFindRecordingMessage
+                let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                libraryViewController?.present(alert, animated: true)
+            } catch AudioPlayerServiceError.unableToConfigurePlayingSession {
+                let title = R.Loc.missingRecordingAlertTitle
+                let message = R.Loc.missingRecordingAlertMessage
+                let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                libraryViewController?.present(alert, animated: true)
             } catch {
-                handleError(error)
+                print(error.localizedDescription)
             }
 
             audioDefaultService?.audioDidFinishBlock = { _ in

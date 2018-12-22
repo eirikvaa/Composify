@@ -102,8 +102,14 @@ extension LibraryViewController {
                             self.currentSectionID = project.sectionIDs.first
                             self.updateUI()
                         })
+                    } catch let FileManagerError.unableToSaveObject(object) {
+                        let objectTitle = object.getTitle() ?? ""
+                        let title = R.Loc.unableToSaveObjectTitle
+                        let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
+                        let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                        self.present(alert, animated: true)
                     } catch {
-                        self.handleError(error)
+                        print(error.localizedDescription)
                     }
                 }
             })
@@ -147,8 +153,13 @@ extension LibraryViewController {
             if let recording = recording {
                 do {
                     audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+                } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
+                    let title = R.Loc.unableToConfigureRecordingSessionTitle
+                    let message = R.Loc.unableToConfigureRecordingSessionMessage
+                    let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                    present(alert, animated: true)
                 } catch {
-                    handleError(error)
+                    print(error.localizedDescription)
                 }
             }
 
@@ -162,9 +173,16 @@ extension LibraryViewController {
         if let recording = recording {
             do {
                 try fileManager.save(recording)
+            } catch let FileManagerError.unableToSaveObject(object) {
+                let objectTitle = object.getTitle() ?? ""
+                let title = R.Loc.unableToSaveObjectTitle
+                let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
+                let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                present(alert, animated: true)
             } catch {
-                handleError(error)
+                print(error.localizedDescription)
             }
+
             databaseService.save(recording)
         }
 
