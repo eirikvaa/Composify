@@ -24,4 +24,15 @@ extension UIView {
         // We stopped one level below the view we want, so return the superview.
         return currentView?.superview
     }
+
+    /// Pin this view to the edges of the passed in view
+    /// - parameter view: The view that this view should be pinned to
+    func pinToEdgesOfView(_ view: UIView) {
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: view.topAnchor),
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+    }
 }

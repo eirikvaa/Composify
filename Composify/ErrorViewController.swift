@@ -39,11 +39,6 @@ class ErrorViewController: UIViewController {
         view.addSubview(label)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.topAnchor),
-            label.leftAnchor.constraint(equalTo: view.leftAnchor),
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            label.rightAnchor.constraint(equalTo: view.rightAnchor),
-        ])
+        label.pinToEdgesOfView(view)
     }
 }

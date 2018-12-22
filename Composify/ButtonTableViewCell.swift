@@ -43,12 +43,8 @@ extension ButtonTableViewCell {
 
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: contentView.topAnchor),
-            button.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            button.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
-        ])
+
+        button.pinToEdgesOfView(contentView)
+        button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
     }
 }

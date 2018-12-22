@@ -31,12 +31,7 @@ class LibraryCollectionViewCell: PagingCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        NSLayoutConstraint.activate([
-            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            sectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
+        sectionLabel.pinToEdgesOfView(contentView)
     }
 
     fileprivate func configure() {

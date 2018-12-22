@@ -49,12 +49,6 @@ private extension SectionViewController {
         tableView.estimatedRowHeight = 55
 
         view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        tableView.pinToEdgesOfView(view)
     }
 }

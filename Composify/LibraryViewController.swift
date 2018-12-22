@@ -277,12 +277,7 @@ extension LibraryViewController {
         add(pagingViewController)
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            pagingViewController.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            pagingViewController.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            pagingViewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: containerView.topAnchor),
-        ])
+        pagingViewController.view.pinToEdgesOfView(containerView)
     }
 
     /// Possibly show onboarding
