@@ -16,7 +16,7 @@ class LibraryViewController: UIViewController {
     @IBOutlet var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = R.Colors.secondaryColor
+            recordAudioButton.backgroundColor = R.Colors.fireBushYellow
             recordAudioButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
             recordAudioButton.titleLabel?.adjustsFontForContentSizeCategory = true
         }
@@ -264,7 +264,7 @@ extension LibraryViewController {
     /// Configure the paging view controller
     func configurePagingViewController() {
         pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
-        pagingViewController.indicatorColor = R.Colors.mainColor
+        pagingViewController.indicatorColor = R.Colors.cardinalRed
         pagingViewController.menuHorizontalAlignment = .center
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
