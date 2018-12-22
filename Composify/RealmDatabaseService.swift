@@ -14,7 +14,7 @@ struct RealmDatabaseService: DatabaseService {
 
     private init() {}
     static var sharedInstance: DatabaseService?
-    static func defaultService() -> DatabaseService {
+    static var defaultService: DatabaseService {
         if sharedInstance == nil {
             sharedInstance = RealmDatabaseService()
         }
@@ -22,7 +22,7 @@ struct RealmDatabaseService: DatabaseService {
         return sharedInstance!
     }
 
-    mutating func save(_ object: ComposifyObject) {
+    func save(_ object: ComposifyObject) {
         try! realm.write {
             switch object {
             case let section as Section:
@@ -39,7 +39,7 @@ struct RealmDatabaseService: DatabaseService {
         }
     }
 
-    mutating func delete(_ object: ComposifyObject) {
+    func delete(_ object: ComposifyObject) {
         try! realm.write {
             switch object {
             case let project as Project:

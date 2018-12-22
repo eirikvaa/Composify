@@ -14,12 +14,12 @@ import Foundation
 /// to Realm or Core Data or something else.
 protocol DatabaseService {
     static var sharedInstance: DatabaseService? { get set }
-    static func defaultService() -> DatabaseService
+    static var defaultService: DatabaseService { get }
 
     func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject]
 
-    mutating func save(_ object: ComposifyObject)
-    mutating func delete(_ object: ComposifyObject)
-    mutating func rename(_ object: ComposifyObject, to newName: String)
-    mutating func performOperation(_ operation: () -> Void)
+    func save(_ object: ComposifyObject)
+    func delete(_ object: ComposifyObject)
+    func rename(_ object: ComposifyObject, to newName: String)
+    func performOperation(_ operation: () -> Void)
 }
