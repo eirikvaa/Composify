@@ -29,10 +29,16 @@ class AdministrateProjectViewController: UIViewController {
 
     var databaseService = DatabaseServiceFactory.defaultService
     private var fileManager = FileManager.default
+    enum TableSection: Int {
+        case metInformation
+        case projectSections
+        case dangerZone
+    }
+
     private(set) lazy var tableRowCount = [
-        0: 1, // Meta Information
-        1: self.project.sectionIDs.count + 1, // Sections
-        2: 1, // Danger Zone
+        TableSection.metInformation.rawValue: 1, // Meta Information
+        TableSection.projectSections.rawValue: self.project.sectionIDs.count + 1, // Sections
+        TableSection.dangerZone.rawValue: 1, // Danger Zone
     ]
     lazy var tableRowValues: [HashableTuple<Int>: String] = [:]
     private(set) var tableSectionHeaders: [String] = [
@@ -42,7 +48,7 @@ class AdministrateProjectViewController: UIViewController {
     ]
     var project: Project
     var titleRow: HashableTuple<Int> {
-        return HashableTuple(0, 0)
+        return HashableTuple(TableSection.metInformation.rawValue, 0)
     }
 
     // Initializer
@@ -78,15 +84,48 @@ class AdministrateProjectViewController: UIViewController {
     }
 
     @objc func textFieldChange(_ textField: UITextField) {
-        guard let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell else { return }
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        guard let (cell, indexPath) = getCellAndIndexPath(from: textField) else { return }
+        guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else { return }
 
         let key = HashableTuple(indexPath.section, indexPath.row)
         tableRowValues[key] = cell.textField.text ?? ""
     }
 }
 
+extension AdministrateProjectViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField, reason _: UITextField.DidEndEditingReason) {
+        guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
+        guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
+
+        databaseService.performOperation {
+            switch indexPath.section {
+            case TableSection.metInformation.rawValue:
+                project.title = newTitle
+            case TableSection.projectSections.rawValue:
+                let section = project.getSection(at: indexPath.row)
+                section?.title = newTitle
+            default:
+                return
+            }
+        }
+
+        administrateProjectDelegate?.userDidEditTitleOfObjects()
+    }
+}
+
 extension AdministrateProjectViewController {
+    func getCellAndIndexPath(from textField: UITextField) -> (TextFieldTableViewCell, IndexPath)? {
+        guard let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell else {
+            return nil
+        }
+
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return nil
+        }
+
+        return (cell, indexPath)
+    }
+
     /// Delete a section from the project
     /// - parameter sectionToDelete: The section to be deleted
     /// - parameter completionHandler: Something that should be done after deleting the section
@@ -126,7 +165,7 @@ extension AdministrateProjectViewController {
     /// - parameter index: The row in the section for project sections
     /// - returns: A hashable tuple with the row and section information
     func sectionRow(_ index: Int) -> HashableTuple<Int> {
-        return HashableTuple(1, index)
+        return HashableTuple(TableSection.projectSections.rawValue, index)
     }
 }
 
@@ -163,35 +202,15 @@ private extension AdministrateProjectViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }
 
-    @objc func dismissVC(_: UIBarButtonItem) {
-        persistChanges()
-        dismiss(animated: true)
+    /// Resign first responder from all textfields so that we persist a possible renaming as
+    /// early as possible.
+    func resignFromAllTextFields() {
+        let action = #selector(UIApplication.resignFirstResponder)
+        UIApplication.shared.sendAction(action, to: nil, from: nil, for: nil)
     }
 
-    /// Persist changes to the database
-    func persistChanges() {
-        var hadChanges = false
-        if tableRowValues[titleRow] != project.title {
-            if let newProjectTitle = tableRowValues[titleRow], newProjectTitle.hasPositiveCharacterCount {
-                databaseService.rename(project, to: newProjectTitle)
-                hadChanges = true
-            }
-        }
-
-        for index in 0 ..< project.sections.count {
-            guard let section: Section = project.getSection(at: index) else { continue }
-            let sectionRow = self.sectionRow(index)
-
-            if tableRowValues[sectionRow] != section.title {
-                if let newSectionTitle = tableRowValues[sectionRow], newSectionTitle.hasPositiveCharacterCount {
-                    databaseService.rename(section, to: newSectionTitle)
-                    hadChanges = true
-                }
-            }
-        }
-
-        if hadChanges {
-            administrateProjectDelegate?.userDidEditTitleOfObjects()
-        }
+    @objc func dismissVC(_: UIBarButtonItem) {
+        resignFromAllTextFields()
+        dismiss(animated: true)
     }
 }

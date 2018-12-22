@@ -18,6 +18,10 @@ class AdministrateProjectTableViewDataSource: NSObject {
     var currentProject: Project {
         return administrateProjectViewController.project
     }
+
+    var tableSection: AdministrateProjectViewController.TableSection.Type {
+        return AdministrateProjectViewController.TableSection.self
+    }
 }
 
 extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
@@ -26,7 +30,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 { return currentProject.sections.count + 1 }
+        let projectSectionsSection = AdministrateProjectViewController.TableSection.projectSections.rawValue
+        if section == projectSectionsSection { return currentProject.sections.count + 1 }
         return administrateProjectViewController.tableRowCount[section] ?? 0
     }
 
@@ -42,12 +47,13 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         let insertRowIndex = currentProject.sectionIDs.count
 
         switch (indexPath.section, indexPath.row) {
-        case (0, _):
+        case (tableSection.metInformation.rawValue, _):
             cell.textField.placeholder = currentProject.title
             cell.textField.autocapitalizationType = .words
             cell.textField.clearButtonMode = .whileEditing
             cell.textField.returnKeyType = .done
-        case (1, _):
+            cell.textField.delegate = administrateProjectViewController
+        case (tableSection.projectSections.rawValue, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = R.Loc.addSection
@@ -57,9 +63,10 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                     cell.textField.autocapitalizationType = .words
                     cell.textField.clearButtonMode = .whileEditing
                     cell.textField.returnKeyType = .done
+                    cell.textField.delegate = administrateProjectViewController
                 }
             }
-        case (2, _):
+        case (tableSection.dangerZone.rawValue, _):
             guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
             deleteCell.buttonTitle = R.Loc.deleteProejct
             deleteCell.action = {
@@ -108,12 +115,14 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 guard let section: Section = sectionID.correspondingComposifyObject(),
                     let existingTitle = administrateProjectViewController.tableRowValues[HashableTuple(1, index)], existingTitle == section.title else { continue }
 
-                administrateProjectViewController.tableRowValues[HashableTuple(1, index)] = section.title
+                let projectSectionsSection = tableSection.projectSections.rawValue
+                administrateProjectViewController.tableRowValues[HashableTuple(projectSectionsSection, index)] = section.title
             }
 
             // It's important that we reload the previously last row after we
             // insert the new row so there's no problem with indexes.
-            let newIndexPath = IndexPath(row: currentProject.sections.count, section: 1)
+            let projectSectionsSection = tableSection.projectSections.rawValue
+            let newIndexPath = IndexPath(row: currentProject.sections.count, section: projectSectionsSection)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         case .delete:
@@ -129,8 +138,9 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             }
 
             administrateProjectViewController.tableRowValues.removeAll()
+            let projectSectionsSection = tableSection.projectSections.rawValue
             for section in currentProject.sections {
-                let key = HashableTuple(1, section.index)
+                let key = HashableTuple(projectSectionsSection, section.index)
                 administrateProjectViewController.tableRowValues[key] = section.title
             }
 
@@ -166,6 +176,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         // because that's the green adding row. Also it doesn't make sense to show
         // the re-ordering controls if there is only a single section.
         let numberOfSections = currentProject.sections.count
-        return indexPath.section == 1 && indexPath.row < numberOfSections && numberOfSections > 1
+        let projectSectionsSection = tableSection.projectSections.rawValue
+        return indexPath.section == projectSectionsSection &&
+            indexPath.row < numberOfSections && numberOfSections > projectSectionsSection
     }
 }
