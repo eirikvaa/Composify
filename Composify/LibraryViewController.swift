@@ -204,6 +204,10 @@ extension LibraryViewController {
         navigationItem.leftBarButtonItem?.title = R.Loc.menu
     }
 
+    func setEditButton() {
+        navigationItem.rightBarButtonItem = currentSection?.recordings.hasElements ?? false ? editButtonItem : nil
+    }
+
     /// Update the user interface, mainly concerned with updating the state
     func updateUI() {
         switch (currentProject, currentSection) {
@@ -219,7 +223,7 @@ extension LibraryViewController {
 
         pagingViewController.reloadData()
 
-        navigationItem.rightBarButtonItem = currentSection?.recordings.hasElements ?? false ? editButtonItem : nil
+        setEditButton()
     }
 
     /// Set the state of the user interface
