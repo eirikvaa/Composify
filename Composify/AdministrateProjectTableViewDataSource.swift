@@ -147,7 +147,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
     func tableView(_: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let sourceRow = sourceIndexPath.row
         let destinationRow = destinationIndexPath.row
-        var databaseService = administrateProjectViewController.databaseService
+        let databaseService = administrateProjectViewController.databaseService
         guard let sourceSection = currentProject.getSection(at: sourceRow) else { return }
         guard let destinationSection = currentProject.getSection(at: destinationRow) else { return }
 

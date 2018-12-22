@@ -16,10 +16,9 @@ protocol DatabaseService {
     static var sharedInstance: DatabaseService? { get set }
     static var defaultService: DatabaseService { get }
 
-    func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject]
-
     func save(_ object: ComposifyObject)
     func delete(_ object: ComposifyObject)
     func rename(_ object: ComposifyObject, to newName: String)
     func performOperation(_ operation: () -> Void)
+    func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject]
 }

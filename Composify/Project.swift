@@ -75,7 +75,7 @@ extension Project {
         let project = Project()
         project.title = title
 
-        var databaseService = DatabaseServiceFactory.defaultService
+        let databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
 
         completionHandler(project)
