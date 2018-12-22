@@ -29,8 +29,9 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
         guard indexPath.section == 1 else { return .none }
 
         let endIndex = project.sectionIDs.count
+        let sectionRowsRange = 0 ..< endIndex
 
-        if indexPath.section == 1, 0 ..< endIndex ~= indexPath.row {
+        if indexPath.section == 1, sectionRowsRange ~= indexPath.row {
             return .delete
         } else if indexPath.section == 1, indexPath.row == endIndex {
             return .insert

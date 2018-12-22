@@ -25,13 +25,17 @@ class RecordingTableViewCell: UITableViewCell {
     }
 
     private func configureViews() {
+        contentView.isUserInteractionEnabled = false
+        selectionStyle = .none
+
+        playButton.alpha = 1
         playButton.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(playButton)
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel.font = .preferredFont(forTextStyle: .body)
         titleLabel.adjustsFontForContentSizeCategory = true
         contentView.addSubview(titleLabel)
 

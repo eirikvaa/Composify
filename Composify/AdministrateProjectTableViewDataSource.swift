@@ -172,6 +172,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         let numberOfSections = currentProject.sections.count
         let projectSectionsSection = tableSection.projectSections.rawValue
         return indexPath.section == projectSectionsSection &&
-            indexPath.row < numberOfSections && numberOfSections > projectSectionsSection
+            indexPath.row < numberOfSections &&
+            numberOfSections > projectSectionsSection
     }
 }
