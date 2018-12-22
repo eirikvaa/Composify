@@ -8,11 +8,20 @@
 
 import UIKit
 
-struct HashableTuple {
-    var t: (Int, Int)
+struct HashableTuple<T: Equatable & Hashable> {
+    var t: (first: T, second: T)
 
-    init(_ t: (Int, Int)) {
-        self.t = t
+    init(_ first: T, _ second: T) {
+        t.0 = first
+        t.1 = second
+    }
+
+    var first: T {
+        return t.first
+    }
+
+    var second: T {
+        return t.second
     }
 }
 

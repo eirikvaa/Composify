@@ -14,13 +14,13 @@ extension SectionViewController: UITableViewDelegate {
             let edit = UIAlertController(title: R.Loc.edit, message: nil, preferredStyle: .alert)
 
             edit.addTextField {
-                let recording = self.section?.recordings[indexPath.row]
-                $0.placeholder = recording?.title
+                let recording = self.section.recordings[indexPath.row]
+                $0.placeholder = recording.title
                 $0.autocapitalizationType = .words
             }
 
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-                let recording: Recording? = self.section?.recordingIDs[indexPath.row].correspondingComposifyObject()
+                let recording: Recording? = self.section.recordingIDs[indexPath.row].correspondingComposifyObject()
                 if let title = edit.textFields?.first?.text, let recording = recording {
                     self.databaseService.rename(recording, to: title)
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -36,27 +36,26 @@ extension SectionViewController: UITableViewDelegate {
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { _, indexPath in
-            if let currentSection = self.section,
-                let recording: Recording = currentSection.recordingIDs[indexPath.row].correspondingComposifyObject() {
-                do {
-                    try self.libraryViewController?.fileManager.delete(recording)
-                } catch let errror as FileManagerError {
-                    self.handleError(errror)
-                } catch {
-                    print(error.localizedDescription)
-                }
-
-                self.databaseService.delete(recording)
-                self.libraryViewController?.updateUI()
+            guard let recording: Recording = self.section.recordingIDs[indexPath.row].correspondingComposifyObject() else {
+                return
             }
+
+            do {
+                try self.libraryViewController?.fileManager.delete(recording)
+            } catch let errror as FileManagerError {
+                self.handleError(errror)
+            } catch {
+                print(error.localizedDescription)
+            }
+
+            self.databaseService.delete(recording)
+            self.libraryViewController?.updateUI()
         }
 
         let export = UITableViewRowAction(style: .default, title: R.Loc.export) { _, indexPath in
-            if let section = self.section {
-                let url: [Any] = [section.recordings[indexPath.row].url]
-                let activityVC = UIActivityViewController(activityItems: url, applicationActivities: nil)
-                self.present(activityVC, animated: true)
-            }
+            let url: [Any] = [self.section.recordings[indexPath.row].url]
+            let activityVC = UIActivityViewController(activityItems: url, applicationActivities: nil)
+            self.present(activityVC, animated: true)
         }
 
         edit.backgroundColor = R.Colors.mainColor
@@ -68,7 +67,7 @@ extension SectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
 
-        guard let recording: Recording = section?.recordingIDs[indexPath.row].correspondingComposifyObject() else {
+        guard let recording: Recording = section.recordingIDs[indexPath.row].correspondingComposifyObject() else {
             return
         }
 

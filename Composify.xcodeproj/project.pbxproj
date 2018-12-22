@@ -24,6 +24,7 @@
 		E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959621C6820700D3004F /* R+UserDefaults.swift */; };
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
 		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
+		E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */; };
 		E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016D2124278000F98E65 /* UIFont+Ext.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
@@ -129,6 +130,7 @@
 		E523959621C6820700D3004F /* R+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+UserDefaults.swift"; sourceTree = "<group>"; };
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
 		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
+		E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTupleTests.swift; sourceTree = "<group>"; };
 		E53C016D2124278000F98E65 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				E590657320E3F4AF0028453D /* RealmTests.swift */,
 				E5152F4520E403760031572E /* ProjectTests.swift */,
 				E51248AD20E787DF00B178C2 /* LogicTests.swift */,
+				E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
@@ -814,6 +817,7 @@
 				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
 				E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */,
+				E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

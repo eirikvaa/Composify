@@ -23,11 +23,10 @@ extension LibraryViewController: PagingViewControllerDataSource {
     }
 
     func pagingViewController<T>(_: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController where T: PagingItem, T: Comparable, T: Hashable {
-        guard let currentProject = currentProject else {
+        guard let currentProject = currentProject,
+            let section = currentProject.getSection(at: index) else {
             return UIViewController()
         }
-
-        let section = currentProject.getSection(at: index)
 
         let sectionViewController = SectionViewController(section: section)
         sectionViewController.libraryViewController = self

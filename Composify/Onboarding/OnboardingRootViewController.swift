@@ -102,7 +102,7 @@ private extension OnboardingRootViewController {
     }
 
     func generateOnboardingViewControllers() -> [OnboardingViewController] {
-        var images = [
+        var backgroundImages = [
             R.Images.onboarding1,
             R.Images.onboarding2,
             R.Images.onboarding3,
@@ -111,7 +111,7 @@ private extension OnboardingRootViewController {
 
         for i in 0 ... 3 {
             let viewController = UIViewController.onboardingPageViewController()
-            viewController.image = images[i]
+            viewController.backgroundImage = backgroundImages[i]
             viewController.pageIndex = i
             viewControllers.append(viewController)
         }

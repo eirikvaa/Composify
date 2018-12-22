@@ -14,33 +14,46 @@ class AdministrateProjectViewController: UIViewController {
     lazy var tableViewDataSource = AdministrateProjectTableViewDataSource(administrateProjectViewController: self)
     lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
-    private(set) var tableView: UITableView? {
+    private(set) var tableView = UITableView(frame: .zero, style: .plain) {
         didSet {
-            tableView?.keyboardDismissMode = .onDrag
-            tableView?.delegate = tableViewDelegate
-            tableView?.dataSource = tableViewDataSource
-            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
-            tableView?.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
-            tableView?.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
-            tableView?.setEditing(true, animated: false)
-            tableView?.rowHeight = UIScreen.main.isSmall ? 44 : 55
+            tableView.keyboardDismissMode = .onDrag
+            tableView.delegate = tableViewDelegate
+            tableView.dataSource = tableViewDataSource
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
+            tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
+            tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
+            tableView.setEditing(true, animated: false)
+            tableView.rowHeight = UIScreen.main.isSmall ? 44 : 55
         }
     }
 
-    var currentProject: Project?
     var databaseService = DatabaseServiceFactory.defaultService
     private var fileManager = FileManager.default
-    private(set) lazy var rowCount = [
+    private(set) lazy var tableRowCount = [
         0: 1, // Meta Information
-        1: (self.currentProject?.sectionIDs.count ?? 0) + 1, // Sections
+        1: self.project.sectionIDs.count + 1, // Sections
         2: 1, // Danger Zone
     ]
-    lazy var newValues: [HashableTuple: String] = [:]
-    private(set) var headers: [String] = [
+    lazy var tableRowValues: [HashableTuple<Int>: String] = [:]
+    private(set) var tableSectionHeaders: [String] = [
         R.Loc.metaInformationHeader,
         R.Loc.sectionsHeader,
         R.Loc.dangerZoneHeader,
     ]
+    var project: Project
+    var titleRow: HashableTuple<Int> {
+        return HashableTuple(0, 0)
+    }
+
+    // Initializer
+    init(project: Project) {
+        self.project = project
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("Not implemented!")
+    }
 
     // MARK: View Controller Life Cycle
 
@@ -49,17 +62,10 @@ class AdministrateProjectViewController: UIViewController {
 
         navigationItem.title = R.Loc.administrate
 
-        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableRowValues[titleRow] = project.title
 
-        newValues[HashableTuple((0, 0))] = currentProject?.title ?? ""
-
-        if let currentProject = currentProject {
-            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                let _section: Section? = sectionID.correspondingComposifyObject()
-                if let section = _section {
-                    newValues[HashableTuple((1, index))] = section.title
-                }
-            }
+        for section in project.sections {
+            tableRowValues[sectionRow(section.index)] = section.title
         }
 
         configureViews()
@@ -68,22 +74,23 @@ class AdministrateProjectViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
-        tableView?.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
 
     @objc func textFieldChange(_ textField: UITextField) {
-        if let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell {
-            if let indexPath = tableView?.indexPath(for: cell) {
-                newValues[HashableTuple((indexPath.section, indexPath.row))] = cell.textField.text ?? ""
-            }
-        }
+        guard let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell else { return }
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+
+        let key = HashableTuple(indexPath.section, indexPath.row)
+        tableRowValues[key] = cell.textField.text ?? ""
     }
 }
 
 extension AdministrateProjectViewController {
-    func deleteSection(_ sectionToDelete: Section?, then completionHandler: () -> Void) {
-        guard let sectionToDelete = sectionToDelete else { return }
-
+    /// Delete a section from the project
+    /// - parameter sectionToDelete: The section to be deleted
+    /// - parameter completionHandler: Something that should be done after deleting the section
+    func deleteSection(_ sectionToDelete: Section, then completionHandler: () -> Void) {
         do {
             try fileManager.delete(sectionToDelete)
         } catch {
@@ -91,23 +98,17 @@ extension AdministrateProjectViewController {
         }
 
         normalizeSectionIndices(from: sectionToDelete.index)
-
         databaseService.delete(sectionToDelete)
-
         completionHandler()
     }
 
+    /// Insert a new section into the project
+    /// - parameter completionHandler: What should be done after inserting the section, returns the inserted section
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
-        guard let currentProject = currentProject else {
-            // This will never happen, because a prerequisite for showing the administrate view
-            // is that there has been created a project.
-            return
-        }
-
         let section = Section()
         section.title = R.Loc.section
-        section.project = currentProject
-        section.index = currentProject.nextSectionIndex
+        section.project = project
+        section.index = project.nextSectionIndex
 
         do {
             try fileManager.save(section)
@@ -120,6 +121,13 @@ extension AdministrateProjectViewController {
 
         completionHandler(section)
     }
+
+    /// Return a tuple used for subscripting the `tableRowValues` dictionary.
+    /// - parameter index: The row in the section for project sections
+    /// - returns: A hashable tuple with the row and section information
+    func sectionRow(_ index: Int) -> HashableTuple<Int> {
+        return HashableTuple(1, index)
+    }
 }
 
 private extension AdministrateProjectViewController {
@@ -131,28 +139,26 @@ private extension AdministrateProjectViewController {
     /// index greater than the passed in index and subtract one to close the gap.
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeSectionIndices(from index: Int) {
-        guard let currentProject = currentProject else { return }
-
-        for i in (index + 1) ..< currentProject.sectionIDs.count {
-            let section = currentProject.getSection(at: i)
+        for i in (index + 1) ..< project.sectionIDs.count {
+            let section = project.getSection(at: i)
             databaseService.performOperation {
                 section?.index -= 1
             }
         }
     }
 
+    /// Configure views
     func configureViews() {
-        if let tableView = tableView {
-            view.addSubview(tableView)
+        tableView = UITableView(frame: view.frame, style: .grouped)
+        view.addSubview(tableView)
 
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                tableView.topAnchor.constraint(equalTo: view.topAnchor),
-                tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            ])
-        }
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }
@@ -162,21 +168,23 @@ private extension AdministrateProjectViewController {
         dismiss(animated: true)
     }
 
+    /// Persist changes to the database
     func persistChanges() {
         var hadChanges = false
-        if newValues[HashableTuple((0, 0))] != currentProject?.title {
-            if let newTitle = newValues[HashableTuple((0, 0))], newTitle.hasPositiveCharacterCount {
-                databaseService.rename(currentProject!, to: newTitle)
+        if tableRowValues[titleRow] != project.title {
+            if let newProjectTitle = tableRowValues[titleRow], newProjectTitle.hasPositiveCharacterCount {
+                databaseService.rename(project, to: newProjectTitle)
                 hadChanges = true
             }
         }
 
-        for (index, sectionID) in (currentProject?.sectionIDs.enumerated())! {
-            guard let section: Section = sectionID.correspondingComposifyObject() else { continue }
+        for index in 0 ..< project.sections.count {
+            guard let section: Section = project.getSection(at: index) else { continue }
+            let sectionRow = self.sectionRow(index)
 
-            if newValues[HashableTuple((1, index))] != section.title {
-                if let newTitle = newValues[HashableTuple((1, index))], newTitle.hasPositiveCharacterCount {
-                    databaseService.rename(section, to: newTitle)
+            if tableRowValues[sectionRow] != section.title {
+                if let newSectionTitle = tableRowValues[sectionRow], newSectionTitle.hasPositiveCharacterCount {
+                    databaseService.rename(section, to: newSectionTitle)
                     hadChanges = true
                 }
             }

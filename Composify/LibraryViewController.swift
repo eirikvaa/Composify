@@ -239,8 +239,7 @@ extension LibraryViewController {
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
     func presentAdministrateViewController(project: Project) {
-        let administerViewController = AdministrateProjectViewController()
-        administerViewController.currentProject = project
+        let administerViewController = AdministrateProjectViewController(project: project)
         administerViewController.administrateProjectDelegate = self
         let navigationController = UINavigationController(rootViewController: administerViewController)
         present(navigationController, animated: true)

@@ -12,7 +12,7 @@ import UIKit
 
 extension SectionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return section?.recordingIDs.count ?? 0
+        return section.recordingIDs.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -23,7 +23,7 @@ extension SectionViewController: UITableViewDataSource {
         cell.contentView.isUserInteractionEnabled = false
         cell.selectionStyle = .none
 
-        let recording: Recording? = section?.recordingIDs[indexPath.row].correspondingComposifyObject()
+        let recording: Recording? = section.recordingIDs[indexPath.row].correspondingComposifyObject()
         let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
 
         cell.titleLabel.font = .preferredFont(forTextStyle: .body)

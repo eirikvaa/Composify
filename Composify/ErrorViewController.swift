@@ -9,11 +9,11 @@
 import UIKit
 
 class ErrorViewController: UIViewController {
-    private var labelText: String?
-    private var errorLabel = UILabel()
+    private var text: String
+    private var label = UILabel()
 
-    init(labelText: String?) {
-        self.labelText = labelText
+    init(labelText: String) {
+        text = labelText
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,19 +31,19 @@ class ErrorViewController: UIViewController {
     private func setup() {
         view.backgroundColor = .white
 
-        errorLabel.text = labelText
-        errorLabel.textAlignment = .center
-        errorLabel.textColor = .darkGray
-        errorLabel.numberOfLines = 0
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        label.numberOfLines = 0
 
-        view.addSubview(errorLabel)
+        view.addSubview(label)
 
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            errorLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
-            errorLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            errorLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            label.topAnchor.constraint(equalTo: view.topAnchor),
+            label.leftAnchor.constraint(equalTo: view.leftAnchor),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            label.rightAnchor.constraint(equalTo: view.rightAnchor),
         ])
     }
 }

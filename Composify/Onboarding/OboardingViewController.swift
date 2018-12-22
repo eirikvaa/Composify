@@ -16,7 +16,7 @@ class OnboardingViewController: UIViewController {
 
     // MARK: Properties
 
-    var image: UIImage?
+    var backgroundImage: UIImage?
     var pageIndex = 0
 
     // MARK: View Controller Life Cycle
@@ -24,6 +24,6 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView.image = image
+        imageView.image = backgroundImage
     }
 }

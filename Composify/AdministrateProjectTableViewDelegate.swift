@@ -14,6 +14,10 @@ class AdministrateProjectTableViewDelegate: NSObject {
     init(administrateProjectViewController: AdministrateProjectViewController) {
         self.administrateProjectViewController = administrateProjectViewController
     }
+
+    var project: Project {
+        return administrateProjectViewController.project
+    }
 }
 
 extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
@@ -24,7 +28,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     func tableView(_: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         guard indexPath.section == 1 else { return .none }
 
-        let endIndex = administrateProjectViewController.currentProject?.sectionIDs.count ?? 0
+        let endIndex = project.sectionIDs.count
 
         if indexPath.section == 1, 0 ..< endIndex ~= indexPath.row {
             return .delete
@@ -38,7 +42,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     func tableView(_: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         guard indexPath.section == 1 else { return false }
 
-        if indexPath.row == administrateProjectViewController.rowCount[indexPath.section] ?? 0 { return false }
+        if indexPath.row == administrateProjectViewController.tableRowCount[indexPath.section] ?? 0 { return false }
 
         return true
     }

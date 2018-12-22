@@ -15,16 +15,16 @@ class SectionViewController: UIViewController {
     var audioDefaultService: AudioPlayerService?
     var databaseService = DatabaseServiceFactory.defaultService
     var libraryViewController: LibraryViewController?
-    var section: Section?
+    var section: Section
     var tableView = UITableView(frame: .zero, style: .plain)
 
-    init(section: Section?) {
+    init(section: Section) {
         self.section = section
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder _: NSCoder) {
+        fatalError("Not implemented!")
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
