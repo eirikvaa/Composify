@@ -76,18 +76,6 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                     userDefaults.resetLastSection()
                 }
 
-                do {
-                    try FileManager.default.delete(self.currentProject)
-                } catch let FileManagerError.unableToDeleteObject(object) {
-                    let objectTitle = object.getTitle() ?? ""
-                    let title = R.Loc.unableToDeleteObjectTitle
-                    let message = R.Loc.unableToDeleteObjectMessage(withTitle: objectTitle)
-                    let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                    self.administrateProjectViewController.present(alert, animated: true)
-                } catch {
-                    print(error.localizedDescription)
-                }
-
                 self.administrateProjectViewController.databaseService.delete(self.currentProject)
                 self.administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
 

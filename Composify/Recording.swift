@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-class Recording: Object {
+class Recording: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
     @objc dynamic var section: Section?
-    @objc dynamic var dateRecorded = Date()
+    @objc dynamic var dateCreated = Date()
     @objc dynamic var fileExtension = ""
 
     override static func primaryKey() -> String? {
@@ -22,12 +22,9 @@ class Recording: Object {
     }
 }
 
-extension Recording: DatabaseObject {}
-extension Recording: AudioPlayable {}
-
-extension Recording: FileSystemObject {
+extension Recording: AudioPlayable {
     var url: URL {
-        return section!.url
+        return R.URLs.recordingsDirectory
             .appendingPathComponent(id)
             .appendingPathExtension(fileExtension)
     }

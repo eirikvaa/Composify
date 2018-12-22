@@ -31,7 +31,7 @@ extension SectionViewController: UITableViewDataSource {
 
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
-        cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateRecorded.description
+        cell.titleLabel.text = recording?.title.count ?? 0 > 0 ? recording?.title : recording?.dateCreated.description
         cell.playButton.alpha = 1
         cell.playButton.setImage(isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play, for: .normal)
 

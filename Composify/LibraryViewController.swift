@@ -96,21 +96,11 @@ extension LibraryViewController {
             }
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
                 if let projectTitle = addProjectAlert.textFields?.first?.text {
-                    do {
-                        try Project.createProject(withTitle: projectTitle, then: { project in
-                            self.currentProjectID = project.id
-                            self.currentSectionID = project.sectionIDs.first
-                            self.updateUI()
-                        })
-                    } catch let FileManagerError.unableToSaveObject(object) {
-                        let objectTitle = object.getTitle() ?? ""
-                        let title = R.Loc.unableToSaveObjectTitle
-                        let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-                        let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                        self.present(alert, animated: true)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
+                    Project.createProject(withTitle: projectTitle, then: { project in
+                        self.currentProjectID = project.id
+                        self.currentSectionID = project.sectionIDs.first
+                        self.updateUI()
+                    })
                 }
             })
             let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
@@ -171,18 +161,6 @@ extension LibraryViewController {
         recorder.stop()
 
         if let recording = recording {
-            do {
-                try fileManager.save(recording)
-            } catch let FileManagerError.unableToSaveObject(object) {
-                let objectTitle = object.getTitle() ?? ""
-                let title = R.Loc.unableToSaveObjectTitle
-                let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-                let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                present(alert, animated: true)
-            } catch {
-                print(error.localizedDescription)
-            }
-
             databaseService.save(recording)
         }
 

@@ -18,7 +18,7 @@ final class ProjectStore: Object {
     }
 }
 
-extension ProjectStore: DatabaseObject, DatabaseFoundationObject {
+extension ProjectStore: DatabaseFoundationObject {
     var projectIDs: [String] {
         get {
             return Array(_projectIDs)

@@ -10,10 +10,8 @@ import Foundation
 
 /// An `AudioPlayable` object is something that can be played, and corresponds
 /// to recordings.
-protocol AudioPlayable {
-    var id: String { get }
-    var title: String { get set }
+protocol AudioPlayable: ComposifyObject {
     var url: URL { get }
-    var dateRecorded: Date { get }
+    var duration: Float64 { get }
     var fileExtension: String { get set }
 }

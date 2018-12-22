@@ -37,7 +37,7 @@ struct RealmDatabaseService: DatabaseService {
         return sharedInstance!
     }
 
-    mutating func save(_ object: DatabaseObject) {
+    mutating func save(_ object: ComposifyObject) {
         try! realm.write {
             switch object {
             case let project as Project:
@@ -56,7 +56,7 @@ struct RealmDatabaseService: DatabaseService {
         }
     }
 
-    mutating func delete(_ object: DatabaseObject) {
+    mutating func delete(_ object: ComposifyObject) {
         let _self = self
         try! realm.write {
             switch object {
@@ -88,7 +88,7 @@ struct RealmDatabaseService: DatabaseService {
         }
     }
 
-    func rename(_ object: DatabaseObject, to newName: String) {
+    func rename(_ object: ComposifyObject, to newName: String) {
         try! realm.write {
             switch object {
             case let project as Project:
@@ -106,6 +106,19 @@ struct RealmDatabaseService: DatabaseService {
     func performOperation(_ operation: () -> Void) {
         try! realm.write {
             operation()
+        }
+    }
+
+    func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject] {
+        switch type {
+        case is Project.Type:
+            return Array(realm.objects(Project.self)) as [ComposifyObject]
+        case is Section.Type:
+            return Array(realm.objects(Section.self)) as [ComposifyObject]
+        case is Recording.Type:
+            return Array(realm.objects(Recording.self)) as [ComposifyObject]
+        default:
+            fatalError("Not supported!")
         }
     }
 }

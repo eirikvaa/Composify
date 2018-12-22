@@ -131,18 +131,6 @@ extension AdministrateProjectViewController {
     /// - parameter sectionToDelete: The section to be deleted
     /// - parameter completionHandler: Something that should be done after deleting the section
     func deleteSection(_ sectionToDelete: Section, then completionHandler: () -> Void) {
-        do {
-            try fileManager.delete(sectionToDelete)
-        } catch let FileManagerError.unableToDeleteObject(object) {
-            let objectTitle = object.getTitle() ?? ""
-            let title = R.Loc.unableToDeleteObjectTitle
-            let message = R.Loc.unableToDeleteObjectMessage(withTitle: objectTitle)
-            let alert = UIAlertController.createErrorAlert(title: title, message: message)
-            present(alert, animated: true)
-        } catch {
-            print(error.localizedDescription)
-        }
-
         normalizeSectionIndices(from: sectionToDelete.index)
         databaseService.delete(sectionToDelete)
         completionHandler()
@@ -155,18 +143,6 @@ extension AdministrateProjectViewController {
         section.title = R.Loc.section
         section.project = project
         section.index = project.nextSectionIndex
-
-        do {
-            try fileManager.save(section)
-        } catch let FileManagerError.unableToSaveObject(object) {
-            let objectTitle = object.getTitle() ?? ""
-            let title = R.Loc.unableToSaveObjectTitle
-            let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-            let alert = UIAlertController.createErrorAlert(title: title, message: message)
-            present(alert, animated: true)
-        } catch {
-            print(error.localizedDescription)
-        }
 
         databaseService.save(section)
         administrateProjectDelegate?.userDidAddSectionToProject(section)

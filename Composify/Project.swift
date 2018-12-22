@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class Project: Object {
+final class Project: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
@@ -19,8 +19,6 @@ final class Project: Object {
         return R.DatabaseKeys.id
     }
 }
-
-extension Project: DatabaseObject {}
 
 extension UserDefaults {
     func lastProject() -> Project? {
@@ -75,24 +73,13 @@ extension Project: Comparable {
     }
 }
 
-extension Project: FileSystemObject {
-    var url: URL {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documentDirectory
-            .appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-            .appendingPathComponent(id)
-    }
-}
-
 extension Project {
-    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
+    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) {
         let project = Project()
         project.title = title
 
         var databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
-
-        try FileManager.default.save(project)
 
         completionHandler(project)
     }

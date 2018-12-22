@@ -16,9 +16,7 @@ class AudioPlayerTests: XCTestCase {
     var project: Project!
     var section: Section!
     var recording: Recording!
-    let userProjcts: URL = {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-    }()
+    let userProjcts = R.URLs.recordingsDirectory
 
     let fileManager = FileManager.default
 
@@ -36,11 +34,9 @@ class AudioPlayerTests: XCTestCase {
         recording.title = "UnitTestRecording"
         recording.section = section
         recording.project = project
-        recording.fileExtension = FileSystemExtensions.caf.rawValue
-        recording.dateRecorded = Date()
+        recording.fileExtension = "caf"
+        recording.dateCreated = Date()
 
-        try! fileManager.save(project)
-        try! fileManager.save(section)
         audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
     }
 
@@ -51,7 +47,7 @@ class AudioPlayerTests: XCTestCase {
         recording = nil
 
         do {
-            let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path).filter { $0.hasPrefix("UnitTest") }
+            let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path)
             for file in unitTestProjects {
                 try fileManager.removeItem(at: userProjcts.appendingPathComponent(file))
             }

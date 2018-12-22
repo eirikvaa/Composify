@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
-		E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */; };
 		E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5089E3A21C4128A0026478C /* UIColor+Ext.swift */; };
 		E51248AE20E787DF00B178C2 /* LogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51248AD20E787DF00B178C2 /* LogicTests.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
@@ -43,9 +42,7 @@
 		E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893B21C6A2D200E438B5 /* AudioRecorderServiceError.swift */; };
 		E582893E21C6A2EE00E438B5 /* AudioPlayerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893D21C6A2EE00E438B5 /* AudioPlayerServiceError.swift */; };
 		E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893F21C6A30400E438B5 /* AudioPlayable.swift */; };
-		E582894221C6A32500E438B5 /* DatabaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894121C6A32500E438B5 /* DatabaseObject.swift */; };
 		E582894421C6A33600E438B5 /* DatabaseFoundationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894321C6A33600E438B5 /* DatabaseFoundationObject.swift */; };
-		E582894621C6A36D00E438B5 /* ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894521C6A36D00E438B5 /* ComposifyObject.swift */; };
 		E582894921C6BE9D00E438B5 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582894821C6BE9D00E438B5 /* Onboarding.storyboard */; };
 		E582894B21C6BF1500E438B5 /* OboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894A21C6BF1500E438B5 /* OboardingViewController.swift */; };
 		E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582894C21C6C59800E438B5 /* OnboardingRootViewController.swift */; };
@@ -64,6 +61,9 @@
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
+		E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */; };
+		E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */; };
+		E5BB2EB121CEDA9B00CF6381 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
 		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
@@ -112,7 +112,6 @@
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
 		E5089E3A21C4128A0026478C /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		E51248AD20E787DF00B178C2 /* LogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicTests.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -150,9 +149,7 @@
 		E582893B21C6A2D200E438B5 /* AudioRecorderServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceError.swift; sourceTree = "<group>"; };
 		E582893D21C6A2EE00E438B5 /* AudioPlayerServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceError.swift; sourceTree = "<group>"; };
 		E582893F21C6A30400E438B5 /* AudioPlayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayable.swift; sourceTree = "<group>"; };
-		E582894121C6A32500E438B5 /* DatabaseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObject.swift; sourceTree = "<group>"; };
 		E582894321C6A33600E438B5 /* DatabaseFoundationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFoundationObject.swift; sourceTree = "<group>"; };
-		E582894521C6A36D00E438B5 /* ComposifyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyObject.swift; sourceTree = "<group>"; };
 		E582894821C6BE9D00E438B5 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E582894A21C6BF1500E438B5 /* OboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OboardingViewController.swift; sourceTree = "<group>"; };
 		E582894C21C6C59800E438B5 /* OnboardingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRootViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +172,9 @@
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+URLs.swift"; sourceTree = "<group>"; };
+		E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyObject.swift; sourceTree = "<group>"; };
+		E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPageItem.swift; sourceTree = "<group>"; };
 		E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDataSource.swift"; sourceTree = "<group>"; };
@@ -266,6 +266,7 @@
 				E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */,
 				E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */,
 				E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */,
+				E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -273,7 +274,7 @@
 		E53C016C2124275900F98E65 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */,
+				E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */,
 				E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */,
 				E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */,
 				E53C0173212427D000F98E65 /* String+Ext.swift */,
@@ -396,7 +397,6 @@
 				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
 				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
-				E582894521C6A36D00E438B5 /* ComposifyObject.swift */,
 				E57B53AE21CAD0540015C23D /* String+ComposifyObject.swift */,
 			);
 			name = Realm;
@@ -406,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
+				E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -484,7 +485,6 @@
 			children = (
 				E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */,
 				E589E71420F7B07300CF51FC /* DatabaseService.swift */,
-				E582894121C6A32500E438B5 /* DatabaseObject.swift */,
 				E582894321C6A33600E438B5 /* DatabaseFoundationObject.swift */,
 			);
 			path = Database;
@@ -758,20 +758,21 @@
 				E5ED6DAC1F8AB48A002788F7 /* R+Loc.swift in Sources */,
 				E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */,
 				E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */,
+				E5BB2EB121CEDA9B00CF6381 /* FileManager+Ext.swift in Sources */,
 				E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */,
 				E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */,
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
-				E582894621C6A36D00E438B5 /* ComposifyObject.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
 				E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
+				E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
-				E582894221C6A32500E438B5 /* DatabaseObject.swift in Sources */,
+				E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */,
 				E523959521C681F800D3004F /* R+Cells.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */,
@@ -795,7 +796,6 @@
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
-				E5055BDF1D44BB5800D2B796 /* FileManager+Ext.swift in Sources */,
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,
 				E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */,
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,

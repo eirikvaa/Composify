@@ -40,7 +40,9 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
 
     func setup(withObject object: AudioPlayable) throws {
         guard player == nil else { return }
-        guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.unableToFindPlayable }
+        guard FileManager.default.fileExists(atPath: object.url.path) else {
+            throw AudioPlayerServiceError.unableToFindPlayable
+        }
 
         do {
             try session.setCategory(.playback, mode: .default, options: [])

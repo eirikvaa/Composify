@@ -40,18 +40,6 @@ extension SectionViewController: UITableViewDelegate {
                 return
             }
 
-            do {
-                try self.libraryViewController?.fileManager.delete(recording)
-            } catch let FileManagerError.unableToDeleteObject(object) {
-                let objectTitle = object.getTitle() ?? ""
-                let title = R.Loc.unableToSaveObjectTitle
-                let message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-                let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                self.libraryViewController?.present(alert, animated: true)
-            } catch {
-                print(error.localizedDescription)
-            }
-
             self.databaseService.delete(recording)
             self.libraryViewController?.updateUI()
         }
