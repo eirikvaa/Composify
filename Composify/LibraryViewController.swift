@@ -248,6 +248,7 @@ extension LibraryViewController {
     func configurePagingViewController() {
         pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
         pagingViewController.indicatorColor = R.Colors.mainColor
+        pagingViewController.menuHorizontalAlignment = .center
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
 
