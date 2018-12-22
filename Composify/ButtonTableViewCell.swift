@@ -38,6 +38,8 @@ extension ButtonTableViewCell {
     func setupViews() {
         button = UIButton(frame: .zero)
         button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
 
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +48,7 @@ extension ButtonTableViewCell {
             button.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             button.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            button.heightAnchor.constraint(equalToConstant: 44),
+            button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
     }
 }

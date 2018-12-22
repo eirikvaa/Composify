@@ -25,7 +25,6 @@
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
 		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
 		E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */; };
-		E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016D2124278000F98E65 /* UIFont+Ext.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
 		E53C0174212427D000F98E65 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0173212427D000F98E65 /* String+Ext.swift */; };
@@ -131,7 +130,6 @@
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
 		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
 		E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTupleTests.swift; sourceTree = "<group>"; };
-		E53C016D2124278000F98E65 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		E53C0173212427D000F98E65 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -276,7 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				E5055BDE1D44BB5800D2B796 /* FileManager+Ext.swift */,
-				E53C016D2124278000F98E65 /* UIFont+Ext.swift */,
 				E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */,
 				E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */,
 				E53C0173212427D000F98E65 /* String+Ext.swift */,
@@ -792,7 +789,6 @@
 				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
-				E53C016E2124278000F98E65 /* UIFont+Ext.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
 				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,

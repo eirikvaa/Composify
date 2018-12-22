@@ -17,6 +17,8 @@ class LibraryViewController: UIViewController {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
             recordAudioButton.backgroundColor = R.Colors.secondaryColor
+            recordAudioButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            recordAudioButton.titleLabel?.adjustsFontForContentSizeCategory = true
         }
     }
 
@@ -61,6 +63,7 @@ class LibraryViewController: UIViewController {
 
         configurePagingViewController()
         setupUI()
+        registerObservers()
         updateUI()
     }
 
@@ -174,6 +177,20 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
+    func registerObservers() {
+        let notificationCenter = NotificationCenter.default
+
+        let sizeChangeNotification = UIContentSizeCategory.didChangeNotification
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(adaptToDynamicSizeChange),
+            name: sizeChangeNotification,
+            object: nil
+        )
+    }
+
+    @objc func adaptToDynamicSizeChange(_: Notification) {}
+
     /// Set the new current project
     /// - parameter project: The project that should now be shown
     func setCurrentProject(_ project: Project) {
@@ -251,6 +268,11 @@ extension LibraryViewController {
         pagingViewController.menuHorizontalAlignment = .center
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
+
+        // Set the size for page items
+        // 65 is a bit tall for the smallest font sizes, but it doesn't break,
+        // so it's fine for now.
+        pagingViewController.menuItemSize = .sizeToFit(minWidth: 150, height: 65)
 
         add(pagingViewController)
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false

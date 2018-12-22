@@ -31,6 +31,8 @@ class RecordingTableViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel.adjustsFontForContentSizeCategory = true
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
@@ -41,6 +43,7 @@ class RecordingTableViewCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
     }
 }

@@ -23,7 +23,8 @@ class AdministrateProjectViewController: UIViewController {
             tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
             tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
             tableView.setEditing(true, animated: false)
-            tableView.rowHeight = UIScreen.main.isSmall ? 44 : 55
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 100
         }
     }
 

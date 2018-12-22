@@ -12,7 +12,9 @@ import UIKit
 class LibraryCollectionViewCell: PagingCell {
     lazy var sectionLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
 
