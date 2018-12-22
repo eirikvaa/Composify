@@ -31,10 +31,7 @@ extension UserDefaults {
 extension Project {
     static func projects() -> [Project] {
         let realm = try! Realm()
-        let projectStore = DatabaseServiceFactory.defaultService.foundationStore
-        return projectStore?.projectIDs
-            .compactMap { realm.object(ofType: Project.self, forPrimaryKey: $0) }
-            .sorted() ?? []
+        return Array(realm.objects(Project.self)) as [Project]
     }
 
     var sections: [Section] {

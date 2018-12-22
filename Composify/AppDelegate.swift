@@ -12,21 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
-        FileManager.default.createRecordingsDirectoryIfNeeded()
+        createRecordingsDirectoryIfNeeded()
 
         return true
     }
 }
 
 private extension AppDelegate {
-    func registerFoundationStoreObjectIfNeeded() {
-        let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: R.UserDefaults.projectStoreID) as? String == nil {
-            var defaultService = DatabaseServiceFactory.defaultService
-            defaultService.foundationStore = ProjectStore()
-        }
+    func createRecordingsDirectoryIfNeeded() {
+        FileManager.default.createRecordingsDirectoryIfNeeded()
     }
 
     func registerNavigationBarAppearance() {

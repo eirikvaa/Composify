@@ -16,6 +16,14 @@ class RealmTests: XCTestCase {
     let realm = try! Realm()
 
     override func setUp() {
+        super.setUp()
+
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
+    }
+
+    override func tearDown() {
+        super.tearDown()
+
         try! realm.write {
             realm.deleteAll()
         }

@@ -13,7 +13,6 @@ import Foundation
 /// use these specific type-free methods instead of references
 /// to Realm or Core Data or something else.
 protocol DatabaseService {
-    var foundationStore: DatabaseFoundationObject? { get set }
     static var sharedInstance: DatabaseService? { get set }
     static func defaultService() -> DatabaseService
 

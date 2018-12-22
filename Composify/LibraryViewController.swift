@@ -58,7 +58,7 @@ class LibraryViewController: UIViewController {
 
         showOnboardingIfNeeded()
 
-        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentProjectID = projects.first?.id
         currentSectionID = currentProject?.sectionIDs.first
 
         configurePagingViewController()
@@ -315,7 +315,7 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidDeleteProject() {
-        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentProjectID = projects.first?.id
         currentSectionID = currentProject?.sectionIDs.first
 
         updateUI()

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Section: Object, ComposifyObject, MinMaxType {
+class Section: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
