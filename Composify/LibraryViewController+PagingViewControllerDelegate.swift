@@ -14,18 +14,4 @@ extension LibraryViewController: PagingViewControllerDelegate {
         guard let sectionPageItem = pagingItem as? SectionPageItem else { return }
         currentSectionID = sectionPageItem.section?.id
     }
-
-    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, widthForPagingItem pageItem: T, isSelected _: Bool) -> CGFloat? where T: PagingItem, T: Comparable, T: Hashable {
-        let item = pageItem as! SectionPageItem
-        let title = item.section?.title ?? ""
-
-        let font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        let size = (title as NSString).size(withAttributes: [
-            .font: font,
-        ])
-
-        // If I don't add enough margin, then the text will be truncated because the width will be too small,
-        // so until I find a general solution here, this will do.
-        return size.width + 50
-    }
 }
