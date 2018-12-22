@@ -9,6 +9,7 @@
 import Foundation
 
 extension FileManager {
+    /// Create the recordings directory that recordings are written to if it is needed.
     func createRecordingsDirectoryIfNeeded() {
         let url = R.URLs.recordingsDirectory
         guard !fileExists(atPath: url.path) else { return }

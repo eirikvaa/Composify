@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIColor {
+    /// Get the components of a UIColor instance
+    /// - returns: A "tuple" with four elements, namely the R, G, B and A components
     func components() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         guard let components = cgColor.components else { return (0, 0, 0, 1) }
         if cgColor.numberOfComponents == 2 {
@@ -18,6 +20,10 @@ extension UIColor {
         }
     }
 
+    /// Interpolate between the two colors passed in with the accompanying fraction
+    /// - parameter from: The start color
+    /// - parameter to: The end color
+    /// - returns: A new color
     static func interpolate(from: UIColor, to: UIColor, with fraction: CGFloat) -> UIColor {
         let minimumFraction = min(1, max(0, fraction))
         let fromComponenets = from.components()

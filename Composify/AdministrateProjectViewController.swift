@@ -186,13 +186,6 @@ private extension AdministrateProjectViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }
 
-    /// Resign first responder from all textfields so that we persist a possible renaming as
-    /// early as possible.
-    func resignFromAllTextFields() {
-        let action = #selector(UIApplication.resignFirstResponder)
-        UIApplication.shared.sendAction(action, to: nil, from: nil, for: nil)
-    }
-
     @objc func dismissVC(_: UIBarButtonItem) {
         resignFromAllTextFields()
         dismiss(animated: true)

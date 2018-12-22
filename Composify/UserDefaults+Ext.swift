@@ -9,15 +9,13 @@
 import Foundation
 
 extension UserDefaults {
+    /// Reset the previously shown project, for example when the project is deleted
     func resetLastProject() {
         setValue(nil, forKey: R.UserDefaults.lastProjectID)
     }
 
+    /// Reset the previously shown section, for example when the section is deleted
     func resetLastSection() {
         setValue(nil, forKey: R.UserDefaults.lastSectionID)
-    }
-
-    var projectStoreID: String? {
-        return value(forKey: R.UserDefaults.projectStoreID) as? String
     }
 }
