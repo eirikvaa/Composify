@@ -100,6 +100,11 @@ private extension OnboardingRootViewController {
 
         view.bringSubviewToFront(skipButton)
         skipButton.addTarget(self, action: #selector(skipOnboarding), for: .touchUpInside)
+
+        // Color everything the same color as the images that are used
+        // because we have to color above and below the safe area layout guides.
+        view.backgroundColor = R.Colors.cardinalRed
+        containerView.backgroundColor = R.Colors.cardinalRed
     }
 
     func generateOnboardingViewControllers() -> [OnboardingViewController] {
@@ -135,6 +140,9 @@ private extension OnboardingRootViewController {
         add(pagingViewController)
         containerView.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
+
+        pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        pagingViewController.view.pinToEdges(of: containerView)
     }
 }
 

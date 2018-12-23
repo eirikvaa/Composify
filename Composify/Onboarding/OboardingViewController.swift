@@ -25,5 +25,6 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
 
         imageView.image = backgroundImage
+        view.backgroundColor = R.Colors.cardinalRed
     }
 }

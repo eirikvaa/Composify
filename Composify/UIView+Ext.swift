@@ -28,10 +28,11 @@ extension UIView {
     /// Pin this view to the edges of the passed in view
     /// - parameter view: The view that this view should be pinned to
     func pinToEdges(of view: UIView) {
+        let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.topAnchor.constraint(equalTo: view.topAnchor),
+            self.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 0),
             self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0),
             self.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }

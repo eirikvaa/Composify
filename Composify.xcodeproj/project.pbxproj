@@ -57,6 +57,7 @@
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
+		E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */; };
 		E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */; };
 		E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */; };
 		E5BB2EB121CEDA9B00CF6381 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */; };
@@ -164,6 +165,7 @@
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+URLs.swift"; sourceTree = "<group>"; };
 		E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyObject.swift; sourceTree = "<group>"; };
 		E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
 				E5089E3A21C4128A0026478C /* UIColor+Ext.swift */,
 				E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */,
+				E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
 				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
+				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
