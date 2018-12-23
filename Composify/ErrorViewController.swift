@@ -40,7 +40,7 @@ class ErrorViewController: UIViewController {
         view.addSubview(label)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.pinToEdgesOfView(view)
+        label.pinToEdges(of: view)
     }
 }
 

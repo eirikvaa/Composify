@@ -27,7 +27,7 @@ extension UIView {
 
     /// Pin this view to the edges of the passed in view
     /// - parameter view: The view that this view should be pinned to
-    func pinToEdgesOfView(_ view: UIView) {
+    func pinToEdges(of view: UIView) {
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: view.topAnchor),
             self.leadingAnchor.constraint(equalTo: view.leadingAnchor),

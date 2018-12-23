@@ -49,6 +49,6 @@ private extension SectionViewController {
         tableView.estimatedRowHeight = 55
 
         view.addSubview(tableView)
-        tableView.pinToEdgesOfView(view)
+        tableView.pinToEdges(of: view)
     }
 }

@@ -284,7 +284,7 @@ extension LibraryViewController {
         add(pagingViewController)
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        pagingViewController.view.pinToEdgesOfView(containerView)
+        pagingViewController.view.pinToEdges(of: containerView)
     }
 
     /// Possibly show onboarding

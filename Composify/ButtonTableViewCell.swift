@@ -44,7 +44,7 @@ extension ButtonTableViewCell {
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
 
-        button.pinToEdgesOfView(contentView)
+        button.pinToEdges(of: contentView)
         button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
 
         applyAccessibility()

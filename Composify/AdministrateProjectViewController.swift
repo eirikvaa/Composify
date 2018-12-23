@@ -181,7 +181,7 @@ private extension AdministrateProjectViewController {
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.pinToEdgesOfView(view)
+        tableView.pinToEdges(of: view)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }

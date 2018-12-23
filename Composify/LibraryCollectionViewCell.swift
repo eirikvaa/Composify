@@ -31,7 +31,7 @@ class LibraryCollectionViewCell: PagingCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        sectionLabel.pinToEdgesOfView(contentView)
+        sectionLabel.pinToEdges(of: contentView)
     }
 
     fileprivate func configure() {
