@@ -44,5 +44,17 @@ class LibraryCollectionViewCell: PagingCell {
     override func setPagingItem(_ pagingItem: PagingItem, selected _: Bool, options _: PagingOptions) {
         guard let sectionItem = pagingItem as? SectionPageItem else { return }
         sectionLabel.text = sectionItem.section?.title ?? "N/A"
+        applyAccessibility()
+    }
+}
+
+extension LibraryCollectionViewCell {
+    func applyAccessibility() {
+        // TODO: Localize
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+        accessibilityLabel = "Seksjon"
+        accessibilityHint = "Velger seksjon"
+        accessibilityValue = sectionLabel.text ?? ""
     }
 }

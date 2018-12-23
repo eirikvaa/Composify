@@ -42,6 +42,7 @@ class OnboardingRootViewController: UIViewController {
 
         configureUI()
         configurePageViewController()
+        applyAccessibility()
     }
 
     // As the onboarding is (as of 16th of December) red, we should
@@ -186,5 +187,24 @@ extension OnboardingRootViewController: UIPageViewControllerDataSource {
         guard index + 1 < viewControllers.count else { return nil }
 
         return viewControllers[index + 1]
+    }
+}
+
+extension OnboardingRootViewController {
+    func applyAccessibility() {
+        // TODO: Localize
+        skipButton.isAccessibilityElement = true
+        skipButton.accessibilityTraits = .button
+        skipButton.accessibilityValue = skipButton.titleLabel?.text
+        skipButton.accessibilityLabel = "Hopp over knapp"
+        skipButton.accessibilityHint = "Hopper over onboarding"
+
+        nextButton.isAccessibilityElement = true
+        nextButton.accessibilityTraits = .button
+        nextButton.accessibilityValue = nextButton.titleLabel?.text
+        nextButton.accessibilityHint = "Gå til neste side"
+        nextButton.accessibilityLabel = "Neste-knapp"
+
+        // TODO: Accessibility for background images
     }
 }

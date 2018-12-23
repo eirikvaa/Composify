@@ -9,8 +9,8 @@
 import UIKit
 
 class RecordingTableViewCell: UITableViewCell {
-    lazy var playButton = UIButton(type: .custom)
-    lazy var titleLabel = UILabel()
+    private lazy var playButton = UIButton(type: .custom)
+    private lazy var titleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,6 +22,15 @@ class RecordingTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
 
         configureViews()
+    }
+
+    func setTitle(_ title: String?) {
+        titleLabel.text = title
+    }
+
+    func setImage(_ image: UIImage?) {
+        playButton.setImage(image, for: .normal)
+        applyAccessibility()
     }
 
     private func configureViews() {
@@ -49,5 +58,33 @@ class RecordingTableViewCell: UITableViewCell {
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
+    }
+}
+
+extension RecordingTableViewCell {
+    func applyAccessibility() {
+        // TODO: Localize
+        let image = playButton.imageView?.image
+        let isPlayImage = image?.isEqualTo(image: R.Images.play) ?? false
+
+        playButton.isAccessibilityElement = true
+        playButton.accessibilityTraits = [.button, .playsSound]
+        playButton.accessibilityLabel = "Avspill"
+        playButton.accessibilityValue = isPlayImage ? "Spill opptak" : "Pause opptak"
+        playButton.accessibilityHint = "Spiller opptak"
+
+        titleLabel.isAccessibilityElement = true
+        titleLabel.accessibilityTraits = .staticText
+        titleLabel.accessibilityValue = titleLabel.text
+        titleLabel.accessibilityLabel = "Opptak"
+    }
+}
+
+extension UIImage {
+    func isEqualTo(image: UIImage?) -> Bool {
+        guard let selfData = self.pngData() else { return false }
+        guard let otherData = image?.pngData() else { return false }
+
+        return selfData == otherData
     }
 }

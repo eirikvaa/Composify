@@ -65,6 +65,7 @@ class LibraryViewController: UIViewController {
         setupUI()
         registerObservers()
         updateUI()
+        applyAccessibility()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -112,7 +113,8 @@ extension LibraryViewController {
 
         projects.forEach { project in
             if project != currentProject {
-                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { _ in
+                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
+                    self.applyAccessibility(for: action)
                     self.setCurrentProject(project)
                 }
                 alert.addAction(projectAction)
@@ -220,6 +222,11 @@ extension LibraryViewController {
         pagingViewController.reloadData()
 
         setEditButton()
+
+        // We do this in `viewDidLoad`, but since the view controller state dictates if the
+        // record audio button should be read in voice over mode, apply the accessibility
+        // again here.
+        applyAccessibility()
     }
 
     /// Set the state of the user interface
@@ -318,5 +325,36 @@ extension LibraryViewController: AdministrateProjectDelegate {
 
     func userDidReorderSections() {
         updateUI()
+    }
+}
+
+extension LibraryViewController {
+    func applyAccessibility() {
+        // TODO: Localize
+        let startRecording = recording == nil
+        if let menuBarButton = navigationItem.leftBarButtonItem {
+            menuBarButton.isAccessibilityElement = true
+            menuBarButton.accessibilityTraits = .button
+            menuBarButton.accessibilityHint = "Viser meny"
+        }
+
+        navigationItem.accessibilityTraits = .staticText
+        navigationItem.accessibilityLabel = "Navn på prosjekt"
+
+        let recordAudioButtonIsVisible = state == .notEmpty
+        recordAudioButton.isAccessibilityElement = recordAudioButtonIsVisible == true
+        recordAudioButton.titleLabel?.isAccessibilityElement = recordAudioButtonIsVisible == true
+        recordAudioButton.accessibilityTraits = [.button, .startsMediaSession]
+        recordAudioButton.accessibilityLabel = "Opptak"
+        recordAudioButton.accessibilityHint = startRecording ? "Start opptak" : "Stopp opptak"
+    }
+
+    func applyAccessibility(for action: UIAlertAction) {
+        // TODO: Localize
+        action.isAccessibilityElement = true
+        action.accessibilityTraits = .button
+        action.accessibilityValue = action.title
+        action.accessibilityHint = "Velg prosjekt"
+        action.accessibilityLabel = "Prosjekt"
     }
 }

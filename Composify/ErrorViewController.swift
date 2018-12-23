@@ -22,6 +22,7 @@ class ErrorViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        applyAccessibility()
     }
 
     required init?(coder _: NSCoder) {
@@ -40,5 +41,15 @@ class ErrorViewController: UIViewController {
 
         label.translatesAutoresizingMaskIntoConstraints = false
         label.pinToEdgesOfView(view)
+    }
+}
+
+extension ErrorViewController {
+    func applyAccessibility() {
+        // TODO: Localize
+        label.isAccessibilityElement = true
+        label.accessibilityTraits = .staticText
+        label.accessibilityValue = text
+        label.accessibilityLabel = "Melding"
     }
 }

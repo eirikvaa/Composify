@@ -27,8 +27,9 @@ extension SectionViewController: UITableViewDataSource {
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
         let hasTitle = recording?.title.hasPositiveCharacterCount ?? false
-        cell.titleLabel.text = hasTitle ? recording?.title : recording?.dateCreated.description
-        cell.playButton.setImage(isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play, for: .normal)
+        cell.setTitle(hasTitle ? recording?.title : recording?.dateCreated.description)
+        // For now: Image must come after title because I set accessbility after image is set
+        cell.setImage(isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play)
 
         return cell
     }

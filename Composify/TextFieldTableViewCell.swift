@@ -39,5 +39,15 @@ extension TextFieldTableViewCell {
             textField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: separatorInset.right),
             textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
+
+        applyAccessibility()
+    }
+}
+
+extension TextFieldTableViewCell {
+    func applyAccessibility() {
+        // TODO: Localize
+        textField.isAccessibilityElement = true
+        textField.accessibilityLabel = "Seksjon"
     }
 }

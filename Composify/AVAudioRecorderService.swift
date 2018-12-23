@@ -50,6 +50,7 @@ struct AVAudioRecorderService: AudioRecorderService {
     }
 
     func stop() {
+        try? session.setActive(false)
         recorder.stop()
     }
 }
