@@ -46,10 +46,9 @@ class ErrorViewController: UIViewController {
 
 extension ErrorViewController {
     func applyAccessibility() {
-        // TODO: Localize
         label.isAccessibilityElement = true
         label.accessibilityTraits = .staticText
         label.accessibilityValue = text
-        label.accessibilityLabel = "Melding"
+        label.accessibilityLabel = R.Loc.errorViewControllerLabelAccLabel
     }
 }

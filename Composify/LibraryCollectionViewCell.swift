@@ -50,11 +50,10 @@ class LibraryCollectionViewCell: PagingCell {
 
 extension LibraryCollectionViewCell {
     func applyAccessibility() {
-        // TODO: Localize
         isAccessibilityElement = true
         accessibilityTraits = .button
-        accessibilityLabel = "Seksjon"
-        accessibilityHint = "Velger seksjon"
+        accessibilityLabel = R.Loc.libraryCollectionViewCellAccLabel
+        accessibilityHint = R.Loc.libraryCollectionViewCellAccHint
         accessibilityValue = sectionLabel.text ?? ""
     }
 }

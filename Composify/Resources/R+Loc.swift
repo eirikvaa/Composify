@@ -15,6 +15,10 @@ extension R.Loc {
         "app.title",
         comment: "The title of the application. Should not be localized, but is included for completeness sake."
     )
+    static let settings = NSLocalizedString(
+        "app.settings",
+        comment: "Settings"
+    )
 }
 
 // MARK: Onboarding
@@ -236,5 +240,151 @@ extension R.Loc {
     static let unableToConfigureRecordingSessionMessage = NSLocalizedString(
         "recordings.error.unable-to-configure-recording-session.alert.message",
         comment: "Message when application is unable to configure a recording session."
+    )
+}
+
+// MARK: Microphone permissions
+
+extension R.Loc {
+    static let deniedMicrophoneAccessGoToSettingsAlertTitle = NSLocalizedString(
+        "microphone-access.denied.show-settings-alert.title",
+        comment: "Alert title when user has denied access to microphone"
+    )
+
+    static let deniedMicrophoneAccessGoToSettingsAlertTessage = NSLocalizedString(
+        "microphone-access.denied.show-settings-alert.message",
+        comment: "Alert message when user has denied access to microphone"
+    )
+}
+
+// MARK: Accessibility
+
+extension R.Loc {
+    static let menuChooseProjectAccHint = NSLocalizedString(
+        "menu.choose-project.acc.hint",
+        comment: "Accessibility hint when choosing project in menu"
+    )
+
+    static let menuChooseProjectAccLabel = NSLocalizedString(
+        "menu.choose-project.acc.label",
+        comment: "Accessibility label when choosing project in menu"
+    )
+
+    static let menuBarButtonAccHint = NSLocalizedString(
+        "menu-bar-button.acc.hint",
+        comment: "Accessibility hint for menu bar button"
+    )
+
+    static let libraryNavigationItemAccLabel = NSLocalizedString("library.nav-item.acc.label", comment: "Accessibility label for library navigation item")
+
+    static let libraryRecordAudioButtonAccLabel = NSLocalizedString(
+        "library.record-audio-button.acc.label",
+        comment: "Accessibility label for library record audio button"
+    )
+
+    static let libraryRecordAudioButtonAccStartRecordingHint = NSLocalizedString(
+        "library.record-audio-button.acc.start-recording.hint",
+        comment: "Accessibility hint when able to start recording"
+    )
+
+    static let libraryRecordAudioButtonAccStopRecordingHint = NSLocalizedString(
+        "library.record-audio-button.acc.stop-recording.hint",
+        comment: "Accessibility hint when able to stop recording"
+    )
+
+    static let libraryCollectionViewCellAccLabel = NSLocalizedString(
+        "library.collection.cell.acc.label",
+        comment: "Accessibility label for library collection view cell"
+    )
+
+    static let libraryCollectionViewCellAccHint = NSLocalizedString(
+        "library.collection.cell.acc.hint",
+        comment: "Accessibility hint for library collection view cell"
+    )
+
+    static let recordingCellPlayButtonAccLabel = NSLocalizedString(
+        "recording-cell.play-button.acc.label",
+        comment: "Accessibility label for recording cell play button"
+    )
+
+    static let recordingCellPlayButtonCanPlayAccValue = NSLocalizedString(
+        "recording-cell.play-button.can-play.acc.value",
+        comment: "Accessibility value for recording cell play button when can play"
+    )
+
+    static let recordingCellPlayButtonCanPauseAccValue = NSLocalizedString(
+        "recording-cell.play-button.can-pause.acc.value",
+        comment: "Accessibility value for recording cell play button when can pause"
+    )
+
+    static let recordingCellPlayButtonAccHint = NSLocalizedString(
+        "recording-cell.play-button.acc.hint",
+        comment: "Accessibility hint for recording cell play button"
+    )
+
+    static let recordingCellTitleLabelAcclabel = NSLocalizedString(
+        "recording-cell.title-label.acc.label",
+        comment: "Accessibility label for recording cell title label"
+    )
+    static let errorViewControllerLabelAccLabel = NSLocalizedString(
+        "error-view-controller.label.acc.label",
+        comment: "Accessibility label for error view controller label"
+    )
+    static let buttonTableViewCellAccLabel = NSLocalizedString(
+        "button-table-view-cell.acc.label",
+        comment: "Accessibility label for button table view cell"
+    )
+
+    static let buttonTableViewCellAccHint = NSLocalizedString(
+        "button-table-view-cell.acc.hint",
+        comment: "Accessibility hint for button table view cell"
+    )
+    static let textFieldTableViewCellAccLabel = NSLocalizedString(
+        "textfield-table-view-cell.acc.label",
+        comment: "Accessibility label for textfield table view cell"
+    )
+
+    static let onboardingNextButtonAccLabel = NSLocalizedString(
+        "onboarding.next-button.acc.label",
+        comment: "Accessibility label for onboarding next button"
+    )
+
+    static let onboardingNextButtonAccHint = NSLocalizedString(
+        "onboarding.next-button.acc.hint",
+        comment: "Accessibility hint for onboarding next button"
+    )
+
+    static let onboardingSkipButtonAccLabel = NSLocalizedString(
+        "onboarding.skip-button.acc.label",
+        comment: "Accessibility label for onboarding skip button"
+    )
+
+    static let onboardingSkipButtonAccHint = NSLocalizedString(
+        "onboarding.skip-button.acc.hint",
+        comment: "Accessibility hint for onboarding skip button"
+    )
+
+    static let onboardingBackgroundImage0AccLabel = NSLocalizedString(
+        "onboarding.background-image-0.acc.label",
+        comment: "Accessibility label for onboarding bacground image 0"
+    )
+
+    static let onboardingBackgroundImage1AccLabel = NSLocalizedString(
+        "onboarding.background-image-1.acc.label",
+        comment: "Accessibility label for onboarding bacground image 1"
+    )
+
+    static let onboardingBackgroundImage2AccLabel = NSLocalizedString(
+        "onboarding.background-image-2.acc.label",
+        comment: "Accessibility label for onboarding bacground image 2"
+    )
+
+    static let onboardingBackgroundImage3AccLabel = NSLocalizedString(
+        "onboarding.background-image-3.acc.label",
+        comment: "Accessibility label for onboarding background image 3"
+    )
+    static let onboardingBackgroundImageAccLabel = NSLocalizedString(
+        "onboarding.background-image.acc.label",
+        comment: "Accessibility label for onboarding background image"
     )
 }

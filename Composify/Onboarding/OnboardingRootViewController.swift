@@ -200,19 +200,16 @@ extension OnboardingRootViewController: UIPageViewControllerDataSource {
 
 extension OnboardingRootViewController {
     func applyAccessibility() {
-        // TODO: Localize
         skipButton.isAccessibilityElement = true
         skipButton.accessibilityTraits = .button
         skipButton.accessibilityValue = skipButton.titleLabel?.text
-        skipButton.accessibilityLabel = "Hopp over knapp"
-        skipButton.accessibilityHint = "Hopper over onboarding"
+        skipButton.accessibilityLabel = R.Loc.onboardingSkipButtonAccLabel
+        skipButton.accessibilityHint = R.Loc.onboardingSkipButtonAccHint
 
         nextButton.isAccessibilityElement = true
         nextButton.accessibilityTraits = .button
         nextButton.accessibilityValue = nextButton.titleLabel?.text
-        nextButton.accessibilityHint = "Gå til neste side"
-        nextButton.accessibilityLabel = "Neste-knapp"
-
-        // TODO: Accessibility for background images
+        nextButton.accessibilityHint = R.Loc.onboardingNextButtonAccHint
+        nextButton.accessibilityLabel = R.Loc.onboardingNextButtonAccLabel
     }
 }

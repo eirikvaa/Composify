@@ -14,8 +14,20 @@
 /* Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed. */
 "administrate-project.tableview.cell.add-section.title" = "Add section";
 
+/* Settings */
+"app.settings" = "Settings";
+
 /* The title of the application. Should not be localized, but is included for completeness sake. */
 "app.title" = "Composify";
+
+/* Accessibility hint for button table view cell */
+"button-table-view-cell.acc.hint" = "Delete project";
+
+/* Accessibility label for button table view cell */
+"button-table-view-cell.acc.label" = "Delete";
+
+/* Accessibility label for error view controller label */
+"error-view-controller.label.acc.label" = "Message";
 
 /* Generic word for administrate. */
 "general.administrate" = "Administrate";
@@ -38,6 +50,12 @@
 /* Generic word for save. */
 "general.save" = "Save";
 
+/* Accessibility hint for library collection view cell */
+"library.collection.cell.acc.hint" = "Selects section";
+
+/* Accessibility label for library collection view cell */
+"library.collection.cell.acc.label" = "Section";
+
 /* Label appearing when the user has no projects. */
 "library.empty-state.no-projects" = "You have no projects. Try adding one.";
 
@@ -59,17 +77,65 @@
 /* Title of button in menu for seeing a project. */
 "library.menu.show-project.label" = "Show %@";
 
+/* Accessibility label for library navigation item */
+"library.nav-item.acc.label" = "Name of project";
+
+/* Accessibility label for library record audio button */
+"library.record-audio-button.acc.label" = "Record";
+
+/* Accessibility hint when able to start recording */
+"library.record-audio-button.acc.start-recording.hint" = "Start recording";
+
+/* Accessibility hint when able to stop recording */
+"library.record-audio-button.acc.stop-recording.hint" = "Stop recording";
+
 /* Title of button when user is not recording audio. */
 "library.record-button.start-recording.title" = "Start recording";
 
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Stop recording";
 
+/* Accessibility hint for menu bar button */
+"menu-bar-button.acc.hint" = "Show menu";
+
+/* Accessibility hint when choosing project in menu */
+"menu.choose-project.acc.hint" = "Choose project";
+
+/* Accessibility label when choosing project in menu */
+"menu.choose-project.acc.label" = "Project";
+
+/* Alert message when user has denied access to microphone */
+"microphone-access.denied.show-settings-alert.message" = "Grant access to microphone";
+
+/* Alert title when user has denied access to microphone */
+"microphone-access.denied.show-settings-alert.title" = "You must grant access to the microphone to be able to record audio.";
+
+/* Accessibility label for onboarding bacground image 0 */
+"onboarding.background-image-0.acc.label" = "Organize your song-writing process with Composify";
+
+/* Accessibility label for onboarding bacground image 1 */
+"onboarding.background-image-1.acc.label" = "Put recordings into sections and projects for easy maintenance";
+
+/* Accessibility label for onboarding bacground image 2 */
+"onboarding.background-image-2.acc.label" = "Easily export recordings";
+
+/* Accessibility label for onboarding background image 3 */
+"onboarding.background-image-3.acc.label" = "Go ahead and record some good stuff!";
+
+/* Accessibility label for onboarding background image */
+"onboarding.background-image.acc.label" = "Background image";
+
 /* Next button title when at the last page */
 "onboarding.next-button-title.dismiss" = "Dismiss";
 
 /* Next button title when not at the last page */
 "onboarding.next-button-title.next" = "Next";
+
+/* Accessibility hint for onboarding next button */
+"onboarding.next-button.acc.hint" = "Go to next page";
+
+/* Accessibility label for onboarding next button */
+"onboarding.next-button.acc.label" = "Next";
 
 /* onboarding.page1 */
 "onboarding.page1" = "Onboarding1";
@@ -83,8 +149,29 @@
 /* onboarding.page4 */
 "onboarding.page4" = "Onboarding4";
 
+/* Accessibility hint for onboarding skip button */
+"onboarding.skip-button.acc.hint" = "Skip to last page";
+
+/* Accessibility label for onboarding skip button */
+"onboarding.skip-button.acc.label" = "Skip";
+
 /* Title of skip button */
 "onboarding.skipButton.title" = "Skip";
+
+/* Accessibility hint for recording cell play button */
+"recording-cell.play-button.acc.hint" = "Play recording";
+
+/* Accessibility label for recording cell play button */
+"recording-cell.play-button.acc.label" = "Play";
+
+/* Accessibility value for recording cell play button when can pause */
+"recording-cell.play-button.can-pause.acc.value" = "Pause recording";
+
+/* Accessibility value for recording cell play button when can play */
+"recording-cell.play-button.can-play.acc.value" = "Play recording";
+
+/* Accessibility label for recording cell title label */
+"recording-cell.title-label.acc.label" = "Recording";
 
 /* Message when recording can't be found in the file system. */
 "recordings.error.missing-recording.alert.message" = "It seems the recording can't be found in the filesystem.";
@@ -93,13 +180,10 @@
 "recordings.error.missing-recording.alert.title" = "Couldn't find recording!";
 
 /* Message when application is unable to configure a recording session. */
-"recordings.error.unable-to-configure-recording-session.alert.message" = "Unable to configure a recording session!";;
+"recordings.error.unable-to-configure-recording-session.alert.message" = "Unable to configure a recording session!";
 
 /* Title when application is unable to configure a recording session. */
 "recordings.error.unable-to-configure-recording-session.alert.title" = "The application was unable to configure a recording session!";
-
-/* Title when application is unable to configure a recording session. */
-"recordings.error.unable-to-configure-recording-session.alert.title" = "recordings.error.unable-to-configure-recording-session.alert.title";
 
 /* Message when trying to delete object from filesystem. */
 "recordings.error.unable-to-delete-object.alert.message" = "The application was unable to delete the object named %@.";
@@ -124,3 +208,6 @@
 
 /* Generic name for a new section */
 "sections.section" = "Section";
+
+/* Accessibility label for textfield table view cell */
+"textfield-table-view-cell.acc.label" = "Section";

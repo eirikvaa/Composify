@@ -14,8 +14,20 @@
 /* Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed. */
 "administrate-project.tableview.cell.add-section.title" = "Legg til seksjon";
 
+/* Settings */
+"app.settings" = "Innstillinger";
+
 /* The title of the application. Should not be localized, but is included for completeness sake. */
 "app.title" = "Composify";
+
+/* Accessibility hint for button table view cell */
+"button-table-view-cell.acc.hint" = "Slett prosjekt";
+
+/* Accessibility label for button table view cell */
+"button-table-view-cell.acc.label" = "Slett";
+
+/* Accessibility label for error view controller label */
+"error-view-controller.label.acc.label" = "Melding";
 
 /* Generic word for administrate. */
 "general.administrate" = "Administrer";
@@ -38,6 +50,12 @@
 /* Generic word for save. */
 "general.save" = "Lagre";
 
+/* Accessibility hint for library collection view cell */
+"library.collection.cell.acc.hint" = "Velger seksjon";
+
+/* Accessibility label for library collection view cell */
+"library.collection.cell.acc.label" = "Seksjon";
+
 /* Label appearing when the user has no projects. */
 "library.empty-state.no-projects" = "Du har ingen prosjekter. Prøv å legge til et.";
 
@@ -59,17 +77,65 @@
 /* Title of button in menu for seeing a project. */
 "library.menu.show-project.label" = "Vis %@";
 
+/* Accessibility label for library navigation item */
+"library.nav-item.acc.label" = "Navn på prosjekt";
+
+/* Accessibility label for library record audio button */
+"library.record-audio-button.acc.label" = "Ta opp";
+
+/* Accessibility hint when able to start recording */
+"library.record-audio-button.acc.start-recording.hint" = "Start opptak";
+
+/* Accessibility hint when able to stop recording */
+"library.record-audio-button.acc.stop-recording.hint" = "Stopp opptak";
+
 /* Title of button when user is not recording audio. */
 "library.record-button.start-recording.title" = "Start opptak";
 
 /* Title of button when user is recording audio. */
 "library.record-button.stop-recording.title" = "Avslutt opptak";
 
+/* Accessibility hint for menu bar button */
+"menu-bar-button.acc.hint" = "Vis meny";
+
+/* Accessibility hint when choosing project in menu */
+"menu.choose-project.acc.hint" = "Velg prosjekt";
+
+/* Accessibility label when choosing project in menu */
+"menu.choose-project.acc.label" = "Prosjekt";
+
+/* Alert message when user has denied access to microphone */
+"microphone-access.denied.show-settings-alert.message" = "Gi tilgang til mikrofonen";
+
+/* Alert title when user has denied access to microphone */
+"microphone-access.denied.show-settings-alert.title" = "Du må gi tilgang til mikrofonen for å ta opp lyd.";
+
+/* Accessibility label for onboarding bacground image 0 */
+"onboarding.background-image-0.acc.label" = "Organiser din sangskrive-prosess med Composify";
+
+/* Accessibility label for onboarding bacground image 1 */
+"onboarding.background-image-1.acc.label" = "Legg opptak i seksjoner og prosjekter for enkel vedlikehold";
+
+/* Accessibility label for onboarding bacground image 2 */
+"onboarding.background-image-2.acc.label" = "Enkelt eksporter opptak";
+
+/* Accessibility label for onboarding background image 3 */
+"onboarding.background-image-3.acc.label" = "Gå videre og spill inn noe kult!";
+
+/* Accessibility label for onboarding background image */
+"onboarding.background-image.acc.label" = "Bakgrunnsbilde";
+
 /* Next button title when at the last page */
 "onboarding.next-button-title.dismiss" = "Fullfør";
 
 /* Next button title when not at the last page */
 "onboarding.next-button-title.next" = "Neste";
+
+/* Accessibility hint for onboarding next button */
+"onboarding.next-button.acc.hint" = "Gå til neste side";
+
+/* Accessibility label for onboarding next button */
+"onboarding.next-button.acc.label" = "Neste";
 
 /* onboarding.page1 */
 "onboarding.page1" = "Onboarding1NB";
@@ -83,8 +149,29 @@
 /* onboarding.page4 */
 "onboarding.page4" = "Onboarding4NB";
 
+/* Accessibility hint for onboarding skip button */
+"onboarding.skip-button.acc.hint" = "Hopp over onboarding";
+
+/* Accessibility label for onboarding skip button */
+"onboarding.skip-button.acc.label" = "Hopp over";
+
 /* Title of skip button */
 "onboarding.skipButton.title" = "Hopp over";
+
+/* Accessibility hint for recording cell play button */
+"recording-cell.play-button.acc.hint" = "Spill opptak";
+
+/* Accessibility label for recording cell play button */
+"recording-cell.play-button.acc.label" = "Spill";
+
+/* Accessibility value for recording cell play button when can pause */
+"recording-cell.play-button.can-pause.acc.value" = "Pause opptak";
+
+/* Accessibility value for recording cell play button when can play */
+"recording-cell.play-button.can-play.acc.value" = "Spill opptak";
+
+/* Accessibility label for recording cell title label */
+"recording-cell.title-label.acc.label" = "Opptak";
 
 /* Message when recording can't be found in the file system. */
 "recordings.error.missing-recording.alert.message" = "Opptaket ble ikke funnet i filsystemet!";
@@ -121,3 +208,6 @@
 
 /* Generic name for a new section */
 "sections.section" = "Seksjon";
+
+/* Accessibility label for textfield table view cell */
+"textfield-table-view-cell.acc.label" = "Seksjon";

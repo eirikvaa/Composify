@@ -26,5 +26,28 @@ class OnboardingViewController: UIViewController {
 
         imageView.image = backgroundImage
         view.backgroundColor = R.Colors.cardinalRed
+
+        applyAccessibility()
+    }
+}
+
+extension OnboardingViewController {
+    func applyAccessibility() {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = .image
+        imageView.accessibilityLabel = R.Loc.onboardingBackgroundImageAccLabel
+
+        switch pageIndex {
+        case 0:
+            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage0AccLabel
+        case 1:
+            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage1AccLabel
+        case 2:
+            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage2AccLabel
+        case 3:
+            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage3AccLabel
+        default:
+            break
+        }
     }
 }

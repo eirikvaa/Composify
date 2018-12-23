@@ -63,15 +63,16 @@ class RecordingTableViewCell: UITableViewCell {
 
 extension RecordingTableViewCell {
     func applyAccessibility() {
-        // TODO: Localize
         let image = playButton.imageView?.image
         let isPlayImage = image?.isEqualTo(image: R.Images.play) ?? false
 
         playButton.isAccessibilityElement = true
         playButton.accessibilityTraits = [.button, .playsSound]
-        playButton.accessibilityLabel = "Avspill"
-        playButton.accessibilityValue = isPlayImage ? "Spill opptak" : "Pause opptak"
-        playButton.accessibilityHint = "Spiller opptak"
+        playButton.accessibilityLabel = R.Loc.recordingCellPlayButtonAccLabel
+        playButton.accessibilityValue = isPlayImage ?
+            R.Loc.recordingCellPlayButtonCanPlayAccValue :
+            R.Loc.recordingCellPlayButtonCanPauseAccValue
+        playButton.accessibilityHint = R.Loc.recordingCellPlayButtonAccHint
 
         titleLabel.isAccessibilityElement = true
         titleLabel.accessibilityTraits = .staticText

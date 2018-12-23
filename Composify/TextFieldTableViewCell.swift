@@ -46,8 +46,7 @@ extension TextFieldTableViewCell {
 
 extension TextFieldTableViewCell {
     func applyAccessibility() {
-        // TODO: Localize
         textField.isAccessibilityElement = true
-        textField.accessibilityLabel = "Seksjon"
+        textField.accessibilityLabel = R.Loc.textFieldTableViewCellAccLabel
     }
 }

@@ -53,11 +53,10 @@ extension ButtonTableViewCell {
 
 extension ButtonTableViewCell {
     func applyAccessibility() {
-        // TODO: Localize
         button.isAccessibilityElement = true
         button.accessibilityTraits = .button
         button.accessibilityValue = button.titleLabel?.text
-        button.accessibilityLabel = "Slett"
-        button.accessibilityHint = "Sletter prosjekt"
+        button.accessibilityLabel = R.Loc.buttonTableViewCellAccLabel
+        button.accessibilityHint = R.Loc.buttonTableViewCellAccHint
     }
 }

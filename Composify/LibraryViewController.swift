@@ -133,10 +133,9 @@ extension LibraryViewController {
     }
 
     @IBAction func recordAudio(_: UIButton) {
-        // TODO: Localize
         let settingsAlert = UIAlertController.createShowSettingsAlert(
-            title: "Permissions not granted",
-            message: "Go to settings and enable it."
+            title: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTitle,
+            message: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTessage
         )
 
         guard let recorder = audioRecorderDefaultService else {
@@ -198,10 +197,8 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
-    func handleMicrophonePermissions() {
-        
-    }
-    
+    func handleMicrophonePermissions() {}
+
     func registerObservers() {
         let notificationCenter = NotificationCenter.default
 
@@ -357,31 +354,30 @@ extension LibraryViewController: AdministrateProjectDelegate {
 
 extension LibraryViewController {
     func applyAccessibility() {
-        // TODO: Localize
         let startRecording = recording == nil
         if let menuBarButton = navigationItem.leftBarButtonItem {
             menuBarButton.isAccessibilityElement = true
             menuBarButton.accessibilityTraits = .button
-            menuBarButton.accessibilityHint = "Viser meny"
+            menuBarButton.accessibilityHint = R.Loc.menuBarButtonAccHint
         }
 
         navigationItem.accessibilityTraits = .staticText
-        navigationItem.accessibilityLabel = "Navn på prosjekt"
+        navigationItem.accessibilityLabel = R.Loc.libraryNavigationItemAccLabel
 
         let recordAudioButtonIsVisible = state == .notEmpty
         recordAudioButton.isAccessibilityElement = recordAudioButtonIsVisible == true
         recordAudioButton.titleLabel?.isAccessibilityElement = recordAudioButtonIsVisible == true
         recordAudioButton.accessibilityTraits = [.button, .startsMediaSession]
-        recordAudioButton.accessibilityLabel = "Opptak"
-        recordAudioButton.accessibilityHint = startRecording ? "Start opptak" : "Stopp opptak"
+        recordAudioButton.accessibilityLabel = R.Loc.libraryRecordAudioButtonAccLabel
+        recordAudioButton.accessibilityHint = startRecording ? R.Loc.libraryRecordAudioButtonAccStartRecordingHint :
+            R.Loc.libraryRecordAudioButtonAccStopRecordingHint
     }
 
     func applyAccessibility(for action: UIAlertAction) {
-        // TODO: Localize
         action.isAccessibilityElement = true
         action.accessibilityTraits = .button
         action.accessibilityValue = action.title
-        action.accessibilityHint = "Velg prosjekt"
-        action.accessibilityLabel = "Prosjekt"
+        action.accessibilityHint = R.Loc.menuChooseProjectAccHint
+        action.accessibilityLabel = R.Loc.menuChooseProjectAccLabel
     }
 }
