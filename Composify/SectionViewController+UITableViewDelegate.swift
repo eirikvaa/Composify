@@ -28,7 +28,7 @@ extension SectionViewController: UITableViewDelegate {
                     self.libraryViewController?.setEditing(false, animated: true)
                 }
             })
-            let cancel = UIAlertAction(title: R.Loc.cancel, style: .default, handler: nil)
+            let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel, handler: nil)
 
             edit.addAction(save)
             edit.addAction(cancel)
