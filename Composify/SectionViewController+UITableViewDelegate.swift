@@ -37,6 +37,7 @@ extension SectionViewController: UITableViewDelegate {
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { _, _ in
+            self.libraryViewController?.setEditing(false, animated: true)
             self.databaseService.delete(recording)
             self.libraryViewController?.updateUI()
         }
