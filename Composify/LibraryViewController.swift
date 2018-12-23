@@ -59,7 +59,7 @@ class LibraryViewController: UIViewController {
 
         showOnboardingIfNeeded()
 
-        currentProjectID = projects.first?.id
+        currentProjectID = UserDefaults.standard.fetchLastProjectID() ?? projects.first?.id
         currentSectionID = currentProject?.sectionIDs.first
 
         configurePagingViewController()
@@ -101,6 +101,7 @@ extension LibraryViewController {
                     Project.createProject(withTitle: projectTitle, then: { project in
                         self.currentProjectID = project.id
                         self.currentSectionID = project.sectionIDs.first
+                        self.rememberProjectChosen(project)
                         self.updateUI()
                     })
                 }
@@ -117,6 +118,7 @@ extension LibraryViewController {
                 let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
                     self.applyAccessibility(for: action)
                     self.setCurrentProject(project)
+                    self.rememberProjectChosen(project)
                 }
                 alert.addAction(projectAction)
             }
@@ -197,7 +199,13 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
-    func handleMicrophonePermissions() {}
+    /// Persist the project to userdefaults so it can be picked the next time
+    /// the user launches the app.
+    /// - parameter project: The project to be persisted
+    func rememberProjectChosen(_: Project) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(currentProject?.id, forKey: R.UserDefaults.lastProjectID)
+    }
 
     func registerObservers() {
         let notificationCenter = NotificationCenter.default

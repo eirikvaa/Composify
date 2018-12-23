@@ -18,4 +18,8 @@ extension UserDefaults {
     func resetLastSection() {
         setValue(nil, forKey: R.UserDefaults.lastSectionID)
     }
+
+    func fetchLastProjectID() -> String? {
+        return string(forKey: R.UserDefaults.lastProjectID)
+    }
 }
