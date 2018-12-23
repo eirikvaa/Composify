@@ -51,6 +51,7 @@ class LibraryViewController: UIViewController {
     }
 
     private var recording: Recording?
+    private var grantedPermissionsToUseMicrophone = false
     let fileManager = FileManager.default
 
     override func viewDidLoad() {
@@ -132,6 +133,12 @@ extension LibraryViewController {
     }
 
     @IBAction func recordAudio(_: UIButton) {
+        // TODO: Localize
+        let settingsAlert = UIAlertController.createShowSettingsAlert(
+            title: "Permissions not granted",
+            message: "Go to settings and enable it."
+        )
+
         guard let recorder = audioRecorderDefaultService else {
             guard let currentProject = currentProject else { return }
             guard let currentSection = currentSection else { return }
@@ -155,8 +162,24 @@ extension LibraryViewController {
                 }
             }
 
+            grantedPermissionsToUseMicrophone = audioRecorderDefaultService?.askForMicrophonePermissions() ?? false
+
+            // Only start recording if permissions are granted
+            guard grantedPermissionsToUseMicrophone else {
+                present(settingsAlert, animated: true)
+                return
+            }
+
             audioRecorderDefaultService?.record()
             recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
+            return
+        }
+
+        // The handling here is a bit off, but this handles the case where permissions have not been
+        // granted, but the audio recorder sevice was created, which, without this, would create a recording,
+        // even though no audio was recorded.
+        guard grantedPermissionsToUseMicrophone else {
+            present(settingsAlert, animated: true)
             return
         }
 
@@ -175,6 +198,10 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
+    func handleMicrophonePermissions() {
+        
+    }
+    
     func registerObservers() {
         let notificationCenter = NotificationCenter.default
 

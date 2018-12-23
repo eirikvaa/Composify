@@ -21,4 +21,22 @@ extension UIAlertController {
 
         return alert
     }
+
+    static func createShowSettingsAlert(title: String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        // TODO: Localize
+        let settings = UIAlertAction(title: "Settings", style: .default) { _ in
+            let application = UIApplication.shared
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            guard application.canOpenURL(settingsURL) else { return }
+
+            application.open(settingsURL)
+        }
+        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+
+        alert.addAction(settings)
+        alert.addAction(cancel)
+
+        return alert
+    }
 }
