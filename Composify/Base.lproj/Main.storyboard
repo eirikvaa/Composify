@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-15-pxI">
-                                <rect key="frame" x="0.0" y="64" width="375" height="513"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="468"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cc-PW-NLT">
                                 <rect key="frame" x="0.0" y="585" width="375" height="82"/>
@@ -46,17 +46,23 @@
                                     <constraint firstItem="ibo-HO-ZNt" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="top" constant="8" id="o9w-RI-ouA"/>
                                 </constraints>
                             </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="xuX-d9-tBx">
+                                <rect key="frame" x="16" y="540" width="343" height="37"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nUi-15-pxI" secondAttribute="trailing" id="1Td-2L-sMg"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="top" secondItem="qzq-cg-rI3" secondAttribute="bottom" id="De6-JY-Riu"/>
-                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" symbolic="YES" id="Lao-eN-HCz"/>
                             <constraint firstItem="1Cc-PW-NLT" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="ewi-pd-juK"/>
                             <constraint firstItem="nUi-15-pxI" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leading" id="eyT-r9-XSy"/>
+                            <constraint firstItem="xuX-d9-tBx" firstAttribute="leading" secondItem="2v3-Us-6Gb" secondAttribute="leadingMargin" id="ghc-gd-Xzq"/>
+                            <constraint firstItem="xuX-d9-tBx" firstAttribute="trailing" secondItem="2v3-Us-6Gb" secondAttribute="trailingMargin" id="hIp-Fx-qV5"/>
                             <constraint firstAttribute="trailing" secondItem="1Cc-PW-NLT" secondAttribute="trailing" id="tpl-Or-8aW"/>
                             <constraint firstItem="tWS-Pa-CnK" firstAttribute="top" secondItem="1Cc-PW-NLT" secondAttribute="bottom" id="up9-ju-10F"/>
+                            <constraint firstItem="xuX-d9-tBx" firstAttribute="top" secondItem="nUi-15-pxI" secondAttribute="bottom" constant="8" id="vKE-pA-YvO"/>
+                            <constraint firstItem="1Cc-PW-NLT" firstAttribute="top" secondItem="xuX-d9-tBx" secondAttribute="bottom" constant="8" id="vwt-TQ-Anb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Project 1 ▸" id="l8w-mm-O0H">
@@ -69,6 +75,7 @@
                     <connections>
                         <outlet property="administerBarButton" destination="A5F-F3-Fdc" id="y2S-5G-yiM"/>
                         <outlet property="containerView" destination="nUi-15-pxI" id="bXY-f0-07s"/>
+                        <outlet property="pageControl" destination="xuX-d9-tBx" id="jzm-Js-XeW"/>
                         <outlet property="recordAudioButton" destination="ibo-HO-ZNt" id="mVS-2h-thc"/>
                         <outlet property="recordAudioView" destination="1Cc-PW-NLT" id="J2O-Lu-y3h"/>
                     </connections>

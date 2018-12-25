@@ -24,6 +24,12 @@ class LibraryViewController: UIViewController {
 
     @IBOutlet var recordAudioView: UIView!
     @IBOutlet var containerView: UIView!
+    @IBOutlet var pageControl: UIPageControl! {
+        didSet {
+            pageControl.pageIndicatorTintColor = .lightGray
+            pageControl.currentPageIndicatorTintColor = R.Colors.cardinalRed
+        }
+    }
 
     // Properties
     private var errorViewController: ErrorViewController?
@@ -255,6 +261,8 @@ extension LibraryViewController {
 
         setEditButton()
 
+        configurePageControl()
+
         // We do this in `viewDidLoad`, but since the view controller state dictates if the
         // record audio button should be read in voice over mode, apply the accessibility
         // again here.
@@ -298,6 +306,11 @@ extension LibraryViewController {
         administerViewController.administrateProjectDelegate = self
         let navigationController = UINavigationController(rootViewController: administerViewController)
         present(navigationController, animated: true)
+    }
+
+    func configurePageControl() {
+        pageControl.numberOfPages = currentProject?.sectionIDs.count ?? 0
+        pageControl.currentPage = currentSection?.index ?? 0
     }
 
     /// Configure the paging view controller

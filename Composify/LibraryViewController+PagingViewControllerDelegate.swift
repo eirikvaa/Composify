@@ -16,5 +16,6 @@ extension LibraryViewController: PagingViewControllerDelegate {
 
         // We might scroll to a section without recordings, so must remember to set the edit button correctly
         setEditButton()
+        configurePageControl()
     }
 }
