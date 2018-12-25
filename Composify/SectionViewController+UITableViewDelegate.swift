@@ -37,9 +37,17 @@ extension SectionViewController: UITableViewDelegate {
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { _, _ in
-            self.libraryViewController?.setEditing(false, animated: true)
-            self.databaseService.delete(recording)
-            self.libraryViewController?.updateUI()
+            let confirmation = UIAlertController.createConfirmationAlert(
+                title: R.Loc.deleteRecordingConfirmationAlertTitle,
+                message: R.Loc.deleteRecordingConfirmationAlertMessage,
+                completionHandler: { _ in
+                    self.libraryViewController?.setEditing(false, animated: true)
+                    self.databaseService.delete(recording)
+                    self.libraryViewController?.updateUI()
+                }
+            )
+
+            self.present(confirmation, animated: true)
         }
 
         let export = UITableViewRowAction(style: .default, title: R.Loc.export) { _, _ in

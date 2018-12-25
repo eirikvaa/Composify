@@ -82,6 +82,16 @@ extension R.Loc {
         "administrate-project.delete-button.title",
         comment: "Title of delete button in table view."
     )
+
+    static let deleteProjectConfirmationAlertTitle = NSLocalizedString(
+        "administrate.delete-project.confirmation.alert.title",
+        comment: "Confirmation title when deleting section"
+    )
+
+    static let deleteProjectConfirmationAlertMessage = NSLocalizedString(
+        "administrate.delete-project.confirmation.alert.message",
+        comment: "Confirmation message when deleting section"
+    )
 }
 
 // MARK: Section localizatios
@@ -99,6 +109,16 @@ extension R.Loc {
         "sections.section",
         comment: "Generic name for a new section"
     )
+
+    static let deleteSectionConfirmationAlertTitle = NSLocalizedString(
+        "administrate.delete-section.confirmation.alert.title",
+        comment: "Confirmation title when deleting section"
+    )
+
+    static let deleteSectionConfirmationAlertMessage = NSLocalizedString(
+        "administrate.delete-section.confirmation.alert.message",
+        comment: "Confirmation message when deleting section"
+    )
 }
 
 // MARK: Recording localizations
@@ -115,6 +135,16 @@ extension R.Loc {
     static let recording = NSLocalizedString(
         "recordings.recording",
         comment: "Generic name for a new recording"
+    )
+
+    static let deleteRecordingConfirmationAlertTitle = NSLocalizedString(
+        "library.delete-recording.confirmation.alert.title",
+        comment: "Confirmation title when deleting recording"
+    )
+
+    static let deleteRecordingConfirmationAlertMessage = NSLocalizedString(
+        "library.delete-recording.confirmation.alert.message",
+        comment: "Confirmation message when deleting recording"
     )
 }
 

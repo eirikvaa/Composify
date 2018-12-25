@@ -38,4 +38,26 @@ extension UIAlertController {
 
         return alert
     }
+
+    static func createConfirmationAlert(title: String, message: String, completionHandler: ((UIAlertAction) -> Void)?) -> UIAlertController {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .actionSheet
+        )
+        let delete = UIAlertAction(
+            title: R.Loc.delete,
+            style: .destructive,
+            handler: completionHandler
+        )
+        let cancel = UIAlertAction(
+            title: R.Loc.cancel,
+            style: .cancel
+        )
+
+        alert.addAction(delete)
+        alert.addAction(cancel)
+
+        return alert
+    }
 }

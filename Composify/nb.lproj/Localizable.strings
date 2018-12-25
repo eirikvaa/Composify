@@ -14,6 +14,18 @@
 /* Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed. */
 "administrate-project.tableview.cell.add-section.title" = "Legg til seksjon";
 
+/* Confirmation message when deleting section */
+"administrate.delete-project.confirmation.alert.message" = "Er du sikker på at du vil slette prosjektet? Du vil ikke kunne gjenopprette det.";
+
+/* Confirmation title when deleting section */
+"administrate.delete-project.confirmation.alert.title" = "Slett prosjekt";
+
+/* Confirmation message when deleting section */
+"administrate.delete-section.confirmation.alert.message" = "Er du sikker på at du vil slette seksjonen? Du vil ikke kunne gjenopprette det.";
+
+/* Confirmation title when deleting section */
+"administrate.delete-section.confirmation.alert.title" = "Slett seksjon";
+
 /* Settings */
 "app.settings" = "Innstillinger";
 
@@ -55,6 +67,12 @@
 
 /* Accessibility label for library collection view cell */
 "library.collection.cell.acc.label" = "Seksjon";
+
+/* Confirmation message when deleting recording */
+"library.delete-recording.confirmation.alert.message" = "Er du sikker på at du vil slette opptaket? Du kommer ikke til å kunne gjenopprette det.";
+
+/* Confirmation title when deleting recording */
+"library.delete-recording.confirmation.alert.title" = "Slett opptak";
 
 /* Label appearing when the user has no projects. */
 "library.empty-state.no-projects" = "Du har ingen prosjekter. Prøv å legge til et.";

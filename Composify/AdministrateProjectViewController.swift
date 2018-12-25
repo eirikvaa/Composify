@@ -130,7 +130,7 @@ extension AdministrateProjectViewController {
     /// Delete a section from the project
     /// - parameter sectionToDelete: The section to be deleted
     /// - parameter completionHandler: Something that should be done after deleting the section
-    func deleteSection(_ sectionToDelete: Section, then completionHandler: () -> Void) {
+    func deleteSection(_ sectionToDelete: Section, then completionHandler: @escaping () -> Void) {
         normalizeSectionIndices(from: sectionToDelete.index)
         databaseService.delete(sectionToDelete)
         completionHandler()

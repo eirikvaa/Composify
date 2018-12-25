@@ -70,16 +70,24 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
             deleteCell.buttonTitle = R.Loc.deleteProejct
             deleteCell.action = {
-                let userDefaults = UserDefaults.standard
-                if userDefaults.lastProject() == self.currentProject {
-                    userDefaults.resetLastProject()
-                    userDefaults.resetLastSection()
-                }
+                let confirmation = UIAlertController.createConfirmationAlert(
+                    title: R.Loc.deleteProjectConfirmationAlertTitle,
+                    message: R.Loc.deleteProjectConfirmationAlertMessage,
+                    completionHandler: { _ in
+                        let userDefaults = UserDefaults.standard
+                        if userDefaults.lastProject() == self.currentProject {
+                            userDefaults.resetLastProject()
+                            userDefaults.resetLastSection()
+                        }
 
-                self.administrateProjectViewController.databaseService.delete(self.currentProject)
-                self.administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
+                        self.administrateProjectViewController.databaseService.delete(self.currentProject)
+                        self.administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
 
-                self.administrateProjectViewController.dismiss(animated: true)
+                        self.administrateProjectViewController.dismiss(animated: true)
+                    }
+                )
+
+                self.administrateProjectViewController.present(confirmation, animated: true)
             }
             return deleteCell
         default:
@@ -127,18 +135,29 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 UserDefaults.standard.resetLastSection()
             }
 
-            administrateProjectViewController.deleteSection(sectionToDelete) {
-                self.administrateProjectViewController.administrateProjectDelegate?.userDidDeleteSectionFromProject()
-            }
+            let confirmation = UIAlertController.createConfirmationAlert(
+                title: R.Loc.deleteSectionConfirmationAlertTitle,
+                message: R.Loc.deleteSectionConfirmationAlertMessage,
+                completionHandler: { _ in
+                    self.administrateProjectViewController.deleteSection(sectionToDelete) {
+                        self.administrateProjectViewController
+                            .administrateProjectDelegate?
+                            .userDidDeleteSectionFromProject()
 
-            administrateProjectViewController.tableRowValues.removeAll()
-            let projectSectionsSection = tableSection.projectSections.rawValue
-            for section in currentProject.sections {
-                let key = HashableTuple(projectSectionsSection, section.index)
-                administrateProjectViewController.tableRowValues[key] = section.title
-            }
+                        self.administrateProjectViewController.tableRowValues.removeAll()
+                        let projectSectionsSection = self.tableSection.projectSections.rawValue
+                        for section in self.currentProject.sections {
+                            let key = HashableTuple(projectSectionsSection, section.index)
+                            self.administrateProjectViewController.tableRowValues[key] = section.title
+                        }
 
-            administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self.administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            )
+
+            administrateProjectViewController.present(confirmation, animated: true)
+
         case .none:
             break
         }
