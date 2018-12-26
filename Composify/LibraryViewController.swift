@@ -290,7 +290,7 @@ extension LibraryViewController {
         case .noProjects:
             errorViewController = ErrorViewController(
                 message: R.Loc.noProjects,
-                actionMessage: "Create project",
+                actionMessage: R.Loc.addProject,
                 action: {
                     self.showCreateProjectAlert()
                 }
@@ -301,7 +301,7 @@ extension LibraryViewController {
         case .noSections:
             errorViewController = ErrorViewController(
                 message: R.Loc.noSections,
-                actionMessage: "Create section",
+                actionMessage: R.Loc.addSection,
                 action: {
                     guard let currentProject = self.currentProject else { return }
                     self.presentAdministrateViewController(project: currentProject)
