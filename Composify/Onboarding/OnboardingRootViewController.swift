@@ -25,6 +25,7 @@ class OnboardingRootViewController: UIViewController {
         }
     }
 
+    @IBOutlet var pageControl: UIPageControl!
     @IBOutlet private var containerView: UIView!
 
     // MARK: Properties
@@ -94,6 +95,14 @@ extension OnboardingRootViewController {
 }
 
 private extension OnboardingRootViewController {
+    /// Configure the page control
+    /// - parameter count: The number of dots corresponding to the number of pages
+    func configurePageControl(count: Int) {
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = count
+    }
+
+    /// Configure the user interface
     func configureUI() {
         view.bringSubviewToFront(nextButton)
         nextButton.addTarget(self, action: #selector(nextOnboardingPage), for: .touchUpInside)
@@ -107,6 +116,8 @@ private extension OnboardingRootViewController {
         containerView.backgroundColor = R.Colors.cardinalRed
     }
 
+    /// Generate the view controllers used for pages in the onboarding
+    /// - returns: An array of view controllers for the onboarding
     func generateOnboardingViewControllers() -> [OnboardingViewController] {
         var backgroundImages = [
             R.Images.onboarding1,
@@ -125,8 +136,11 @@ private extension OnboardingRootViewController {
         return viewControllers
     }
 
+    /// Configure the page view controller
     func configurePageViewController() {
         viewControllers = generateOnboardingViewControllers()
+
+        configurePageControl(count: viewControllers.count)
 
         pagingViewController.setViewControllers(
             [viewControllers[0]],
@@ -147,10 +161,13 @@ private extension OnboardingRootViewController {
 }
 
 extension OnboardingRootViewController: UIPageViewControllerDelegate {
+    /// Update the next button title if needed
+    /// It will be updated at the last page as it then will dismiss the onboarding
     func updateNextButtonTitleIfNeeded() {
         // We're at the last onboarding page
         let fontSize = nextButton.titleLabel?.font.pointSize ?? UIFont.systemFontSize
         let transitionedToLastOnboardingPage = currentOnboardingPageIndex == viewControllers.count - 1
+        pageControl.currentPage = currentOnboardingPageIndex
 
         UIView.transition(
             with: nextButton,

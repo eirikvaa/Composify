@@ -32,13 +32,23 @@
                                 <rect key="frame" x="349" y="673" width="32" height="30"/>
                                 <state key="normal" title="Next"/>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="SUh-ak-ar9">
+                                <rect key="frame" x="132" y="673" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="V8C-fU-QAu"/>
+                                </constraints>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aTK-KV-pgM" firstAttribute="trailing" secondItem="Dfa-nO-KBw" secondAttribute="trailing" constant="33" id="204-Xx-Bxk"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="trailing" secondItem="aTK-KV-pgM" secondAttribute="trailing" id="LvT-gm-kME"/>
+                            <constraint firstItem="SUh-ak-ar9" firstAttribute="top" secondItem="cAq-FG-KE0" secondAttribute="bottom" constant="-63" id="Mt4-mX-Qlc"/>
+                            <constraint firstItem="Dfa-nO-KBw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SUh-ak-ar9" secondAttribute="trailing" constant="8" id="aed-Ql-okG"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" id="e5E-QP-4ii"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="top" secondItem="aTK-KV-pgM" secondAttribute="top" constant="-20" id="fgy-dc-SJ7"/>
+                            <constraint firstItem="SUh-ak-ar9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JXa-Yw-v2C" secondAttribute="trailing" constant="8" id="hIQ-7z-Nxt"/>
+                            <constraint firstItem="SUh-ak-ar9" firstAttribute="centerX" secondItem="z6P-Vg-bM8" secondAttribute="centerX" id="hh7-Uj-BzG"/>
                             <constraint firstItem="aTK-KV-pgM" firstAttribute="bottom" secondItem="Dfa-nO-KBw" secondAttribute="bottom" constant="33" id="o9A-h0-gSK"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" id="rmJ-h9-uze"/>
                             <constraint firstItem="JXa-Yw-v2C" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" constant="33" id="szM-JC-zaD"/>
@@ -49,6 +59,7 @@
                     <connections>
                         <outlet property="containerView" destination="cAq-FG-KE0" id="xpM-Gx-u3N"/>
                         <outlet property="nextButton" destination="Dfa-nO-KBw" id="C7Z-ef-jLW"/>
+                        <outlet property="pageControl" destination="SUh-ak-ar9" id="Ul3-J5-pds"/>
                         <outlet property="skipButton" destination="JXa-Yw-v2C" id="for-7H-ppa"/>
                     </connections>
                 </viewController>
