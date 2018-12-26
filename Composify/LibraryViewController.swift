@@ -87,38 +87,22 @@ class LibraryViewController: UIViewController {
 extension LibraryViewController {
     @IBAction func administrateProject(_: UIBarButtonItem) {
         var administrate: UIAlertAction?
+
         let alert = UIAlertController(title: R.Loc.menu, message: nil, preferredStyle: .actionSheet)
+
+        // Be able to administrate project if there is one
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: R.Loc.administrateProject, style: .default) { _ in
                 self.presentAdministrateViewController(project: currentProject)
             }
         }
 
+        // Can alway add a project
         let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
-            let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
-            addProjectAlert.addTextField { textField in
-                textField.autocapitalizationType = .words
-                textField.placeholder = R.Loc.projectTitle
-                textField.returnKeyType = .done
-                textField.clearButtonMode = .whileEditing
-            }
-            let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-                if let projectTitle = addProjectAlert.textFields?.first?.text {
-                    Project.createProject(withTitle: projectTitle, then: { project in
-                        self.currentProjectID = project.id
-                        self.currentSectionID = project.sectionIDs.first
-                        self.rememberProjectChosen(project)
-                        self.updateUI()
-                    })
-                }
-            })
-            let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
-            addProjectAlert.addAction(save)
-            addProjectAlert.addAction(cancel)
-
-            self.present(addProjectAlert, animated: true)
+            self.showCreateProjectAlert()
         }
 
+        // Showing other projects
         projects.forEach { project in
             if project != currentProject {
                 let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
@@ -131,9 +115,11 @@ extension LibraryViewController {
         }
 
         let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+
         if let administrate = administrate {
             alert.addAction(administrate)
         }
+
         alert.addAction(addProject)
         alert.addAction(cancel)
 
@@ -205,6 +191,30 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
+    func showCreateProjectAlert() {
+        let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
+        addProjectAlert.addTextField { textField in
+            textField.autocapitalizationType = .words
+            textField.placeholder = R.Loc.projectTitle
+            textField.returnKeyType = .done
+            textField.clearButtonMode = .whileEditing
+        }
+        let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
+            if let projectTitle = addProjectAlert.textFields?.first?.text {
+                Project.createProject(withTitle: projectTitle, then: { project in
+                    self.setCurrentProject(project)
+                    self.rememberProjectChosen(project)
+                    self.updateUI()
+                })
+            }
+        })
+        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+        addProjectAlert.addAction(save)
+        addProjectAlert.addAction(cancel)
+
+        present(addProjectAlert, animated: true)
+    }
+
     /// Persist the project to userdefaults so it can be picked the next time
     /// the user launches the app.
     /// - parameter project: The project to be persisted
@@ -278,12 +288,25 @@ extension LibraryViewController {
         case .notEmpty:
             break
         case .noProjects:
-            errorViewController = ErrorViewController(text: R.Loc.noProjects)
+            errorViewController = ErrorViewController(
+                message: R.Loc.noProjects,
+                actionMessage: "Create project",
+                action: {
+                    self.showCreateProjectAlert()
+                }
+            )
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
         case .noSections:
-            errorViewController = ErrorViewController(text: R.Loc.noSections)
+            errorViewController = ErrorViewController(
+                message: R.Loc.noSections,
+                actionMessage: "Create section",
+                action: {
+                    guard let currentProject = self.currentProject else { return }
+                    self.presentAdministrateViewController(project: currentProject)
+                }
+            )
             if let errorVieController = errorViewController {
                 add(errorVieController)
             }

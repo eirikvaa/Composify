@@ -49,6 +49,7 @@
 		E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E587605D20F24A600050C0BD /* ErrorViewController.swift */; };
 		E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71420F7B07300CF51FC /* DatabaseService.swift */; };
 		E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */; };
+		E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A4CCA21D2FED4007F9DBB /* RoundedButton.swift */; };
 		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
 		E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* FileManagerTests.swift */; };
@@ -155,6 +156,7 @@
 		E587605D20F24A600050C0BD /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		E589E71420F7B07300CF51FC /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		E589E71620F7B2C000CF51FC /* DatabaseServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceFactory.swift; sourceTree = "<group>"; };
+		E58A4CCA21D2FED4007F9DBB /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 		E56460371D3B54B600AA6557 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				E58A4CC921D2FEBE007F9DBB /* Custom Controls */,
 				E5FAB87D1F0985F800634565 /* Storyboards */,
 				E5FAB87C1F0985EA00634565 /* Cells */,
 			);
@@ -421,6 +424,14 @@
 				E5D6BDEE211258F7009B2E9F /* Database */,
 			);
 			name = "Common Interfaces";
+			sourceTree = "<group>";
+		};
+		E58A4CC921D2FEBE007F9DBB /* Custom Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E58A4CCA21D2FED4007F9DBB /* RoundedButton.swift */,
+			);
+			name = "Custom Controls";
 			sourceTree = "<group>";
 		};
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
@@ -789,6 +800,7 @@
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,
 				E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */,
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
+				E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */,
 				E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */,
 				E523959921C6821C00D3004F /* R+Colors.swift in Sources */,
 			);
