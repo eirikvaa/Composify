@@ -26,14 +26,25 @@ class OnboardingRootViewController: UIViewController {
     }
 
     @IBOutlet var pageControl: UIPageControl!
-    @IBOutlet private var containerView: UIView!
+    @IBOutlet private var containerView: UIView! {
+        didSet {
+            containerView.backgroundColor = R.Colors.cardinalRed
+        }
+    }
 
     // MARK: Properties
 
-    private var pagingViewController = UIPageViewController(
-        transitionStyle: .scroll,
-        navigationOrientation: .horizontal
-    )
+    private var pagingViewController: UIPageViewController {
+        let pagingViewController = UIPageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal
+        )
+        pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        pagingViewController.dataSource = self
+        pagingViewController.delegate = self
+        return pagingViewController
+    }
+
     private lazy var viewControllers = [OnboardingViewController]()
 
     // MARK: View Controller Life Cycle
@@ -113,7 +124,6 @@ private extension OnboardingRootViewController {
         // Color everything the same color as the images that are used
         // because we have to color above and below the safe area layout guides.
         view.backgroundColor = R.Colors.cardinalRed
-        containerView.backgroundColor = R.Colors.cardinalRed
     }
 
     /// Generate the view controllers used for pages in the onboarding
@@ -148,14 +158,7 @@ private extension OnboardingRootViewController {
             animated: true
         )
 
-        pagingViewController.dataSource = self
-        pagingViewController.delegate = self
-
         add(pagingViewController)
-        containerView.addSubview(pagingViewController.view)
-        pagingViewController.didMove(toParent: self)
-
-        pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         pagingViewController.view.pinToEdges(of: containerView)
     }
 }

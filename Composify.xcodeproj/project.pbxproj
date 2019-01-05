@@ -76,6 +76,8 @@
 		E5E6DC8121C445650061254B /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6DC8021C445650061254B /* R.swift */; };
 		E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* R+Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */; };
+		E5F0A4A521E1615B0072EEA5 /* Bool+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */; };
+		E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0A4A621E163F90072EEA5 /* UIAlertAction+Ext.swift */; };
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
@@ -185,6 +187,8 @@
 		E5E6DC8021C445650061254B /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SectionViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Loc.swift"; sourceTree = "<group>"; };
+		E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Ext.swift"; sourceTree = "<group>"; };
+		E5F0A4A621E163F90072EEA5 /* UIAlertAction+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Ext.swift"; sourceTree = "<group>"; };
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 				E5089E3A21C4128A0026478C /* UIColor+Ext.swift */,
 				E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */,
 				E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */,
+				E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */,
+				E5F0A4A621E163F90072EEA5 /* UIAlertAction+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */,
 				E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */,
 				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
+				E5F0A4A521E1615B0072EEA5 /* Bool+Ext.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
 				E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
@@ -794,6 +801,7 @@
 				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
+				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,

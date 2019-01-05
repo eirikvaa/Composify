@@ -24,6 +24,7 @@ extension UIAlertController {
 
     static func createShowSettingsAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
         let settings = UIAlertAction(title: R.Loc.settings, style: .default) { _ in
             let application = UIApplication.shared
             guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -31,7 +32,8 @@ extension UIAlertController {
 
             application.open(settingsURL)
         }
-        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+
+        let cancel = UIAlertAction.cancelAction
 
         alert.addAction(settings)
         alert.addAction(cancel)
@@ -45,18 +47,17 @@ extension UIAlertController {
             message: message,
             preferredStyle: .actionSheet
         )
+
         let delete = UIAlertAction(
             title: R.Loc.delete,
             style: .destructive,
             handler: completionHandler
         )
-        let cancel = UIAlertAction(
-            title: R.Loc.cancel,
-            style: .cancel
-        )
+
+        let cancelAction = UIAlertAction.cancelAction
 
         alert.addAction(delete)
-        alert.addAction(cancel)
+        alert.addAction(cancelAction)
 
         return alert
     }

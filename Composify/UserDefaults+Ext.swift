@@ -19,6 +19,8 @@ extension UserDefaults {
         setValue(nil, forKey: R.UserDefaults.lastSectionID)
     }
 
+    /// Get the ID of the last shown project
+    /// - returns: The ID of the project, or `nil` if there are no projects
     func fetchLastProjectID() -> String? {
         return string(forKey: R.UserDefaults.lastProjectID)
     }

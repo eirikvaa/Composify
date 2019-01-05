@@ -14,6 +14,7 @@ extension UIView {
     /// or nothing is found
     /// - parameter tag: The tag the wanted view has
     /// - parameter bottomView: The view from which we start searching
+    /// - returns: The super view with the passed in tag, or `nil` if the view wasn't found
     static func findSuperView(withTag tag: Int, fromBottomView bottomView: UIView?) -> UIView? {
         var currentView: UIView? = bottomView
 
