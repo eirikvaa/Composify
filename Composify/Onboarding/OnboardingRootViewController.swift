@@ -146,20 +146,30 @@ private extension OnboardingRootViewController {
         return viewControllers
     }
 
+    func setInitialViewControllerInPageViewController(viewController: UIViewController?) {
+        guard let viewController = viewController else {
+            return
+        }
+
+        pagingViewController.setViewControllers(
+            [viewController],
+            direction: .forward,
+            animated: true
+        )
+    }
+    
+    func pinPagingViewControllerToEdges(of view: UIView) {
+        pagingViewController.view.pinToEdges(of: containerView)
+    }
+
     /// Configure the page view controller
     func configurePageViewController() {
         viewControllers = generateOnboardingViewControllers()
 
         configurePageControl(count: viewControllers.count)
-
-        pagingViewController.setViewControllers(
-            [viewControllers[0]],
-            direction: .forward,
-            animated: true
-        )
-
+        setInitialViewControllerInPageViewController(viewController: viewControllers.first)
         add(pagingViewController)
-        pagingViewController.view.pinToEdges(of: containerView)
+        pinPagingViewControllerToEdges(of: containerView)
     }
 }
 
