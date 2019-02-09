@@ -34,7 +34,7 @@ class OnboardingRootViewController: UIViewController {
 
     // MARK: Properties
 
-    private var pagingViewController: UIPageViewController {
+    private lazy var pagingViewController: UIPageViewController = {
         let pagingViewController = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal
@@ -43,7 +43,7 @@ class OnboardingRootViewController: UIViewController {
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
         return pagingViewController
-    }
+    }()
 
     private lazy var viewControllers = [OnboardingViewController]()
 
