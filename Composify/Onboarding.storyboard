@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAq-FG-KE0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
                                 <connections>
                                     <segue destination="yBK-vp-FK1" kind="embed" id="fEq-Yf-AVr"/>
                                 </connections>
@@ -33,9 +33,9 @@
                                 <state key="normal" title="Next"/>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="SUh-ak-ar9">
-                                <rect key="frame" x="132" y="673" width="150" height="37"/>
+                                <rect key="frame" x="71" y="669.66666666666663" width="270" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="V8C-fU-QAu"/>
+                                    <constraint firstAttribute="width" constant="270" id="V8C-fU-QAu"/>
                                 </constraints>
                             </pageControl>
                         </subviews>
@@ -43,12 +43,10 @@
                         <constraints>
                             <constraint firstItem="aTK-KV-pgM" firstAttribute="trailing" secondItem="Dfa-nO-KBw" secondAttribute="trailing" constant="33" id="204-Xx-Bxk"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="trailing" secondItem="aTK-KV-pgM" secondAttribute="trailing" id="LvT-gm-kME"/>
-                            <constraint firstItem="SUh-ak-ar9" firstAttribute="top" secondItem="cAq-FG-KE0" secondAttribute="bottom" constant="-63" id="Mt4-mX-Qlc"/>
-                            <constraint firstItem="Dfa-nO-KBw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SUh-ak-ar9" secondAttribute="trailing" constant="8" id="aed-Ql-okG"/>
-                            <constraint firstItem="cAq-FG-KE0" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" id="e5E-QP-4ii"/>
+                            <constraint firstItem="SUh-ak-ar9" firstAttribute="centerY" secondItem="JXa-Yw-v2C" secondAttribute="centerY" id="Q1u-jz-m2n"/>
+                            <constraint firstItem="cAq-FG-KE0" firstAttribute="bottom" secondItem="aTK-KV-pgM" secondAttribute="bottom" constant="-71" id="e5E-QP-4ii"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="top" secondItem="aTK-KV-pgM" secondAttribute="top" constant="-20" id="fgy-dc-SJ7"/>
-                            <constraint firstItem="SUh-ak-ar9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JXa-Yw-v2C" secondAttribute="trailing" constant="8" id="hIQ-7z-Nxt"/>
-                            <constraint firstItem="SUh-ak-ar9" firstAttribute="centerX" secondItem="z6P-Vg-bM8" secondAttribute="centerX" id="hh7-Uj-BzG"/>
+                            <constraint firstItem="SUh-ak-ar9" firstAttribute="centerX" secondItem="z6P-Vg-bM8" secondAttribute="centerX" constant="-1" id="hh7-Uj-BzG"/>
                             <constraint firstItem="aTK-KV-pgM" firstAttribute="bottom" secondItem="Dfa-nO-KBw" secondAttribute="bottom" constant="33" id="o9A-h0-gSK"/>
                             <constraint firstItem="cAq-FG-KE0" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" id="rmJ-h9-uze"/>
                             <constraint firstItem="JXa-Yw-v2C" firstAttribute="leading" secondItem="aTK-KV-pgM" secondAttribute="leading" constant="33" id="szM-JC-zaD"/>
@@ -72,11 +70,11 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingPage" autoresizesArchivedViewToFullSize="NO" id="yBK-vp-FK1" customClass="OnboardingViewController" customModule="Composify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ozh-eG-U0I">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TXz-qf-vLR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
