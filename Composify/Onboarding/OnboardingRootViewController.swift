@@ -157,9 +157,9 @@ private extension OnboardingRootViewController {
             animated: true
         )
     }
-    
+
     func pinPagingViewControllerToEdges(of view: UIView) {
-        pagingViewController.view.pinToEdges(of: containerView)
+        pagingViewController.view.pinToEdges(of: view)
     }
 
     /// Configure the page view controller
