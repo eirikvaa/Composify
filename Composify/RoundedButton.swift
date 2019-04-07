@@ -31,9 +31,11 @@ class RoundedButton: UIButton {
 
     private func setup() {
         setTitle(title, for: .normal)
+        setTitleColor(R.Colors.cardinalRed, for: .normal)
         addTarget(self, action: #selector(performAction), for: .touchUpInside)
 
-        backgroundColor = R.Colors.cardinalRed
+        layer.borderWidth = 1.0
+        layer.borderColor = R.Colors.cardinalRed.cgColor
         layer.cornerRadius = 12
         contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
     }

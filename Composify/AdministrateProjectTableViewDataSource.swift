@@ -160,6 +160,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
 
         case .none:
             break
+        @unknown default:
+            break
         }
     }
 

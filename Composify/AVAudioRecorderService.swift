@@ -67,6 +67,7 @@ struct AVAudioRecorderService: AudioRecorderService {
             }
 
             return isGranted
+        @unknown default: return false
         }
     }
 }
