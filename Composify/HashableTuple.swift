@@ -26,8 +26,9 @@ struct HashableTuple<T: Equatable & Hashable> {
 }
 
 extension HashableTuple: Hashable {
-    var hashValue: Int {
-        return t.0.hashValue ^ t.1.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(t.0)
+        hasher.combine(t.1)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AdministrateProjectDelegate: class {
+protocol AdministrateProjectDelegate: AnyObject {
     /// User aded a section to a project
     /// - parameter section: The section that was added
     func userDidAddSectionToProject(_ section: Section)
