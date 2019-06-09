@@ -13,7 +13,6 @@ import XCTest
 
 class ProjectTests: XCTestCase {
     var databaseService = DatabaseServiceFactory.defaultService
-    let realm = try! Realm()
 
     override func setUp() {
         super.setUp()
@@ -21,15 +20,9 @@ class ProjectTests: XCTestCase {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
     }
 
-    override func tearDown() {
-        super.tearDown()
-
-        try! realm.write {
-            realm.deleteAll()
-        }
-    }
-
     func testAddRecordingsToProjectSectionsAndCheckCumulativeRecordingsSet() {
+        let realm = try! Realm()
+
         let project = Project()
         let section = Section()
         let section2 = Section()

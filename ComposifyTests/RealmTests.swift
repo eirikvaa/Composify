@@ -13,7 +13,6 @@ import XCTest
 
 class RealmTests: XCTestCase {
     var databaseService = DatabaseServiceFactory.defaultService
-    let realm = try! Realm()
 
     override func setUp() {
         super.setUp()
@@ -21,15 +20,8 @@ class RealmTests: XCTestCase {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
     }
 
-    override func tearDown() {
-        super.tearDown()
-
-        try! realm.write {
-            realm.deleteAll()
-        }
-    }
-
     func testCreateProject() {
+        let realm = try! Realm()
         let project = Project()
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
@@ -40,6 +32,7 @@ class RealmTests: XCTestCase {
     }
 
     func testDeleteProject() {
+        let realm = try! Realm()
         let project = Project()
         databaseService.save(project)
 
@@ -51,6 +44,7 @@ class RealmTests: XCTestCase {
     }
 
     func testDeleteProjectWhichAlsoDeletesSections() {
+        let realm = try! Realm()
         let project = Project()
         let section = Section()
         let section2 = Section()
@@ -70,6 +64,7 @@ class RealmTests: XCTestCase {
     }
 
     func testDeleteProjectWhichAlsoDeletesSectionsAndRecordings() {
+        let realm = try! Realm()
         let project = Project()
         let section = Section()
         let recording = Recording()
@@ -92,6 +87,7 @@ class RealmTests: XCTestCase {
     }
 
     func testDeleteSectionWhichAlsoDeletesRecordings() {
+        let realm = try! Realm()
         let project = Project()
         let section = Section()
         let recording = Recording()
@@ -114,6 +110,7 @@ class RealmTests: XCTestCase {
     }
 
     func testDeleteRecording() {
+        let realm = try! Realm()
         let project = Project()
         let section = Section()
         let recording = Recording()
@@ -136,6 +133,7 @@ class RealmTests: XCTestCase {
     }
 
     func testRenameProject() {
+        let realm = try! Realm()
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
@@ -154,6 +152,7 @@ class RealmTests: XCTestCase {
     }
 
     func testRenameSection() {
+        let realm = try! Realm()
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
@@ -172,6 +171,7 @@ class RealmTests: XCTestCase {
     }
 
     func testRenameRecording() {
+        let realm = try! Realm()
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 

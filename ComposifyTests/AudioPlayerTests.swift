@@ -6,64 +6,61 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-@testable import Composify
-import Darwin
+import RealmSwift
 import XCTest
 
+@testable import Composify
+
 class AudioPlayerTests: XCTestCase {
-    var audioPlayer: AudioPlayerService!
-    var audioRecorder: AudioRecorderService!
-    var project: Project!
-    var section: Section!
-    var recording: Recording!
-    let userProjcts = R.URLs.recordingsDirectory
-
-    let fileManager = FileManager.default
-
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        project = Project()
-        project.title = "UnitTestProject"
 
-        section = Section()
-        section.title = "UnitTestSection"
-        section.project = project
-
-        recording = Recording()
-        recording.title = "UnitTestRecording"
-        recording.section = section
-        recording.project = project
-        recording.fileExtension = "caf"
-        recording.dateCreated = Date()
-
-        audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-    }
-
-    override func tearDown() {
-        super.tearDown()
-        project = nil
-        section = nil
-        recording = nil
-
-        do {
-            let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path)
-            for file in unitTestProjects {
-                try fileManager.removeItem(at: userProjcts.appendingPathComponent(file))
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
     }
 
     func testPlayRecordedAudio() {
-        audioRecorder.record()
-        sleep(4)
-        audioRecorder.stop()
+        let (_, _, recording, _) = createObjects()
+        let audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
 
-        audioPlayer = try! AudioPlayerServiceFactory.defaultService(withObject: recording)
+        audioRecorder?.record()
+        audioRecorder?.stop()
 
-        XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
-        XCTAssertTrue(3 ... 5 ~= recording.duration)
+        _ = try! AudioPlayerServiceFactory.defaultService(withObject: recording)
+
+        XCTAssertTrue(FileManager.default.fileExists(atPath: recording.url.path))
+    }
+}
+
+private extension AudioPlayerTests {
+    func createProject(titled title: String) -> Project {
+        let project = Project()
+        project.title = title
+        return project
+    }
+
+    func createSection(titled title: String, project: Project) -> Section {
+        let section = Section()
+        section.title = title
+        section.project = project
+        return section
+    }
+
+    func createRecording(titled title: String, section: Section) -> Recording {
+        let recording = Recording()
+        recording.title = title
+        recording.section = section
+        recording.project = section.project
+        recording.fileExtension = "caf"
+        recording.dateCreated = Date()
+        return recording
+    }
+
+    func createObjects() -> (Project, Section, Recording, Realm) {
+        let project = createProject(titled: "UnitTestProject")
+        let section = createSection(titled: "UnitTestSection", project: project)
+        let recording = createRecording(titled: "UnitTestRecording", section: section)
+        let realm = try! Realm()
+
+        return (project, section, recording, realm)
     }
 }

@@ -10,8 +10,6 @@ import Foundation
 import RealmSwift
 
 struct RealmDatabaseService: DatabaseService {
-    let realm = try! Realm()
-
     private init() {}
     static var sharedInstance: DatabaseService?
     static var defaultService: DatabaseService {
@@ -23,6 +21,8 @@ struct RealmDatabaseService: DatabaseService {
     }
 
     func save(_ object: ComposifyObject) {
+        let realm = try! Realm()
+
         try! realm.write {
             switch object {
             case let section as Section:
@@ -40,6 +40,8 @@ struct RealmDatabaseService: DatabaseService {
     }
 
     func delete(_ object: ComposifyObject) {
+        let realm = try! Realm()
+
         try! realm.write {
             switch object {
             case let project as Project:
@@ -55,6 +57,8 @@ struct RealmDatabaseService: DatabaseService {
     }
 
     func rename(_ object: ComposifyObject, to newName: String) {
+        let realm = try! Realm()
+
         try! realm.write {
             switch object {
             case let project as Project:
@@ -70,12 +74,16 @@ struct RealmDatabaseService: DatabaseService {
     }
 
     func performOperation(_ operation: () -> Void) {
+        let realm = try! Realm()
+
         try! realm.write {
             operation()
         }
     }
 
     func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject] {
+        let realm = try! Realm()
+
         switch type {
         case is Project.Type:
             return Array(realm.objects(Project.self)) as [ComposifyObject]
@@ -99,8 +107,10 @@ private extension RealmDatabaseService {
     }
 
     func deleteProject(_ project: Project) {
+        let realm = try! Realm()
+
         project.sectionIDs
-            .compactMap { self.realm.object(ofType: Section.self, forPrimaryKey: $0) }
+            .compactMap { realm.object(ofType: Section.self, forPrimaryKey: $0) }
             .forEach {
                 realm.delete($0.recordings)
                 realm.delete($0)
@@ -109,6 +119,8 @@ private extension RealmDatabaseService {
     }
 
     func deleteSection(_ section: Section) {
+        let realm = try! Realm()
+
         if let index = section.project?.sectionIDs.index(of: section.id) {
             section.project?.sectionIDs.remove(at: index)
         }
@@ -117,6 +129,8 @@ private extension RealmDatabaseService {
     }
 
     func deleteRecording(_ recording: Recording) {
+        let realm = try! Realm()
+
         if let index = recording.section?.recordingIDs.index(of: recording.id) {
             recording.section?.recordingIDs.remove(at: index)
         }
