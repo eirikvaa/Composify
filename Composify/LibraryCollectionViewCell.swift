@@ -9,10 +9,12 @@
 import Parchment
 import UIKit
 
-class LibraryCollectionViewCell: PagingCell {
+final class LibraryCollectionViewCell: PagingCell {
     lazy var sectionLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
 
@@ -29,12 +31,7 @@ class LibraryCollectionViewCell: PagingCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        NSLayoutConstraint.activate([
-            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            sectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
+        sectionLabel.pinToEdges(of: contentView)
     }
 
     fileprivate func configure() {
@@ -47,5 +44,16 @@ class LibraryCollectionViewCell: PagingCell {
     override func setPagingItem(_ pagingItem: PagingItem, selected _: Bool, options _: PagingOptions) {
         guard let sectionItem = pagingItem as? SectionPageItem else { return }
         sectionLabel.text = sectionItem.section?.title ?? "N/A"
+        applyAccessibility()
+    }
+}
+
+extension LibraryCollectionViewCell {
+    func applyAccessibility() {
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+        accessibilityLabel = R.Loc.libraryCollectionViewCellAccLabel
+        accessibilityHint = R.Loc.libraryCollectionViewCellAccHint
+        accessibilityValue = sectionLabel.text ?? ""
     }
 }

@@ -8,12 +8,17 @@
 
 import UIKit
 
-class ErrorViewController: UIViewController {
-    private var labelText: String?
-    private var errorLabel = UILabel()
+final class ErrorViewController: UIViewController {
+    private var text: String
+    private var buttonTitle: String
+    private var buttonAction: () -> Void
+    private var label = UILabel()
+    private lazy var button = RoundedButton(title: self.buttonTitle, action: self.buttonAction)
 
-    init(labelText: String?) {
-        self.labelText = labelText
+    init(message: String, actionMessage: String, action: @escaping () -> Void) {
+        text = message
+        buttonTitle = actionMessage
+        buttonAction = action
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,28 +27,51 @@ class ErrorViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        applyAccessibility()
     }
 
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc private func doAction() {
+        button.performAction()
+    }
+
     private func setup() {
         view.backgroundColor = .white
 
-        errorLabel.text = labelText
-        errorLabel.textAlignment = .center
-        errorLabel.textColor = .darkGray
-        errorLabel.numberOfLines = 0
+        label.text = text
+        label.sizeToFit()
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        label.numberOfLines = 0
 
-        view.addSubview(errorLabel)
+        view.addSubview(label)
+        view.addSubview(button)
 
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        // Pin label to top, leading, and trailing anchor, in addition to button below
+        label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            errorLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
-            errorLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            errorLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -32),
         ])
+
+        // Pin button to label above, in addition to leading, trailing and bottom anchor.
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: label.centerXAnchor),
+        ])
+    }
+}
+
+extension ErrorViewController {
+    func applyAccessibility() {
+        label.isAccessibilityElement = true
+        label.accessibilityTraits = .staticText
+        label.accessibilityValue = text
+        label.accessibilityLabel = R.Loc.errorViewControllerLabelAccLabel
     }
 }

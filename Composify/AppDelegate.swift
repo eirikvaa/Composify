@@ -12,25 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        registerFoundationStoreObjectIfNeeded()
         registerNavigationBarAppearance()
+        createRecordingsDirectoryIfNeeded()
 
         return true
     }
 }
 
 private extension AppDelegate {
-    func registerFoundationStoreObjectIfNeeded() {
-        let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: R.UserDefaults.projectStoreID) as? String == nil {
-            var defaultService = DatabaseServiceFactory.defaultService
-            defaultService.foundationStore = ProjectStore()
-        }
+    func createRecordingsDirectoryIfNeeded() {
+        FileManager.default.createRecordingsDirectoryIfNeeded()
     }
 
     func registerNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = R.Colors.mainColor
+        navigationBarAppearance.barTintColor = R.Colors.cardinalRed
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.backgroundColor = UIColor.clear

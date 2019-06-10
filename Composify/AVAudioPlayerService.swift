@@ -14,7 +14,7 @@ import Foundation
  - Author: Eirik Vale Aase
  */
 
-class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
+final class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
     var audioDidFinishBlock: ((Bool) -> Void)?
 
     private var player: AVAudioPlayer?
@@ -27,6 +27,7 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
     }
 
     func play() {
+        try? session.setActive(true)
         player?.play()
     }
 
@@ -35,15 +36,19 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
     }
 
     func stop() {
+        try? session.setActive(false)
         player?.stop()
     }
 
     func setup(withObject object: AudioPlayable) throws {
         guard player == nil else { return }
-        guard FileManager.default.fileExists(atPath: object.url.path) else { throw AudioPlayerServiceError.unableToFindPlayable }
+        guard FileManager.default.fileExists(atPath: object.url.path) else {
+            throw AudioPlayerServiceError.unableToFindPlayable
+        }
 
         do {
             try session.setCategory(.playback, mode: .default, options: [])
+            try session.setActive(true)
             player = try AVAudioPlayer(contentsOf: object.url, fileTypeHint: object.fileExtension)
         } catch {
             throw AudioPlayerServiceError.unableToConfigurePlayingSession
@@ -56,6 +61,7 @@ class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate 
     }
 
     func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully flag: Bool) {
+        try? session.setActive(false)
         audioDidFinishBlock?(flag)
     }
 }

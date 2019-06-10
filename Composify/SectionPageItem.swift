@@ -16,9 +16,10 @@ struct SectionPageItem: PagingItem, Hashable, Comparable {
         self.section = section
     }
 
-    var hashValue: Int {
-        guard section?.isInvalidated == false else { return 0 }
-        return section?.title.hashValue ?? 0
+    func hash(into hasher: inout Hasher) {
+        if let section = section {
+            hasher.combine(section.title)
+        }
     }
 
     static func == (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
@@ -28,6 +29,8 @@ struct SectionPageItem: PagingItem, Hashable, Comparable {
     }
 
     static func < (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
-        return lhs.section?.index ?? 0 < rhs.section?.index ?? 0
+        let _lhs = lhs.section?.index ?? 0
+        let _rhs = rhs.section?.index ?? 0
+        return _lhs < _rhs
     }
 }

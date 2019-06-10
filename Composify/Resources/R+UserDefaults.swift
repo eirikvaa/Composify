@@ -9,7 +9,6 @@
 import Foundation
 
 extension R.UserDefaults {
-    static let projectStoreID = "projectStoreID"
     static let lastProjectID = "lastProjectID"
     static let lastSectionID = "lastSectionID"
     static let hasSeenOnboarding = "hasSeenOnboarding"

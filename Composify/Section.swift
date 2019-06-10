@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Section: Object {
+final class Section: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
@@ -21,10 +21,6 @@ class Section: Object {
         return R.DatabaseKeys.id
     }
 }
-
-extension Section: MinMaxType {}
-
-extension Section: DatabaseObject {}
 
 extension Section {
     var recordings: [Recording] {
@@ -42,22 +38,8 @@ extension UserDefaults {
     }
 }
 
-extension Section: FileSystemObject {
-    var url: URL {
-        return project!.url
-            .appendingPathComponent(id)
-    }
-}
-
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
-        return lhs.index <= rhs.index
-    }
-}
-
-extension String {
-    var correspondingSection: Section? {
-        guard let realm = try? Realm() else { return nil }
-        return realm.object(ofType: Section.self, forPrimaryKey: self)
+        return lhs.index < rhs.index
     }
 }

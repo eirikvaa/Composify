@@ -8,9 +8,9 @@
 
 import UIKit
 
-class RecordingTableViewCell: UITableViewCell {
-    lazy var playButton = UIButton(type: .custom)
-    lazy var titleLabel = UILabel()
+final class RecordingTableViewCell: UITableViewCell {
+    private lazy var playButton = UIButton(type: .custom)
+    private lazy var titleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,13 +24,28 @@ class RecordingTableViewCell: UITableViewCell {
         configureViews()
     }
 
+    func setTitle(_ title: String?) {
+        titleLabel.text = title
+    }
+
+    func setImage(_ image: UIImage?) {
+        playButton.setImage(image, for: .normal)
+        applyAccessibility()
+    }
+
     private func configureViews() {
+        contentView.isUserInteractionEnabled = false
+        selectionStyle = .none
+
+        playButton.alpha = 1
         playButton.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(playButton)
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.font = .preferredFont(forTextStyle: .body)
+        titleLabel.adjustsFontForContentSizeCategory = true
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
@@ -41,6 +56,36 @@ class RecordingTableViewCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
+    }
+}
+
+extension RecordingTableViewCell {
+    func applyAccessibility() {
+        let image = playButton.imageView?.image
+        let isPlayImage = image?.isEqualTo(image: R.Images.play) ?? false
+
+        playButton.isAccessibilityElement = true
+        playButton.accessibilityTraits = [.button, .playsSound]
+        playButton.accessibilityLabel = R.Loc.recordingCellPlayButtonAccLabel
+        playButton.accessibilityValue = isPlayImage ?
+            R.Loc.recordingCellPlayButtonCanPlayAccValue :
+            R.Loc.recordingCellPlayButtonCanPauseAccValue
+        playButton.accessibilityHint = R.Loc.recordingCellPlayButtonAccHint
+
+        titleLabel.isAccessibilityElement = true
+        titleLabel.accessibilityTraits = .staticText
+        titleLabel.accessibilityValue = titleLabel.text
+        titleLabel.accessibilityLabel = "Opptak"
+    }
+}
+
+extension UIImage {
+    func isEqualTo(image: UIImage?) -> Bool {
+        guard let selfData = self.pngData() else { return false }
+        guard let otherData = image?.pngData() else { return false }
+
+        return selfData == otherData
     }
 }

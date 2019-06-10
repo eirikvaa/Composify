@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AudioRecorderServiceFactory {
+final class AudioRecorderServiceFactory {
     static func defaultService(withURL url: URL) throws -> AudioRecorderService? {
         return try? AVAudioRecorderService(url: url)
     }

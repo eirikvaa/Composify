@@ -9,14 +9,14 @@
 import Parchment
 import UIKit
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     // MARK: @IBOutlets
 
     @IBOutlet private var imageView: UIImageView!
 
     // MARK: Properties
 
-    var image: UIImage?
+    var backgroundImage: UIImage?
     var pageIndex = 0
 
     // MARK: View Controller Life Cycle
@@ -24,6 +24,25 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView.image = image
+        imageView.image = backgroundImage
+        view.backgroundColor = R.Colors.cardinalRed
+
+        applyAccessibility()
+    }
+}
+
+extension OnboardingViewController {
+    func applyAccessibility() {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = .image
+        imageView.accessibilityLabel = R.Loc.onboardingBackgroundImageAccLabel
+
+        switch pageIndex {
+        case 0: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage0AccLabel
+        case 1: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage1AccLabel
+        case 2: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage2AccLabel
+        case 3: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage3AccLabel
+        default: break
+        }
     }
 }

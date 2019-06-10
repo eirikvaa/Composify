@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class Project: Object {
+final class Project: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
@@ -19,8 +19,6 @@ final class Project: Object {
         return R.DatabaseKeys.id
     }
 }
-
-extension Project: DatabaseObject {}
 
 extension UserDefaults {
     func lastProject() -> Project? {
@@ -33,10 +31,7 @@ extension UserDefaults {
 extension Project {
     static func projects() -> [Project] {
         let realm = try! Realm()
-        let projectStore = DatabaseServiceFactory.defaultService.foundationStore
-        return projectStore?.projectIDs
-            .compactMap { realm.object(ofType: Project.self, forPrimaryKey: $0) }
-            .sorted() ?? []
+        return Array(realm.objects(Project.self)) as [Project]
     }
 
     var sections: [Section] {
@@ -59,7 +54,7 @@ extension Project {
     func getSection(at index: Int) -> Section? {
         var section: Section?
         for sectionID in sectionIDs {
-            let _section = sectionID.correspondingSection
+            let _section: Section? = sectionID.correspondingComposifyObject()
             if _section?.index == index {
                 section = _section
             }
@@ -71,41 +66,24 @@ extension Project {
 
 extension Project: Comparable {
     static func < (lhs: Project, rhs: Project) -> Bool {
-        return lhs.title < rhs.title
-    }
-}
-
-extension Project: FileSystemObject {
-    var url: URL {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documentDirectory
-            .appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-            .appendingPathComponent(id)
-    }
-}
-
-extension String {
-    var correspondingProject: Project? {
-        guard let realm = try? Realm() else { return nil }
-        return realm.object(ofType: Project.self, forPrimaryKey: self)
+        return lhs.dateCreated < rhs.dateCreated
     }
 }
 
 extension Project {
-    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) throws {
+    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) {
         let project = Project()
         project.title = title
 
-        var databaseService = DatabaseServiceFactory.defaultService
+        let databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
-
-        try FileManager.default.save(project)
 
         completionHandler(project)
     }
 
     var nextSectionIndex: Int {
-        let lastSectionIndex = sectionIDs.last?.correspondingSection?.index ?? 0
+        let _section: Section? = sectionIDs.last?.correspondingComposifyObject()
+        let lastSectionIndex = _section?.index ?? 0
         return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 }

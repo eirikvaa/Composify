@@ -1,5 +1,5 @@
 //
-//  CFileManagerTests.swift
+//  FileManagerTests.swift
 //  ComposifyTests
 //
 //  Created by Eirik Vale Aase on 10.11.2016.
@@ -10,83 +10,73 @@
 import XCTest
 
 /*
- PIEFileManagerTests tests both PIEFileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
+ FileManagerTests tests both FileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
  */
-class FileManagerTests: XCTestCase {
-    var project: Project!
-    var section: Section!
-    var recording: Recording!
-    let fileManager = FileManager.default
-
-    var project2: Project!
-    var section2: Section!
-
-    let userProjcts: URL = {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(FileSystemDirectories.userProjects.rawValue)
-    }()
-
-    override func setUp() {
-        super.setUp()
-
-        project = Project()
-        project.title = "UnitTestProject"
-
-        project2 = Project()
-        project2.title = "UnitTestProject2"
-
-        section = Section()
-        section.title = "UnitTestSection"
-        section.project = project
-
-        section2 = Section()
-        section2.title = "UnitTestSection2"
-        section2.project = project2
-
-        recording = Recording()
-        recording.title = "UnitTestRecording"
-        recording.dateRecorded = Date()
-        recording.project = project
-        recording.section = section
-        recording.fileExtension = FileSystemExtensions.caf.rawValue
-
-        try! fileManager.save(project)
-        try! fileManager.save(section)
-        try! fileManager.save(project2)
-        try! fileManager.save(section2)
-        _ = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-    }
-
+final class FileManagerTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
-        project = nil
-        project2 = nil
-        section = nil
-        section2 = nil
-        recording = nil
+
+        clearUserProjectsDirectory()
+    }
+
+    func testCreateRecording() {
+        let recording = createRecording(withTitle: "Recording")
+
+        _ = try? AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+
+        let fileManager = FileManager.default
+        XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
+    }
+}
+
+private extension FileManagerTests {
+    /// Create project
+    /// - parameter title: Title for object
+    func createProject(withTitle title: String) -> Project {
+        let project = Project()
+        project.title = title
+
+        return project
+    }
+
+    /// Create section
+    /// - parameter title: Title for object
+    func createSection(withTitle title: String, in project: Project) -> Section {
+        let section = Section()
+        section.title = title
+        section.project = project
+
+        return section
+    }
+
+    /// Create a recording
+    /// - parameter title: Title that the recording will have
+    /// - parameter section: Section to which the recording will be saved to
+    func createRecording(withTitle title: String) -> Recording {
+        let project = createProject(withTitle: "Project")
+        let section = createSection(withTitle: "Section", in: project)
+
+        let recording = Recording()
+        recording.title = title
+        recording.section = section
+        recording.project = project
+        recording.fileExtension = "caf"
+
+        return recording
+    }
+
+    /// Clear the user projects directory that objects are saved to
+    func clearUserProjectsDirectory() {
+        let fileManager = FileManager.default
+        let userProjects = R.URLs.recordingsDirectory
 
         do {
-            let unitTestProjects = try fileManager.contentsOfDirectory(atPath: userProjcts.path).filter { $0.hasPrefix("UnitTest") }
+            let unitTestProjects = try FileManager.default.contentsOfDirectory(atPath: userProjects.path)
             for file in unitTestProjects {
-                try fileManager.removeItem(at: userProjcts.appendingPathComponent(file))
+                try fileManager.removeItem(at: userProjects.appendingPathComponent(file))
             }
         } catch {
             print(error.localizedDescription)
         }
-    }
-
-    func testSave() {
-        XCTAssertTrue(fileManager.fileExists(atPath: project.url.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: section.url.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: recording.url.path))
-    }
-
-    func testDelete() {
-        try! fileManager.delete(project)
-        try! fileManager.delete(section)
-        try! fileManager.delete(recording)
-
-        XCTAssertFalse(fileManager.fileExists(atPath: project.url.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: section.url.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: recording.url.path))
     }
 }

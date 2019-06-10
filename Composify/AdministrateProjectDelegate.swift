@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AdministrateProjectDelegate: class {
+protocol AdministrateProjectDelegate: AnyObject {
     /// User aded a section to a project
     /// - parameter section: The section that was added
     func userDidAddSectionToProject(_ section: Section)
@@ -21,4 +21,7 @@ protocol AdministrateProjectDelegate: class {
 
     /// The user deleted the project
     func userDidDeleteProject()
+
+    /// The user reordered one or more sections
+    func userDidReorderSections()
 }

@@ -13,12 +13,11 @@ import Foundation
 /// use these specific type-free methods instead of references
 /// to Realm or Core Data or something else.
 protocol DatabaseService {
-    var foundationStore: DatabaseFoundationObject? { get set }
     static var sharedInstance: DatabaseService? { get set }
-    static func defaultService() -> DatabaseService
+    static var defaultService: DatabaseService { get }
 
-    mutating func save(_ object: DatabaseObject)
-    mutating func delete(_ object: DatabaseObject)
-    mutating func rename(_ object: DatabaseObject, to newName: String)
-    mutating func performOperation(_ operation: () -> Void)
+    func save(_ object: ComposifyObject)
+    func delete(_ object: ComposifyObject)
+    func rename(_ object: ComposifyObject, to newName: String)
+    func performOperation(_ operation: () -> Void)
 }

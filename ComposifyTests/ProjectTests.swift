@@ -11,17 +11,18 @@ import XCTest
 
 @testable import Composify
 
-class ProjectTests: XCTestCase {
+final class ProjectTests: XCTestCase {
     var databaseService = DatabaseServiceFactory.defaultService
-    let realm = try! Realm()
 
     override func setUp() {
-        try! realm.write {
-            realm.deleteAll()
-        }
+        super.setUp()
+
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
     }
 
     func testAddRecordingsToProjectSectionsAndCheckCumulativeRecordingsSet() {
+        let realm = try! Realm()
+
         let project = Project()
         let section = Section()
         let section2 = Section()

@@ -33,4 +33,7 @@ struct R {
 
     /// View controller identifiers
     struct ViewControllerIdentifiers {}
+
+    /// Urls
+    struct URLs {}
 }

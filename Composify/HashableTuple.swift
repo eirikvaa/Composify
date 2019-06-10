@@ -8,17 +8,27 @@
 
 import UIKit
 
-struct HashableTuple {
-    var t: (Int, Int)
+struct HashableTuple<T: Equatable & Hashable> {
+    var t: (first: T, second: T)
 
-    init(_ t: (Int, Int)) {
-        self.t = t
+    init(_ first: T, _ second: T) {
+        t.0 = first
+        t.1 = second
+    }
+
+    var first: T {
+        return t.first
+    }
+
+    var second: T {
+        return t.second
     }
 }
 
 extension HashableTuple: Hashable {
-    var hashValue: Int {
-        return t.0.hashValue ^ t.1.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(t.0)
+        hasher.combine(t.1)
     }
 }
 
@@ -30,6 +40,8 @@ extension HashableTuple: Equatable {
 
 extension HashableTuple: CustomStringConvertible {
     var description: String {
-        return "(\(t.0), \(t.1))"
+        let first = t.0
+        let second = t.1
+        return "(\(first), \(second))"
     }
 }

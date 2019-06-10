@@ -11,35 +11,39 @@ import UIKit
 
 /// The view controller for almost all of the functionality; shows projects, sections and recordings.
 
-class LibraryViewController: UIViewController {
+final class LibraryViewController: UIViewController {
     @IBOutlet var administerBarButton: UIBarButtonItem!
     @IBOutlet var recordAudioButton: UIButton! {
         didSet {
             recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = R.Colors.secondaryColor
+            recordAudioButton.backgroundColor = R.Colors.fireBushYellow
+            recordAudioButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            recordAudioButton.titleLabel?.adjustsFontForContentSizeCategory = true
         }
     }
 
     @IBOutlet var recordAudioView: UIView!
     @IBOutlet var containerView: UIView!
-
-    // Properties
-    private var errorViewController: ErrorViewController?
-    private var state: LibraryViewController.State = .noSections {
+    @IBOutlet var pageControl: UIPageControl! {
         didSet {
-            setState(state)
+            pageControl.pageIndicatorTintColor = .lightGray
+            pageControl.currentPageIndicatorTintColor = R.Colors.cardinalRed
         }
     }
 
+    // Properties
+    private var errorViewController: ErrorViewController?
+    private var state: LibraryViewController.State = .noSections
+
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
-        guard let project = projectID.correspondingProject else { return nil }
+        guard let project: Project = projectID.correspondingComposifyObject() else { return nil }
         return project
     }
 
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section = sectionID.correspondingSection else { return nil }
+        guard let section: Section = sectionID.correspondingComposifyObject() else { return nil }
         return section
     }
 
@@ -53,24 +57,22 @@ class LibraryViewController: UIViewController {
     }
 
     private var recording: Recording?
+    private var grantedPermissionsToUseMicrophone = false
     let fileManager = FileManager.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        possiblyShowOnboarding()
+        showOnboardingIfNeeded()
 
-        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentProjectID = UserDefaults.standard.fetchLastProjectID() ?? projects.first?.id
         currentSectionID = currentProject?.sectionIDs.first
 
         configurePagingViewController()
         setupUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+        registerObservers()
         updateUI()
+        applyAccessibility()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -85,54 +87,39 @@ class LibraryViewController: UIViewController {
 extension LibraryViewController {
     @IBAction func administrateProject(_: UIBarButtonItem) {
         var administrate: UIAlertAction?
+
         let alert = UIAlertController(title: R.Loc.menu, message: nil, preferredStyle: .actionSheet)
+
+        // Be able to administrate project if there is one
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: R.Loc.administrateProject, style: .default) { _ in
                 self.presentAdministrateViewController(project: currentProject)
             }
         }
 
+        // Can alway add a project
         let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
-            let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
-            addProjectAlert.addTextField { textField in
-                textField.autocapitalizationType = .words
-                textField.placeholder = R.Loc.projectTitle
-                textField.returnKeyType = .done
-                textField.clearButtonMode = .whileEditing
-            }
-            let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-                if let projectTitle = addProjectAlert.textFields?.first?.text {
-                    do {
-                        try Project.createProject(withTitle: projectTitle, then: { project in
-                            self.currentProjectID = project.id
-                            self.currentSectionID = project.sectionIDs.first
-                            self.updateUI()
-                        })
-                    } catch {
-                        self.handleError(error)
-                    }
-                }
-            })
-            let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
-            addProjectAlert.addAction(save)
-            addProjectAlert.addAction(cancel)
-
-            self.present(addProjectAlert, animated: true)
+            self.showCreateProjectAlert()
         }
 
+        // Showing other projects
         projects.forEach { project in
             if project != currentProject {
-                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { _ in
+                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
+                    self.applyAccessibility(for: action)
                     self.setCurrentProject(project)
+                    self.rememberProjectChosen(project)
                 }
                 alert.addAction(projectAction)
             }
         }
 
         let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+
         if let administrate = administrate {
             alert.addAction(administrate)
         }
+
         alert.addAction(addProject)
         alert.addAction(cancel)
 
@@ -140,6 +127,11 @@ extension LibraryViewController {
     }
 
     @IBAction func recordAudio(_: UIButton) {
+        let settingsAlert = UIAlertController.createShowSettingsAlert(
+            title: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTitle,
+            message: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTessage
+        )
+
         guard let recorder = audioRecorderDefaultService else {
             guard let currentProject = currentProject else { return }
             guard let currentSection = currentSection else { return }
@@ -153,9 +145,22 @@ extension LibraryViewController {
             if let recording = recording {
                 do {
                     audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+                } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
+                    let title = R.Loc.unableToConfigureRecordingSessionTitle
+                    let message = R.Loc.unableToConfigureRecordingSessionMessage
+                    let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                    present(alert, animated: true)
                 } catch {
-                    handleError(error)
+                    print(error.localizedDescription)
                 }
+            }
+
+            grantedPermissionsToUseMicrophone = audioRecorderDefaultService?.askForMicrophonePermissions() ?? false
+
+            // Only start recording if permissions are granted
+            guard grantedPermissionsToUseMicrophone else {
+                present(settingsAlert, animated: true)
+                return
             }
 
             audioRecorderDefaultService?.record()
@@ -163,14 +168,17 @@ extension LibraryViewController {
             return
         }
 
+        // The handling here is a bit off, but this handles the case where permissions have not been
+        // granted, but the audio recorder sevice was created, which, without this, would create a recording,
+        // even though no audio was recorded.
+        guard grantedPermissionsToUseMicrophone else {
+            present(settingsAlert, animated: true)
+            return
+        }
+
         recorder.stop()
 
         if let recording = recording {
-            do {
-                try fileManager.save(recording)
-            } catch {
-                handleError(error)
-            }
             databaseService.save(recording)
         }
 
@@ -183,6 +191,52 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
+    func showCreateProjectAlert() {
+        let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
+        addProjectAlert.addTextField { textField in
+            textField.autocapitalizationType = .words
+            textField.placeholder = R.Loc.projectTitle
+            textField.returnKeyType = .done
+            textField.clearButtonMode = .whileEditing
+        }
+        let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
+            if let projectTitle = addProjectAlert.textFields?.first?.text {
+                Project.createProject(withTitle: projectTitle, then: { project in
+                    self.setCurrentProject(project)
+                    self.rememberProjectChosen(project)
+                    self.updateUI()
+                })
+            }
+        })
+        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
+        addProjectAlert.addAction(save)
+        addProjectAlert.addAction(cancel)
+
+        present(addProjectAlert, animated: true)
+    }
+
+    /// Persist the project to userdefaults so it can be picked the next time
+    /// the user launches the app.
+    /// - parameter project: The project to be persisted
+    func rememberProjectChosen(_: Project) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(currentProject?.id, forKey: R.UserDefaults.lastProjectID)
+    }
+
+    func registerObservers() {
+        let notificationCenter = NotificationCenter.default
+
+        let sizeChangeNotification = UIContentSizeCategory.didChangeNotification
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(adaptToDynamicSizeChange),
+            name: sizeChangeNotification,
+            object: nil
+        )
+    }
+
+    @objc func adaptToDynamicSizeChange(_: Notification) {}
+
     /// Set the new current project
     /// - parameter project: The project that should now be shown
     func setCurrentProject(_ project: Project) {
@@ -196,6 +250,10 @@ extension LibraryViewController {
         navigationItem.leftBarButtonItem?.title = R.Loc.menu
     }
 
+    func setEditButton() {
+        navigationItem.rightBarButtonItem = currentSection?.recordings.hasElements ?? false ? editButtonItem : nil
+    }
+
     /// Update the user interface, mainly concerned with updating the state
     func updateUI() {
         switch (currentProject, currentSection) {
@@ -207,12 +265,18 @@ extension LibraryViewController {
             state = .noProjects
         }
 
-        // FIXME: Must figure out how to reload the width so that it adapts when adding/removing sections
+        setState(state)
+
         pagingViewController.reloadData()
 
-        if let section = currentProject?.sectionIDs.first?.correspondingSection {
-            navigationItem.rightBarButtonItem = section.recordings.hasElements ? editButtonItem : nil
-        }
+        setEditButton()
+
+        configurePageControl()
+
+        // We do this in `viewDidLoad`, but since the view controller state dictates if the
+        // record audio button should be read in voice over mode, apply the accessibility
+        // again here.
+        applyAccessibility()
     }
 
     /// Set the state of the user interface
@@ -224,12 +288,25 @@ extension LibraryViewController {
         case .notEmpty:
             break
         case .noProjects:
-            errorViewController = ErrorViewController(labelText: R.Loc.noProjects)
+            errorViewController = ErrorViewController(
+                message: R.Loc.noProjects,
+                actionMessage: R.Loc.addProject,
+                action: {
+                    self.showCreateProjectAlert()
+                }
+            )
             if let errorViewController = errorViewController {
                 add(errorViewController)
             }
         case .noSections:
-            errorViewController = ErrorViewController(labelText: R.Loc.noSections)
+            errorViewController = ErrorViewController(
+                message: R.Loc.noSections,
+                actionMessage: R.Loc.addSection,
+                action: {
+                    guard let currentProject = self.currentProject else { return }
+                    self.presentAdministrateViewController(project: currentProject)
+                }
+            )
             if let errorVieController = errorViewController {
                 add(errorVieController)
             }
@@ -248,35 +325,38 @@ extension LibraryViewController {
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
     func presentAdministrateViewController(project: Project) {
-        let administerVC = AdministrateProjectViewController()
-        administerVC.currentProject = project
-        administerVC.administrateProjectDelegate = self
-        let nav = UINavigationController(rootViewController: administerVC)
-        present(nav, animated: true)
+        let administerViewController = AdministrateProjectViewController(project: project)
+        administerViewController.administrateProjectDelegate = self
+        let navigationController = UINavigationController(rootViewController: administerViewController)
+        present(navigationController, animated: true)
+    }
+
+    func configurePageControl() {
+        pageControl.numberOfPages = currentProject?.sectionIDs.count ?? 0
+        pageControl.currentPage = currentSection?.index ?? 0
     }
 
     /// Configure the paging view controller
     func configurePagingViewController() {
         pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
-        pagingViewController.indicatorColor = R.Colors.mainColor
+        pagingViewController.indicatorColor = R.Colors.cardinalRed
+        pagingViewController.menuHorizontalAlignment = .center
         pagingViewController.dataSource = self
         pagingViewController.delegate = self
 
+        // Set the size for page items
+        // 65 is a bit tall for the smallest font sizes, but it doesn't break,
+        // so it's fine for now.
+        pagingViewController.menuItemSize = .sizeToFit(minWidth: 150, height: 65)
+
         add(pagingViewController)
-        containerView.addSubview(pagingViewController.view)
-        pagingViewController.didMove(toParent: self)
         pagingViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            pagingViewController.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            pagingViewController.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            pagingViewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: containerView.topAnchor),
-        ])
+        pagingViewController.view.pinToEdges(of: containerView)
     }
 
     /// Possibly show onboarding
-    func possiblyShowOnboarding() {
+    func showOnboardingIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenOnboarding = userDefaults.bool(forKey: R.UserDefaults.hasSeenOnboarding)
 
@@ -290,16 +370,58 @@ extension LibraryViewController {
 extension LibraryViewController: AdministrateProjectDelegate {
     func userDidAddSectionToProject(_ section: Section) {
         currentSectionID = section.id
+
+        updateUI()
     }
 
     func userDidDeleteSectionFromProject() {
         currentSectionID = currentProject?.sectionIDs.sorted().first
+
+        updateUI()
     }
 
-    func userDidEditTitleOfObjects() {}
+    func userDidEditTitleOfObjects() {
+        updateUI()
+    }
 
     func userDidDeleteProject() {
-        currentProjectID = databaseService.foundationStore?.projectIDs.first
+        currentProjectID = projects.first?.id
         currentSectionID = currentProject?.sectionIDs.first
+
+        updateUI()
+    }
+
+    func userDidReorderSections() {
+        updateUI()
+    }
+}
+
+extension LibraryViewController {
+    func applyAccessibility() {
+        let startRecording = recording == nil
+        if let menuBarButton = navigationItem.leftBarButtonItem {
+            menuBarButton.isAccessibilityElement = true
+            menuBarButton.accessibilityTraits = .button
+            menuBarButton.accessibilityHint = R.Loc.menuBarButtonAccHint
+        }
+
+        navigationItem.accessibilityTraits = .staticText
+        navigationItem.accessibilityLabel = R.Loc.libraryNavigationItemAccLabel
+
+        let recordAudioButtonIsVisible = state == .notEmpty
+        recordAudioButton.isAccessibilityElement = recordAudioButtonIsVisible == true
+        recordAudioButton.titleLabel?.isAccessibilityElement = recordAudioButtonIsVisible == true
+        recordAudioButton.accessibilityTraits = [.button, .startsMediaSession]
+        recordAudioButton.accessibilityLabel = R.Loc.libraryRecordAudioButtonAccLabel
+        recordAudioButton.accessibilityHint = startRecording ? R.Loc.libraryRecordAudioButtonAccStartRecordingHint :
+            R.Loc.libraryRecordAudioButtonAccStopRecordingHint
+    }
+
+    func applyAccessibility(for action: UIAlertAction) {
+        action.isAccessibilityElement = true
+        action.accessibilityTraits = .button
+        action.accessibilityValue = action.title
+        action.accessibilityHint = R.Loc.menuChooseProjectAccHint
+        action.accessibilityLabel = R.Loc.menuChooseProjectAccLabel
     }
 }

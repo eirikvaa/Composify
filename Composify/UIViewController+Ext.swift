@@ -27,50 +27,22 @@ extension UIViewController {
         view.removeFromSuperview()
     }
 
-    func handleError(_ error: Error) {
-        let title: String
-        let message: String
-
-        if let error = error as? AudioPlayerServiceError {
-            switch error {
-            case .unableToConfigurePlayingSession:
-                title = R.Loc.missingRecordingAlertTitle
-                message = R.Loc.missingRecordingAlertMessage
-            case .unableToFindPlayable:
-                title = R.Loc.unableToFindRecordingTitle
-                message = R.Loc.unableToFindRecordingMessage
-            }
-        } else if let error = error as? FileManagerError {
-            switch error {
-            case let .unableToSaveObject(object):
-                let objectTitle = object.getTitle() ?? ""
-                title = R.Loc.unableToSaveObjectTitle
-                message = R.Loc.unableToSaveObjectMessage(withTitle: objectTitle)
-            case let .unableToDeleteObject(object):
-                let objectTitle = object.getTitle() ?? ""
-                title = R.Loc.unableToDeleteObjectTitle
-                message = R.Loc.unableToDeleteObjectMessage(withTitle: objectTitle)
-            }
-        } else if let error = error as? AudioRecorderServiceError {
-            switch error {
-            case .unableToConfigureRecordingSession:
-                title = R.Loc.unableToConfigureRecordingSessionTitle
-                message = R.Loc.unableToConfigureRecordingSessionMessage
-            }
-        } else {
-            print(error.localizedDescription)
-            return
-        }
-
-        let alert = UIAlertController.createErrorAlert(title: title, message: message)
-        present(alert, animated: true)
+    /// Resign first responder from all textfields so that we persist a possible renaming as
+    /// early as possible.
+    func resignFromAllTextFields() {
+        let action = #selector(UIApplication.resignFirstResponder)
+        UIApplication.shared.sendAction(action, to: nil, from: nil, for: nil)
     }
 
+    /// Instantiate an OnboardingRootViewController
+    /// - returns: OnboardingRootViewController
     static func onboardingRootViewController() -> OnboardingRootViewController {
         let storyboard = UIStoryboard.onboardingStoryboard()
         return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingRoot) as! OnboardingRootViewController
     }
 
+    /// Instantiate an OnboardingViewController
+    /// - returns: OnboardingViewController
     static func onboardingPageViewController() -> OnboardingViewController {
         let storyboard = UIStoryboard.onboardingStoryboard()
         return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingPage) as! OnboardingViewController

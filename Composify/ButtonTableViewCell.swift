@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonTableViewCell: UITableViewCell {
+final class ButtonTableViewCell: UITableViewCell {
     private var button: UIButton!
     var buttonTitle: String? {
         didSet {
@@ -38,15 +38,25 @@ extension ButtonTableViewCell {
     func setupViews() {
         button = UIButton(frame: .zero)
         button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
 
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: contentView.topAnchor),
-            button.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            button.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            button.heightAnchor.constraint(equalToConstant: 44),
-        ])
+
+        button.pinToEdges(of: contentView)
+        button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+
+        applyAccessibility()
+    }
+}
+
+extension ButtonTableViewCell {
+    func applyAccessibility() {
+        button.isAccessibilityElement = true
+        button.accessibilityTraits = .button
+        button.accessibilityValue = button.titleLabel?.text
+        button.accessibilityLabel = R.Loc.buttonTableViewCellAccLabel
+        button.accessibilityHint = R.Loc.buttonTableViewCellAccHint
     }
 }

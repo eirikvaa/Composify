@@ -50,6 +50,24 @@ struct AVAudioRecorderService: AudioRecorderService {
     }
 
     func stop() {
+        try? session.setActive(false)
         recorder.stop()
+    }
+
+    func askForMicrophonePermissions() -> Bool {
+        let permission = session.recordPermission
+
+        switch permission {
+        case .granted: return true
+        case .denied: return false
+        case .undetermined:
+            var isGranted = false
+            session.requestRecordPermission { granted in
+                isGranted = granted
+            }
+
+            return isGranted
+        @unknown default: return false
+        }
     }
 }

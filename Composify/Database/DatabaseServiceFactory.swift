@@ -12,8 +12,8 @@ import Foundation
 /// If we every need to use another database, we just implement the
 /// interface `DatabaseService` and return a different `defaultService()`
 /// here. It's awesome.
-class DatabaseServiceFactory {
+final class DatabaseServiceFactory {
     static var defaultService: DatabaseService {
-        return RealmDatabaseService.defaultService()
+        return RealmDatabaseService.defaultService
     }
 }

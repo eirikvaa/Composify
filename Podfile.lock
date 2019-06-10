@@ -1,11 +1,11 @@
 PODS:
-  - Parchment (1.5.0)
-  - Realm (3.7.5):
-    - Realm/Headers (= 3.7.5)
-  - Realm/Headers (3.7.5)
-  - RealmSwift (3.7.5):
-    - Realm (= 3.7.5)
-  - SwiftLint (0.27.0)
+  - Parchment (1.6.0)
+  - Realm (3.15.0):
+    - Realm/Headers (= 3.15.0)
+  - Realm/Headers (3.15.0)
+  - RealmSwift (3.15.0):
+    - Realm (= 3.15.0)
+  - SwiftLint (0.32.0)
 
 DEPENDENCIES:
   - Parchment
@@ -20,11 +20,11 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Parchment: 5a8c9c73549a6d73a7c1b606c27246910d2e5720
-  Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
-  RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  Parchment: d3a7b367c529fa6ef51aa43f5717a7ff36d4b1f5
+  Realm: 9b834e1be6062f544805252c812348872dc5d4ed
+  RealmSwift: 8a41886f8ab6efef9eb8df97de2f2bb911561a79
+  SwiftLint: 009a898ef2a1c851f45e1b59349bf6ff2ddc990d
 
 PODFILE CHECKSUM: ef59a4ba7843b6fb300e643df3b8e84bbfba0d27
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.1
