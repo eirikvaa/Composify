@@ -211,20 +211,22 @@ extension OnboardingRootViewController: UIPageViewControllerDataSource {
         guard let boardingVieController = viewController as? OnboardingViewController else { return nil }
 
         let index = boardingVieController.pageIndex
+        let nextIndex = index - 1
 
-        guard index - 1 >= 0 else { return nil }
+        guard nextIndex >= 0 else { return nil }
 
-        return viewControllers[index - 1]
+        return viewControllers[nextIndex]
     }
 
     func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let boardingVieController = viewController as? OnboardingViewController else { return nil }
 
         let index = boardingVieController.pageIndex
+        let nextIndex = index + 1
 
-        guard index + 1 < viewControllers.count else { return nil }
+        guard nextIndex < viewControllers.count else { return nil }
 
-        return viewControllers[index + 1]
+        return viewControllers[nextIndex]
     }
 }
 
