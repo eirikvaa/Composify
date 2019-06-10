@@ -35,3 +35,18 @@ extension Recording: Comparable {
         return lhs.title < rhs.title
     }
 }
+
+extension FileManager {
+    func deleteRecording(_ recording: Recording) {
+        let url = recording.url
+        guard fileExists(atPath: url.path) else {
+            return
+        }
+
+        do {
+            try removeItem(atPath: url.path)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}

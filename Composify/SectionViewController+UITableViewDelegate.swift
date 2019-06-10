@@ -42,6 +42,7 @@ extension SectionViewController: UITableViewDelegate {
                 message: R.Loc.deleteRecordingConfirmationAlertMessage,
                 completionHandler: { _ in
                     self.libraryViewController?.setEditing(false, animated: true)
+                    FileManager.default.deleteRecording(recording)
                     self.databaseService.delete(recording)
                     self.libraryViewController?.updateUI()
                 }

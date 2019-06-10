@@ -31,12 +31,18 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         let projectSectionsSection = AdministrateProjectViewController.TableSection.projectSections.rawValue
-        if section == projectSectionsSection { return currentProject.sections.count + 1 }
+
+        if section == projectSectionsSection {
+            return currentProject.sections.count + 1
+        }
+
         return administrateProjectViewController.tableRowCount[section] ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateSectionCell, for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateSectionCell, for: indexPath) as? TextFieldTableViewCell else {
+            return UITableViewCell()
+        }
 
         cell.textField.returnKeyType = .done
         cell.tag = 1234
@@ -48,42 +54,27 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
 
         switch (indexPath.section, indexPath.row) {
         case (tableSection.metInformation.rawValue, _):
-            cell.textField.placeholder = currentProject.title
-            cell.textField.autocapitalizationType = .words
-            cell.textField.clearButtonMode = .whileEditing
-            cell.textField.returnKeyType = .done
-            cell.textField.delegate = administrateProjectViewController
+            configureCellTextField(textField: cell.textField, placeholder: currentProject.title, delegate: administrateProjectViewController)
         case (tableSection.projectSections.rawValue, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = R.Loc.addSection
             } else {
                 if let section = currentProject.getSection(at: indexPath.row) {
-                    cell.textField.placeholder = section.title
-                    cell.textField.autocapitalizationType = .words
-                    cell.textField.clearButtonMode = .whileEditing
-                    cell.textField.returnKeyType = .done
-                    cell.textField.delegate = administrateProjectViewController
+                    configureCellTextField(textField: cell.textField, placeholder: section.title, delegate: administrateProjectViewController)
                 }
             }
         case (tableSection.dangerZone.rawValue, _):
-            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else { return UITableViewCell() }
+            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else {
+                return UITableViewCell()
+            }
             deleteCell.buttonTitle = R.Loc.deleteProejct
             deleteCell.action = {
                 let confirmation = UIAlertController.createConfirmationAlert(
                     title: R.Loc.deleteProjectConfirmationAlertTitle,
                     message: R.Loc.deleteProjectConfirmationAlertMessage,
-                    completionHandler: { _ in
-                        let userDefaults = UserDefaults.standard
-                        if userDefaults.lastProject() == self.currentProject {
-                            userDefaults.resetLastProject()
-                            userDefaults.resetLastSection()
-                        }
-
-                        self.administrateProjectViewController.databaseService.delete(self.currentProject)
-                        self.administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
-
-                        self.administrateProjectViewController.dismiss(animated: true)
+                    completionHandler: { [weak self] _ in
+                        self?.deleteProject()
                     }
                 )
 
@@ -115,7 +106,9 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 // section was renamed. Without this check, if a section is renamed
                 // and a section later added, the rename will be ignored.
                 guard let section: Section = sectionID.correspondingComposifyObject(),
-                    let existingTitle = administrateProjectViewController.tableRowValues[HashableTuple(1, index)], existingTitle == section.title else { continue }
+                    let existingTitle = administrateProjectViewController.tableRowValues[HashableTuple(1, index)], existingTitle == section.title else {
+                    continue
+                }
 
                 let projectSectionsSection = tableSection.projectSections.rawValue
                 administrateProjectViewController.tableRowValues[HashableTuple(projectSectionsSection, index)] = section.title
@@ -138,21 +131,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             let confirmation = UIAlertController.createConfirmationAlert(
                 title: R.Loc.deleteSectionConfirmationAlertTitle,
                 message: R.Loc.deleteSectionConfirmationAlertMessage,
-                completionHandler: { _ in
-                    self.administrateProjectViewController.deleteSection(sectionToDelete) {
-                        self.administrateProjectViewController
-                            .administrateProjectDelegate?
-                            .userDidDeleteSectionFromProject()
-
-                        self.administrateProjectViewController.tableRowValues.removeAll()
-                        let projectSectionsSection = self.tableSection.projectSections.rawValue
-                        for section in self.currentProject.sections {
-                            let key = HashableTuple(projectSectionsSection, section.index)
-                            self.administrateProjectViewController.tableRowValues[key] = section.title
-                        }
-
-                        self.administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
-                    }
+                completionHandler: { [weak self] _ in
+                    self?.deleteSection(sectionToDelete, indexPath: indexPath)
                 }
             )
 
@@ -195,5 +175,50 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         return indexPath.section == projectSectionsSection &&
             indexPath.row < numberOfSections &&
             numberOfSections > projectSectionsSection
+    }
+}
+
+private extension AdministrateProjectTableViewDataSource {
+    func deleteSection(_ section: Section, indexPath: IndexPath) {
+        administrateProjectViewController.deleteSection(section) { [weak self] in
+            self?.administrateProjectViewController
+                .administrateProjectDelegate?
+                .userDidDeleteSectionFromProject()
+
+            self?.administrateProjectViewController.tableRowValues.removeAll()
+            let projectSectionsSection = self?.tableSection.projectSections.rawValue ?? 0
+            let sections = self?.currentProject.sections ?? []
+            for section in sections {
+                let key = HashableTuple(projectSectionsSection, section.index)
+                self?.administrateProjectViewController.tableRowValues[key] = section.title
+            }
+
+            self?.administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func deleteProject() {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.lastProject() == currentProject {
+            userDefaults.resetLastProject()
+            userDefaults.resetLastSection()
+        }
+
+        administrateProjectViewController.databaseService.delete(currentProject)
+        administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
+        administrateProjectViewController.dismiss(animated: true)
+    }
+
+    func configureCellTextField(textField: UITextField,
+                                placeholder: String,
+                                autocapitalizationType: UITextAutocapitalizationType = .words,
+                                clearButtonMode: UITextField.ViewMode = .whileEditing,
+                                returnKeyType: UIReturnKeyType = .done,
+                                delegate: UITextFieldDelegate?) {
+        textField.placeholder = placeholder
+        textField.autocapitalizationType = autocapitalizationType
+        textField.clearButtonMode = clearButtonMode
+        textField.returnKeyType = returnKeyType
+        textField.delegate = delegate
     }
 }
