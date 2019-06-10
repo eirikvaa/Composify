@@ -21,15 +21,19 @@ extension SectionViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let recording: Recording? = section.recordingIDs[indexPath.row].correspondingComposifyObject()
+        let recordingId = section.recordingIDs[indexPath.row]
+        let recording: Recording? = recordingId.correspondingComposifyObject()
         let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
 
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
         let hasTitle = recording?.title.hasPositiveCharacterCount ?? false
-        cell.setTitle(hasTitle ? recording?.title : recording?.dateCreated.description)
+        let title = hasTitle ? recording?.title : String(describing: recording?.dateCreated.description)
+        cell.setTitle(title)
+
         // For now: Image must come after title because I set accessbility after image is set
-        cell.setImage(isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play)
+        let image = isCurrentlyPlayingRecording ? R.Images.pause : R.Images.play
+        cell.setImage(image)
 
         return cell
     }

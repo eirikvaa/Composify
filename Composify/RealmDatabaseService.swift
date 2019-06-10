@@ -80,21 +80,6 @@ struct RealmDatabaseService: DatabaseService {
             operation()
         }
     }
-
-    func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject] {
-        let realm = try! Realm()
-
-        switch type {
-        case is Project.Type:
-            return Array(realm.objects(Project.self)) as [ComposifyObject]
-        case is Section.Type:
-            return Array(realm.objects(Section.self)) as [ComposifyObject]
-        case is Recording.Type:
-            return Array(realm.objects(Recording.self)) as [ComposifyObject]
-        default:
-            fatalError("Not supported!")
-        }
-    }
 }
 
 private extension RealmDatabaseService {

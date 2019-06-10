@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SectionViewController: UIViewController {
+final class SectionViewController: UIViewController {
     // MARK: Regular Properties
 
     var currentlyPlayingRecording: AudioPlayable?

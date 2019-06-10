@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ErrorViewController: UIViewController {
+final class ErrorViewController: UIViewController {
     private var text: String
     private var buttonTitle: String
     private var buttonAction: () -> Void

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdministrateProjectViewController: UIViewController {
+final class AdministrateProjectViewController: UIViewController {
     // MARK: Properties
 
     lazy var tableViewDataSource = AdministrateProjectTableViewDataSource(administrateProjectViewController: self)

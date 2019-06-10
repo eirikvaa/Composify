@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Composify
 
-class HashableTupleTests: XCTestCase {
+final class HashableTupleTests: XCTestCase {
     func testHashableTupleInitialization() {
         let tuple = HashableTuple(1, 2)
 

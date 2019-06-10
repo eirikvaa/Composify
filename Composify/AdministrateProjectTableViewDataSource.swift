@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdministrateProjectTableViewDataSource: NSObject {
+final class AdministrateProjectTableViewDataSource: NSObject {
     let administrateProjectViewController: AdministrateProjectViewController
 
     init(administrateProjectViewController: AdministrateProjectViewController) {

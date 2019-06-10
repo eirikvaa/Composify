@@ -11,7 +11,7 @@ import UIKit
 
 /// The view controller for almost all of the functionality; shows projects, sections and recordings.
 
-class LibraryViewController: UIViewController {
+final class LibraryViewController: UIViewController {
     @IBOutlet var administerBarButton: UIBarButtonItem!
     @IBOutlet var recordAudioButton: UIButton! {
         didSet {

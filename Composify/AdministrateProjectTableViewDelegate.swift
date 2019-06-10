@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdministrateProjectTableViewDelegate: NSObject {
+final class AdministrateProjectTableViewDelegate: NSObject {
     let administrateProjectViewController: AdministrateProjectViewController
 
     init(administrateProjectViewController: AdministrateProjectViewController) {
@@ -30,10 +30,12 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
 
         let endIndex = project.sectionIDs.count
         let sectionRowsRange = 0 ..< endIndex
+        let shouldDelete = indexPath.section == 1 && sectionRowsRange.contains(indexPath.row)
+        let shouldInsert = indexPath.section == 1 && indexPath.row == endIndex
 
-        if indexPath.section == 1, sectionRowsRange ~= indexPath.row {
+        if shouldDelete {
             return .delete
-        } else if indexPath.section == 1, indexPath.row == endIndex {
+        } else if shouldInsert {
             return .insert
         } else {
             return .none

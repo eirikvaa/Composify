@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextFieldTableViewCell: UITableViewCell {
+final class TextFieldTableViewCell: UITableViewCell {
     var textField: UITextField!
     var placeholder: String?
 

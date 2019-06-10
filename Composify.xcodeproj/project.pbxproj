@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
-		E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5089E3A21C4128A0026478C /* UIColor+Ext.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -112,7 +111,6 @@
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5089E3A21C4128A0026478C /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 				E53C0175212427E000F98E65 /* UIView+Ext.swift */,
 				E53C0177212427F000F98E65 /* Collection+Ext.swift */,
 				E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */,
-				E5089E3A21C4128A0026478C /* UIColor+Ext.swift */,
 				E582895221C6D14800E438B5 /* UIStoryboard+Ext.swift */,
 				E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */,
 				E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */,
@@ -785,7 +782,6 @@
 				E523959521C681F800D3004F /* R+Cells.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */,
 				E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */,
-				E5089E3B21C4128A0026478C /* UIColor+Ext.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,

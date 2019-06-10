@@ -11,7 +11,7 @@ import XCTest
 
 @testable import Composify
 
-class AudioPlayerTests: XCTestCase {
+final class AudioPlayerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 

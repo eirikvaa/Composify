@@ -12,7 +12,7 @@ import XCTest
 /*
  FileManagerTests tests both FileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
  */
-class FileManagerTests: XCTestCase {
+final class FileManagerTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
 

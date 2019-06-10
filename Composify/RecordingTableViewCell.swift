@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecordingTableViewCell: UITableViewCell {
+final class RecordingTableViewCell: UITableViewCell {
     private lazy var playButton = UIButton(type: .custom)
     private lazy var titleLabel = UILabel()
 

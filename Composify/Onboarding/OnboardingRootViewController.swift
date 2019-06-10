@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingRootViewController: UIViewController {
+final class OnboardingRootViewController: UIViewController {
     // MARK: @IBOutlets
 
     @IBOutlet private var skipButton: UIButton! {
@@ -25,7 +25,7 @@ class OnboardingRootViewController: UIViewController {
         }
     }
 
-    @IBOutlet var pageControl: UIPageControl!
+    @IBOutlet private var pageControl: UIPageControl!
     @IBOutlet private var containerView: UIView! {
         didSet {
             containerView.backgroundColor = R.Colors.cardinalRed

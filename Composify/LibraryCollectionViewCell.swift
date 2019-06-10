@@ -9,7 +9,7 @@
 import Parchment
 import UIKit
 
-class LibraryCollectionViewCell: PagingCell {
+final class LibraryCollectionViewCell: PagingCell {
     lazy var sectionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .preferredFont(forTextStyle: .body)

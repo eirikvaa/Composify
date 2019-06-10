@@ -20,5 +20,4 @@ protocol DatabaseService {
     func delete(_ object: ComposifyObject)
     func rename(_ object: ComposifyObject, to newName: String)
     func performOperation(_ operation: () -> Void)
-    func objects(ofType type: ComposifyObject.Type) -> [ComposifyObject]
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Recording: Object, ComposifyObject {
+final class Recording: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
     @objc dynamic var project: Project?

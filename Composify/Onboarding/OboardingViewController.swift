@@ -9,7 +9,7 @@
 import Parchment
 import UIKit
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     // MARK: @IBOutlets
 
     @IBOutlet private var imageView: UIImageView!
@@ -38,16 +38,11 @@ extension OnboardingViewController {
         imageView.accessibilityLabel = R.Loc.onboardingBackgroundImageAccLabel
 
         switch pageIndex {
-        case 0:
-            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage0AccLabel
-        case 1:
-            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage1AccLabel
-        case 2:
-            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage2AccLabel
-        case 3:
-            imageView.accessibilityValue = R.Loc.onboardingBackgroundImage3AccLabel
-        default:
-            break
+        case 0: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage0AccLabel
+        case 1: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage1AccLabel
+        case 2: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage2AccLabel
+        case 3: imageView.accessibilityValue = R.Loc.onboardingBackgroundImage3AccLabel
+        default: break
         }
     }
 }

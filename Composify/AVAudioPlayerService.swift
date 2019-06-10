@@ -14,7 +14,7 @@ import Foundation
  - Author: Eirik Vale Aase
  */
 
-class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
+final class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
     var audioDidFinishBlock: ((Bool) -> Void)?
 
     private var player: AVAudioPlayer?

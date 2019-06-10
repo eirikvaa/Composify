@@ -11,7 +11,7 @@ import XCTest
 
 @testable import Composify
 
-class RealmTests: XCTestCase {
+final class RealmTests: XCTestCase {
     var databaseService = DatabaseServiceFactory.defaultService
 
     override func setUp() {

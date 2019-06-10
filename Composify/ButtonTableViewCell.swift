@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonTableViewCell: UITableViewCell {
+final class ButtonTableViewCell: UITableViewCell {
     private var button: UIButton!
     var buttonTitle: String? {
         didSet {

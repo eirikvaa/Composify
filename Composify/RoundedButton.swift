@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedButton: UIButton {
+final class RoundedButton: UIButton {
     private let title: String
     private let action: () -> Void
 
