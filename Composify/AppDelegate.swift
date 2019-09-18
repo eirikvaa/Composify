@@ -30,7 +30,8 @@ private extension AppDelegate {
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.backgroundColor = UIColor.clear
-        navigationBarAppearance.barStyle = .blackTranslucent
+        navigationBarAppearance.barStyle = .black
+        navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
         ]
