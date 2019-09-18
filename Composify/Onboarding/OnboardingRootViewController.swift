@@ -129,7 +129,7 @@ private extension OnboardingRootViewController {
     /// Generate the view controllers used for pages in the onboarding
     /// - returns: An array of view controllers for the onboarding
     func generateOnboardingViewControllers() -> [OnboardingViewController] {
-        var backgroundImages = [
+        let backgroundImages = [
             R.Images.onboarding1,
             R.Images.onboarding2,
             R.Images.onboarding3,
