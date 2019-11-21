@@ -34,7 +34,7 @@ struct RealmDatabaseService: DatabaseService {
             }
 
             if let realmObject = object as? Object {
-                realm.add(realmObject, update: true)
+                realm.add(realmObject, update: .all)
             }
         }
     }
