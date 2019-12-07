@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
+		E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */; };
+		E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -114,6 +116,8 @@
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewController.swift; sourceTree = "<group>"; };
+		E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewController.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 			children = (
 				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
 				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
+				E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */,
+				E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */,
 				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
 				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
 			);
@@ -757,6 +763,7 @@
 				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
 				E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */,
+				E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */,
 				E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */,
 				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */,
@@ -780,6 +787,7 @@
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
+				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
 				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,

@@ -93,7 +93,9 @@ extension LibraryViewController {
         // Be able to administrate project if there is one
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: R.Loc.administrateProject, style: .default) { _ in
-                self.presentAdministrateViewController(project: currentProject)
+                self.presentAdministrateViewController(
+                    viewController: EditExistingProjectViewController(project: currentProject)
+                )
             }
         }
 
@@ -192,7 +194,7 @@ extension LibraryViewController {
 
 extension LibraryViewController {
     func showCreateNewProjectFlow() {
-        presentAdministrateViewController(project: nil)
+        presentAdministrateViewController(viewController: CreateNewProjectViewController())
     }
 
     /// Persist the project to userdefaults so it can be picked the next time
@@ -284,7 +286,8 @@ extension LibraryViewController {
                 actionMessage: R.Loc.addSection,
                 action: {
                     guard let currentProject = self.currentProject else { return }
-                    self.presentAdministrateViewController(project: currentProject)
+                    let viewController = EditExistingProjectViewController(project: currentProject)
+                    self.presentAdministrateViewController(viewController: viewController)
                 }
             )
             if let errorVieController = errorViewController {
@@ -304,10 +307,9 @@ extension LibraryViewController {
 
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
-    func presentAdministrateViewController(project: Project?) {
-        let administerViewController = AdministrateProjectViewController(project: project)
-        administerViewController.administrateProjectDelegate = self
-        let navigationController = UINavigationController(rootViewController: administerViewController)
+    func presentAdministrateViewController(viewController: AdministrateProjectViewController) {
+        viewController.administrateProjectDelegate = self
+        let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
 
