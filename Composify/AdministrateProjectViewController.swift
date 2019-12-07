@@ -165,6 +165,14 @@ extension AdministrateProjectViewController {
     func sectionRow(_ index: Int) -> HashableTuple<Int> {
         return HashableTuple(TableSection.projectSections.rawValue, index)
     }
+
+    func dismissWithoutSaving() {
+        resignFromAllTextFields()
+        if let project = project, creatingNewProject {
+            DatabaseServiceFactory.defaultService.delete(project)
+        }
+        dismiss(animated: true)
+    }
 }
 
 private extension AdministrateProjectViewController {
@@ -203,6 +211,7 @@ private extension AdministrateProjectViewController {
         if creatingNewProject {
             if let project = project {
                 DatabaseServiceFactory.defaultService.save(project)
+                administrateProjectDelegate?.userDidCreateProject(project)
             }
         }
         resignFromAllTextFields()

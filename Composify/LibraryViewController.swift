@@ -374,6 +374,13 @@ extension LibraryViewController: AdministrateProjectDelegate {
     func userDidReorderSections() {
         updateUI()
     }
+
+    func userDidCreateProject(_ project: Project) {
+        currentProjectID = project.id
+        currentSectionID = project.sectionIDs.first
+
+        updateUI()
+    }
 }
 
 extension LibraryViewController {

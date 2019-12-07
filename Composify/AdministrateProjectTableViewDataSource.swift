@@ -68,17 +68,25 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else {
                 return UITableViewCell()
             }
-            deleteCell.buttonTitle = R.Loc.deleteProejct
-            deleteCell.action = {
-                let confirmation = UIAlertController.createConfirmationAlert(
-                    title: R.Loc.deleteProjectConfirmationAlertTitle,
-                    message: R.Loc.deleteProjectConfirmationAlertMessage,
-                    completionHandler: { [weak self] _ in
-                        self?.deleteProject()
-                    }
-                )
+            deleteCell.buttonTitle = administrateProjectViewController
+                .creatingNewProject ?
+                R.Loc.closeWithoutSaving :
+                R.Loc.deleteProject
 
-                self.administrateProjectViewController.present(confirmation, animated: true)
+            deleteCell.action = {
+                if self.administrateProjectViewController.creatingNewProject {
+                    self.administrateProjectViewController.dismissWithoutSaving()
+                } else {
+                    let confirmation = UIAlertController.createConfirmationAlert(
+                        title: R.Loc.deleteProjectConfirmationAlertTitle,
+                        message: R.Loc.deleteProjectConfirmationAlertMessage,
+                        completionHandler: { [weak self] _ in
+                            self?.deleteProject()
+                        }
+                    )
+
+                    self.administrateProjectViewController.present(confirmation, animated: true)
+                }
             }
             return deleteCell
         default:

@@ -228,3 +228,6 @@
 
 /* Accessibility label for textfield table view cell */
 "textfield-table-view-cell.acc.label" = "Section";
+
+/* Title of close button when closing without saving the new project. */
+"administrate-project.close-without-saving.button.title" = "Close without saving";
