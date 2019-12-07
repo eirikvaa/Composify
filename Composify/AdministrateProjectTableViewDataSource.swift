@@ -15,7 +15,7 @@ final class AdministrateProjectTableViewDataSource: NSObject {
         self.administrateProjectViewController = administrateProjectViewController
     }
 
-    var currentProject: Project {
+    var currentProject: Project? {
         return administrateProjectViewController.project
     }
 
@@ -33,7 +33,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         let projectSectionsSection = AdministrateProjectViewController.TableSection.projectSections.rawValue
 
         if section == projectSectionsSection {
-            return currentProject.sections.count + 1
+            return (currentProject?.sections.count ?? 0) + 1
         }
 
         return administrateProjectViewController.tableRowCount[section] ?? 0
@@ -50,17 +50,17 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         cell.textField.text = nil
         cell.textField.placeholder = nil
         cell.isUserInteractionEnabled = true
-        let insertRowIndex = currentProject.sectionIDs.count
+        let insertRowIndex = currentProject?.sectionIDs.count ?? 0
 
         switch (indexPath.section, indexPath.row) {
         case (tableSection.metInformation.rawValue, _):
-            configureCellTextField(textField: cell.textField, placeholder: currentProject.title, delegate: administrateProjectViewController)
+            configureCellTextField(textField: cell.textField, placeholder: currentProject?.title ?? "", delegate: administrateProjectViewController)
         case (tableSection.projectSections.rawValue, _):
             if indexPath.row == insertRowIndex {
                 cell.textField.isUserInteractionEnabled = false
                 cell.textField.text = R.Loc.addSection
             } else {
-                if let section = currentProject.getSection(at: indexPath.row) {
+                if let section = currentProject?.getSection(at: indexPath.row) {
                     configureCellTextField(textField: cell.textField, placeholder: section.title, delegate: administrateProjectViewController)
                 }
             }
@@ -99,6 +99,10 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
                 self.administrateProjectViewController.administrateProjectDelegate?.userDidAddSectionToProject($0)
             }
 
+            guard let currentProject = currentProject else {
+                return
+            }
+
             administrateProjectViewController.tableRowValues.removeAll()
             for (index, sectionID) in currentProject.sectionIDs.enumerated() {
                 // We're skipping the entries that have a title different
@@ -121,8 +125,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         case .delete:
-            guard currentProject.sections.hasElements else { return }
-            guard let sectionToDelete = currentProject.getSection(at: indexPath.row) else { return }
+            guard currentProject?.sections.hasElements ?? false else { return }
+            guard let sectionToDelete = currentProject?.getSection(at: indexPath.row) else { return }
 
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()
@@ -149,8 +153,8 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         let sourceRow = sourceIndexPath.row
         let destinationRow = destinationIndexPath.row
         let databaseService = administrateProjectViewController.databaseService
-        guard let sourceSection = currentProject.getSection(at: sourceRow) else { return }
-        guard let destinationSection = currentProject.getSection(at: destinationRow) else { return }
+        guard let sourceSection = currentProject?.getSection(at: sourceRow) else { return }
+        guard let destinationSection = currentProject?.getSection(at: destinationRow) else { return }
 
         databaseService.performOperation {
             sourceSection.index = destinationRow
@@ -170,7 +174,7 @@ extension AdministrateProjectTableViewDataSource: UITableViewDataSource {
         // Also we don't want to be able to reorder the last row in that section,
         // because that's the green adding row. Also it doesn't make sense to show
         // the re-ordering controls if there is only a single section.
-        let numberOfSections = currentProject.sections.count
+        let numberOfSections = currentProject?.sections.count ?? 0
         let projectSectionsSection = tableSection.projectSections.rawValue
         return indexPath.section == projectSectionsSection &&
             indexPath.row < numberOfSections &&
@@ -187,7 +191,7 @@ private extension AdministrateProjectTableViewDataSource {
 
             self?.administrateProjectViewController.tableRowValues.removeAll()
             let projectSectionsSection = self?.tableSection.projectSections.rawValue ?? 0
-            let sections = self?.currentProject.sections ?? []
+            let sections = self?.currentProject?.sections ?? []
             for section in sections {
                 let key = HashableTuple(projectSectionsSection, section.index)
                 self?.administrateProjectViewController.tableRowValues[key] = section.title
@@ -204,7 +208,7 @@ private extension AdministrateProjectTableViewDataSource {
             userDefaults.resetLastSection()
         }
 
-        administrateProjectViewController.databaseService.delete(currentProject)
+        DatabaseServiceFactory.defaultService.delete(currentProject!)
         administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
         administrateProjectViewController.dismiss(animated: true)
     }

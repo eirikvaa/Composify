@@ -99,7 +99,7 @@ extension LibraryViewController {
 
         // Can alway add a project
         let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
-            self.showCreateProjectAlert()
+            self.showCreateNewProjectFlow()
         }
 
         // Showing other projects
@@ -191,28 +191,8 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
-    func showCreateProjectAlert() {
-        let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
-        addProjectAlert.addTextField { textField in
-            textField.autocapitalizationType = .words
-            textField.placeholder = R.Loc.projectTitle
-            textField.returnKeyType = .done
-            textField.clearButtonMode = .whileEditing
-        }
-        let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-            if let projectTitle = addProjectAlert.textFields?.first?.text {
-                Project.createProject(withTitle: projectTitle, then: { project in
-                    self.setCurrentProject(project)
-                    self.rememberProjectChosen(project)
-                    self.updateUI()
-                })
-            }
-        })
-        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
-        addProjectAlert.addAction(save)
-        addProjectAlert.addAction(cancel)
-
-        present(addProjectAlert, animated: true)
+    func showCreateNewProjectFlow() {
+        presentAdministrateViewController(project: nil)
     }
 
     /// Persist the project to userdefaults so it can be picked the next time
@@ -292,7 +272,7 @@ extension LibraryViewController {
                 message: R.Loc.noProjects,
                 actionMessage: R.Loc.addProject,
                 action: {
-                    self.showCreateProjectAlert()
+                    self.showCreateNewProjectFlow()
                 }
             )
             if let errorViewController = errorViewController {
@@ -324,7 +304,7 @@ extension LibraryViewController {
 
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
-    func presentAdministrateViewController(project: Project) {
+    func presentAdministrateViewController(project: Project?) {
         let administerViewController = AdministrateProjectViewController(project: project)
         administerViewController.administrateProjectDelegate = self
         let navigationController = UINavigationController(rootViewController: administerViewController)

@@ -15,7 +15,7 @@ final class AdministrateProjectTableViewDelegate: NSObject {
         self.administrateProjectViewController = administrateProjectViewController
     }
 
-    var project: Project {
+    var project: Project? {
         return administrateProjectViewController.project
     }
 }
@@ -28,7 +28,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     func tableView(_: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         guard indexPath.section == 1 else { return .none }
 
-        let endIndex = project.sectionIDs.count
+        let endIndex = project?.sectionIDs.count ?? 0
         let sectionRowsRange = 0 ..< endIndex
         let shouldDelete = indexPath.section == 1 && sectionRowsRange.contains(indexPath.row)
         let shouldInsert = indexPath.section == 1 && indexPath.row == endIndex

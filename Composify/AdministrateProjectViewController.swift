@@ -38,7 +38,7 @@ final class AdministrateProjectViewController: UIViewController {
 
     private(set) lazy var tableRowCount = [
         TableSection.metInformation.rawValue: 1, // Meta Information
-        TableSection.projectSections.rawValue: self.project.sectionIDs.count + 1, // Sections
+        TableSection.projectSections.rawValue: self.project?.sectionIDs.count ?? 0 + 1, // Sections
         TableSection.dangerZone.rawValue: 1, // Danger Zone
     ]
     lazy var tableRowValues: [HashableTuple<Int>: String] = [:]
@@ -47,13 +47,14 @@ final class AdministrateProjectViewController: UIViewController {
         R.Loc.sectionsHeader,
         R.Loc.dangerZoneHeader,
     ]
-    var project: Project
+    var project: Project?
+    var creatingNewProject = true
     var titleRow: HashableTuple<Int> {
         return HashableTuple(TableSection.metInformation.rawValue, 0)
     }
 
     // Initializer
-    init(project: Project) {
+    init(project: Project?) {
         self.project = project
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,11 +68,19 @@ final class AdministrateProjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = R.Loc.administrate
+        if project != nil {
+            creatingNewProject = false
+            navigationItem.title = R.Loc.administrate
+        } else {
+            Project.createProject(withTitle: "") { [weak self] project in
+                self?.project = project
+            }
+            navigationItem.title = R.Loc.addProject
+        }
 
-        tableRowValues[titleRow] = project.title
+        tableRowValues[titleRow] = project?.title
 
-        for section in project.sections {
+        for section in project?.sections ?? [] {
             tableRowValues[sectionRow(section.index)] = section.title
         }
 
@@ -101,9 +110,9 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
         databaseService.performOperation {
             switch indexPath.section {
             case TableSection.metInformation.rawValue:
-                project.title = newTitle
+                project?.title = newTitle
             case TableSection.projectSections.rawValue:
-                let section = project.getSection(at: indexPath.row)
+                let section = project?.getSection(at: indexPath.row)
                 section?.title = newTitle
             default:
                 return
@@ -142,7 +151,7 @@ extension AdministrateProjectViewController {
         let section = Section()
         section.title = R.Loc.section
         section.project = project
-        section.index = project.nextSectionIndex
+        section.index = project?.nextSectionIndex ?? 1
 
         databaseService.save(section)
         administrateProjectDelegate?.userDidAddSectionToProject(section)
@@ -167,8 +176,8 @@ private extension AdministrateProjectViewController {
     /// index greater than the passed in index and subtract one to close the gap.
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeSectionIndices(from index: Int) {
-        for i in (index + 1) ..< project.sectionIDs.count {
-            let section = project.getSection(at: i)
+        for i in (index + 1) ..< (project?.sectionIDs.count ?? 0) {
+            let section = project?.getSection(at: i)
             databaseService.performOperation {
                 section?.index -= 1
             }
@@ -183,10 +192,19 @@ private extension AdministrateProjectViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.pinToEdges(of: view)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        if creatingNewProject {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: R.Loc.save, style: .done, target: self, action: #selector(dismissVC))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        }
     }
 
     @objc func dismissVC(_: UIBarButtonItem) {
+        if creatingNewProject {
+            if let project = project {
+                DatabaseServiceFactory.defaultService.save(project)
+            }
+        }
         resignFromAllTextFields()
         dismiss(animated: true)
     }
