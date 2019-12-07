@@ -526,12 +526,12 @@
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
 				61B2B7D52623F71A28422112 /* [CP] Check Pods Manifest.lock */,
-				E51B851720F4076700FB3D48 /* ShellScript */,
-				E523959D21C6919000D3004F /* ShellScript */,
+				E51B851720F4076700FB3D48 /* SwiftLint */,
+				E523959D21C6919000D3004F /* SwiftFormat */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
-				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
+				E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */,
 				D3262428F336E7174CB2747A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -696,20 +696,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E51B851720F4076700FB3D48 /* ShellScript */ = {
+		E51B851720F4076700FB3D48 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" lint --config \"${PROJECT_DIR}/.swiftlint.yml\"\n";
 		};
-		E523959D21C6919000D3004F /* ShellScript */ = {
+		E523959D21C6919000D3004F /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -718,21 +719,23 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftFormat;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\nswiftformat .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${PROJECT_DIR}\" --config \"${PROJECT_DIR}/.swiftformat\"\n";
 		};
-		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
+		E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = BartyCrouch;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

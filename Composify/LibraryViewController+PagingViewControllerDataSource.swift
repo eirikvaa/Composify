@@ -12,13 +12,16 @@ import Parchment
 extension LibraryViewController: PagingViewControllerDataSource {
     func pagingViewController<T>(_: PagingViewController<T>, pagingItemForIndex index: Int) -> T where T: PagingItem, T: Comparable, T: Hashable {
         guard let currentProject = currentProject else {
+            // swiftlint:disable:next force_cast
             return SectionPageItem(section: nil) as! T
         }
 
         guard let section = currentProject.getSection(at: index) else {
+            // swiftlint:disable:next force_cast
             return SectionPageItem(section: nil) as! T
         }
 
+        // swiftlint:disable:next force_cast
         return SectionPageItem(section: section) as! T
     }
 
