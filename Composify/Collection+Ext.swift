@@ -12,6 +12,6 @@ extension Collection {
     /// A happy-path method for checking if a collection consists of at
     /// least one element.
     var hasElements: Bool {
-        return isEmpty == false
+        return isEmpty.isFalse
     }
 }
