@@ -19,6 +19,7 @@
 		E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959621C6820700D3004F /* R+UserDefaults.swift */; };
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
 		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
+		E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52A14D7239B29B3006AD675 /* BartyCrouch.swift */; };
 		E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
@@ -125,6 +126,7 @@
 		E523959621C6820700D3004F /* R+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+UserDefaults.swift"; sourceTree = "<group>"; };
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
 		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
+		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTupleTests.swift; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */,
 				E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */,
 				E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */,
+				E52A14D7239B29B3006AD675 /* BartyCrouch.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
+				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
