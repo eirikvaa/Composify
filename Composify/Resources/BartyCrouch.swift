@@ -11,5 +11,6 @@ import Foundation
 enum BartyCrouch {
     enum SupportedLanguage: String {
         case norwegian = "nb"
+        case english = "en"
     }
 }
