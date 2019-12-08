@@ -14,16 +14,13 @@ class AdministrateProjectViewController: UIViewController {
     lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
 
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
-    private(set) var tableView = UITableView(frame: .zero, style: .plain) {
+    private(set) var tableView = AdministrateProjectTableView(frame: .zero, style: .plain) {
         didSet {
-            tableView.keyboardDismissMode = .onDrag
             tableView.delegate = tableViewDelegate
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
             tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
             tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
             tableView.setEditing(true, animated: false)
-            tableView.rowHeight = UITableView.automaticDimension
-            tableView.estimatedRowHeight = 100
         }
     }
 
@@ -62,14 +59,6 @@ class AdministrateProjectViewController: UIViewController {
 
     // MARK: View Controller Life Cycle
 
-    fileprivate func fillUnderlyingDataStorage() {
-        tableRowValues[titleRow] = project?.title
-
-        for section in project?.sections ?? [] {
-            tableRowValues[sectionRow(section.index)] = section.title
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,7 +82,7 @@ class AdministrateProjectViewController: UIViewController {
     }
 
     func configureViews() {
-        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableView = AdministrateProjectTableView(frame: view.frame, style: .grouped)
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -181,6 +170,14 @@ private extension AdministrateProjectViewController {
             DatabaseServiceFactory.defaultService.performOperation {
                 section?.index -= 1
             }
+        }
+    }
+
+    func fillUnderlyingDataStorage() {
+        tableRowValues[titleRow] = project?.title
+
+        for section in project?.sections ?? [] {
+            tableRowValues[sectionRow(section.index)] = section.title
         }
     }
 }
