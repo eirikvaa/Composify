@@ -13,14 +13,7 @@ import UIKit
 
 final class LibraryViewController: UIViewController {
     @IBOutlet var administerBarButton: UIBarButtonItem!
-    @IBOutlet var recordAudioButton: UIButton! {
-        didSet {
-            recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = R.Colors.fireBushYellow
-            recordAudioButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-            recordAudioButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-    }
+    @IBOutlet var recordAudioButton: RecordAudioButton!
 
     @IBOutlet var recordAudioView: UIView!
     @IBOutlet var containerView: UIView!

@@ -14,6 +14,7 @@
 		E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */; };
 		E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */; };
 		E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */; };
+		E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FD239D230800C795B8 /* RecordAudioButton.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -124,6 +125,7 @@
 		E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableView.swift; sourceTree = "<group>"; };
 		E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectTableViewDataSource.swift; sourceTree = "<group>"; };
 		E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E51309FD239D230800C795B8 /* RecordAudioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAudioButton.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		E512A01C2112663900A70A75 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E51309FD239D230800C795B8 /* RecordAudioButton.swift */,
 				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
 				E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */,
 				E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */,
@@ -842,6 +845,7 @@
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
 				E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
+				E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */,
 				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
