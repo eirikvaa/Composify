@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
+		E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */; };
+		E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */; };
 		E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */; };
 		E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */; };
 		E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */; };
@@ -120,6 +122,8 @@
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewControllerTests.swift; sourceTree = "<group>"; };
+		E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewControllerTests.swift; sourceTree = "<group>"; };
 		E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewController.swift; sourceTree = "<group>"; };
 		E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewController.swift; sourceTree = "<group>"; };
 		E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableView.swift; sourceTree = "<group>"; };
@@ -488,6 +492,8 @@
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */,
+				E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */,
 				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
 				E58C57F51DD879C200348C65 /* FileManagerTests.swift */,
 				E590657320E3F4AF0028453D /* RealmTests.swift */,
@@ -867,6 +873,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */,
+				E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */,
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
 				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
