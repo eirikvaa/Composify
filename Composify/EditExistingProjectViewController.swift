@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditExistingProjectViewController: AdministrateProjectViewController {
+final class EditExistingProjectViewController: AdministrateProjectViewController {
     override init(project: Project?) {
         super.init(project: project)
         self.project = project

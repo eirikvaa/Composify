@@ -40,18 +40,6 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
         return administrateProjectViewController.tableSections[section].header
     }
 
-    func deleteSection(_ section: Section, indexPath: IndexPath) {
-        administrateProjectViewController.deleteSection(section) { [weak self] in
-            self?.administrateProjectViewController
-                .administrateProjectDelegate?
-                .userDidDeleteSectionFromProject()
-
-            self?.administrateProjectViewController.tableSections[1].values.removeAll()
-            self?.administrateProjectViewController.fillUnderlyingDataStorage()
-            self?.administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
-
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .insert:
@@ -153,6 +141,19 @@ extension AdministrateProjectTableViewDataSource {
         textField.delegate = delegate
     }
 
+    func configureSectionsCell(indexPath: IndexPath, insertRowIndex: Int, cell: TextFieldTableViewCell) {
+        if indexPath.row == insertRowIndex {
+            cell.textField.isUserInteractionEnabled = false
+            cell.textField.text = R.Loc.addSection
+        } else {
+            if let section = currentProject?.getSection(at: indexPath.row) {
+                configureCellTextField(textField: cell.textField, placeholder: section.title, delegate: administrateProjectViewController)
+            }
+        }
+    }
+}
+
+private extension AdministrateProjectTableViewDataSource {
     func updateDataBackend(_ currentProject: Project) {
         let existingValues = administrateProjectViewController.tableSections[1].values
 
@@ -176,6 +177,18 @@ extension AdministrateProjectTableViewDataSource {
             }
 
             administrateProjectViewController.tableSections[1].values.append(section.title)
+        }
+    }
+
+    func deleteSection(_ section: Section, indexPath: IndexPath) {
+        administrateProjectViewController.deleteSection(section) { [weak self] in
+            self?.administrateProjectViewController
+                .administrateProjectDelegate?
+                .userDidDeleteSectionFromProject()
+
+            self?.administrateProjectViewController.tableSections[1].values.removeAll()
+            self?.administrateProjectViewController.fillUnderlyingDataStorage()
+            self?.administrateProjectViewController.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 }

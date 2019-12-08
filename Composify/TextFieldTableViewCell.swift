@@ -10,7 +10,6 @@ import UIKit
 
 final class TextFieldTableViewCell: UITableViewCell {
     var textField: UITextField!
-    var placeholder: String?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,9 +25,11 @@ final class TextFieldTableViewCell: UITableViewCell {
 extension TextFieldTableViewCell {
     func setupViews() {
         textField = UITextField(frame: .zero)
-        textField.placeholder = placeholder
         textField.font = UIFont.preferredFont(forTextStyle: .body)
         textField.adjustsFontForContentSizeCategory = true
+        textField.returnKeyType = .done
+        tag = 1234
+        isUserInteractionEnabled = true
 
         contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false

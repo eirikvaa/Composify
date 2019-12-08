@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateNewProjectViewController: AdministrateProjectViewController {
+final class CreateNewProjectViewController: AdministrateProjectViewController {
     lazy var tableViewDataSource = CreateNewProjectTableViewDataSource(administrateProjectViewController: self)
 
     override func viewDidLoad() {

@@ -8,16 +8,22 @@
 
 import UIKit
 
-class AdministrateProjectTableView: UITableView {
+final class AdministrateProjectTableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
 
-        keyboardDismissMode = .onDrag
-        rowHeight = UITableView.automaticDimension
-        estimatedRowHeight = 100
+        configureTableView()
     }
 
     required init?(coder _: NSCoder) {
         fatalError("Not implemented")
+    }
+}
+
+private extension AdministrateProjectTableView {
+    func configureTableView() {
+        keyboardDismissMode = .onDrag
+        rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = 100
     }
 }
