@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct TableSection {
+    let header: String
+    var values: [String]
+}
+
 class AdministrateProjectViewController: UIViewController {
     // MARK: Properties
 
@@ -24,30 +29,13 @@ class AdministrateProjectViewController: UIViewController {
         }
     }
 
-    enum TableSection: Int {
-        case metInformation
-        case projectSections
-        case dangerZone
-    }
-
-    private(set) lazy var tableRowCount = [
-        TableSection.metInformation.rawValue: 1, // Meta Information
-        TableSection.projectSections.rawValue: self.project?.sectionIDs.count ?? 0 + 1, // Sections
-        TableSection.dangerZone.rawValue: 1, // Danger Zone
+    var tableSections: [TableSection] = [
+        .init(header: R.Loc.metaInformationHeader, values: []),
+        .init(header: R.Loc.sectionsHeader, values: []),
+        .init(header: R.Loc.dangerZoneHeader, values: []),
     ]
-    lazy var tableRowValues: [HashableTuple<Int>: String] = [:]
-    var tableSectionHeaders: [String] {
-        [
-            R.Loc.metaInformationHeader,
-            R.Loc.sectionsHeader,
-            R.Loc.dangerZoneHeader,
-        ]
-    }
 
     var project: Project?
-    var titleRow: HashableTuple<Int> {
-        return HashableTuple(TableSection.metInformation.rawValue, 0)
-    }
 
     init(project _: Project? = nil) {
         super.init(nibName: nil, bundle: nil)
@@ -77,8 +65,7 @@ class AdministrateProjectViewController: UIViewController {
         guard let (cell, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else { return }
 
-        let key = HashableTuple(indexPath.section, indexPath.row)
-        tableRowValues[key] = cell.textField.text ?? ""
+        tableSections[indexPath.section].values[indexPath.row] = cell.textField.text ?? ""
     }
 
     func configureViews() {
@@ -107,9 +94,9 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
 
         DatabaseServiceFactory.defaultService.performOperation {
             switch indexPath.section {
-            case TableSection.metInformation.rawValue:
+            case 0:
                 project?.title = newTitle
-            case TableSection.projectSections.rawValue:
+            case 1:
                 let section = project?.getSection(at: indexPath.row)
                 section?.title = newTitle
             default:
@@ -148,11 +135,9 @@ extension AdministrateProjectViewController {
         completionHandler(section)
     }
 
-    /// Return a tuple used for subscripting the `tableRowValues` dictionary.
-    /// - parameter index: The row in the section for project sections
-    /// - returns: A hashable tuple with the row and section information
-    func sectionRow(_ index: Int) -> HashableTuple<Int> {
-        return HashableTuple(TableSection.projectSections.rawValue, index)
+    func fillUnderlyingDataStorage() {
+        tableSections[0].values = [project?.title ?? ""]
+        tableSections[1].values = (project?.sections.map { $0.title } ?? [])
     }
 }
 
@@ -170,14 +155,6 @@ private extension AdministrateProjectViewController {
             DatabaseServiceFactory.defaultService.performOperation {
                 section?.index -= 1
             }
-        }
-    }
-
-    func fillUnderlyingDataStorage() {
-        tableRowValues[titleRow] = project?.title
-
-        for section in project?.sections ?? [] {
-            tableRowValues[sectionRow(section.index)] = section.title
         }
     }
 }

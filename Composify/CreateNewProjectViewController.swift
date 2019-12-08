@@ -9,14 +9,6 @@
 import UIKit
 
 class CreateNewProjectViewController: AdministrateProjectViewController {
-    override var tableSectionHeaders: [String] {
-        [
-            R.Loc.metaInformationHeader,
-            R.Loc.sectionsHeader,
-            R.Loc.dangerZoneHeader,
-        ]
-    }
-
     lazy var tableViewDataSource = CreateNewProjectTableViewDataSource(administrateProjectViewController: self)
 
     override func viewDidLoad() {

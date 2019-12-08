@@ -37,13 +37,13 @@ final class LibraryViewController: UIViewController {
 
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
-        guard let project: Project = projectID.correspondingComposifyObject() else { return nil }
+        guard let project: Project = projectID.composifyObject() else { return nil }
         return project
     }
 
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section: Section = sectionID.correspondingComposifyObject() else { return nil }
+        guard let section: Section = sectionID.composifyObject() else { return nil }
         return section
     }
 

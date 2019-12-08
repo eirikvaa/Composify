@@ -45,7 +45,7 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     func tableView(_: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         guard indexPath.section == 1 else { return false }
 
-        let row = administrateProjectViewController.tableRowCount[indexPath.section]
+        let row = administrateProjectViewController.tableSections[indexPath.section].values.count
         if indexPath.row == row { return false }
 
         return true

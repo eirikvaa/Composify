@@ -12,6 +12,8 @@
 		E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */; };
 		E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */; };
 		E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */; };
+		E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */; };
+		E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -120,6 +122,8 @@
 		E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewController.swift; sourceTree = "<group>"; };
 		E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewController.swift; sourceTree = "<group>"; };
 		E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableView.swift; sourceTree = "<group>"; };
+		E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectTableViewDataSource.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -262,6 +266,36 @@
 			name = Section;
 			sourceTree = "<group>";
 		};
+		E51309F6239C815100C795B8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */,
+				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
+				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
+				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
+				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		E51309F7239C816C00C795B8 /* EditExisting */ = {
+			isa = PBXGroup;
+			children = (
+				E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */,
+				E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */,
+			);
+			name = EditExisting;
+			sourceTree = "<group>";
+		};
+		E51309FA239C81B200C795B8 /* CreateNew */ = {
+			isa = PBXGroup;
+			children = (
+				E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */,
+				E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */,
+			);
+			name = CreateNew;
+			sourceTree = "<group>";
+		};
 		E523959A21C6824300D3004F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +376,7 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
+				E56460361D3B54B000AA6557 /* Application */,
 				E53C016C2124275900F98E65 /* Extensions */,
 				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
@@ -350,7 +385,6 @@
 				E512A01D2112664800A70A75 /* Section */,
 				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E5B3C7151D4A29C20021183A /* Localization */,
-				E56460361D3B54B000AA6557 /* Application */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -481,13 +515,9 @@
 		E5BD121D21126684000ED703 /* AdministrateProject */ = {
 			isa = PBXGroup;
 			children = (
-				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
-				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
-				E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */,
-				E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */,
-				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
-				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
-				E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */,
+				E51309FA239C81B200C795B8 /* CreateNew */,
+				E51309F7239C816C00C795B8 /* EditExisting */,
+				E51309F6239C815100C795B8 /* Base */,
 			);
 			name = AdministrateProject;
 			sourceTree = "<group>";
@@ -790,6 +820,7 @@
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
+				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
 				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
 				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
@@ -816,6 +847,7 @@
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
+				E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,

@@ -9,14 +9,6 @@
 import UIKit
 
 class EditExistingProjectViewController: AdministrateProjectViewController {
-    override var tableSectionHeaders: [String] {
-        [
-            R.Loc.metaInformationHeader,
-            R.Loc.sectionsHeader,
-            R.Loc.dangerZoneHeader,
-        ]
-    }
-
     override init(project: Project?) {
         super.init(project: project)
         self.project = project
