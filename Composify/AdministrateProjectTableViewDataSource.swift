@@ -65,29 +65,7 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
                 return
             }
 
-            let existingValues = administrateProjectViewController.tableSections[1].values
-
-            administrateProjectViewController.tableSections[1].values.removeAll()
-            for (index, sectionID) in currentProject.sectionIDs.enumerated() {
-                // We're skipping the entries that have a title different
-                // from the corresponding section title, because that means the
-                // section was renamed. Without this check, if a section is renamed
-                // and a section later added, the rename will be ignored.
-                let _section: Section? = sectionID.composifyObject()
-
-                let existingTitle: String
-                if index < existingValues.count {
-                    existingTitle = existingValues[index]
-                } else {
-                    existingTitle = _section?.title ?? ""
-                }
-
-                guard let section = _section, existingTitle == section.title else {
-                    continue
-                }
-
-                administrateProjectViewController.tableSections[1].values.append(section.title)
-            }
+            updateDataBackend(currentProject)
 
             // It's important that we reload the previously last row after we
             // insert the new row so there's no problem with indexes.
@@ -173,5 +151,31 @@ extension AdministrateProjectTableViewDataSource {
         textField.clearButtonMode = clearButtonMode
         textField.returnKeyType = returnKeyType
         textField.delegate = delegate
+    }
+
+    func updateDataBackend(_ currentProject: Project) {
+        let existingValues = administrateProjectViewController.tableSections[1].values
+
+        administrateProjectViewController.tableSections[1].values.removeAll()
+        for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+            // We're skipping the entries that have a title different
+            // from the corresponding section title, because that means the
+            // section was renamed. Without this check, if a section is renamed
+            // and a section later added, the rename will be ignored.
+            let _section: Section? = sectionID.composifyObject()
+
+            let existingTitle: String
+            if index < existingValues.count {
+                existingTitle = existingValues[index]
+            } else {
+                existingTitle = _section?.title ?? ""
+            }
+
+            guard let section = _section, existingTitle == section.title else {
+                continue
+            }
+
+            administrateProjectViewController.tableSections[1].values.append(section.title)
+        }
     }
 }
