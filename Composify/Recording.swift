@@ -22,6 +22,20 @@ final class Recording: Object, ComposifyObject {
     }
 }
 
+extension Recording {
+    static func createRecording(title: String, section: Section, fileExtension: String = "caf") -> Recording {
+        let recording = Recording()
+        recording.title = title
+        recording.section = section
+        recording.project = section.project
+        recording.fileExtension = fileExtension
+
+        DatabaseServiceFactory.defaultService.save(recording)
+
+        return recording
+    }
+}
+
 extension Recording: AudioPlayable {
     var url: URL {
         return R.URLs.recordingsDirectory

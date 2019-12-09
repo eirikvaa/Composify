@@ -14,15 +14,9 @@ import UIKit
 final class LibraryViewController: UIViewController {
     @IBOutlet var administerBarButton: UIBarButtonItem!
     @IBOutlet var recordAudioButton: RecordAudioButton!
-
     @IBOutlet var recordAudioView: UIView!
     @IBOutlet var containerView: UIView!
-    @IBOutlet var pageControl: UIPageControl! {
-        didSet {
-            pageControl.pageIndicatorTintColor = .lightGray
-            pageControl.currentPageIndicatorTintColor = R.Colors.cardinalRed
-        }
-    }
+    @IBOutlet var pageControl: LibraryPageControl!
 
     // Properties
     private var errorViewController: ErrorViewController?
@@ -51,7 +45,6 @@ final class LibraryViewController: UIViewController {
 
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
-    let fileManager = FileManager.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,14 +121,9 @@ extension LibraryViewController {
         )
 
         guard let recorder = audioRecorderDefaultService else {
-            guard let currentProject = currentProject else { return }
             guard let currentSection = currentSection else { return }
 
-            recording = Recording()
-            recording?.title = R.Loc.recording
-            recording?.project = currentProject
-            recording?.section = currentSection
-            recording?.fileExtension = "caf"
+            recording = Recording.createRecording(title: R.Loc.recording, section: currentSection)
 
             if let recording = recording {
                 do {

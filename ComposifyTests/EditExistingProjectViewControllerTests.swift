@@ -46,11 +46,6 @@ class EditExistingProjectViewControllerTests: XCTestCase {
 
 extension EditExistingProjectViewControllerTests {
     func createProject() -> Project? {
-        var project: Project?
-        Project.createProject(withTitle: "Test") { _project in
-            project = _project
-        }
-
-        return project
+        return Project.createProject(withTitle: "Test")
     }
 }

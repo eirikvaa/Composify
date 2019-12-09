@@ -16,9 +16,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
         tableView.dataSource = tableViewDataSource
 
-        Project.createProject(withTitle: "") { [weak self] project in
-            self?.project = project
-        }
+        project = Project.createProject(withTitle: "")
 
         navigationItem.title = R.Loc.addProject
     }

@@ -71,14 +71,14 @@ extension Project: Comparable {
 }
 
 extension Project {
-    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) {
+    static func createProject(withTitle title: String) -> Project {
         let project = Project()
         project.title = title
 
         let databaseService = DatabaseServiceFactory.defaultService
         databaseService.save(project)
 
-        completionHandler(project)
+        return project
     }
 
     var nextSectionIndex: Int {
