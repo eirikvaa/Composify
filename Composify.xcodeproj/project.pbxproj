@@ -59,7 +59,7 @@
 		E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A4CCA21D2FED4007F9DBB /* RoundedButton.swift */; };
 		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
-		E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* FileManagerTests.swift */; };
+		E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */; };
 		E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */; };
 		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
@@ -180,7 +180,7 @@
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
-		E58C57F51DD879C200348C65 /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
+		E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
 		E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPageControl.swift; sourceTree = "<group>"; };
 		E590657320E3F4AF0028453D /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
@@ -893,7 +893,7 @@
 				E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */,
 				E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */,
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
-				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
+				E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
 			);
