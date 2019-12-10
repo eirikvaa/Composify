@@ -88,6 +88,7 @@
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
+		E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -210,6 +211,7 @@
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTextField.swift; sourceTree = "<group>"; };
 		E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		E51309F6239C815100C795B8 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */,
 				E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */,
 				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
 				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
@@ -854,6 +857,7 @@
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
 				E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */,
 				E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */,
+				E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */,
 				E523959921C6821C00D3004F /* R+Colors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

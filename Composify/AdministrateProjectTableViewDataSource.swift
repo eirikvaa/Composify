@@ -128,16 +128,8 @@ extension AdministrateProjectTableViewDataSource {
         administrateProjectViewController.dismiss(animated: true)
     }
 
-    func configureCellTextField(textField: UITextField,
-                                placeholder: String,
-                                autocapitalizationType: UITextAutocapitalizationType = .words,
-                                clearButtonMode: UITextField.ViewMode = .whileEditing,
-                                returnKeyType: UIReturnKeyType = .done,
-                                delegate: UITextFieldDelegate?) {
+    func configureCellTextField(textField: AdministrateProjectTextField, placeholder: String, delegate: UITextFieldDelegate?) {
         textField.placeholder = placeholder
-        textField.autocapitalizationType = autocapitalizationType
-        textField.clearButtonMode = clearButtonMode
-        textField.returnKeyType = returnKeyType
         textField.delegate = delegate
     }
 

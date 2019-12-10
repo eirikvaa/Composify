@@ -9,7 +9,7 @@
 import UIKit
 
 final class TextFieldTableViewCell: UITableViewCell {
-    var textField: UITextField!
+    var textField: AdministrateProjectTextField!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,10 +24,7 @@ final class TextFieldTableViewCell: UITableViewCell {
 
 extension TextFieldTableViewCell {
     func setupViews() {
-        textField = UITextField(frame: .zero)
-        textField.font = UIFont.preferredFont(forTextStyle: .body)
-        textField.adjustsFontForContentSizeCategory = true
-        textField.returnKeyType = .done
+        textField = AdministrateProjectTextField(frame: .zero)
         tag = 1234
         isUserInteractionEnabled = true
 
@@ -40,14 +37,5 @@ extension TextFieldTableViewCell {
             textField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: separatorInset.right),
             textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
         ])
-
-        applyAccessibility()
-    }
-}
-
-extension TextFieldTableViewCell {
-    func applyAccessibility() {
-        textField.isAccessibilityElement = true
-        textField.accessibilityLabel = R.Loc.textFieldTableViewCellAccLabel
     }
 }
