@@ -87,6 +87,15 @@ extension Project {
         return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 
+    func deleteSection(at index: Int) {
+        guard let section = getSection(at: index) else {
+            return
+        }
+
+        normalizeIndices(from: index)
+        DatabaseServiceFactory.defaultService.delete(section)
+    }
+
     /// This will normalize the section indices such as when one is deleted, any
     /// holes in the counting is filled.
     /// If we delete a section, it will create a whole unless we delete the last one.

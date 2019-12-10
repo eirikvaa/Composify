@@ -81,8 +81,7 @@ class AdministrateProjectViewController: UIViewController {
     }
 
     func deleteSection(_ sectionToDelete: Section, then completionHandler: @escaping () -> Void) {
-        project?.normalizeIndices(from: sectionToDelete.index)
-        DatabaseServiceFactory.defaultService.delete(sectionToDelete)
+        project?.deleteSection(at: sectionToDelete.index)
         completionHandler()
     }
 }

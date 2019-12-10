@@ -47,10 +47,7 @@ final class ProjectTests: XCTestCase {
     func testNormalizeSectionsAfterDeleteSection() {
         let project = createProject(populateWithSectionCount: 3)
 
-        if let section = project?.getSection(at: 1) {
-            project?.normalizeIndices(from: 1)
-            DatabaseServiceFactory.defaultService.delete(section)
-        }
+        project?.deleteSection(at: 1)
 
         let expectedIndices = [0, 1]
         let actualIndices = project?.sections.map { $0.index } ?? []
