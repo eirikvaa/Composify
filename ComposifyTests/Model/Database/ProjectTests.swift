@@ -43,4 +43,38 @@ final class ProjectTests: XCTestCase {
 
         XCTAssertEqual(project.recordings.count, 2)
     }
+
+    func testNormalizeSectionsAfterDeleteSection() {
+        let project = createProject(populateWithSectionCount: 3)
+
+        if let section = project?.getSection(at: 1) {
+            project?.normalizeIndices(from: 1)
+            DatabaseServiceFactory.defaultService.delete(section)
+        }
+
+        let expectedIndices = [0, 1]
+        let actualIndices = project?.sections.map { $0.index } ?? []
+        XCTAssertEqual(expectedIndices, actualIndices)
+    }
+}
+
+extension ProjectTests {
+    /// Create project with `count` number of sections.
+    func createProject(populateWithSectionCount count: Int = 0) -> Project? {
+        let project = Project.createProject(withTitle: "Test")
+
+        for i in 0 ..< count {
+            let section = Section()
+            section.title = "S\(i)"
+            section.index = i
+
+            let databaseService = DatabaseServiceFactory.defaultService
+            databaseService.save(section)
+            databaseService.performOperation {
+                project.sectionIDs.append(section.id)
+            }
+        }
+
+        return project
+    }
 }

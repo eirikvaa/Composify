@@ -42,21 +42,6 @@ class EditExistingProjectViewControllerTests: XCTestCase {
 
         XCTAssertEqual(tableSections[1].values, [])
     }
-
-    func testNormalizeSectionsAfterDeleteSection() {
-        let project = createProject(populateWithSectionCount: 3)
-
-        let vc = EditExistingProjectViewController(project: project)
-        vc.loadViewIfNeeded()
-
-        if let firstSection = project?.getSection(at: 1) {
-            vc.deleteSection(firstSection) {}
-        }
-
-        let expectedIndices = [0, 1]
-        let actualIndices = project?.sections.map { $0.index } ?? []
-        XCTAssertEqual(expectedIndices, actualIndices)
-    }
 }
 
 extension EditExistingProjectViewControllerTests {
