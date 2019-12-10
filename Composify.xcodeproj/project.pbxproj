@@ -392,7 +392,6 @@
 				E5BD121D21126684000ED703 /* AdministrateProject */,
 				E512A01C2112663900A70A75 /* Library */,
 				E512A01D2112664800A70A75 /* Section */,
-				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -424,6 +423,7 @@
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E523959A21C6824300D3004F /* Resources */,
 				E582893821C6A1F900E438B5 /* Common */,
 				E576D93E1D58663E006F5D62 /* Realm */,
