@@ -86,4 +86,20 @@ extension Project {
         let lastSectionIndex = _section?.index ?? 0
         return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
+
+    /// This will normalize the section indices such as when one is deleted, any
+    /// holes in the counting is filled.
+    /// If we delete a section, it will create a whole unless we delete the last one.
+    /// Say we have indices 0 - 1 - 2 and delete the middle, then we have 0 - 2 and the
+    /// application will crash, because it only goes from 0 - 1. Solve this by getting all sections with an
+    /// index greater than the passed in index and subtract one to close the gap.
+    /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
+    func normalizeIndices(from index: Int) {
+        for i in (index + 1) ..< sectionIDs.count {
+            let section = getSection(at: i)
+            DatabaseServiceFactory.defaultService.performOperation {
+                section?.index -= 1
+            }
+        }
+    }
 }

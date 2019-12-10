@@ -81,7 +81,7 @@ class AdministrateProjectViewController: UIViewController {
     }
 
     func deleteSection(_ sectionToDelete: Section, then completionHandler: @escaping () -> Void) {
-        normalizeSectionIndices(from: sectionToDelete.index)
+        project?.normalizeIndices(from: sectionToDelete.index)
         DatabaseServiceFactory.defaultService.delete(sectionToDelete)
         completionHandler()
     }
@@ -138,23 +138,5 @@ extension AdministrateProjectViewController {
     func fillUnderlyingDataStorage() {
         tableSections[0].values = [project?.title ?? ""]
         tableSections[1].values = (project?.sections.map { $0.title } ?? [])
-    }
-}
-
-private extension AdministrateProjectViewController {
-    /// This will normalize the section indices such as when one is deleted, any
-    /// holes in the counting is filled.
-    /// If we delete a section, it will create a whole unless we delete the last one.
-    /// Say we have indices 0 - 1 - 2 and delete the middle, then we have 0 - 2 and the
-    /// application will crash, because it only goes from 0 - 1. Solve this by getting all sections with an
-    /// index greater than the passed in index and subtract one to close the gap.
-    /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
-    func normalizeSectionIndices(from index: Int) {
-        for i in (index + 1) ..< (project?.sectionIDs.count ?? 0) {
-            let section = project?.getSection(at: i)
-            DatabaseServiceFactory.defaultService.performOperation {
-                section?.index -= 1
-            }
-        }
     }
 }

@@ -49,7 +49,7 @@ class EditExistingProjectViewControllerTests: XCTestCase {
         let vc = EditExistingProjectViewController(project: project)
         vc.loadViewIfNeeded()
 
-        if let firstSection = project?.getSection(at: 2) {
+        if let firstSection = project?.getSection(at: 1) {
             vc.deleteSection(firstSection) {}
         }
 
