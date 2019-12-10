@@ -394,7 +394,6 @@
 				E512A01C2112663900A70A75 /* Library */,
 				E512A01D2112664800A70A75 /* Section */,
 				E589E71320F7B05800CF51FC /* Common Interfaces */,
-				E5B3C7151D4A29C20021183A /* Localization */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -407,6 +406,7 @@
 				E56460041D3B50B500AA6557 /* AppDelegate.swift */,
 				E582899B21C6F59D00E438B5 /* Info.plist */,
 				E58289A121C6F5F800E438B5 /* InfoPlist.strings */,
+				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 				E5C2030C2090FEE900B061E2 /* Assets.xcassets */,
 			);
 			name = Application;
@@ -514,14 +514,6 @@
 				E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */,
 			);
 			name = AVFoundation;
-			sourceTree = "<group>";
-		};
-		E5B3C7151D4A29C20021183A /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
-			);
-			name = Localization;
 			sourceTree = "<group>";
 		};
 		E5BD121D21126684000ED703 /* AdministrateProject */ = {
