@@ -62,15 +62,7 @@ extension Project {
 
         return section
     }
-}
 
-extension Project: Comparable {
-    static func < (lhs: Project, rhs: Project) -> Bool {
-        return lhs.dateCreated < rhs.dateCreated
-    }
-}
-
-extension Project {
     static func createProject(withTitle title: String) -> Project {
         let project = Project()
         project.title = title
@@ -95,7 +87,15 @@ extension Project {
         normalizeIndices(from: index)
         DatabaseServiceFactory.defaultService.delete(section)
     }
+}
 
+extension Project: Comparable {
+    static func < (lhs: Project, rhs: Project) -> Bool {
+        return lhs.dateCreated < rhs.dateCreated
+    }
+}
+
+private extension Project {
     /// This will normalize the section indices such as when one is deleted, any
     /// holes in the counting is filled.
     /// If we delete a section, it will create a whole unless we delete the last one.
