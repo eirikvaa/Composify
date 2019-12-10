@@ -42,10 +42,40 @@ class EditExistingProjectViewControllerTests: XCTestCase {
 
         XCTAssertEqual(tableSections[1].values, [])
     }
+
+    func testNormalizeSectionsAfterDeleteSection() {
+        let project = createProject(populateWithSectionCount: 3)
+
+        let vc = EditExistingProjectViewController(project: project)
+        vc.loadViewIfNeeded()
+
+        if let firstSection = project?.getSection(at: 2) {
+            vc.deleteSection(firstSection) {}
+        }
+
+        let expectedIndices = [0, 1]
+        let actualIndices = project?.sections.map { $0.index } ?? []
+        XCTAssertEqual(expectedIndices, actualIndices)
+    }
 }
 
 extension EditExistingProjectViewControllerTests {
-    func createProject() -> Project? {
-        return Project.createProject(withTitle: "Test")
+    /// Create project with `count` number of sections.
+    func createProject(populateWithSectionCount count: Int = 0) -> Project? {
+        let project = Project.createProject(withTitle: "Test")
+
+        for i in 0 ..< count {
+            let section = Section()
+            section.title = "S\(i)"
+            section.index = i
+
+            let databaseService = DatabaseServiceFactory.defaultService
+            databaseService.save(section)
+            databaseService.performOperation {
+                project.sectionIDs.append(section.id)
+            }
+        }
+
+        return project
     }
 }
