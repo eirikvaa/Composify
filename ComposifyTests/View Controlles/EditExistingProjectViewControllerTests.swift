@@ -22,7 +22,7 @@ class EditExistingProjectViewControllerTests: XCTestCase {
     }
 
     func testEditExistingProjectAndPopulateBackingDataCheckTitle() {
-        let project = createProject()
+        let project = Project.createProject()
 
         let vc = EditExistingProjectViewController(project: project)
         vc.loadViewIfNeeded()
@@ -33,7 +33,7 @@ class EditExistingProjectViewControllerTests: XCTestCase {
     }
 
     func testEditExistingProjectAndPopulateBackingDataCheckSections() {
-        let project = createProject()
+        let project = Project.createProject()
 
         let vc = EditExistingProjectViewController(project: project)
         vc.loadViewIfNeeded()
@@ -41,26 +41,5 @@ class EditExistingProjectViewControllerTests: XCTestCase {
         let tableSections = vc.tableSections
 
         XCTAssertEqual(tableSections[1].values, [])
-    }
-}
-
-extension EditExistingProjectViewControllerTests {
-    /// Create project with `count` number of sections.
-    func createProject(populateWithSectionCount count: Int = 0) -> Project? {
-        let project = Project.createProject(withTitle: "Test")
-
-        for i in 0 ..< count {
-            let section = Section()
-            section.title = "S\(i)"
-            section.index = i
-
-            let databaseService = DatabaseServiceFactory.defaultService
-            databaseService.save(section)
-            databaseService.performOperation {
-                project.sectionIDs.append(section.id)
-            }
-        }
-
-        return project
     }
 }

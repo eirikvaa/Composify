@@ -89,6 +89,7 @@
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
 		E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */; };
+		E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41B6239FBC11000377BC /* Project+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -212,6 +213,7 @@
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTextField.swift; sourceTree = "<group>"; };
+		E5FC41B6239FBC11000377BC /* Project+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Ext.swift"; sourceTree = "<group>"; };
 		E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5FC41B5239FBBE8000377BC /* Extensions */,
 				E5FC41B2239FB4D1000377BC /* Model */,
 				E5FC41B1239FB4C4000377BC /* View Controlles */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
@@ -591,6 +594,14 @@
 				E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		E5FC41B5239FBBE8000377BC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC41B6239FBC11000377BC /* Project+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -900,6 +911,7 @@
 			files = (
 				E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */,
 				E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */,
+				E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */,
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
 				E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
