@@ -28,7 +28,6 @@
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
 		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
 		E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52A14D7239B29B3006AD675 /* BartyCrouch.swift */; };
-		E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
 		E53C0174212427D000F98E65 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0173212427D000F98E65 /* String+Ext.swift */; };
@@ -75,7 +74,6 @@
 		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
 		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
-		E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* HashableTuple.swift */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */; };
@@ -144,7 +142,6 @@
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
 		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
-		E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTupleTests.swift; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		E53C0173212427D000F98E65 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -197,7 +194,6 @@
 		E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPageItem.swift; sourceTree = "<group>"; };
 		E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDataSource.swift"; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E5D3EA291F818D28001D59ED /* HashableTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTuple.swift; sourceTree = "<group>"; };
 		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDelegate.swift"; sourceTree = "<group>"; };
@@ -459,7 +455,6 @@
 		E582893821C6A1F900E438B5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 				E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */,
 			);
 			name = Common;
@@ -501,7 +496,6 @@
 				E58C57F51DD879C200348C65 /* FileManagerTests.swift */,
 				E590657320E3F4AF0028453D /* RealmTests.swift */,
 				E5152F4520E403760031572E /* ProjectTests.swift */,
-				E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
@@ -848,7 +842,6 @@
 				E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
 				E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */,
-				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
@@ -874,7 +867,6 @@
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
 				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
-				E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
