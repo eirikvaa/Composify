@@ -569,8 +569,7 @@
 		E5FC41B2239FB4D1000377BC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
-				E58C57F51DD879C200348C65 /* FileManagerTests.swift */,
+				E5FC41B4239FB673000377BC /* Audio */,
 				E5FC41B3239FB4D9000377BC /* Database */,
 			);
 			path = Model;
@@ -583,6 +582,15 @@
 				E5152F4520E403760031572E /* ProjectTests.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		E5FC41B4239FB673000377BC /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
+				E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
