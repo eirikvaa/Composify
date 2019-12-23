@@ -22,7 +22,7 @@ extension SectionViewController: UITableViewDataSource {
         }
 
         let recordingId = section.recordingIDs[indexPath.row]
-        let recording: Recording? = recordingId.correspondingComposifyObject()
+        let recording: Recording? = recordingId.composifyObject()
         let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
 
         // If a recording has just been created, it's title is defaulted to a zero-string,

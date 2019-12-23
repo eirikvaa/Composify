@@ -9,10 +9,13 @@
 import UIKit
 
 extension SectionViewController: UITableViewDelegate {
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let recording = section.recordings[indexPath.row]
 
-        let edit = UITableViewRowAction(style: .default, title: R.Loc.edit) { _, indexPath in
+        let edit = UIContextualAction(
+            style: .normal,
+            title: R.Loc.edit
+        ) { _, _, _ in
             let edit = UIAlertController(title: R.Loc.edit, message: nil, preferredStyle: .alert)
 
             edit.addTextField {
@@ -36,7 +39,7 @@ extension SectionViewController: UITableViewDelegate {
             self.present(edit, animated: true, completion: nil)
         }
 
-        let delete = UITableViewRowAction(style: .destructive, title: R.Loc.delete) { _, _ in
+        let delete = UIContextualAction(style: .destructive, title: R.Loc.delete) { _, _, _ in
             let confirmation = UIAlertController.createConfirmationAlert(
                 title: R.Loc.deleteRecordingConfirmationAlertTitle,
                 message: R.Loc.deleteRecordingConfirmationAlertMessage,
@@ -51,7 +54,7 @@ extension SectionViewController: UITableViewDelegate {
             self.present(confirmation, animated: true)
         }
 
-        let export = UITableViewRowAction(style: .default, title: R.Loc.export) { _, _ in
+        let export = UIContextualAction(style: .normal, title: R.Loc.export) { _, _, _ in
             let url: [Any] = [recording.url]
             let activityVC = UIActivityViewController(activityItems: url, applicationActivities: nil)
             self.present(activityVC, animated: true)
@@ -61,13 +64,13 @@ extension SectionViewController: UITableViewDelegate {
         delete.backgroundColor = R.Colors.carminPink
         export.backgroundColor = R.Colors.blueDeFrance
 
-        return [edit, delete, export]
+        return UISwipeActionsConfiguration(actions: [edit, export, delete])
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
 
-        guard let recording: Recording = section.recordingIDs[indexPath.row].correspondingComposifyObject() else {
+        guard let recording: Recording = section.recordingIDs[indexPath.row].composifyObject() else {
             return
         }
 

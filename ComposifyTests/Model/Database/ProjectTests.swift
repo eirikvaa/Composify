@@ -43,4 +43,14 @@ final class ProjectTests: XCTestCase {
 
         XCTAssertEqual(project.recordings.count, 2)
     }
+
+    func testNormalizeSectionsAfterDeleteSection() {
+        let project = Project.createProject(populateWithSectionCount: 3)
+
+        project?.deleteSection(at: 1)
+
+        let expectedIndices = [0, 1]
+        let actualIndices = project?.sections.map { $0.index } ?? []
+        XCTAssertEqual(expectedIndices, actualIndices)
+    }
 }

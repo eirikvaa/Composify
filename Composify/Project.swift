@@ -54,13 +54,38 @@ extension Project {
     func getSection(at index: Int) -> Section? {
         var section: Section?
         for sectionID in sectionIDs {
-            let _section: Section? = sectionID.correspondingComposifyObject()
+            let _section: Section? = sectionID.composifyObject()
             if _section?.index == index {
                 section = _section
             }
         }
 
         return section
+    }
+
+    static func createProject(withTitle title: String) -> Project {
+        let project = Project()
+        project.title = title
+
+        let databaseService = DatabaseServiceFactory.defaultService
+        databaseService.save(project)
+
+        return project
+    }
+
+    var nextSectionIndex: Int {
+        let _section: Section? = sectionIDs.last?.composifyObject()
+        let lastSectionIndex = _section?.index ?? 0
+        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
+    }
+
+    func deleteSection(at index: Int) {
+        guard let section = getSection(at: index) else {
+            return
+        }
+
+        normalizeIndices(from: index)
+        DatabaseServiceFactory.defaultService.delete(section)
     }
 }
 
@@ -70,20 +95,20 @@ extension Project: Comparable {
     }
 }
 
-extension Project {
-    static func createProject(withTitle title: String, then completionHandler: (_ project: Project) -> Void) {
-        let project = Project()
-        project.title = title
-
-        let databaseService = DatabaseServiceFactory.defaultService
-        databaseService.save(project)
-
-        completionHandler(project)
-    }
-
-    var nextSectionIndex: Int {
-        let _section: Section? = sectionIDs.last?.correspondingComposifyObject()
-        let lastSectionIndex = _section?.index ?? 0
-        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
+private extension Project {
+    /// This will normalize the section indices such as when one is deleted, any
+    /// holes in the counting is filled.
+    /// If we delete a section, it will create a whole unless we delete the last one.
+    /// Say we have indices 0 - 1 - 2 and delete the middle, then we have 0 - 2 and the
+    /// application will crash, because it only goes from 0 - 1. Solve this by getting all sections with an
+    /// index greater than the passed in index and subtract one to close the gap.
+    /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
+    func normalizeIndices(from index: Int) {
+        for i in (index + 1) ..< sectionIDs.count {
+            let section = getSection(at: i)
+            DatabaseServiceFactory.defaultService.performOperation {
+                section?.index -= 1
+            }
+        }
     }
 }

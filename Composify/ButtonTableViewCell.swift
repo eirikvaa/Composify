@@ -17,6 +17,12 @@ final class ButtonTableViewCell: UITableViewCell {
         }
     }
 
+    var buttonTitleColor: UIColor? {
+        didSet {
+            button.setTitleColor(buttonTitleColor, for: .normal)
+        }
+    }
+
     var action: (() -> Void)?
 
     required init?(coder aDecoder: NSCoder) {

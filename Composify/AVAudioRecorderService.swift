@@ -17,7 +17,7 @@ import Foundation
 struct AVAudioRecorderService: AudioRecorderService {
     // MARK: Properties
 
-    private(set) var recorder: AVAudioRecorder!
+    private var recorder: AVAudioRecorder!
     private var session = AVAudioSession.sharedInstance()
 
     // MARK: Initialization

@@ -38,6 +38,8 @@ extension UIViewController {
     /// - returns: OnboardingRootViewController
     static func onboardingRootViewController() -> OnboardingRootViewController {
         let storyboard = UIStoryboard.onboardingStoryboard()
+
+        // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingRoot) as! OnboardingRootViewController
     }
 
@@ -45,6 +47,8 @@ extension UIViewController {
     /// - returns: OnboardingViewController
     static func onboardingPageViewController() -> OnboardingViewController {
         let storyboard = UIStoryboard.onboardingStoryboard()
+
+        // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: R.ViewControllerIdentifiers.onboardingPage) as! OnboardingViewController
     }
 }

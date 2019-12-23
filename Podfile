@@ -1,14 +1,15 @@
-# Uncomment the next line to define a global platform for your project
-platform :ios, '12.1'
+source 'https://cdn.cocoapods.org/'
+
+platform :ios, '13.2'
 
 target 'Composify' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for Composify
-  pod 'RealmSwift'
-  pod 'SwiftLint'
-  pod 'Parchment'
+  pod 'RealmSwift',       '~> 4.1.1'
+  pod 'SwiftLint',        '~> 0.38.0'
+  pod 'SwiftFormat/CLI',  '~> 0.42.0'
+  pod 'Parchment',        '~> 1.7.0'
 
   target 'ComposifyTests' do
     inherit! :search_paths

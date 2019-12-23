@@ -78,7 +78,7 @@ extension R.Loc {
         )
     }
 
-    static let deleteProejct = NSLocalizedString(
+    static let deleteProject = NSLocalizedString(
         "administrate-project.delete-button.title",
         comment: "Title of delete button in table view."
     )
@@ -208,6 +208,10 @@ extension R.Loc {
     static let dangerZoneHeader = NSLocalizedString(
         "administrate-project.section-titles.danger-zone.label",
         comment: "Title of section for the danger zone in administrate project."
+    )
+    static let closeWithoutSaving = NSLocalizedString(
+        "administrate-project.close-without-saving.button.title",
+        comment: "Title of close button when closing without saving the new project."
     )
 }
 

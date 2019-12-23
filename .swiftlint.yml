@@ -14,6 +14,9 @@ disabled_rules: # rule identifiers to exclude from running
   - large_tuple
 opt_in_rules: # some rules are only opt-in
   - empty_count
+  - anyobject_protocol
+  - closure_spacing
+  - implicit_return
   # Find all the available rules by running:
   # swiftlint rules
 included: # paths to include during linting. `--path` is ignored if present.

@@ -1,5 +1,5 @@
 //
-//  FileManagerTests.swift
+//  AudioRecorderTests.swift
 //  ComposifyTests
 //
 //  Created by Eirik Vale Aase on 10.11.2016.
@@ -9,10 +9,7 @@
 @testable import Composify
 import XCTest
 
-/*
- FileManagerTests tests both FileManager and AudioRecorder; it tests renaming of recordings, so you kind of need recordings, so you kind of need AudioRecorder.
- */
-final class FileManagerTests: XCTestCase {
+final class AudioRecorderTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
 
@@ -29,7 +26,7 @@ final class FileManagerTests: XCTestCase {
     }
 }
 
-private extension FileManagerTests {
+private extension AudioRecorderTests {
     /// Create project
     /// - parameter title: Title for object
     func createProject(withTitle title: String) -> Project {

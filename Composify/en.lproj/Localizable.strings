@@ -1,4 +1,7 @@
 
+/* Title of close button when closing without saving the new project. */
+"administrate-project.close-without-saving.button.title" = "Close without saving";
+
 /* Title of delete button in table view. */
 "administrate-project.delete-button.title" = "Delete project";
 

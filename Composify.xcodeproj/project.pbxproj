@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		6014CEDA7FA3EA7598D1A0C0 /* Pods_Composify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BEA34384C1A29FC770BAD /* Pods_Composify.framework */; };
 		8AB05DFF4AAEE82A048D39FC /* Pods_ComposifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */; };
+		E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */; };
+		E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */; };
+		E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */; };
+		E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */; };
+		E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */; };
+		E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */; };
+		E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */; };
+		E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FD239D230800C795B8 /* RecordAudioButton.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
 		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
@@ -19,7 +27,7 @@
 		E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959621C6820700D3004F /* R+UserDefaults.swift */; };
 		E523959921C6821C00D3004F /* R+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959821C6821C00D3004F /* R+Colors.swift */; };
 		E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */; };
-		E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */; };
+		E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52A14D7239B29B3006AD675 /* BartyCrouch.swift */; };
 		E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */; };
 		E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */; };
 		E53C0174212427D000F98E65 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0173212427D000F98E65 /* String+Ext.swift */; };
@@ -51,7 +59,8 @@
 		E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58A4CCA21D2FED4007F9DBB /* RoundedButton.swift */; };
 		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
-		E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* FileManagerTests.swift */; };
+		E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */; };
+		E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */; };
 		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
@@ -65,7 +74,6 @@
 		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
 		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
-		E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3EA291F818D28001D59ED /* HashableTuple.swift */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
 		E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */; };
@@ -80,6 +88,8 @@
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
+		E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */; };
+		E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41B6239FBC11000377BC /* Project+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -113,6 +123,14 @@
 		6C29AD79869CCFA36EB00624 /* Pods_ComposifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921F8BF05D3A91002F20D8AD /* Pods-Composify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Composify.release.xcconfig"; path = "Target Support Files/Pods-Composify/Pods-Composify.release.xcconfig"; sourceTree = "<group>"; };
 		DA9CCC039052B06A327C25E8 /* Pods_ComposifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComposifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewControllerTests.swift; sourceTree = "<group>"; };
+		E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewControllerTests.swift; sourceTree = "<group>"; };
+		E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewController.swift; sourceTree = "<group>"; };
+		E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewController.swift; sourceTree = "<group>"; };
+		E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTableView.swift; sourceTree = "<group>"; };
+		E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectTableViewDataSource.swift; sourceTree = "<group>"; };
+		E51309FD239D230800C795B8 /* RecordAudioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAudioButton.swift; sourceTree = "<group>"; };
 		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E517008E1E29479400B7DAA8 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -125,7 +143,7 @@
 		E523959621C6820700D3004F /* R+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+UserDefaults.swift"; sourceTree = "<group>"; };
 		E523959821C6821C00D3004F /* R+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Colors.swift"; sourceTree = "<group>"; };
 		E523959B21C68CC400D3004F /* R+DatabaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+DatabaseKeys.swift"; sourceTree = "<group>"; };
-		E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTupleTests.swift; sourceTree = "<group>"; };
+		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E53C016F2124279D00F98E65 /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		E53C0171212427BF00F98E65 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		E53C0173212427D000F98E65 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -163,7 +181,8 @@
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
-		E58C57F51DD879C200348C65 /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
+		E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
+		E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPageControl.swift; sourceTree = "<group>"; };
 		E590657320E3F4AF0028453D /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
@@ -177,7 +196,6 @@
 		E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPageItem.swift; sourceTree = "<group>"; };
 		E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDataSource.swift"; sourceTree = "<group>"; };
 		E5CFDBAA1DD24E0D007252D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E5D3EA291F818D28001D59ED /* HashableTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableTuple.swift; sourceTree = "<group>"; };
 		E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerServiceFactory.swift; sourceTree = "<group>"; };
 		E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+PagingViewControllerDelegate.swift"; sourceTree = "<group>"; };
@@ -194,6 +212,8 @@
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTextField.swift; sourceTree = "<group>"; };
+		E5FC41B6239FBC11000377BC /* Project+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Ext.swift"; sourceTree = "<group>"; };
 		E67F776E6CDE4FD42E375E61 /* Pods-ComposifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F45B7765EC9933926416A71C /* Pods-ComposifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyUITests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyUITests/Pods-ComposifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F7F48F93F3581184C334B237 /* Pods-ComposifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComposifyTests.release.xcconfig"; path = "Target Support Files/Pods-ComposifyTests/Pods-ComposifyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +256,8 @@
 		E512A01C2112663900A70A75 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */,
+				E51309FD239D230800C795B8 /* RecordAudioButton.swift */,
 				E517008E1E29479400B7DAA8 /* LibraryViewController.swift */,
 				E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */,
 				E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */,
@@ -254,6 +276,37 @@
 			name = Section;
 			sourceTree = "<group>";
 		};
+		E51309F6239C815100C795B8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */,
+				E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */,
+				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
+				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
+				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
+				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		E51309F7239C816C00C795B8 /* EditExisting */ = {
+			isa = PBXGroup;
+			children = (
+				E51309F0239C63BC00C795B8 /* EditExistingProjectViewController.swift */,
+				E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */,
+			);
+			name = EditExisting;
+			sourceTree = "<group>";
+		};
+		E51309FA239C81B200C795B8 /* CreateNew */ = {
+			isa = PBXGroup;
+			children = (
+				E51309F2239C63D900C795B8 /* CreateNewProjectViewController.swift */,
+				E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */,
+			);
+			name = CreateNew;
+			sourceTree = "<group>";
+		};
 		E523959A21C6824300D3004F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +320,7 @@
 				E582894E21C6C5EB00E438B5 /* R+Storyboards.swift */,
 				E582895021C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift */,
 				E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */,
+				E52A14D7239B29B3006AD675 /* BartyCrouch.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -333,15 +387,13 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
+				E56460361D3B54B000AA6557 /* Application */,
 				E53C016C2124275900F98E65 /* Extensions */,
 				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
 				E5BD121D21126684000ED703 /* AdministrateProject */,
 				E512A01C2112663900A70A75 /* Library */,
 				E512A01D2112664800A70A75 /* Section */,
-				E589E71320F7B05800CF51FC /* Common Interfaces */,
-				E5B3C7151D4A29C20021183A /* Localization */,
-				E56460361D3B54B000AA6557 /* Application */,
 				E56460391D3B54C400AA6557 /* Model */,
 				E56460371D3B54B600AA6557 /* User Interface */,
 			);
@@ -354,6 +406,7 @@
 				E56460041D3B50B500AA6557 /* AppDelegate.swift */,
 				E582899B21C6F59D00E438B5 /* Info.plist */,
 				E58289A121C6F5F800E438B5 /* InfoPlist.strings */,
+				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 				E5C2030C2090FEE900B061E2 /* Assets.xcassets */,
 			);
 			name = Application;
@@ -372,6 +425,7 @@
 		E56460391D3B54C400AA6557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E589E71320F7B05800CF51FC /* Common Interfaces */,
 				E523959A21C6824300D3004F /* Resources */,
 				E582893821C6A1F900E438B5 /* Common */,
 				E576D93E1D58663E006F5D62 /* Realm */,
@@ -406,7 +460,6 @@
 		E582893821C6A1F900E438B5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E5D3EA291F818D28001D59ED /* HashableTuple.swift */,
 				E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */,
 			);
 			name = Common;
@@ -442,11 +495,9 @@
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
-				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
-				E58C57F51DD879C200348C65 /* FileManagerTests.swift */,
-				E590657320E3F4AF0028453D /* RealmTests.swift */,
-				E5152F4520E403760031572E /* ProjectTests.swift */,
-				E533A0D421CDCB1B00855A3C /* HashableTupleTests.swift */,
+				E5FC41B5239FBBE8000377BC /* Extensions */,
+				E5FC41B2239FB4D1000377BC /* Model */,
+				E5FC41B1239FB4C4000377BC /* View Controlles */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
@@ -461,21 +512,12 @@
 			name = AVFoundation;
 			sourceTree = "<group>";
 		};
-		E5B3C7151D4A29C20021183A /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
-			);
-			name = Localization;
-			sourceTree = "<group>";
-		};
 		E5BD121D21126684000ED703 /* AdministrateProject */ = {
 			isa = PBXGroup;
 			children = (
-				E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */,
-				E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */,
-				E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */,
-				E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */,
+				E51309FA239C81B200C795B8 /* CreateNew */,
+				E51309F7239C816C00C795B8 /* EditExisting */,
+				E51309F6239C815100C795B8 /* Base */,
 			);
 			name = AdministrateProject;
 			sourceTree = "<group>";
@@ -518,6 +560,50 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		E5FC41B1239FB4C4000377BC /* View Controlles */ = {
+			isa = PBXGroup;
+			children = (
+				E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */,
+				E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */,
+			);
+			path = "View Controlles";
+			sourceTree = "<group>";
+		};
+		E5FC41B2239FB4D1000377BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC41B4239FB673000377BC /* Audio */,
+				E5FC41B3239FB4D9000377BC /* Database */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E5FC41B3239FB4D9000377BC /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E590657320E3F4AF0028453D /* RealmTests.swift */,
+				E5152F4520E403760031572E /* ProjectTests.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		E5FC41B4239FB673000377BC /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
+				E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		E5FC41B5239FBBE8000377BC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC41B6239FBC11000377BC /* Project+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -526,12 +612,12 @@
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
 				61B2B7D52623F71A28422112 /* [CP] Check Pods Manifest.lock */,
-				E51B851720F4076700FB3D48 /* ShellScript */,
-				E523959D21C6919000D3004F /* ShellScript */,
+				E51B851720F4076700FB3D48 /* SwiftLint */,
+				E523959D21C6919000D3004F /* SwiftFormat */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
-				E5E3EFD71DDB9B9E00D3C643 /* ShellScript */,
+				E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */,
 				D3262428F336E7174CB2747A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -696,20 +782,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Composify/Pods-Composify-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E51B851720F4076700FB3D48 /* ShellScript */ = {
+		E51B851720F4076700FB3D48 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" lint --config \"${PROJECT_DIR}/.swiftlint.yml\"\n";
 		};
-		E523959D21C6919000D3004F /* ShellScript */ = {
+		E523959D21C6919000D3004F /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -718,21 +805,23 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftFormat;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\nswiftformat .\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${PROJECT_DIR}\" --config \"${PROJECT_DIR}/.swiftformat\"\n";
 		};
-		E5E3EFD71DDB9B9E00D3C643 /* ShellScript */ = {
+		E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = BartyCrouch;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -751,6 +840,7 @@
 				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
 				E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */,
+				E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */,
 				E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */,
 				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */,
@@ -772,7 +862,11 @@
 				E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
+				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
+				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
+				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
+				E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */,
 				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
@@ -791,12 +885,14 @@
 				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
+				E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
-				E5D3EA2A1F818D28001D59ED /* HashableTuple.swift in Sources */,
+				E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
 				E589E71520F7B07300CF51FC /* DatabaseService.swift in Sources */,
+				E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,
@@ -804,6 +900,7 @@
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
 				E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */,
 				E589E71720F7B2C000CF51FC /* DatabaseServiceFactory.swift in Sources */,
+				E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */,
 				E523959921C6821C00D3004F /* R+Colors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,10 +909,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */,
+				E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */,
+				E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */,
 				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
-				E58C57F71DD879C200348C65 /* FileManagerTests.swift in Sources */,
+				E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */,
 				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
-				E533A0D521CDCB1B00855A3C /* HashableTupleTests.swift in Sources */,
 				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,7 +1021,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Composify;
@@ -980,7 +1079,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
@@ -1006,7 +1105,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
@@ -1033,7 +1132,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.composify;
@@ -1056,7 +1155,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1079,7 +1178,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = no.aasesoftware.ComposifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

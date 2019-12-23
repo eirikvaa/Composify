@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 extension String {
-    func correspondingComposifyObject<T: ComposifyObject>() -> T? {
+    func composifyObject<T: ComposifyObject>() -> T? {
         guard let realm = try? Realm() else { return nil }
 
         if let obj = realm.object(ofType: Project.self, forPrimaryKey: self) {

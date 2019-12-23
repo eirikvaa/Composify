@@ -8,53 +8,36 @@
 
 import UIKit
 
-final class AdministrateProjectViewController: UIViewController {
+struct TableSection {
+    let header: String
+    var values: [String]
+}
+
+class AdministrateProjectViewController: UIViewController {
     // MARK: Properties
 
-    lazy var tableViewDataSource = AdministrateProjectTableViewDataSource(administrateProjectViewController: self)
     lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
+
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
-    private(set) var tableView = UITableView(frame: .zero, style: .plain) {
+    private(set) var tableView = AdministrateProjectTableView(frame: .zero, style: .plain) {
         didSet {
-            tableView.keyboardDismissMode = .onDrag
             tableView.delegate = tableViewDelegate
-            tableView.dataSource = tableViewDataSource
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: R.Cells.cell)
             tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateDeleteCell)
             tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: R.Cells.administrateSectionCell)
             tableView.setEditing(true, animated: false)
-            tableView.rowHeight = UITableView.automaticDimension
-            tableView.estimatedRowHeight = 100
         }
     }
 
-    var databaseService = DatabaseServiceFactory.defaultService
-    private var fileManager = FileManager.default
-    enum TableSection: Int {
-        case metInformation
-        case projectSections
-        case dangerZone
-    }
-
-    private(set) lazy var tableRowCount = [
-        TableSection.metInformation.rawValue: 1, // Meta Information
-        TableSection.projectSections.rawValue: self.project.sectionIDs.count + 1, // Sections
-        TableSection.dangerZone.rawValue: 1, // Danger Zone
+    var tableSections: [TableSection] = [
+        .init(header: R.Loc.metaInformationHeader, values: []),
+        .init(header: R.Loc.sectionsHeader, values: []),
+        .init(header: R.Loc.dangerZoneHeader, values: []),
     ]
-    lazy var tableRowValues: [HashableTuple<Int>: String] = [:]
-    private(set) var tableSectionHeaders: [String] = [
-        R.Loc.metaInformationHeader,
-        R.Loc.sectionsHeader,
-        R.Loc.dangerZoneHeader,
-    ]
-    var project: Project
-    var titleRow: HashableTuple<Int> {
-        return HashableTuple(TableSection.metInformation.rawValue, 0)
-    }
 
-    // Initializer
-    init(project: Project) {
-        self.project = project
+    var project: Project?
+
+    init(project _: Project? = nil) {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -67,13 +50,7 @@ final class AdministrateProjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = R.Loc.administrate
-
-        tableRowValues[titleRow] = project.title
-
-        for section in project.sections {
-            tableRowValues[sectionRow(section.index)] = section.title
-        }
+        fillUnderlyingDataStorage()
 
         configureViews()
     }
@@ -88,8 +65,24 @@ final class AdministrateProjectViewController: UIViewController {
         guard let (cell, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else { return }
 
-        let key = HashableTuple(indexPath.section, indexPath.row)
-        tableRowValues[key] = cell.textField.text ?? ""
+        tableSections[indexPath.section].values[indexPath.row] = cell.textField.text ?? ""
+    }
+
+    func configureViews() {
+        tableView = AdministrateProjectTableView(frame: view.frame, style: .grouped)
+        view.addSubview(tableView)
+
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.pinToEdges(of: view)
+    }
+
+    @objc func dismissAction() {
+        resignFromAllTextFields()
+    }
+
+    func deleteSection(_ sectionToDelete: Section, then completionHandler: @escaping () -> Void) {
+        project?.deleteSection(at: sectionToDelete.index)
+        completionHandler()
     }
 }
 
@@ -98,12 +91,12 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
         guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
 
-        databaseService.performOperation {
+        DatabaseServiceFactory.defaultService.performOperation {
             switch indexPath.section {
-            case TableSection.metInformation.rawValue:
-                project.title = newTitle
-            case TableSection.projectSections.rawValue:
-                let section = project.getSection(at: indexPath.row)
+            case 0:
+                project?.title = newTitle
+            case 1:
+                let section = project?.getSection(at: indexPath.row)
                 section?.title = newTitle
             default:
                 return
@@ -127,67 +120,22 @@ extension AdministrateProjectViewController {
         return (cell, indexPath)
     }
 
-    /// Delete a section from the project
-    /// - parameter sectionToDelete: The section to be deleted
-    /// - parameter completionHandler: Something that should be done after deleting the section
-    func deleteSection(_ sectionToDelete: Section, then completionHandler: @escaping () -> Void) {
-        normalizeSectionIndices(from: sectionToDelete.index)
-        databaseService.delete(sectionToDelete)
-        completionHandler()
-    }
-
     /// Insert a new section into the project
     /// - parameter completionHandler: What should be done after inserting the section, returns the inserted section
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
         let section = Section()
         section.title = R.Loc.section
         section.project = project
-        section.index = project.nextSectionIndex
+        section.index = project?.nextSectionIndex ?? 1
 
-        databaseService.save(section)
+        DatabaseServiceFactory.defaultService.save(section)
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 
         completionHandler(section)
     }
 
-    /// Return a tuple used for subscripting the `tableRowValues` dictionary.
-    /// - parameter index: The row in the section for project sections
-    /// - returns: A hashable tuple with the row and section information
-    func sectionRow(_ index: Int) -> HashableTuple<Int> {
-        return HashableTuple(TableSection.projectSections.rawValue, index)
-    }
-}
-
-private extension AdministrateProjectViewController {
-    /// This will normalize the section indices such as when one is deleted, any
-    /// holes in the counting is filled.
-    /// If we delete a section, it will create a whole unless we delete the last one.
-    /// Say we have indices 0 - 1 - 2 and delete the middle, then we have 0 - 2 and the
-    /// application will crash, because it only goes from 0 - 1. Solve this by getting all sections with an
-    /// index greater than the passed in index and subtract one to close the gap.
-    /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
-    func normalizeSectionIndices(from index: Int) {
-        for i in (index + 1) ..< project.sectionIDs.count {
-            let section = project.getSection(at: i)
-            databaseService.performOperation {
-                section?.index -= 1
-            }
-        }
-    }
-
-    /// Configure views
-    func configureViews() {
-        tableView = UITableView(frame: view.frame, style: .grouped)
-        view.addSubview(tableView)
-
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.pinToEdges(of: view)
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
-    }
-
-    @objc func dismissVC(_: UIBarButtonItem) {
-        resignFromAllTextFields()
-        dismiss(animated: true)
+    func fillUnderlyingDataStorage() {
+        tableSections[0].values = [project?.title ?? ""]
+        tableSections[1].values = (project?.sections.map { $0.title } ?? [])
     }
 }

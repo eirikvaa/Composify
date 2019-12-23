@@ -13,23 +13,10 @@ import UIKit
 
 final class LibraryViewController: UIViewController {
     @IBOutlet var administerBarButton: UIBarButtonItem!
-    @IBOutlet var recordAudioButton: UIButton! {
-        didSet {
-            recordAudioButton.layer.cornerRadius = 5
-            recordAudioButton.backgroundColor = R.Colors.fireBushYellow
-            recordAudioButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-            recordAudioButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-    }
-
+    @IBOutlet var recordAudioButton: RecordAudioButton!
     @IBOutlet var recordAudioView: UIView!
     @IBOutlet var containerView: UIView!
-    @IBOutlet var pageControl: UIPageControl! {
-        didSet {
-            pageControl.pageIndicatorTintColor = .lightGray
-            pageControl.currentPageIndicatorTintColor = R.Colors.cardinalRed
-        }
-    }
+    @IBOutlet var pageControl: LibraryPageControl!
 
     // Properties
     private var errorViewController: ErrorViewController?
@@ -37,13 +24,13 @@ final class LibraryViewController: UIViewController {
 
     var currentProject: Project? {
         guard let projectID = currentProjectID else { return nil }
-        guard let project: Project = projectID.correspondingComposifyObject() else { return nil }
+        guard let project: Project = projectID.composifyObject() else { return nil }
         return project
     }
 
     var currentSection: Section? {
         guard let sectionID = currentSectionID else { return nil }
-        guard let section: Section = sectionID.correspondingComposifyObject() else { return nil }
+        guard let section: Section = sectionID.composifyObject() else { return nil }
         return section
     }
 
@@ -58,7 +45,6 @@ final class LibraryViewController: UIViewController {
 
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
-    let fileManager = FileManager.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,13 +79,15 @@ extension LibraryViewController {
         // Be able to administrate project if there is one
         if let currentProject = currentProject {
             administrate = UIAlertAction(title: R.Loc.administrateProject, style: .default) { _ in
-                self.presentAdministrateViewController(project: currentProject)
+                self.presentAdministrateViewController(
+                    viewController: EditExistingProjectViewController(project: currentProject)
+                )
             }
         }
 
         // Can alway add a project
         let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
-            self.showCreateProjectAlert()
+            self.showCreateNewProjectFlow()
         }
 
         // Showing other projects
@@ -133,14 +121,9 @@ extension LibraryViewController {
         )
 
         guard let recorder = audioRecorderDefaultService else {
-            guard let currentProject = currentProject else { return }
             guard let currentSection = currentSection else { return }
 
-            recording = Recording()
-            recording?.title = R.Loc.recording
-            recording?.project = currentProject
-            recording?.section = currentSection
-            recording?.fileExtension = "caf"
+            recording = Recording.createRecording(title: R.Loc.recording, section: currentSection)
 
             if let recording = recording {
                 do {
@@ -191,28 +174,8 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
-    func showCreateProjectAlert() {
-        let addProjectAlert = UIAlertController(title: R.Loc.addProject, message: nil, preferredStyle: .alert)
-        addProjectAlert.addTextField { textField in
-            textField.autocapitalizationType = .words
-            textField.placeholder = R.Loc.projectTitle
-            textField.returnKeyType = .done
-            textField.clearButtonMode = .whileEditing
-        }
-        let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
-            if let projectTitle = addProjectAlert.textFields?.first?.text {
-                Project.createProject(withTitle: projectTitle, then: { project in
-                    self.setCurrentProject(project)
-                    self.rememberProjectChosen(project)
-                    self.updateUI()
-                })
-            }
-        })
-        let cancel = UIAlertAction(title: R.Loc.cancel, style: .cancel)
-        addProjectAlert.addAction(save)
-        addProjectAlert.addAction(cancel)
-
-        present(addProjectAlert, animated: true)
+    func showCreateNewProjectFlow() {
+        presentAdministrateViewController(viewController: CreateNewProjectViewController())
     }
 
     /// Persist the project to userdefaults so it can be picked the next time
@@ -292,7 +255,7 @@ extension LibraryViewController {
                 message: R.Loc.noProjects,
                 actionMessage: R.Loc.addProject,
                 action: {
-                    self.showCreateProjectAlert()
+                    self.showCreateNewProjectFlow()
                 }
             )
             if let errorViewController = errorViewController {
@@ -304,7 +267,8 @@ extension LibraryViewController {
                 actionMessage: R.Loc.addSection,
                 action: {
                     guard let currentProject = self.currentProject else { return }
-                    self.presentAdministrateViewController(project: currentProject)
+                    let viewController = EditExistingProjectViewController(project: currentProject)
+                    self.presentAdministrateViewController(viewController: viewController)
                 }
             )
             if let errorVieController = errorViewController {
@@ -324,10 +288,9 @@ extension LibraryViewController {
 
     /// Present the view controller for administrating a given project
     /// - parameter project: The project that should be administrated
-    func presentAdministrateViewController(project: Project) {
-        let administerViewController = AdministrateProjectViewController(project: project)
-        administerViewController.administrateProjectDelegate = self
-        let navigationController = UINavigationController(rootViewController: administerViewController)
+    func presentAdministrateViewController(viewController: AdministrateProjectViewController) {
+        viewController.administrateProjectDelegate = self
+        let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
 
@@ -392,6 +355,13 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidReorderSections() {
+        updateUI()
+    }
+
+    func userDidCreateProject(_ project: Project) {
+        currentProjectID = project.id
+        currentSectionID = project.sectionIDs.first
+
         updateUI()
     }
 }

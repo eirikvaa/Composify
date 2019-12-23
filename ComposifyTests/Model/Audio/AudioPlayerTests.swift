@@ -6,20 +6,13 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import RealmSwift
 import XCTest
 
 @testable import Composify
 
 final class AudioPlayerTests: XCTestCase {
-    override func setUp() {
-        super.setUp()
-
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
-    }
-
     func testPlayRecordedAudio() {
-        let (_, _, recording, _) = createObjects()
+        let (_, _, recording) = createObjects()
         let audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
 
         audioRecorder?.record()
@@ -55,12 +48,11 @@ private extension AudioPlayerTests {
         return recording
     }
 
-    func createObjects() -> (Project, Section, Recording, Realm) {
+    func createObjects() -> (Project, Section, Recording) {
         let project = createProject(titled: "UnitTestProject")
         let section = createSection(titled: "UnitTestSection", project: project)
         let recording = createRecording(titled: "UnitTestRecording", section: section)
-        let realm = try! Realm()
 
-        return (project, section, recording, realm)
+        return (project, section, recording)
     }
 }
