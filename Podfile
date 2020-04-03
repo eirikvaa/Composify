@@ -1,6 +1,6 @@
 source 'https://cdn.cocoapods.org/'
 
-platform :ios, '13.2'
+platform :ios, '13.4'
 
 target 'Composify' do
   use_frameworks!
