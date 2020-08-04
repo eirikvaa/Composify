@@ -40,7 +40,7 @@ final class LibraryViewController: UIViewController {
     private let pagingViewController = PagingViewController<SectionPageItem>()
     private var audioRecorderDefaultService: AudioRecorderService?
     private var projects: [Project] {
-        return Project.projects()
+        Project.projects()
     }
 
     private var recording: Recording?

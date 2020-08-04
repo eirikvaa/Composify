@@ -34,7 +34,7 @@ extension UIView {
             self.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 0),
             self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0),
-            self.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }

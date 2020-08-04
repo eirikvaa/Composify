@@ -70,7 +70,7 @@ extension R.Loc {
         comment: "Placeholder of textfield in alert appearing when user tries to add a project."
     )
     static func showProject(named name: String) -> String {
-        return String.localizedStringWithFormat(
+        String.localizedStringWithFormat(
             NSLocalizedString(
                 "library.menu.show-project.label",
                 comment: "Title of button in menu for seeing a project."
@@ -244,7 +244,7 @@ extension R.Loc {
     )
 
     static func unableToSaveObjectMessage(withTitle title: String) -> String {
-        return String.localizedStringWithFormat(
+        String.localizedStringWithFormat(
             NSLocalizedString(
                 "recordings.error.unable-to-save-recording.alert.message",
                 comment: "Message when application was unable to save the recording."
@@ -258,7 +258,7 @@ extension R.Loc {
     )
 
     static func unableToDeleteObjectMessage(withTitle title: String) -> String {
-        return String.localizedStringWithFormat(
+        String.localizedStringWithFormat(
             NSLocalizedString(
                 "recordings.error.unable-to-delete-object.alert.message",
                 comment: "Message when trying to delete object from filesystem."

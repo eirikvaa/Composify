@@ -56,13 +56,13 @@ final class ErrorViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            label.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -32),
+            label.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -32)
         ])
 
         // Pin button to label above, in addition to leading, trailing and bottom anchor.
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: label.centerXAnchor),
+            button.centerXAnchor.constraint(equalTo: label.centerXAnchor)
         ])
     }
 }

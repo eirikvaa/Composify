@@ -35,7 +35,7 @@ extension TextFieldTableViewCell {
             textField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: separatorInset.left),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             textField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: separatorInset.right),
-            textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
         ])
     }
 }

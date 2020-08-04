@@ -60,7 +60,7 @@ final class OnboardingRootViewController: UIViewController {
     // As the onboarding is (as of 16th of December) red, we should
     // have a white status bar.
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
 }
 
@@ -133,7 +133,7 @@ private extension OnboardingRootViewController {
             R.Images.onboarding1,
             R.Images.onboarding2,
             R.Images.onboarding3,
-            R.Images.onboarding4,
+            R.Images.onboarding4
         ]
 
         for i in 0 ... 3 {

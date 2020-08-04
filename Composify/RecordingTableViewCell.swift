@@ -56,7 +56,7 @@ final class RecordingTableViewCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
         ])
     }
 }

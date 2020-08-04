@@ -10,6 +10,6 @@ import Foundation
 
 final class AudioRecorderServiceFactory {
     static func defaultService(withURL url: URL) throws -> AudioRecorderService? {
-        return try? AVAudioRecorderService(url: url)
+        try? AVAudioRecorderService(url: url)
     }
 }

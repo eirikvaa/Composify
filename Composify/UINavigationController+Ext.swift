@@ -10,6 +10,6 @@ import UIKit
 
 extension UINavigationController {
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
 }

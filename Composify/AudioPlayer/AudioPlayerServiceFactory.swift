@@ -10,6 +10,6 @@ import Foundation
 
 final class AudioPlayerServiceFactory {
     static func defaultService(withObject object: AudioPlayable) throws -> AudioPlayerService? {
-        return try AVAudioPlayerService(object)
+        try AVAudioPlayerService(object)
     }
 }

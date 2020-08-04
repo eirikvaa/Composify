@@ -32,7 +32,7 @@ class AdministrateProjectViewController: UIViewController {
     var tableSections: [TableSection] = [
         .init(header: R.Loc.metaInformationHeader, values: []),
         .init(header: R.Loc.sectionsHeader, values: []),
-        .init(header: R.Loc.dangerZoneHeader, values: []),
+        .init(header: R.Loc.dangerZoneHeader, values: [])
     ]
 
     var project: Project?

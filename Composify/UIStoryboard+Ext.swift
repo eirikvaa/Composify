@@ -12,6 +12,6 @@ extension UIStoryboard {
     /// Fetch the onboarding storyboard
     /// - returns: The onboarding storyboard
     static func onboardingStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: R.Storyboards.onboarding, bundle: .main)
+        UIStoryboard(name: R.Storyboards.onboarding, bundle: .main)
     }
 }

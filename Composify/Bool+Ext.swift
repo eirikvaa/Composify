@@ -10,6 +10,6 @@ import Foundation
 
 extension Bool {
     var isFalse: Bool {
-        return self == false
+        self == false
     }
 }

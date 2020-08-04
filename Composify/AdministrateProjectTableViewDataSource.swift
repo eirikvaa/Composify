@@ -16,11 +16,11 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     var currentProject: Project? {
-        return administrateProjectViewController.project
+        administrateProjectViewController.project
     }
 
     func numberOfSections(in _: UITableView) -> Int {
-        return administrateProjectViewController.tableSections.count
+        administrateProjectViewController.tableSections.count
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,7 +37,7 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return administrateProjectViewController.tableSections[section].header
+        administrateProjectViewController.tableSections[section].header
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -18,13 +18,13 @@ final class Section: Object, ComposifyObject {
     var recordingIDs = List<String>()
 
     override static func primaryKey() -> String? {
-        return R.DatabaseKeys.id
+        R.DatabaseKeys.id
     }
 }
 
 extension Section {
     var recordings: [Recording] {
-        return recordingIDs
+        recordingIDs
             .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0) }
             .sorted()
     }
@@ -40,6 +40,6 @@ extension UserDefaults {
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
-        return lhs.index < rhs.index
+        lhs.index < rhs.index
     }
 }

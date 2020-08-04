@@ -16,13 +16,13 @@ final class AdministrateProjectTableViewDelegate: NSObject {
     }
 
     var project: Project? {
-        return administrateProjectViewController.project
+        administrateProjectViewController.project
     }
 }
 
 extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     func tableView(_: UITableView, shouldHighlightRowAt _: IndexPath) -> Bool {
-        return false
+        false
     }
 
     func tableView(_: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

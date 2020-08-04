@@ -33,7 +33,7 @@ private extension AppDelegate {
         navigationBarAppearance.barStyle = .black
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor.white
         ]
     }
 }

@@ -10,6 +10,6 @@ import UIKit
 
 extension UIAlertAction {
     static var cancelAction: UIAlertAction {
-        return UIAlertAction(title: R.Loc.cancel, style: .cancel)
+        UIAlertAction(title: R.Loc.cancel, style: .cancel)
     }
 }

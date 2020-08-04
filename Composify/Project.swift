@@ -16,7 +16,7 @@ final class Project: Object, ComposifyObject {
     var sectionIDs = List<String>()
 
     override static func primaryKey() -> String? {
-        return R.DatabaseKeys.id
+        R.DatabaseKeys.id
     }
 }
 
@@ -35,13 +35,13 @@ extension Project {
     }
 
     var sections: [Section] {
-        return sectionIDs
+        sectionIDs
             .compactMap { self.realm?.object(ofType: Section.self, forPrimaryKey: $0) }
             .sorted()
     }
 
     var recordings: [Recording] {
-        return sections
+        sections
             .reduce([]) { (recordings: [Recording], section: Section) -> [Recording] in
                 recordings + section.recordings
             }
@@ -91,7 +91,7 @@ extension Project {
 
 extension Project: Comparable {
     static func < (lhs: Project, rhs: Project) -> Bool {
-        return lhs.dateCreated < rhs.dateCreated
+        lhs.dateCreated < rhs.dateCreated
     }
 }
 

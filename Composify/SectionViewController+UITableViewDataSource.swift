@@ -12,7 +12,7 @@ import UIKit
 
 extension SectionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return section.recordingIDs.count
+        section.recordingIDs.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
