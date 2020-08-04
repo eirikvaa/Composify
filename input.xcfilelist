@@ -1,0 +1,3 @@
+$(SRCROOT)/Carthage/Build/iOS/Realm.framework
+$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework
+$(SRCROOT)/Carthage/Build/iOS/Parchment.framework
