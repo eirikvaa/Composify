@@ -19,7 +19,7 @@ final class CreateNewProjectTableViewDataSource: AdministrateProjectTableViewDat
         }
 
         cell.textField.addTarget(administrateProjectViewController, action: #selector(administrateProjectViewController.textFieldChange), for: .editingChanged)
-        let insertRowIndex = currentProject?.sectionIDs.count ?? 0
+        let insertRowIndex = currentProject?.sections.count ?? 0
 
         switch (indexPath.section, indexPath.row) {
         case (0, _):

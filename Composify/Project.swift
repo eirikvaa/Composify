@@ -13,7 +13,7 @@ final class Project: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
-    var sectionIDs = List<String>()
+    let sections = List<Section>()
 
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
@@ -21,6 +21,7 @@ final class Project: Object, ComposifyObject {
 }
 
 extension UserDefaults {
+    
     func lastProject() -> Project? {
         guard let realm = try? Realm() else { return nil }
         guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else { return nil }
@@ -29,38 +30,22 @@ extension UserDefaults {
 }
 
 extension Project {
-    static func projects() -> [Project] {
-        let realm = try! Realm()
-        return Array(realm.objects(Project.self)) as [Project]
+    static func projects() -> Results<Project> {
+        guard let realm = try? Realm() else { fatalError("Unable to instantiate Realm!") }
+        return realm.objects(Project.self)
     }
-
-    var sections: [Section] {
-        sectionIDs
-            .compactMap { self.realm?.object(ofType: Section.self, forPrimaryKey: $0) }
-            .sorted()
-    }
-
-    var recordings: [Recording] {
-        sections
-            .reduce([]) { (recordings: [Recording], section: Section) -> [Recording] in
-                recordings + section.recordings
-            }
-            .sorted()
-    }
-
+    
     /// Get the section that corresponds to the passed-in index
     /// - parameter index: An index that won't necessarily correspond to the
     /// order that sections were created.
     func getSection(at index: Int) -> Section? {
-        var section: Section?
-        for sectionID in sectionIDs {
-            let _section: Section? = sectionID.composifyObject()
-            if _section?.index == index {
-                section = _section
+        for section in sections {
+            if section.index == index {
+                return section
             }
         }
 
-        return section
+        return nil
     }
 
     static func createProject(withTitle title: String) -> Project {
@@ -74,9 +59,9 @@ extension Project {
     }
 
     var nextSectionIndex: Int {
-        let _section: Section? = sectionIDs.last?.composifyObject()
+        let _section = sections.last
         let lastSectionIndex = _section?.index ?? 0
-        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
+        return sections.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 
     func deleteSection(at index: Int) {
@@ -104,7 +89,7 @@ private extension Project {
     /// index greater than the passed in index and subtract one to close the gap.
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeIndices(from index: Int) {
-        for i in (index + 1) ..< sectionIDs.count {
+        for i in (index + 1) ..< sections.count {
             let section = getSection(at: i)
             DatabaseServiceFactory.defaultService.performOperation {
                 section?.index -= 1

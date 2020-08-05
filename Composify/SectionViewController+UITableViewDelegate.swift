@@ -70,9 +70,7 @@ extension SectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
 
-        guard let recording: Recording = section.recordingIDs[indexPath.row].composifyObject() else {
-            return
-        }
+        let recording = section.recordings[indexPath.row]
 
         if currentlyPlayingRecording != nil {
             currentlyPlayingRecording = nil

@@ -29,6 +29,10 @@ extension Recording {
         recording.section = section
         recording.project = section.project
         recording.fileExtension = fileExtension
+        
+        DatabaseServiceFactory.defaultService.performOperation {
+            section.recordings.append(recording)
+        }
 
         DatabaseServiceFactory.defaultService.save(recording)
 

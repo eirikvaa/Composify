@@ -15,18 +15,10 @@ final class Section: Object, ComposifyObject {
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
-    var recordingIDs = List<String>()
+    let recordings = List<Recording>()
 
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
-    }
-}
-
-extension Section {
-    var recordings: [Recording] {
-        recordingIDs
-            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0) }
-            .sorted()
     }
 }
 

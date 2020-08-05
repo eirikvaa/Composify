@@ -150,21 +150,19 @@ private extension AdministrateProjectTableViewDataSource {
         let existingValues = administrateProjectViewController.tableSections[1].values
 
         administrateProjectViewController.tableSections[1].values.removeAll()
-        for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+        for (index, section) in currentProject.sections.enumerated() {
             // We're skipping the entries that have a title different
             // from the corresponding section title, because that means the
             // section was renamed. Without this check, if a section is renamed
             // and a section later added, the rename will be ignored.
-            let _section: Section? = sectionID.composifyObject()
-
             let existingTitle: String
             if index < existingValues.count {
                 existingTitle = existingValues[index]
             } else {
-                existingTitle = _section?.title ?? ""
+                existingTitle = section.title
             }
 
-            guard let section = _section, existingTitle == section.title else {
+            guard existingTitle == section.title else {
                 continue
             }
 

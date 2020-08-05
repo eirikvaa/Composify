@@ -22,37 +22,22 @@ final class LibraryViewController: UIViewController {
     private var errorViewController: ErrorViewController?
     private var state: LibraryViewController.State = .noSections
 
-    var currentProject: Project? {
-        guard let projectID = currentProjectID else { return nil }
-        guard let project: Project = projectID.composifyObject() else { return nil }
-        return project
-    }
-
-    var currentSection: Section? {
-        guard let sectionID = currentSectionID else { return nil }
-        guard let section: Section = sectionID.composifyObject() else { return nil }
-        return section
-    }
-
-    var currentProjectID: String?
-    var currentSectionID: String?
+    var currentProject: Project?
+    var currentSection: Section?
     private var databaseService = DatabaseServiceFactory.defaultService
     private let pagingViewController = PagingViewController<SectionPageItem>()
     private var audioRecorderDefaultService: AudioRecorderService?
-    private var projects: [Project] {
-        Project.projects()
-    }
 
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentProject = UserDefaults.standard.lastProject() ?? Project.projects().first
+        currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
 
         showOnboardingIfNeeded()
-
-        currentProjectID = UserDefaults.standard.fetchLastProjectID() ?? projects.first?.id
-        currentSectionID = currentProject?.sectionIDs.first
 
         configurePagingViewController()
         setupUI()
@@ -91,7 +76,7 @@ extension LibraryViewController {
         }
 
         // Showing other projects
-        projects.forEach { project in
+        Project.projects().forEach { project in
             if project != currentProject {
                 let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
                     self.applyAccessibility(for: action)
@@ -203,8 +188,8 @@ extension LibraryViewController {
     /// Set the new current project
     /// - parameter project: The project that should now be shown
     func setCurrentProject(_ project: Project) {
-        currentProjectID = project.id
-        currentSectionID = currentProject?.sectionIDs.first
+        currentProject = project
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -295,7 +280,7 @@ extension LibraryViewController {
     }
 
     func configurePageControl() {
-        pageControl.numberOfPages = currentProject?.sectionIDs.count ?? 0
+        pageControl.numberOfPages = currentProject?.sections.count ?? 0
         pageControl.currentPage = currentSection?.index ?? 0
     }
 
@@ -332,13 +317,13 @@ extension LibraryViewController {
 
 extension LibraryViewController: AdministrateProjectDelegate {
     func userDidAddSectionToProject(_ section: Section) {
-        currentSectionID = section.id
+        currentSection = section
 
         updateUI()
     }
 
     func userDidDeleteSectionFromProject() {
-        currentSectionID = currentProject?.sectionIDs.sorted().first
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -348,8 +333,8 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidDeleteProject() {
-        currentProjectID = projects.first?.id
-        currentSectionID = currentProject?.sectionIDs.first
+        currentProject = Project.projects().first
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -359,8 +344,8 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidCreateProject(_ project: Project) {
-        currentProjectID = project.id
-        currentSectionID = project.sectionIDs.first
+        currentProject = project
+        currentSection = project.sections.first
 
         updateUI()
     }

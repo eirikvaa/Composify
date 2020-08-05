@@ -14,15 +14,6 @@ struct RealmDatabaseService: DatabaseService {
         let realm = try! Realm()
 
         try! realm.write {
-            switch object {
-            case let section as Section:
-                saveSection(section)
-            case let recording as Recording:
-                saveRecording(recording)
-            default:
-                break
-            }
-
             if let realmObject = object as? Object {
                 realm.add(realmObject, update: .all)
             }
@@ -73,32 +64,20 @@ struct RealmDatabaseService: DatabaseService {
 }
 
 private extension RealmDatabaseService {
-    func saveRecording(_ recording: Recording) {
-        recording.section?.recordingIDs.append(recording.id)
-    }
-
-    func saveSection(_ section: Section) {
-        section.project?.sectionIDs.append(section.id)
-    }
-
     func deleteProject(_ project: Project) {
         let realm = try! Realm()
+        
+        for section in project.sections {
+            realm.delete(section.recordings)
+        }
 
-        project.sectionIDs
-            .compactMap { realm.object(ofType: Section.self, forPrimaryKey: $0) }
-            .forEach {
-                realm.delete($0.recordings)
-                realm.delete($0)
-            }
+        realm.delete(project.sections)
         realm.delete(project)
     }
 
     func deleteSection(_ section: Section) {
         let realm = try! Realm()
-
-        if let index = section.project?.sectionIDs.index(of: section.id) {
-            section.project?.sectionIDs.remove(at: index)
-        }
+        
         realm.delete(section.recordings)
         realm.delete(section)
     }
@@ -106,9 +85,6 @@ private extension RealmDatabaseService {
     func deleteRecording(_ recording: Recording) {
         let realm = try! Realm()
 
-        if let index = recording.section?.recordingIDs.index(of: recording.id) {
-            recording.section?.recordingIDs.remove(at: index)
-        }
         realm.delete(recording)
     }
 }

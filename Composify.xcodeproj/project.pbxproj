@@ -41,7 +41,6 @@
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E56E3FE820D53D6300411F5F /* RealmDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */; };
 		E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */; };
-		E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B53AE21CAD0540015C23D /* String+ComposifyObject.swift */; };
 		E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* SectionViewController.swift */; };
 		E582893A21C6A29000E438B5 /* AdministrateProjectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */; };
 		E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893B21C6A2D200E438B5 /* AudioRecorderServiceError.swift */; };
@@ -155,7 +154,6 @@
 		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E56E3FE720D53D6300411F5F /* RealmDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabaseService.swift; sourceTree = "<group>"; };
 		E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectViewController.swift; sourceTree = "<group>"; };
-		E57B53AE21CAD0540015C23D /* String+ComposifyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ComposifyObject.swift"; sourceTree = "<group>"; };
 		E57BBA781D4977CC00867486 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E57D16571E31DF2200BD0802 /* SectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectDelegate.swift; sourceTree = "<group>"; };
@@ -434,7 +432,6 @@
 				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
 				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
-				E57B53AE21CAD0540015C23D /* String+ComposifyObject.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -801,7 +798,6 @@
 				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
 				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
 				E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */,
-				E57B53AF21CAD0540015C23D /* String+ComposifyObject.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
 				E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */,

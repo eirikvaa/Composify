@@ -50,7 +50,7 @@ final class RealmTests: XCTestCase {
         let section2 = Section()
 
         try! realm.write {
-            project.sectionIDs.append(objectsIn: [section.id, section2.id])
+            project.sections.append(objectsIn: [section, section2])
             realm.add([project, section, section2])
         }
 
@@ -70,8 +70,8 @@ final class RealmTests: XCTestCase {
         let recording = Recording()
 
         try! realm.write {
-            project.sectionIDs.append(objectsIn: [section.id])
-            section.recordingIDs.append(recording.id)
+            project.sections.append(objectsIn: [section])
+            section.recordings.append(recording)
             realm.add([project, section, recording])
         }
 
@@ -93,8 +93,8 @@ final class RealmTests: XCTestCase {
         let recording = Recording()
 
         try! realm.write {
-            project.sectionIDs.append(objectsIn: [section.id])
-            section.recordingIDs.append(recording.id)
+            project.sections.append(objectsIn: [section])
+            section.recordings.append(recording)
             realm.add([project, section, recording])
         }
 
@@ -116,8 +116,8 @@ final class RealmTests: XCTestCase {
         let recording = Recording()
 
         try! realm.write {
-            project.sectionIDs.append(objectsIn: [section.id])
-            section.recordingIDs.append(recording.id)
+            project.sections.append(objectsIn: [section])
+            section.recordings.append(recording)
             realm.add([project, section, recording])
         }
 

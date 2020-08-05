@@ -21,7 +21,7 @@ extension Project {
             let databaseService = DatabaseServiceFactory.defaultService
             databaseService.save(section)
             databaseService.performOperation {
-                project.sectionIDs.append(section.id)
+                project.sections.append(section)
             }
         }
 

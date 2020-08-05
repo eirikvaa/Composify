@@ -128,6 +128,9 @@ extension AdministrateProjectViewController {
         section.project = project
         section.index = project?.nextSectionIndex ?? 1
 
+        DatabaseServiceFactory.defaultService.performOperation { [weak self] in
+            self?.project?.sections.append(section)
+        }
         DatabaseServiceFactory.defaultService.save(section)
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 
