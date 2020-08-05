@@ -14,6 +14,6 @@ import Foundation
 /// here. It's awesome.
 final class DatabaseServiceFactory {
     static var defaultService: DatabaseService {
-        RealmDatabaseService.defaultService
+        RealmDatabaseService()
     }
 }

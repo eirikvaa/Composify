@@ -10,16 +10,6 @@ import Foundation
 import RealmSwift
 
 struct RealmDatabaseService: DatabaseService {
-    private init() {}
-    static var sharedInstance: DatabaseService?
-    static var defaultService: DatabaseService {
-        if sharedInstance == nil {
-            sharedInstance = RealmDatabaseService()
-        }
-
-        return sharedInstance!
-    }
-
     func save(_ object: ComposifyObject) {
         let realm = try! Realm()
 
