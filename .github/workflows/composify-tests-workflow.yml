@@ -18,10 +18,7 @@ jobs:
               run: gem install bundler:2.1.4
 
             - name: Install Carthage
-              run: brew install carthage
-
-            - name: Install Carthage 2
-              run: carthage bootstrap --platform iOS
+              run: carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 
             - name: Install Gems
               run: bundle install
