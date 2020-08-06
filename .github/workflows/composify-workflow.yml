@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
     build:
-        name: Test
+        name: Run Tests
         runs-on: macOS-latest
         steps:
             - name: Checkout
@@ -16,6 +16,14 @@ jobs:
             
             - name: Install Bundler
               run: gem install bundler:2.1.4
+
+            - name: Cache Carthage Dependencies
+              uses: actions/cache@v2
+                with:
+                  path: Carthage
+                  key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+                  restore-keys: |
+                    ${{ runner.os }}-carthage-
 
             - name: Install Carthage
               run: carthage bootstrap --no-use-binaries --platform iOS --cache-builds
