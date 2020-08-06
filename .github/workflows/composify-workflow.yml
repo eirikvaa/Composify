@@ -19,11 +19,10 @@ jobs:
 
             - name: Cache Carthage Dependencies
               uses: actions/cache@v2
-                with:
-                  path: Carthage
-                  key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-                  restore-keys: |
-                    ${{ runner.os }}-carthage-
+              with:
+                path: Carthage
+                key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+                restore-keys: ${{ runner.os }}-carthage-
 
             - name: Install Carthage
               run: carthage bootstrap --no-use-binaries --platform iOS --cache-builds
