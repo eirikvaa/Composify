@@ -1,5 +1,4 @@
 language: swift
 osx_image: xcode11.6
-xcode_project: Composify.xcodeproj
-xcode_scheme: Composify
-xcode_destination: platform=iOS Simulator,OS=13.2,name=iPhone 11
+script:
+    - bundle exec fastlane test
