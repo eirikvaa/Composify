@@ -1,4 +1,4 @@
-name: Composify Tests
+name: Composify
 on: [push]
 
 jobs:
