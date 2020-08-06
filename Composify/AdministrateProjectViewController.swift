@@ -90,17 +90,16 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason _: UITextField.DidEndEditingReason) {
         guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
-
-        DatabaseServiceFactory.defaultService.performOperation {
-            switch indexPath.section {
-            case 0:
-                project?.title = newTitle
-            case 1:
-                let section = project?.getSection(at: indexPath.row)
-                section?.title = newTitle
-            default:
-                return
-            }
+        guard let project = project else { return }
+        
+        switch indexPath.section {
+        case 0:
+            ProjectRepository().update(id: project.id, value: newTitle, keyPath: \.title)
+        case 1:
+            let section = project.getSection(at: indexPath.row)
+            section?.title = newTitle
+        default:
+            return
         }
 
         administrateProjectDelegate?.userDidEditTitleOfObjects()
@@ -128,10 +127,11 @@ extension AdministrateProjectViewController {
         section.project = project
         section.index = project?.nextSectionIndex ?? 1
 
-        DatabaseServiceFactory.defaultService.performOperation { [weak self] in
+        SectionRepository().save(object: section)
+        performRealmOperation { [weak self] _ in
             self?.project?.sections.append(section)
         }
-        DatabaseServiceFactory.defaultService.save(section)
+        
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 
         completionHandler(section)

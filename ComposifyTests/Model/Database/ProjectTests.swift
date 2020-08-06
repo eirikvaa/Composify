@@ -12,8 +12,6 @@ import XCTest
 @testable import Composify
 
 final class ProjectTests: XCTestCase {
-    var databaseService = DatabaseServiceFactory.defaultService
-
     override func setUp() {
         super.setUp()
 

@@ -24,7 +24,7 @@ final class LibraryViewController: UIViewController {
 
     var currentProject: Project?
     var currentSection: Section?
-    private var databaseService = DatabaseServiceFactory.defaultService
+    //private var databaseService = DatabaseServiceFactory.defaultService
     private let pagingViewController = PagingViewController<SectionPageItem>()
     private var audioRecorderDefaultService: AudioRecorderService?
 
@@ -147,7 +147,7 @@ extension LibraryViewController {
         recorder.stop()
 
         if let recording = recording {
-            databaseService.save(recording)
+            RecordingRepository().save(object: recording)
         }
 
         recording = nil

@@ -30,11 +30,11 @@ extension Recording {
         recording.project = section.project
         recording.fileExtension = fileExtension
         
-        DatabaseServiceFactory.defaultService.performOperation {
+        performRealmOperation { _ in
             section.recordings.append(recording)
         }
-
-        DatabaseServiceFactory.defaultService.save(recording)
+        
+        RecordingRepository().save(object: recording)
 
         return recording
     }

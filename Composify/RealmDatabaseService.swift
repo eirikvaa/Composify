@@ -9,7 +9,237 @@
 import Foundation
 import RealmSwift
 
-struct RealmDatabaseService: DatabaseService {
+func performRealmOperation(block: (Realm) -> Void) {
+    let realm = try! Realm()
+    
+    try! realm.write {
+        block(realm)
+    }
+}
+
+struct ProjectRepository: Repository {
+    typealias T = Project
+    
+    @discardableResult
+    func save(object: Project) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        try! realm.write {
+            realm.add(object)
+        }
+        
+        return true
+    }
+    
+    func get(id: String) -> Project? {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.object(ofType: Project.self, forPrimaryKey: id)
+    }
+    
+    func getAll() -> Results<Project> {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.objects(Project.self)
+    }
+    
+    @discardableResult
+    func update<V>(id: String, value: V, keyPath: WritableKeyPath<Project, V>) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard var object = realm.object(ofType: Project.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            object[keyPath: keyPath] = value
+        }
+        
+        return true
+    }
+    
+    @discardableResult
+    func delete(id: String) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard let object = realm.object(ofType: Project.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            for section in object.sections {
+                realm.delete(section.recordings)
+            }
+            
+            realm.delete(object.sections)
+            realm.delete(object)
+        }
+        
+        return true
+    }
+}
+
+
+
+struct SectionRepository: Repository {
+    typealias T = Section
+    
+    @discardableResult
+    func save(object: Section) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        try! realm.write {
+            realm.add(object)
+        }
+        
+        return true
+    }
+    
+    func get(id: String) -> Section? {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.object(ofType: Section.self, forPrimaryKey: id)
+    }
+    
+    func getAll() -> Results<Section> {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.objects(Section.self)
+    }
+    
+    @discardableResult
+    func update<V>(id: String, value: V, keyPath: WritableKeyPath<Section, V>) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard var object = realm.object(ofType: Section.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            object[keyPath: keyPath] = value
+        }
+        
+        return true
+    }
+    
+    @discardableResult
+    func delete(id: String) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard let object = realm.object(ofType: Section.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            realm.delete(object.recordings)
+            realm.delete(object)
+        }
+        
+        return true
+    }
+}
+
+struct RecordingRepository: Repository {
+    typealias T = Recording
+    
+    @discardableResult
+    func save(object: Recording) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        try! realm.write {
+            realm.add(object)
+        }
+        
+        return true
+    }
+    
+    func get(id: String) -> Recording? {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.object(ofType: Recording.self, forPrimaryKey: id)
+    }
+    
+    func getAll() -> Results<Recording> {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        return realm.objects(Recording.self)
+    }
+    
+    @discardableResult
+    func update<V>(id: String, value: V, keyPath: WritableKeyPath<Recording, V>) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard var object = realm.object(ofType: Recording.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            object[keyPath: keyPath] = value
+        }
+        
+        return true
+    }
+    
+    @discardableResult
+    func delete(id: String) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        guard let object = realm.object(ofType: Recording.self, forPrimaryKey: id) else {
+            return false
+        }
+        
+        try! realm.write {
+            realm.delete(object)
+        }
+        
+        return true
+    }
+}
+
+struct RealmDatabaseService {
+    func save(_ object: Project) {
+        
+    }
+    
+    func delete(_ object: Project) {
+        
+    }
+    
+    func rename(_ object: Project, to newName: String) {
+        
+    }
+    
+    typealias T = Project
     func save(_ object: ComposifyObject) {
         let realm = try! Realm()
 

@@ -18,9 +18,8 @@ extension Project {
             section.title = "S\(i)"
             section.index = i
 
-            let databaseService = DatabaseServiceFactory.defaultService
-            databaseService.save(section)
-            databaseService.performOperation {
+            SectionRepository().save(object: section)
+            performRealmOperation { _ in
                 project.sections.append(section)
             }
         }

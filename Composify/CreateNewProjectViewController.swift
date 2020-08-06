@@ -34,7 +34,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
     @objc func dismissWithoutSaving() {
         if let project = project {
-            DatabaseServiceFactory.defaultService.delete(project)
+            ProjectRepository().delete(id: project.id)
         }
 
         dismissAction()
@@ -42,7 +42,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
     @objc func saveAndDismiss() {
         if let project = project {
-            DatabaseServiceFactory.defaultService.save(project)
+            ProjectRepository().save(object: project)
             administrateProjectDelegate?.userDidCreateProject(project)
         }
 

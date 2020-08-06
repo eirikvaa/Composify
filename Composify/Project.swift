@@ -51,10 +51,7 @@ extension Project {
     static func createProject(withTitle title: String) -> Project {
         let project = Project()
         project.title = title
-
-        let databaseService = DatabaseServiceFactory.defaultService
-        databaseService.save(project)
-
+        ProjectRepository().save(object: project)
         return project
     }
 
@@ -70,7 +67,7 @@ extension Project {
         }
 
         normalizeIndices(from: index)
-        DatabaseServiceFactory.defaultService.delete(section)
+        SectionRepository().delete(id: section.id)
     }
 }
 
@@ -91,7 +88,7 @@ private extension Project {
     func normalizeIndices(from index: Int) {
         for i in (index + 1) ..< sections.count {
             let section = getSection(at: i)
-            DatabaseServiceFactory.defaultService.performOperation {
+            performRealmOperation { _ in
                 section?.index -= 1
             }
         }
