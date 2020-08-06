@@ -30,11 +30,6 @@ extension UserDefaults {
 }
 
 extension Project {
-    static func projects() -> Results<Project> {
-        guard let realm = try? Realm() else { fatalError("Unable to instantiate Realm!") }
-        return realm.objects(Project.self)
-    }
-    
     /// Get the section that corresponds to the passed-in index
     /// - parameter index: An index that won't necessarily correspond to the
     /// order that sections were created.
@@ -46,13 +41,6 @@ extension Project {
         }
 
         return nil
-    }
-
-    static func createProject(withTitle title: String) -> Project {
-        let project = Project()
-        project.title = title
-        ProjectRepository().save(object: project)
-        return project
     }
 
     var nextSectionIndex: Int {
@@ -67,7 +55,7 @@ extension Project {
         }
 
         normalizeIndices(from: index)
-        SectionRepository().delete(id: section.id)
+        RealmRepository().delete(object: section)
     }
 }
 
@@ -88,7 +76,7 @@ private extension Project {
     func normalizeIndices(from index: Int) {
         for i in (index + 1) ..< sections.count {
             let section = getSection(at: i)
-            performRealmOperation { _ in
+            RealmRepository().performOperation { _ in
                 section?.index -= 1
             }
         }

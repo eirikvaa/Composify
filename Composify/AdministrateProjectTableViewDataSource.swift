@@ -91,7 +91,7 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
         guard let sourceSection = currentProject?.getSection(at: sourceRow) else { return }
         guard let destinationSection = currentProject?.getSection(at: destinationRow) else { return }
 
-        performRealmOperation { _ in
+        RealmRepository().performOperation { _ in
             sourceSection.index = destinationRow
             destinationSection.index = sourceRow
         }
@@ -127,7 +127,7 @@ extension AdministrateProjectTableViewDataSource {
             return
         }
 
-        ProjectRepository().delete(id: currentProject.id)
+        RealmRepository().delete(object: currentProject)
         administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
         administrateProjectViewController.dismiss(animated: true)
     }

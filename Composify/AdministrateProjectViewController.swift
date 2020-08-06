@@ -94,7 +94,7 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
         
         switch indexPath.section {
         case 0:
-            ProjectRepository().update(id: project.id, value: newTitle, keyPath: \.title)
+            RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
         case 1:
             let section = project.getSection(at: indexPath.row)
             section?.title = newTitle
@@ -127,8 +127,8 @@ extension AdministrateProjectViewController {
         section.project = project
         section.index = project?.nextSectionIndex ?? 1
 
-        SectionRepository().save(object: section)
-        performRealmOperation { [weak self] _ in
+        RealmRepository().save(object: section)
+        RealmRepository().performOperation { [weak self] _ in
             self?.project?.sections.append(section)
         }
         

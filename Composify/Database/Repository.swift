@@ -15,17 +15,18 @@ import RealmSwift
 /// to Realm or Core Data or something else.
 protocol Repository {
     associatedtype T: Object
+    associatedtype D
     
     @discardableResult
     func save(object: T) -> Bool
     
     func get(id: String) -> T?
     
-    func getAll() -> Results<T>
-    
     @discardableResult
     func update<V>(id: String, value: V, keyPath: WritableKeyPath<T, V>) -> Bool
     
     @discardableResult
-    func delete(id: String) -> Bool
+    func delete(object: T) -> Bool
+    
+    func performOperation(block: (D) -> Void)
 }

@@ -26,7 +26,7 @@ extension SectionViewController: UITableViewDelegate {
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
                 let textFieldText = edit.textFields?.first?.text
                 if let title = textFieldText {
-                    RecordingRepository().update(id: recording.id, value: title, keyPath: \.title)
+                    RealmRepository<Recording>().update(id: recording.id, value: title, keyPath: \.title)
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
                     self.libraryViewController?.setEditing(false, animated: true)
                 }
@@ -46,7 +46,7 @@ extension SectionViewController: UITableViewDelegate {
                 completionHandler: { _ in
                     self.libraryViewController?.setEditing(false, animated: true)
                     FileManager.default.deleteRecording(recording)
-                    RecordingRepository().delete(id: recording.id)
+                    RealmRepository().delete(object: recording)
                     self.libraryViewController?.updateUI()
                 }
             )

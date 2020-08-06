@@ -24,7 +24,7 @@ final class RealmTests: XCTestCase {
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
 
-        ProjectRepository().save(object: project)
+        RealmRepository().save(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 1)
     }
@@ -32,11 +32,11 @@ final class RealmTests: XCTestCase {
     func testDeleteProject() {
         let realm = try! Realm()
         let project = Project()
-        ProjectRepository().save(object: project)
+        RealmRepository().save(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 1)
 
-        ProjectRepository().delete(id: project.id)
+        RealmRepository().delete(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
     }
@@ -55,7 +55,7 @@ final class RealmTests: XCTestCase {
         XCTAssertEqual(realm.objects(Project.self).count, 1)
         XCTAssertEqual(realm.objects(Section.self).count, 2)
 
-        ProjectRepository().delete(id: project.id)
+        RealmRepository().delete(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
         XCTAssertEqual(realm.objects(Section.self).count, 0)
@@ -77,7 +77,7 @@ final class RealmTests: XCTestCase {
         XCTAssertEqual(realm.objects(Section.self).count, 1)
         XCTAssertEqual(realm.objects(Recording.self).count, 1)
 
-        ProjectRepository().delete(id: project.id)
+        RealmRepository().delete(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
         XCTAssertEqual(realm.objects(Section.self).count, 0)
@@ -100,7 +100,7 @@ final class RealmTests: XCTestCase {
         XCTAssertEqual(realm.objects(Section.self).count, 1)
         XCTAssertEqual(realm.objects(Recording.self).count, 1)
 
-        SectionRepository().delete(id: section.id)
+        RealmRepository().delete(object: section)
 
         XCTAssertEqual(realm.objects(Project.self).count, 1)
         XCTAssertEqual(realm.objects(Section.self).count, 0)
@@ -123,7 +123,7 @@ final class RealmTests: XCTestCase {
         XCTAssertEqual(realm.objects(Section.self).count, 1)
         XCTAssertEqual(realm.objects(Recording.self).count, 1)
 
-        RecordingRepository().delete(id: recording.id)
+        RealmRepository().delete(object: recording)
 
         XCTAssertEqual(realm.objects(Project.self).count, 1)
         XCTAssertEqual(realm.objects(Section.self).count, 1)
@@ -138,12 +138,12 @@ final class RealmTests: XCTestCase {
         let project = Project()
         project.title = oldTitle
 
-        ProjectRepository().save(object: project)
+        RealmRepository().save(object: project)
 
         XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
 
-        ProjectRepository().update(id: project.id, value: newTitle, keyPath: \.title)
+        RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
@@ -157,12 +157,12 @@ final class RealmTests: XCTestCase {
         let section = Section()
         section.title = oldTitle
 
-        SectionRepository().save(object: section)
+        RealmRepository().save(object: section)
 
         XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
 
-        SectionRepository().update(id: section.id, value: newTitle, keyPath: \.title)
+        RealmRepository<Section>().update(id: section.id, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
@@ -176,12 +176,12 @@ final class RealmTests: XCTestCase {
         let recording = Recording()
         recording.title = oldTitle
 
-        RecordingRepository().save(object: recording)
+        RealmRepository().save(object: recording)
 
         XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
 
-        RecordingRepository().update(id: recording.id, value: newTitle, keyPath: \.title)
+        RealmRepository<Recording>().update(id: recording.id, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))

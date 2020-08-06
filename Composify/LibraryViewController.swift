@@ -34,7 +34,7 @@ final class LibraryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentProject = UserDefaults.standard.lastProject() ?? Project.projects().first
+        currentProject = UserDefaults.standard.lastProject() ?? RealmRepository<Project>().getAll().first
         currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
 
         showOnboardingIfNeeded()
@@ -76,7 +76,7 @@ extension LibraryViewController {
         }
 
         // Showing other projects
-        Project.projects().forEach { project in
+        RealmRepository<Project>().getAll().forEach { project in
             if project != currentProject {
                 let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
                     self.applyAccessibility(for: action)
@@ -108,19 +108,27 @@ extension LibraryViewController {
         guard let recorder = audioRecorderDefaultService else {
             guard let currentSection = currentSection else { return }
 
-            recording = Recording.createRecording(title: R.Loc.recording, section: currentSection)
+            let recording = Recording()
+            recording.title = R.Loc.recording
+            recording.section = currentSection
+            recording.project = currentSection.project
+            recording.fileExtension = "caf"
+            RealmRepository().save(object: recording)
+            RealmRepository().performOperation { _ in
+                currentSection.recordings.append(recording)
+            }
+            
+            self.recording = recording
 
-            if let recording = recording {
-                do {
-                    audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-                } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
-                    let title = R.Loc.unableToConfigureRecordingSessionTitle
-                    let message = R.Loc.unableToConfigureRecordingSessionMessage
-                    let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                    present(alert, animated: true)
-                } catch {
-                    print(error.localizedDescription)
-                }
+            do {
+                audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+            } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
+                let title = R.Loc.unableToConfigureRecordingSessionTitle
+                let message = R.Loc.unableToConfigureRecordingSessionMessage
+                let alert = UIAlertController.createErrorAlert(title: title, message: message)
+                present(alert, animated: true)
+            } catch {
+                print(error.localizedDescription)
             }
 
             grantedPermissionsToUseMicrophone = audioRecorderDefaultService?.askForMicrophonePermissions() ?? false
@@ -147,7 +155,7 @@ extension LibraryViewController {
         recorder.stop()
 
         if let recording = recording {
-            RecordingRepository().save(object: recording)
+            RealmRepository().save(object: recording)
         }
 
         recording = nil
@@ -333,7 +341,7 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidDeleteProject() {
-        currentProject = Project.projects().first
+        currentProject = RealmRepository<Project>().getAll().first
         currentSection = currentProject?.sections.first
 
         updateUI()
