@@ -15,7 +15,6 @@ import RealmSwift
 /// to Realm or Core Data or something else.
 protocol Repository {
     associatedtype T: Object
-    associatedtype D
     
     @discardableResult
     func save(object: T) -> Bool
