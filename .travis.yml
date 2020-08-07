@@ -1,4 +1,0 @@
-language: swift
-osx_image: xcode11.6
-script:
-    - bundle exec fastlane test
