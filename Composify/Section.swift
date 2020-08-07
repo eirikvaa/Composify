@@ -15,18 +15,10 @@ final class Section: Object, ComposifyObject {
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
-    var recordingIDs = List<String>()
+    let recordings = List<Recording>()
 
     override static func primaryKey() -> String? {
-        return R.DatabaseKeys.id
-    }
-}
-
-extension Section {
-    var recordings: [Recording] {
-        return recordingIDs
-            .compactMap { self.realm?.object(ofType: Recording.self, forPrimaryKey: $0) }
-            .sorted()
+        R.DatabaseKeys.id
     }
 }
 
@@ -40,6 +32,6 @@ extension UserDefaults {
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
-        return lhs.index < rhs.index
+        lhs.index < rhs.index
     }
 }

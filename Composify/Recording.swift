@@ -18,7 +18,7 @@ final class Recording: Object, ComposifyObject {
     @objc dynamic var fileExtension = ""
 
     override static func primaryKey() -> String? {
-        return R.DatabaseKeys.id
+        R.DatabaseKeys.id
     }
 }
 
@@ -30,7 +30,7 @@ extension Recording {
         recording.project = section.project
         recording.fileExtension = fileExtension
 
-        DatabaseServiceFactory.defaultService.save(recording)
+        RealmRepository().save(recording: recording, to: section)
 
         return recording
     }
@@ -38,7 +38,7 @@ extension Recording {
 
 extension Recording: AudioPlayable {
     var url: URL {
-        return R.URLs.recordingsDirectory
+        R.URLs.recordingsDirectory
             .appendingPathComponent(id)
             .appendingPathExtension(fileExtension)
     }
@@ -46,7 +46,7 @@ extension Recording: AudioPlayable {
 
 extension Recording: Comparable {
     static func < (lhs: Recording, rhs: Recording) -> Bool {
-        return lhs.title < rhs.title
+        lhs.title < rhs.title
     }
 }
 

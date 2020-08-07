@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         registerNavigationBarAppearance()
         createRecordingsDirectoryIfNeeded()
+
+        Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
 
         return true
     }
@@ -33,7 +36,7 @@ private extension AppDelegate {
         navigationBarAppearance.barStyle = .black
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor.white
         ]
     }
 }

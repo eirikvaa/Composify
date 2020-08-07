@@ -16,11 +16,11 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     var currentProject: Project? {
-        return administrateProjectViewController.project
+        administrateProjectViewController.project
     }
 
     func numberOfSections(in _: UITableView) -> Int {
-        return administrateProjectViewController.tableSections.count
+        administrateProjectViewController.tableSections.count
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,7 +37,7 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return administrateProjectViewController.tableSections[section].header
+        administrateProjectViewController.tableSections[section].header
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -91,10 +91,8 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
         guard let sourceSection = currentProject?.getSection(at: sourceRow) else { return }
         guard let destinationSection = currentProject?.getSection(at: destinationRow) else { return }
 
-        DatabaseServiceFactory.defaultService.performOperation {
-            sourceSection.index = destinationRow
-            destinationSection.index = sourceRow
-        }
+        RealmRepository<Section>().update(id: sourceSection.id, value: destinationRow, keyPath: \.index)
+        RealmRepository<Section>().update(id: destinationSection.id, value: sourceRow, keyPath: \.index)
 
         administrateProjectViewController.tableSections[1].values[sourceRow] = sourceSection.title
         administrateProjectViewController.tableSections[1].values[destinationRow] = destinationSection.title
@@ -123,7 +121,11 @@ extension AdministrateProjectTableViewDataSource {
             userDefaults.resetLastSection()
         }
 
-        DatabaseServiceFactory.defaultService.delete(currentProject!)
+        guard let currentProject = currentProject else {
+            return
+        }
+
+        RealmRepository().delete(object: currentProject)
         administrateProjectViewController.administrateProjectDelegate?.userDidDeleteProject()
         administrateProjectViewController.dismiss(animated: true)
     }
@@ -150,21 +152,19 @@ private extension AdministrateProjectTableViewDataSource {
         let existingValues = administrateProjectViewController.tableSections[1].values
 
         administrateProjectViewController.tableSections[1].values.removeAll()
-        for (index, sectionID) in currentProject.sectionIDs.enumerated() {
+        for (index, section) in currentProject.sections.enumerated() {
             // We're skipping the entries that have a title different
             // from the corresponding section title, because that means the
             // section was renamed. Without this check, if a section is renamed
             // and a section later added, the rename will be ignored.
-            let _section: Section? = sectionID.composifyObject()
-
             let existingTitle: String
             if index < existingValues.count {
                 existingTitle = existingValues[index]
             } else {
-                existingTitle = _section?.title ?? ""
+                existingTitle = section.title
             }
 
-            guard let section = _section, existingTitle == section.title else {
+            guard existingTitle == section.title else {
                 continue
             }
 

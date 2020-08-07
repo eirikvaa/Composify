@@ -12,7 +12,7 @@ import UIKit
 
 extension SectionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return section.recordingIDs.count
+        section.recordings.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -21,14 +21,13 @@ extension SectionViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let recordingId = section.recordingIDs[indexPath.row]
-        let recording: Recording? = recordingId.composifyObject()
-        let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording?.id
+        let recording = section.recordings[indexPath.row]
+        let isCurrentlyPlayingRecording = currentlyPlayingRecording?.id == recording.id
 
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
-        let hasTitle = recording?.title.hasPositiveCharacterCount ?? false
-        let title = hasTitle ? recording?.title : String(describing: recording?.dateCreated.description)
+        let hasTitle = recording.title.hasPositiveCharacterCount
+        let title = hasTitle ? recording.title : String(describing: recording.dateCreated.description)
         cell.setTitle(title)
 
         // For now: Image must come after title because I set accessbility after image is set

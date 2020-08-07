@@ -1,16 +1,9 @@
 default_platform :ios
 
 platform :ios do
-  before_all do
-    cocoapods
-  end
-
   desc "Runs all the tests"
   lane :test do
-    scan(
-      workspace: "Composify.xcworkspace",
-      devices: ["iPhone 11"]
-    )
+    scan
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"

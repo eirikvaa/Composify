@@ -31,7 +31,7 @@ struct AVAudioRecorderService: AudioRecorderService {
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000.0,
             AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue,
+            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
         ]
 
         do {
@@ -52,22 +52,5 @@ struct AVAudioRecorderService: AudioRecorderService {
     func stop() {
         try? session.setActive(false)
         recorder.stop()
-    }
-
-    func askForMicrophonePermissions() -> Bool {
-        let permission = session.recordPermission
-
-        switch permission {
-        case .granted: return true
-        case .denied: return false
-        case .undetermined:
-            var isGranted = false
-            session.requestRecordPermission { granted in
-                isGranted = granted
-            }
-
-            return isGranted
-        @unknown default: return false
-        }
     }
 }

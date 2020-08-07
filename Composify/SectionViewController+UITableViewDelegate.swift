@@ -26,7 +26,7 @@ extension SectionViewController: UITableViewDelegate {
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
                 let textFieldText = edit.textFields?.first?.text
                 if let title = textFieldText {
-                    self.databaseService.rename(recording, to: title)
+                    RealmRepository<Recording>().update(id: recording.id, value: title, keyPath: \.title)
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
                     self.libraryViewController?.setEditing(false, animated: true)
                 }
@@ -46,7 +46,7 @@ extension SectionViewController: UITableViewDelegate {
                 completionHandler: { _ in
                     self.libraryViewController?.setEditing(false, animated: true)
                     FileManager.default.deleteRecording(recording)
-                    self.databaseService.delete(recording)
+                    RealmRepository().delete(object: recording)
                     self.libraryViewController?.updateUI()
                 }
             )
@@ -70,9 +70,7 @@ extension SectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
 
-        guard let recording: Recording = section.recordingIDs[indexPath.row].composifyObject() else {
-            return
-        }
+        let recording = section.recordings[indexPath.row]
 
         if currentlyPlayingRecording != nil {
             currentlyPlayingRecording = nil

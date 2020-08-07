@@ -19,46 +19,30 @@ final class LibraryViewController: UIViewController {
     @IBOutlet var pageControl: LibraryPageControl!
 
     // Properties
+    var currentProject: Project?
+    var currentSection: Section?
+
     private var errorViewController: ErrorViewController?
     private var state: LibraryViewController.State = .noSections
-
-    var currentProject: Project? {
-        guard let projectID = currentProjectID else { return nil }
-        guard let project: Project = projectID.composifyObject() else { return nil }
-        return project
-    }
-
-    var currentSection: Section? {
-        guard let sectionID = currentSectionID else { return nil }
-        guard let section: Section = sectionID.composifyObject() else { return nil }
-        return section
-    }
-
-    var currentProjectID: String?
-    var currentSectionID: String?
-    private var databaseService = DatabaseServiceFactory.defaultService
     private let pagingViewController = PagingViewController<SectionPageItem>()
     private var audioRecorderDefaultService: AudioRecorderService?
-    private var projects: [Project] {
-        return Project.projects()
-    }
-
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showOnboardingIfNeeded()
+        currentProject = UserDefaults.standard.lastProject() ?? RealmRepository().getAll().first
+        currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
 
-        currentProjectID = UserDefaults.standard.fetchLastProjectID() ?? projects.first?.id
-        currentSectionID = currentProject?.sectionIDs.first
+        showOnboardingIfNeeded()
 
         configurePagingViewController()
         setupUI()
         registerObservers()
         updateUI()
         applyAccessibility()
+        askForRecordingPermissions()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -91,7 +75,7 @@ extension LibraryViewController {
         }
 
         // Showing other projects
-        projects.forEach { project in
+        RealmRepository<Project>().getAll().forEach { project in
             if project != currentProject {
                 let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
                     self.applyAccessibility(for: action)
@@ -115,65 +99,64 @@ extension LibraryViewController {
     }
 
     @IBAction func recordAudio(_: UIButton) {
-        let settingsAlert = UIAlertController.createShowSettingsAlert(
-            title: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTitle,
-            message: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTessage
-        )
-
-        guard let recorder = audioRecorderDefaultService else {
-            guard let currentSection = currentSection else { return }
-
-            recording = Recording.createRecording(title: R.Loc.recording, section: currentSection)
-
-            if let recording = recording {
-                do {
-                    audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-                } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
-                    let title = R.Loc.unableToConfigureRecordingSessionTitle
-                    let message = R.Loc.unableToConfigureRecordingSessionMessage
-                    let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                    present(alert, animated: true)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-
-            grantedPermissionsToUseMicrophone = audioRecorderDefaultService?.askForMicrophonePermissions() ?? false
-
-            // Only start recording if permissions are granted
-            guard grantedPermissionsToUseMicrophone else {
-                present(settingsAlert, animated: true)
-                return
-            }
-
-            audioRecorderDefaultService?.record()
-            recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
-            return
+        if recording == nil {
+            startRecordingSession()
+        } else {
+            stopRecordingSession()
         }
-
-        // The handling here is a bit off, but this handles the case where permissions have not been
-        // granted, but the audio recorder sevice was created, which, without this, would create a recording,
-        // even though no audio was recorded.
-        guard grantedPermissionsToUseMicrophone else {
-            present(settingsAlert, animated: true)
-            return
-        }
-
-        recorder.stop()
-
-        if let recording = recording {
-            databaseService.save(recording)
-        }
-
-        recording = nil
-        audioRecorderDefaultService = nil
-        recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
-
-        updateUI()
     }
 }
 
 extension LibraryViewController {
+    /// Start a recording session.
+    /// Overwrite the currently initialized recording.
+    func startRecordingSession() {
+        let recording = Recording()
+        recording.title = R.Loc.recording
+        recording.section = currentSection
+        recording.project = currentSection?.project
+        recording.fileExtension = "caf"
+
+        self.recording = recording
+
+        do {
+            audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+        } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
+            let title = R.Loc.unableToConfigureRecordingSessionTitle
+            let message = R.Loc.unableToConfigureRecordingSessionMessage
+            let alert = UIAlertController.createErrorAlert(title: title, message: message)
+            present(alert, animated: true)
+            return
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+
+        audioRecorderDefaultService?.record()
+
+        recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
+        updateUI()
+    }
+
+    /// Stop the recording session.
+    /// Only save the recording if it was successfully created.
+    func stopRecordingSession() {
+        audioRecorderDefaultService?.stop()
+
+        if let recording = recording, let currentSection = currentSection {
+            RealmRepository().save(recording: recording, to: currentSection)
+        }
+
+        recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
+        updateUI()
+    }
+
+    func askForRecordingPermissions() {
+        AudioRecorderPermissions.askForMicrophonePermissions { [weak self] granted in
+            self?.grantedPermissionsToUseMicrophone = granted
+        }
+    }
+
     func showCreateNewProjectFlow() {
         presentAdministrateViewController(viewController: CreateNewProjectViewController())
     }
@@ -203,8 +186,8 @@ extension LibraryViewController {
     /// Set the new current project
     /// - parameter project: The project that should now be shown
     func setCurrentProject(_ project: Project) {
-        currentProjectID = project.id
-        currentSectionID = currentProject?.sectionIDs.first
+        currentProject = project
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -295,7 +278,7 @@ extension LibraryViewController {
     }
 
     func configurePageControl() {
-        pageControl.numberOfPages = currentProject?.sectionIDs.count ?? 0
+        pageControl.numberOfPages = currentProject?.sections.count ?? 0
         pageControl.currentPage = currentSection?.index ?? 0
     }
 
@@ -332,13 +315,13 @@ extension LibraryViewController {
 
 extension LibraryViewController: AdministrateProjectDelegate {
     func userDidAddSectionToProject(_ section: Section) {
-        currentSectionID = section.id
+        currentSection = section
 
         updateUI()
     }
 
     func userDidDeleteSectionFromProject() {
-        currentSectionID = currentProject?.sectionIDs.sorted().first
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -348,8 +331,8 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidDeleteProject() {
-        currentProjectID = projects.first?.id
-        currentSectionID = currentProject?.sectionIDs.first
+        currentProject = RealmRepository().getAll().first
+        currentSection = currentProject?.sections.first
 
         updateUI()
     }
@@ -359,8 +342,8 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidCreateProject(_ project: Project) {
-        currentProjectID = project.id
-        currentSectionID = project.sectionIDs.first
+        currentProject = project
+        currentSection = project.sections.first
 
         updateUI()
     }

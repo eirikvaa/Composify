@@ -16,7 +16,9 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
         tableView.dataSource = tableViewDataSource
 
-        project = Project.createProject(withTitle: "")
+        let project = Project()
+        self.project = project
+        RealmRepository().save(object: project)
 
         navigationItem.title = R.Loc.addProject
     }
@@ -34,7 +36,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
     @objc func dismissWithoutSaving() {
         if let project = project {
-            DatabaseServiceFactory.defaultService.delete(project)
+            RealmRepository().delete(object: project)
         }
 
         dismissAction()
@@ -42,7 +44,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
     @objc func saveAndDismiss() {
         if let project = project {
-            DatabaseServiceFactory.defaultService.save(project)
+            RealmRepository().save(object: project)
             administrateProjectDelegate?.userDidCreateProject(project)
         }
 

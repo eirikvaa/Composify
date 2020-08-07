@@ -13,7 +13,7 @@ import XCTest
 final class AudioPlayerTests: XCTestCase {
     func testPlayRecordedAudio() {
         let (_, _, recording) = createObjects()
-        let audioRecorder = try! AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+        let audioRecorder = try? AudioRecorderServiceFactory.defaultService(withURL: recording.url)
 
         audioRecorder?.record()
         audioRecorder?.stop()

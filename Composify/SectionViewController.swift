@@ -13,7 +13,6 @@ final class SectionViewController: UIViewController {
 
     var currentlyPlayingRecording: AudioPlayable?
     var audioDefaultService: AudioPlayerService?
-    var databaseService = DatabaseServiceFactory.defaultService
     var libraryViewController: LibraryViewController?
     var section: Section
     var tableView = UITableView(frame: .zero, style: .plain)

@@ -39,6 +39,6 @@ extension LibraryViewController: PagingViewControllerDataSource {
     }
 
     func numberOfViewControllers<T>(in _: PagingViewController<T>) -> Int where T: PagingItem, T: Comparable, T: Hashable {
-        return currentProject?.sectionIDs.count ?? 0
+        currentProject?.sections.count ?? 0
     }
 }

@@ -13,14 +13,15 @@ final class Project: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
-    var sectionIDs = List<String>()
+    let sections = List<Section>()
 
     override static func primaryKey() -> String? {
-        return R.DatabaseKeys.id
+        R.DatabaseKeys.id
     }
 }
 
 extension UserDefaults {
+
     func lastProject() -> Project? {
         guard let realm = try? Realm() else { return nil }
         guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else { return nil }
@@ -29,54 +30,23 @@ extension UserDefaults {
 }
 
 extension Project {
-    static func projects() -> [Project] {
-        let realm = try! Realm()
-        return Array(realm.objects(Project.self)) as [Project]
-    }
-
-    var sections: [Section] {
-        return sectionIDs
-            .compactMap { self.realm?.object(ofType: Section.self, forPrimaryKey: $0) }
-            .sorted()
-    }
-
-    var recordings: [Recording] {
-        return sections
-            .reduce([]) { (recordings: [Recording], section: Section) -> [Recording] in
-                recordings + section.recordings
-            }
-            .sorted()
-    }
-
     /// Get the section that corresponds to the passed-in index
     /// - parameter index: An index that won't necessarily correspond to the
     /// order that sections were created.
     func getSection(at index: Int) -> Section? {
-        var section: Section?
-        for sectionID in sectionIDs {
-            let _section: Section? = sectionID.composifyObject()
-            if _section?.index == index {
-                section = _section
+        for section in sections {
+            if section.index == index {
+                return section
             }
         }
 
-        return section
-    }
-
-    static func createProject(withTitle title: String) -> Project {
-        let project = Project()
-        project.title = title
-
-        let databaseService = DatabaseServiceFactory.defaultService
-        databaseService.save(project)
-
-        return project
+        return nil
     }
 
     var nextSectionIndex: Int {
-        let _section: Section? = sectionIDs.last?.composifyObject()
+        let _section = sections.last
         let lastSectionIndex = _section?.index ?? 0
-        return sectionIDs.hasElements ? lastSectionIndex + 1 : lastSectionIndex
+        return sections.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 
     func deleteSection(at index: Int) {
@@ -85,13 +55,13 @@ extension Project {
         }
 
         normalizeIndices(from: index)
-        DatabaseServiceFactory.defaultService.delete(section)
+        RealmRepository().delete(object: section)
     }
 }
 
 extension Project: Comparable {
     static func < (lhs: Project, rhs: Project) -> Bool {
-        return lhs.dateCreated < rhs.dateCreated
+        lhs.dateCreated < rhs.dateCreated
     }
 }
 
@@ -104,11 +74,12 @@ private extension Project {
     /// index greater than the passed in index and subtract one to close the gap.
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeIndices(from index: Int) {
-        for i in (index + 1) ..< sectionIDs.count {
-            let section = getSection(at: i)
-            DatabaseServiceFactory.defaultService.performOperation {
-                section?.index -= 1
+        for i in (index + 1) ..< sections.count {
+            guard let section = getSection(at: i) else {
+                return
             }
+
+            RealmRepository<Section>().update(id: section.id, value: section.index - 1, keyPath: \.index)
         }
     }
 }

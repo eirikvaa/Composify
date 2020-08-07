@@ -32,7 +32,7 @@ class AdministrateProjectViewController: UIViewController {
     var tableSections: [TableSection] = [
         .init(header: R.Loc.metaInformationHeader, values: []),
         .init(header: R.Loc.sectionsHeader, values: []),
-        .init(header: R.Loc.dangerZoneHeader, values: []),
+        .init(header: R.Loc.dangerZoneHeader, values: [])
     ]
 
     var project: Project?
@@ -90,17 +90,17 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason _: UITextField.DidEndEditingReason) {
         guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
+        guard let project = project else { return }
 
-        DatabaseServiceFactory.defaultService.performOperation {
-            switch indexPath.section {
-            case 0:
-                project?.title = newTitle
-            case 1:
-                let section = project?.getSection(at: indexPath.row)
-                section?.title = newTitle
-            default:
-                return
+        switch indexPath.section {
+        case 0:
+            RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
+        case 1:
+            if let section = project.getSection(at: indexPath.row) {
+                RealmRepository<Section>().update(id: section.id, value: newTitle, keyPath: \.title)
             }
+        default:
+            return
         }
 
         administrateProjectDelegate?.userDidEditTitleOfObjects()
@@ -128,7 +128,10 @@ extension AdministrateProjectViewController {
         section.project = project
         section.index = project?.nextSectionIndex ?? 1
 
-        DatabaseServiceFactory.defaultService.save(section)
+        if let project = project {
+            RealmRepository().save(section: section, to: project)
+        }
+
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 
         completionHandler(section)

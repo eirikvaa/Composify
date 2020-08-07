@@ -18,8 +18,4 @@ protocol AudioRecorderService {
 
     /// Stop recording audio.
     func stop()
-
-    /// Ask the user for permissions to use the microphone
-    /// - returns: Whether access was granted or denied
-    func askForMicrophonePermissions() -> Bool
 }
