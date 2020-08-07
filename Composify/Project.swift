@@ -75,10 +75,11 @@ private extension Project {
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeIndices(from index: Int) {
         for i in (index + 1) ..< sections.count {
-            let section = getSection(at: i)
-            RealmRepository().performOperation { _ in
-                section?.index -= 1
+            guard let section = getSection(at: i) else {
+                return
             }
+            
+            RealmRepository<Section>().update(id: section.id, value: section.index - 1, keyPath: \.index)
         }
     }
 }

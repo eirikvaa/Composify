@@ -91,10 +91,8 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
         guard let sourceSection = currentProject?.getSection(at: sourceRow) else { return }
         guard let destinationSection = currentProject?.getSection(at: destinationRow) else { return }
 
-        RealmRepository().performOperation { _ in
-            sourceSection.index = destinationRow
-            destinationSection.index = sourceRow
-        }
+        RealmRepository<Section>().update(id: sourceSection.id, value: destinationRow, keyPath: \.index)
+        RealmRepository<Section>().update(id: destinationSection.id, value: sourceRow, keyPath: \.index)
 
         administrateProjectViewController.tableSections[1].values[sourceRow] = sourceSection.title
         administrateProjectViewController.tableSections[1].values[destinationRow] = destinationSection.title

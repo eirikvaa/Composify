@@ -27,6 +27,4 @@ protocol Repository {
     
     @discardableResult
     func delete(object: T) -> Bool
-    
-    func performOperation(block: (D) -> Void)
 }

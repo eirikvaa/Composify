@@ -30,10 +30,7 @@ extension Recording {
         recording.project = section.project
         recording.fileExtension = fileExtension
         
-        RealmRepository().performOperation { _ in
-            section.recordings.append(recording)
-        }
-        RealmRepository().save(object: recording)
+        RealmRepository().save(recording: recording, to: section)
 
         return recording
     }

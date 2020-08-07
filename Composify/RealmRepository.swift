@@ -84,16 +84,6 @@ struct RealmRepository<O: Object>: Repository {
         
         return true
     }
-    
-    func performOperation(block: (Realm) -> Void) {
-        guard let realm = try? Realm() else {
-            fatalError("Unable to instantiate Realm instance!")
-        }
-        
-        try! realm.write {
-            block(realm)
-        }
-    }
 }
 
 extension Repository where T: Object {
@@ -103,5 +93,47 @@ extension Repository where T: Object {
         }
         
         return realm.objects(T.self)
+    }
+}
+
+extension Repository where T == Recording {
+    /// Save a recording and add it to a section's recordings
+    /// - Parameters:
+    ///     - recording: Recording to be added
+    ///     - section: The section into which a recording should be included
+    /// - Returns: If the operation was successful or not
+    @discardableResult
+    func save(recording: T, to section: Section) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        try! realm.write {
+            realm.add(recording)
+            section.recordings.append(recording)
+        }
+        
+        return true
+    }
+}
+
+extension Repository where T == Section {
+    /// Save a section and add it to a projects's sections
+    /// - Parameters:
+    ///     - section: Section to be added
+    ///     - project: The project into which a section should be included
+    /// - Returns: If the operation was successful or not
+    @discardableResult
+    func save(section: T, to project: Project) -> Bool {
+        guard let realm = try? Realm() else {
+            fatalError("Unable to instantiate Realm instance!")
+        }
+        
+        try! realm.write {
+            realm.add(section)
+            project.sections.append(section)
+        }
+        
+        return true
     }
 }

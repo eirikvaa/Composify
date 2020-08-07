@@ -19,10 +19,7 @@ extension Project {
             section.title = "S\(i)"
             section.index = i
 
-            RealmRepository().save(object: section)
-            RealmRepository().performOperation { _ in
-                project.sections.append(section)
-            }
+            RealmRepository().save(section: section, to: project)
         }
 
         return project

@@ -143,11 +143,8 @@ extension LibraryViewController {
     func stopRecordingSession() {
         audioRecorderDefaultService?.stop()
         
-        if let recording = recording {
-            RealmRepository().save(object: recording)
-            RealmRepository().performOperation { _ in
-                currentSection?.recordings.append(recording)
-            }
+        if let recording = recording, let currentSection = currentSection {
+            RealmRepository().save(recording: recording, to: currentSection)
         }
         
         recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)

@@ -128,9 +128,8 @@ extension AdministrateProjectViewController {
         section.project = project
         section.index = project?.nextSectionIndex ?? 1
 
-        RealmRepository().save(object: section)
-        RealmRepository().performOperation { [weak self] _ in
-            self?.project?.sections.append(section)
+        if let project = project {
+            RealmRepository().save(section: section, to: project)
         }
         
         administrateProjectDelegate?.userDidAddSectionToProject(section)
