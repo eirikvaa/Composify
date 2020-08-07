@@ -334,7 +334,7 @@ extension LibraryViewController: AdministrateProjectDelegate {
     }
 
     func userDidDeleteProject() {
-        currentProject = RealmRepository<Project>().getAll().first
+        currentProject = RealmRepository().getAll().first
         currentSection = currentProject?.sections.first
 
         updateUI()
