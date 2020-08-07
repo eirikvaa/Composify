@@ -42,6 +42,7 @@ final class LibraryViewController: UIViewController {
         registerObservers()
         updateUI()
         applyAccessibility()
+        askForRecordingPermissions()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -102,6 +103,10 @@ extension LibraryViewController {
             title: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTitle,
             message: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTessage
         )
+        
+        guard grantedPermissionsToUseMicrophone else {
+            return
+        }
 
         guard let recorder = audioRecorderDefaultService else {
             guard let currentSection = currentSection else { return }
@@ -128,8 +133,6 @@ extension LibraryViewController {
             } catch {
                 print(error.localizedDescription)
             }
-
-            grantedPermissionsToUseMicrophone = audioRecorderDefaultService?.askForMicrophonePermissions() ?? false
 
             // Only start recording if permissions are granted
             guard grantedPermissionsToUseMicrophone else {
@@ -165,6 +168,12 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController {
+    func askForRecordingPermissions() {
+        AudioRecorderPermissions.askForMicrophonePermissions { [weak self] granted in
+            self?.grantedPermissionsToUseMicrophone = granted
+        }
+    }
+
     func showCreateNewProjectFlow() {
         presentAdministrateViewController(viewController: CreateNewProjectViewController())
     }

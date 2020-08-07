@@ -87,6 +87,7 @@
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
+		E5F7CDF424DE04CA009D7819 /* AudioRecorderPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F7CDF324DE04CA009D7819 /* AudioRecorderPermissions.swift */; };
 		E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */; };
 		E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41B6239FBC11000377BC /* Project+Ext.swift */; };
 /* End PBXBuildFile section */
@@ -204,6 +205,7 @@
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		E5F7CDF324DE04CA009D7819 /* AudioRecorderPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderPermissions.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FC41AF239FA93B000377BC /* AdministrateProjectTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministrateProjectTextField.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 		E5B036A81D59957C00C66A69 /* AVFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				E5F7CDF324DE04CA009D7819 /* AudioRecorderPermissions.swift */,
 				E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */,
 				E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */,
 			);
@@ -788,6 +791,7 @@
 				E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */,
 				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
 				E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */,
+				E5F7CDF424DE04CA009D7819 /* AudioRecorderPermissions.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
