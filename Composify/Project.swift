@@ -21,7 +21,7 @@ final class Project: Object, ComposifyObject {
 }
 
 extension UserDefaults {
-    
+
     func lastProject() -> Project? {
         guard let realm = try? Realm() else { return nil }
         guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else { return nil }
@@ -78,7 +78,7 @@ private extension Project {
             guard let section = getSection(at: i) else {
                 return
             }
-            
+
             RealmRepository<Section>().update(id: section.id, value: section.index - 1, keyPath: \.index)
         }
     }

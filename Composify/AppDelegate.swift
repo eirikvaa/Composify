@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         registerNavigationBarAppearance()
         createRecordingsDirectoryIfNeeded()
-        
+
         Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
 
         return true

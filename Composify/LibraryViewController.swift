@@ -21,7 +21,7 @@ final class LibraryViewController: UIViewController {
     // Properties
     var currentProject: Project?
     var currentSection: Section?
-    
+
     private var errorViewController: ErrorViewController?
     private var state: LibraryViewController.State = .noSections
     private let pagingViewController = PagingViewController<SectionPageItem>()
@@ -31,7 +31,7 @@ final class LibraryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         currentProject = UserDefaults.standard.lastProject() ?? RealmRepository().getAll().first
         currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
 
@@ -116,9 +116,9 @@ extension LibraryViewController {
         recording.section = currentSection
         recording.project = currentSection?.project
         recording.fileExtension = "caf"
-        
+
         self.recording = recording
-        
+
         do {
             audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
         } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
@@ -131,26 +131,26 @@ extension LibraryViewController {
             print(error.localizedDescription)
             return
         }
-        
+
         audioRecorderDefaultService?.record()
-        
+
         recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
         updateUI()
     }
-    
+
     /// Stop the recording session.
     /// Only save the recording if it was successfully created.
     func stopRecordingSession() {
         audioRecorderDefaultService?.stop()
-        
+
         if let recording = recording, let currentSection = currentSection {
             RealmRepository().save(recording: recording, to: currentSection)
         }
-        
+
         recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
         updateUI()
     }
-    
+
     func askForRecordingPermissions() {
         AudioRecorderPermissions.askForMicrophonePermissions { [weak self] granted in
             self?.grantedPermissionsToUseMicrophone = granted

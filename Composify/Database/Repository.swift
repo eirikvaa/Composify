@@ -15,15 +15,15 @@ import RealmSwift
 /// to Realm or Core Data or something else.
 protocol Repository {
     associatedtype T: Object
-    
+
     @discardableResult
     func save(object: T) -> Bool
-    
+
     func get(id: String) -> T?
-    
+
     @discardableResult
     func update<V>(id: String, value: V, keyPath: WritableKeyPath<T, V>) -> Bool
-    
+
     @discardableResult
     func delete(object: T) -> Bool
 }

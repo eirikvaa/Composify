@@ -29,7 +29,7 @@ extension Recording {
         recording.section = section
         recording.project = section.project
         recording.fileExtension = fileExtension
-        
+
         RealmRepository().save(recording: recording, to: section)
 
         return recording

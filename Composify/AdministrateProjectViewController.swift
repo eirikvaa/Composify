@@ -91,7 +91,7 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
         guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
         guard let project = project else { return }
-        
+
         switch indexPath.section {
         case 0:
             RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
@@ -131,7 +131,7 @@ extension AdministrateProjectViewController {
         if let project = project {
             RealmRepository().save(section: section, to: project)
         }
-        
+
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 
         completionHandler(section)

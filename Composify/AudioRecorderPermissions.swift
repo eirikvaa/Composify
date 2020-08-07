@@ -17,14 +17,14 @@ struct AudioRecorderPermissions {
     static func askForMicrophonePermissions(completion: @escaping (_ granted: Bool) -> Void) {
         let session = AVAudioSession.sharedInstance()
         let permission = session.recordPermission
-        
+
         if case .undetermined = permission {
             session.requestRecordPermission { granted in
                 completion(granted)
                 return
             }
         }
-        
+
         completion(permission == .granted)
     }
 }

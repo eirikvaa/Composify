@@ -120,7 +120,7 @@ extension AdministrateProjectTableViewDataSource {
             userDefaults.resetLastProject()
             userDefaults.resetLastSection()
         }
-        
+
         guard let currentProject = currentProject else {
             return
         }
