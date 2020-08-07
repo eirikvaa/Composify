@@ -96,8 +96,9 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
         case 0:
             RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
         case 1:
-            let section = project.getSection(at: indexPath.row)
-            section?.title = newTitle
+            if let section = project.getSection(at: indexPath.row) {
+                RealmRepository<Section>().update(id: section.id, value: newTitle, keyPath: \.title)
+            }
         default:
             return
         }
