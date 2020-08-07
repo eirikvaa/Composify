@@ -19,22 +19,20 @@ final class LibraryViewController: UIViewController {
     @IBOutlet var pageControl: LibraryPageControl!
 
     // Properties
-    private var errorViewController: ErrorViewController?
-    private var state: LibraryViewController.State = .noSections
-
     var currentProject: Project?
     var currentSection: Section?
-    //private var databaseService = DatabaseServiceFactory.defaultService
+    
+    private var errorViewController: ErrorViewController?
+    private var state: LibraryViewController.State = .noSections
     private let pagingViewController = PagingViewController<SectionPageItem>()
     private var audioRecorderDefaultService: AudioRecorderService?
-
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentProject = UserDefaults.standard.lastProject() ?? RealmRepository<Project>().getAll().first
+        currentProject = UserDefaults.standard.lastProject() ?? RealmRepository().getAll().first
         currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
 
         showOnboardingIfNeeded()
