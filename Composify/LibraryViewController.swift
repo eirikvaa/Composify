@@ -99,75 +99,61 @@ extension LibraryViewController {
     }
 
     @IBAction func recordAudio(_: UIButton) {
-        let settingsAlert = UIAlertController.createShowSettingsAlert(
-            title: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTitle,
-            message: R.Loc.deniedMicrophoneAccessGoToSettingsAlertTessage
-        )
-        
-        guard grantedPermissionsToUseMicrophone else {
-            return
+        if recording == nil {
+            startRecordingSession()
+        } else {
+            stopRecordingSession()
         }
-
-        guard let recorder = audioRecorderDefaultService else {
-            guard let currentSection = currentSection else { return }
-
-            let recording = Recording()
-            recording.title = R.Loc.recording
-            recording.section = currentSection
-            recording.project = currentSection.project
-            recording.fileExtension = "caf"
-            RealmRepository().save(object: recording)
-            RealmRepository().performOperation { _ in
-                currentSection.recordings.append(recording)
-            }
-            
-            self.recording = recording
-
-            do {
-                audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
-            } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
-                let title = R.Loc.unableToConfigureRecordingSessionTitle
-                let message = R.Loc.unableToConfigureRecordingSessionMessage
-                let alert = UIAlertController.createErrorAlert(title: title, message: message)
-                present(alert, animated: true)
-            } catch {
-                print(error.localizedDescription)
-            }
-
-            // Only start recording if permissions are granted
-            guard grantedPermissionsToUseMicrophone else {
-                present(settingsAlert, animated: true)
-                return
-            }
-
-            audioRecorderDefaultService?.record()
-            recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
-            return
-        }
-
-        // The handling here is a bit off, but this handles the case where permissions have not been
-        // granted, but the audio recorder sevice was created, which, without this, would create a recording,
-        // even though no audio was recorded.
-        guard grantedPermissionsToUseMicrophone else {
-            present(settingsAlert, animated: true)
-            return
-        }
-
-        recorder.stop()
-
-        if let recording = recording {
-            RealmRepository().save(object: recording)
-        }
-
-        recording = nil
-        audioRecorderDefaultService = nil
-        recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
-
-        updateUI()
     }
 }
 
 extension LibraryViewController {
+    /// Start a recording session.
+    /// Overwrite the currently initialized recording.
+    func startRecordingSession() {
+        let recording = Recording()
+        recording.title = R.Loc.recording
+        recording.section = currentSection
+        recording.project = currentSection?.project
+        recording.fileExtension = "caf"
+        
+        self.recording = recording
+        
+        do {
+            audioRecorderDefaultService = try AudioRecorderServiceFactory.defaultService(withURL: recording.url)
+        } catch AudioRecorderServiceError.unableToConfigureRecordingSession {
+            let title = R.Loc.unableToConfigureRecordingSessionTitle
+            let message = R.Loc.unableToConfigureRecordingSessionMessage
+            let alert = UIAlertController.createErrorAlert(title: title, message: message)
+            present(alert, animated: true)
+            return
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+        
+        audioRecorderDefaultService?.record()
+        
+        recordAudioButton.setTitle(R.Loc.stopRecording, for: .normal)
+        updateUI()
+    }
+    
+    /// Stop the recording session.
+    /// Only save the recording if it was successfully created.
+    func stopRecordingSession() {
+        audioRecorderDefaultService?.stop()
+        
+        if let recording = recording {
+            RealmRepository().save(object: recording)
+            RealmRepository().performOperation { _ in
+                currentSection?.recordings.append(recording)
+            }
+        }
+        
+        recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
+        updateUI()
+    }
+    
     func askForRecordingPermissions() {
         AudioRecorderPermissions.askForMicrophonePermissions { [weak self] granted in
             self?.grantedPermissionsToUseMicrophone = granted
