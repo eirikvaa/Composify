@@ -1,5 +1,5 @@
 //
-//  RealmDatabaseService.swift
+//  RealmRepository.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 16.06.2018.
