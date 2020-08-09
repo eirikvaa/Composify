@@ -90,14 +90,14 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason _: UITextField.DidEndEditingReason) {
         guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
         guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
-        guard let project = project else { return }
+        guard var project = project else { return }
 
         switch indexPath.section {
         case 0:
-            RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
+            RealmRepository().update(object: &project, value: newTitle, keyPath: \.title)
         case 1:
-            if let section = project.getSection(at: indexPath.row) {
-                RealmRepository<Section>().update(id: section.id, value: newTitle, keyPath: \.title)
+            if var section = project.getSection(at: indexPath.row) {
+                RealmRepository().update(object: &section, value: newTitle, keyPath: \.title)
             }
         default:
             return

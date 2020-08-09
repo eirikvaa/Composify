@@ -22,7 +22,7 @@ protocol Repository {
     func get(id: String) -> T?
 
     @discardableResult
-    func update<V>(id: String, value: V, keyPath: WritableKeyPath<T, V>) -> Bool
+    func update<V>(object: inout T, value: V, keyPath: WritableKeyPath<T, V>) -> Bool
 
     @discardableResult
     func delete(object: T) -> Bool

@@ -10,7 +10,7 @@ import UIKit
 
 extension SectionViewController: UITableViewDelegate {
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let recording = section.recordings[indexPath.row]
+        var recording = section.recordings[indexPath.row]
 
         let edit = UIContextualAction(
             style: .normal,
@@ -26,7 +26,7 @@ extension SectionViewController: UITableViewDelegate {
             let save = UIAlertAction(title: R.Loc.save, style: .default, handler: { _ in
                 let textFieldText = edit.textFields?.first?.text
                 if let title = textFieldText {
-                    RealmRepository<Recording>().update(id: recording.id, value: title, keyPath: \.title)
+                    RealmRepository().update(object: &recording, value: title, keyPath: \.title)
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
                     self.libraryViewController?.setEditing(false, animated: true)
                 }

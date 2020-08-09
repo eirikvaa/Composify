@@ -135,7 +135,7 @@ final class RealmTests: XCTestCase {
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
-        let project = Project()
+        var project = Project()
         project.title = oldTitle
 
         RealmRepository().save(object: project)
@@ -143,7 +143,7 @@ final class RealmTests: XCTestCase {
         XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
 
-        RealmRepository<Project>().update(id: project.id, value: newTitle, keyPath: \.title)
+        RealmRepository().update(object: &project, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Project.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Project.self).contains(where: { $0.title == newTitle }))
@@ -154,7 +154,7 @@ final class RealmTests: XCTestCase {
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
-        let section = Section()
+        var section = Section()
         section.title = oldTitle
 
         RealmRepository().save(object: section)
@@ -162,7 +162,7 @@ final class RealmTests: XCTestCase {
         XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
 
-        RealmRepository<Section>().update(id: section.id, value: newTitle, keyPath: \.title)
+        RealmRepository().update(object: &section, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Section.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Section.self).contains(where: { $0.title == newTitle }))
@@ -173,7 +173,7 @@ final class RealmTests: XCTestCase {
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
-        let recording = Recording()
+        var recording = Recording()
         recording.title = oldTitle
 
         RealmRepository().save(object: recording)
@@ -181,7 +181,7 @@ final class RealmTests: XCTestCase {
         XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
         XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))
 
-        RealmRepository<Recording>().update(id: recording.id, value: newTitle, keyPath: \.title)
+        RealmRepository().update(object: &recording, value: newTitle, keyPath: \.title)
 
         XCTAssertFalse(realm.objects(Recording.self).contains(where: { $0.title == oldTitle }))
         XCTAssertTrue(realm.objects(Recording.self).contains(where: { $0.title == newTitle }))

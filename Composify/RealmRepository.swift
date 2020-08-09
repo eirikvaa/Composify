@@ -43,13 +43,9 @@ struct RealmRepository<O: Object>: Repository {
     }
 
     @discardableResult
-    func update<V>(id: String, value: V, keyPath: WritableKeyPath<T, V>) -> Bool {
+    func update<V>(object: inout T, value: V, keyPath: WritableKeyPath<T, V>) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
-        }
-
-        guard var object = realm.object(ofType: T.self, forPrimaryKey: id) else {
-            return false
         }
 
         try! realm.write {
