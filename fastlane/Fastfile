@@ -9,14 +9,8 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-    test
-
-    gym(
-	    scheme: "Composify",
-	    export_method: "app-store"
-    )
-    
-    testflight(skip_waiting_for_build_processing: true)
+	build_app
+	upload_to_testflight
   end
 end
 
