@@ -22,8 +22,7 @@ class EditExistingProjectViewControllerTests: XCTestCase {
     }
 
     func testEditExistingProjectAndPopulateBackingDataCheckTitle() {
-        let project = Project()
-        project.title = "Test"
+        let project = Project(title: "Test")
         RealmRepository().save(object: project)
 
         let vc = EditExistingProjectViewController(project: project)

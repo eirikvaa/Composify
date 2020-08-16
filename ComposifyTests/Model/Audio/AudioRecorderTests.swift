@@ -30,20 +30,13 @@ private extension AudioRecorderTests {
     /// Create project
     /// - parameter title: Title for object
     func createProject(withTitle title: String) -> Project {
-        let project = Project()
-        project.title = title
-
-        return project
+        Project(title: title)
     }
 
     /// Create section
     /// - parameter title: Title for object
     func createSection(withTitle title: String, in project: Project) -> Section {
-        let section = Section()
-        section.title = title
-        section.project = project
-
-        return section
+        Section(title: title, project: project)
     }
 
     /// Create a recording
@@ -52,12 +45,7 @@ private extension AudioRecorderTests {
     func createRecording(withTitle title: String) -> Recording {
         let project = createProject(withTitle: "Project")
         let section = createSection(withTitle: "Section", in: project)
-
-        let recording = Recording()
-        recording.title = title
-        recording.section = section
-        recording.project = project
-        recording.fileExtension = "caf"
+        let recording = Recording(title: title, section: section)
 
         return recording
     }

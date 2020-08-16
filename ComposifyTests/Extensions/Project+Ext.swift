@@ -11,13 +11,11 @@ import Foundation
 
 extension Project {
     static func createProject(populateWithSectionCount count: Int = 0) -> Project? {
-        let project = Project()
+        let project = Project(title: "Stuff")
         RealmRepository().save(object: project)
 
         for i in 0 ..< count {
-            let section = Section()
-            section.title = "S\(i)"
-            section.index = i
+            let section = Section(title: "S\(i)", project: project)
 
             RealmRepository().save(section: section, to: project)
         }

@@ -16,7 +16,7 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
 
         tableView.dataSource = tableViewDataSource
 
-        let project = Project()
+        let project = Project(title: String(describing: Date()))
         self.project = project
         RealmRepository().save(object: project)
 

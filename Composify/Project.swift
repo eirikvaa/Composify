@@ -14,7 +14,15 @@ final class Project: Object, ComposifyObject {
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
     let sections = List<Section>()
-
+    
+    init(title: String) {
+        self.title = title
+    }
+    
+    required init() {
+        super.init()
+    }
+    
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
     }

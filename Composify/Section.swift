@@ -16,7 +16,17 @@ final class Section: Object, ComposifyObject {
     @objc dynamic var title = ""
     @objc dynamic var project: Project?
     let recordings = List<Recording>()
-
+    
+    init(title: String, project: Project?) {
+        self.title = title
+        self.index = project?.nextSectionIndex ?? 0
+        self.project = project
+    }
+    
+    required init() {
+        super.init()
+    }
+    
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
     }

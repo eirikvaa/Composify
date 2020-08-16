@@ -32,8 +32,9 @@ final class LibraryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        currentProject = UserDefaults.standard.lastProject() ?? RealmRepository().getAll().first
-        currentSection = UserDefaults.standard.lastSection() ?? currentProject?.sections.first
+        let userDefaults = UserDefaults.standard
+        currentProject = userDefaults.lastProject() ?? RealmRepository().getAll().first
+        currentSection = userDefaults.lastSection() ?? currentProject?.sections.first
 
         showOnboardingIfNeeded()
 
@@ -111,12 +112,11 @@ extension LibraryViewController {
     /// Start a recording session.
     /// Overwrite the currently initialized recording.
     func startRecordingSession() {
-        let recording = Recording()
-        recording.title = R.Loc.recording
-        recording.section = currentSection
-        recording.project = currentSection?.project
-        recording.fileExtension = "caf"
-
+        guard let currentSection = currentSection else {
+            return
+        }
+        
+        let recording = Recording(title: R.Loc.recording, section: currentSection)
         self.recording = recording
 
         do {

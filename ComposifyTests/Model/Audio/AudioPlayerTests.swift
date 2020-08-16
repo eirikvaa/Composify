@@ -26,26 +26,15 @@ final class AudioPlayerTests: XCTestCase {
 
 private extension AudioPlayerTests {
     func createProject(titled title: String) -> Project {
-        let project = Project()
-        project.title = title
-        return project
+        Project(title: title)
     }
 
     func createSection(titled title: String, project: Project) -> Section {
-        let section = Section()
-        section.title = title
-        section.project = project
-        return section
+        Section(title: title, project: project)
     }
 
     func createRecording(titled title: String, section: Section) -> Recording {
-        let recording = Recording()
-        recording.title = title
-        recording.section = section
-        recording.project = section.project
-        recording.fileExtension = "caf"
-        recording.dateCreated = Date()
-        return recording
+        Recording(title: title, section: section)
     }
 
     func createObjects() -> (Project, Section, Recording) {

@@ -123,14 +123,12 @@ extension AdministrateProjectViewController {
     /// Insert a new section into the project
     /// - parameter completionHandler: What should be done after inserting the section, returns the inserted section
     func insertNewSection(_ completionHandler: (_ section: Section) -> Void) {
-        let section = Section()
-        section.title = R.Loc.section
-        section.project = project
-        section.index = project?.nextSectionIndex ?? 1
-
-        if let project = project {
-            RealmRepository().save(section: section, to: project)
+        guard let project = project else {
+            return
         }
+        
+        let section = Section(title: R.Loc.section, project: project)
+        RealmRepository().save(section: section, to: project)
 
         administrateProjectDelegate?.userDidAddSectionToProject(section)
 

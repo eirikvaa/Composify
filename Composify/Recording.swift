@@ -15,8 +15,18 @@ final class Recording: Object, ComposifyObject {
     @objc dynamic var project: Project?
     @objc dynamic var section: Section?
     @objc dynamic var dateCreated = Date()
-    @objc dynamic var fileExtension = ""
-
+    @objc dynamic var fileExtension = "caf"
+    
+    init(title: String, section: Section?) {
+        self.title = title
+        self.section = section
+        self.project = section?.project
+    }
+    
+    required init() {
+        super.init()
+    }
+    
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
     }
@@ -24,12 +34,7 @@ final class Recording: Object, ComposifyObject {
 
 extension Recording {
     static func createRecording(title: String, section: Section, fileExtension: String = "caf") -> Recording {
-        let recording = Recording()
-        recording.title = title
-        recording.section = section
-        recording.project = section.project
-        recording.fileExtension = fileExtension
-
+        let recording = Recording(title: title, section: section)
         RealmRepository().save(recording: recording, to: section)
 
         return recording

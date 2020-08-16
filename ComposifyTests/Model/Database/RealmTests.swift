@@ -20,7 +20,7 @@ final class RealmTests: XCTestCase {
 
     func testCreateProject() {
         let realm = try! Realm()
-        let project = Project()
+        let project = Project(title: "Stuff")
 
         XCTAssertEqual(realm.objects(Project.self).count, 0)
 
@@ -31,7 +31,7 @@ final class RealmTests: XCTestCase {
 
     func testDeleteProject() {
         let realm = try! Realm()
-        let project = Project()
+        let project = Project(title: "Stuff")
         RealmRepository().save(object: project)
 
         XCTAssertEqual(realm.objects(Project.self).count, 1)
@@ -43,9 +43,9 @@ final class RealmTests: XCTestCase {
 
     func testDeleteProjectWhichAlsoDeletesSections() {
         let realm = try! Realm()
-        let project = Project()
-        let section = Section()
-        let section2 = Section()
+        let project = Project(title: "Stuff")
+        let section = Section(title: "Stuff", project: project)
+        let section2 = Section(title: "Stuff 2", project: project)
 
         try! realm.write {
             project.sections.append(objectsIn: [section, section2])
@@ -63,9 +63,9 @@ final class RealmTests: XCTestCase {
 
     func testDeleteProjectWhichAlsoDeletesSectionsAndRecordings() {
         let realm = try! Realm()
-        let project = Project()
-        let section = Section()
-        let recording = Recording()
+        let project = Project(title: "Stuff")
+        let section = Section(title: "Stuff", project: project)
+        let recording = Recording(title: "Stuff", section: section)
 
         try! realm.write {
             project.sections.append(objectsIn: [section])
@@ -86,9 +86,9 @@ final class RealmTests: XCTestCase {
 
     func testDeleteSectionWhichAlsoDeletesRecordings() {
         let realm = try! Realm()
-        let project = Project()
-        let section = Section()
-        let recording = Recording()
+        let project = Project(title: "Stuff")
+        let section = Section(title: "Stuff", project: project)
+        let recording = Recording(title: "Stuff", section: section)
 
         try! realm.write {
             project.sections.append(objectsIn: [section])
@@ -109,9 +109,9 @@ final class RealmTests: XCTestCase {
 
     func testDeleteRecording() {
         let realm = try! Realm()
-        let project = Project()
-        let section = Section()
-        let recording = Recording()
+        let project = Project(title: "Stuff")
+        let section = Section(title: "Stuff", project: project)
+        let recording = Recording(title: "Stuff", section: section)
 
         try! realm.write {
             project.sections.append(objectsIn: [section])
@@ -135,7 +135,7 @@ final class RealmTests: XCTestCase {
         let oldTitle = "Tittel"
         let newTitle = "New Title"
 
-        var project = Project()
+        var project = Project(title: oldTitle)
         project.title = oldTitle
 
         RealmRepository().save(object: project)
@@ -153,9 +153,9 @@ final class RealmTests: XCTestCase {
         let realm = try! Realm()
         let oldTitle = "Tittel"
         let newTitle = "New Title"
+        let project = Project(title: "Project")
 
-        var section = Section()
-        section.title = oldTitle
+        var section = Section(title: oldTitle, project: project)
 
         RealmRepository().save(object: section)
 
@@ -172,8 +172,10 @@ final class RealmTests: XCTestCase {
         let realm = try! Realm()
         let oldTitle = "Tittel"
         let newTitle = "New Title"
+        let project = Project(title: "Project")
+        let section = Section(title: "Section", project: project)
 
-        var recording = Recording()
+        var recording = Recording(title: oldTitle, section: section)
         recording.title = oldTitle
 
         RealmRepository().save(object: recording)
