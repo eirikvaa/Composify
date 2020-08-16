@@ -280,6 +280,8 @@ extension LibraryViewController {
     func configurePageControl() {
         pageControl.numberOfPages = currentProject?.sections.count ?? 0
         pageControl.currentPage = currentSection?.index ?? 0
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = R.Colors.cardinalRed
     }
 
     /// Configure the paging view controller
