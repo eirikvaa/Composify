@@ -9,11 +9,7 @@
 import AVFoundation
 import Foundation
 
-/**
- A class for abstracting away the details regarding simple recording of audio.
- - Author: Eirik Vale Aase
- */
-
+/// A class for recording music.
 struct AVAudioRecorderService: AudioRecorderService {
     // MARK: Properties
 

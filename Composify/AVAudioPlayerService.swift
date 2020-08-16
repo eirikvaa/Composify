@@ -9,11 +9,7 @@
 import AVFoundation
 import Foundation
 
-/**
- A class for playing audio from Recording objects.
- - Author: Eirik Vale Aase
- */
-
+/// A class for playing music.
 final class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDelegate {
     var audioDidFinishBlock: ((Bool) -> Void)?
 
