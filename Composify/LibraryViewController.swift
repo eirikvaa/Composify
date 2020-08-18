@@ -146,6 +146,9 @@ extension LibraryViewController {
         if let recording = recording, let currentSection = currentSection {
             RealmRepository().save(recording: recording, to: currentSection)
         }
+        
+        // Remember to reset the recording
+        recording = nil
 
         recordAudioButton.setTitle(R.Loc.startRecording, for: .normal)
         updateUI()
