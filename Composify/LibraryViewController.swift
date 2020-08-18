@@ -72,7 +72,7 @@ extension LibraryViewController {
 
         // Can alway add a project
         let addProject = UIAlertAction(title: R.Loc.addProject, style: .default) { _ in
-            self.showCreateNewProjectFlow()
+            self.presentAdministrateViewController(viewController: CreateNewProjectViewController())
         }
 
         // Showing other projects
@@ -160,10 +160,6 @@ extension LibraryViewController {
         }
     }
 
-    func showCreateNewProjectFlow() {
-        presentAdministrateViewController(viewController: CreateNewProjectViewController())
-    }
-
     /// Persist the project to userdefaults so it can be picked the next time
     /// the user launches the app.
     /// - parameter project: The project to be persisted
@@ -241,7 +237,7 @@ extension LibraryViewController {
                 message: R.Loc.noProjects,
                 actionMessage: R.Loc.addProject,
                 action: {
-                    self.showCreateNewProjectFlow()
+                    self.presentAdministrateViewController(viewController: CreateNewProjectViewController())
                 }
             )
             if let errorViewController = errorViewController {
