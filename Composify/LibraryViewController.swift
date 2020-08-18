@@ -116,7 +116,8 @@ extension LibraryViewController {
             return
         }
         
-        let recording = Recording(title: R.Loc.recording, section: currentSection)
+        let humanReadableNowDate = Date().shortHumanReadableDate()
+        let recording = Recording(title: humanReadableNowDate, section: currentSection)
         self.recording = recording
 
         do {

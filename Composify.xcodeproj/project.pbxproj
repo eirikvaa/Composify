@@ -32,6 +32,7 @@
 		E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0175212427E000F98E65 /* UIView+Ext.swift */; };
 		E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0177212427F000F98E65 /* Collection+Ext.swift */; };
 		E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */; };
+		E547801424EC438E00D5E219 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547801324EC438E00D5E219 /* Date+Ext.swift */; };
 		E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */; };
 		E5635C4224D9F1270013953B /* Parchment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5635C3A24D9F01C0013953B /* Parchment.framework */; };
 		E5635C4B24D9F2AC0013953B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5635C3E24D9F01E0013953B /* Realm.framework */; };
@@ -144,6 +145,7 @@
 		E53C0175212427E000F98E65 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		E53C0177212427F000F98E65 /* Collection+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Ext.swift"; sourceTree = "<group>"; };
 		E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Ext.swift"; sourceTree = "<group>"; };
+		E547801324EC438E00D5E219 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		E5635C3A24D9F01C0013953B /* Parchment.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parchment.framework; path = Carthage/Build/iOS/Parchment.framework; sourceTree = "<group>"; };
 		E5635C3E24D9F01E0013953B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		E5635C4724D9F2540013953B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */,
 				E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */,
 				E5F0A4A621E163F90072EEA5 /* UIAlertAction+Ext.swift */,
+				E547801324EC438E00D5E219 /* Date+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
 				E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */,
 				E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */,
+				E547801424EC438E00D5E219 /* Date+Ext.swift in Sources */,
 				E523959921C6821C00D3004F /* R+Colors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
