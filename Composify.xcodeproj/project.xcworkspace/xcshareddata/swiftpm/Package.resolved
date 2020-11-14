@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Parchment",
+        "repositoryURL": "git@github.com:rechsteiner/Parchment.git",
+        "state": {
+          "branch": null,
+          "revision": "a44d39e4752c7947879ffd92ec871e3a30926df2",
+          "version": "3.0.0-beta2"
+        }
+      },
+      {
+        "package": "Realm",
+        "repositoryURL": "https://github.com/realm/realm-cocoa.git",
+        "state": {
+          "branch": null,
+          "revision": "efaf9c31dd042274a8b38f021ab19c33047a8a6a",
+          "version": "10.1.2"
+        }
+      },
+      {
+        "package": "RealmCore",
+        "repositoryURL": "https://github.com/realm/realm-core",
+        "state": {
+          "branch": null,
+          "revision": "63b42fc6835efdd27b706a6a6b629edc36018d43",
+          "version": "10.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

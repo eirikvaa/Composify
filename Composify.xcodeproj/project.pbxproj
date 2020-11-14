@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -72,6 +72,9 @@
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
 		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
+		E5CD44F3255F55C600608EAF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F2255F55C600608EAF /* Realm */; };
+		E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F4255F55C600608EAF /* RealmSwift */; };
+		E5CD44FA255F560600608EAF /* Parchment in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F9255F560600608EAF /* Parchment */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
@@ -217,10 +220,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */,
 				E5635C4B24D9F2AC0013953B /* Realm.framework in Frameworks */,
+				E5CD44FA255F560600608EAF /* Parchment in Frameworks */,
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
 				E5635C4D24D9F2AC0013953B /* RealmSwift.framework in Frameworks */,
 				E5635C4224D9F1270013953B /* Parchment.framework in Frameworks */,
+				E5CD44F3255F55C600608EAF /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +610,11 @@
 			dependencies = (
 			);
 			name = Composify;
+			packageProductDependencies = (
+				E5CD44F2255F55C600608EAF /* Realm */,
+				E5CD44F4255F55C600608EAF /* RealmSwift */,
+				E5CD44F9255F560600608EAF /* Parchment */,
+			);
 			productName = Piece;
 			productReference = E56460011D3B50B500AA6557 /* Composify.app */;
 			productType = "com.apple.product-type.application";
@@ -659,6 +670,10 @@
 				nb,
 			);
 			mainGroup = E5645FF81D3B50B500AA6557;
+			packageReferences = (
+				E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */,
+			);
 			productRefGroup = E56460021D3B50B500AA6557 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1170,6 +1185,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.2;
+			};
+		};
+		E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:rechsteiner/Parchment.git";
+			requirement = {
+				kind = exactVersion;
+				version = "3.0.0-beta2";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E5CD44F2255F55C600608EAF /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		E5CD44F4255F55C600608EAF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		E5CD44F9255F560600608EAF /* Parchment */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */;
+			productName = Parchment;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E5645FF91D3B50B500AA6557 /* Project object */;
 }
