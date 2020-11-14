@@ -14,11 +14,7 @@
 		E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F4239C746C00C795B8 /* AdministrateProjectTableView.swift */; };
 		E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309F8239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift */; };
 		E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FB239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift */; };
-		E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FD239D230800C795B8 /* RecordAudioButton.swift */; };
 		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
-		E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
-		E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
-		E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift */; };
 		E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E8BC51E30905D0022CF71 /* RecordingTableViewCell.swift */; };
 		E523959321C681D400D3004F /* R+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959221C681D400D3004F /* R+Images.swift */; };
 		E523959521C681F800D3004F /* R+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523959421C681F800D3004F /* R+Cells.swift */; };
@@ -38,7 +34,6 @@
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E56E3FE820D53D6300411F5F /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3FE720D53D6300411F5F /* RealmRepository.swift */; };
 		E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E571F54320983945008F29A6 /* AdministrateProjectViewController.swift */; };
-		E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* SectionViewController.swift */; };
 		E582893A21C6A29000E438B5 /* AdministrateProjectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893921C6A29000E438B5 /* AdministrateProjectDelegate.swift */; };
 		E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893B21C6A2D200E438B5 /* AudioRecorderServiceError.swift */; };
 		E582893E21C6A2EE00E438B5 /* AudioPlayerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582893D21C6A2EE00E438B5 /* AudioPlayerServiceError.swift */; };
@@ -56,31 +51,39 @@
 		E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58BBBBD2099930B00BCC6DC /* TextFieldTableViewCell.swift */; };
 		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
 		E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */; };
-		E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */; };
 		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
+		E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */; };
+		E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB83255FE84F00BC7D32 /* MainView.swift */; };
+		E5A6BB9C255FEFA000BC7D32 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */; };
+		E5A6BBAD255FF15B00BC7D32 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517008E1E29479400B7DAA8 /* LibraryViewController.swift */; };
+		E5A6BBAE255FF15B00BC7D32 /* RecordAudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51309FD239D230800C795B8 /* RecordAudioButton.swift */; };
+		E5A6BBAF255FF15B00BC7D32 /* LibraryPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D3C56239EF9450090A7D6 /* LibraryPageControl.swift */; };
+		E5A6BBB0255FF15B00BC7D32 /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
+		E5A6BBB1255FF15B00BC7D32 /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */; };
+		E5A6BBB4255FF15E00BC7D32 /* SectionViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */; };
+		E5A6BBB5255FF15E00BC7D32 /* SectionViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700951E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift */; };
+		E5A6BBB6255FF15E00BC7D32 /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
+		E5A6BBB7255FF15E00BC7D32 /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D16571E31DF2200BD0802 /* SectionViewController.swift */; };
+		E5A6BBBA255FF16500BC7D32 /* LibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51700901E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */; };
 		E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */; };
 		E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EAE21CEC96300CF6381 /* ComposifyObject.swift */; };
 		E5BB2EB121CEDA9B00CF6381 /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2EB021CEDA9A00CF6381 /* FileManager+Ext.swift */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
-		E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E621B9C5D100DB30AA /* SectionPageItem.swift */; };
-		E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C500E821B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift */; };
 		E5CD44F3255F55C600608EAF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F2255F55C600608EAF /* Realm */; };
 		E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F4255F55C600608EAF /* RealmSwift */; };
 		E5CD44FA255F560600608EAF /* Parchment in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F9255F560600608EAF /* Parchment */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
-		E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7F7E821BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift */; };
 		E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DB68B920989ACB00ED00CB /* ButtonTableViewCell.swift */; };
 		E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E231592122198D00B55583 /* AdministrateProjectTableViewDataSource.swift */; };
 		E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E2315B21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift */; };
 		E5E6DC8121C445650061254B /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6DC8021C445650061254B /* R.swift */; };
-		E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5A591ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift */; };
 		E5ED6DAC1F8AB48A002788F7 /* R+Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */; };
 		E5F0A4A521E1615B0072EEA5 /* Bool+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0A4A421E1615B0072EEA5 /* Bool+Ext.swift */; };
 		E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F0A4A621E163F90072EEA5 /* UIAlertAction+Ext.swift */; };
@@ -182,6 +185,8 @@
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
+		E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyApp.swift; sourceTree = "<group>"; };
+		E5A6BB83255FE84F00BC7D32 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5B9FA5921CF98AC00F9915A /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+URLs.swift"; sourceTree = "<group>"; };
@@ -219,8 +224,9 @@
 			files = (
 				E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */,
 				E5CD44FA255F560600608EAF /* Parchment in Frameworks */,
-				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
+				E5A6BB9C255FEFA000BC7D32 /* SwiftUIPager in Frameworks */,
 				E5CD44F3255F55C600608EAF /* Realm in Frameworks */,
+				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +389,8 @@
 		E56460361D3B54B000AA6557 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */,
+				E5A6BB83255FE84F00BC7D32 /* MainView.swift */,
 				E56460041D3B50B500AA6557 /* AppDelegate.swift */,
 				E582899B21C6F59D00E438B5 /* Info.plist */,
 				E58289A121C6F5F800E438B5 /* InfoPlist.strings */,
@@ -590,7 +598,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E56460291D3B50B500AA6557 /* Build configuration list for PBXNativeTarget "Composify" */;
 			buildPhases = (
-				E5635C4124D9F0390013953B /* Carthage */,
 				E51B851720F4076700FB3D48 /* SwiftLint */,
 				E523959D21C6919000D3004F /* SwiftFormat */,
 				E5645FFD1D3B50B500AA6557 /* Sources */,
@@ -608,6 +615,7 @@
 				E5CD44F2255F55C600608EAF /* Realm */,
 				E5CD44F4255F55C600608EAF /* RealmSwift */,
 				E5CD44F9255F560600608EAF /* Parchment */,
+				E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */,
 			);
 			productName = Piece;
 			productReference = E56460011D3B50B500AA6557 /* Composify.app */;
@@ -638,7 +646,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Eirik Vale Aase";
 				TargetAttributes = {
 					E56460001D3B50B500AA6557 = {
@@ -667,6 +675,7 @@
 			packageReferences = (
 				E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */,
+				E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = E56460021D3B50B500AA6557 /* Products */;
 			projectDirPath = "";
@@ -734,26 +743,6 @@
 			shellPath = /bin/sh;
 			shellScript = "#\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${PROJECT_DIR}\" --config \"${PROJECT_DIR}/.swiftformat\"\n";
 		};
-		E5635C4124D9F0390013953B /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"$(SRCROOT)/input.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = Carthage;
-			outputFileListPaths = (
-				"$(SRCROOT)/output.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#/usr/local/bin/carthage copy-frameworks\n";
-		};
 		E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -777,57 +766,59 @@
 			files = (
 				E582894B21C6BF1500E438B5 /* OboardingViewController.swift in Sources */,
 				E53C0172212427BF00F98E65 /* UIViewController+Ext.swift in Sources */,
-				E5C500E721B9C5D100DB30AA /* SectionPageItem.swift in Sources */,
+				E5A6BBB0255FF15B00BC7D32 /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */,
 				E523959721C6820700D3004F /* R+UserDefaults.swift in Sources */,
+				E5A6BBB4255FF15E00BC7D32 /* SectionViewController+UITableViewDelegate.swift in Sources */,
 				E51309F1239C63BC00C795B8 /* EditExistingProjectViewController.swift in Sources */,
 				E523959C21C68CC400D3004F /* R+DatabaseKeys.swift in Sources */,
-				E5C500E921B9C60400DB30AA /* LibraryViewController+PagingViewControllerDataSource.swift in Sources */,
 				E582894D21C6C59800E438B5 /* OnboardingRootViewController.swift in Sources */,
 				E53C0174212427D000F98E65 /* String+Ext.swift in Sources */,
-				E517008F1E29479400B7DAA8 /* LibraryViewController.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
 				E582893A21C6A29000E438B5 /* AdministrateProjectDelegate.swift in Sources */,
 				E5ED6DAC1F8AB48A002788F7 /* R+Loc.swift in Sources */,
 				E53C01702124279D00F98E65 /* UserDefaults+Ext.swift in Sources */,
 				E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */,
 				E5BB2EB121CEDA9B00CF6381 /* FileManager+Ext.swift in Sources */,
-				E5D7F7E921BDD181004413CF /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */,
 				E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */,
-				E51700911E2947CA00B7DAA8 /* LibraryCollectionViewCell.swift in Sources */,
 				E5F0A4A521E1615B0072EEA5 /* Bool+Ext.swift in Sources */,
+				E5A6BBBA255FF16500BC7D32 /* LibraryCollectionViewCell.swift in Sources */,
 				E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */,
 				E582895321C6D14800E438B5 /* UIStoryboard+Ext.swift in Sources */,
-				E51700961E294F0E00B7DAA8 /* SectionViewController+UITableViewDataSource.swift in Sources */,
 				E5BB2EAD21CEC49100CF6381 /* R+URLs.swift in Sources */,
 				E5F7CDF424DE04CA009D7819 /* AudioRecorderPermissions.swift in Sources */,
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
+				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
 				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
-				E58D3C57239EF9450090A7D6 /* LibraryPageControl.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
 				E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */,
 				E523959521C681F800D3004F /* R+Cells.swift in Sources */,
 				E56E3FE820D53D6300411F5F /* RealmRepository.swift in Sources */,
-				E5EC5A5A1ED1F3AD00D721CF /* SectionViewController+UITableViewDelegate.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,
+				E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */,
+				E5A6BBAD255FF15B00BC7D32 /* LibraryViewController.swift in Sources */,
+				E5A6BBAE255FF15B00BC7D32 /* RecordAudioButton.swift in Sources */,
 				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,
+				E5A6BBAF255FF15B00BC7D32 /* LibraryPageControl.swift in Sources */,
 				E582893E21C6A2EE00E438B5 /* AudioPlayerServiceError.swift in Sources */,
 				E582895121C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift in Sources */,
 				E58BBBBE2099930B00BCC6DC /* TextFieldTableViewCell.swift in Sources */,
+				E5A6BBB7255FF15E00BC7D32 /* SectionViewController.swift in Sources */,
+				E5A6BBB5255FF15E00BC7D32 /* SectionViewController+UITableViewDataSource.swift in Sources */,
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
+				E5A6BBB6255FF15E00BC7D32 /* SectionPageItem.swift in Sources */,
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
 				E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
-				E51309FE239D230800C795B8 /* RecordAudioButton.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
@@ -836,11 +827,11 @@
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,
-				E57D16581E31DF2200BD0802 /* SectionViewController.swift in Sources */,
 				E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */,
 				E58A4CCB21D2FED4007F9DBB /* RoundedButton.swift in Sources */,
 				E5FC41B0239FA93B000377BC /* AdministrateProjectTextField.swift in Sources */,
 				E523959921C6821C00D3004F /* R+Colors.swift in Sources */,
+				E5A6BBB1255FF15B00BC7D32 /* LibraryViewController+PagingViewControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +925,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -960,7 +952,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Composify;
@@ -997,6 +989,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1018,7 +1011,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
@@ -1033,6 +1026,10 @@
 		E564602A1D3B50B500AA6557 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1040,13 +1037,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
+				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "i386 arm64";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1066,6 +1065,10 @@
 		E564602B1D3B50B500AA6557 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1073,13 +1076,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Composify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1106,7 +1110,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1132,7 +1136,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1181,6 +1185,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.13.0;
+			};
+		};
 		E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
@@ -1200,6 +1212,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
+		};
 		E5CD44F2255F55C600608EAF /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
