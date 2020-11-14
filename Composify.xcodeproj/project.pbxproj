@@ -33,9 +33,6 @@
 		E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0177212427F000F98E65 /* Collection+Ext.swift */; };
 		E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */; };
 		E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */; };
-		E5635C4224D9F1270013953B /* Parchment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5635C3A24D9F01C0013953B /* Parchment.framework */; };
-		E5635C4B24D9F2AC0013953B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5635C3E24D9F01E0013953B /* Realm.framework */; };
-		E5635C4D24D9F2AC0013953B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5635C4724D9F2540013953B /* RealmSwift.framework */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E564600F1D3B50B500AA6557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E564600D1D3B50B500AA6557 /* LaunchScreen.storyboard */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
@@ -221,11 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */,
-				E5635C4B24D9F2AC0013953B /* Realm.framework in Frameworks */,
 				E5CD44FA255F560600608EAF /* Parchment in Frameworks */,
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
-				E5635C4D24D9F2AC0013953B /* RealmSwift.framework in Frameworks */,
-				E5635C4224D9F1270013953B /* Parchment.framework in Frameworks */,
 				E5CD44F3255F55C600608EAF /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,7 +752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "#/usr/local/bin/carthage copy-frameworks\n";
 		};
 		E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;

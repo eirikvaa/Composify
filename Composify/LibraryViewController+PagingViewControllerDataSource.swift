@@ -11,22 +11,22 @@ import Parchment
 import UIKit
 
 extension LibraryViewController: PagingViewControllerDataSource {
-    func pagingViewController<T>(_: PagingViewController<T>, pagingItemForIndex index: Int) -> T where T: PagingItem, T: Comparable, T: Hashable {
+    func pagingViewController(_: PagingViewController, pagingItemAt index: Int) -> PagingItem {
         guard let currentProject = currentProject else {
             // swiftlint:disable:next force_cast
-            return SectionPageItem(section: nil) as! T
+            return SectionPageItem(section: nil)
         }
 
         guard let section = currentProject.getSection(at: index) else {
             // swiftlint:disable:next force_cast
-            return SectionPageItem(section: nil) as! T
+            return SectionPageItem(section: nil)
         }
 
         // swiftlint:disable:next force_cast
-        return SectionPageItem(section: section) as! T
+        return SectionPageItem(section: section)
     }
-
-    func pagingViewController<T>(_: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController where T: PagingItem, T: Comparable, T: Hashable {
+    
+    func pagingViewController(_: PagingViewController, viewControllerAt index: Int) -> UIViewController {
         guard let currentProject = currentProject,
             let section = currentProject.getSection(at: index) else {
             return UIViewController()
@@ -37,8 +37,8 @@ extension LibraryViewController: PagingViewControllerDataSource {
 
         return sectionViewController
     }
-
-    func numberOfViewControllers<T>(in _: PagingViewController<T>) -> Int where T: PagingItem, T: Comparable, T: Hashable {
+    
+    func numberOfViewControllers(in pagingViewController: PagingViewController) -> Int {
         currentProject?.sections.count ?? 0
     }
 }

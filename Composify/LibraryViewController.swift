@@ -24,7 +24,7 @@ final class LibraryViewController: UIViewController {
 
     private var errorViewController: ErrorViewController?
     private var state: LibraryViewController.State = .noSections
-    private let pagingViewController = PagingViewController<SectionPageItem>()
+    private let pagingViewController = PagingViewController()
     private var audioRecorderDefaultService: AudioRecorderService?
     private var recording: Recording?
     private var grantedPermissionsToUseMicrophone = false
@@ -284,7 +284,7 @@ extension LibraryViewController {
 
     /// Configure the paging view controller
     func configurePagingViewController() {
-        pagingViewController.menuItemSource = .class(type: LibraryCollectionViewCell.self)
+        pagingViewController.register(LibraryCollectionViewCell.self, for: SectionPageItem.self)
         pagingViewController.indicatorColor = R.Colors.cardinalRed
         pagingViewController.menuHorizontalAlignment = .center
         pagingViewController.dataSource = self

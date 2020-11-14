@@ -10,7 +10,7 @@ import Parchment
 import UIKit
 
 extension LibraryViewController: PagingViewControllerDelegate {
-    func pagingViewController<T>(_: PagingViewController<T>, didScrollToItem pagingItem: T, startingViewController _: UIViewController?, destinationViewController _: UIViewController, transitionSuccessful _: Bool) where T: PagingItem, T: Comparable, T: Hashable {
+    func pagingViewController(_ pagingViewController: PagingViewController, didScrollToItem pagingItem: PagingItem, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) {
         guard let sectionPageItem = pagingItem as? SectionPageItem else { return }
         currentSection = sectionPageItem.section
 
