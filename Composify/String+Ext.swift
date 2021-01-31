@@ -11,7 +11,7 @@ import Foundation
 extension String {
     /// A happy-path method for checking if a string consists of at
     /// least one character.
-    var hasPositiveCharacterCount: Bool {
+    var hasCharacters: Bool {
         !isEmpty
     }
 }

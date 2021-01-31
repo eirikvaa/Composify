@@ -29,7 +29,7 @@ extension SectionViewController: UITableViewDataSource {
 
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
-        let hasTitle = recording.title.hasPositiveCharacterCount
+        let hasTitle = recording.title.hasCharacters
         let title = hasTitle ? recording.title : String(describing: recording.dateCreated.description)
         cell.setTitle(title)
 

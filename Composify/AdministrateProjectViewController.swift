@@ -69,7 +69,7 @@ class AdministrateProjectViewController: UIViewController {
             return
         }
 
-        guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else {
+        guard let newTitle = cell.textField.text, newTitle.hasCharacters else {
             return
         }
 
@@ -101,7 +101,7 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
             return
         }
 
-        guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else {
+        guard let newTitle = textField.text, newTitle.hasCharacters else {
             return
         }
 
