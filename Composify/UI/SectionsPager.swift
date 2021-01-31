@@ -14,7 +14,7 @@ struct SectionsPager: View {
     private var items = Array(0..<5)
     private var recordings = Array(0..<5)
     private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
-    
+
     var body: some View {
         Pager(page: PagerModel(page: page), data: items, id: \.self) { index in
             VStack(alignment: .leading) {
@@ -25,19 +25,18 @@ struct SectionsPager: View {
                             .padding()
                     Spacer()
                 }
-                ForEach(recordings, id: \.self) { i in
+                ForEach(recordings, id: \.self) { index in
                     HStack {
                         Button(action: {
-
-                        }) {
+                            print("Play button was tapped.")
+                        }, label: {
                             Image(systemName: "play.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25)
                                     .padding()
                                     .foregroundColor(.red)
-                        }
-                                .buttonStyle(PlainButtonStyle())
-                        Text("Recording \(i)")
+                        }).buttonStyle(PlainButtonStyle())
+                        Text("Recording \(index)")
                                 .padding()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                     }

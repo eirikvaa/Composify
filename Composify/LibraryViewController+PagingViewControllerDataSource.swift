@@ -25,7 +25,7 @@ extension LibraryViewController: PagingViewControllerDataSource {
         // swiftlint:disable:next force_cast
         return SectionPageItem(section: section)
     }
-    
+
     func pagingViewController(_: PagingViewController, viewControllerAt index: Int) -> UIViewController {
         guard let currentProject = currentProject,
             let section = currentProject.getSection(at: index) else {
@@ -37,7 +37,7 @@ extension LibraryViewController: PagingViewControllerDataSource {
 
         return sectionViewController
     }
-    
+
     func numberOfViewControllers(in pagingViewController: PagingViewController) -> Int {
         currentProject?.sections.count ?? 0
     }

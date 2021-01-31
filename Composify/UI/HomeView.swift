@@ -14,12 +14,11 @@ struct HomeView: View {
     private var items = Array(0..<5)
     private var recordings = Array(0..<5)
     private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
-    
+
     var body: some View {
         NavigationView {
             VStack {
                 SectionsPager()
-                
                 Button(action: {
                     print("Hei")
                 }) {
@@ -30,7 +29,7 @@ struct HomeView: View {
                 .frame(width: 200)
                 .background(Color.red)
                 .cornerRadius(4.0)
-                
+
                 Spacer()
             }
             .navigationBarTitle("Composify", displayMode: .inline)
