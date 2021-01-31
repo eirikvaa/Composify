@@ -9,7 +9,7 @@
 import SwiftUI
 
 @main
-struct TestApp: App {
+struct ComposifyApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()

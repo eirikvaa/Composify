@@ -13,12 +13,10 @@ import XCTest
 
 class EditExistingProjectViewControllerTests: XCTestCase {
     override func setUp() {
+        super.setUp()
+
         // Put setup code here. This method is called before the invocation of each test method in the class.
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testEditExistingProjectAndPopulateBackingDataCheckTitle() {
@@ -26,10 +24,10 @@ class EditExistingProjectViewControllerTests: XCTestCase {
         project.title = "Test"
         RealmRepository().save(object: project)
 
-        let vc = EditExistingProjectViewController(project: project)
-        vc.loadViewIfNeeded()
+        let viewController = EditExistingProjectViewController(project: project)
+        viewController.loadViewIfNeeded()
 
-        let tableSections = vc.tableSections
+        let tableSections = viewController.tableSections
 
         XCTAssertEqual(tableSections[0].values, ["Test"])
     }
@@ -37,10 +35,10 @@ class EditExistingProjectViewControllerTests: XCTestCase {
     func testEditExistingProjectAndPopulateBackingDataCheckSections() {
         let project = Project.createProject()
 
-        let vc = EditExistingProjectViewController(project: project)
-        vc.loadViewIfNeeded()
+        let viewController = EditExistingProjectViewController(project: project)
+        viewController.loadViewIfNeeded()
 
-        let tableSections = vc.tableSections
+        let tableSections = viewController.tableSections
 
         XCTAssertEqual(tableSections[1].values, [])
     }

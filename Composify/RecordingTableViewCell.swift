@@ -83,8 +83,10 @@ extension RecordingTableViewCell {
 
 extension UIImage {
     func isEqualTo(image: UIImage?) -> Bool {
-        guard let selfData = self.pngData() else { return false }
-        guard let otherData = image?.pngData() else { return false }
+        guard let selfData = self.pngData(),
+              let otherData = image?.pngData() else {
+            return false
+        }
 
         return selfData == otherData
     }

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Eirik Vale Aase. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 struct AudioRecorderPermissions {
     /// Ask the user for permissions to use the microphone

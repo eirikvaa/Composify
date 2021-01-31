@@ -737,7 +737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/SwiftLint/swiftlint\" lint --config \"${PROJECT_DIR}/.swiftlint.yml\"\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		E523959D21C6919000D3004F /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;

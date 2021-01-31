@@ -12,7 +12,7 @@ import XCTest
 
 final class AudioPlayerTests: XCTestCase {
     func testPlayRecordedAudio() {
-        let (_, _, recording) = createObjects()
+        let recording = createObjects()
         let audioRecorder = try? AudioRecorderServiceFactory.defaultService(withURL: recording.url)
 
         audioRecorder?.record()
@@ -48,7 +48,7 @@ private extension AudioPlayerTests {
         return recording
     }
 
-    func createObjects() -> (Project, Section, Recording) {
+    func createObjects() -> Recording {
         let project = createProject(titled: "UnitTestProject")
         let section = createSection(titled: "UnitTestSection", project: project)
         let recording = createRecording(titled: "UnitTestRecording", section: section)

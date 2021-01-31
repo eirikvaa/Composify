@@ -20,9 +20,9 @@ struct SectionsPager: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(sections[index])
-                            .font(.title)
-                            .bold()
-                            .padding()
+                        .font(.title)
+                        .bold()
+                        .padding()
                     Spacer()
                 }
                 ForEach(recordings, id: \.self) { index in
@@ -31,21 +31,23 @@ struct SectionsPager: View {
                             print("Play button was tapped.")
                         }, label: {
                             Image(systemName: "play.circle.fill")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .padding()
-                                    .foregroundColor(.red)
-                        }).buttonStyle(PlainButtonStyle())
-                        Text("Recording \(index)")
+                                .resizable()
+                                .frame(width: 25, height: 25)
                                 .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.red)
+                        })
+                        .buttonStyle(PlainButtonStyle())
+
+                        Text("Recording \(index)")
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                             .overlay(
-                                    RoundedRectangle(cornerRadius: 4.0)
-                                            .stroke()
+                                RoundedRectangle(cornerRadius: 4.0)
+                                    .stroke()
                             )
                 }
-                        .padding(.horizontal)
+                .padding(.horizontal)
                 Spacer()
             }
         }

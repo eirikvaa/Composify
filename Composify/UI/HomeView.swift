@@ -21,11 +21,11 @@ struct HomeView: View {
                 SectionsPager()
                 Button(action: {
                     print("Hei")
-                }) {
+                }, label: {
                     Text("Record")
                         .padding()
                         .foregroundColor(.white)
-                }
+                })
                 .frame(width: 200)
                 .background(Color.red)
                 .cornerRadius(4.0)

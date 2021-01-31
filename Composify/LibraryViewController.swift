@@ -12,11 +12,11 @@ import UIKit
 /// The view controller for almost all of the functionality; shows projects, sections and recordings.
 
 final class LibraryViewController: UIViewController {
-    @IBOutlet var administerBarButton: UIBarButtonItem!
-    @IBOutlet var recordAudioButton: RecordAudioButton!
-    @IBOutlet var recordAudioView: UIView!
-    @IBOutlet var containerView: UIView!
-    @IBOutlet var pageControl: LibraryPageControl!
+    @IBOutlet private var administerBarButton: UIBarButtonItem!
+    @IBOutlet private var recordAudioButton: RecordAudioButton!
+    @IBOutlet private var recordAudioView: UIView!
+    @IBOutlet private var containerView: UIView!
+    @IBOutlet private var pageControl: LibraryPageControl!
 
     // Properties
     var currentProject: Project?
@@ -55,7 +55,7 @@ final class LibraryViewController: UIViewController {
 // MARK: @IBActions
 
 extension LibraryViewController {
-    @IBAction func administrateProject(_: UIBarButtonItem) {
+    @IBAction private func administrateProject(_: UIBarButtonItem) {
         var administrate: UIAlertAction?
 
         let alert = UIAlertController(title: R.Loc.menu, message: nil, preferredStyle: .actionSheet)
@@ -77,7 +77,10 @@ extension LibraryViewController {
         // Showing other projects
         RealmRepository<Project>().getAll().forEach { project in
             if project != currentProject {
-                let projectAction = UIAlertAction(title: R.Loc.showProject(named: project.title), style: .default) { action in
+                let projectAction = UIAlertAction(
+                    title: R.Loc.showProject(named: project.title),
+                    style: .default
+                ) { action in
                     self.applyAccessibility(for: action)
                     self.setCurrentProject(project)
                     self.rememberProjectChosen(project)
@@ -98,7 +101,7 @@ extension LibraryViewController {
         present(alert, animated: true)
     }
 
-    @IBAction func recordAudio(_: UIButton) {
+    @IBAction private func recordAudio(_: UIButton) {
         if recording == nil {
             startRecordingSession()
         } else {
@@ -181,7 +184,8 @@ extension LibraryViewController {
         )
     }
 
-    @objc func adaptToDynamicSizeChange(_: Notification) {}
+    @objc
+    func adaptToDynamicSizeChange(_: Notification) {}
 
     /// Set the new current project
     /// - parameter project: The project that should now be shown
@@ -249,7 +253,10 @@ extension LibraryViewController {
                 message: R.Loc.noSections,
                 actionMessage: R.Loc.addSection,
                 action: {
-                    guard let currentProject = self.currentProject else { return }
+                    guard let currentProject = self.currentProject else {
+                        return
+                    }
+
                     let viewController = EditExistingProjectViewController(project: currentProject)
                     self.presentAdministrateViewController(viewController: viewController)
                 }

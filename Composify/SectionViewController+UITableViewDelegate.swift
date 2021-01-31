@@ -9,7 +9,10 @@
 import UIKit
 
 extension SectionViewController: UITableViewDelegate {
-    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         var recording = section.recordings[indexPath.row]
 
         let edit = UIContextualAction(

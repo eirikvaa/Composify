@@ -13,37 +13,35 @@ import XCTest
 
 class CreateNewProjectViewControllerTests: XCTestCase {
     override func setUp() {
+        super.setUp()
+
         // Put setup code here. This method is called before the invocation of each test method in the class.
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testInitializeVCShouldCreateProject() {
-        let vc = CreateNewProjectViewController()
-        vc.loadViewIfNeeded()
+        let viewController = CreateNewProjectViewController()
+        viewController.loadViewIfNeeded()
 
         let objectCount = fetchProjectDatabaseCount()
         XCTAssertEqual(objectCount, 1)
     }
 
     func testDismissWithoutSavingShouldDeleteMadeProject() {
-        let vc = CreateNewProjectViewController()
-        vc.loadViewIfNeeded()
+        let viewController = CreateNewProjectViewController()
+        viewController.loadViewIfNeeded()
 
-        vc.dismissWithoutSaving()
+        viewController.dismissWithoutSaving()
 
         let objectCount = fetchProjectDatabaseCount()
         XCTAssertEqual(objectCount, 0)
     }
 
     func testSaveAndDismissShouldKeepMadeProject() {
-        let vc = CreateNewProjectViewController()
-        vc.loadViewIfNeeded()
+        let viewController = CreateNewProjectViewController()
+        viewController.loadViewIfNeeded()
 
-        vc.saveAndDismiss()
+        viewController.saveAndDismiss()
 
         let objectCount = fetchProjectDatabaseCount()
         XCTAssertEqual(objectCount, 1)

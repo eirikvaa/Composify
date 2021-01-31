@@ -16,7 +16,9 @@ struct TableSection {
 class AdministrateProjectViewController: UIViewController {
     // MARK: Properties
 
-    lazy var tableViewDelegate = AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
+    weak var tableViewDelegate: AdministrateProjectTableViewDelegate? {
+        AdministrateProjectTableViewDelegate(administrateProjectViewController: self)
+    }
 
     weak var administrateProjectDelegate: AdministrateProjectDelegate?
     private(set) var tableView = AdministrateProjectTableView(frame: .zero, style: .plain) {
@@ -61,9 +63,15 @@ class AdministrateProjectViewController: UIViewController {
         tableView.setEditing(editing, animated: animated)
     }
 
-    @objc func textFieldChange(_ textField: UITextField) {
-        guard let (cell, indexPath) = getCellAndIndexPath(from: textField) else { return }
-        guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else { return }
+    @objc
+    func textFieldChange(_ textField: UITextField) {
+        guard let (cell, indexPath) = getCellAndIndexPath(from: textField) else {
+            return
+        }
+
+        guard let newTitle = cell.textField.text, newTitle.hasPositiveCharacterCount else {
+            return
+        }
 
         tableSections[indexPath.section].values[indexPath.row] = cell.textField.text ?? ""
     }
@@ -76,7 +84,8 @@ class AdministrateProjectViewController: UIViewController {
         tableView.pinToEdges(of: view)
     }
 
-    @objc func dismissAction() {
+    @objc
+    func dismissAction() {
         resignFromAllTextFields()
     }
 
@@ -88,9 +97,17 @@ class AdministrateProjectViewController: UIViewController {
 
 extension AdministrateProjectViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason _: UITextField.DidEndEditingReason) {
-        guard let (_, indexPath) = getCellAndIndexPath(from: textField) else { return }
-        guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else { return }
-        guard var project = project else { return }
+        guard let (_, indexPath) = getCellAndIndexPath(from: textField) else {
+            return
+        }
+
+        guard let newTitle = textField.text, newTitle.hasPositiveCharacterCount else {
+            return
+        }
+
+        guard var project = project else {
+            return
+        }
 
         switch indexPath.section {
         case 0:
@@ -109,7 +126,10 @@ extension AdministrateProjectViewController: UITextFieldDelegate {
 
 extension AdministrateProjectViewController {
     func getCellAndIndexPath(from textField: UITextField) -> (TextFieldTableViewCell, IndexPath)? {
-        guard let cell = UIView.findSuperView(withTag: 1234, fromBottomView: textField) as? TextFieldTableViewCell else {
+        guard let cell = UIView.findSuperView(
+                withTag: 1_234,
+                fromBottomView: textField
+        ) as? TextFieldTableViewCell else {
             return nil
         }
 

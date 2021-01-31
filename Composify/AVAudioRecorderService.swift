@@ -29,7 +29,7 @@ struct AVAudioRecorderService: AudioRecorderService {
     init(url: URL) throws {
         let settings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000.0,
+            AVSampleRateKey: 12_000.0,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
         ]

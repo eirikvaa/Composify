@@ -29,7 +29,8 @@ final class ButtonTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    @objc func buttonTap() {
+    @objc
+    func buttonTap() {
         action?()
     }
 
