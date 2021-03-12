@@ -17,38 +17,39 @@ struct SectionsPager: View {
 
     var body: some View {
         Pager(page: page, data: items, id: \.self) { index in
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(sections[index])
-                        .font(.title)
-                        .bold()
-                        .padding()
-                    Spacer()
-                }
-                ForEach(recordings, id: \.self) { index in
+            ScrollView {
+                VStack(alignment: .leading) {
                     HStack {
-                        Button(action: {
-                            print("Play button was tapped.")
-                        }, label: {
-                            Image(systemName: "play.circle.fill")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                                .padding()
-                                .foregroundColor(.red)
-                        })
-                        .buttonStyle(PlainButtonStyle())
-
-                        Text("Recording \(index)")
+                        Text(sections[index])
+                            .font(.title)
+                            .bold()
                             .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Spacer()
                     }
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4.0)
-                                    .stroke()
-                            )
+                    ForEach(recordings, id: \.self) { index in
+                        HStack {
+                            Button(action: {
+                                print("Play button was tapped.")
+                            }, label: {
+                                Image(systemName: "play.circle.fill")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .padding()
+                                    .foregroundColor(.red)
+                            })
+                            .buttonStyle(PlainButtonStyle())
+
+                            Text("Recording \(index)")
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 4.0)
+                                        .stroke()
+                                )
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
-                Spacer()
             }
         }
     }
