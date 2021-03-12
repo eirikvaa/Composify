@@ -377,8 +377,8 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
+				E56460361D3B54B000AA6557 /* App */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
-				E56460361D3B54B000AA6557 /* Application */,
 				E53C016C2124275900F98E65 /* Extensions */,
 				E582894721C6BE6D00E438B5 /* Onboarding */,
 				E5BD121E21126695000ED703 /* ErrorViewController */,
@@ -391,7 +391,7 @@
 			path = Composify;
 			sourceTree = "<group>";
 		};
-		E56460361D3B54B000AA6557 /* Application */ = {
+		E56460361D3B54B000AA6557 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */,
@@ -401,7 +401,7 @@
 				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 				E5C2030C2090FEE900B061E2 /* Assets.xcassets */,
 			);
-			name = Application;
+			name = App;
 			sourceTree = "<group>";
 		};
 		E56460371D3B54B600AA6557 /* User Interface */ = {
