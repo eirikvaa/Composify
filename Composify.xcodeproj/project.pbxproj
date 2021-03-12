@@ -28,6 +28,7 @@
 		E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0175212427E000F98E65 /* UIView+Ext.swift */; };
 		E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0177212427F000F98E65 /* Collection+Ext.swift */; };
 		E53C017A212427FE00F98E65 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */; };
+		E547142225FC3641008DA65B /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547142125FC3641008DA65B /* RecordButton.swift */; };
 		E547801424EC438E00D5E219 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547801324EC438E00D5E219 /* Date+Ext.swift */; };
 		E547EC711DD3C721005D5986 /* AVAudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460321D3B50DA00AA6557 /* AVAudioRecorderService.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
@@ -150,6 +151,7 @@
 		E53C0175212427E000F98E65 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		E53C0177212427F000F98E65 /* Collection+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Ext.swift"; sourceTree = "<group>"; };
 		E53C0179212427FE00F98E65 /* UIAlertController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Ext.swift"; sourceTree = "<group>"; };
+		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E547801324EC438E00D5E219 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		E5635C3A24D9F01C0013953B /* Parchment.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parchment.framework; path = Carthage/Build/iOS/Parchment.framework; sourceTree = "<group>"; };
 		E5635C3E24D9F01E0013953B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
+				E547142125FC3641008DA65B /* RecordButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				E5E6DC8121C445650061254B /* R.swift in Sources */,
 				E51309F5239C746C00C795B8 /* AdministrateProjectTableView.swift in Sources */,
 				E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */,
+				E547142225FC3641008DA65B /* RecordButton.swift in Sources */,
 				E5B9FA5A21CF98AC00F9915A /* UINavigationController+Ext.swift in Sources */,
 				E571F54420983945008F29A6 /* AdministrateProjectViewController.swift in Sources */,
 				E5F0A4A721E163F90072EEA5 /* UIAlertAction+Ext.swift in Sources */,
