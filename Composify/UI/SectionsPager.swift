@@ -10,9 +10,9 @@ import SwiftUI
 import SwiftUIPager
 
 struct SectionsPager: View {
-    @State private var page: Page = .first()
+    @StateObject private var page: Page = .first()
     private var items = Array(0..<5)
-    private var recordings = Array(0..<5)
+    private var recordings = Array(0..<Int.random(in: 0..<5))
     private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
 
     var body: some View {
@@ -33,25 +33,25 @@ struct SectionsPager: View {
                             }, label: {
                                 Image(systemName: "play.circle.fill")
                                     .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .padding()
-                                    .foregroundColor(.red)
+                                    .frame(width: 30, height: 30)
                             })
                             .buttonStyle(PlainButtonStyle())
 
                             Text("Recording \(index)")
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.white)
+                                .font(.body)
+
+                            Spacer()
                         }
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 4.0)
-                                        .stroke()
-                                )
+                        .padding()
+                        .background(Color.gray.opacity(0.7))
+                        .cornerRadius(10.0)
                     }
                     .padding(.horizontal)
                 }
             }
         }
+        .loopPages()
     }
 }
 
