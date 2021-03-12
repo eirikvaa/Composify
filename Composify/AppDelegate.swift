@@ -6,13 +6,16 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
-
+import UIKit
+/*
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         registerNavigationBarAppearance()
         createRecordingsDirectoryIfNeeded()
 
@@ -40,3 +43,4 @@ private extension AppDelegate {
         ]
     }
 }
+*/

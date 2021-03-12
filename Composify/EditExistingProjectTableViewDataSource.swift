@@ -10,7 +10,10 @@ import UIKit
 
 final class EditExistingProjectTableViewDataSource: AdministrateProjectTableViewDataSource {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateSectionCell, for: indexPath) as? TextFieldTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: R.Cells.administrateSectionCell,
+                for: indexPath
+        ) as? TextFieldTableViewCell else {
             return .init()
         }
 
@@ -31,7 +34,10 @@ final class EditExistingProjectTableViewDataSource: AdministrateProjectTableView
         case (1, _):
             configureSectionsCell(indexPath: indexPath, insertRowIndex: insertRowIndex, cell: cell)
         case (2, _):
-            guard let deleteCell = tableView.dequeueReusableCell(withIdentifier: R.Cells.administrateDeleteCell, for: indexPath) as? ButtonTableViewCell else {
+            guard let deleteCell = tableView.dequeueReusableCell(
+                    withIdentifier: R.Cells.administrateDeleteCell,
+                    for: indexPath
+            ) as? ButtonTableViewCell else {
                 return .init()
             }
             configureDeleteCell(deleteCell: deleteCell)

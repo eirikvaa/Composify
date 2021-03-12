@@ -16,8 +16,8 @@ extension UIAlertController {
     /// - returns: An alert controller for an error message
     static func createErrorAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: R.Loc.ok, style: .default)
-        alert.addAction(ok)
+        let okAction = UIAlertAction(title: R.Loc.ok, style: .default)
+        alert.addAction(okAction)
 
         return alert
     }
@@ -27,8 +27,13 @@ extension UIAlertController {
 
         let settings = UIAlertAction(title: R.Loc.settings, style: .default) { _ in
             let application = UIApplication.shared
-            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-            guard application.canOpenURL(settingsURL) else { return }
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+
+            guard application.canOpenURL(settingsURL) else {
+                return
+            }
 
             application.open(settingsURL)
         }
@@ -41,7 +46,11 @@ extension UIAlertController {
         return alert
     }
 
-    static func createConfirmationAlert(title: String, message: String, completionHandler: ((UIAlertAction) -> Void)?) -> UIAlertController {
+    static func createConfirmationAlert(
+        title: String,
+        message: String,
+        completionHandler: ((UIAlertAction) -> Void)?
+    ) -> UIAlertController {
         let alert = UIAlertController(
             title: title,
             message: message,

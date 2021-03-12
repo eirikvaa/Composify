@@ -9,7 +9,8 @@
 import Foundation
 
 /**
- The `ComposifyObject` protocol gives information about where a `FileSystemComposifyObject` instance is in the file system.
+ The `ComposifyObject` protocol gives information about where
+ a `FileSystemComposifyObject` instance is in the file system.
  - Author: Eirik Vale Aase
  */
 protocol ComposifyObject {

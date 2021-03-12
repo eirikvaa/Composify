@@ -25,7 +25,7 @@ final class TextFieldTableViewCell: UITableViewCell {
 extension TextFieldTableViewCell {
     func setupViews() {
         textField = AdministrateProjectTextField(frame: .zero)
-        tag = 1234
+        tag = 1_234
         isUserInteractionEnabled = true
 
         contentView.addSubview(textField)

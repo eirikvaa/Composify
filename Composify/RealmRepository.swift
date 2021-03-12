@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 
 struct RealmRepository<O: Object>: Repository {
-    typealias T = O
+    typealias Item = O
     typealias D = Realm
 
     @discardableResult
-    func save(object: T) -> Bool {
+    func save(object: Item) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
@@ -26,24 +26,24 @@ struct RealmRepository<O: Object>: Repository {
         return true
     }
 
-    func get(id: String) -> T? {
+    func get(id: String) -> Item? {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
 
-        return realm.object(ofType: T.self, forPrimaryKey: id)
+        return realm.object(ofType: Item.self, forPrimaryKey: id)
     }
 
-    func getAll() -> Results<T> {
+    func getAll() -> Results<Item> {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
 
-        return realm.objects(T.self)
+        return realm.objects(Item.self)
     }
 
     @discardableResult
-    func update<V>(object: inout T, value: V, keyPath: WritableKeyPath<T, V>) -> Bool {
+    func update<V>(object: inout Item, value: V, keyPath: WritableKeyPath<Item, V>) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
@@ -56,7 +56,7 @@ struct RealmRepository<O: Object>: Repository {
     }
 
     @discardableResult
-    func delete(object: T) -> Bool {
+    func delete(object: Item) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
@@ -82,24 +82,24 @@ struct RealmRepository<O: Object>: Repository {
     }
 }
 
-extension Repository where T: Object {
-    func getAll() -> Results<T> {
+extension Repository where Item: Object {
+    func getAll() -> Results<Item> {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
 
-        return realm.objects(T.self)
+        return realm.objects(Item.self)
     }
 }
 
-extension Repository where T == Recording {
+extension Repository where Item == Recording {
     /// Save a recording and add it to a section's recordings
     /// - Parameters:
     ///     - recording: Recording to be added
     ///     - section: The section into which a recording should be included
     /// - Returns: If the operation was successful or not
     @discardableResult
-    func save(recording: T, to section: Section) -> Bool {
+    func save(recording: Item, to section: Section) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }
@@ -113,14 +113,14 @@ extension Repository where T == Recording {
     }
 }
 
-extension Repository where T == Section {
+extension Repository where Item == Section {
     /// Save a section and add it to a projects's sections
     /// - Parameters:
     ///     - section: Section to be added
     ///     - project: The project into which a section should be included
     /// - Returns: If the operation was successful or not
     @discardableResult
-    func save(section: T, to project: Project) -> Bool {
+    func save(section: Item, to project: Project) -> Bool {
         guard let realm = try? Realm() else {
             fatalError("Unable to instantiate Realm instance!")
         }

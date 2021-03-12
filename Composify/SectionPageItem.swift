@@ -23,14 +23,20 @@ struct SectionPageItem: PagingItem, Hashable, Comparable {
     }
 
     static func == (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
-        guard lhs.section?.isInvalidated == false else { return false }
-        guard rhs.section?.isInvalidated == false else { return false }
+        guard lhs.section?.isInvalidated == false else {
+            return false
+        }
+
+        guard rhs.section?.isInvalidated == false else {
+            return false
+        }
+
         return lhs.section?.index == rhs.section?.index
     }
 
     static func < (lhs: SectionPageItem, rhs: SectionPageItem) -> Bool {
-        let _lhs = lhs.section?.index ?? 0
-        let _rhs = rhs.section?.index ?? 0
-        return _lhs < _rhs
+        let lhsIndex = lhs.section?.index ?? 0
+        let rhsIndex = rhs.section?.index ?? 0
+        return lhsIndex < rhsIndex
     }
 }

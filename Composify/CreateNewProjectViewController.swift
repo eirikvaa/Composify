@@ -34,7 +34,8 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
         )
     }
 
-    @objc func dismissWithoutSaving() {
+    @objc
+    func dismissWithoutSaving() {
         if let project = project {
             RealmRepository().delete(object: project)
         }
@@ -42,7 +43,8 @@ final class CreateNewProjectViewController: AdministrateProjectViewController {
         dismissAction()
     }
 
-    @objc func saveAndDismiss() {
+    @objc
+    func saveAndDismiss() {
         if let project = project {
             RealmRepository().save(object: project)
             administrateProjectDelegate?.userDidCreateProject(project)

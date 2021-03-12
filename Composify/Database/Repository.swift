@@ -14,16 +14,16 @@ import RealmSwift
 /// use these specific type-free methods instead of references
 /// to Realm or Core Data or something else.
 protocol Repository {
-    associatedtype T: Object
+    associatedtype Item: Object
 
     @discardableResult
-    func save(object: T) -> Bool
+    func save(object: Item) -> Bool
 
-    func get(id: String) -> T?
-
-    @discardableResult
-    func update<V>(object: inout T, value: V, keyPath: WritableKeyPath<T, V>) -> Bool
+    func get(id: String) -> Item?
 
     @discardableResult
-    func delete(object: T) -> Bool
+    func update<V>(object: inout Item, value: V, keyPath: WritableKeyPath<Item, V>) -> Bool
+
+    @discardableResult
+    func delete(object: Item) -> Bool
 }

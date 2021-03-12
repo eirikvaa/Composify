@@ -8,6 +8,8 @@
 
 import Foundation
 
+// swiftlint:disable file_length identifier_name
+
 // MARK: Multi-subject localizations
 
 extension R.Loc {
@@ -99,7 +101,11 @@ extension R.Loc {
 extension R.Loc {
     static let addSection = NSLocalizedString(
         "administrate-project.tableview.cell.add-section.title",
-        comment: "Title of cell that appears below all other sections in table view, next to a green button, indicating that it should add a new section when pressed."
+        comment:
+            """
+            Title of cell that appears below all other sections in table view,
+            next to a green button, indicating that it should add a new section when pressed.
+            """
     )
     static let noSections = NSLocalizedString(
         "library.empty-state.no-sections",
@@ -309,7 +315,10 @@ extension R.Loc {
         comment: "Accessibility hint for menu bar button"
     )
 
-    static let libraryNavigationItemAccLabel = NSLocalizedString("library.nav-item.acc.label", comment: "Accessibility label for library navigation item")
+    static let libraryNavigationItemAccLabel = NSLocalizedString(
+        "library.nav-item.acc.label",
+        comment: "Accessibility label for library navigation item"
+    )
 
     static let libraryRecordAudioButtonAccLabel = NSLocalizedString(
         "library.record-audio-button.acc.label",

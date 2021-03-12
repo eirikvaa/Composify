@@ -17,7 +17,10 @@ extension SectionViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = R.Cells.libraryRecordingCell
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? RecordingTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: identifier,
+                for: indexPath
+        ) as? RecordingTableViewCell else {
             return UITableViewCell()
         }
 
@@ -26,7 +29,7 @@ extension SectionViewController: UITableViewDataSource {
 
         // If a recording has just been created, it's title is defaulted to a zero-string,
         // so the date of recording is used instead.
-        let hasTitle = recording.title.hasPositiveCharacterCount
+        let hasTitle = recording.title.hasCharacters
         let title = hasTitle ? recording.title : String(describing: recording.dateCreated.description)
         cell.setTitle(title)
 
@@ -37,7 +40,11 @@ extension SectionViewController: UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
         if editingStyle == .insert {
             tableView.insertRows(at: [indexPath], with: .fade)
         }

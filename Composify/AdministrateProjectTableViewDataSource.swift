@@ -40,7 +40,11 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
         administrateProjectViewController.tableSections[section].header
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
         switch editingStyle {
         case .insert:
             administrateProjectViewController.insertNewSection {
@@ -61,8 +65,13 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         case .delete:
-            guard currentProject?.sections.hasElements ?? false else { return }
-            guard let sectionToDelete = currentProject?.getSection(at: indexPath.row) else { return }
+            guard currentProject?.sections.hasElements ?? false else {
+                return
+            }
+
+            guard let sectionToDelete = currentProject?.getSection(at: indexPath.row) else {
+                return
+            }
 
             if UserDefaults.standard.lastSection() == sectionToDelete {
                 UserDefaults.standard.resetLastSection()
@@ -88,8 +97,13 @@ class AdministrateProjectTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let sourceRow = sourceIndexPath.row
         let destinationRow = destinationIndexPath.row
-        guard var sourceSection = currentProject?.getSection(at: sourceRow) else { return }
-        guard var destinationSection = currentProject?.getSection(at: destinationRow) else { return }
+        guard var sourceSection = currentProject?.getSection(at: sourceRow) else {
+            return
+        }
+
+        guard var destinationSection = currentProject?.getSection(at: destinationRow) else {
+            return
+        }
 
         RealmRepository().update(object: &sourceSection, value: destinationRow, keyPath: \.index)
         RealmRepository().update(object: &destinationSection, value: sourceRow, keyPath: \.index)
@@ -130,7 +144,11 @@ extension AdministrateProjectTableViewDataSource {
         administrateProjectViewController.dismiss(animated: true)
     }
 
-    func configureCellTextField(textField: AdministrateProjectTextField, placeholder: String, delegate: UITextFieldDelegate?) {
+    func configureCellTextField(
+        textField: AdministrateProjectTextField,
+        placeholder: String,
+        delegate: UITextFieldDelegate?
+    ) {
         textField.placeholder = placeholder
         textField.delegate = delegate
     }
@@ -141,7 +159,11 @@ extension AdministrateProjectTableViewDataSource {
             cell.textField.text = R.Loc.addSection
         } else {
             if let section = currentProject?.getSection(at: indexPath.row) {
-                configureCellTextField(textField: cell.textField, placeholder: section.title, delegate: administrateProjectViewController)
+                configureCellTextField(
+                    textField: cell.textField,
+                    placeholder: section.title,
+                    delegate: administrateProjectViewController
+                )
             }
         }
     }

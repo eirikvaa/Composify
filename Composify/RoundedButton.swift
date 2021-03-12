@@ -25,7 +25,8 @@ final class RoundedButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func performAction() {
+    @objc
+    func performAction() {
         action()
     }
 

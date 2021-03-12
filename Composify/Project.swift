@@ -29,10 +29,15 @@ final class Project: Object, ComposifyObject {
 }
 
 extension UserDefaults {
-
     func lastProject() -> Project? {
-        guard let realm = try? Realm() else { return nil }
-        guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else { return nil }
+        guard let realm = try? Realm() else {
+            return nil
+        }
+
+        guard let id = UserDefaults.standard.string(forKey: R.UserDefaults.lastProjectID) else {
+            return nil
+        }
+
         return realm.object(ofType: Project.self, forPrimaryKey: id)
     }
 }
@@ -42,18 +47,16 @@ extension Project {
     /// - parameter index: An index that won't necessarily correspond to the
     /// order that sections were created.
     func getSection(at index: Int) -> Section? {
-        for section in sections {
-            if section.index == index {
-                return section
-            }
+        for section in sections where section.index == index {
+            return section
         }
 
         return nil
     }
 
     var nextSectionIndex: Int {
-        let _section = sections.last
-        let lastSectionIndex = _section?.index ?? 0
+        let section = sections.last
+        let lastSectionIndex = section?.index ?? 0
         return sections.hasElements ? lastSectionIndex + 1 : lastSectionIndex
     }
 
@@ -82,8 +85,8 @@ private extension Project {
     /// index greater than the passed in index and subtract one to close the gap.
     /// - parameter index: The index that is off by one. We don't need to normalize section indices before this point.
     func normalizeIndices(from index: Int) {
-        for i in (index + 1) ..< sections.count {
-            guard var section = getSection(at: i) else {
+        for index in (index + 1) ..< sections.count {
+            guard var section = getSection(at: index) else {
                 return
             }
 

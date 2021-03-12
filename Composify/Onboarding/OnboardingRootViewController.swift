@@ -68,12 +68,20 @@ final class OnboardingRootViewController: UIViewController {
 
 extension OnboardingRootViewController {
     var currentOnboardingPageIndex: Int {
-        guard let currentViewController = pagingViewController.viewControllers?.first as? OnboardingViewController else { return 0 }
+        let firstViewController = pagingViewController.viewControllers?.first
+        guard let currentViewController = firstViewController as? OnboardingViewController else {
+            return 0
+        }
         return currentViewController.pageIndex
     }
 
-    @objc func nextOnboardingPage(_: UIButton) {
-        guard let currentViewController = pagingViewController.viewControllers?.first as? OnboardingViewController else { return }
+    @objc
+    func nextOnboardingPage(_: UIButton) {
+        let firstViewController = pagingViewController.viewControllers?.first
+        guard let currentViewController = firstViewController as? OnboardingViewController else {
+            return
+        }
+
         guard currentViewController.pageIndex + 1 < viewControllers.count else {
             dismiss(animated: true) {
                 let userDefaults = UserDefaults.standard
@@ -92,8 +100,11 @@ extension OnboardingRootViewController {
         updateNextButtonTitleIfNeeded()
     }
 
-    @objc func skipOnboarding(_: UIButton) {
-        guard let lastViewController = viewControllers.last else { return }
+    @objc
+    func skipOnboarding(_: UIButton) {
+        guard let lastViewController = viewControllers.last else {
+            return
+        }
 
         pagingViewController.setViewControllers(
             [lastViewController],
@@ -136,10 +147,10 @@ private extension OnboardingRootViewController {
             R.Images.onboarding4
         ]
 
-        for i in 0 ... 3 {
+        for index in 0 ... 3 {
             let viewController = UIViewController.onboardingPageViewController()
-            viewController.backgroundImage = backgroundImages[i]
-            viewController.pageIndex = i
+            viewController.backgroundImage = backgroundImages[index]
+            viewController.pageIndex = index
             viewControllers.append(viewController)
         }
 
@@ -198,33 +209,54 @@ extension OnboardingRootViewController: UIPageViewControllerDelegate {
         )
     }
 
-    func pageViewController(_: UIPageViewController, didFinishAnimating _: Bool, previousViewControllers _: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(
+        _: UIPageViewController,
+        didFinishAnimating _: Bool,
+        previousViewControllers _: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
         // Make sure we actually finished the transition
-        guard completed else { return }
+        guard completed else {
+            return
+        }
 
         updateNextButtonTitleIfNeeded()
     }
 }
 
 extension OnboardingRootViewController: UIPageViewControllerDataSource {
-    func pageViewController(_: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let boardingVieController = viewController as? OnboardingViewController else { return nil }
+    func pageViewController(
+        _: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
+        guard let boardingVieController = viewController as? OnboardingViewController else {
+            return nil
+        }
 
         let index = boardingVieController.pageIndex
         let nextIndex = index - 1
 
-        guard nextIndex >= 0 else { return nil }
+        guard nextIndex >= 0 else {
+            return nil
+        }
 
         return viewControllers[nextIndex]
     }
 
-    func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let boardingVieController = viewController as? OnboardingViewController else { return nil }
+    func pageViewController(
+        _: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
+        guard let boardingVieController = viewController as? OnboardingViewController else {
+            return nil
+        }
 
         let index = boardingVieController.pageIndex
         let nextIndex = index + 1
 
-        guard nextIndex < viewControllers.count else { return nil }
+        guard nextIndex < viewControllers.count else {
+            return nil
+        }
 
         return viewControllers[nextIndex]
     }

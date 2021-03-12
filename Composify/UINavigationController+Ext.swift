@@ -9,7 +9,7 @@
 import UIKit
 
 extension UINavigationController {
-    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         .all
     }
 }

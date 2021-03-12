@@ -14,8 +14,10 @@ extension Project {
         let project = Project(title: "Stuff")
         RealmRepository().save(object: project)
 
-        for i in 0 ..< count {
-            let section = Section(title: "S\(i)", project: project)
+        for index in 0 ..< count {
+            let section = Section()
+            section.title = "S\(index)"
+            section.index = index
 
             RealmRepository().save(section: section, to: project)
         }

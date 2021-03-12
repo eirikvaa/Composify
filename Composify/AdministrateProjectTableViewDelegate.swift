@@ -26,7 +26,9 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        guard indexPath.section == 1 else { return .none }
+        guard indexPath.section == 1 else {
+            return .none
+        }
 
         let endIndex = project?.sections.count ?? 0
         let sectionRowsRange = 0 ..< endIndex
@@ -43,10 +45,14 @@ extension AdministrateProjectTableViewDelegate: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        guard indexPath.section == 1 else { return false }
+        guard indexPath.section == 1 else {
+            return false
+        }
 
         let row = administrateProjectViewController.tableSections[indexPath.section].values.count
-        if indexPath.row == row { return false }
+        if indexPath.row == row {
+            return false
+        }
 
         return true
     }

@@ -37,7 +37,10 @@ final class AVAudioPlayerService: NSObject, AudioPlayerService, AVAudioPlayerDel
     }
 
     func setup(withObject object: AudioPlayable) throws {
-        guard player == nil else { return }
+        guard player == nil else {
+            return
+        }
+
         guard FileManager.default.fileExists(atPath: object.url.path) else {
             throw AudioPlayerServiceError.unableToFindPlayable
         }
