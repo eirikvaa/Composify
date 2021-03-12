@@ -1192,7 +1192,7 @@
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.13.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
@@ -1200,15 +1200,15 @@
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.1.2;
+				minimumVersion = 10.0.0;
 			};
 		};
 		E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:rechsteiner/Parchment.git";
 			requirement = {
-				kind = exactVersion;
-				version = "3.0.0-beta2";
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
