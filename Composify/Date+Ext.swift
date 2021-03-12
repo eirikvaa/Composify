@@ -10,8 +10,8 @@ import Foundation
 
 extension Date {
     func shortHumanReadableDate() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "E, d MMM yyyy HH:mm:ss"
-        return df.string(from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+        return dateFormatter.string(from: self)
     }
 }
