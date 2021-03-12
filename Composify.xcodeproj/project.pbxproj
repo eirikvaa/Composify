@@ -377,7 +377,7 @@
 		E56460031D3B50B500AA6557 /* Composify */ = {
 			isa = PBXGroup;
 			children = (
-				E5A6BBBD255FF32200BC7D32 /* UI */,
+				E5A6BBBD255FF32200BC7D32 /* Screens */,
 				E56460361D3B54B000AA6557 /* Application */,
 				E53C016C2124275900F98E65 /* Extensions */,
 				E582894721C6BE6D00E438B5 /* Onboarding */,
@@ -494,14 +494,14 @@
 			path = ComposifyTests;
 			sourceTree = "<group>";
 		};
-		E5A6BBBD255FF32200BC7D32 /* UI */ = {
+		E5A6BBBD255FF32200BC7D32 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				E5A6BB83255FE84F00BC7D32 /* MainView.swift */,
 				E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */,
 				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
 			);
-			path = UI;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		E5B036A81D59957C00C66A69 /* AVFoundation */ = {
