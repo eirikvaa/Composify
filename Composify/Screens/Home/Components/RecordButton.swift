@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct RecordButton: View {
+    let recordAction: (() -> Void)
+
     var body: some View {
         Button(action: {
-            print("Hei")
+            recordAction()
         }, label: {
             Text("Record")
                 .padding()
@@ -25,6 +27,8 @@ struct RecordButton: View {
 
 struct RecordButton_Previews: PreviewProvider {
     static var previews: some View {
-        RecordButton()
+        RecordButton {
+            print("Start recording!")
+        }
     }
 }

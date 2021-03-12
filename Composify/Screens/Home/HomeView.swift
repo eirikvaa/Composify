@@ -20,7 +20,9 @@ struct HomeView: View {
             VStack {
                 SectionsPager()
                 Spacer()
-                RecordButton()
+                RecordButton {
+                    print("Start recording!")
+                }
             }
             .navigationBarTitle("Composify", displayMode: .inline)
         }
