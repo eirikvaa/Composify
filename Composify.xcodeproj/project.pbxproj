@@ -358,6 +358,31 @@
 			path = AudioRecorder;
 			sourceTree = "<group>";
 		};
+		E547141E25FC3605008DA65B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E5A6BB83255FE84F00BC7D32 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E547141F25FC3609008DA65B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */,
+				E547142025FC3615008DA65B /* Components */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E547142025FC3615008DA65B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E5645FF81D3B50B500AA6557 = {
 			isa = PBXGroup;
 			children = (
@@ -500,9 +525,8 @@
 		E5A6BBBD255FF32200BC7D32 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				E5A6BB83255FE84F00BC7D32 /* MainView.swift */,
-				E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */,
-				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
+				E547141E25FC3605008DA65B /* Main */,
+				E547141F25FC3609008DA65B /* Home */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
