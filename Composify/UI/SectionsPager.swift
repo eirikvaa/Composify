@@ -10,13 +10,13 @@ import SwiftUI
 import SwiftUIPager
 
 struct SectionsPager: View {
-    @State private var page = 0
+    @State private var page: Page = .first()
     private var items = Array(0..<5)
     private var recordings = Array(0..<5)
     private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
 
     var body: some View {
-        Pager(page: PagerModel(page: page), data: items, id: \.self) { index in
+        Pager(page: page, data: items, id: \.self) { index in
             VStack(alignment: .leading) {
                 HStack {
                     Text(sections[index])
