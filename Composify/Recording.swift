@@ -16,17 +16,17 @@ final class Recording: Object, ComposifyObject {
     @objc dynamic var section: Section?
     @objc dynamic var dateCreated = Date()
     @objc dynamic var fileExtension = "caf"
-    
+
     init(title: String, section: Section?) {
         self.title = title
         self.section = section
         self.project = section?.project
     }
-    
-    required init() {
+
+    override required init() {
         super.init()
     }
-    
+
     override static func primaryKey() -> String? {
         R.DatabaseKeys.id
     }

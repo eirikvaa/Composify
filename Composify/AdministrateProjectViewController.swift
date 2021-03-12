@@ -146,7 +146,7 @@ extension AdministrateProjectViewController {
         guard let project = project else {
             return
         }
-        
+
         let section = Section(title: R.Loc.section, project: project)
         RealmRepository().save(section: section, to: project)
 

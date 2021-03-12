@@ -118,7 +118,7 @@ extension LibraryViewController {
         guard let currentSection = currentSection else {
             return
         }
-        
+
         let humanReadableNowDate = Date().shortHumanReadableDate()
         let recording = Recording(title: humanReadableNowDate, section: currentSection)
         self.recording = recording
@@ -150,7 +150,7 @@ extension LibraryViewController {
         if let recording = recording, let currentSection = currentSection {
             RealmRepository().save(recording: recording, to: currentSection)
         }
-        
+
         // Remember to reset the recording
         recording = nil
 
