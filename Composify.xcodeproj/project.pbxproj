@@ -7,17 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */; };
-		E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */; };
-		E5152F4620E403760031572E /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5152F4520E403760031572E /* ProjectTests.swift */; };
 		E547142225FC3641008DA65B /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547142125FC3641008DA65B /* RecordButton.swift */; };
 		E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56460041D3B50B500AA6557 /* AppDelegate.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57F4E71255FF57800CE7030 /* SectionsPager.swift */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
-		E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */; };
-		E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */; };
-		E590657420E3F4AF0028453D /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E590657320E3F4AF0028453D /* RealmTests.swift */; };
 		E595A7D825FC375F00F27283 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7D725FC375F00F27283 /* HomeViewModel.swift */; };
 		E595A7DD25FC389B00F27283 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7DC25FC389B00F27283 /* SongRepository.swift */; };
 		E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7E425FC390B00F27283 /* RecordingDao.swift */; };
@@ -32,6 +26,7 @@
 		E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB83255FE84F00BC7D32 /* MainView.swift */; };
 		E5A6BB9C255FEFA000BC7D32 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */; };
 		E5A6BBBF255FF32C00BC7D32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */; };
+		E5A7991C25FCEDC200FF718C /* ComposifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CD44F3255F55C600608EAF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F2255F55C600608EAF /* Realm */; };
@@ -39,7 +34,6 @@
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
-		E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC41B6239FBC11000377BC /* Project+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -67,9 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewProjectViewControllerTests.swift; sourceTree = "<group>"; };
-		E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExistingProjectViewControllerTests.swift; sourceTree = "<group>"; };
-		E5152F4520E403760031572E /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E5635C3A24D9F01C0013953B /* Parchment.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parchment.framework; path = Carthage/Build/iOS/Parchment.framework; sourceTree = "<group>"; };
@@ -84,9 +75,6 @@
 		E58289A221C6F5FB00E438B5 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTests.swift; sourceTree = "<group>"; };
-		E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
-		E590657320E3F4AF0028453D /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		E595A7D725FC375F00F27283 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E595A7DC25FC389B00F27283 /* SongRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		E595A7E425FC390B00F27283 /* RecordingDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDao.swift; sourceTree = "<group>"; };
@@ -100,6 +88,7 @@
 		E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyApp.swift; sourceTree = "<group>"; };
 		E5A6BB83255FE84F00BC7D32 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyTests.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+URLs.swift"; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,7 +99,6 @@
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E5FC41B6239FBC11000377BC /* Project+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,9 +225,7 @@
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
 			isa = PBXGroup;
 			children = (
-				E5FC41B5239FBBE8000377BC /* Extensions */,
-				E5FC41B2239FB4D1000377BC /* Model */,
-				E5FC41B1239FB4C4000377BC /* View Controlles */,
+				E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */,
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
@@ -296,50 +282,6 @@
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		E5FC41B1239FB4C4000377BC /* View Controlles */ = {
-			isa = PBXGroup;
-			children = (
-				E50CD015239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift */,
-				E50CD019239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift */,
-			);
-			path = "View Controlles";
-			sourceTree = "<group>";
-		};
-		E5FC41B2239FB4D1000377BC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E5FC41B4239FB673000377BC /* Audio */,
-				E5FC41B3239FB4D9000377BC /* Database */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		E5FC41B3239FB4D9000377BC /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				E590657320E3F4AF0028453D /* RealmTests.swift */,
-				E5152F4520E403760031572E /* ProjectTests.swift */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
-		E5FC41B4239FB673000377BC /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				E58C57F41DD879C200348C65 /* AudioPlayerTests.swift */,
-				E58C57F51DD879C200348C65 /* AudioRecorderTests.swift */,
-			);
-			path = Audio;
-			sourceTree = "<group>";
-		};
-		E5FC41B5239FBBE8000377BC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E5FC41B6239FBC11000377BC /* Project+Ext.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,7 +348,7 @@
 					};
 					E58C57E81DD8799D00348C65 = {
 						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E56460001D3B50B500AA6557;
 					};
@@ -536,13 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E50CD016239D9666008ABDDD /* CreateNewProjectViewControllerTests.swift in Sources */,
-				E50CD01A239DAA99008ABDDD /* EditExistingProjectViewControllerTests.swift in Sources */,
-				E5FC41B7239FBC11000377BC /* Project+Ext.swift in Sources */,
-				E590657420E3F4AF0028453D /* RealmTests.swift in Sources */,
-				E58C57F71DD879C200348C65 /* AudioRecorderTests.swift in Sources */,
-				E58C57F61DD879C200348C65 /* AudioPlayerTests.swift in Sources */,
-				E5152F4620E403760031572E /* ProjectTests.swift in Sources */,
+				E5A7991C25FCEDC200FF718C /* ComposifyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Composify;
@@ -689,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Composify;
 				SDKROOT = iphoneos;
@@ -774,7 +710,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -800,7 +736,7 @@
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComposifyTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
