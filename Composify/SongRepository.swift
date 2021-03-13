@@ -22,8 +22,8 @@ protocol SongRepository {
     func getRecordings(in section: Section) -> [Recording]
 }
 
-class SongRepositoryImpl: SongRepository {
+class SongRepositoryImpl: SongRepository, RecordingDaoInjectable {
     func getRecordings(in section: Section) -> [Recording] {
-        []
+        recordingDao.getRecordings(in: section)
     }
 }
