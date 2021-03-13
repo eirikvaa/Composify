@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 struct RecordingsView: View {
+    @StateObject private var audioPlayer = AudioPlayer()
     var recordings: [Recording]
 
     var body: some View {
@@ -18,11 +19,17 @@ struct RecordingsView: View {
                 ForEach(recordings, id: \.self) { recording in
                     HStack {
                         Button(action: {
-                            print("Play button was tapped.")
+                            audioPlayer.play(recording: recording)
                         }, label: {
-                            Image(systemName: "play.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                            if audioPlayer.recording == recording {
+                                Image(systemName: audioPlayer.isPlaying ? "stop.circle.fill" : "play.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            } else {
+                                Image(systemName: "play.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
                         })
                         .buttonStyle(PlainButtonStyle())
 
