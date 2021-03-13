@@ -143,11 +143,6 @@
 			children = (
 				E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */,
 				E595A7D725FC375F00F27283 /* HomeViewModel.swift */,
-				E595A7FA25FC422A00F27283 /* NewProject */,
-				E595A80125FCA78C00F27283 /* EditProject */,
-				E5A7994425FD2DF100FF718C /* SectionsPager */,
-				E5A7994625FD2E9C00FF718C /* Recordings */,
-				E547142025FC3615008DA65B /* Components */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -265,6 +260,11 @@
 			children = (
 				E547141E25FC3605008DA65B /* Main */,
 				E547141F25FC3609008DA65B /* Home */,
+				E595A7FA25FC422A00F27283 /* NewProject */,
+				E595A80125FCA78C00F27283 /* EditProject */,
+				E5A7994425FD2DF100FF718C /* SectionsPager */,
+				E5A7994625FD2E9C00FF718C /* Recordings */,
+				E547142025FC3615008DA65B /* Components */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
