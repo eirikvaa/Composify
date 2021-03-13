@@ -25,6 +25,7 @@ struct HomeView: View {
                         RecordButton {
                             print("Add recording to \(project.title)")
                         }
+                        .padding(.bottom, 20)
                     }
                     .padding()
                     .toolbar {

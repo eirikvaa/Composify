@@ -36,21 +36,18 @@ struct SectionsPager: View {
     var body: some View {
         Pager(page: page, data: sections, id: \.id) { section in
             VStack {
-                HStack {
-                    Text(section.title)
-                        .font(.title)
-                        .bold()
-                        .padding()
-                    Spacer()
-                }
+                SectionHeaderView(section: section)
 
-                switch viewModel.state {
-                case .recordings(let recordings):
-                    SectionPagerView(section: section, recordings: recordings)
-                case .noRecordings:
-                    Spacer()
-                    Text("No recordings, try recording some good stuff.")
-                    Spacer()
+                ZStack {
+                    Color.white
+                    VStack {
+                        switch viewModel.state {
+                        case .recordings(let recordings):
+                            RecordingsView(section: section, recordings: recordings)
+                        case .noRecordings:
+                            EmptyRecordingsView()
+                        }
+                    }
                 }
             }
             .onAppear {

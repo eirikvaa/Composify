@@ -59,11 +59,13 @@
 		E595A7DD25FC389B00F27283 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7DC25FC389B00F27283 /* SongRepository.swift */; };
 		E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7E425FC390B00F27283 /* RecordingDao.swift */; };
 		E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7EA25FC3BD800F27283 /* ProjectDao.swift */; };
-		E595A7F125FC3E2500F27283 /* SectionPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* SectionPagerView.swift */; };
+		E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* RecordingsView.swift */; };
 		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
 		E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7FB25FC423800F27283 /* NewProjectView.swift */; };
 		E595A80325FCA79C00F27283 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A80225FCA79C00F27283 /* EditProjectView.swift */; };
 		E595A80C25FCAE8800F27283 /* Parchment in Frameworks */ = {isa = PBXBuildFile; productRef = E595A80B25FCAE8800F27283 /* Parchment */; };
+		E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81525FCE19600F27283 /* SectionHeaderView.swift */; };
+		E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
@@ -201,10 +203,12 @@
 		E595A7DC25FC389B00F27283 /* SongRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		E595A7E425FC390B00F27283 /* RecordingDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDao.swift; sourceTree = "<group>"; };
 		E595A7EA25FC3BD800F27283 /* ProjectDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDao.swift; sourceTree = "<group>"; };
-		E595A7F025FC3E2500F27283 /* SectionPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPagerView.swift; sourceTree = "<group>"; };
+		E595A7F025FC3E2500F27283 /* RecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
 		E595A7F625FC3F6400F27283 /* SectionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDao.swift; sourceTree = "<group>"; };
 		E595A7FB25FC423800F27283 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		E595A80225FCA79C00F27283 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
+		E595A81525FCE19600F27283 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRecordingsView.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
@@ -400,7 +404,9 @@
 			isa = PBXGroup;
 			children = (
 				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
-				E595A7F025FC3E2500F27283 /* SectionPagerView.swift */,
+				E595A81525FCE19600F27283 /* SectionHeaderView.swift */,
+				E595A7F025FC3E2500F27283 /* RecordingsView.swift */,
+				E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */,
 				E547142125FC3641008DA65B /* RecordButton.swift */,
 			);
 			path = Components;
@@ -895,8 +901,9 @@
 				E53C0178212427F000F98E65 /* Collection+Ext.swift in Sources */,
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
+				E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
-				E595A7F125FC3E2500F27283 /* SectionPagerView.swift in Sources */,
+				E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
 				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
@@ -935,6 +942,7 @@
 				E589E71520F7B07300CF51FC /* Repository.swift in Sources */,
 				E51309FC239C81CB00C795B8 /* CreateNewProjectTableViewDataSource.swift in Sources */,
 				E523959321C681D400D3004F /* R+Images.swift in Sources */,
+				E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */,
 				E53C0176212427E000F98E65 /* UIView+Ext.swift in Sources */,
 				E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */,
 				E582893C21C6A2D200E438B5 /* AudioRecorderServiceError.swift in Sources */,

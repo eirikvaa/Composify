@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct SectionPagerView: View {
+struct RecordingsView: View {
     var section: Section
     var recordings: [Recording]
 
