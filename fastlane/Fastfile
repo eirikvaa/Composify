@@ -3,15 +3,15 @@ default_platform :ios
 platform :ios do
   desc "Runs all the tests"
   lane :test do
-    scan
+    run_tests(scheme: "Composify")
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-	sync_code_signing(type: "appstore")
-	build_app
-	upload_to_testflight
+	  sync_code_signing(type: "appstore")
+	  build_app
+	  upload_to_testflight
   end
 end
 

@@ -63,6 +63,7 @@
 		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
 		E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7FB25FC423800F27283 /* NewProjectView.swift */; };
 		E595A80325FCA79C00F27283 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A80225FCA79C00F27283 /* EditProjectView.swift */; };
+		E595A80C25FCAE8800F27283 /* Parchment in Frameworks */ = {isa = PBXBuildFile; productRef = E595A80B25FCAE8800F27283 /* Parchment */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
@@ -88,7 +89,6 @@
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CD44F3255F55C600608EAF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F2255F55C600608EAF /* Realm */; };
 		E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F4255F55C600608EAF /* RealmSwift */; };
-		E5CD44FA255F560600608EAF /* Parchment in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F9255F560600608EAF /* Parchment */; };
 		E5CFDBA91DD24E0D007252D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CFDBAB1DD24E0D007252D6 /* Main.storyboard */; };
 		E5D6BDF021125963009B2E9F /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDEF21125963009B2E9F /* AudioPlayerService.swift */; };
 		E5D6BDF221125976009B2E9F /* AudioPlayerServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6BDF121125976009B2E9F /* AudioPlayerServiceFactory.swift */; };
@@ -247,8 +247,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */,
-				E5CD44FA255F560600608EAF /* Parchment in Frameworks */,
 				E5A6BB9C255FEFA000BC7D32 /* SwiftUIPager in Frameworks */,
+				E595A80C25FCAE8800F27283 /* Parchment in Frameworks */,
 				E5CD44F3255F55C600608EAF /* Realm in Frameworks */,
 				E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */,
 			);
@@ -714,8 +714,8 @@
 			packageProductDependencies = (
 				E5CD44F2255F55C600608EAF /* Realm */,
 				E5CD44F4255F55C600608EAF /* RealmSwift */,
-				E5CD44F9255F560600608EAF /* Parchment */,
 				E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */,
+				E595A80B25FCAE8800F27283 /* Parchment */,
 			);
 			productName = Piece;
 			productReference = E56460011D3B50B500AA6557 /* Composify.app */;
@@ -774,8 +774,8 @@
 			mainGroup = E5645FF81D3B50B500AA6557;
 			packageReferences = (
 				E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */,
 				E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				E595A80A25FCAE8800F27283 /* XCRemoteSwiftPackageReference "Parchment" */,
 			);
 			productRefGroup = E56460021D3B50B500AA6557 /* Products */;
 			projectDirPath = "";
@@ -1283,6 +1283,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E595A80A25FCAE8800F27283 /* XCRemoteSwiftPackageReference "Parchment" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rechsteiner/Parchment";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
@@ -1299,17 +1307,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:rechsteiner/Parchment.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E595A80B25FCAE8800F27283 /* Parchment */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E595A80A25FCAE8800F27283 /* XCRemoteSwiftPackageReference "Parchment" */;
+			productName = Parchment;
+		};
 		E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E5A6BB9A255FEFA000BC7D32 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
@@ -1324,11 +1329,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E5CD44F1255F55C600608EAF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
-		};
-		E5CD44F9255F560600608EAF /* Parchment */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E5CD44F8255F560600608EAF /* XCRemoteSwiftPackageReference "Parchment" */;
-			productName = Parchment;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

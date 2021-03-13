@@ -42,6 +42,6 @@ private extension AudioPlayerTests {
         let section = createSection(titled: "UnitTestSection", project: project)
         let recording = createRecording(titled: "UnitTestRecording", section: section)
 
-        return (project, section, recording)
+        return recording
     }
 }
