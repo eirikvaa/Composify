@@ -17,32 +17,35 @@ struct RecordingsView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 ForEach(recordings, id: \.self) { recording in
-                    HStack {
-                        Button(action: {
-                            if audioPlayer.isPlaying {
+                    Button(action: {
+                        if audioPlayer.isPlaying {
+                            if audioPlayer.recording != recording {
                                 audioPlayer.stopPlaying()
-                            } else {
                                 audioPlayer.play(recording: recording)
-                            }
-                        }, label: {
-                            if audioPlayer.recording == recording {
-                                Image(systemName: audioPlayer.isPlaying ? "stop.circle.fill" : "play.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
                             } else {
-                                Image(systemName: "play.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
+                                audioPlayer.stopPlaying()
                             }
-                        })
-                        .buttonStyle(PlainButtonStyle())
+                        } else {
+                            audioPlayer.play(recording: recording)
+                        }
+                    }, label: {
+                        if audioPlayer.recording == recording {
+                            Image(systemName: audioPlayer.isPlaying ? "stop.circle.fill" : "play.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        } else {
+                            Image(systemName: "play.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
 
                         Text(recording.title)
                             .foregroundColor(.white)
                             .font(.body)
 
                         Spacer()
-                    }
+                    })
+                    .buttonStyle(PlainButtonStyle())
                     .padding()
                     .background(Color.gray.opacity(0.7))
                     .cornerRadius(10.0)
