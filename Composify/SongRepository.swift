@@ -19,10 +19,21 @@ extension SongRepositoryInjectable {
 }
 
 protocol SongRepository {
+    func getProjects() -> [Project]
+    func getSections(in project: Project) -> [Section]
     func getRecordings(in section: Section) -> [Recording]
 }
 
-class SongRepositoryImpl: SongRepository, RecordingDaoInjectable {
+class SongRepositoryImpl: SongRepository,
+                          ProjectDaoInjectable,
+                          SectionDaoInjectable,
+                          RecordingDaoInjectable {
+    func getProjects() -> [Project] {
+        projectDao.getProjects()
+    }
+    func getSections(in project: Project) -> [Section] {
+        sectionDao.getSections(in: project)
+    }
     func getRecordings(in section: Section) -> [Recording] {
         recordingDao.getRecordings(in: section)
     }

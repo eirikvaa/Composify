@@ -58,6 +58,9 @@
 		E595A7D825FC375F00F27283 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7D725FC375F00F27283 /* HomeViewModel.swift */; };
 		E595A7DD25FC389B00F27283 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7DC25FC389B00F27283 /* SongRepository.swift */; };
 		E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7E425FC390B00F27283 /* RecordingDao.swift */; };
+		E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7EA25FC3BD800F27283 /* ProjectDao.swift */; };
+		E595A7F125FC3E2500F27283 /* SectionPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* SectionPagerView.swift */; };
+		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
@@ -195,6 +198,9 @@
 		E595A7D725FC375F00F27283 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E595A7DC25FC389B00F27283 /* SongRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
 		E595A7E425FC390B00F27283 /* RecordingDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDao.swift; sourceTree = "<group>"; };
+		E595A7EA25FC3BD800F27283 /* ProjectDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDao.swift; sourceTree = "<group>"; };
+		E595A7F025FC3E2500F27283 /* SectionPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPagerView.swift; sourceTree = "<group>"; };
+		E595A7F625FC3F6400F27283 /* SectionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDao.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
@@ -388,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
+				E595A7F025FC3E2500F27283 /* SectionPagerView.swift */,
 				E547142125FC3641008DA65B /* RecordButton.swift */,
 			);
 			path = Components;
@@ -545,6 +552,8 @@
 		E595A7E325FC38FB00F27283 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				E595A7EA25FC3BD800F27283 /* ProjectDao.swift */,
+				E595A7F625FC3F6400F27283 /* SectionDao.swift */,
 				E595A7E425FC390B00F27283 /* RecordingDao.swift */,
 			);
 			name = Database;
@@ -864,9 +873,11 @@
 				E582894021C6A30400E438B5 /* AudioPlayable.swift in Sources */,
 				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
 				E52A14D8239B29B3006AD675 /* BartyCrouch.swift in Sources */,
+				E595A7F125FC3E2500F27283 /* SectionPagerView.swift in Sources */,
 				E5E2315A2122198D00B55583 /* AdministrateProjectTableViewDataSource.swift in Sources */,
 				E51309F9239C819200C795B8 /* EditExistingProjectTableViewDataSource.swift in Sources */,
 				E51309F3239C63D900C795B8 /* CreateNewProjectViewController.swift in Sources */,
+				E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */,
 				E51E8BC61E30905D0022CF71 /* RecordingTableViewCell.swift in Sources */,
 				E5E2315C21221B5600B55583 /* AdministrateProjectTableViewDelegate.swift in Sources */,
 				E5BB2EAF21CEC96300CF6381 /* ComposifyObject.swift in Sources */,
@@ -881,6 +892,7 @@
 				E5A6BBAD255FF15B00BC7D32 /* LibraryViewController.swift in Sources */,
 				E5A6BBAE255FF15B00BC7D32 /* RecordAudioButton.swift in Sources */,
 				E5DB68BA20989ACB00ED00CB /* ButtonTableViewCell.swift in Sources */,
+				E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */,
 				E5A6BBAF255FF15B00BC7D32 /* LibraryPageControl.swift in Sources */,
 				E582893E21C6A2EE00E438B5 /* AudioPlayerServiceError.swift in Sources */,
 				E582895121C6C64D00E438B5 /* R+ViewControllerIdentifiers.swift in Sources */,

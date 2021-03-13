@@ -19,9 +19,7 @@ extension RecordingDaoInjectable {
     }
 }
 
-class RecordingDaoInjectableImpl: RecordingDaoInjectable {
-    
-}
+class RecordingDaoInjectableImpl: RecordingDaoInjectable {}
 
 protocol RecordingDao {
     func getRecordings(in section: Section) -> [Recording]
@@ -33,7 +31,6 @@ class RecordingDaoImpl: RecordingDao {
         let recordings = realm
             .objects(Recording.self)
             .filter { $0.section == section }
-        
         return Array(recordings)
     }
 }

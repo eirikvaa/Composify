@@ -10,18 +10,23 @@ import SwiftUI
 import SwiftUIPager
 
 struct HomeView: View {
-    @State private var page = 0
-    private var items = Array(0..<5)
-    private var recordings = Array(0..<5)
-    private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
+    @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
-                SectionsPager()
-                Spacer()
-                RecordButton {
-                    print("Start recording!")
+                if let currentProject = viewModel.currentProject {
+                    if let sections = viewModel.getSections(in: currentProject) {
+                        SectionsPager(sections: sections)
+                        Spacer()
+                        RecordButton {
+                            print("Start recording!")
+                        }
+                    } else {
+                        Text("No sections in project \(currentProject.title)")
+                    }
+                } else {
+                    Text("No projects to show.")
                 }
             }
             .navigationBarTitle("Composify", displayMode: .inline)

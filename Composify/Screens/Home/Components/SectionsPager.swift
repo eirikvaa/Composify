@@ -9,54 +9,31 @@
 import SwiftUI
 import SwiftUIPager
 
+class SectionsPagerViewModel: ObservableObject, SongRepositoryInjectable {
+    @Published var recordings: [Recording] = []
+
+    func loadRecordings(from section: Section) {
+        recordings = songRepository.getRecordings(in: section)
+    }
+}
+
 struct SectionsPager: View {
     @StateObject private var page: Page = .first()
-    private var items = Array(0..<5)
-    private var recordings = Array(0..<Int.random(in: 0..<5))
-    private var sections = ["Intro", "Verse", "Solo", "Chorus", "Outro"]
+    @StateObject private var viewModel = SectionsPagerViewModel()
+    var sections: [Section]
 
     var body: some View {
-        Pager(page: page, data: items, id: \.self) { index in
-            ScrollView {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(sections[index])
-                            .font(.title)
-                            .bold()
-                            .padding()
-                        Spacer()
-                    }
-                    ForEach(recordings, id: \.self) { index in
-                        HStack {
-                            Button(action: {
-                                print("Play button was tapped.")
-                            }, label: {
-                                Image(systemName: "play.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            })
-                            .buttonStyle(PlainButtonStyle())
-
-                            Text("Recording \(index)")
-                                .foregroundColor(.white)
-                                .font(.body)
-
-                            Spacer()
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.7))
-                        .cornerRadius(10.0)
-                    }
-                    .padding(.horizontal)
+        Pager(page: page, data: sections, id: \.id) { section in
+            SectionPagerView(section: section, recordings: viewModel.recordings)
+                .onAppear {
+                    viewModel.loadRecordings(from: section)
                 }
-            }
         }
-        .loopPages()
     }
 }
 
 struct SectionsPager_Previews: PreviewProvider {
     static var previews: some View {
-        SectionsPager()
+        SectionsPager(sections: [])
     }
 }

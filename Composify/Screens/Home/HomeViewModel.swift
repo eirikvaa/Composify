@@ -8,6 +8,18 @@
 
 import Foundation
 
-class HomeViewModel: ObservableObject {
-    
+class HomeViewModel: ObservableObject, SongRepositoryInjectable {
+    @Published var currentProject: Project?
+
+    init(currentProject: Project? = nil) {
+        self.currentProject = currentProject
+    }
+
+    func getProjects() -> [Project] {
+        songRepository.getProjects()
+    }
+
+    func getSections(in project: Project) -> [Section] {
+        songRepository.getSections(in: project)
+    }
 }
