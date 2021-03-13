@@ -201,10 +201,11 @@
 			isa = PBXGroup;
 			children = (
 				E56460361D3B54B000AA6557 /* App */,
-				E595A7E325FC38FB00F27283 /* Database */,
-				E595A7DB25FC384A00F27283 /* Domain */,
+				E523959A21C6824300D3004F /* Resources */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
-				E56460391D3B54C400AA6557 /* Model */,
+				E595A7DB25FC384A00F27283 /* Domain */,
+				E5A7990E25FCECC100FF718C /* Model */,
+				E595A7E325FC38FB00F27283 /* Database */,
 			);
 			path = Composify;
 			sourceTree = "<group>";
@@ -222,15 +223,6 @@
 			name = App;
 			sourceTree = "<group>";
 		};
-		E56460391D3B54C400AA6557 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E523959A21C6824300D3004F /* Resources */,
-				E576D93E1D58663E006F5D62 /* Realm */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		E56C327B1FF6FB8A00AB8375 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,16 +232,6 @@
 				E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E576D93E1D58663E006F5D62 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
-				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
-				E5F60B831D5B1535000B4F7F /* Recording.swift */,
-			);
-			name = Realm;
 			sourceTree = "<group>";
 		};
 		E58C57EA1DD8799D00348C65 /* ComposifyTests */ = {
@@ -304,6 +286,16 @@
 				E547141F25FC3609008DA65B /* Home */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		E5A7990E25FCECC100FF718C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5F60B7B1D5B1417000B4F7F /* Project.swift */,
+				E5F60B7F1D5B14E6000B4F7F /* Section.swift */,
+				E5F60B831D5B1535000B4F7F /* Recording.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E5FC41B1239FB4C4000377BC /* View Controlles */ = {
