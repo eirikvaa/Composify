@@ -145,6 +145,8 @@
 				E595A7D725FC375F00F27283 /* HomeViewModel.swift */,
 				E595A7FA25FC422A00F27283 /* NewProject */,
 				E595A80125FCA78C00F27283 /* EditProject */,
+				E5A7994425FD2DF100FF718C /* SectionsPager */,
+				E5A7994625FD2E9C00FF718C /* Recordings */,
 				E547142025FC3615008DA65B /* Components */,
 			);
 			path = Home;
@@ -153,10 +155,6 @@
 		E547142025FC3615008DA65B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
-				E595A81525FCE19600F27283 /* SectionHeaderView.swift */,
-				E595A7F025FC3E2500F27283 /* RecordingsView.swift */,
-				E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */,
 				E547142125FC3641008DA65B /* RecordButton.swift */,
 				E5A7993A25FCF1D100FF718C /* AudioRecorder.swift */,
 				E5A7994025FD23C400FF718C /* AudioPlayer.swift */,
@@ -279,6 +277,32 @@
 				E5F60B831D5B1535000B4F7F /* Recording.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E5A7994425FD2DF100FF718C /* SectionsPager */ = {
+			isa = PBXGroup;
+			children = (
+				E57F4E71255FF57800CE7030 /* SectionsPager.swift */,
+				E5A7994525FD2E1200FF718C /* Components */,
+			);
+			path = SectionsPager;
+			sourceTree = "<group>";
+		};
+		E5A7994525FD2E1200FF718C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E595A81525FCE19600F27283 /* SectionHeaderView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E5A7994625FD2E9C00FF718C /* Recordings */ = {
+			isa = PBXGroup;
+			children = (
+				E595A7F025FC3E2500F27283 /* RecordingsView.swift */,
+				E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */,
+			);
+			path = Recordings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
