@@ -13,28 +13,4 @@ import Foundation
 struct R {
     /// Localizations
     struct Loc {}
-
-    /// Images
-    struct Images {}
-
-    /// Cell identfiers
-    struct Cells {}
-
-    /// Userdefault keys
-    struct UserDefaults {}
-
-    /// Custom colors
-    struct Colors {}
-
-    /// Database keys
-    struct DatabaseKeys {}
-
-    /// Storyboards
-    struct Storyboards {}
-
-    /// View controller identifiers
-    struct ViewControllerIdentifiers {}
-
-    /// Urls
-    struct URLs {}
 }

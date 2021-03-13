@@ -90,7 +90,6 @@
 		E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyTests.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+URLs.swift"; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5E6DC8021C445650061254B /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Loc.swift"; sourceTree = "<group>"; };
@@ -128,7 +127,6 @@
 			children = (
 				E5E6DC8021C445650061254B /* R.swift */,
 				E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */,
-				E5BB2EAC21CEC49100CF6381 /* R+URLs.swift */,
 				E52A14D7239B29B3006AD675 /* BartyCrouch.swift */,
 			);
 			path = Resources;
@@ -443,7 +441,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+			shellScript = "if which bartycrouch > /dev/null; then\n    # bartycrouch update -x\n    # bartycrouch lint -x\n    echo \"Nothing to do for BartyCrouch right now.\"\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
