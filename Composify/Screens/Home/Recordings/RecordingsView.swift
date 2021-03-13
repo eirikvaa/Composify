@@ -19,7 +19,11 @@ struct RecordingsView: View {
                 ForEach(recordings, id: \.self) { recording in
                     HStack {
                         Button(action: {
-                            audioPlayer.play(recording: recording)
+                            if audioPlayer.isPlaying {
+                                audioPlayer.stopPlaying()
+                            } else {
+                                audioPlayer.play(recording: recording)
+                            }
                         }, label: {
                             if audioPlayer.recording == recording {
                                 Image(systemName: audioPlayer.isPlaying ? "stop.circle.fill" : "play.circle.fill")
