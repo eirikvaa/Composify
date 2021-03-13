@@ -23,6 +23,7 @@ class RecordingDaoInjectableImpl: RecordingDaoInjectable {}
 
 protocol RecordingDao {
     func getRecordings(in section: Section) -> [Recording]
+    func save(recording: Recording, to section: Section)
 }
 
 class RecordingDaoImpl: RecordingDao {
@@ -32,5 +33,13 @@ class RecordingDaoImpl: RecordingDao {
             .objects(Recording.self)
             .filter { $0.section == section }
         return Array(recordings)
+    }
+    
+    func save(recording: Recording, to section: Section) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(recording)
+            section.recordings.append(recording)
+        }
     }
 }

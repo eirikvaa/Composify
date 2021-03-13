@@ -11,9 +11,9 @@ import SwiftUIPager
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var audioRecorder = AudioRecorder()
     @State private var isShowingNewProjectView = false
     @State private var isShowingEditProjectView = false
-    @State private var isRecording = false
 
     var body: some View {
         NavigationView {
@@ -23,8 +23,12 @@ struct HomeView: View {
                     VStack {
                         SectionsPager(sections: sections)
                         Spacer()
-                        RecordButton(isRecording: $isRecording) {
-                            print("Add recording to \(project.title)")
+                        RecordButton(isRecording: $audioRecorder.isRecording) {
+                            if audioRecorder.isRecording {
+                                audioRecorder.stopRecording()
+                            } else {
+                                audioRecorder.startRecording()
+                            }
                         }
                         .padding(.bottom, 20)
                     }

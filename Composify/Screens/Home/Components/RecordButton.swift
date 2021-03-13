@@ -10,11 +10,11 @@ import SwiftUI
 
 struct RecordButton: View {
     @Binding var isRecording: Bool
-    let recordAction: (() -> Void)
+    let tapAction: (() -> Void)
 
     var body: some View {
         Button(action: {
-            recordAction()
+            tapAction()
         }, label: {
             if isRecording {
                 Image(systemName: "stop.circle.fill")

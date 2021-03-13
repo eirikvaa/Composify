@@ -24,6 +24,7 @@ protocol SongRepository {
     func getRecordings(in section: Section) -> [Recording]
     func save(project: Project)
     func save(section: Section, to project: Project)
+    func save(recording: Recording, to section: Section)
     func update(project: Project)
     func update(section: Section)
 }
@@ -56,5 +57,9 @@ class SongRepositoryImpl: SongRepository,
 
     func save(section: Section, to project: Project) {
         sectionDao.save(section: section, to: project)
+    }
+    
+    func save(recording: Recording, to section: Section) {
+        recordingDao.save(recording: recording, to: section)
     }
 }
