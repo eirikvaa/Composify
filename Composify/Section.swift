@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class Section: Object, ComposifyObject {
+final class Section: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
@@ -19,7 +19,6 @@ final class Section: Object, ComposifyObject {
 
     init(title: String, project: Project?) {
         self.title = title
-//        self.index = project?.nextSectionIndex ?? 0
         self.project = project
     }
 
@@ -31,19 +30,6 @@ final class Section: Object, ComposifyObject {
         "id"
     }
 }
-
-//extension UserDefaults {
-//    func lastSection() -> Section? {
-//        guard let realm = try? Realm() else {
-//            return nil
-//        }
-//
-//        guard let id = UserDefaults.standard.string(
-//                forKey: R.UserDefaults.lastSectionID
-//        ) else { return nil }
-//        return realm.object(ofType: Section.self, forPrimaryKey: id)
-//    }
-//}
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
