@@ -14,18 +14,25 @@ struct HomeView: View {
     @StateObject private var audioRecorder = AudioRecorder()
     @State private var isShowingNewProjectView = false
     @State private var isShowingEditProjectView = false
+    @State private var currentSection = Section()
 
     var body: some View {
         NavigationView {
             VStack {
-                switch viewModel.state {
-                case let .loaded(project, sections):
+                switch (viewModel.currentProject, viewModel.currentSection) {
+                case let (project?, .some):
                     VStack {
-                        SectionsPager(sections: sections)
+                        SectionsPager(sections: Array(project.sections), currentSection: $currentSection)
                         Spacer()
                         RecordButton(isRecording: $audioRecorder.isRecording) {
                             if audioRecorder.isRecording {
-                                audioRecorder.stopRecording()
+                                let url = audioRecorder.stopRecording()
+                                let recording = Recording(
+                                    title: url.lastPathComponent,
+                                    section: currentSection,
+                                    url: url.absoluteString
+                                )
+                                viewModel.save(recording: recording)
                             } else {
                                 audioRecorder.startRecording()
                             }
@@ -50,7 +57,7 @@ struct HomeView: View {
                             viewModel.loadData()
                         }
                     }
-                case .noSections(let project):
+                case (let project?, nil):
                     Button(action: {
                         isShowingEditProjectView = true
                     }, label: {
@@ -64,7 +71,7 @@ struct HomeView: View {
                                 viewModel.loadData()
                             }
                         }
-                case .noProjects:
+                case (nil, nil):
                     Button(action: {
                         isShowingNewProjectView = true
                     }, label: {
@@ -73,6 +80,8 @@ struct HomeView: View {
                     .sheet(isPresented: $isShowingNewProjectView) {
                         NewProjectView()
                     }
+                case (nil, .some):
+                    fatalError("Impossible ot have a section without a project.")
                 }
             }
             .navigationBarTitle("Composify", displayMode: .inline)

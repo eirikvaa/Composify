@@ -34,7 +34,7 @@ class RecordingDaoImpl: RecordingDao {
             .filter { $0.section == section }
         return Array(recordings)
     }
-    
+
     func save(recording: Recording, to section: Section) {
         let realm = try! Realm()
         try! realm.write {

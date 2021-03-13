@@ -9,48 +9,23 @@
 import Foundation
 
 class HomeViewModel: ObservableObject, SongRepositoryInjectable {
-    enum State {
-        case noProjects
-        case noSections(project: Project)
-        case loaded(project: Project, sections: [Section])
-    }
-
-    @Published var state: State = .noProjects
     @Published var currentProject: Project?
+    @Published var currentSection: Section?
 
-    init(currentProject: Project? = nil) {
+    init(currentProject: Project? = nil, currentSection: Section? = nil) {
         self.currentProject = currentProject
-    }
-
-    func getProjects() -> [Project] {
-        songRepository.getProjects()
-    }
-
-    func getSections(in project: Project) -> [Section] {
-        songRepository.getSections(in: project)
+        self.currentSection = currentSection
     }
 
     func loadData() {
-        state = .noProjects
-
-        let projects = getProjects()
-
-        if projects.isEmpty {
-            return
-        }
-
         // TODO: Remember the current project
-        guard let currentProject = projects.first else {
-            return
+        currentProject = songRepository.getProjects().first
+        currentSection = currentProject?.sections.first
+    }
+
+    func save(recording: Recording) {
+        if let currentSection = currentSection {
+            songRepository.save(recording: recording, to: currentSection)
         }
-
-        let sections = getSections(in: currentProject)
-
-        if sections.isEmpty {
-            state = .noSections(project: currentProject)
-            return
-        }
-
-        state = .loaded(project: currentProject, sections: sections)
     }
 }

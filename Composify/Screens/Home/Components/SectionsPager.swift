@@ -32,6 +32,7 @@ struct SectionsPager: View {
     @StateObject private var page: Page = .first()
     @StateObject private var viewModel = SectionsPagerViewModel()
     var sections: [Section]
+    @Binding var currentSection: Section
 
     var body: some View {
         Pager(page: page, data: sections, id: \.id) { section in
@@ -41,24 +42,23 @@ struct SectionsPager: View {
                 ZStack {
                     Color.white
                     VStack {
-                        switch viewModel.state {
-                        case .recordings(let recordings):
-                            RecordingsView(section: section, recordings: recordings)
-                        case .noRecordings:
+                        if section.recordings.isEmpty {
                             EmptyRecordingsView()
+                        } else {
+                            RecordingsView(recordings: Array(section.recordings))
                         }
                     }
                 }
             }
-            .onAppear {
-                viewModel.loadRecordings(from: section)
-            }
+        }
+        .onPageChanged { index in
+            currentSection = sections[index]
         }
     }
 }
 
 struct SectionsPager_Previews: PreviewProvider {
     static var previews: some View {
-        SectionsPager(sections: [])
+        SectionsPager(sections: [], currentSection: .constant(Section()))
     }
 }

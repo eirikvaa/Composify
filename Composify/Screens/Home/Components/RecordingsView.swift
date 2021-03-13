@@ -10,7 +10,6 @@ import Foundation
 import SwiftUI
 
 struct RecordingsView: View {
-    var section: Section
     var recordings: [Recording]
 
     var body: some View {

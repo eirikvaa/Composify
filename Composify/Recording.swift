@@ -16,11 +16,13 @@ final class Recording: Object {
     @objc dynamic var section: Section?
     @objc dynamic var dateCreated = Date()
     @objc dynamic var fileExtension = "caf"
+    @objc dynamic var url = ""
 
-    init(title: String, section: Section?) {
+    init(title: String, section: Section?, url: String) {
         self.title = title
         self.section = section
         self.project = section?.project
+        self.url = url
     }
 
     override required init() {

@@ -12,6 +12,10 @@ import SwiftUI
 class AudioRecorder: ObservableObject {
     @Published var isRecording = false
     private var audioRecorder: AVAudioRecorder!
+    private var recordingTitle = String(describing: Date())
+    private var recordingUrl: URL {
+        createFileAndGetURL(name: recordingTitle)
+    }
 
     func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
@@ -30,10 +34,8 @@ class AudioRecorder: ObservableObject {
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
 
-        let url = createFileAndGetURL(name: Date().description)
-
         do {
-            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: recordingUrl, settings: settings)
             audioRecorder.prepareToRecord()
             audioRecorder.record()
             isRecording = true
@@ -42,9 +44,11 @@ class AudioRecorder: ObservableObject {
         }
     }
 
-    func stopRecording() {
+    func stopRecording() -> URL {
         audioRecorder.stop()
         isRecording = false
+
+        return recordingUrl
     }
 }
 

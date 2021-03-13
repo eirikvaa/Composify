@@ -58,7 +58,7 @@ class SongRepositoryImpl: SongRepository,
     func save(section: Section, to project: Project) {
         sectionDao.save(section: section, to: project)
     }
-    
+
     func save(recording: Recording, to section: Section) {
         recordingDao.save(recording: recording, to: section)
     }
