@@ -32,7 +32,7 @@ class SectionDaoImpl: SectionDao {
         let sections = realm.objects(Section.self).filter { $0.project == project }
         return Array(sections)
     }
-    
+
     func save(section: Section, to project: Project) {
         let realm = try! Realm()
         try! realm.write {
