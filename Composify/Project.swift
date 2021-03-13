@@ -13,7 +13,7 @@ final class Project: Object, ComposifyObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
-    let sections = List<Section>()
+    var sections = List<Section>()
 
     init(title: String) {
         self.title = title

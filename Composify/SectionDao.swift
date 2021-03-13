@@ -23,6 +23,7 @@ class SectionDaoInjectableImpl: SectionDaoInjectable {}
 
 protocol SectionDao {
     func getSections(in project: Project) -> [Section]
+    func save(section: Section, to project: Project)
 }
 
 class SectionDaoImpl: SectionDao {
@@ -30,5 +31,13 @@ class SectionDaoImpl: SectionDao {
         let realm = try! Realm()
         let sections = realm.objects(Section.self).filter { $0.project == project }
         return Array(sections)
+    }
+    
+    func save(section: Section, to project: Project) {
+        let realm = try! Realm()
+        try! realm.write {
+            section.project = project
+            project.sections.append(section)
+        }
     }
 }
