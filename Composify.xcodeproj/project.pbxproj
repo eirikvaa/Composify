@@ -89,8 +89,6 @@
 		E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyTests.swift; sourceTree = "<group>"; };
 		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E5E6DC8021C445650061254B /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
-		E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Loc.swift"; sourceTree = "<group>"; };
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
@@ -123,8 +121,6 @@
 		E523959A21C6824300D3004F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E5E6DC8021C445650061254B /* R.swift */,
-				E5ED6DAB1F8AB48A002788F7 /* R+Loc.swift */,
 				E52A14D7239B29B3006AD675 /* BartyCrouch.swift */,
 			);
 			path = Resources;
