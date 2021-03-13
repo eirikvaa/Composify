@@ -19,7 +19,7 @@ final class Section: Object, ComposifyObject {
 
     init(title: String, project: Project?) {
         self.title = title
-        self.index = project?.nextSectionIndex ?? 0
+//        self.index = project?.nextSectionIndex ?? 0
         self.project = project
     }
 
@@ -28,22 +28,22 @@ final class Section: Object, ComposifyObject {
     }
 
     override static func primaryKey() -> String? {
-        R.DatabaseKeys.id
+        "id"
     }
 }
 
-extension UserDefaults {
-    func lastSection() -> Section? {
-        guard let realm = try? Realm() else {
-            return nil
-        }
-
-        guard let id = UserDefaults.standard.string(
-                forKey: R.UserDefaults.lastSectionID
-        ) else { return nil }
-        return realm.object(ofType: Section.self, forPrimaryKey: id)
-    }
-}
+//extension UserDefaults {
+//    func lastSection() -> Section? {
+//        guard let realm = try? Realm() else {
+//            return nil
+//        }
+//
+//        guard let id = UserDefaults.standard.string(
+//                forKey: R.UserDefaults.lastSectionID
+//        ) else { return nil }
+//        return realm.object(ofType: Section.self, forPrimaryKey: id)
+//    }
+//}
 
 extension Section: Comparable {
     static func < (lhs: Section, rhs: Section) -> Bool {
