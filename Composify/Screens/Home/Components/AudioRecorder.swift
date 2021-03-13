@@ -12,9 +12,7 @@ import SwiftUI
 class AudioRecorder: ObservableObject {
     @Published var isRecording = false
     private var audioRecorder: AVAudioRecorder!
-    private var recordingTitle: String {
-        UUID().uuidString
-    }
+    private var recordingTitle = UUID().uuidString
     private var recordingUrl: URL {
         createFileAndGetURL(name: recordingTitle)
     }
@@ -50,7 +48,11 @@ class AudioRecorder: ObservableObject {
         audioRecorder.stop()
         isRecording = false
 
-        return recordingUrl
+        // Reset the recording title so we don't overwrite recordings
+        let previousRecordingURL = recordingUrl
+        recordingTitle = UUID().uuidString
+
+        return previousRecordingURL
     }
 }
 
