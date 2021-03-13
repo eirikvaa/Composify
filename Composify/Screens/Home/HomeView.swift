@@ -12,6 +12,7 @@ import SwiftUIPager
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var isShowingNewProjectView = false
+    @State private var isShowingEditProjectView = false
 
     var body: some View {
         NavigationView {
@@ -24,7 +25,19 @@ struct HomeView: View {
                         print("Add recording to \(project.title)")
                     }
                 case .noSections(let project):
-                    Text("No sections in project \(project.title)")
+                    Button(action: {
+                        isShowingEditProjectView = true
+                    }, label: {
+                        Text("Edit \(project.title)")
+                    })
+                        .sheet(isPresented: $isShowingEditProjectView) {
+                            EditProjectView(project: Binding<Project>(
+                                                get: { project },
+                                                set: { _ in })
+                            ) { _ in
+                                viewModel.loadData()
+                            }
+                        }
                 case .noProjects:
                     Button(action: {
                         isShowingNewProjectView = true
