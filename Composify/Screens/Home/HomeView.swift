@@ -13,6 +13,7 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var isShowingNewProjectView = false
     @State private var isShowingEditProjectView = false
+    @State private var isRecording = false
 
     var body: some View {
         NavigationView {
@@ -22,7 +23,7 @@ struct HomeView: View {
                     VStack {
                         SectionsPager(sections: sections)
                         Spacer()
-                        RecordButton {
+                        RecordButton(isRecording: $isRecording) {
                             print("Add recording to \(project.title)")
                         }
                         .padding(.bottom, 20)

@@ -9,26 +9,39 @@
 import SwiftUI
 
 struct RecordButton: View {
+    @Binding var isRecording: Bool
     let recordAction: (() -> Void)
 
     var body: some View {
         Button(action: {
             recordAction()
         }, label: {
-            Text("Record")
-                .padding()
-                .foregroundColor(.white)
+            if isRecording {
+                Image(systemName: "stop.circle.fill")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.red)
+            } else {
+                Image(systemName: "record.circle.fill")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.red)
+            }
         })
-        .frame(width: 200)
-        .background(Color.red)
-        .cornerRadius(4.0)
+        .clipShape(Circle())
     }
 }
 
 struct RecordButton_Previews: PreviewProvider {
     static var previews: some View {
-        RecordButton {
-            print("Start recording!")
+        Group {
+            RecordButton(isRecording: .constant(false)) {
+                print("Start recording!")
+            }
+            RecordButton(isRecording: .constant(true)) {
+                print("Start recording!")
+            }
         }
+        .previewLayout(.sizeThatFits)
     }
 }
