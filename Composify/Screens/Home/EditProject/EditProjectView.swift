@@ -27,6 +27,15 @@ struct EditProjectView: View {
 
     var saveAction: ((Project) -> Void)
 
+    init(project: Binding<Project>, saveAction: @escaping ((Project) -> Void)) {
+        self._project = project
+        self.saveAction = saveAction
+
+        self._addedSections = State(
+            initialValue: Array(project.wrappedValue.sections)
+        )
+    }
+
     var body: some View {
         NavigationView {
             List {

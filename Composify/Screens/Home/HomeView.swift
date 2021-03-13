@@ -19,10 +19,30 @@ struct HomeView: View {
             VStack {
                 switch viewModel.state {
                 case let .loaded(project, sections):
-                    SectionsPager(sections: sections)
-                    Spacer()
-                    RecordButton {
-                        print("Add recording to \(project.title)")
+                    VStack {
+                        SectionsPager(sections: sections)
+                        Spacer()
+                        RecordButton {
+                            print("Add recording to \(project.title)")
+                        }
+                    }
+                    .padding()
+                    .toolbar {
+                        ToolbarItem(placement: .bottomBar) {
+                            Button(action: {
+                                isShowingEditProjectView = true
+                            }, label: {
+                                Text("Edit Project")
+                            })
+                        }
+                    }
+                    .sheet(isPresented: $isShowingEditProjectView) {
+                        EditProjectView(project: Binding<Project>(
+                                            get: { project },
+                                            set: { _ in })
+                        ) { _ in
+                            viewModel.loadData()
+                        }
                     }
                 case .noSections(let project):
                     Button(action: {
