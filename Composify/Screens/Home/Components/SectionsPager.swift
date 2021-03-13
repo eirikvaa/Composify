@@ -10,10 +10,21 @@ import SwiftUI
 import SwiftUIPager
 
 class SectionsPagerViewModel: ObservableObject, SongRepositoryInjectable {
-    @Published var recordings: [Recording] = []
+    enum State {
+        case noRecordings
+        case recordings([Recording])
+    }
+    @Published var state: State = .noRecordings
 
     func loadRecordings(from section: Section) {
-        recordings = songRepository.getRecordings(in: section)
+        let recordings = songRepository.getRecordings(in: section)
+
+        if recordings.isEmpty {
+            state = .noRecordings
+            return
+        }
+
+        state = .recordings(recordings)
     }
 }
 
@@ -24,10 +35,27 @@ struct SectionsPager: View {
 
     var body: some View {
         Pager(page: page, data: sections, id: \.id) { section in
-            SectionPagerView(section: section, recordings: viewModel.recordings)
-                .onAppear {
-                    viewModel.loadRecordings(from: section)
+            VStack {
+                HStack {
+                    Text(section.title)
+                        .font(.title)
+                        .bold()
+                        .padding()
+                    Spacer()
                 }
+
+                switch viewModel.state {
+                case .recordings(let recordings):
+                    SectionPagerView(section: section, recordings: recordings)
+                case .noRecordings:
+                    Spacer()
+                    Text("No recordings, try recording some good stuff.")
+                    Spacer()
+                }
+            }
+            .onAppear {
+                viewModel.loadRecordings(from: section)
+            }
         }
     }
 }

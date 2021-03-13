@@ -16,6 +16,10 @@ class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
     func save(section: Section, to project: Project) {
         songRepository.save(section: section, to: project)
     }
+
+    func update(section: Section) {
+        songRepository.update(section: section)
+    }
 }
 
 struct EditProjectView: View {
@@ -51,9 +55,12 @@ struct EditProjectView: View {
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("New Project")
             .navigationBarItems(leading: Button(action: {
-                addedSections.forEach {
-                    viewModel.save(section: $0, to: project)
-                }
+                addedSections
+                    .filter { !project.sections.contains($0) }
+                    .forEach { viewModel.save(section: $0, to: project) }
+                addedSections
+                    .filter { project.sections.contains($0) }
+                    .forEach { viewModel.update(section: $0) }
                 viewModel.update(project: project)
                 saveAction(project)
                 presentationMode.wrappedValue.dismiss()

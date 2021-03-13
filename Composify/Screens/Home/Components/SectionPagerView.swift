@@ -16,13 +16,6 @@ struct SectionPagerView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                HStack {
-                    Text(section.title)
-                        .font(.title)
-                        .bold()
-                        .padding()
-                    Spacer()
-                }
                 ForEach(recordings, id: \.self) { recording in
                     HStack {
                         Button(action: {

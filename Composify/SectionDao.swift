@@ -24,6 +24,7 @@ class SectionDaoInjectableImpl: SectionDaoInjectable {}
 protocol SectionDao {
     func getSections(in project: Project) -> [Section]
     func save(section: Section, to project: Project)
+    func update(section: Section)
 }
 
 class SectionDaoImpl: SectionDao {
@@ -38,6 +39,12 @@ class SectionDaoImpl: SectionDao {
         try! realm.write {
             section.project = project
             project.sections.append(section)
+        }
+    }
+    func update(section: Section) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(section, update: .modified)
         }
     }
 }
