@@ -11,25 +11,35 @@ import SwiftUIPager
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @State private var isShowingNewProjectView = false
 
     var body: some View {
         NavigationView {
             VStack {
-                if let currentProject = viewModel.currentProject {
-                    if let sections = viewModel.getSections(in: currentProject) {
-                        SectionsPager(sections: sections)
-                        Spacer()
-                        RecordButton {
-                            print("Start recording!")
-                        }
-                    } else {
-                        Text("No sections in project \(currentProject.title)")
+                switch viewModel.state {
+                case let .loaded(project, sections):
+                    SectionsPager(sections: sections)
+                    Spacer()
+                    RecordButton {
+                        print("Add recording to \(project.title)")
                     }
-                } else {
-                    Text("No projects to show.")
+                case .noSections(let project):
+                    Text("No sections in project \(project.title)")
+                case .noProjects:
+                    Button(action: {
+                        isShowingNewProjectView = true
+                    }, label: {
+                        Text("Add project")
+                    })
+                    .sheet(isPresented: $isShowingNewProjectView) {
+                        NewProjectView()
+                    }
                 }
             }
             .navigationBarTitle("Composify", displayMode: .inline)
+        }
+        .onAppear {
+            viewModel.loadData()
         }
     }
 }

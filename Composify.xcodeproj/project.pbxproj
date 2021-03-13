@@ -61,6 +61,7 @@
 		E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7EA25FC3BD800F27283 /* ProjectDao.swift */; };
 		E595A7F125FC3E2500F27283 /* SectionPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* SectionPagerView.swift */; };
 		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
+		E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7FB25FC423800F27283 /* NewProjectView.swift */; };
 		E598475621208C2F00330B2D /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475521208C2F00330B2D /* AudioRecorderService.swift */; };
 		E598475821208C3A00330B2D /* AudioRecorderServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */; };
 		E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */; };
@@ -201,6 +202,7 @@
 		E595A7EA25FC3BD800F27283 /* ProjectDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDao.swift; sourceTree = "<group>"; };
 		E595A7F025FC3E2500F27283 /* SectionPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPagerView.swift; sourceTree = "<group>"; };
 		E595A7F625FC3F6400F27283 /* SectionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDao.swift; sourceTree = "<group>"; };
+		E595A7FB25FC423800F27283 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		E598475521208C2F00330B2D /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		E598475721208C3A00330B2D /* AudioRecorderServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderServiceFactory.swift; sourceTree = "<group>"; };
 		E59ECDBC1D42322300C8F018 /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */,
 				E595A7D725FC375F00F27283 /* HomeViewModel.swift */,
+				E595A7FA25FC422A00F27283 /* NewProject */,
 				E547142025FC3615008DA65B /* Components */,
 			);
 			path = Home;
@@ -557,6 +560,14 @@
 				E595A7E425FC390B00F27283 /* RecordingDao.swift */,
 			);
 			name = Database;
+			sourceTree = "<group>";
+		};
+		E595A7FA25FC422A00F27283 /* NewProject */ = {
+			isa = PBXGroup;
+			children = (
+				E595A7FB25FC423800F27283 /* NewProjectView.swift */,
+			);
+			path = NewProject;
 			sourceTree = "<group>";
 		};
 		E5A6BBBD255FF32200BC7D32 /* Screens */ = {
@@ -885,6 +896,7 @@
 				E56E3FE820D53D6300411F5F /* RealmRepository.swift in Sources */,
 				E59ECDBD1D42322300C8F018 /* AVAudioPlayerService.swift in Sources */,
 				E582894F21C6C5EB00E438B5 /* R+Storyboards.swift in Sources */,
+				E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E587605E20F24A600050C0BD /* ErrorViewController.swift in Sources */,
 				E56460051D3B50B500AA6557 /* AppDelegate.swift in Sources */,

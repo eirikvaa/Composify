@@ -9,6 +9,13 @@
 import Foundation
 
 class HomeViewModel: ObservableObject, SongRepositoryInjectable {
+    enum State {
+        case noProjects
+        case noSections(project: Project)
+        case loaded(project: Project, sections: [Section])
+    }
+
+    @Published var state: State = .noProjects
     @Published var currentProject: Project?
 
     init(currentProject: Project? = nil) {
@@ -21,5 +28,29 @@ class HomeViewModel: ObservableObject, SongRepositoryInjectable {
 
     func getSections(in project: Project) -> [Section] {
         songRepository.getSections(in: project)
+    }
+
+    func loadData() {
+        state = .noProjects
+
+        let projects = getProjects()
+
+        if projects.isEmpty {
+            return
+        }
+
+        // TODO: Remember the current project
+        guard let currentProject = projects.first else {
+            return
+        }
+
+        let sections = getSections(in: currentProject)
+
+        if sections.isEmpty {
+            state = .noSections(project: currentProject)
+            return
+        }
+
+        state = .loaded(project: currentProject, sections: sections)
     }
 }

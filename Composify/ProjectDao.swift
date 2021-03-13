@@ -23,6 +23,7 @@ class ProjectDaoInjectableImpl: ProjectDaoInjectable {}
 
 protocol ProjectDao {
     func getProjects() -> [Project]
+    func save(project: Project)
 }
 
 class ProjectDaoImpl: ProjectDao {
@@ -30,5 +31,12 @@ class ProjectDaoImpl: ProjectDao {
         let realm = try! Realm()
         let recordings = realm.objects(Project.self)
         return Array(recordings)
+    }
+
+    func save(project: Project) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(project)
+        }
     }
 }

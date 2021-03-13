@@ -22,6 +22,7 @@ protocol SongRepository {
     func getProjects() -> [Project]
     func getSections(in project: Project) -> [Section]
     func getRecordings(in section: Section) -> [Recording]
+    func save(project: Project)
 }
 
 class SongRepositoryImpl: SongRepository,
@@ -36,5 +37,9 @@ class SongRepositoryImpl: SongRepository,
     }
     func getRecordings(in section: Section) -> [Recording] {
         recordingDao.getRecordings(in: section)
+    }
+
+    func save(project: Project) {
+        projectDao.save(project: project)
     }
 }
