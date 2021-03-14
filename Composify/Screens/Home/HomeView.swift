@@ -62,16 +62,20 @@ struct HomeView: View {
         Button(action: {
             isShowingEditProjectView = true
         }, label: {
-            Text("Edit \(project.title)")
+            Text("Add section")
+                .padding()
+                .foregroundColor(.white)
         })
-            .sheet(isPresented: $isShowingEditProjectView) {
-                EditProjectView(project: Binding<Project>(
-                                    get: { project },
-                                    set: { _ in })
-                ) { _ in
-                    viewModel.loadData()
-                }
+        .background(Color.gray)
+        .cornerRadius(10.0)
+        .sheet(isPresented: $isShowingEditProjectView) {
+            EditProjectView(project: Binding<Project>(
+                                get: { project },
+                                set: { _ in })
+            ) { _ in
+                viewModel.loadData()
             }
+        }
     }
 
     private func loadedView(project: Project) -> some View {
