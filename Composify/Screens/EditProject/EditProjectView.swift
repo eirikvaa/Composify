@@ -20,6 +20,10 @@ class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
     func update(section: Section) {
         songRepository.update(section: section)
     }
+
+    func delete(section: Section) {
+        songRepository.delete(section: section)
+    }
 }
 
 struct EditProjectView: View {
@@ -27,6 +31,7 @@ struct EditProjectView: View {
     @StateObject private var viewModel = EditProjectViewModel()
     @Binding var project: Project
     @State private var addedSections: [Section] = []
+    @State private var deletedSections: [Section] = []
     @State private var editMode = EditMode.active
 
     var saveAction: ((Project) -> Void)
@@ -50,10 +55,17 @@ struct EditProjectView: View {
                     ForEach(addedSections.indices, id: \.self) { index in
                         TextField("Section title", text: $addedSections[index].title)
                     }
+                    .onDelete { indices in
+                        indices.forEach {
+                            deletedSections.append(
+                                addedSections.remove(at: $0)
+                            )
+                        }
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("New Project")
+            .navigationTitle("Edit \(project.title)")
             .navigationBarItems(leading: Button(action: {
                 addedSections
                     .filter { !project.sections.contains($0) }
@@ -61,6 +73,8 @@ struct EditProjectView: View {
                 addedSections
                     .filter { project.sections.contains($0) }
                     .forEach { viewModel.update(section: $0) }
+                deletedSections
+                    .forEach { viewModel.delete(section: $0) }
                 viewModel.update(project: project)
                 saveAction(project)
                 presentationMode.wrappedValue.dismiss()

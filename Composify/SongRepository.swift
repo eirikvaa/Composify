@@ -27,6 +27,7 @@ protocol SongRepository {
     func save(recording: Recording, to section: Section)
     func update(project: Project)
     func update(section: Section)
+    func delete(section: Section)
 }
 
 class SongRepositoryImpl: SongRepository,
@@ -61,5 +62,9 @@ class SongRepositoryImpl: SongRepository,
 
     func save(recording: Recording, to section: Section) {
         recordingDao.save(recording: recording, to: section)
+    }
+
+    func delete(section: Section) {
+        sectionDao.delete(section: section)
     }
 }

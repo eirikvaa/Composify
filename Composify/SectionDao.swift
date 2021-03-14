@@ -25,6 +25,7 @@ protocol SectionDao {
     func getSections(in project: Project) -> [Section]
     func save(section: Section, to project: Project)
     func update(section: Section)
+    func delete(section: Section)
 }
 
 class SectionDaoImpl: SectionDao {
@@ -45,6 +46,17 @@ class SectionDaoImpl: SectionDao {
         let realm = try! Realm()
         try! realm.write {
             realm.add(section, update: .modified)
+        }
+    }
+
+    func delete(section: Section) {
+        let realm = try! Realm()
+        try! realm.write {
+            for recording in section.recordings {
+                realm.delete(recording)
+            }
+
+            realm.delete(section)
         }
     }
 }
