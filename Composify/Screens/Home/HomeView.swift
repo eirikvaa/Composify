@@ -52,7 +52,9 @@ struct HomeView: View {
         .background(Color.gray)
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingNewProjectView) {
-            NewProjectView()
+            NewProjectView {
+                viewModel.loadData()
+            }
         }
     }
 

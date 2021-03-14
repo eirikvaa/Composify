@@ -19,6 +19,8 @@ struct NewProjectView: View {
     @StateObject private var viewModel = NewProjectViewModel()
     @State private var project = Project()
 
+    var tapAction: (() -> Void)
+
     var body: some View {
         NavigationView {
             List {
@@ -30,6 +32,7 @@ struct NewProjectView: View {
             .navigationTitle("New Project")
             .navigationBarItems(trailing: Button(action: {
                 viewModel.save(project: project)
+                tapAction()
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
@@ -40,6 +43,6 @@ struct NewProjectView: View {
 
 struct NewProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        NewProjectView()
+        NewProjectView {}
     }
 }
