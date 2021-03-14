@@ -81,7 +81,12 @@ struct EditProjectView: View {
             }, label: {
                 Text("Save")
             }), trailing: Button(action: {
-                addedSections.append(Section())
+                addedSections.append(
+                    Section(
+                        title: "Section \(addedSections.count + 1)",
+                        project: project
+                    )
+                )
             }, label: {
                 Image(systemName: "plus")
             }))
