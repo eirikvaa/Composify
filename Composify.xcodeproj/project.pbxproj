@@ -35,6 +35,7 @@
 		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
+		E5F88A1E25FE512500124A61 /* SongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F88A1D25FE512500124A61 /* SongState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -96,6 +97,7 @@
 		E5F60B7B1D5B1417000B4F7F /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		E5F60B7F1D5B14E6000B4F7F /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		E5F60B831D5B1535000B4F7F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		E5F88A1D25FE512500124A61 /* SongState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongState.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 			children = (
 				E56460361D3B54B000AA6557 /* App */,
 				E523959A21C6824300D3004F /* Resources */,
+				E5F88A1C25FE511B00124A61 /* State */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
 				E595A7DB25FC384A00F27283 /* Domain */,
 				E5A7990E25FCECC100FF718C /* Model */,
@@ -303,6 +306,14 @@
 				E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */,
 			);
 			path = Recordings;
+			sourceTree = "<group>";
+		};
+		E5F88A1C25FE511B00124A61 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				E5F88A1D25FE512500124A61 /* SongState.swift */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,6 +503,7 @@
 				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
 				E547142225FC3641008DA65B /* RecordButton.swift in Sources */,
 				E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */,
+				E5F88A1E25FE512500124A61 /* SongState.swift in Sources */,
 				E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

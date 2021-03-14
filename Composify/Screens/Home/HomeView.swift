@@ -10,20 +10,17 @@ import SwiftUI
 import SwiftUIPager
 
 struct HomeView: View {
-    @ObservedObject private var viewModel = HomeViewModel()
+    @EnvironmentObject var songState: SongState
+    @ObservedObject var viewModel = HomeViewModel()
     @StateObject private var audioRecorder = AudioRecorder()
     @State private var isShowingNewProjectView = false
     @State private var isShowingEditProjectView = false
     @State private var currentSection = Section()
 
-    init(viewModel: HomeViewModel = HomeViewModel()) {
-        self.viewModel = viewModel
-    }
-
     var body: some View {
         NavigationView {
             VStack {
-                switch (viewModel.currentProject, viewModel.currentSection) {
+                switch (songState.currentProject, songState.currentSection) {
                 case let (project?, .some):
                     loadedView(project: project)
                 case (let project?, nil):
@@ -37,7 +34,7 @@ struct HomeView: View {
             .navigationBarTitle("Composify", displayMode: .inline)
         }
         .onAppear {
-            viewModel.loadData()
+            songState.refresh()
         }
     }
 
@@ -53,8 +50,9 @@ struct HomeView: View {
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingNewProjectView) {
             NewProjectView {
-                viewModel.loadData()
+                //songState.refresh()
             }
+            .environmentObject(songState)
         }
     }
 
@@ -73,8 +71,9 @@ struct HomeView: View {
                                 get: { project },
                                 set: { _ in })
             ) { _ in
-                viewModel.loadData()
+                //viewModel.loadData()
             }
+            .environmentObject(songState)
         }
     }
 
@@ -112,7 +111,7 @@ struct HomeView: View {
                                 get: { project },
                                 set: { _ in })
             ) { _ in
-                viewModel.loadData()
+                // viewModel.loadData()
             }
         }
     }
@@ -120,7 +119,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let noProjectsViewModel = HomeViewModel(currentProject: nil, currentSection: nil)
-        HomeView(viewModel: noProjectsViewModel)
+        // let noProjectsViewModel = HomeViewModel(currentProject: nil, currentSection: nil)
+        HomeView()
+            .environmentObject(SongState())
     }
 }

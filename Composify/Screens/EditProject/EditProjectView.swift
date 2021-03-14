@@ -27,6 +27,7 @@ class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
 }
 
 struct EditProjectView: View {
+    @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = EditProjectViewModel()
     @Binding var project: Project
@@ -76,6 +77,10 @@ struct EditProjectView: View {
                 deletedSections
                     .forEach { viewModel.delete(section: $0) }
                 viewModel.update(project: project)
+                songState.select(
+                    currentProject: project,
+                    currentSection: addedSections.first
+                )
                 saveAction(project)
                 presentationMode.wrappedValue.dismiss()
             }, label: {

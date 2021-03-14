@@ -11,10 +11,12 @@ import SwiftUI
 class NewProjectViewModel: ObservableObject, SongRepositoryInjectable {
     func save(project: Project) {
         songRepository.save(project: project)
+        songRepository.set(currentProject: project, currentSection: nil)
     }
 }
 
 struct NewProjectView: View {
+    @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = NewProjectViewModel()
     @State private var project = Project()
