@@ -25,6 +25,7 @@ protocol ProjectDao {
     func getProjects() -> [Project]
     func save(project: Project)
     func update(project: Project)
+    func delete(project: Project)
 }
 
 class ProjectDaoImpl: ProjectDao {
@@ -45,6 +46,18 @@ class ProjectDaoImpl: ProjectDao {
         let realm = try! Realm()
         try! realm.write {
             realm.add(project, update: .all)
+        }
+    }
+
+    func delete(project: Project) {
+        let realm = try! Realm()
+        try! realm.write {
+            for section in project.sections {
+                realm.delete(section.recordings)
+            }
+
+            realm.delete(project.sections)
+            realm.delete(project)
         }
     }
 }

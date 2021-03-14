@@ -11,7 +11,6 @@ import SwiftUI
 class NewProjectViewModel: ObservableObject, SongRepositoryInjectable {
     func save(project: Project) {
         songRepository.save(project: project)
-        songRepository.set(currentProject: project, currentSection: nil)
     }
 }
 
@@ -34,7 +33,7 @@ struct NewProjectView: View {
             .navigationTitle("New Project")
             .navigationBarItems(trailing: Button(action: {
                 viewModel.save(project: project)
-                tapAction()
+                songState.select(currentProject: project, currentSection: nil)
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")

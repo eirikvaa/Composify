@@ -28,6 +28,7 @@ protocol SongRepository {
     func update(project: Project)
     func update(section: Section)
     func delete(section: Section)
+    func delete(project: Project)
     func set(currentProject: Project?, currentSection: Section?)
     func getCurrentProjectAndSection() -> (Project?, Section?)
 }
@@ -68,6 +69,10 @@ class SongRepositoryImpl: SongRepository,
 
     func delete(section: Section) {
         sectionDao.delete(section: section)
+    }
+
+    func delete(project: Project) {
+        projectDao.delete(project: project)
     }
 
     func set(currentProject: Project?, currentSection: Section?) {

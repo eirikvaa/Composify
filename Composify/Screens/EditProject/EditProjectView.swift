@@ -24,6 +24,10 @@ class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
     func delete(section: Section) {
         songRepository.delete(section: section)
     }
+
+    func delete(project: Project) {
+        songRepository.delete(project: project)
+    }
 }
 
 struct EditProjectView: View {
@@ -63,6 +67,17 @@ struct EditProjectView: View {
                             )
                         }
                     }
+                }
+                SwiftUI.Section(header: Text("Danger Zone")) {
+                    Text("Delete project")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            songState.select(currentProject: nil, currentSection: nil)
+                            viewModel.delete(project: project)
+                            presentationMode.wrappedValue.dismiss()
+                        }
                 }
             }
             .listStyle(InsetGroupedListStyle())
