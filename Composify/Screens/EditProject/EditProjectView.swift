@@ -34,20 +34,18 @@ struct EditProjectView: View {
     @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = EditProjectViewModel()
-    @Binding var project: Project
+    @State private var project: Project
     @State private var addedSections: [Section] = []
     @State private var deletedSections: [Section] = []
     @State private var editMode = EditMode.active
 
     var saveAction: ((Project) -> Void)
 
-    init(project: Binding<Project>, saveAction: @escaping ((Project) -> Void)) {
-        self._project = project
+    init(project: Project, saveAction: @escaping ((Project) -> Void)) {
+        self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
-        self._addedSections = State(
-            initialValue: Array(project.wrappedValue.sections)
-        )
+        self._addedSections = .init(initialValue: Array(project.sections))
     }
 
     var body: some View {
@@ -75,7 +73,18 @@ struct EditProjectView: View {
                         .foregroundColor(.red)
                         .onTapGesture {
                             songState.select(currentProject: nil, currentSection: nil)
-                            viewModel.delete(project: project)
+
+                            // Reset state variables, but preserve the original project
+                            // so we can safely delete it.
+                            addedSections.forEach {
+                                viewModel.delete(section: $0)
+                            }
+                            addedSections = []
+
+                            let projectCopy = project
+                            project = Project()
+                            viewModel.delete(project: projectCopy)
+
                             presentationMode.wrappedValue.dismiss()
                         }
                 }
@@ -97,6 +106,7 @@ struct EditProjectView: View {
                     currentSection: addedSections.first
                 )
                 saveAction(project)
+                project = Project()
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
@@ -117,6 +127,6 @@ struct EditProjectView: View {
 
 struct EditProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProjectView(project: .constant(Project())) { _ in }
+        EditProjectView(project: Project()) { _ in }
     }
 }

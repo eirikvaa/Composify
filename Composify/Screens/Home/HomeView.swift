@@ -50,7 +50,7 @@ struct HomeView: View {
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingNewProjectView) {
             NewProjectView {
-                //songState.refresh()
+                songState.refresh()
             }
             .environmentObject(songState)
         }
@@ -67,11 +67,8 @@ struct HomeView: View {
         .background(Color.gray)
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingEditProjectView) {
-            EditProjectView(project: Binding<Project>(
-                                get: { project },
-                                set: { _ in })
-            ) { _ in
-                //viewModel.loadData()
+            EditProjectView(project: project) { _ in
+                viewModel.loadData()
             }
             .environmentObject(songState)
         }
@@ -107,11 +104,8 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $isShowingEditProjectView) {
-            EditProjectView(project: Binding<Project>(
-                                get: { project },
-                                set: { _ in })
-            ) { _ in
-                // viewModel.loadData()
+            EditProjectView(project: project) { _ in
+                viewModel.loadData()
             }
         }
     }
@@ -119,7 +113,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        // let noProjectsViewModel = HomeViewModel(currentProject: nil, currentSection: nil)
         HomeView()
             .environmentObject(SongState())
     }
