@@ -11,6 +11,7 @@ import Foundation
 class HomeViewModel: ObservableObject, SongRepositoryInjectable {
     func save(recording: Recording) {
         let (_, currentSection) = songRepository.getCurrentProjectAndSection()
+
         if let currentSection = currentSection {
             songRepository.save(recording: recording, to: currentSection)
         }
