@@ -66,24 +66,28 @@ struct HomeView: View {
     }
 
     private func loadedView(project: Project, section: Section) -> some View {
-        VStack {
+        ZStack {
             SectionsPager(sections: Array(project.sections), currentSection: section)
-            Spacer()
-            RecordButton(isRecording: $audioRecorder.isRecording) {
-                if audioRecorder.isRecording {
-                    let url = audioRecorder.stopRecording()
-                    let recording = Recording(
-                        title: url.lastPathComponent,
-                        section: section,
-                        url: url.absoluteString
-                    )
-                    viewModel.save(recording: recording)
-                    songState.refresh()
-                } else {
-                    audioRecorder.startRecording()
+            VStack {
+                Spacer()
+                RecordButton(isRecording: $audioRecorder.isRecording) {
+                    if audioRecorder.isRecording {
+                        let url = audioRecorder.stopRecording()
+                        let recording = Recording(
+                            title: url.lastPathComponent,
+                            section: section,
+                            url: url.absoluteString
+                        )
+                        viewModel.save(recording: recording)
+                        songState.refresh()
+                    } else {
+                        audioRecorder.startRecording()
+                    }
                 }
+                .background(Color.white)
+                .clipShape(Circle())
+                .padding(.bottom, 20)
             }
-            .padding(.bottom, 20)
         }
         .padding()
         .toolbar {

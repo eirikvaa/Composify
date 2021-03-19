@@ -27,15 +27,12 @@ struct SectionsPager: View {
             VStack {
                 SectionHeaderView(section: section)
 
-                ZStack {
-                    Color.white
-                    VStack {
-                        if section.recordings.isEmpty {
-                            EmptyRecordingsView()
-                        } else {
-                            RecordingsView(recordings: Array(section.recordings))
-                        }
-                    }
+                if section.recordings.isEmpty {
+                    Spacer()
+                    EmptyRecordingsView()
+                    Spacer()
+                } else {
+                    RecordingsView(recordings: Array(section.recordings))
                 }
             }
         }
