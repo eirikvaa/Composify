@@ -133,12 +133,10 @@ struct EditProjectView: View {
     }
 
     private func trailingNavigationBarItemAction() {
-        addedSections.append(
-            Section(
-                title: "Section \(addedSections.count + 1)",
-                project: project
-            )
-        )
+        let nextSectionIndex = addedSections.count + 1
+        let nextSectionTitle = "Section \(nextSectionIndex)"
+        let nextSection = Section(title: nextSectionTitle, project: project )
+        addedSections.append(nextSection)
     }
 }
 
