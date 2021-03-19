@@ -23,10 +23,8 @@ struct HomeView: View {
                     loadedView(project: project, section: section)
                 case (let project?, nil):
                     noSectionsView(project: project)
-                case (nil, nil):
+                case (nil, _):
                     noProjectsView()
-                case (nil, .some):
-                    fatalError("Impossible ot have a section without a project.")
                 }
             }
             .navigationTitle(Text("Composify"))
