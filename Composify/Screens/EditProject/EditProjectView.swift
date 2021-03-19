@@ -58,70 +58,91 @@ struct EditProjectView: View {
                     ForEach(addedSections.indices, id: \.self) { index in
                         TextField("Section title", text: $addedSections[index].title)
                     }
-                    .onDelete { indices in
-                        indices.forEach {
-                            deletedSections.append(
-                                addedSections.remove(at: $0)
-                            )
-                        }
-                    }
+                    .onDelete(perform: deleteSection)
                 }
                 SwiftUI.Section(header: Text("Danger Zone")) {
                     Text("Delete project")
                         .bold()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.red)
-                        .onTapGesture {
-                            songState.select(currentProject: nil, currentSection: nil)
-
-                            // Reset state variables, but preserve the original project
-                            // so we can safely delete it.
-                            addedSections.forEach {
-                                viewModel.delete(section: $0)
-                            }
-                            addedSections = []
-
-                            let projectCopy = project
-                            project = Project()
-                            viewModel.delete(project: projectCopy)
-
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                        .onTapGesture(perform: deleteProject)
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Edit \(project.title)")
-            .navigationBarItems(leading: Button(action: {
-                addedSections
-                    .filter { !project.sections.contains($0) }
-                    .forEach { viewModel.save(section: $0, to: project) }
-                addedSections
-                    .filter { project.sections.contains($0) }
-                    .forEach { viewModel.update(section: $0) }
-                deletedSections
-                    .forEach { viewModel.delete(section: $0) }
-                viewModel.update(project: project)
-                songState.select(
-                    currentProject: project,
-                    currentSection: addedSections.first
-                )
-                saveAction(project)
-                project = Project()
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Save")
-            }), trailing: Button(action: {
-                addedSections.append(
-                    Section(
-                        title: "Section \(addedSections.count + 1)",
-                        project: project
-                    )
-                )
-            }, label: {
-                Image(systemName: "plus")
-            }))
+            .navigationBarItems(
+                leading: leadingNavigationBarItem,
+                trailing: trailingNavigationBarItem
+            )
             .environment(\.editMode, $editMode)
         }
+    }
+
+    private var leadingNavigationBarItem: some View {
+        Button(
+            action: leadingNavigationBarItemAction,
+            label: { Text("Save") }
+        )
+    }
+
+    private var trailingNavigationBarItem: some View {
+        Button(
+            action: trailingNavigationBarItemAction,
+            label: { Image(systemName: "plus") }
+        )
+    }
+
+    private func deleteProject() {
+        songState.select(currentProject: nil, currentSection: nil)
+
+        // Reset state variables, but preserve the original project
+        // so we can safely delete it.
+        addedSections.forEach {
+            viewModel.delete(section: $0)
+        }
+        addedSections = []
+
+        let projectCopy = project
+        project = Project()
+        viewModel.delete(project: projectCopy)
+
+        presentationMode.wrappedValue.dismiss()
+    }
+
+    private func deleteSection(indices: IndexSet) {
+        indices.forEach {
+            deletedSections.append(
+                addedSections.remove(at: $0)
+            )
+        }
+    }
+
+    private func leadingNavigationBarItemAction() {
+        addedSections
+            .filter { !project.sections.contains($0) }
+            .forEach { viewModel.save(section: $0, to: project) }
+        addedSections
+            .filter { project.sections.contains($0) }
+            .forEach { viewModel.update(section: $0) }
+        deletedSections
+            .forEach { viewModel.delete(section: $0) }
+        viewModel.update(project: project)
+        songState.select(
+            currentProject: project,
+            currentSection: addedSections.first
+        )
+        saveAction(project)
+        project = Project()
+        presentationMode.wrappedValue.dismiss()
+    }
+
+    private func trailingNavigationBarItemAction() {
+        addedSections.append(
+            Section(
+                title: "Section \(addedSections.count + 1)",
+                project: project
+            )
+        )
     }
 }
 
