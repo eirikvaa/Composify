@@ -80,6 +80,7 @@ struct HomeView: View {
                         url: url.absoluteString
                     )
                     viewModel.save(recording: recording)
+                    songState.refresh()
                 } else {
                     audioRecorder.startRecording()
                 }
