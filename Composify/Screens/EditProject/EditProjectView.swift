@@ -35,8 +35,8 @@ struct EditProjectView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = EditProjectViewModel()
     @State private var project: Project
-    @State private var addedSections: [Section] = []
-    @State private var deletedSections: [Section] = []
+    @State private var visibleSections: [Section] = []
+    @State private var removedSections: [Section] = []
     @State private var editMode = EditMode.active
 
     var saveAction: ((Project) -> Void)
@@ -45,7 +45,7 @@ struct EditProjectView: View {
         self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
-        self._addedSections = .init(initialValue: Array(project.sections))
+        self._visibleSections = .init(initialValue: Array(project.sections))
     }
 
     var body: some View {
@@ -55,8 +55,8 @@ struct EditProjectView: View {
                     TextField("Project title", text: $project.title)
                 }
                 SwiftUI.Section(header: Text("Sections")) {
-                    ForEach(addedSections.indices, id: \.self) { index in
-                        TextField("Section title", text: $addedSections[index].title)
+                    ForEach(visibleSections.indices, id: \.self) { index in
+                        TextField("Section title", text: $visibleSections[index].title)
                     }
                     .onDelete(perform: deleteSection)
                 }
@@ -93,10 +93,10 @@ struct EditProjectView: View {
 
         // Reset state variables, but preserve the original project
         // so we can safely delete it.
-        addedSections.forEach {
+        visibleSections.forEach {
             viewModel.delete(section: $0)
         }
-        addedSections = []
+        visibleSections = []
 
         let projectCopy = project
         project = Project()
@@ -107,36 +107,41 @@ struct EditProjectView: View {
 
     private func deleteSection(indices: IndexSet) {
         indices.forEach {
-            deletedSections.append(
-                addedSections.remove(at: $0)
+            removedSections.append(
+                visibleSections.remove(at: $0)
             )
         }
     }
 
     private func leadingNavigationBarItemAction() {
-        addedSections
+        visibleSections
             .filter { !project.sections.contains($0) }
             .forEach { viewModel.save(section: $0, to: project) }
-        addedSections
+
+        visibleSections
             .filter { project.sections.contains($0) }
             .forEach { viewModel.update(section: $0) }
-        deletedSections
-            .forEach { viewModel.delete(section: $0) }
+
+        removedSections.forEach {
+            viewModel.delete(section: $0)
+        }
+
         viewModel.update(project: project)
+
         songState.select(
             currentProject: project,
-            currentSection: addedSections.first
+            currentSection: visibleSections.first
         )
+
         saveAction(project)
-        project = Project()
         presentationMode.wrappedValue.dismiss()
     }
 
     private func trailingNavigationBarItemAction() {
-        let nextSectionIndex = addedSections.count + 1
+        let nextSectionIndex = visibleSections.count + 1
         let nextSectionTitle = "Section \(nextSectionIndex)"
         let nextSection = Section(title: nextSectionTitle, project: project )
-        addedSections.append(nextSection)
+        visibleSections.append(nextSection)
     }
 }
 
