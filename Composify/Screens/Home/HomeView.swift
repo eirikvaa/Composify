@@ -31,8 +31,9 @@ struct HomeView: View {
                     fatalError("Impossible ot have a section without a project.")
                 }
             }
-            .navigationBarTitle("Composify", displayMode: .inline)
+            .navigationTitle(Text("Composify"))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             songState.refresh()
         }
