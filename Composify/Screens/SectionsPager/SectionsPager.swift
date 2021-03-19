@@ -9,29 +9,9 @@
 import SwiftUI
 import SwiftUIPager
 
-class SectionsPagerViewModel: ObservableObject, SongRepositoryInjectable {
-    enum State {
-        case noRecordings
-        case recordings([Recording])
-    }
-    @Published var state: State = .noRecordings
-
-    func loadRecordings(from section: Section) {
-        let recordings = songRepository.getRecordings(in: section)
-
-        if recordings.isEmpty {
-            state = .noRecordings
-            return
-        }
-
-        state = .recordings(recordings)
-    }
-}
-
 struct SectionsPager: View {
     @EnvironmentObject var songState: SongState
     @StateObject private var page: Page
-    @StateObject private var viewModel = SectionsPagerViewModel()
     var sections: [Section]
     var currentSection: Section
 
