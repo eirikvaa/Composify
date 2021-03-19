@@ -246,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				E595A80225FCA79C00F27283 /* ProjectDetailsView.swift */,
-				E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */,
+				E5FC816F2605046900AF65CC /* Components */,
 			);
 			path = ProjectDetails;
 			sourceTree = "<group>";
@@ -306,6 +306,14 @@
 				E5F88A1D25FE512500124A61 /* SongState.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		E5FC816F2605046900AF65CC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
