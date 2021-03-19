@@ -17,9 +17,10 @@ final class Section: Object {
     @objc dynamic var project: Project?
     let recordings = List<Recording>()
 
-    init(title: String, project: Project?) {
+    init(title: String, project: Project?, index: Int) {
         self.title = title
         self.project = project
+        self.index = index
     }
 
     override required init() {

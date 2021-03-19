@@ -14,14 +14,13 @@ struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @StateObject private var audioRecorder = AudioRecorder()
     @State private var isShowingProjectDetails = false
-    @State private var currentSection = Section()
 
     var body: some View {
         NavigationView {
             VStack {
                 switch (songState.currentProject, songState.currentSection) {
-                case let (project?, .some):
-                    loadedView(project: project)
+                case let (project?, section?):
+                    loadedView(project: project, section: section)
                 case (let project?, nil):
                     noSectionsView(project: project)
                 case (nil, nil):
@@ -68,16 +67,16 @@ struct HomeView: View {
         }
     }
 
-    private func loadedView(project: Project) -> some View {
+    private func loadedView(project: Project, section: Section) -> some View {
         VStack {
-            SectionsPager(sections: Array(project.sections), currentSection: $currentSection)
+            SectionsPager(sections: Array(project.sections), currentSection: section)
             Spacer()
             RecordButton(isRecording: $audioRecorder.isRecording) {
                 if audioRecorder.isRecording {
                     let url = audioRecorder.stopRecording()
                     let recording = Recording(
                         title: url.lastPathComponent,
-                        section: currentSection,
+                        section: section,
                         url: url.absoluteString
                     )
                     viewModel.save(recording: recording)
@@ -103,8 +102,9 @@ struct HomeView: View {
     }
 
     private func projectDetailsView(project: Project) -> some View {
-        ProjectDetailsView(project: project) { _ in
-            viewModel.loadData()
+        ProjectDetailsView(project: project) { project in
+            songState.select(currentProject: project)
+            songState.refresh()
         }
         .environmentObject(songState)
     }

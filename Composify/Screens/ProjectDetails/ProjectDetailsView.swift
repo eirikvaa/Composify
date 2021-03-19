@@ -39,9 +39,9 @@ struct ProjectDetailsView: View {
     @State private var removedSections: [Section] = []
     @State private var editMode = EditMode.active
 
-    var saveAction: ((Project) -> Void)
+    var saveAction: ((Project?) -> Void)
 
-    init(project: Project, saveAction: @escaping ((Project) -> Void)) {
+    init(project: Project, saveAction: @escaping ((Project?) -> Void)) {
         self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
@@ -138,9 +138,9 @@ struct ProjectDetailsView: View {
     }
 
     private func trailingNavigationBarItemAction() {
-        let nextSectionIndex = visibleSections.count + 1
-        let nextSectionTitle = "Section \(nextSectionIndex)"
-        let nextSection = Section(title: nextSectionTitle, project: project )
+        let nextSectionIndex = visibleSections.count
+        let nextSectionTitle = "Section \(nextSectionIndex + 1)"
+        let nextSection = Section(title: nextSectionTitle, project: project, index: nextSectionIndex)
         visibleSections.append(nextSection)
     }
 }

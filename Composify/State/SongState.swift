@@ -12,17 +12,17 @@ class SongState: ObservableObject, SongRepositoryInjectable {
     @Published var currentProject: Project?
     @Published var currentSection: Section?
 
-    func select(currentProject: Project?, currentSection: Section?) {
+    func select(currentProject: Project?, currentSection: Section? = nil) {
         self.currentProject = currentProject
-        self.currentSection = currentSection
+        self.currentSection = currentSection ?? currentProject?.sections.first
 
         songRepository.set(currentProject: currentProject, currentSection: currentSection)
     }
 
     func refresh() {
-        let (currentProject, currentsection) = songRepository.getCurrentProjectAndSection()
+        let (currentProject, currentSection) = songRepository.getCurrentProjectAndSection()
 
         self.currentProject = currentProject
-        self.currentSection = currentsection
+        self.currentSection = currentSection
     }
 }

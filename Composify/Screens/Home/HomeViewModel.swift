@@ -9,21 +9,8 @@
 import Foundation
 
 class HomeViewModel: ObservableObject, SongRepositoryInjectable {
-    @Published var currentProject: Project?
-    @Published var currentSection: Section?
-
-    init(currentProject: Project? = nil, currentSection: Section? = nil) {
-        self.currentProject = currentProject
-        self.currentSection = currentSection
-    }
-
-    func loadData() {
-        // TODO: Remember the current project
-        currentProject = songRepository.getProjects().first
-        currentSection = currentProject?.sections.first
-    }
-
     func save(recording: Recording) {
+        let (_, currentSection) = songRepository.getCurrentProjectAndSection()
         if let currentSection = currentSection {
             songRepository.save(recording: recording, to: currentSection)
         }

@@ -29,10 +29,17 @@ class SectionsPagerViewModel: ObservableObject, SongRepositoryInjectable {
 }
 
 struct SectionsPager: View {
-    @StateObject private var page: Page = .first()
+    @EnvironmentObject var songState: SongState
+    @StateObject private var page: Page
     @StateObject private var viewModel = SectionsPagerViewModel()
     var sections: [Section]
-    @Binding var currentSection: Section
+    var currentSection: Section
+
+    init(sections: [Section], currentSection: Section) {
+        self.sections = sections
+        self.currentSection = currentSection
+        self._page = .init(wrappedValue: .withIndex(currentSection.index))
+    }
 
     var body: some View {
         Pager(page: page, data: sections, id: \.id) { section in
@@ -52,13 +59,15 @@ struct SectionsPager: View {
             }
         }
         .onPageChanged { index in
-            currentSection = sections[index]
+            let newSection = sections.first(where: { $0.index == index })
+            songState.select(currentProject: currentSection.project, currentSection: newSection)
         }
     }
 }
 
 struct SectionsPager_Previews: PreviewProvider {
     static var previews: some View {
-        SectionsPager(sections: [], currentSection: .constant(Section()))
+        SectionsPager(sections: [], currentSection: Section())
+            .environmentObject(SongState())
     }
 }
