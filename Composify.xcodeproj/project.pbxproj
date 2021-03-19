@@ -36,6 +36,7 @@
 		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
 		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
 		E5F88A1E25FE512500124A61 /* SongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F88A1D25FE512500124A61 /* SongState.swift */; };
+		E5FC81662604FEF000AF65CC /* DeleteProjectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -100,6 +101,7 @@
 		E5F88A1D25FE512500124A61 /* SongState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongState.swift; sourceTree = "<group>"; };
 		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProjectButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				E595A80225FCA79C00F27283 /* EditProjectView.swift */,
+				E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */,
 			);
 			path = EditProject;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				E547142225FC3641008DA65B /* RecordButton.swift in Sources */,
 				E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */,
 				E5F88A1E25FE512500124A61 /* SongState.swift in Sources */,
+				E5FC81662604FEF000AF65CC /* DeleteProjectButton.swift in Sources */,
 				E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

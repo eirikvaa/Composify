@@ -61,11 +61,7 @@ struct EditProjectView: View {
                     .onDelete(perform: deleteSection)
                 }
                 SwiftUI.Section(header: Text("Danger Zone")) {
-                    Text("Delete project")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.red)
-                        .onTapGesture(perform: deleteProject)
+                    DeleteProjectButton(deleteAction: deleteProject)
                 }
             }
             .listStyle(InsetGroupedListStyle())
