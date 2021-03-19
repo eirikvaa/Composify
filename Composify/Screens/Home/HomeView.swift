@@ -50,8 +50,8 @@ struct HomeView: View {
         .background(Color.gray)
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingNewProjectView) {
-            NewProjectView {
-                songState.refresh()
+            ProjectDetailsView(project: Project()) { _ in
+                viewModel.loadData()
             }
             .environmentObject(songState)
         }
@@ -68,7 +68,7 @@ struct HomeView: View {
         .background(Color.gray)
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingEditProjectView) {
-            EditProjectView(project: project) { _ in
+            ProjectDetailsView(project: project) { _ in
                 viewModel.loadData()
             }
             .environmentObject(songState)
@@ -105,7 +105,7 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $isShowingEditProjectView) {
-            EditProjectView(project: project) { _ in
+            ProjectDetailsView(project: project) { _ in
                 viewModel.loadData()
             }
         }

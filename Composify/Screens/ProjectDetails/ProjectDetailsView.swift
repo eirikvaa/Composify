@@ -1,5 +1,5 @@
 //
-//  EditProjectView.swift
+//  ProjectDetailsView.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 13/03/2021.
@@ -30,7 +30,7 @@ class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
     }
 }
 
-struct EditProjectView: View {
+struct ProjectDetailsView: View {
     @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = EditProjectViewModel()
@@ -147,6 +147,6 @@ struct EditProjectView: View {
 
 struct EditProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProjectView(project: Project()) { _ in }
+        ProjectDetailsView(project: Project()) { _ in }
     }
 }

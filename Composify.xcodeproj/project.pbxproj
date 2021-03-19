@@ -17,8 +17,7 @@
 		E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7EA25FC3BD800F27283 /* ProjectDao.swift */; };
 		E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* RecordingsView.swift */; };
 		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
-		E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7FB25FC423800F27283 /* NewProjectView.swift */; };
-		E595A80325FCA79C00F27283 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A80225FCA79C00F27283 /* EditProjectView.swift */; };
+		E595A80325FCA79C00F27283 /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A80225FCA79C00F27283 /* ProjectDetailsView.swift */; };
 		E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81525FCE19600F27283 /* SectionHeaderView.swift */; };
 		E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */; };
 		E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */; };
@@ -83,8 +82,7 @@
 		E595A7EA25FC3BD800F27283 /* ProjectDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDao.swift; sourceTree = "<group>"; };
 		E595A7F025FC3E2500F27283 /* RecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
 		E595A7F625FC3F6400F27283 /* SectionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDao.swift; sourceTree = "<group>"; };
-		E595A7FB25FC423800F27283 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
-		E595A80225FCA79C00F27283 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
+		E595A80225FCA79C00F27283 /* ProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsView.swift; sourceTree = "<group>"; };
 		E595A81525FCE19600F27283 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRecordingsView.swift; sourceTree = "<group>"; };
 		E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyApp.swift; sourceTree = "<group>"; };
@@ -244,21 +242,13 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
-		E595A7FA25FC422A00F27283 /* NewProject */ = {
+		E595A80125FCA78C00F27283 /* ProjectDetails */ = {
 			isa = PBXGroup;
 			children = (
-				E595A7FB25FC423800F27283 /* NewProjectView.swift */,
-			);
-			path = NewProject;
-			sourceTree = "<group>";
-		};
-		E595A80125FCA78C00F27283 /* EditProject */ = {
-			isa = PBXGroup;
-			children = (
-				E595A80225FCA79C00F27283 /* EditProjectView.swift */,
+				E595A80225FCA79C00F27283 /* ProjectDetailsView.swift */,
 				E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */,
 			);
-			path = EditProject;
+			path = ProjectDetails;
 			sourceTree = "<group>";
 		};
 		E5A6BBBD255FF32200BC7D32 /* Screens */ = {
@@ -266,8 +256,7 @@
 			children = (
 				E547141E25FC3605008DA65B /* Main */,
 				E547141F25FC3609008DA65B /* Home */,
-				E595A7FA25FC422A00F27283 /* NewProject */,
-				E595A80125FCA78C00F27283 /* EditProject */,
+				E595A80125FCA78C00F27283 /* ProjectDetails */,
 				E5A7994425FD2DF100FF718C /* SectionsPager */,
 				E5A7994625FD2E9C00FF718C /* Recordings */,
 				E547142025FC3615008DA65B /* Components */,
@@ -488,7 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E595A7D825FC375F00F27283 /* HomeViewModel.swift in Sources */,
-				E595A80325FCA79C00F27283 /* EditProjectView.swift in Sources */,
+				E595A80325FCA79C00F27283 /* ProjectDetailsView.swift in Sources */,
 				E5A7993B25FCF1D100FF718C /* AudioRecorder.swift in Sources */,
 				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
 				E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */,
@@ -499,7 +488,6 @@
 				E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */,
 				E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */,
 				E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */,
-				E595A7FC25FC423800F27283 /* NewProjectView.swift in Sources */,
 				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
 				E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */,
 				E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */,
