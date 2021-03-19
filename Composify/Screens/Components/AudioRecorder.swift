@@ -11,6 +11,7 @@ import SwiftUI
 
 class AudioRecorder: ObservableObject {
     @Published var isRecording = false
+
     private var audioRecorder: AVAudioRecorder!
     private var recordingTitle = UUID().uuidString
     private var recordingUrl: URL {

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DeleteProjectButton: View {
     var deleteAction: () -> Void
+
     var body: some View {
         Text("Delete project")
             .bold()

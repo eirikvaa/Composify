@@ -12,6 +12,7 @@ import SwiftUIPager
 struct SectionsPager: View {
     @EnvironmentObject var songState: SongState
     @StateObject private var page: Page
+
     var sections: [Section]
     var currentSection: Section
 

@@ -12,6 +12,7 @@ import Foundation
 class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isPlaying = false
     @Published var recording: Recording?
+
     private var audioPlayer: AVAudioPlayer!
 
     func play(recording: Recording) {

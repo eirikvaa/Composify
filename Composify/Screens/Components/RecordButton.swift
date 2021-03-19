@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RecordButton: View {
     @Binding var isRecording: Bool
+
     let tapAction: (() -> Void)
 
     var body: some View {

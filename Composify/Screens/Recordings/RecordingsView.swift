@@ -11,6 +11,7 @@ import SwiftUI
 
 struct RecordingsView: View {
     @StateObject private var audioPlayer = AudioPlayer()
+
     var recordings: [Recording]
 
     var body: some View {
