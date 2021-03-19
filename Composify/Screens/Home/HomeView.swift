@@ -13,8 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var songState: SongState
     @ObservedObject var viewModel = HomeViewModel()
     @StateObject private var audioRecorder = AudioRecorder()
-    @State private var isShowingNewProjectView = false
-    @State private var isShowingEditProjectView = false
+    @State private var isShowingProjectDetails = false
     @State private var currentSection = Section()
 
     var body: some View {
@@ -41,7 +40,7 @@ struct HomeView: View {
 
     private func noProjectsView() -> some View {
         Button(action: {
-            isShowingNewProjectView = true
+            isShowingProjectDetails = true
         }, label: {
             Text("Add project")
                 .padding()
@@ -49,17 +48,14 @@ struct HomeView: View {
         })
         .background(Color.gray)
         .cornerRadius(10.0)
-        .sheet(isPresented: $isShowingNewProjectView) {
-            ProjectDetailsView(project: Project()) { _ in
-                viewModel.loadData()
-            }
-            .environmentObject(songState)
+        .sheet(isPresented: $isShowingProjectDetails) {
+            projectDetailsView(project: Project())
         }
     }
 
     private func noSectionsView(project: Project) -> some View {
         Button(action: {
-            isShowingEditProjectView = true
+            isShowingProjectDetails = true
         }, label: {
             Text("Add section")
                 .padding()
@@ -67,11 +63,8 @@ struct HomeView: View {
         })
         .background(Color.gray)
         .cornerRadius(10.0)
-        .sheet(isPresented: $isShowingEditProjectView) {
-            ProjectDetailsView(project: project) { _ in
-                viewModel.loadData()
-            }
-            .environmentObject(songState)
+        .sheet(isPresented: $isShowingProjectDetails) {
+            projectDetailsView(project: project)
         }
     }
 
@@ -98,17 +91,22 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Button(action: {
-                    isShowingEditProjectView = true
+                    isShowingProjectDetails = true
                 }, label: {
                     Text("Edit Project")
                 })
             }
         }
-        .sheet(isPresented: $isShowingEditProjectView) {
-            ProjectDetailsView(project: project) { _ in
-                viewModel.loadData()
-            }
+        .sheet(isPresented: $isShowingProjectDetails) {
+            projectDetailsView(project: project)
         }
+    }
+
+    private func projectDetailsView(project: Project) -> some View {
+        ProjectDetailsView(project: project) { _ in
+            viewModel.loadData()
+        }
+        .environmentObject(songState)
     }
 }
 
