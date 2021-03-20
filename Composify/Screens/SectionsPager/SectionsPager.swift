@@ -37,8 +37,8 @@ struct SectionsPager: View {
             }
         }
         .onPageChanged { index in
-            let newSection = sections.first(where: { $0.index == index })
-            songState.select(currentProject: currentSection.project, currentSection: newSection)
+            let newCurrentSection = sections.first(where: { $0.index == index })
+            songState.select(currentProject: currentSection.project, currentSection: newCurrentSection)
         }
     }
 }
