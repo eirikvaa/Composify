@@ -12,7 +12,7 @@ struct ProjectDetailsView: View {
     @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = ProjectDetailsViewModel()
-    @State private var project: Project?
+    @State private var project: Project
     @State private var visibleSections: [Section] = []
     @State private var removedSections: [Section] = []
     @State private var sectionTitles: [String] = []
@@ -21,12 +21,13 @@ struct ProjectDetailsView: View {
 
     var saveAction: () -> Void
 
-    init(project: Project?, saveAction: @escaping (() -> Void)) {
+    init(project: Project, saveAction: @escaping (() -> Void)) {
         self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
-        self._visibleSections = .init(initialValue: Array(project?.sections ?? .init()))
-        self._sectionTitles = .init(initialValue: project?.sections.map { $0.title } ?? .init())
+        self._visibleSections = .init(initialValue: Array(project.sections))
+        self._sectionTitles = .init(initialValue: project.sections.map { $0.title })
+        self._projectTitle = .init(initialValue: project.title)
     }
 
     var body: some View {
@@ -35,18 +36,18 @@ struct ProjectDetailsView: View {
                 SwiftUI.Section(header: Text("Title")) {
                     TextField("Project title", text: $projectTitle)
                 }
-                SwiftUI.Section(header: Text("Sections")) {
-                    ForEach(Array(sectionTitles.indices), id: \.self) { index in
-                        TextField("Section title", text: $sectionTitles[index])
-                    }
-                    .onDelete(perform: deleteSections)
-                }
+//                SwiftUI.Section(header: Text("Sections")) {
+//                    ForEach(Array(sectionTitles.indices), id: \.self) { index in
+//                        TextField("Section title", text: $sectionTitles[index])
+//                    }
+//                    .onDelete(perform: deleteSections)
+//                }
                 SwiftUI.Section(header: Text("Danger Zone")) {
                     DeleteProjectButton(deleteAction: deleteProject)
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Edit \(project?.title ?? "")")
+            .navigationTitle("Edit \(projectTitle)")
             .navigationBarItems(
                 leading: leadingNavigationBarItem,
                 trailing: trailingNavigationBarItem
@@ -76,10 +77,6 @@ struct ProjectDetailsView: View {
 
         songState.select(currentProject: nil, currentSection: nil)
 
-        guard let project = project else {
-            return
-        }
-
         viewModel.delete(project: project)
     }
 
@@ -100,31 +97,28 @@ struct ProjectDetailsView: View {
             presentationMode.wrappedValue.dismiss()
         }
 
-        guard let project = project else {
-            return
-        }
-
         songState.select(
             currentProject: project,
             currentSection: visibleSections.first
         )
 
-        for (var section, newTitle) in zip(visibleSections, sectionTitles) {
-            viewModel.update(section: &section, keyPath: \.title, value: newTitle)
-        }
+//        for (var section, newTitle) in zip(visibleSections, sectionTitles) {
+//            viewModel.update(section: &section, keyPath: \.title, value: newTitle)
+//        }
 
-        let newSections = visibleSections.filter {
-            !project.sections.contains($0)
-        }
+//        let newSections = visibleSections.filter {
+//            !project.sections.contains($0)
+//        }
 
-        newSections.forEach {
-            viewModel.save(section: $0, to: project)
-        }
+//        newSections.forEach {
+//            viewModel.save(section: $0, to: project)
+//        }
 
-        removedSections.forEach {
-            viewModel.delete(section: $0)
-        }
+//        removedSections.forEach {
+//            viewModel.delete(section: $0)
+//        }
 
+        viewModel.update(project: &project, keyPath: \.title, value: projectTitle)
         viewModel.save(project: project)
 
         saveAction()

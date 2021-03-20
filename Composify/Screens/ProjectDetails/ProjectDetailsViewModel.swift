@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ProjectDetailsViewModel: ObservableObject, SongRepositoryInjectable {
     func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value) {
@@ -15,6 +16,17 @@ class ProjectDetailsViewModel: ObservableObject, SongRepositoryInjectable {
 
     func save(section: Section, to project: Project) {
         songRepository.save(section: section, to: project)
+    }
+
+    func save<Value>(sectionProperties: [WritableKeyPath<Section, Value>], sectionValues: [Value], project: Project) {
+        let realm = try! Realm()
+        try! realm.write {
+            var section = Section()
+
+            for (keyPath, value) in zip(sectionProperties, sectionValues) {
+                section[keyPath: keyPath] = value
+            }
+        }
     }
 
     func save(project: Project) {
