@@ -58,7 +58,7 @@ struct ProjectDetailsView: View {
                     ForEach(visibleSections.indices, id: \.self) { index in
                         TextField("Section title", text: $visibleSections[index].title)
                     }
-                    .onDelete(perform: deleteSection)
+                    .onDelete(perform: deleteSections)
                 }
                 SwiftUI.Section(header: Text("Danger Zone")) {
                     DeleteProjectButton(deleteAction: deleteProject)
@@ -105,7 +105,7 @@ struct ProjectDetailsView: View {
         presentationMode.wrappedValue.dismiss()
     }
 
-    private func deleteSection(indices: IndexSet) {
+    private func deleteSections(indices: IndexSet) {
         let sectionsToDelete = indices.map {
             visibleSections.remove(at: $0)
         }
