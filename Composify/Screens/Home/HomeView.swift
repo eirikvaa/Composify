@@ -67,7 +67,7 @@ struct HomeView: View {
 
     private func loadedView(project: Project, section: Section) -> some View {
         ZStack {
-            SectionsPager(sections: Array(project.sections), currentSection: section)
+            SectionsPager(sections: Array(project.sections.freeze()), currentSection: section)
             VStack {
                 Spacer()
                 RecordButton(isRecording: $audioRecorder.isRecording) {

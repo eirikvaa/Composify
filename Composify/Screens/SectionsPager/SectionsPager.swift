@@ -32,7 +32,7 @@ struct SectionsPager: View {
                     EmptyRecordingsView()
                     Spacer()
                 } else {
-                    RecordingsView(recordings: Array(section.recordings))
+                    RecordingsView(recordings: Array(section.recordings.freeze()))
                 }
             }
         }
