@@ -36,13 +36,9 @@ struct HomeView: View {
     }
 
     private func noProjectsView() -> some View {
-        Button(action: {
+        AddButton(title: "Add project") {
             isShowingProjectDetails = true
-        }, label: {
-            Text("Add project")
-                .padding()
-                .foregroundColor(.white)
-        })
+        }
         .background(Color.gray)
         .cornerRadius(10.0)
         .sheet(isPresented: $isShowingProjectDetails) {
@@ -51,18 +47,13 @@ struct HomeView: View {
     }
 
     private func noSectionsView(project: Project) -> some View {
-        Button(action: {
+        AddButton(title: "Add sections") {
             isShowingProjectDetails = true
-        }, label: {
-            Text("Add section")
-                .padding()
-                .foregroundColor(.white)
-        })
-        .background(Color.gray)
-        .cornerRadius(10.0)
+        }
         .sheet(isPresented: $isShowingProjectDetails) {
             projectDetailsView(project: project)
         }
+        .editProjectToolbar(isPresented: $isShowingProjectDetails)
     }
 
     private func loadedView(project: Project, section: Section) -> some View {
@@ -73,12 +64,7 @@ struct HomeView: View {
                 RecordButton(isRecording: $audioRecorder.isRecording) {
                     if audioRecorder.isRecording {
                         let url = audioRecorder.stopRecording()
-                        let recording = Recording(
-                            title: url.lastPathComponent,
-                            section: section,
-                            url: url.absoluteString
-                        )
-                        viewModel.save(recording: recording)
+                        viewModel.createRecording(for: url)
                         songState.refresh()
                     } else {
                         audioRecorder.startRecording()
@@ -90,18 +76,10 @@ struct HomeView: View {
             }
         }
         .padding()
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Button(action: {
-                    isShowingProjectDetails = true
-                }, label: {
-                    Text("Edit Project")
-                })
-            }
-        }
         .sheet(isPresented: $isShowingProjectDetails) {
             projectDetailsView(project: project)
         }
+        .editProjectToolbar(isPresented: $isShowingProjectDetails)
     }
 
     private func projectDetailsView(project: Project) -> some View {

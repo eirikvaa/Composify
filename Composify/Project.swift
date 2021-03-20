@@ -13,7 +13,8 @@ final class Project: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
-    var sections = List<Section>()
+
+    let sections = List<Section>()
 
     init(title: String) {
         self.title = title

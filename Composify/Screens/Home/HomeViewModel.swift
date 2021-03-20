@@ -9,7 +9,12 @@
 import Foundation
 
 class HomeViewModel: ObservableObject, SongRepositoryInjectable {
-    func save(recording: Recording) {
+    func createRecording(for url: URL) {
+        let recording = Recording(
+            title: url.lastPathComponent,
+            url: url.absoluteString
+        )
+
         let (_, currentSection) = songRepository.getCurrentProjectAndSection()
 
         if let currentSection = currentSection {

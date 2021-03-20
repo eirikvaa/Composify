@@ -9,26 +9,22 @@
 import Foundation
 import RealmSwift
 
-final class Section: Object {
+final class Section: EmbeddedObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var index = 0
     @objc dynamic var dateCreated = Date()
     @objc dynamic var title = ""
-    @objc dynamic var project: Project?
-    let recordings = List<Recording>()
 
-    init(title: String, project: Project?, index: Int) {
+    let recordings = List<Recording>()
+    let project = LinkingObjects(fromType: Project.self, property: "sections")
+
+    init(title: String, index: Int) {
         self.title = title
-        self.project = project
         self.index = index
     }
 
     override required init() {
         super.init()
-    }
-
-    override static func primaryKey() -> String? {
-        "id"
     }
 }
 

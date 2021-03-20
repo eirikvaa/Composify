@@ -8,55 +8,36 @@
 
 import SwiftUI
 
-class EditProjectViewModel: ObservableObject, SongRepositoryInjectable {
-    func update(project: Project) {
-        songRepository.update(project: project)
-    }
-
-    func save(section: Section, to project: Project) {
-        songRepository.save(section: section, to: project)
-    }
-
-    func update(section: Section) {
-        songRepository.update(section: section)
-    }
-
-    func delete(section: Section) {
-        songRepository.delete(section: section)
-    }
-
-    func delete(project: Project) {
-        songRepository.delete(project: project)
-    }
-}
-
 struct ProjectDetailsView: View {
     @EnvironmentObject var songState: SongState
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var viewModel = EditProjectViewModel()
-    @State private var project: Project
+    @StateObject private var viewModel = ProjectDetailsViewModel()
+    @State private var project: Project?
     @State private var visibleSections: [Section] = []
     @State private var removedSections: [Section] = []
+    @State private var sectionTitles: [String] = []
     @State private var editMode = EditMode.active
+    @State private var projectTitle = ""
 
     var saveAction: () -> Void
 
-    init(project: Project, saveAction: @escaping (() -> Void)) {
+    init(project: Project?, saveAction: @escaping (() -> Void)) {
         self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
-        self._visibleSections = .init(initialValue: Array(project.sections))
+        self._visibleSections = .init(initialValue: Array(project?.sections ?? .init()))
+        self._sectionTitles = .init(initialValue: project?.sections.map { $0.title } ?? .init())
     }
 
     var body: some View {
         NavigationView {
             List {
                 SwiftUI.Section(header: Text("Title")) {
-                    TextField("Project title", text: $project.title)
+                    TextField("Project title", text: $projectTitle)
                 }
                 SwiftUI.Section(header: Text("Sections")) {
-                    ForEach(visibleSections.indices, id: \.self) { index in
-                        TextField("Section title", text: $visibleSections[index].title)
+                    ForEach(Array(sectionTitles.indices), id: \.self) { index in
+                        TextField("Section title", text: $sectionTitles[index])
                     }
                     .onDelete(perform: deleteSections)
                 }
@@ -65,7 +46,7 @@ struct ProjectDetailsView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Edit \(project.title)")
+            .navigationTitle("Edit \(project?.title ?? "")")
             .navigationBarItems(
                 leading: leadingNavigationBarItem,
                 trailing: trailingNavigationBarItem
@@ -89,41 +70,47 @@ struct ProjectDetailsView: View {
     }
 
     private func deleteProject() {
+        defer {
+            presentationMode.wrappedValue.dismiss()
+        }
+
         songState.select(currentProject: nil, currentSection: nil)
 
-        // Reset state variables, but preserve the original project
-        // so we can safely delete it.
-        visibleSections.forEach {
-            viewModel.delete(section: $0)
+        guard let project = project else {
+            return
         }
-        visibleSections = []
 
-        let projectCopy = project
-        project = Project()
-        viewModel.delete(project: projectCopy)
-
-        presentationMode.wrappedValue.dismiss()
+        viewModel.delete(project: project)
     }
 
     private func deleteSections(indices: IndexSet) {
         let sectionsToDelete = indices.map {
             visibleSections.remove(at: $0)
         }
+
+        indices.forEach {
+            sectionTitles.remove(at: $0)
+        }
+
         removedSections.append(contentsOf: sectionsToDelete)
     }
 
     private func leadingNavigationBarItemAction() {
+        defer {
+            presentationMode.wrappedValue.dismiss()
+        }
+
+        guard let project = project else {
+            return
+        }
+
         songState.select(
             currentProject: project,
             currentSection: visibleSections.first
         )
 
-        let updatedSections = visibleSections.filter {
-            project.sections.contains($0)
-        }
-
-        updatedSections.forEach {
-            viewModel.update(section: $0)
+        for (var section, newTitle) in zip(visibleSections, sectionTitles) {
+            viewModel.update(section: &section, keypath: \.title, value: newTitle)
         }
 
         let newSections = visibleSections.filter {
@@ -138,17 +125,17 @@ struct ProjectDetailsView: View {
             viewModel.delete(section: $0)
         }
 
-        viewModel.update(project: project)
+        viewModel.save(project: project)
 
         saveAction()
-        presentationMode.wrappedValue.dismiss()
     }
 
     private func trailingNavigationBarItemAction() {
         let nextSectionIndex = visibleSections.count
         let nextSectionTitle = "Section \(nextSectionIndex + 1)"
-        let nextSection = Section(title: nextSectionTitle, project: project, index: nextSectionIndex)
+        let nextSection = Section(title: nextSectionTitle, index: nextSectionIndex)
         visibleSections.append(nextSection)
+        sectionTitles.append(nextSectionTitle)
     }
 }
 

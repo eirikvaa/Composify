@@ -9,27 +9,21 @@
 import Foundation
 import RealmSwift
 
-final class Recording: Object {
+final class Recording: EmbeddedObject {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
-    @objc dynamic var project: Project?
-    @objc dynamic var section: Section?
     @objc dynamic var dateCreated = Date()
     @objc dynamic var fileExtension = "caf"
     @objc dynamic var url = ""
 
-    init(title: String, section: Section?, url: String) {
+    let section = LinkingObjects(fromType: Section.self, property: "recordings")
+
+    init(title: String, url: String) {
         self.title = title
-        self.section = section
-        self.project = section?.project
         self.url = url
     }
 
     override required init() {
         super.init()
-    }
-
-    override static func primaryKey() -> String? {
-        "id"
     }
 }

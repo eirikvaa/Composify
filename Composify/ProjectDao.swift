@@ -24,7 +24,7 @@ class ProjectDaoInjectableImpl: ProjectDaoInjectable {}
 protocol ProjectDao {
     func getProjects() -> [Project]
     func save(project: Project)
-    func update(project: Project)
+    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value)
     func delete(project: Project)
 }
 
@@ -38,26 +38,22 @@ class ProjectDaoImpl: ProjectDao {
     func save(project: Project) {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(project)
+            realm.add(project, update: .modified)
         }
     }
 
-    func update(project: Project) {
+    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value) {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(project, update: .all)
+            project[keyPath: keypath] = value
         }
     }
 
     func delete(project: Project) {
         let realm = try! Realm()
         try! realm.write {
-            let recordings = realm.objects(Recording.self).filter { $0.project == project }
-            realm.delete(recordings)
-
-            let sections = realm.objects(Section.self).filter { $0.project == project }
-            realm.delete(sections)
-
+            // Since Section and Recording are embedded objects, they will be deleted when
+            // a Project is deleted, as they are bound to the life cycle of the Project.
             realm.delete(project)
         }
     }

@@ -28,17 +28,12 @@ protocol RecordingDao {
 
 class RecordingDaoImpl: RecordingDao {
     func getRecordings(in section: Section) -> [Recording] {
-        let realm = try! Realm()
-        let recordings = realm
-            .objects(Recording.self)
-            .filter { $0.section == section }
-        return Array(recordings)
+        Array(section.recordings)
     }
 
     func save(recording: Recording, to section: Section) {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(recording)
             section.recordings.append(recording)
         }
     }
