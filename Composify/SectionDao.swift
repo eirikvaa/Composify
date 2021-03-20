@@ -36,7 +36,7 @@ class SectionDaoImpl: SectionDao {
     func save(section: Section, to project: Project) {
         let realm = try! Realm()
         try! realm.write {
-            project.sections.append(Section(title: "Yo", index: 10))
+            project.sections.append(section)
         }
     }
     func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value) {
