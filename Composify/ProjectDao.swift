@@ -24,7 +24,7 @@ class ProjectDaoInjectableImpl: ProjectDaoInjectable {}
 protocol ProjectDao {
     func getProjects() -> [Project]
     func save(project: Project)
-    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value)
+    func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value)
     func delete(project: Project)
 }
 
@@ -42,10 +42,10 @@ class ProjectDaoImpl: ProjectDao {
         }
     }
 
-    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value) {
+    func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value) {
         let realm = try! Realm()
         try! realm.write {
-            project[keyPath: keypath] = value
+            project[keyPath: keyPath] = value
         }
     }
 

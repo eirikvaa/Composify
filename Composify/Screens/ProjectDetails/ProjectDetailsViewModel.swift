@@ -9,8 +9,8 @@
 import Foundation
 
 class ProjectDetailsViewModel: ObservableObject, SongRepositoryInjectable {
-    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value) {
-        songRepository.update(project: &project, keypath: keypath, value: value)
+    func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value) {
+        songRepository.update(project: &project, keyPath: keyPath, value: value)
     }
 
     func save(section: Section, to project: Project) {
@@ -21,8 +21,8 @@ class ProjectDetailsViewModel: ObservableObject, SongRepositoryInjectable {
         songRepository.save(project: project)
     }
 
-    func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value) {
-        songRepository.update(section: &section, keypath: keypath, value: value)
+    func update<Value>(section: inout Section, keyPath: WritableKeyPath<Section, Value>, value: Value) {
+        songRepository.update(section: &section, keyPath: keyPath, value: value)
     }
 
     func delete(section: Section) {

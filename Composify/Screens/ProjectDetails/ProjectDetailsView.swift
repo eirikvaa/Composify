@@ -110,7 +110,7 @@ struct ProjectDetailsView: View {
         )
 
         for (var section, newTitle) in zip(visibleSections, sectionTitles) {
-            viewModel.update(section: &section, keypath: \.title, value: newTitle)
+            viewModel.update(section: &section, keyPath: \.title, value: newTitle)
         }
 
         let newSections = visibleSections.filter {

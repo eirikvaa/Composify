@@ -24,7 +24,7 @@ class SectionDaoInjectableImpl: SectionDaoInjectable {}
 protocol SectionDao {
     func getSections(in project: Project) -> [Section]
     func save(section: Section, to project: Project)
-    func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value)
+    func update<Value>(section: inout Section, keyPath: WritableKeyPath<Section, Value>, value: Value)
     func delete(section: Section)
 }
 
@@ -39,10 +39,10 @@ class SectionDaoImpl: SectionDao {
             project.sections.append(section)
         }
     }
-    func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value) {
+    func update<Value>(section: inout Section, keyPath: WritableKeyPath<Section, Value>, value: Value) {
         let realm = try! Realm()
         try! realm.write {
-            section[keyPath: keypath] = value
+            section[keyPath: keyPath] = value
         }
     }
 

@@ -25,8 +25,8 @@ protocol SongRepository {
     func save(project: Project)
     func save(section: Section, to project: Project)
     func save(recording: Recording, to section: Section)
-    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value)
-    func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value)
+    func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value)
+    func update<Value>(section: inout Section, keyPath: WritableKeyPath<Section, Value>, value: Value)
     func delete(section: Section)
     func delete(project: Project)
     func set(currentProject: Project?, currentSection: Section?)
@@ -51,12 +51,12 @@ class SongRepositoryImpl: SongRepository,
         projectDao.save(project: project)
     }
 
-    func update<Value>(project: inout Project, keypath: WritableKeyPath<Project, Value>, value: Value) {
-        projectDao.update(project: &project, keypath: keypath, value: value)
+    func update<Value>(project: inout Project, keyPath: WritableKeyPath<Project, Value>, value: Value) {
+        projectDao.update(project: &project, keyPath: keyPath, value: value)
     }
 
-    func update<Value>(section: inout Section, keypath: WritableKeyPath<Section, Value>, value: Value) {
-        sectionDao.update(section: &section, keypath: keypath, value: value)
+    func update<Value>(section: inout Section, keyPath: WritableKeyPath<Section, Value>, value: Value) {
+        sectionDao.update(section: &section, keyPath: keyPath, value: value)
     }
 
     func save(section: Section, to project: Project) {
