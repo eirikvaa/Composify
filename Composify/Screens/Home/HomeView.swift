@@ -105,8 +105,7 @@ struct HomeView: View {
     }
 
     private func projectDetailsView(project: Project) -> some View {
-        ProjectDetailsView(project: project) { project in
-            songState.select(currentProject: project)
+        ProjectDetailsView(project: project) {
             songState.refresh()
         }
         .environmentObject(songState)

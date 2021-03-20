@@ -39,9 +39,9 @@ struct ProjectDetailsView: View {
     @State private var removedSections: [Section] = []
     @State private var editMode = EditMode.active
 
-    var saveAction: ((Project?) -> Void)
+    var saveAction: () -> Void
 
-    init(project: Project, saveAction: @escaping ((Project?) -> Void)) {
+    init(project: Project, saveAction: @escaping (() -> Void)) {
         self._project = .init(initialValue: project)
         self.saveAction = saveAction
 
@@ -113,13 +113,26 @@ struct ProjectDetailsView: View {
     }
 
     private func leadingNavigationBarItemAction() {
-        visibleSections
-            .filter { !project.sections.contains($0) }
-            .forEach { viewModel.save(section: $0, to: project) }
+        songState.select(
+            currentProject: project,
+            currentSection: visibleSections.first
+        )
 
-        visibleSections
-            .filter { project.sections.contains($0) }
-            .forEach { viewModel.update(section: $0) }
+        let updatedSections = visibleSections.filter {
+            project.sections.contains($0)
+        }
+
+        updatedSections.forEach {
+            viewModel.update(section: $0)
+        }
+
+        let newSections = visibleSections.filter {
+            !project.sections.contains($0)
+        }
+
+        newSections.forEach {
+            viewModel.save(section: $0, to: project)
+        }
 
         removedSections.forEach {
             viewModel.delete(section: $0)
@@ -127,12 +140,7 @@ struct ProjectDetailsView: View {
 
         viewModel.update(project: project)
 
-        songState.select(
-            currentProject: project,
-            currentSection: visibleSections.first
-        )
-
-        saveAction(project)
+        saveAction()
         presentationMode.wrappedValue.dismiss()
     }
 
@@ -146,6 +154,6 @@ struct ProjectDetailsView: View {
 
 struct EditProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectDetailsView(project: Project()) { _ in }
+        ProjectDetailsView(project: Project()) {}
     }
 }
