@@ -52,9 +52,8 @@ class SectionDaoImpl: SectionDao {
     func delete(section: Section) {
         let realm = try! Realm()
         try! realm.write {
-            for recording in section.recordings {
-                realm.delete(recording)
-            }
+            let recordings = realm.objects(Recording.self).filter { $0.section == section }
+            realm.delete(recordings)
 
             realm.delete(section)
         }

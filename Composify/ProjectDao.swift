@@ -52,11 +52,12 @@ class ProjectDaoImpl: ProjectDao {
     func delete(project: Project) {
         let realm = try! Realm()
         try! realm.write {
-            for section in project.sections {
-                realm.delete(section.recordings)
-            }
+            let recordings = realm.objects(Recording.self).filter { $0.project == project }
+            realm.delete(recordings)
 
-            realm.delete(project.sections)
+            let sections = realm.objects(Section.self).filter { $0.project == project }
+            realm.delete(sections)
+
             realm.delete(project)
         }
     }
