@@ -106,11 +106,10 @@ struct ProjectDetailsView: View {
     }
 
     private func deleteSection(indices: IndexSet) {
-        indices.forEach {
-            removedSections.append(
-                visibleSections.remove(at: $0)
-            )
+        let sectionsToDelete = indices.map {
+            visibleSections.remove(at: $0)
         }
+        removedSections.append(contentsOf: sectionsToDelete)
     }
 
     private func leadingNavigationBarItemAction() {
