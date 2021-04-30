@@ -393,7 +393,6 @@
 					E56460001D3B50B500AA6557 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
 					};
 					E58C57E81DD8799D00348C65 = {
 						CreatedOnToolsVersion = 8.1;
@@ -698,7 +697,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				ENABLE_PREVIEWS = YES;
@@ -717,7 +716,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eirikvaa.composify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eirikvaa.composify";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -730,7 +729,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				ENABLE_PREVIEWS = YES;
@@ -747,7 +746,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eirikvaa.composify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eirikvaa.composify";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
