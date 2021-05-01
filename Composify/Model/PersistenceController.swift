@@ -17,16 +17,19 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
 
-        (0..<5).forEach {
-            ProjectFactory.create(
+        (0..<3).forEach {
+            let project = ProjectFactory.create(
                 title: "Project \($0)",
-                persistenceController: controller
-            )
-            RecordingFactory.create(
-                title: "Recording \($0)",
-                url: URL(fileURLWithPath: ""),
                 context: controller.container.viewContext
             )
+            (0..<3).forEach {
+                RecordingFactory.create(
+                    title: "\(project.title ?? "") recording \($0)",
+                    project: project,
+                    url: URL(fileURLWithPath: ""),
+                    context: controller.container.viewContext
+                )
+            }
         }
 
         return controller
