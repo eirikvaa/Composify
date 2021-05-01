@@ -9,19 +9,38 @@
 import CoreData
 import SwiftUI
 
+struct ProjectViewModel {
+    let project: Project
+
+    var title: String {
+        project.title ?? ""
+    }
+
+    var recordings: [Recording] {
+        Array(project.recordings?.array ?? []) as? [Recording] ?? []
+    }
+
+    var createdAt: String {
+        let createdAtDate = project.createdAt ?? Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: createdAtDate)
+    }
+}
+
 struct ProjectView: View {
     @Environment(\.managedObjectContext) var moc
     @State private var projectTitle: String
+
+    private let viewModel: ProjectViewModel
 
     let project: Project
 
     init(project: Project) {
         self.project = project
         self.projectTitle = project.title ?? ""
-    }
-
-    private var recordings: [Recording] {
-        Array(project.recordings?.array ?? []) as? [Recording] ?? []
+        self.viewModel = ProjectViewModel(project: project)
     }
 
     var body: some View {
@@ -34,14 +53,17 @@ struct ProjectView: View {
                 }
             }
             Section(header: Text("Recordings")) {
-                ForEach(recordings, id: \.index) { recording in
+                ForEach(viewModel.recordings, id: \.index) { recording in
                     Text(recording.title ?? "")
                 }
                 .onDelete(perform: removeRecordings)
             }
+            Section(header: Text("Created At")) {
+                Text(viewModel.createdAt)
+            }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle(project.title ?? "")
+        .navigationTitle(viewModel.title)
         .onDisappear {
             try! moc.save()
         }
@@ -49,7 +71,7 @@ struct ProjectView: View {
 
     func removeRecordings(at indexes: IndexSet) {
         for index in indexes {
-            let recording = recordings[index]
+            let recording = viewModel.recordings[index]
             moc.delete(recording)
         }
 
