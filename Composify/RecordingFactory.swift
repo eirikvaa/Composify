@@ -10,13 +10,14 @@ import CoreData
 import Foundation
 
 struct RecordingFactory {
+    @discardableResult
     static func create(
         title: String,
         fileExtension: String = "caf",
         project: Project? = nil,
         url: URL,
         context: NSManagedObjectContext
-    ) {
+    ) -> Recording {
         let recording = Recording(context: context)
         recording.id = UUID()
         recording.createdAt = Date()
@@ -26,5 +27,7 @@ struct RecordingFactory {
         recording.url = url
 
         try! context.save()
+
+        return recording
     }
 }

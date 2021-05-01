@@ -9,12 +9,15 @@
 import CoreData
 
 struct ProjectFactory {
-    static func create(title: String, persistenceController: PersistenceController) {
-        let project = Project(context: persistenceController.container.viewContext)
+    @discardableResult
+    static func create(title: String, context: NSManagedObjectContext) -> Project {
+        let project = Project(context: context)
         project.id = UUID()
         project.createdAt = Date()
         project.title = title
 
-        persistenceController.save()
+        try! context.save()
+
+        return project
     }
 }
