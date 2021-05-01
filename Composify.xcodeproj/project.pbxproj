@@ -8,38 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5020B28263CD4C40017DC04 /* Composify.xcdatamodeld */; };
-		E547142225FC3641008DA65B /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547142125FC3641008DA65B /* RecordButton.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
-		E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57F4E71255FF57800CE7030 /* SectionsPager.swift */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
-		E595A7D825FC375F00F27283 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7D725FC375F00F27283 /* HomeViewModel.swift */; };
-		E595A7DD25FC389B00F27283 /* SongRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7DC25FC389B00F27283 /* SongRepository.swift */; };
-		E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7E425FC390B00F27283 /* RecordingDao.swift */; };
-		E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7EA25FC3BD800F27283 /* ProjectDao.swift */; };
-		E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F025FC3E2500F27283 /* RecordingsView.swift */; };
-		E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A7F625FC3F6400F27283 /* SectionDao.swift */; };
-		E595A80325FCA79C00F27283 /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A80225FCA79C00F27283 /* ProjectDetailsView.swift */; };
-		E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81525FCE19600F27283 /* SectionHeaderView.swift */; };
-		E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E595A81925FCE1A900F27283 /* EmptyRecordingsView.swift */; };
 		E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */; };
-		E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB83255FE84F00BC7D32 /* MainView.swift */; };
 		E5A6BB9C255FEFA000BC7D32 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = E5A6BB9B255FEFA000BC7D32 /* SwiftUIPager */; };
-		E5A6BBBF255FF32C00BC7D32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */; };
 		E5A7991C25FCEDC200FF718C /* ComposifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */; };
-		E5A7993B25FCF1D100FF718C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7993A25FCF1D100FF718C /* AudioRecorder.swift */; };
-		E5A7994125FD23C400FF718C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7994025FD23C400FF718C /* AudioPlayer.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5CD44F3255F55C600608EAF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F2255F55C600608EAF /* Realm */; };
 		E5CD44F5255F55C600608EAF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5CD44F4255F55C600608EAF /* RealmSwift */; };
-		E5EE9BB92606444000076559 /* ProjectDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EE9BB82606444000076559 /* ProjectDetailsViewModel.swift */; };
-		E5EE9BBE2606460500076559 /* EditProjectToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EE9BBD2606460500076559 /* EditProjectToolbar.swift */; };
-		E5EE9BCA2606463B00076559 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EE9BC92606463B00076559 /* AddButton.swift */; };
-		E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7B1D5B1417000B4F7F /* Project.swift */; };
-		E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B7F1D5B14E6000B4F7F /* Section.swift */; };
-		E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F60B831D5B1535000B4F7F /* Recording.swift */; };
-		E5F88A1E25FE512500124A61 /* SongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F88A1D25FE512500124A61 /* SongState.swift */; };
-		E5FC81662604FEF000AF65CC /* DeleteProjectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC81652604FEF000AF65CC /* DeleteProjectButton.swift */; };
+		E5F2956E263D4FC000650A5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB83255FE84F00BC7D32 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -503,31 +481,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E595A7D825FC375F00F27283 /* HomeViewModel.swift in Sources */,
-				E595A80325FCA79C00F27283 /* ProjectDetailsView.swift in Sources */,
-				E5A7993B25FCF1D100FF718C /* AudioRecorder.swift in Sources */,
-				E5F60B801D5B14E6000B4F7F /* Section.swift in Sources */,
-				E595A7E525FC390B00F27283 /* RecordingDao.swift in Sources */,
-				E595A7DD25FC389B00F27283 /* SongRepository.swift in Sources */,
-				E5A6BBBF255FF32C00BC7D32 /* HomeView.swift in Sources */,
-				E5A7994125FD23C400FF718C /* AudioPlayer.swift in Sources */,
 				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
-				E595A81625FCE19600F27283 /* SectionHeaderView.swift in Sources */,
-				E5EE9BBE2606460500076559 /* EditProjectToolbar.swift in Sources */,
-				E595A7F125FC3E2500F27283 /* RecordingsView.swift in Sources */,
-				E595A7EB25FC3BD800F27283 /* ProjectDao.swift in Sources */,
-				E5F60B7C1D5B1417000B4F7F /* Project.swift in Sources */,
-				E5A6BB84255FE84F00BC7D32 /* MainView.swift in Sources */,
-				E5EE9BCA2606463B00076559 /* AddButton.swift in Sources */,
-				E595A7F725FC3F6400F27283 /* SectionDao.swift in Sources */,
-				E5EE9BB92606444000076559 /* ProjectDetailsViewModel.swift in Sources */,
-				E5F60B841D5B1535000B4F7F /* Recording.swift in Sources */,
-				E547142225FC3641008DA65B /* RecordButton.swift in Sources */,
+				E5F2956E263D4FC000650A5F /* MainView.swift in Sources */,
 				E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */,
-				E595A81A25FCE1A900F27283 /* EmptyRecordingsView.swift in Sources */,
-				E5F88A1E25FE512500124A61 /* SongState.swift in Sources */,
-				E5FC81662604FEF000AF65CC /* DeleteProjectButton.swift in Sources */,
-				E57F4E72255FF57800CE7030 /* SectionsPager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
