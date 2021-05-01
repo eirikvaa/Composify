@@ -10,6 +10,7 @@
 		E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5020B28263CD4C40017DC04 /* Composify.xcdatamodeld */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
+		E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */; };
 		E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */; };
 		E5A7991C25FCEDC200FF718C /* ComposifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */; };
 		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
@@ -61,6 +62,7 @@
 		E58289A221C6F5FB00E438B5 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposifyApp.swift; path = App/ComposifyApp.swift; sourceTree = "<group>"; };
 		E5A6BB83255FE84F00BC7D32 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E5A6BBBE255FF32C00BC7D32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 			name = Domain;
 			sourceTree = "<group>";
 		};
+		E5A50DF8263DAA8E002CE1C5 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
 		E5A6BBBD255FF32200BC7D32 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +216,7 @@
 				E547141F25FC3609008DA65B /* Home */,
 				E5FE0642263D70770021DDD7 /* Record */,
 				E5FE0643263D70800021DDD7 /* Library */,
+				E5A50DF8263DAA8E002CE1C5 /* Project */,
 				E547142025FC3615008DA65B /* Components */,
 			);
 			path = Screens;
@@ -412,6 +423,7 @@
 				E5FE0647263D72440021DDD7 /* RecordView.swift in Sources */,
 				E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */,
 				E5FE063E263D68600021DDD7 /* PersistenceController.swift in Sources */,
+				E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
