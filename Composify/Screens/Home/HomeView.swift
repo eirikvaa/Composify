@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftUIPager
 
 extension HomeView {
     enum TabItem {

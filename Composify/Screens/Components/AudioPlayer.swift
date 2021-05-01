@@ -27,8 +27,10 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             try audioSession.setCategory(.playback)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
+            let recordingTitle = recording.title ?? ""
+            let errorMessage = error.localizedDescription
             print(
-                "Failed preparing audio session for audio playback of \(recording.title ?? ""): \(error.localizedDescription)"
+                "Failed preparing audio session for audio playback of \(recordingTitle): \(errorMessage)"
             )
         }
 
