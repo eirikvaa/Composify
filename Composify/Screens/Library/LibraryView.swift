@@ -18,7 +18,8 @@ struct LibraryView: View {
     ) var projects: FetchedResults<Project>
     @FetchRequest(
         entity: Recording.entity(),
-        sortDescriptors: []
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "project = nil")
     ) var recordings: FetchedResults<Recording>
 
     var body: some View {
