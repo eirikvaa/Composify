@@ -47,8 +47,11 @@ struct RecordView: View {
                     VStack {
                         Text("Working project")
                             .font(.caption)
-                        Text(workingProject.title ?? "")
-                            .font(.headline)
+                        HStack {
+                            Text(workingProject.title ?? "")
+                                .font(.headline)
+                            Image(systemName: "hand.tap")
+                        }
                     }
                 } else {
                     VStack {
