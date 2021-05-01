@@ -9,15 +9,20 @@
 import CoreData
 import SwiftUI
 
-struct ProjectViewModel {
+struct ProjectView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(
+        entity: Recording.entity(),
+        sortDescriptors: []
+    ) private var recordings: FetchedResults<Recording>
+
+    @State private var projectTitle = ""
+
     let project: Project
 
-    var title: String {
-        project.title ?? ""
-    }
-
-    var recordings: [Recording] {
-        Array(project.recordings?.array ?? []) as? [Recording] ?? []
+    init(project: Project) {
+        self.project = project
+        self._projectTitle = .init(initialValue: project.title ?? "")
     }
 
     var createdAt: String {
@@ -26,21 +31,6 @@ struct ProjectViewModel {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: createdAtDate)
-    }
-}
-
-struct ProjectView: View {
-    @Environment(\.managedObjectContext) var moc
-    @State private var projectTitle: String
-
-    private let viewModel: ProjectViewModel
-
-    let project: Project
-
-    init(project: Project) {
-        self.project = project
-        self.projectTitle = project.title ?? ""
-        self.viewModel = ProjectViewModel(project: project)
     }
 
     var body: some View {
@@ -53,17 +43,17 @@ struct ProjectView: View {
                 }
             }
             Section(header: Text("Recordings")) {
-                ForEach(viewModel.recordings, id: \.index) { recording in
+                ForEach(recordings.filter { $0.project == project }, id: \.index) { recording in
                     Text(recording.title ?? "")
                 }
                 .onDelete(perform: removeRecordings)
             }
             Section(header: Text("Created At")) {
-                Text(viewModel.createdAt)
+                Text(createdAt)
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle(viewModel.title)
+        .navigationTitle(project.title ?? "")
         .onDisappear {
             try! moc.save()
         }
@@ -71,7 +61,7 @@ struct ProjectView: View {
 
     func removeRecordings(at indexes: IndexSet) {
         for index in indexes {
-            let recording = viewModel.recordings[index]
+            let recording = recordings[index]
             moc.delete(recording)
         }
 
