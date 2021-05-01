@@ -32,7 +32,7 @@ struct LibraryView: View {
                     removeProjects(at: indexSet)
                 })
             }
-            Section(header: Text("Orphaned recordings")) {
+            Section(header: Text("Standalone recordings")) {
                 ForEach(recordings, id: \.id) { recording in
                     Text(recording.title ?? "")
                         .onTapGesture {
