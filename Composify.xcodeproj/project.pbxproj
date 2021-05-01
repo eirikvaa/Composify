@@ -23,6 +23,8 @@
 		E5FE0648263D73E70021DDD7 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E547142125FC3641008DA65B /* RecordButton.swift */; };
 		E5FE0649263D73ED0021DDD7 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7993A25FCF1D100FF718C /* AudioRecorder.swift */; };
 		E5FE064A263D73F00021DDD7 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7994025FD23C400FF718C /* AudioPlayer.swift */; };
+		E5FE064C263D7BEA0021DDD7 /* RecordingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FE064B263D7BEA0021DDD7 /* RecordingFactory.swift */; };
+		E5FE064F263D7E970021DDD7 /* OrphanedRecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FE064E263D7E970021DDD7 /* OrphanedRecordingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -74,6 +76,8 @@
 		E5FE063F263D6D5E0021DDD7 /* ProjectFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProjectFactory.swift; path = Model/ProjectFactory.swift; sourceTree = "<group>"; };
 		E5FE0644263D70940021DDD7 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		E5FE0646263D72440021DDD7 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		E5FE064B263D7BEA0021DDD7 /* RecordingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingFactory.swift; sourceTree = "<group>"; };
+		E5FE064E263D7E970021DDD7 /* OrphanedRecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrphanedRecordingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +218,7 @@
 			children = (
 				E5FE063D263D68600021DDD7 /* PersistenceController.swift */,
 				E5FE063F263D6D5E0021DDD7 /* ProjectFactory.swift */,
+				E5FE064B263D7BEA0021DDD7 /* RecordingFactory.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -230,8 +235,17 @@
 			isa = PBXGroup;
 			children = (
 				E5FE0644263D70940021DDD7 /* LibraryView.swift */,
+				E5FE064D263D7E800021DDD7 /* OrphanedRecordings */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		E5FE064D263D7E800021DDD7 /* OrphanedRecordings */ = {
+			isa = PBXGroup;
+			children = (
+				E5FE064E263D7E970021DDD7 /* OrphanedRecordingsView.swift */,
+			);
+			path = OrphanedRecordings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,9 +414,11 @@
 				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
 				E5F2956E263D4FC000650A5F /* MainView.swift in Sources */,
 				E5FE064A263D73F00021DDD7 /* AudioPlayer.swift in Sources */,
+				E5FE064F263D7E970021DDD7 /* OrphanedRecordingsView.swift in Sources */,
 				E5FE0648263D73E70021DDD7 /* RecordButton.swift in Sources */,
 				E5FE0640263D6D5E0021DDD7 /* ProjectFactory.swift in Sources */,
 				E5FE0649263D73ED0021DDD7 /* AudioRecorder.swift in Sources */,
+				E5FE064C263D7BEA0021DDD7 /* RecordingFactory.swift in Sources */,
 				E5FE0641263D6DB20021DDD7 /* HomeView.swift in Sources */,
 				E5FE0645263D70940021DDD7 /* LibraryView.swift in Sources */,
 				E5FE0647263D72440021DDD7 /* RecordView.swift in Sources */,

@@ -18,8 +18,9 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func play(recording: Recording) {
         self.recording = recording
 
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent(recording.title ?? "")
+        guard let url = recording.url else {
+            return
+        }
 
         let audioSession = AVAudioSession.sharedInstance()
 

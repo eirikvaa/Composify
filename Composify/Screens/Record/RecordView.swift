@@ -9,10 +9,29 @@
 import SwiftUI
 
 struct RecordView: View {
+    @Environment(\.managedObjectContext) var moc
+    @ObservedObject private var audioRecorder = AudioRecorder()
     @State private var isRecording = false
 
     var body: some View {
-        RecordButton(isRecording: $isRecording) {}
+        VStack {
+            Text(isRecording ? "Recording ..." : "Start recording")
+
+            RecordButton(isRecording: $isRecording) {
+                if isRecording {
+                    let url = audioRecorder.stopRecording()
+                    RecordingFactory.create(
+                        title: Date().description,
+                        url: url,
+                        context: moc
+                    )
+                } else {
+                    audioRecorder.startRecording()
+                }
+
+                isRecording.toggle()
+            }
+        }
     }
 }
 

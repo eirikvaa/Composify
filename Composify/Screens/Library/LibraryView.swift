@@ -18,13 +18,21 @@ struct LibraryView: View {
 
     var body: some View {
         List {
-            ForEach(projects, id: \.id) { project in
-                Text(project.title ?? "")
+            Section(header: Text("Projects")) {
+                ForEach(projects, id: \.id) { project in
+                    Text(project.title ?? "")
+                }
+                .onDelete(perform: { indexSet in
+                    removeProjects(at: indexSet)
+                })
             }
-            .onDelete(perform: { indexSet in
-                removeProjects(at: indexSet)
-            })
+            Section(header: Text("Orphaned recordings")) {
+                NavigationLink(destination: OrphanedRecordingsView()) {
+                    Text("Orphaned recordings")
+                }
+            }
         }
+        .listStyle(InsetGroupedListStyle())
         .navigationTitle("Library")
         .navigationBarItems(trailing: Button(action: {
             ProjectFactory.create(
