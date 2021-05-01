@@ -26,7 +26,9 @@ struct LibraryView: View {
         List {
             Section(header: Text("Projects")) {
                 ForEach(projects, id: \.id) { project in
-                    Text(project.title ?? "")
+                    NavigationLink(destination: ProjectView(project: project)) {
+                        Text(project.title ?? "")
+                    }
                 }
                 .onDelete(perform: { indexSet in
                     removeProjects(at: indexSet)
@@ -49,7 +51,7 @@ struct LibraryView: View {
         .navigationBarItems(trailing: Button(action: {
             ProjectFactory.create(
                 title: "Something New",
-                persistenceController: PersistenceController.shared
+                context: PersistenceController.shared.container.viewContext
             )
         }, label: {
             Image(systemName: "plus")
