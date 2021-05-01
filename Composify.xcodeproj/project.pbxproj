@@ -158,7 +158,6 @@
 				E56460361D3B54B000AA6557 /* App */,
 				E523959A21C6824300D3004F /* Resources */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
-				E595A7DB25FC384A00F27283 /* Domain */,
 				E5A7990E25FCECC100FF718C /* Model */,
 			);
 			path = Composify;
@@ -192,13 +191,6 @@
 				E58C57ED1DD8799D00348C65 /* Info.plist */,
 			);
 			path = ComposifyTests;
-			sourceTree = "<group>";
-		};
-		E595A7DB25FC384A00F27283 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Domain;
 			sourceTree = "<group>";
 		};
 		E5A50DF8263DAA8E002CE1C5 /* Project */ = {
