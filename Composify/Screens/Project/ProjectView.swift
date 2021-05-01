@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ProjectView: View {
     @Environment(\.managedObjectContext) var moc
+    @ObservedObject private var audioPlayer = AudioPlayer()
     @FetchRequest(
         entity: Recording.entity(),
         sortDescriptors: []
@@ -45,6 +46,9 @@ struct ProjectView: View {
             Section(header: Text("Recordings")) {
                 ForEach(recordings.filter { $0.project == project }, id: \.index) { recording in
                     Text(recording.title ?? "")
+                        .onTapGesture {
+                            audioPlayer.play(recording: recording)
+                        }
                 }
                 .onDelete(perform: removeRecordings)
             }
