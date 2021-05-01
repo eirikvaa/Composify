@@ -10,11 +10,16 @@ import CoreData
 import SwiftUI
 
 struct LibraryView: View {
+    @ObservedObject private var audioPlayer = AudioPlayer()
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Project.entity(),
         sortDescriptors: []
     ) var projects: FetchedResults<Project>
+    @FetchRequest(
+        entity: Recording.entity(),
+        sortDescriptors: []
+    ) var recordings: FetchedResults<Recording>
 
     var body: some View {
         List {
@@ -27,9 +32,15 @@ struct LibraryView: View {
                 })
             }
             Section(header: Text("Orphaned recordings")) {
-                NavigationLink(destination: OrphanedRecordingsView()) {
-                    Text("Orphaned recordings")
+                ForEach(recordings, id: \.id) { recording in
+                    Text(recording.title ?? "")
+                        .onTapGesture {
+                            audioPlayer.play(recording: recording)
+                        }
                 }
+                .onDelete(perform: { indexSet in
+                    removeRecordings(at: indexSet)
+                })
             }
         }
         .listStyle(InsetGroupedListStyle())
@@ -48,6 +59,15 @@ struct LibraryView: View {
         for index in indexes {
             let project = projects[index]
             moc.delete(project)
+        }
+
+        try! moc.save()
+    }
+
+    func removeRecordings(at indexes: IndexSet) {
+        for index in indexes {
+            let recording = recordings[index]
+            moc.delete(recording)
         }
 
         try! moc.save()
