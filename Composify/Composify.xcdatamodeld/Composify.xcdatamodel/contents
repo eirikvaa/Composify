@@ -10,12 +10,13 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fileExtension" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="url" attributeType="URI"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="recordings" inverseEntity="Project"/>
     </entity>
     <elements>
         <element name="Project" positionX="610.8929443359375" positionY="213.5830688476562" width="128" height="89"/>
-        <element name="Recording" positionX="918.2435302734375" positionY="-58.66696166992188" width="128" height="133"/>
+        <element name="Recording" positionX="918.2435302734375" positionY="-58.66696166992188" width="128" height="134"/>
     </elements>
 </model>
