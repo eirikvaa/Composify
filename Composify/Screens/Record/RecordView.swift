@@ -6,6 +6,7 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
+import CoreData
 import SwiftUI
 
 struct RecordView: View {
@@ -24,11 +25,13 @@ struct RecordView: View {
         let projects = projects.map { project in
             Alert.Button.default(Text(project.title ?? "")) {
                 self.workingProject = project
+                UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
             }
         }
 
         let reset = Alert.Button.destructive(Text("Reset working project")) {
             workingProject = nil
+            UserDefaults.standard.set(nil, forKey: "project.id")
         }
 
         let cancel = Alert.Button.cancel()
@@ -95,6 +98,19 @@ struct RecordView: View {
                 message: Text("Select a project to record audio in"),
                 buttons: actionSheetButtons
             )
+        }
+        .onAppear {
+            if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
+               let uuid = UUID(uuidString: uuidString) {
+                let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
+
+                do {
+                    self.workingProject = try moc.fetch(fetchRequest).first
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
