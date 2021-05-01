@@ -12,9 +12,60 @@ struct RecordView: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject private var audioRecorder = AudioRecorder()
     @State private var isRecording = false
+    @State private var workingProject: Project?
+    @State private var showProjectSheet = false
+
+    @FetchRequest(
+        entity: Project.entity(),
+        sortDescriptors: []
+    ) var projects: FetchedResults<Project>
+
+    private var actionSheetButtons: [Alert.Button] {
+        let projects = projects.map { project in
+            Alert.Button.default(Text(project.title ?? "")) {
+                self.workingProject = project
+            }
+        }
+
+        let reset = Alert.Button.destructive(Text("Reset working project")) {
+            workingProject = nil
+        }
+
+        let cancel = Alert.Button.cancel()
+
+        return projects + [reset, cancel]
+    }
 
     var body: some View {
         VStack {
+            Spacer().frame(height: 20)
+
+            Button(action: {
+                showProjectSheet.toggle()
+            }, label: {
+                if let workingProject = workingProject {
+                    VStack {
+                        Text("Working project")
+                            .font(.caption)
+                        Text(workingProject.title ?? "")
+                            .font(.headline)
+                    }
+                } else {
+                    VStack {
+                        Text("No working project")
+                            .font(.caption)
+                        HStack {
+                            Text("Tap to select working project")
+                                .font(.headline)
+                            Image(systemName: "hand.tap")
+                        }
+                    }
+                }
+            })
+            .buttonStyle(PlainButtonStyle())
+
+            Spacer()
+
             Text(isRecording ? "Recording ..." : "Start recording")
 
             RecordButton(isRecording: $isRecording) {
@@ -22,6 +73,7 @@ struct RecordView: View {
                     let url = audioRecorder.stopRecording()
                     RecordingFactory.create(
                         title: Date().description,
+                        project: workingProject,
                         url: url,
                         context: moc
                     )
@@ -31,6 +83,15 @@ struct RecordView: View {
 
                 isRecording.toggle()
             }
+
+            Spacer()
+        }
+        .actionSheet(isPresented: $showProjectSheet) {
+            ActionSheet(
+                title: Text("Projects"),
+                message: Text("Select a project to record audio in"),
+                buttons: actionSheetButtons
+            )
         }
     }
 }
