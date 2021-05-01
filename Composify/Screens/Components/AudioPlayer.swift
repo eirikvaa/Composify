@@ -19,7 +19,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         self.recording = recording
 
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent(recording.title)
+            .appendingPathComponent(recording.title ?? "")
 
         let audioSession = AVAudioSession.sharedInstance()
 
@@ -28,7 +28,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print(
-                "Failed preparing audio session for audio playback of \(recording.title): \(error.localizedDescription)"
+                "Failed preparing audio session for audio playback of \(recording.title ?? ""): \(error.localizedDescription)"
             )
         }
 
@@ -39,7 +39,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             audioPlayer.play()
             isPlaying = true
         } catch {
-            print("Failed to play recording with name: \(recording.title): \(error.localizedDescription)")
+            print("Failed to play recording with name: \(recording.title ?? ""): \(error.localizedDescription)")
         }
     }
 

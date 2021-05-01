@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+    <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="sections" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Section" inverseName="project" inverseEntity="Section"/>
+    </entity>
+    <entity name="Recording" representedClassName="Recording" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fileExtension" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="url" attributeType="String"/>
+        <relationship name="section" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="recordings" inverseEntity="Section"/>
+    </entity>
+    <entity name="Section" representedClassName="Section" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="project" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="sections" inverseEntity="Project"/>
+        <relationship name="recordings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Recording" inverseName="section" inverseEntity="Recording"/>
+    </entity>
+    <elements>
+        <element name="Project" positionX="610.8929443359375" positionY="213.5830688476562" width="128" height="89"/>
+        <element name="Recording" positionX="918.2435302734375" positionY="-58.66696166992188" width="128" height="119"/>
+        <element name="Section" positionX="917.8021240234375" positionY="329.578857421875" width="128" height="119"/>
+    </elements>
 </model>
