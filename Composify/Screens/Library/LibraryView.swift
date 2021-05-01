@@ -14,11 +14,15 @@ struct LibraryView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Project.entity(),
-        sortDescriptors: []
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Project.title, ascending: true)
+        ]
     ) var projects: FetchedResults<Project>
     @FetchRequest(
         entity: Recording.entity(),
-        sortDescriptors: [],
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Recording.createdAt, ascending: true)
+        ],
         predicate: NSPredicate(format: "project = nil")
     ) var recordings: FetchedResults<Recording>
 
@@ -50,7 +54,7 @@ struct LibraryView: View {
         .navigationTitle("Library")
         .navigationBarItems(trailing: Button(action: {
             ProjectFactory.create(
-                title: "Something New",
+                title: UUID().uuidString,
                 context: PersistenceController.shared.container.viewContext
             )
         }, label: {
