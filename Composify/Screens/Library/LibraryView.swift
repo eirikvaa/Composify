@@ -48,6 +48,11 @@ struct LibraryView: View {
 
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
-        LibraryView()
+        let context = PersistenceController.preview.container.viewContext
+
+        NavigationView {
+            LibraryView()
+                .environment(\.managedObjectContext, context)
+        }
     }
 }

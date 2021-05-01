@@ -14,6 +14,16 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
 
+    static var preview: PersistenceController = {
+        let controller = PersistenceController(inMemory: true)
+
+        (0..<5).forEach {
+            ProjectFactory.create(title: "Project \($0)", persistenceController: controller)
+        }
+
+        return controller
+    }()
+
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Composify")
 
