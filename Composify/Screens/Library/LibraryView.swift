@@ -54,7 +54,7 @@ struct LibraryView: View {
     private var trailingButton: some View {
         Button(action: {
             ProjectFactory.create(
-                title: UUID().uuidString,
+                title: "Project \(Date().prettyDate)",
                 context: PersistenceController.shared.container.viewContext
             )
         }, label: {

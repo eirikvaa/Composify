@@ -9,6 +9,16 @@
 import CoreData
 import SwiftUI
 
+extension Date {
+    var prettyDate: String {
+        let createdAtDate = self
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: createdAtDate)
+    }
+}
+
 struct ProjectView: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject private var audioPlayer = AudioPlayer()
@@ -27,11 +37,7 @@ struct ProjectView: View {
     }
 
     private var createdAt: String {
-        let createdAtDate = project.createdAt ?? Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: createdAtDate)
+        project.createdAt?.prettyDate ?? ""
     }
 
     var body: some View {

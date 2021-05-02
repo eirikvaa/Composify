@@ -78,7 +78,7 @@ struct RecordView: View {
                 if isRecording {
                     let url = audioRecorder.stopRecording()
                     RecordingFactory.create(
-                        title: Date().description,
+                        title: "Recording \(Date().prettyDate)",
                         project: workingProject,
                         url: url,
                         context: moc
