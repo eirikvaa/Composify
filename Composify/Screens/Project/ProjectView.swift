@@ -19,14 +19,14 @@ struct ProjectView: View {
 
     @State private var projectTitle = ""
 
-    let project: Project
+    private let project: Project
 
     init(project: Project) {
         self.project = project
         self._projectTitle = .init(initialValue: project.title ?? "")
     }
 
-    var createdAt: String {
+    private var createdAt: String {
         let createdAtDate = project.createdAt ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
@@ -63,7 +63,7 @@ struct ProjectView: View {
         }
     }
 
-    func removeRecordings(at indexes: IndexSet) {
+    private func removeRecordings(at indexes: IndexSet) {
         for index in indexes {
             let recording = recordings[index]
             moc.delete(recording)

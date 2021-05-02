@@ -62,7 +62,7 @@ struct LibraryView: View {
         }))
     }
 
-    func removeProjects(at indexes: IndexSet) {
+    private func removeProjects(at indexes: IndexSet) {
         for index in indexes {
             let project = projects[index]
             moc.delete(project)
@@ -71,7 +71,7 @@ struct LibraryView: View {
         try! moc.save()
     }
 
-    func removeRecordings(at indexes: IndexSet) {
+    private func removeRecordings(at indexes: IndexSet) {
         for index in indexes {
             let recording = recordings[index]
             moc.delete(recording)
@@ -85,9 +85,14 @@ struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
 
-        NavigationView {
-            LibraryView()
-                .environment(\.managedObjectContext, context)
+        Group {
+            NavigationView {
+                LibraryView()
+                    .environment(\.managedObjectContext, context)
+            }
+            NavigationView {
+                LibraryView()
+            }
         }
     }
 }
