@@ -34,9 +34,7 @@ struct LibraryView: View {
                         Text(project.title ?? "")
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    removeProjects(at: indexSet)
-                })
+                .onDelete(perform: removeProjects)
             }
             Section(header: Text("Standalone recordings")) {
                 ForEach(recordings, id: \.id) { recording in
@@ -45,21 +43,23 @@ struct LibraryView: View {
                             audioPlayer.play(recording: recording)
                         }
                 }
-                .onDelete(perform: { indexSet in
-                    removeRecordings(at: indexSet)
-                })
+                .onDelete(perform: removeRecordings)
             }
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("Library")
-        .navigationBarItems(trailing: Button(action: {
+        .navigationBarItems(trailing: trailingButton)
+    }
+
+    private var trailingButton: some View {
+        Button(action: {
             ProjectFactory.create(
                 title: UUID().uuidString,
                 context: PersistenceController.shared.container.viewContext
             )
         }, label: {
             Image(systemName: "plus")
-        }))
+        })
     }
 
     private func removeProjects(at indexes: IndexSet) {
