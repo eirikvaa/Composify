@@ -21,7 +21,7 @@ extension Date {
 
 struct ProjectView: View {
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject private var audioPlayer = AudioPlayer()
+    @EnvironmentObject private var audioPlayer: AudioPlayer
     @FetchRequest(
         entity: Recording.entity(),
         sortDescriptors: [

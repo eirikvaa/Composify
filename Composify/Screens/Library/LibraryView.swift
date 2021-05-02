@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 
 struct LibraryView: View {
-    @ObservedObject private var audioPlayer = AudioPlayer()
+    @EnvironmentObject private var audioPlayer: AudioPlayer
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Project.entity(),

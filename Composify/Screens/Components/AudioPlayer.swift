@@ -16,6 +16,8 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private var audioPlayer: AVAudioPlayer!
 
     func play(recording: Recording) {
+        stopPlaying()
+
         self.recording = recording
 
         guard let url = recording.url else {
@@ -49,12 +51,15 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func stopPlaying() {
         if audioPlayer != nil {
             audioPlayer.stop()
-            isPlaying = false
-            recording = nil
+            reset()
         }
     }
 
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        reset()
+    }
+
+    private func reset() {
         audioPlayer = nil
         isPlaying = false
         recording = nil
