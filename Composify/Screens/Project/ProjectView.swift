@@ -9,17 +9,8 @@
 import CoreData
 import SwiftUI
 
-extension Date {
-    var prettyDate: String {
-        let createdAtDate = self
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: createdAtDate)
-    }
-}
-
 struct ProjectView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject private var audioPlayer: AudioPlayer
     @FetchRequest(
@@ -65,6 +56,18 @@ struct ProjectView: View {
             Section(header: Text("Created At")) {
                 Text(createdAt)
             }
+            Section(header: Text("Danger Zone")) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    moc.delete(project)
+                    try! moc.save()
+                }, label: {
+                    Text("Delete project")
+                }).buttonStyle(DeleteButtonStyle())
+            }
+        }
+        .toolbar {
+            EditButton()
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(project.title ?? "")

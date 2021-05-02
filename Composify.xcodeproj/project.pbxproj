@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5020B28263CD4C40017DC04 /* Composify.xcdatamodeld */; };
 		E5168E17263EC383003E34C0 /* PlayableRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E16263EC383003E34C0 /* PlayableRowItem.swift */; };
+		E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */; };
+		E5168E1E263ED0B2003E34C0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
 		E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		E5020B29263CD4C40017DC04 /* Composify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Composify.xcdatamodel; sourceTree = "<group>"; };
 		E5168E16263EC383003E34C0 /* PlayableRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayableRowItem.swift; sourceTree = "<group>"; };
+		E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonStyle.swift; sourceTree = "<group>"; };
+		E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Composify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Composify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +105,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5168E1C263ED09B003E34C0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E523959A21C6824300D3004F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +144,7 @@
 				E5A7993A25FCF1D100FF718C /* AudioRecorder.swift */,
 				E5A7994025FD23C400FF718C /* AudioPlayer.swift */,
 				E5168E16263EC383003E34C0 /* PlayableRowItem.swift */,
+				E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -159,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				E56460361D3B54B000AA6557 /* App */,
+				E5168E1C263ED09B003E34C0 /* Extensions */,
 				E523959A21C6824300D3004F /* Resources */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
 				E5A7990E25FCECC100FF718C /* Model */,
@@ -396,9 +410,11 @@
 				E5FE0649263D73ED0021DDD7 /* AudioRecorder.swift in Sources */,
 				E5FE064C263D7BEA0021DDD7 /* RecordingFactory.swift in Sources */,
 				E5FE0641263D6DB20021DDD7 /* HomeView.swift in Sources */,
+				E5168E1E263ED0B2003E34C0 /* Date+Extensions.swift in Sources */,
 				E5FE0645263D70940021DDD7 /* LibraryView.swift in Sources */,
 				E5FE0647263D72440021DDD7 /* RecordView.swift in Sources */,
 				E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */,
+				E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */,
 				E5FE063E263D68600021DDD7 /* PersistenceController.swift in Sources */,
 				E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */,
 			);
