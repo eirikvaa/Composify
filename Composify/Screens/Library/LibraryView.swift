@@ -38,10 +38,11 @@ struct LibraryView: View {
             }
             Section(header: Text("Standalone recordings")) {
                 ForEach(recordings, id: \.id) { recording in
-                    Text(recording.title ?? "")
-                        .onTapGesture {
-                            audioPlayer.play(recording: recording)
-                        }
+                    PlayableRowItem(
+                        isPlaying: rowIsPlaying(recording: recording),
+                        title: recording.title ?? "") {
+                        audioPlayer.play(recording: recording)
+                    }
                 }
                 .onDelete(perform: removeRecordings)
             }
@@ -78,6 +79,13 @@ struct LibraryView: View {
         }
 
         try! moc.save()
+    }
+
+    private func rowIsPlaying(recording: Recording) -> Binding<Bool> {
+        Binding<Bool>(
+            get: { audioPlayer.isPlaying && audioPlayer.recording == recording },
+            set: { _ in }
+        )
     }
 }
 

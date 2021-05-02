@@ -52,11 +52,13 @@ struct ProjectView: View {
                 }
             }
             Section(header: Text("Recordings")) {
-                ForEach(recordings.filter { $0.project == project }, id: \.index) { recording in
-                    Text(recording.title ?? "")
-                        .onTapGesture {
-                            audioPlayer.play(recording: recording)
-                        }
+                ForEach(recordings.filter { $0.project == project }, id: \.id) { recording in
+                    PlayableRowItem(
+                        isPlaying: rowIsPlaying(recording: recording),
+                        title: recording.title ?? ""
+                    ) {
+                        audioPlayer.play(recording: recording)
+                    }
                 }
                 .onDelete(perform: removeRecordings)
             }
@@ -78,6 +80,13 @@ struct ProjectView: View {
         }
 
         try! moc.save()
+    }
+
+    private func rowIsPlaying(recording: Recording) -> Binding<Bool> {
+        Binding<Bool>(
+            get: { audioPlayer.isPlaying && audioPlayer.recording == recording },
+            set: { _ in }
+        )
     }
 }
 
