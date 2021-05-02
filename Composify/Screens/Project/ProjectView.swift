@@ -24,7 +24,9 @@ struct ProjectView: View {
     @ObservedObject private var audioPlayer = AudioPlayer()
     @FetchRequest(
         entity: Recording.entity(),
-        sortDescriptors: []
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Recording.createdAt, ascending: true)
+        ]
     ) private var recordings: FetchedResults<Recording>
 
     @State private var projectTitle = ""
