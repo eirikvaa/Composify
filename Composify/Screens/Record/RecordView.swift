@@ -29,6 +29,15 @@ struct RecordView: View {
             }
         }
 
+        let newProject = Alert.Button.default(Text("Create new project")) {
+            let project = ProjectFactory.create(
+                title: "Project \(Date().prettyDate)",
+                context: PersistenceController.shared.container.viewContext
+            )
+            workingProject = project
+            UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
+        }
+
         let reset = Alert.Button.destructive(Text("Reset working project")) {
             workingProject = nil
             UserDefaults.standard.set(nil, forKey: "project.id")
@@ -36,7 +45,7 @@ struct RecordView: View {
 
         let cancel = Alert.Button.cancel()
 
-        return projects + [reset, cancel]
+        return projects + [newProject, reset, cancel]
     }
 
     var body: some View {
