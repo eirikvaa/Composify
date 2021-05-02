@@ -57,6 +57,13 @@ struct ProjectView: View {
                 Text(createdAt)
             }
             Section(header: Text("Danger Zone")) {
+                // TODO:
+                //   It is currently possible to crash the app if the delete a project
+                //   when there are at least one recording. I'm not sure why yet. The
+                //   crash is related to the number of rows in section 1, which is the
+                //   recordings section. Specifically, there are wrong number of rows
+                //   after deleting the project. Deleting projects will cascadingly delete
+                //   all recordings attached to it, so will need to debug this further.
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     moc.delete(project)
