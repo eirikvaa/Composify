@@ -50,11 +50,13 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         if audioPlayer != nil {
             audioPlayer.stop()
             isPlaying = false
+            recording = nil
         }
     }
 
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer = nil
         isPlaying = false
+        recording = nil
     }
 }
