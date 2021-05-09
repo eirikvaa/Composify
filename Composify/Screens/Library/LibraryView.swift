@@ -35,6 +35,18 @@ struct LibraryView: View {
                     }
                 }
                 .onDelete(perform: removeProjects)
+                Button(action: {
+                    ProjectFactory.create(
+                        title: "Project \(Date().prettyDate)",
+                        context: PersistenceController.shared.container.viewContext
+                    )
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus.circle").foregroundColor(.green)
+                        Text("Create new project")
+                    }
+                })
+                .buttonStyle(PlainButtonStyle())
             }
             Section(header: Text("Standalone recordings")) {
                 ForEach(recordings, id: \.id) { recording in
@@ -49,18 +61,7 @@ struct LibraryView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("Library")
-        .navigationBarItems(trailing: trailingButton)
-    }
-
-    private var trailingButton: some View {
-        Button(action: {
-            ProjectFactory.create(
-                title: "Project \(Date().prettyDate)",
-                context: PersistenceController.shared.container.viewContext
-            )
-        }, label: {
-            Image(systemName: "plus")
-        })
+        .navigationBarItems(trailing: EditButton())
     }
 
     private func removeProjects(at indexes: IndexSet) {
