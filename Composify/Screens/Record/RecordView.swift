@@ -15,6 +15,7 @@ struct RecordView: View {
     @State private var isRecording = false
     @State private var workingProject: Project?
     @State private var showProjectSheet = false
+    @State private var showRecordingDeniedAlert = false
 
     @FetchRequest(
         entity: Project.entity(),
@@ -84,6 +85,11 @@ struct RecordView: View {
             Text(isRecording ? "Recording ..." : "Start recording")
 
             RecordButton(isRecording: $isRecording) {
+                guard audioRecorder.canRecord else {
+                    showRecordingDeniedAlert.toggle()
+                    return
+                }
+
                 if isRecording {
                     let url = audioRecorder.stopRecording()
                     RecordingFactory.create(
@@ -108,6 +114,24 @@ struct RecordView: View {
                 buttons: actionSheetButtons
             )
         }
+        .alert(isPresented: $showRecordingDeniedAlert, content: {
+            let title = "Microphone usage denied"
+            let message =
+                "Composify does not have access " +
+                "to your microphone. Please enable " +
+                "it in Settings to record audio."
+
+            return Alert(
+                title: Text(title),
+                message: Text(message),
+                primaryButton: Alert.Button.default(Text("Settings"), action: {
+                    if let settings = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(settings)
+                    }
+                }),
+                secondaryButton: Alert.Button.cancel()
+            )
+        })
         .onAppear {
             if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
                let uuid = UUID(uuidString: uuidString) {

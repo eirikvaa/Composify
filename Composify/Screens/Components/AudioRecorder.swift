@@ -18,6 +18,10 @@ class AudioRecorder: ObservableObject {
         createFileAndGetURL(name: recordingTitle)
     }
 
+    var canRecord: Bool {
+        AVAudioSession.sharedInstance().recordPermission == .granted
+    }
+
     func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
 
