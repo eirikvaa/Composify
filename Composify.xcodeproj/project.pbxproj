@@ -591,7 +591,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development: Eirik Vale Aase (3F3KF67SN9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Eirik Vale Aase (3F3KF67SN9)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				ENABLE_PREVIEWS = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "i386 arm64";
@@ -620,7 +620,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: Eirik Vale Aase (N37KDKBFXC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Eirik Vale Aase (N37KDKBFXC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N37KDKBFXC;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
