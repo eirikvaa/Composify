@@ -55,6 +55,15 @@ struct LibraryView: View {
                         title: recording.title ?? "") {
                         audioPlayer.play(recording: recording)
                     }
+                    .contextMenu {
+                        ForEach(projects, id: \.id) { project in
+                            Button(action: {
+                                recording.project = project
+                            }, label: {
+                                Text(project.title ?? "")
+                            })
+                        }
+                    }
                 }
                 .onDelete(perform: removeRecordings)
             }
