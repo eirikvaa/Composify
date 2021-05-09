@@ -120,9 +120,8 @@ struct ProjectView_Previews: PreviewProvider {
     }
 }
 
-
 extension Notification.Name {
     static var didSelectDeleteItem: Notification.Name {
-        return Notification.Name("Delete Item")
+        Notification.Name("Delete Item")
     }
 }
