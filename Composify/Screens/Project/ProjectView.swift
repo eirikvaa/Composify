@@ -57,17 +57,16 @@ struct ProjectView: View {
                 Text(createdAt)
             }
             Section(header: Text("Danger Zone")) {
-                // TODO:
-                //   It is currently possible to crash the app if the delete a project
-                //   when there are at least one recording. I'm not sure why yet. The
-                //   crash is related to the number of rows in section 1, which is the
-                //   recordings section. Specifically, there are wrong number of rows
-                //   after deleting the project. Deleting projects will cascadingly delete
-                //   all recordings attached to it, so will need to debug this further.
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                    moc.delete(project)
-                    try! moc.save()
+                    // If we try to delete a project that has recordings while still in the view,
+                    // we will get a 'NSInternalInconsistencyException' crash, saying that the number
+                    // of rows in section 1 is invalid. For some reason we're not able to update
+                    // the underlying data backing. Therefore we just post a notification saying
+                    // that we should delete the project, and then handle it in the `onReceive`
+                    // method in this view. There we dismiss the view, wait a short moment and
+                    // then delete the project. This is a hack and I hope there is a more elegant
+                    // way of doing it.
+                    NotificationCenter.default.post(name: .didSelectDeleteItem, object: nil)
                 }, label: {
                     Text("Delete project")
                 }).buttonStyle(DeleteButtonStyle())
@@ -78,9 +77,15 @@ struct ProjectView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(project.title ?? "")
-        .onDisappear {
-            try! moc.save()
-        }
+        .onReceive(NotificationCenter.default.publisher(for: .didSelectDeleteItem), perform: { _ in
+            self.presentationMode.wrappedValue.dismiss()
+
+            // TODO: Try to find a time interval that works for all phones.
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                moc.delete(project)
+                try! moc.save()
+            }
+        })
     }
 
     private func removeRecordings(at indexes: IndexSet) {
@@ -112,5 +117,12 @@ struct ProjectView_Previews: PreviewProvider {
         NavigationView {
             ProjectView(project: project)
         }
+    }
+}
+
+
+extension Notification.Name {
+    static var didSelectDeleteItem: Notification.Name {
+        return Notification.Name("Delete Item")
     }
 }
