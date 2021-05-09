@@ -59,6 +59,7 @@ struct LibraryView: View {
                         ForEach(projects, id: \.id) { project in
                             Button(action: {
                                 recording.project = project
+                                try! moc.save()
                             }, label: {
                                 Text(project.title ?? "")
                             })

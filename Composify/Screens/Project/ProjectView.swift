@@ -50,6 +50,14 @@ struct ProjectView: View {
                     ) {
                         audioPlayer.play(recording: recording)
                     }
+                    .contextMenu {
+                        Button(action: {
+                            recording.project = nil
+                            try! moc.save()
+                        }, label: {
+                            Text("Remove recording from project")
+                        })
+                    }
                 }
                 .onDelete(perform: removeRecordings)
             }
