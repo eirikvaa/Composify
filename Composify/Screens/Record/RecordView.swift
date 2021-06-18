@@ -9,30 +9,6 @@
 import CoreData
 import SwiftUI
 
-class RecordViewModel: ObservableObject {
-    @Published var workingProject: Project?
-
-    func fetchWorkingProject(moc: NSManagedObjectContext) {
-        if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
-           let uuid = UUID(uuidString: uuidString) {
-            let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
-            fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
-
-            do {
-                self.workingProject = try moc.fetch(fetchRequest).first
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-
-    func openSettings() {
-        if let settings = URL(string: UIApplication.openSettingsURLString) {
-            UIApplication.shared.open(settings)
-        }
-    }
-}
-
 struct RecordView: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject private var audioRecorder = AudioRecorder()
