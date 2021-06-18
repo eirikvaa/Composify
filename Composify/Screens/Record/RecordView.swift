@@ -9,45 +9,40 @@
 import CoreData
 import SwiftUI
 
+class RecordViewModel: ObservableObject {
+    @Published var workingProject: Project?
+
+    func fetchWorkingProject(moc: NSManagedObjectContext) {
+        if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
+           let uuid = UUID(uuidString: uuidString) {
+            let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+            fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
+
+            do {
+                self.workingProject = try moc.fetch(fetchRequest).first
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func openSettings() {
+        if let settings = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(settings)
+        }
+    }
+}
+
 struct RecordView: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject private var audioRecorder = AudioRecorder()
+    @ObservedObject private var viewModel = RecordViewModel()
     @State private var isRecording = false
-    @State private var workingProject: Project?
     @State private var showProjectSheet = false
     @State private var showRecordingDeniedAlert = false
 
-    @FetchRequest(
-        entity: Project.entity(),
-        sortDescriptors: []
-    ) var projects: FetchedResults<Project>
-
-    private var actionSheetButtons: [Alert.Button] {
-        let projects = projects.map { project in
-            Alert.Button.default(Text(project.title ?? "")) {
-                self.workingProject = project
-                UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
-            }
-        }
-
-        let newProject = Alert.Button.default(Text("Create new project")) {
-            let project = ProjectFactory.create(
-                title: "Project \(Date().prettyDate)",
-                context: PersistenceController.shared.container.viewContext
-            )
-            workingProject = project
-            UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
-        }
-
-        let reset = Alert.Button.destructive(Text("Reset working project")) {
-            workingProject = nil
-            UserDefaults.standard.set(nil, forKey: "project.id")
-        }
-
-        let cancel = Alert.Button.cancel()
-
-        return projects + [newProject, reset, cancel]
-    }
+    @FetchRequest(sortDescriptors: [])
+    var projects: FetchedResults<Project>
 
     var body: some View {
         VStack {
@@ -56,7 +51,7 @@ struct RecordView: View {
             Button(action: {
                 showProjectSheet.toggle()
             }, label: {
-                if let workingProject = workingProject {
+                if let workingProject = viewModel.workingProject {
                     VStack {
                         Text("Working project")
                             .font(.caption)
@@ -95,7 +90,7 @@ struct RecordView: View {
                         let url = audioRecorder.stopRecording()
                         RecordingFactory.create(
                             title: "Recording \(Date().prettyDate)",
-                            project: workingProject,
+                            project: viewModel.workingProject,
                             url: url,
                             context: moc
                         )
@@ -130,27 +125,40 @@ struct RecordView: View {
             return Alert(
                 title: Text(title),
                 message: Text(message),
-                primaryButton: Alert.Button.default(Text("Settings"), action: {
-                    if let settings = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(settings)
-                    }
-                }),
-                secondaryButton: Alert.Button.cancel()
+                primaryButton: .default(Text("Settings"), action: viewModel.openSettings),
+                secondaryButton: .cancel()
             )
         })
         .onAppear {
-            if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
-               let uuid = UUID(uuidString: uuidString) {
-                let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
-                fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
+            viewModel.fetchWorkingProject(moc: moc)
+        }
+    }
 
-                do {
-                    self.workingProject = try moc.fetch(fetchRequest).first
-                } catch {
-                    print(error.localizedDescription)
-                }
+    var actionSheetButtons: [Alert.Button] {
+        let projects = projects.map { project in
+            Alert.Button.default(Text(project.title ?? "")) {
+                viewModel.workingProject = project
+                UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
             }
         }
+
+        let newProject = Alert.Button.default(Text("Create new project")) {
+            let project = ProjectFactory.create(
+                title: "Project \(Date().prettyDate)",
+                context: PersistenceController.shared.container.viewContext
+            )
+            viewModel.workingProject = project
+            UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
+        }
+
+        let reset = Alert.Button.destructive(Text("Reset working project")) {
+            viewModel.workingProject = nil
+            UserDefaults.standard.set(nil, forKey: "project.id")
+        }
+
+        let cancel = Alert.Button.cancel()
+
+        return projects + [newProject, reset, cancel]
     }
 }
 
