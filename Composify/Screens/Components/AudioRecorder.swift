@@ -59,6 +59,12 @@ class AudioRecorder: ObservableObject {
 
         return previousRecordingURL
     }
+
+    func askForPermission(callback: @escaping (Bool) -> Void) {
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+            callback(granted)
+        }
+    }
 }
 
 private extension AudioRecorder {

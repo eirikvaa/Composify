@@ -85,24 +85,30 @@ struct RecordView: View {
             Text(isRecording ? "Recording ..." : "Start recording")
 
             RecordButton(isRecording: $isRecording) {
-                guard audioRecorder.canRecord else {
-                    showRecordingDeniedAlert.toggle()
-                    return
-                }
+                audioRecorder.askForPermission { granted in
+                    guard granted else {
+                        showRecordingDeniedAlert.toggle()
+                        return
+                    }
 
-                if isRecording {
-                    let url = audioRecorder.stopRecording()
-                    RecordingFactory.create(
-                        title: "Recording \(Date().prettyDate)",
-                        project: workingProject,
-                        url: url,
-                        context: moc
-                    )
-                } else {
-                    audioRecorder.startRecording()
-                }
+                    if isRecording {
+                        let url = audioRecorder.stopRecording()
+                        RecordingFactory.create(
+                            title: "Recording \(Date().prettyDate)",
+                            project: workingProject,
+                            url: url,
+                            context: moc
+                        )
+                    } else {
+                        DispatchQueue.main.async {
+                            audioRecorder.startRecording()
+                        }
+                    }
 
-                isRecording.toggle()
+                    DispatchQueue.main.async {
+                        isRecording.toggle()
+                    }
+                }
             }
 
             Spacer()
