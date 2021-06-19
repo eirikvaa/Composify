@@ -112,9 +112,6 @@ struct LibraryView_Previews: PreviewProvider {
                 LibraryView()
                     .environment(\.managedObjectContext, context)
             }
-            NavigationView {
-                LibraryView()
-            }
         }
     }
 }
