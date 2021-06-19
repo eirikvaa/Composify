@@ -13,17 +13,17 @@ struct LibraryView: View {
     @EnvironmentObject private var audioPlayer: AudioPlayer
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
-        entity: Project.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Project.title, ascending: true)
-        ]
+            SortDescriptor(\Project.createdAt, order: .forward)
+        ],
+        animation: .default
     ) var projects: FetchedResults<Project>
     @FetchRequest(
-        entity: Recording.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Recording.createdAt, ascending: true)
+            SortDescriptor(\Recording.createdAt, order: .forward)
         ],
-        predicate: NSPredicate(format: "project = nil")
+        predicate: NSPredicate(format: "project = nil"),
+        animation: .default
     ) var recordings: FetchedResults<Recording>
 
     var body: some View {
