@@ -66,18 +66,12 @@ struct ProjectView: View {
             }
             Section(header: Text("Danger Zone")) {
                 Button(action: {
-                    // If we try to delete a project that has recordings while still in the view,
-                    // we will get a 'NSInternalInconsistencyException' crash, saying that the number
-                    // of rows in section 1 is invalid. For some reason we're not able to update
-                    // the underlying data backing. Therefore we just post a notification saying
-                    // that we should delete the project, and then handle it in the `onReceive`
-                    // method in this view. There we dismiss the view, wait a short moment and
-                    // then delete the project. This is a hack and I hope there is a more elegant
-                    // way of doing it.
-                    NotificationCenter.default.post(name: .didSelectDeleteItem, object: nil)
+                    presentationMode.wrappedValue.dismiss()
+                    moc.delete(project)
+                    try! moc.save()
                 }, label: {
                     Text("Delete project")
-                }).buttonStyle(DeleteButtonStyle())
+                })
             }
         }
         .toolbar {
@@ -85,15 +79,6 @@ struct ProjectView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(project.title ?? "")
-        .onReceive(NotificationCenter.default.publisher(for: .didSelectDeleteItem), perform: { _ in
-            self.presentationMode.wrappedValue.dismiss()
-
-            // TODO: Try to find a time interval that works for all phones.
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
-                moc.delete(project)
-                try! moc.save()
-            }
-        })
     }
 
     private func removeRecordings(at indexes: IndexSet) {
