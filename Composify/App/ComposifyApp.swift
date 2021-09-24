@@ -14,12 +14,14 @@ struct ComposifyApp: App {
 
     private let persistenceController = PersistenceController.shared
     private let audioPlayer = AudioPlayer()
+    private let workingProjectState = WorkingProjectState()
 
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(audioPlayer)
+                .environmentObject(workingProjectState)
         }
         .onChange(of: scenePhase) { _ in
             persistenceController.save()

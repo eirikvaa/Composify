@@ -10,6 +10,7 @@ import CoreData
 import SwiftUI
 
 struct RecordView: View {
+    @EnvironmentObject var workingProjectState: WorkingProjectState
     @Environment(\.managedObjectContext) var moc
     @ObservedObject private var audioRecorder = AudioRecorder()
     @ObservedObject private var viewModel = RecordViewModel()
@@ -27,7 +28,7 @@ struct RecordView: View {
             Button(action: {
                 showProjectSheet.toggle()
             }, label: {
-                if let workingProject = viewModel.workingProject {
+                if let workingProject = workingProjectState.workingProject {
                     VStack {
                         Text("Working project")
                             .font(.caption)
@@ -66,7 +67,7 @@ struct RecordView: View {
                         let url = audioRecorder.stopRecording()
                         RecordingFactory.create(
                             title: "Recording \(Date().prettyDate)",
-                            project: viewModel.workingProject,
+                            project: workingProjectState.workingProject,
                             url: url,
                             context: moc
                         )
@@ -106,14 +107,14 @@ struct RecordView: View {
             )
         })
         .onAppear {
-            viewModel.fetchWorkingProject(moc: moc)
+            workingProjectState.fetchWorkingProject(moc: moc)
         }
     }
 
     var actionSheetButtons: [Alert.Button] {
         let projects = projects.map { project in
             Alert.Button.default(Text(project.title ?? "")) {
-                viewModel.workingProject = project
+                workingProjectState.workingProject = project
                 UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
             }
         }
@@ -123,12 +124,12 @@ struct RecordView: View {
                 title: "Project \(Date().prettyDate)",
                 context: PersistenceController.shared.container.viewContext
             )
-            viewModel.workingProject = project
+            workingProjectState.workingProject = project
             UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
         }
 
         let reset = Alert.Button.destructive(Text("Reset working project")) {
-            viewModel.workingProject = nil
+            workingProjectState.workingProject = nil
             UserDefaults.standard.set(nil, forKey: "project.id")
         }
 

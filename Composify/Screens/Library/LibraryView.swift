@@ -10,6 +10,7 @@ import CoreData
 import SwiftUI
 
 struct LibraryView: View {
+    @EnvironmentObject var workingProjectState: WorkingProjectState
     @EnvironmentObject private var audioPlayer: AudioPlayer
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
@@ -31,7 +32,13 @@ struct LibraryView: View {
             Section(header: Text("Projects")) {
                 ForEach(projects, id: \.id) { project in
                     NavigationLink(destination: ProjectView(project: project)) {
-                        Text(project.title ?? "")
+                        HStack {
+                            let isWorkingProject = workingProjectState.workingProject?.id == project.id
+                            Circle()
+                                .foregroundColor(isWorkingProject ? .green : .clear)
+                                .frame(width: 10, height: 10)
+                            Text(project.title ?? "")
+                        }
                     }
                 }
                 .onDelete(perform: removeProjects)

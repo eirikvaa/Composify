@@ -11,6 +11,7 @@
 		E5168E17263EC383003E34C0 /* PlayableRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E16263EC383003E34C0 /* PlayableRowItem.swift */; };
 		E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */; };
 		E5168E1E263ED0B2003E34C0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */; };
+		E5559C2826FE994000947A7E /* WorkingProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5559C2726FE994000947A7E /* WorkingProjectState.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
 		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
 		E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */; };
@@ -63,6 +64,7 @@
 		E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		E5559C2726FE994000947A7E /* WorkingProjectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingProjectState.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Composify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Composify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E58289A021C6F5F800E438B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		E5559C2626FE992600947A7E /* State */ = {
+			isa = PBXGroup;
+			children = (
+				E5559C2726FE994000947A7E /* WorkingProjectState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
 		E5645FF81D3B50B500AA6557 = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				E56460361D3B54B000AA6557 /* App */,
+				E5559C2626FE992600947A7E /* State */,
 				E5168E1C263ED09B003E34C0 /* Extensions */,
 				E523959A21C6824300D3004F /* Resources */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
@@ -410,6 +421,7 @@
 				E5168E17263EC383003E34C0 /* PlayableRowItem.swift in Sources */,
 				E5FE0648263D73E70021DDD7 /* RecordButton.swift in Sources */,
 				E5FE0640263D6D5E0021DDD7 /* ProjectFactory.swift in Sources */,
+				E5559C2826FE994000947A7E /* WorkingProjectState.swift in Sources */,
 				E5FE0649263D73ED0021DDD7 /* AudioRecorder.swift in Sources */,
 				E5FE064C263D7BEA0021DDD7 /* RecordingFactory.swift in Sources */,
 				E5FE0641263D6DB20021DDD7 /* HomeView.swift in Sources */,
