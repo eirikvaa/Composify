@@ -66,6 +66,7 @@ struct ProjectView: View {
             }
             Section(header: Text("Danger Zone")) {
                 Button(action: {
+                    audioPlayer.stopPlaying()
                     presentationMode.wrappedValue.dismiss()
                     moc.delete(project)
                     try! moc.save()
