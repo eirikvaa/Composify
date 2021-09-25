@@ -140,5 +140,6 @@ struct RecordView: View {
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
         RecordView()
+            .environmentObject(WorkingProjectState())
     }
 }

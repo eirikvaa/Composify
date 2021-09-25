@@ -116,8 +116,16 @@ struct LibraryView_Previews: PreviewProvider {
 
         Group {
             NavigationView {
-                LibraryView()
-                    .environment(\.managedObjectContext, context)
+                TabView {
+                    LibraryView()
+                        .environment(\.managedObjectContext, context)
+                        .environmentObject(WorkingProjectState())
+                        .tabItem {
+                            Label("Library", systemImage: "music.note.list")
+                            Text("Library")
+                        }
+                }
+                .navigationTitle("Library")
             }
         }
     }
