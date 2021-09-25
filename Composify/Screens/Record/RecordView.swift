@@ -48,27 +48,29 @@ struct RecordView: View {
                     if let workingProject = workingProjectState.workingProject {
                         VStack {
                             Text("Working project")
-                                .font(.caption)
+                                .font(.body)
                             HStack {
                                 Text(workingProject.title ?? "")
-                                    .font(.headline)
-                                Image(systemName: "hand.tap")
+                                    .font(.title)
                             }
                         }
                     } else {
                         VStack {
                             Text("No working project")
-                                .font(.caption)
+                                .font(.body)
                             HStack {
                                 Text("Tap to select working project")
-                                    .font(.headline)
-                                Image(systemName: "hand.tap")
+                                    .font(.title)
                             }
                         }
                     }
                 })
                 .buttonStyle(PlainButtonStyle())
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+
+                Image(systemName: "hand.tap")
+                    .foregroundColor(.white)
 
                 Spacer()
 
