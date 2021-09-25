@@ -13,7 +13,7 @@ extension Date {
         let createdAtDate = self
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
+        dateFormatter.timeStyle = .medium
         return dateFormatter.string(from: createdAtDate)
     }
 }
