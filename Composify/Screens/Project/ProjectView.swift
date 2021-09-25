@@ -124,9 +124,17 @@ struct ProjectView_Previews: PreviewProvider {
             .registeredObjects
             .first(where: { $0 is Project }) as! Project
 
-        NavigationView {
-            ProjectView(project: project)
+        Group {
+            NavigationView {
+                ProjectView(project: project)
+            }
+
+            NavigationView {
+                ProjectView(project: project)
+            }
+            .previewInterfaceOrientation(.landscapeLeft)
         }
+        .environmentObject(WorkingProjectState())
     }
 }
 
