@@ -21,12 +21,12 @@ struct RecordButton: View {
                 Image(systemName: "stop.circle.fill")
                     .resizable()
                     .frame(width: 60, height: 60)
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
             } else {
                 Image(systemName: "record.circle.fill")
                     .resizable()
                     .frame(width: 60, height: 60)
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
             }
         })
         .clipShape(Circle())

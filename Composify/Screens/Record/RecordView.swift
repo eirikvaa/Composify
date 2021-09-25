@@ -22,92 +22,99 @@ struct RecordView: View {
     var projects: FetchedResults<Project>
 
     var body: some View {
-        VStack {
-            Spacer().frame(height: 20)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.pink, .red]), startPoint: .bottom, endPoint: .top)
+                .edgesIgnoringSafeArea(.all)
 
-            Button(action: {
-                showProjectSheet.toggle()
-            }, label: {
-                if let workingProject = workingProjectState.workingProject {
-                    VStack {
-                        Text("Working project")
-                            .font(.caption)
-                        HStack {
-                            Text(workingProject.title ?? "")
-                                .font(.headline)
-                            Image(systemName: "hand.tap")
+            VStack {
+                Spacer().frame(height: 20)
+
+                Button(action: {
+                    showProjectSheet.toggle()
+                }, label: {
+                    if let workingProject = workingProjectState.workingProject {
+                        VStack {
+                            Text("Working project")
+                                .font(.caption)
+                            HStack {
+                                Text(workingProject.title ?? "")
+                                    .font(.headline)
+                                Image(systemName: "hand.tap")
+                            }
                         }
-                    }
-                } else {
-                    VStack {
-                        Text("No working project")
-                            .font(.caption)
-                        HStack {
-                            Text("Tap to select working project")
-                                .font(.headline)
-                            Image(systemName: "hand.tap")
-                        }
-                    }
-                }
-            })
-            .buttonStyle(PlainButtonStyle())
-
-            Spacer()
-
-            Text(isRecording ? "Recording ..." : "Start recording")
-
-            RecordButton(isRecording: $isRecording) {
-                audioRecorder.askForPermission { granted in
-                    guard granted else {
-                        showRecordingDeniedAlert.toggle()
-                        return
-                    }
-
-                    if isRecording {
-                        let url = audioRecorder.stopRecording()
-                        RecordingFactory.create(
-                            title: "Recording \(Date().prettyDate)",
-                            project: workingProjectState.workingProject,
-                            url: url,
-                            context: moc
-                        )
                     } else {
-                        DispatchQueue.main.async {
-                            audioRecorder.startRecording()
+                        VStack {
+                            Text("No working project")
+                                .font(.caption)
+                            HStack {
+                                Text("Tap to select working project")
+                                    .font(.headline)
+                                Image(systemName: "hand.tap")
+                            }
                         }
                     }
+                })
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.white)
 
-                    DispatchQueue.main.async {
-                        isRecording.toggle()
+                Spacer()
+
+                Text(isRecording ? "Recording ..." : "Start recording")
+                    .foregroundColor(.white)
+
+                RecordButton(isRecording: $isRecording) {
+                    audioRecorder.askForPermission { granted in
+                        guard granted else {
+                            showRecordingDeniedAlert.toggle()
+                            return
+                        }
+
+                        if isRecording {
+                            let url = audioRecorder.stopRecording()
+                            RecordingFactory.create(
+                                title: "Recording \(Date().prettyDate)",
+                                project: workingProjectState.workingProject,
+                                url: url,
+                                context: moc
+                            )
+                        } else {
+                            DispatchQueue.main.async {
+                                audioRecorder.startRecording()
+                            }
+                        }
+
+                        DispatchQueue.main.async {
+                            isRecording.toggle()
+                        }
                     }
                 }
+
+                Spacer()
             }
+            .actionSheet(isPresented: $showProjectSheet) {
+                ActionSheet(
+                    title: Text("Projects"),
+                    message: Text("Select a project to record audio in"),
+                    buttons: actionSheetButtons
+                )
+            }
+            .alert(isPresented: $showRecordingDeniedAlert, content: {
+                let title = "Microphone usage denied"
+                let message =
+                    "Composify does not have access " +
+                    "to your microphone. Please enable " +
+                    "it in Settings to record audio."
 
-            Spacer()
-        }
-        .actionSheet(isPresented: $showProjectSheet) {
-            ActionSheet(
-                title: Text("Projects"),
-                message: Text("Select a project to record audio in"),
-                buttons: actionSheetButtons
-            )
-        }
-        .alert(isPresented: $showRecordingDeniedAlert, content: {
-            let title = "Microphone usage denied"
-            let message =
-                "Composify does not have access " +
-                "to your microphone. Please enable " +
-                "it in Settings to record audio."
-
-            return Alert(
-                title: Text(title),
-                message: Text(message),
-                primaryButton: .default(Text("Settings"), action: viewModel.openSettings),
-                secondaryButton: .cancel()
-            )
-        })
-        .onAppear {
-            workingProjectState.fetchWorkingProject(moc: moc)
+                return Alert(
+                    title: Text(title),
+                    message: Text(message),
+                    primaryButton: .default(Text("Settings"), action: viewModel.openSettings),
+                    secondaryButton: .cancel()
+                )
+            })
+            .onAppear {
+                workingProjectState.fetchWorkingProject(moc: moc)
+            }
         }
     }
 
