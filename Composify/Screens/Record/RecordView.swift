@@ -114,8 +114,7 @@ struct RecordView: View {
     var actionSheetButtons: [Alert.Button] {
         let projects = projects.map { project in
             Alert.Button.default(Text(project.title ?? "")) {
-                workingProjectState.workingProject = project
-                UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
+                workingProjectState.storeWorkingProject(project: project, moc: moc)
             }
         }
 
@@ -124,8 +123,7 @@ struct RecordView: View {
                 title: "Project \(Date().prettyDate)",
                 context: PersistenceController.shared.container.viewContext
             )
-            workingProjectState.workingProject = project
-            UserDefaults.standard.set(project.id?.uuidString, forKey: "project.id")
+            workingProjectState.storeWorkingProject(project: project, moc: moc)
         }
 
         let reset = Alert.Button.destructive(Text("Reset working project")) {

@@ -10,6 +10,7 @@ import CoreData
 import SwiftUI
 
 struct ProjectView: View {
+    @EnvironmentObject var workingProjectState: WorkingProjectState
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject private var audioPlayer: AudioPlayer
@@ -63,6 +64,21 @@ struct ProjectView: View {
             }
             Section(header: Text("Created At")) {
                 Text(createdAt)
+            }
+            Section(header: Text("Working project")) {
+                Button(action: {
+                    if workingProjectState.workingProject == project {
+                        workingProjectState.clearWorkingProject()
+                    } else {
+                        workingProjectState.storeWorkingProject(project: project, moc: moc)
+                    }
+                }, label: {
+                    if workingProjectState.workingProject == project {
+                        Text("Clear working project")
+                    } else {
+                        Text("Set as working project")
+                    }
+                })
             }
             Section(header: Text("Danger Zone")) {
                 Button(action: {

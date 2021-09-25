@@ -27,14 +27,13 @@ final class WorkingProjectState: ObservableObject {
     }
 
     func storeWorkingProject(project: Project, moc: NSManagedObjectContext) {
-        moc.insert(project)
+        workingProject = project
+        UserDefaults.standard.set(project.id?.description, forKey: "project.id")
+    }
 
-        do {
-            try moc.save()
-            UserDefaults.standard.set(project.id?.description, forKey: "project.id")
-        } catch {
-            print(error.localizedDescription)
-        }
+    func clearWorkingProject() {
+        workingProject = nil
+        UserDefaults.standard.set(nil, forKey: "project.id")
     }
 
     func openSettings() {
