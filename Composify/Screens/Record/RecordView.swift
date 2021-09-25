@@ -23,7 +23,20 @@ struct RecordView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.pink, .red]), startPoint: .bottom, endPoint: .top)
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        Color(UIColor(
+                            red: 0.95,
+                            green: 0.95,
+                            blue: 0.97,
+                            alpha: 1.00
+                        )),
+                        .red
+                    ]),
+                startPoint: .bottom,
+                endPoint: .top
+            )
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
@@ -61,6 +74,7 @@ struct RecordView: View {
 
                 Text(isRecording ? "Recording ..." : "Start recording")
                     .foregroundColor(.white)
+                    .font(.body)
 
                 RecordButton(isRecording: $isRecording) {
                     audioRecorder.askForPermission { granted in
@@ -88,6 +102,7 @@ struct RecordView: View {
                         }
                     }
                 }
+                .shadow(radius: 1)
 
                 Spacer()
             }
