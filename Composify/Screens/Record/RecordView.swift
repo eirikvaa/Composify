@@ -165,5 +165,9 @@ struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
         RecordView()
             .environmentObject(WorkingProjectState())
+
+        RecordView()
+            .environmentObject(WorkingProjectState())
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
