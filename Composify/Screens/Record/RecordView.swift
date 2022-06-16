@@ -10,8 +10,8 @@ import CoreData
 import SwiftUI
 
 struct RecordView: View {
-    @EnvironmentObject var workingProjectState: WorkingProjectState
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var workingProjectState: WorkingProjectState
     @ObservedObject private var audioRecorder = AudioRecorder()
     @ObservedObject private var viewModel = RecordViewModel()
     @State private var isRecording = false
@@ -37,14 +37,12 @@ struct RecordView: View {
                 startPoint: .bottom,
                 endPoint: .top
             )
-                .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
 
             VStack {
                 Spacer().frame(height: 20)
 
-                Button(action: {
-                    showProjectSheet.toggle()
-                }, label: {
+                Button(action: viewModel.onProjectSheetTap, label: {
                     if let workingProject = workingProjectState.workingProject {
                         VStack {
                             Text("Working project")
@@ -74,48 +72,29 @@ struct RecordView: View {
 
                 Spacer()
 
-                Text(isRecording ? "Recording ..." : "Start recording")
+                Text(viewModel.isRecording ? "Recording ..." : "Start recording")
                     .foregroundColor(.white)
                     .font(.body)
 
-                RecordButton(isRecording: $isRecording) {
-                    audioRecorder.askForPermission { granted in
-                        guard granted else {
-                            showRecordingDeniedAlert.toggle()
-                            return
-                        }
-
-                        if isRecording {
-                            let url = audioRecorder.stopRecording()
-                            RecordingFactory.create(
-                                title: "Recording \(Date().prettyDate)",
-                                project: workingProjectState.workingProject,
-                                url: url,
-                                context: moc
-                            )
-                        } else {
-                            DispatchQueue.main.async {
-                                audioRecorder.startRecording()
-                            }
-                        }
-
-                        DispatchQueue.main.async {
-                            isRecording.toggle()
-                        }
-                    }
+                RecordButton(isRecording: $viewModel.isRecording) {
+                    viewModel.onRecordButtonTap(
+                        audioRecorder: audioRecorder,
+                        workingProjectState: workingProjectState,
+                        moc: moc
+                    )
                 }
                 .shadow(radius: 1)
 
                 Spacer()
             }
-            .actionSheet(isPresented: $showProjectSheet) {
+            .actionSheet(isPresented: $viewModel.showProjectSheet) {
                 ActionSheet(
                     title: Text("Projects"),
                     message: Text("Select a project to record audio in"),
                     buttons: actionSheetButtons
                 )
             }
-            .alert(isPresented: $showRecordingDeniedAlert, content: {
+            .alert(isPresented: $viewModel.showRecordingDeniedAlert, content: {
                 let title = "Microphone usage denied"
                 let message =
                     "Composify does not have access " +
@@ -130,7 +109,7 @@ struct RecordView: View {
                 )
             })
             .onAppear {
-                workingProjectState.fetchWorkingProject(moc: moc)
+                viewModel.onAppear(workingProjectState: workingProjectState, moc: moc)
             }
         }
     }
@@ -165,9 +144,5 @@ struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
         RecordView()
             .environmentObject(WorkingProjectState())
-
-        RecordView()
-            .environmentObject(WorkingProjectState())
-            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
