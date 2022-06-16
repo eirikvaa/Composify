@@ -12,14 +12,16 @@ import SwiftUI
 final class WorkingProjectState: ObservableObject {
     @Published var workingProject: Project?
 
+    private let userDefaults = UserDefaults.standard
+
     func fetchWorkingProject(moc: NSManagedObjectContext) {
-        if let uuidString = UserDefaults.standard.object(forKey: "project.id") as? String,
+        if let uuidString = userDefaults.object(forKey: "project.id") as? String,
            let uuid = UUID(uuidString: uuidString) {
             let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
             fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
 
             do {
-                self.workingProject = try moc.fetch(fetchRequest).first
+                workingProject = try moc.fetch(fetchRequest).first
             } catch {
                 print(error.localizedDescription)
             }
@@ -28,12 +30,12 @@ final class WorkingProjectState: ObservableObject {
 
     func storeWorkingProject(project: Project, moc: NSManagedObjectContext) {
         workingProject = project
-        UserDefaults.standard.set(project.id?.description, forKey: "project.id")
+        userDefaults.set(project.id?.description, forKey: "project.id")
     }
 
     func clearWorkingProject() {
         workingProject = nil
-        UserDefaults.standard.set(nil, forKey: "project.id")
+        userDefaults.set(nil, forKey: "project.id")
     }
 
     func openSettings() {
