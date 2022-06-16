@@ -10,9 +10,11 @@ import CoreData
 import SwiftUI
 
 struct LibraryView: View {
+    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var workingProjectState: WorkingProjectState
     @EnvironmentObject private var audioPlayer: AudioPlayer
-    @Environment(\.managedObjectContext) var moc
+    @StateObject var viewModel = LibraryViewModel()
+
     @FetchRequest(
         sortDescriptors: [
             SortDescriptor(\Project.createdAt, order: .forward)
@@ -42,12 +44,7 @@ struct LibraryView: View {
                     }
                 }
                 .onDelete(perform: removeProjects)
-                Button(action: {
-                    ProjectFactory.create(
-                        title: "Project \(Date().prettyDate)",
-                        context: PersistenceController.shared.container.viewContext
-                    )
-                }, label: {
+                Button(action: viewModel.onProjectAddTap, label: {
                     HStack {
                         Image(systemName: "plus.circle").foregroundColor(.green)
                         Text("Create new project")
@@ -61,14 +58,14 @@ struct LibraryView: View {
                     ForEach(recordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
-                            title: recording.title ?? "") {
-                            audioPlayer.play(recording: recording)
+                            title: recording.title ?? ""
+                        ) {
+                            viewModel.onRecordingTap(recording: recording, audioPlayer: audioPlayer)
                         }
                         .contextMenu {
                             ForEach(projects, id: \.id) { project in
                                 Button(action: {
-                                    recording.project = project
-                                    try! moc.save()
+                                    viewModel.move(standaloneRecording: recording, to: project, moc: moc)
                                 }, label: {
                                     Text(project.title ?? "")
                                 })
