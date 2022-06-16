@@ -60,9 +60,11 @@ class AudioRecorder: ObservableObject {
         return previousRecordingURL
     }
 
-    func askForPermission(callback: @escaping (Bool) -> Void) {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            callback(granted)
+    func askForPermission() async -> Bool {
+        await withCheckedContinuation { continuation in
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                continuation.resume(returning: granted)
+            }
         }
     }
 }

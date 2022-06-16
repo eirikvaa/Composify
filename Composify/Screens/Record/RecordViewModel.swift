@@ -14,6 +14,8 @@ class RecordViewModel: ObservableObject {
     @Published var showRecordingDeniedAlert = false
     @Published var showProjectSheet = false
 
+    private var onRecordTapTask: Task<Void, Never>?
+
     func openSettings() {
         if let settings = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(settings)
@@ -25,27 +27,27 @@ class RecordViewModel: ObservableObject {
         workingProjectState: WorkingProjectState,
         moc: NSManagedObjectContext
     ) {
-        audioRecorder.askForPermission { granted in
-            guard granted else {
-                self.showRecordingDeniedAlert.toggle()
+        onRecordTapTask = Task {
+            guard await audioRecorder.askForPermission() else {
+                await MainActor.run {
+                    self.showRecordingDeniedAlert.toggle()
+                }
                 return
             }
 
-            if self.isRecording {
-                let url = audioRecorder.stopRecording()
-                RecordingFactory.create(
-                    title: "Recording \(Date().prettyDate)",
-                    project: workingProjectState.workingProject,
-                    url: url,
-                    context: moc
-                )
-            } else {
-                DispatchQueue.main.async {
+            await MainActor.run {
+                if self.isRecording {
+                    let url = audioRecorder.stopRecording()
+                    RecordingFactory.create(
+                        title: "Recording \(Date().prettyDate)",
+                        project: workingProjectState.workingProject,
+                        url: url,
+                        context: moc
+                    )
+                } else {
                     audioRecorder.startRecording()
                 }
-            }
 
-            DispatchQueue.main.async {
                 self.isRecording.toggle()
             }
         }
