@@ -20,17 +20,13 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
 
         self.recording = recording
 
-        guard let url = recording.url else {
-            return
-        }
-
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
             try audioSession.setCategory(.playback)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-            let recordingTitle = recording.title ?? ""
+            let recordingTitle = recording.title
             let errorMessage = error.localizedDescription
             print(
                 "Failed preparing audio session for audio playback of \(recordingTitle): \(errorMessage)"
@@ -38,13 +34,13 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
 
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer = try AVAudioPlayer(contentsOf: recording.url)
             audioPlayer.delegate = self
             audioPlayer.prepareToPlay()
             audioPlayer.play()
             isPlaying = true
         } catch {
-            print("Failed to play recording with name: \(recording.title ?? ""): \(error.localizedDescription)")
+            print("Failed to play recording with name: \(recording.title): \(error.localizedDescription)")
         }
     }
 

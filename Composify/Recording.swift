@@ -6,24 +6,14 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
+import CoreData
 import Foundation
-import RealmSwift
 
-final class Recording: EmbeddedObject {
-    @objc dynamic var id = UUID().uuidString
-    @objc dynamic var title = ""
-    @objc dynamic var dateCreated = Date()
-    @objc dynamic var fileExtension = "caf"
-    @objc dynamic var url = ""
-
-    let section = LinkingObjects(fromType: Section.self, property: "recordings")
-
-    init(title: String, url: String) {
-        self.title = title
-        self.url = url
-    }
-
-    override required init() {
-        super.init()
-    }
+final class Recording: NSManagedObject {
+    @NSManaged var id: UUID
+    @NSManaged var title: String
+    @NSManaged var createdAt: Date
+    @NSManaged var fileExtension: String
+    @NSManaged var url: URL
+    @NSManaged var project: Project?
 }

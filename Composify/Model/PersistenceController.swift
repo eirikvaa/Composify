@@ -24,7 +24,7 @@ struct PersistenceController {
             )
             (0..<3).forEach {
                 RecordingFactory.create(
-                    title: "\(project.title ?? "") recording \($0)",
+                    title: "\(project.title) recording \($0)",
                     project: project,
                     url: URL(fileURLWithPath: ""),
                     context: controller.container.viewContext

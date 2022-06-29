@@ -6,25 +6,11 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
+import CoreData
 import Foundation
-import RealmSwift
 
-final class Project: Object {
-    @objc dynamic var id = UUID().uuidString
-    @objc dynamic var dateCreated = Date()
-    @objc dynamic var title = ""
-
-    let sections = List<Section>()
-
-    init(title: String) {
-        self.title = title
-    }
-
-    override required init() {
-        super.init()
-    }
-
-    override static func primaryKey() -> String? {
-        "id"
-    }
+public final class Project: NSManagedObject {
+    @NSManaged var id: UUID
+    @NSManaged var createdAt: Date
+    @NSManaged var title: String
 }

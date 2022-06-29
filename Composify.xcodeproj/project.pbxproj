@@ -11,6 +11,8 @@
 		E5168E17263EC383003E34C0 /* PlayableRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E16263EC383003E34C0 /* PlayableRowItem.swift */; };
 		E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */; };
 		E5168E1E263ED0B2003E34C0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */; };
+		E541977B28692A390005028E /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E541977928692A390005028E /* Project.swift */; };
+		E541977C28692A390005028E /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E541977A28692A390005028E /* Recording.swift */; };
 		E5559C2826FE994000947A7E /* WorkingProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5559C2726FE994000947A7E /* WorkingProjectState.swift */; };
 		E55EC621285BDE3C00B459D7 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EC620285BDE3C00B459D7 /* LibraryViewModel.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
@@ -64,6 +66,8 @@
 		E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonStyle.swift; sourceTree = "<group>"; };
 		E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
+		E541977928692A390005028E /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		E541977A28692A390005028E /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E5559C2726FE994000947A7E /* WorkingProjectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingProjectState.swift; sourceTree = "<group>"; };
 		E55EC620285BDE3C00B459D7 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 		E5A7990E25FCECC100FF718C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E541977928692A390005028E /* Project.swift */,
+				E541977A28692A390005028E /* Recording.swift */,
 				E5FE063D263D68600021DDD7 /* PersistenceController.swift */,
 				E5FE063F263D6D5E0021DDD7 /* ProjectFactory.swift */,
 				E5FE064B263D7BEA0021DDD7 /* RecordingFactory.swift */,
@@ -422,6 +428,7 @@
 				E5FE2218267D66040073FE1E /* RecordViewModel.swift in Sources */,
 				E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */,
 				E5F2956E263D4FC000650A5F /* MainView.swift in Sources */,
+				E541977B28692A390005028E /* Project.swift in Sources */,
 				E5FE064A263D73F00021DDD7 /* AudioPlayer.swift in Sources */,
 				E5168E17263EC383003E34C0 /* PlayableRowItem.swift in Sources */,
 				E5FE0648263D73E70021DDD7 /* RecordButton.swift in Sources */,
@@ -437,6 +444,7 @@
 				E5020B2A263CD4C40017DC04 /* Composify.xcdatamodeld in Sources */,
 				E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */,
 				E5FE063E263D68600021DDD7 /* PersistenceController.swift in Sources */,
+				E541977C28692A390005028E /* Recording.swift in Sources */,
 				E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

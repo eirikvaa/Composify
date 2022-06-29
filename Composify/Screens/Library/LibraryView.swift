@@ -39,7 +39,7 @@ struct LibraryView: View {
                             Circle()
                                 .foregroundColor(isWorkingProject ? .green : .clear)
                                 .frame(width: 10, height: 10)
-                            Text(project.title ?? "")
+                            Text(project.title)
                         }
                     }
                 }
@@ -58,7 +58,7 @@ struct LibraryView: View {
                     ForEach(recordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
-                            title: recording.title ?? ""
+                            title: recording.title
                         ) {
                             viewModel.onRecordingTap(recording: recording, audioPlayer: audioPlayer)
                         }
@@ -67,7 +67,7 @@ struct LibraryView: View {
                                 Button(action: {
                                     viewModel.move(standaloneRecording: recording, to: project, moc: moc)
                                 }, label: {
-                                    Text(project.title ?? "")
+                                    Text(project.title)
                                 })
                             }
                         }

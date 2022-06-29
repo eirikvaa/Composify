@@ -27,11 +27,11 @@ struct ProjectView: View {
 
     init(project: Project) {
         self.project = project
-        self._projectTitle = .init(initialValue: project.title ?? "")
+        self._projectTitle = .init(initialValue: project.title)
     }
 
     private var createdAt: String {
-        project.createdAt?.prettyDate ?? ""
+        project.createdAt.prettyDate
     }
 
     var body: some View {
@@ -47,7 +47,7 @@ struct ProjectView: View {
                 ForEach(recordings.filter { $0.project == project }, id: \.id) { recording in
                     PlayableRowItem(
                         isPlaying: rowIsPlaying(recording: recording),
-                        title: recording.title ?? ""
+                        title: recording.title
                     ) {
                         audioPlayer.play(recording: recording)
                     }
@@ -95,7 +95,7 @@ struct ProjectView: View {
             EditButton()
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle(project.title ?? "")
+        .navigationTitle(project.title)
     }
 
     private func removeRecordings(at indexes: IndexSet) {

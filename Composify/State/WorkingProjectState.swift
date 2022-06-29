@@ -30,7 +30,7 @@ final class WorkingProjectState: ObservableObject {
 
     func storeWorkingProject(project: Project, moc: NSManagedObjectContext) {
         workingProject = project
-        userDefaults.set(project.id?.description, forKey: "project.id")
+        userDefaults.set(project.id.description, forKey: "project.id")
     }
 
     func clearWorkingProject() {

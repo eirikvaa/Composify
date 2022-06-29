@@ -48,7 +48,7 @@ struct RecordView: View {
                             Text("Working project")
                                 .font(.body)
                             HStack {
-                                Text(workingProject.title ?? "")
+                                Text(workingProject.title)
                                     .font(.title)
                             }
                         }
@@ -116,7 +116,7 @@ struct RecordView: View {
 
     var actionSheetButtons: [Alert.Button] {
         let projects = projects.map { project in
-            Alert.Button.default(Text(project.title ?? "")) {
+            Alert.Button.default(Text(project.title)) {
                 workingProjectState.storeWorkingProject(project: project, moc: moc)
             }
         }
