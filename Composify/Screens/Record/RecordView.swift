@@ -23,58 +23,33 @@ struct RecordView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(
-                    colors: [
-                        Color(UIColor(
-                            red: 0.95,
-                            green: 0.95,
-                            blue: 0.97,
-                            alpha: 1.00
-                        )),
-                        .red
-                    ]),
-                startPoint: .bottom,
-                endPoint: .top
-            )
-            .edgesIgnoringSafeArea(.all)
+            Color.red
+                .edgesIgnoringSafeArea(.all)
 
             VStack {
                 Spacer().frame(height: 20)
 
-                Button(action: viewModel.onProjectSheetTap, label: {
-                    if let workingProject = workingProjectState.workingProject {
-                        VStack {
-                            Text("Working project")
-                                .font(.body)
-                            HStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Add new recordings to")
+                            .font(.subheadline)
+                        Group {
+                            if let workingProject = workingProjectState.workingProject {
                                 Text(workingProject.title)
-                                    .font(.title)
-                            }
-                        }
-                    } else {
-                        VStack {
-                            Text("No working project")
-                                .font(.body)
-                            HStack {
-                                Text("Tap to select working project")
-                                    .font(.title)
+                                    .font(.headline)
+                            } else {
+                                Text("Standalone recordings")
+                                    .font(.headline)
                             }
                         }
                     }
-                })
+                }
                 .buttonStyle(PlainButtonStyle())
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-
-                Image(systemName: "hand.tap")
-                    .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 Spacer()
-
-                Text(viewModel.isRecording ? "Recording ..." : "Start recording")
-                    .foregroundColor(.white)
-                    .font(.body)
 
                 RecordButton(isRecording: $viewModel.isRecording) {
                     viewModel.onRecordButtonTap(
@@ -86,7 +61,15 @@ struct RecordView: View {
                 .shadow(radius: 1)
 
                 Spacer()
+
+                Button(action: viewModel.onProjectSheetTap) {
+                    Text("Set working project")
+                        .foregroundColor(.white)
+                        .font(.body)
+                        .bold()
+                }
             }
+            .padding()
             .actionSheet(isPresented: $viewModel.showProjectSheet) {
                 ActionSheet(
                     title: Text("Projects"),
@@ -112,6 +95,18 @@ struct RecordView: View {
                 viewModel.onAppear(workingProjectState: workingProjectState, moc: moc)
             }
         }
+    }
+
+    private var recordingText: String {
+        let text: String
+        if isRecording {
+            text = "Recording …"
+        } else if workingProjectState.workingProject != nil {
+            text = "Create recording in working project"
+        } else {
+            text = "Create standalone recording"
+        }
+        return text
     }
 
     var actionSheetButtons: [Alert.Button] {
