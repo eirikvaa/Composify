@@ -139,5 +139,14 @@ struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
         RecordView()
             .environmentObject(WorkingProjectState())
+
+        let moc = PersistenceController.preview.container.viewContext
+        RecordView()
+            .environmentObject(WorkingProjectState(
+                workingProject: ProjectFactory.create(
+                    title: "A project",
+                    context: moc
+                )
+            ))
     }
 }

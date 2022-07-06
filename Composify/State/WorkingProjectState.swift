@@ -12,6 +12,10 @@ import SwiftUI
 final class WorkingProjectState: ObservableObject {
     @Published var workingProject: Project?
 
+    init(workingProject: Project? = nil) {
+        self.workingProject = workingProject
+    }
+
     private let userDefaults = UserDefaults.standard
 
     func fetchWorkingProject(moc: NSManagedObjectContext) {
