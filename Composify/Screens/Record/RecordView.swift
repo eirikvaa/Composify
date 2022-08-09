@@ -23,7 +23,7 @@ struct RecordView: View {
 
     var body: some View {
         ZStack {
-            Color.red
+            Color.clear
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
@@ -45,7 +45,7 @@ struct RecordView: View {
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
-                .foregroundColor(.white)
+                .foregroundColor(.red)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -64,7 +64,7 @@ struct RecordView: View {
 
                 Button(action: viewModel.onProjectSheetTap) {
                     Text("Set working project")
-                        .foregroundColor(.white)
+                        .foregroundColor(.red)
                         .font(.body)
                         .bold()
                 }
