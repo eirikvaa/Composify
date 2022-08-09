@@ -33,7 +33,7 @@ struct LibraryView: View {
         List {
             Section(header: Text("Projects")) {
                 ForEach(projects, id: \.id) { project in
-                    NavigationLink(destination: ProjectView(project: project)) {
+                    NavigationLink(value: project) {
                         HStack {
                             let isWorkingProject = workingProjectState.workingProject?.id == project.id
                             Circle()

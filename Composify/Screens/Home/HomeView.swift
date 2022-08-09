@@ -26,8 +26,11 @@ struct HomeView: View {
                 }
                 .tag(TabItem.record)
 
-            NavigationView {
+            NavigationStack {
                 LibraryView()
+                    .navigationDestination(for: Project.self) { project in
+                        ProjectView(project: project)
+                    }
             }
             .tabItem {
                 Label("Library", systemImage: "music.note.list")
