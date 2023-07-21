@@ -47,15 +47,17 @@ struct LibraryView: View {
                 .buttonStyle(PlainButtonStyle())
             }
 
+//            print("###", recordings)
             let freestandingRecordings = recordings.filter {
                 $0.isFreestanding
             }
+//            print("###", freestandingRecordings)
             if !freestandingRecordings.isEmpty {
                 Section(header: Text("Standalone recordings")) {
-                    ForEach(freestandingRecordings, id: \.id) { recording in
+                    ForEach(recordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
-                            title: recording.title
+                            title: recording.title + "\(recording.id)"
                         ) {
                             viewModel.onRecordingTap(recording: recording, audioPlayer: audioPlayer)
                         }
@@ -106,7 +108,7 @@ struct LibraryView: View {
 
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.shared.container
+        let context = PreviewData.shared.container
 
         Group {
             NavigationView {

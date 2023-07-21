@@ -1,5 +1,5 @@
 //
-//  PersistenceController.swift
+//  PreviewData.swift
 //  Composify
 //
 //  Created by Eirik Vale Aase on 01/05/2021.
@@ -10,8 +10,8 @@ import Foundation
 import SwiftData
 
 @MainActor
-struct PersistenceController {
-    static let shared = PersistenceController()
+struct PreviewData {
+    static let shared = PreviewData()
 
     let container: ModelContainer = {
         let schema = Schema([Project.self, Recording.self])

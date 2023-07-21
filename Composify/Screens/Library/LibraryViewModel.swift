@@ -12,10 +12,15 @@ import SwiftData
 @MainActor
 class LibraryViewModel: ObservableObject {
     func onProjectAddTap(modelContext: ModelContext) {
-        ProjectFactory.create(
-            title: "Project \(Date().prettyDate)",
-            modelContext: modelContext
+        let project = Project(
+            title: "Project \(Date().prettyDate)"
         )
+        modelContext.insert(project)
+        do {
+            try modelContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func move(standaloneRecording recording: Recording, to project: Project, moc: ModelContext) {

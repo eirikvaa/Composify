@@ -12,15 +12,17 @@ import SwiftData
 @Model
 final class Project {
     @Attribute(.unique)
-    var id = UUID()
+    var id: UUID
 
-    var createdAt = Date()
+    var createdAt: Date
     var title: String
 
     @Relationship(.cascade, inverse: \Recording.project)
     var recordings: [Recording] = []
 
     init(title: String) {
+        self.id = UUID()
+        self.createdAt = Date()
         self.title = title
     }
 }

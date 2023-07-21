@@ -76,16 +76,6 @@ struct ProjectView: View {
                     }
                 })
             }
-            Section(header: Text("Danger Zone")) {
-                Button(action: {
-                    audioPlayer.stopPlaying()
-                    presentationMode.wrappedValue.dismiss()
-                    modelContext.delete(project)
-                    try! modelContext.save()
-                }, label: {
-                    Text("Delete project")
-                })
-            }
         }
         .toolbar {
             EditButton()

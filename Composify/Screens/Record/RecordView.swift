@@ -124,9 +124,8 @@ struct RecordView: View {
         }
 
         let newProject = Alert.Button.default(Text("Create new project")) {
-            let project = ProjectFactory.create(
-                title: "Project \(Date().prettyDate)",
-                modelContext: modelContext
+            let project = Project(
+                title: "Project \(Date().prettyDate)"
             )
             workingProjectState.storeWorkingProject(project: project, moc: modelContext)
         }
@@ -147,7 +146,7 @@ struct RecordView_Previews: PreviewProvider {
         RecordView()
             .environmentObject(WorkingProjectState())
 
-        let context = PersistenceController.shared.container
+        let context = PreviewData.shared.container
         RecordView()
             .modelContainer(context)
     }

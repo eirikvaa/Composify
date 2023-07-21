@@ -45,6 +45,7 @@ class RecordViewModel: ObservableObject {
                         project: workingProjectState.workingProject
                     )
                     modelContext.insert(recording)
+                    workingProjectState.workingProject?.recordings.append(recording)
                     do {
                         try modelContext.save()
                     } catch {

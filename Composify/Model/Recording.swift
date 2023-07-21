@@ -11,8 +11,9 @@ import SwiftData
 
 @Model
 final class Recording {
-    @Attribute(.unique) var id = UUID()
-    var createdAt = Date()
+    @Attribute(.unique)
+    var id: UUID
+    var createdAt: Date
     var fileExtension = "caf"
     var index: Int?
     var title: String
@@ -20,6 +21,8 @@ final class Recording {
     var project: Project?
 
     init(title: String, index: Int? = 0, url: URL, project: Project?) {
+        self.id = UUID()
+        self.createdAt = Date()
         self.title = title
         self.fileExtension = fileExtension
         self.index = index
