@@ -6,18 +6,19 @@
 //  Copyright © 2022 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
 import Foundation
+import SwiftData
 
+@MainActor
 class LibraryViewModel: ObservableObject {
-    func onProjectAddTap() {
+    func onProjectAddTap(modelContext: ModelContext) {
         ProjectFactory.create(
             title: "Project \(Date().prettyDate)",
-            context: PersistenceController.shared.container.viewContext
+            modelContext: modelContext
         )
     }
 
-    func move(standaloneRecording recording: Recording, to project: Project, moc: NSManagedObjectContext) {
+    func move(standaloneRecording recording: Recording, to project: Project, moc: ModelContext) {
         recording.project = project
         try! moc.save()
     }

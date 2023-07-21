@@ -6,25 +6,22 @@
 //  Copyright © 2020 Eirik Vale Aase. All rights reserved.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
 struct ComposifyApp: App {
     @Environment(\.scenePhase) var scenePhase
 
-    private let persistenceController = PersistenceController.shared
     private let audioPlayer = AudioPlayer()
     private let workingProjectState = WorkingProjectState()
 
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(audioPlayer)
                 .environmentObject(workingProjectState)
         }
-        .onChange(of: scenePhase) { _ in
-            persistenceController.save()
-        }
+        .modelContainer(for: [Project.self, Recording.self])
     }
 }

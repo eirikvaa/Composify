@@ -6,17 +6,16 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 
 struct ProjectFactory {
     @discardableResult
-    static func create(title: String, context: NSManagedObjectContext) -> Project {
-        let project = Project(context: context)
-        project.id = UUID()
-        project.createdAt = Date()
+    static func create(title: String, modelContext: ModelContext) -> Project {
+        let project = Project(title: title)
         project.title = title
 
-        try! context.save()
+        modelContext.insert(project)
+        try! modelContext.save()
 
         return project
     }

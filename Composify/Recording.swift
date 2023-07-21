@@ -6,14 +6,30 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
 import Foundation
+import SwiftData
 
-final class Recording: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var title: String
-    @NSManaged var createdAt: Date
-    @NSManaged var fileExtension: String
-    @NSManaged var url: URL
-    @NSManaged var project: Project?
+@Model
+final class Recording {
+    @Attribute(.unique) var id = UUID()
+    var createdAt = Date()
+    var fileExtension = "caf"
+    var index: Int?
+    var title: String
+    var url: URL
+    var project: Project?
+
+    init(title: String, index: Int? = 0, url: URL, project: Project?) {
+        self.title = title
+        self.fileExtension = fileExtension
+        self.index = index
+        self.url = url
+        self.project = project
+    }
+}
+
+extension Recording {
+    var isFreestanding: Bool {
+        project == nil
+    }
 }

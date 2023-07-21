@@ -6,8 +6,8 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
 import Foundation
+import SwiftData
 
 struct RecordingFactory {
     @discardableResult
@@ -16,15 +16,13 @@ struct RecordingFactory {
         fileExtension: String = "caf",
         project: Project? = nil,
         url: URL,
-        context: NSManagedObjectContext
+        context: ModelContext
     ) -> Recording {
-        let recording = Recording(context: context)
-        recording.id = UUID()
-        recording.createdAt = Date()
-        recording.title = title
-        recording.fileExtension = "m4a"
-        recording.project = project
-        recording.url = url
+        let recording = Recording(
+            title: title,
+            url: url,
+            project: project
+        )
 
         try! context.save()
 

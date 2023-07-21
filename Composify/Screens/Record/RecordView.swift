@@ -6,20 +6,20 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
 struct RecordView: View {
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var workingProjectState: WorkingProjectState
     @ObservedObject private var audioRecorder = AudioRecorder()
-    @ObservedObject private var viewModel = RecordViewModel()
+    @State private var viewModel = RecordViewModel()
     @State private var isRecording = false
     @State private var showProjectSheet = false
     @State private var showRecordingDeniedAlert = false
 
-    @FetchRequest(sortDescriptors: [])
-    var projects: FetchedResults<Project>
+    @Query
+    var projects: [Project]
 
     var body: some View {
         ZStack {
@@ -55,19 +55,24 @@ struct RecordView: View {
                     viewModel.onRecordButtonTap(
                         audioRecorder: audioRecorder,
                         workingProjectState: workingProjectState,
-                        moc: moc
+                        modelContext: modelContext
                     )
                 }
                 .shadow(radius: 1)
 
                 Spacer()
 
-                Button(action: viewModel.onProjectSheetTap) {
-                    Text("Set working project")
-                        .foregroundColor(.red)
-                        .font(.body)
-                        .bold()
-                }
+                Button(
+                    action: {
+                        viewModel.onProjectSheetTap()
+                    },
+                    label: {
+                        Text("Set working project")
+                            .foregroundColor(.red)
+                            .font(.body)
+                            .bold()
+                    }
+                )
             }
             .padding()
             .actionSheet(isPresented: $viewModel.showProjectSheet) {
@@ -87,12 +92,14 @@ struct RecordView: View {
                 return Alert(
                     title: Text(title),
                     message: Text(message),
-                    primaryButton: .default(Text("Settings"), action: viewModel.openSettings),
+                    primaryButton: .default(Text("Settings"), action: {
+                        viewModel.openSettings()
+                    }),
                     secondaryButton: .cancel()
                 )
             })
             .onAppear {
-                viewModel.onAppear(workingProjectState: workingProjectState, moc: moc)
+                viewModel.onAppear(workingProjectState: workingProjectState, modelContext: modelContext)
             }
         }
     }
@@ -112,16 +119,16 @@ struct RecordView: View {
     var actionSheetButtons: [Alert.Button] {
         let projects = projects.map { project in
             Alert.Button.default(Text(project.title)) {
-                workingProjectState.storeWorkingProject(project: project, moc: moc)
+                workingProjectState.storeWorkingProject(project: project, moc: modelContext)
             }
         }
 
         let newProject = Alert.Button.default(Text("Create new project")) {
             let project = ProjectFactory.create(
                 title: "Project \(Date().prettyDate)",
-                context: PersistenceController.shared.container.viewContext
+                modelContext: modelContext
             )
-            workingProjectState.storeWorkingProject(project: project, moc: moc)
+            workingProjectState.storeWorkingProject(project: project, moc: modelContext)
         }
 
         let reset = Alert.Button.destructive(Text("Reset working project")) {
@@ -140,13 +147,8 @@ struct RecordView_Previews: PreviewProvider {
         RecordView()
             .environmentObject(WorkingProjectState())
 
-        let moc = PersistenceController.preview.container.viewContext
+        let context = PersistenceController.shared.container
         RecordView()
-            .environmentObject(WorkingProjectState(
-                workingProject: ProjectFactory.create(
-                    title: "A project",
-                    context: moc
-                )
-            ))
+            .modelContainer(context)
     }
 }

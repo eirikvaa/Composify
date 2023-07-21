@@ -6,7 +6,7 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
 final class WorkingProjectState: ObservableObject {
@@ -18,21 +18,20 @@ final class WorkingProjectState: ObservableObject {
 
     private let userDefaults = UserDefaults.standard
 
-    func fetchWorkingProject(moc: NSManagedObjectContext) {
-        if let uuidString = userDefaults.object(forKey: "project.id") as? String,
-           let uuid = UUID(uuidString: uuidString) {
-            let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
-            fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", uuid as CVarArg)
-
+    func fetchWorkingProject(modelContext: ModelContext) {
+        let projectId = userDefaults.object(forKey: "project.id") as? String
+        if let uuidString = projectId, let uuid = UUID(uuidString: uuidString) {
             do {
-                workingProject = try moc.fetch(fetchRequest).first
+                workingProject = try modelContext.fetch(.init(predicate: #Predicate { (project: Project) in
+                    project.id == uuid
+                })).first
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
 
-    func storeWorkingProject(project: Project, moc: NSManagedObjectContext) {
+    func storeWorkingProject(project: Project, moc: ModelContext) {
         workingProject = project
         userDefaults.set(project.id.description, forKey: "project.id")
     }

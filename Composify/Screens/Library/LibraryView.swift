@@ -6,28 +6,20 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
 struct LibraryView: View {
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.modelContext) var moc
     @EnvironmentObject var workingProjectState: WorkingProjectState
     @EnvironmentObject private var audioPlayer: AudioPlayer
-    @StateObject var viewModel = LibraryViewModel()
+    @State var viewModel = LibraryViewModel()
 
-    @FetchRequest(
-        sortDescriptors: [
-            SortDescriptor(\Project.createdAt, order: .forward)
-        ],
-        animation: .default
-    ) var projects: FetchedResults<Project>
-    @FetchRequest(
-        sortDescriptors: [
-            SortDescriptor(\Recording.createdAt, order: .forward)
-        ],
-        predicate: NSPredicate(format: "project = nil"),
-        animation: .default
-    ) var recordings: FetchedResults<Recording>
+    @Query(sort: \.createdAt, order: .forward, animation: .default)
+    var projects: [Project]
+
+    @Query
+    var recordings: [Recording]
 
     var body: some View {
         List {
@@ -44,7 +36,9 @@ struct LibraryView: View {
                     }
                 }
                 .onDelete(perform: removeProjects)
-                Button(action: viewModel.onProjectAddTap, label: {
+                Button(action: {
+                    viewModel.onProjectAddTap(modelContext: moc)
+                }, label: {
                     HStack {
                         Image(systemName: "plus.circle").foregroundColor(.green)
                         Text("Create new project")
@@ -53,9 +47,12 @@ struct LibraryView: View {
                 .buttonStyle(PlainButtonStyle())
             }
 
-            if !recordings.isEmpty {
+            let freestandingRecordings = recordings.filter {
+                $0.isFreestanding
+            }
+            if !freestandingRecordings.isEmpty {
                 Section(header: Text("Standalone recordings")) {
-                    ForEach(recordings, id: \.id) { recording in
+                    ForEach(freestandingRecordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
                             title: recording.title
@@ -109,13 +106,13 @@ struct LibraryView: View {
 
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.preview.container.viewContext
+        let context = PersistenceController.shared.container
 
         Group {
             NavigationView {
                 TabView {
                     LibraryView()
-                        .environment(\.managedObjectContext, context)
+                        .modelContainer(context)
                         .environmentObject(WorkingProjectState())
                         .tabItem {
                             Label("Library", systemImage: "music.note.list")

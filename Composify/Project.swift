@@ -6,11 +6,21 @@
 //  Copyright © 2016 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
 import Foundation
+import SwiftData
 
-public final class Project: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var createdAt: Date
-    @NSManaged var title: String
+@Model
+final class Project {
+    @Attribute(.unique)
+    var id = UUID()
+
+    var createdAt = Date()
+    var title: String
+
+    @Relationship(.cascade, inverse: \Recording.project)
+    var recordings: [Recording] = []
+
+    init(title: String) {
+        self.title = title
+    }
 }

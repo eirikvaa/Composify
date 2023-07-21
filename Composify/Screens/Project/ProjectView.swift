@@ -6,20 +6,16 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
 struct ProjectView: View {
     @EnvironmentObject var workingProjectState: WorkingProjectState
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var audioPlayer: AudioPlayer
-    @FetchRequest(
-        entity: Recording.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Recording.createdAt, ascending: true)
-        ]
-    ) private var recordings: FetchedResults<Recording>
+    @Query(sort: \.createdAt, order: .forward)
+    private var recordings: [Recording]
 
     @State private var projectTitle = ""
 
@@ -40,7 +36,7 @@ struct ProjectView: View {
                 TextField("Project title", text: $projectTitle) { _ in
                     project.title = projectTitle
                 } onCommit: {
-                    try! moc.save()
+                    try! modelContext.save()
                 }
             }
             Section(header: Text("Recordings")) {
@@ -54,7 +50,7 @@ struct ProjectView: View {
                     .contextMenu {
                         Button(action: {
                             recording.project = nil
-                            try! moc.save()
+                            try! modelContext.save()
                         }, label: {
                             Text("Remove recording from project")
                         })
@@ -70,7 +66,7 @@ struct ProjectView: View {
                     if workingProjectState.workingProject == project {
                         workingProjectState.clearWorkingProject()
                     } else {
-                        workingProjectState.storeWorkingProject(project: project, moc: moc)
+                        workingProjectState.storeWorkingProject(project: project, moc: modelContext)
                     }
                 }, label: {
                     if workingProjectState.workingProject == project {
@@ -84,8 +80,8 @@ struct ProjectView: View {
                 Button(action: {
                     audioPlayer.stopPlaying()
                     presentationMode.wrappedValue.dismiss()
-                    moc.delete(project)
-                    try! moc.save()
+                    modelContext.delete(project)
+                    try! modelContext.save()
                 }, label: {
                     Text("Delete project")
                 })
@@ -101,10 +97,10 @@ struct ProjectView: View {
     private func removeRecordings(at indexes: IndexSet) {
         for index in indexes {
             let recording = recordings[index]
-            moc.delete(recording)
+            modelContext.delete(recording)
         }
 
-        try! moc.save()
+        try! modelContext.save()
     }
 
     private func rowIsPlaying(recording: Recording) -> Binding<Bool> {
@@ -117,12 +113,7 @@ struct ProjectView: View {
 
 struct ProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        let controller = PersistenceController.preview
-        let project = controller
-            .container
-            .viewContext
-            .registeredObjects
-            .first(where: { $0 is Project }) as! Project
+        let project = Project(title: "Project 1")
 
         Group {
             NavigationView {

@@ -6,9 +6,10 @@
 //  Copyright © 2021 Eirik Vale Aase. All rights reserved.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
+@MainActor
 class RecordViewModel: ObservableObject {
     @Published var isRecording = false
     @Published var showRecordingDeniedAlert = false
@@ -25,7 +26,7 @@ class RecordViewModel: ObservableObject {
     func onRecordButtonTap(
         audioRecorder: AudioRecorder,
         workingProjectState: WorkingProjectState,
-        moc: NSManagedObjectContext
+        modelContext: ModelContext
     ) {
         onRecordTapTask = Task {
             guard await audioRecorder.askForPermission() else {
@@ -38,12 +39,17 @@ class RecordViewModel: ObservableObject {
             await MainActor.run {
                 if self.isRecording {
                     let url = audioRecorder.stopRecording()
-                    RecordingFactory.create(
+                    let recording = Recording(
                         title: "Recording \(Date().prettyDate)",
-                        project: workingProjectState.workingProject,
                         url: url,
-                        context: moc
+                        project: workingProjectState.workingProject
                     )
+                    modelContext.insert(recording)
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        print("###", error.localizedDescription)
+                    }
                 } else {
                     audioRecorder.startRecording()
                 }
@@ -57,7 +63,7 @@ class RecordViewModel: ObservableObject {
         showProjectSheet.toggle()
     }
 
-    func onAppear(workingProjectState: WorkingProjectState, moc: NSManagedObjectContext) {
-        workingProjectState.fetchWorkingProject(moc: moc)
+    func onAppear(workingProjectState: WorkingProjectState, modelContext: ModelContext) {
+        workingProjectState.fetchWorkingProject(modelContext: modelContext)
     }
 }
