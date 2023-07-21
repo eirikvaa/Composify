@@ -2,7 +2,6 @@ analyzer_rules:
   - unused_declaration
   - unused_import
 opt_in_rules:
-  - anyobject_protocol
   - array_init
   - attributes
   - closure_end_indentation
@@ -67,6 +66,7 @@ disabled_rules:
   - type_name
   - force_try
   - force_cast
+  - attributes
 identifier_name:
   excluded:
     # Used with the Identifiable protocol, so should be allowed.
