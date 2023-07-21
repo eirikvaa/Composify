@@ -47,17 +47,15 @@ struct LibraryView: View {
                 .buttonStyle(PlainButtonStyle())
             }
 
-//            print("###", recordings)
             let freestandingRecordings = recordings.filter {
                 $0.isFreestanding
             }
-//            print("###", freestandingRecordings)
             if !freestandingRecordings.isEmpty {
                 Section(header: Text("Standalone recordings")) {
                     ForEach(recordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
-                            title: recording.title + "\(recording.id)"
+                            title: recording.title
                         ) {
                             viewModel.onRecordingTap(recording: recording, audioPlayer: audioPlayer)
                         }
