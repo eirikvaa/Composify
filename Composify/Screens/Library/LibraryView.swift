@@ -69,7 +69,11 @@ struct LibraryView: View {
                         .contextMenu {
                             ForEach(projects, id: \.id) { project in
                                 Button(action: {
-                                    viewModel.move(standaloneRecording: recording, to: project, moc: moc)
+                                    viewModel.move(
+                                        standaloneRecording: recording,
+                                        to: project,
+                                        moc: moc
+                                    )
                                 }, label: {
                                     Text(project.title)
                                 })
