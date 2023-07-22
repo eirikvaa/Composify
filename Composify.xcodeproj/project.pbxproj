@@ -61,7 +61,6 @@
 		E5168E16263EC383003E34C0 /* PlayableRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayableRowItem.swift; sourceTree = "<group>"; };
 		E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonStyle.swift; sourceTree = "<group>"; };
 		E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E5559C2726FE994000947A7E /* WorkingProjectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingProjectState.swift; sourceTree = "<group>"; };
 		E55758F12A6BE5D400D3DDF7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -112,14 +111,6 @@
 				E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		E523959A21C6824300D3004F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E52A14D7239B29B3006AD675 /* BartyCrouch.swift */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		E547141E25FC3605008DA65B /* Main */ = {
@@ -183,7 +174,6 @@
 				E56460361D3B54B000AA6557 /* App */,
 				E5559C2626FE992600947A7E /* State */,
 				E5168E1C263ED09B003E34C0 /* Extensions */,
-				E523959A21C6824300D3004F /* Resources */,
 				E5A6BBBD255FF32200BC7D32 /* Screens */,
 				E5A7990E25FCECC100FF718C /* Model */,
 			);
@@ -278,7 +268,6 @@
 				E5645FFD1D3B50B500AA6557 /* Sources */,
 				E5645FFE1D3B50B500AA6557 /* Frameworks */,
 				E5645FFF1D3B50B500AA6557 /* Resources */,
-				E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */,
 			);
 			buildRules = (
 				E5E3EFD61DDB9B7A00D3C643 /* PBXBuildRule */,
@@ -390,21 +379,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		E5E3EFD71DDB9B9E00D3C643 /* BartyCrouch */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = BartyCrouch;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n    # bartycrouch update -x\n    # bartycrouch lint -x\n    echo \"Nothing to do for BartyCrouch right now.\"\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
