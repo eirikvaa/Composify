@@ -12,7 +12,7 @@ import SwiftUI
 struct RecordView: View {
     @Environment(\.modelContext) var modelContext
     @EnvironmentObject var workingProjectState: WorkingProjectState
-    @ObservedObject private var audioRecorder = AudioRecorder()
+    @State private var audioRecorder = AudioRecorder()
     @State private var viewModel = RecordViewModel()
     @State private var isRecording = false
     @State private var showProjectSheet = false

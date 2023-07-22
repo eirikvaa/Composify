@@ -9,8 +9,9 @@
 import AVFoundation
 import SwiftUI
 
-class AudioRecorder: ObservableObject {
-    @Published var isRecording = false
+@Observable
+class AudioRecorder {
+    var isRecording = false
 
     private var audioRecorder: AVAudioRecorder!
     private var recordingTitle = UUID()

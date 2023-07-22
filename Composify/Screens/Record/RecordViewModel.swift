@@ -10,10 +10,11 @@ import SwiftData
 import SwiftUI
 
 @MainActor
-class RecordViewModel: ObservableObject {
-    @Published var isRecording = false
-    @Published var showRecordingDeniedAlert = false
-    @Published var showProjectSheet = false
+@Observable
+class RecordViewModel {
+    var isRecording = false
+    var showRecordingDeniedAlert = false
+    var showProjectSheet = false
 
     private var onRecordTapTask: Task<Void, Never>?
 

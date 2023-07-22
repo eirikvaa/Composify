@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 @MainActor
-class LibraryViewModel: ObservableObject {
+class LibraryViewModel {
     func onProjectAddTap(modelContext: ModelContext) {
         let project = Project(
             title: "Project \(Date().prettyDate)"
