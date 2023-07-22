@@ -1,0 +1,186 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add new recordings to" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legg nye prosjekter til"
+          }
+        }
+      }
+    },
+    "Clear working project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern arbeidsprosjekt"
+          }
+        }
+      }
+    },
+    "Create new project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lag nytt prosjekt"
+          }
+        }
+      }
+    },
+    "Created At" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprettet"
+          }
+        }
+      }
+    },
+    "Library" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bibliotek"
+          }
+        }
+      }
+    },
+    "Project title" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prosjekttittel"
+          }
+        }
+      }
+    },
+    "Projects" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prosjekter"
+          }
+        }
+      }
+    },
+    "Record" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta opp"
+          }
+        }
+      }
+    },
+    "Recordings" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opptak"
+          }
+        }
+      }
+    },
+    "Remove recording from project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern opptak fra prosjekt"
+          }
+        }
+      }
+    },
+    "Reset working project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resett arbeidsprosjekt"
+          }
+        }
+      }
+    },
+    "Select a project to record audio in" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg prosjekt å ta opp lyd til"
+          }
+        }
+      }
+    },
+    "Set as working project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sett som arbeidsprosjekt"
+          }
+        }
+      }
+    },
+    "Set working project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sett arbeidsprosjekt"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstillinger"
+          }
+        }
+      }
+    },
+    "Standalone recordings" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uavhengige opptak"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tittel"
+          }
+        }
+      }
+    },
+    "Working project" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arbeidsprosjekt"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

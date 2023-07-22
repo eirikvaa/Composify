@@ -11,13 +11,13 @@
 		E5168E1B263ED08A003E34C0 /* DeleteButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1A263ED08A003E34C0 /* DeleteButtonStyle.swift */; };
 		E5168E1E263ED0B2003E34C0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5168E1D263ED0B2003E34C0 /* Date+Extensions.swift */; };
 		E5559C2826FE994000947A7E /* WorkingProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5559C2726FE994000947A7E /* WorkingProjectState.swift */; };
+		E55758F22A6BE5D400D3DDF7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E55758F12A6BE5D400D3DDF7 /* Localizable.xcstrings */; };
+		E55758F42A6BEA0E00D3DDF7 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E55758F32A6BEA0E00D3DDF7 /* InfoPlist.xcstrings */; };
 		E55EC621285BDE3C00B459D7 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55EC620285BDE3C00B459D7 /* LibraryViewModel.swift */; };
 		E56C327D1FF6FB8B00AB8375 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */; };
-		E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E58289A121C6F5F800E438B5 /* InfoPlist.strings */; };
 		E5A50DFA263DAAB4002CE1C5 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */; };
 		E5A6BB78255FE80C00BC7D32 /* ComposifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */; };
 		E5A7991C25FCEDC200FF718C /* ComposifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */; };
-		E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B3C7341D4A34BB0021183A /* Localizable.strings */; };
 		E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C2030C2090FEE900B061E2 /* Assets.xcassets */; };
 		E5F2956E263D4FC000650A5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6BB83255FE84F00BC7D32 /* MainView.swift */; };
 		E5FBEF9F2A6B326C00311A4E /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBEF9C2A6B326C00311A4E /* Project.swift */; };
@@ -64,11 +64,11 @@
 		E52A14D7239B29B3006AD675 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		E547142125FC3641008DA65B /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		E5559C2726FE994000947A7E /* WorkingProjectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingProjectState.swift; sourceTree = "<group>"; };
+		E55758F12A6BE5D400D3DDF7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		E55758F32A6BEA0E00D3DDF7 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		E55EC620285BDE3C00B459D7 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		E56460011D3B50B500AA6557 /* Composify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Composify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56C327C1FF6FB8B00AB8375 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		E58289A021C6F5F800E438B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E58289A221C6F5FB00E438B5 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E58C57E91DD8799D00348C65 /* ComposifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComposifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58C57ED1DD8799D00348C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5A50DF9263DAAB4002CE1C5 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
@@ -78,10 +78,7 @@
 		E5A7991B25FCEDC200FF718C /* ComposifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposifyTests.swift; sourceTree = "<group>"; };
 		E5A7993A25FCF1D100FF718C /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		E5A7994025FD23C400FF718C /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
-		E5B3C7331D4A34BB0021183A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5C2030C2090FEE900B061E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E5FA94BE1E2F4338005444AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E5FA94BF1E2F4339005444AC /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5FBEF9C2A6B326C00311A4E /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Project.swift; path = Model/Project.swift; sourceTree = "<group>"; };
 		E5FBEF9E2A6B326C00311A4E /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recording.swift; path = Model/Recording.swift; sourceTree = "<group>"; };
 		E5FE063D263D68600021DDD7 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewData.swift; path = Model/PreviewData.swift; sourceTree = "<group>"; };
@@ -197,9 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				E5A6BB77255FE80C00BC7D32 /* ComposifyApp.swift */,
-				E58289A121C6F5F800E438B5 /* InfoPlist.strings */,
-				E5B3C7341D4A34BB0021183A /* Localizable.strings */,
 				E5C2030C2090FEE900B061E2 /* Assets.xcassets */,
+				E55758F12A6BE5D400D3DDF7 /* Localizable.xcstrings */,
+				E55758F32A6BEA0E00D3DDF7 /* InfoPlist.xcstrings */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -363,8 +360,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5B3C7321D4A34BB0021183A /* Localizable.strings in Resources */,
-				E582899F21C6F5F800E438B5 /* InfoPlist.strings in Resources */,
+				E55758F42A6BEA0E00D3DDF7 /* InfoPlist.xcstrings in Resources */,
+				E55758F22A6BE5D400D3DDF7 /* Localizable.xcstrings in Resources */,
 				E5C2030D2090FEE900B061E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,28 +452,6 @@
 			targetProxy = E58C57EE1DD8799D00348C65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		E58289A121C6F5F800E438B5 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E58289A021C6F5F800E438B5 /* en */,
-				E58289A221C6F5FB00E438B5 /* nb */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E5B3C7341D4A34BB0021183A /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E5B3C7331D4A34BB0021183A /* Base */,
-				E5FA94BE1E2F4338005444AC /* en */,
-				E5FA94BF1E2F4339005444AC /* nb */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E56460271D3B50B500AA6557 /* Debug */ = {
