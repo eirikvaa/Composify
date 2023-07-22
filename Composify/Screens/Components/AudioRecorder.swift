@@ -13,10 +13,7 @@ class AudioRecorder: ObservableObject {
     @Published var isRecording = false
 
     private var audioRecorder: AVAudioRecorder!
-    private var recordingTitle = UUID().uuidString
-    private var recordingUrl: URL {
-        createFileAndGetURL(name: recordingTitle)
-    }
+    private var recordingTitle = UUID()
 
     var canRecord: Bool {
         AVAudioApplication.shared.recordPermission == .granted
@@ -40,7 +37,10 @@ class AudioRecorder: ObservableObject {
         ]
 
         do {
-            audioRecorder = try AVAudioRecorder(url: recordingUrl, settings: settings)
+            audioRecorder = try AVAudioRecorder(
+                url: createRecordingUrl(name: recordingTitle),
+                settings: settings
+            )
             audioRecorder.prepareToRecord()
             audioRecorder.record()
             isRecording = true
@@ -54,10 +54,10 @@ class AudioRecorder: ObservableObject {
         isRecording = false
 
         // Reset the recording title so we don't overwrite recordings
-        let previousRecordingURL = recordingUrl
-        recordingTitle = UUID().uuidString
+        let recordingId = recordingTitle
+        recordingTitle = UUID()
 
-        return UUID(uuidString: String(previousRecordingURL.lastPathComponent.split(separator: ".")[0]))!
+        return recordingId
     }
 
     func askForPermission() async -> Bool {
@@ -66,12 +66,9 @@ class AudioRecorder: ObservableObject {
 }
 
 private extension AudioRecorder {
-    func createFileAndGetURL(name: String) -> URL {
-        let fileManager = FileManager.default
-        let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-
-        return documentDirectory
-            .appendingPathComponent(name)
+    func createRecordingUrl(name: UUID) -> URL {
+        URL.documentsDirectory
+            .appendingPathComponent(name.uuidString)
             .appendingPathExtension("m4a")
     }
 }
