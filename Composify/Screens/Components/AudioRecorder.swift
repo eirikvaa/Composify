@@ -19,7 +19,7 @@ class AudioRecorder: ObservableObject {
     }
 
     var canRecord: Bool {
-        AVAudioSession.sharedInstance().recordPermission == .granted
+        AVAudioApplication.shared.recordPermission == .granted
     }
 
     func startRecording() {
@@ -61,11 +61,7 @@ class AudioRecorder: ObservableObject {
     }
 
     func askForPermission() async -> Bool {
-        await withCheckedContinuation { continuation in
-            AVAudioSession.sharedInstance().requestRecordPermission { granted in
-                continuation.resume(returning: granted)
-            }
-        }
+        await AVAudioApplication.requestRecordPermission()
     }
 }
 
