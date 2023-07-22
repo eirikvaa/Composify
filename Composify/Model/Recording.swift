@@ -14,7 +14,6 @@ final class Recording {
     @Attribute(.unique)
     var id: UUID
     var createdAt: Date
-    var fileExtension = "caf"
     var index: Int?
     var title: String
     var project: Project?
@@ -23,7 +22,6 @@ final class Recording {
         self.id = id
         self.createdAt = Date()
         self.title = title
-        self.fileExtension = fileExtension
         self.index = index
         self.project = project
     }
