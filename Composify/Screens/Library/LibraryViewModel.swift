@@ -11,13 +11,17 @@ import SwiftData
 
 @MainActor
 class LibraryViewModel {
-    func onProjectAddTap(modelContext: ModelContext) {
+    func onProjectAddTap(
+        workingProjectState: WorkingProjectState,
+        modelContext: ModelContext
+    ) {
         let project = Project(
             title: "Project \(Date().prettyDate)"
         )
         modelContext.insert(project)
         do {
             try modelContext.save()
+            workingProjectState.storeWorkingProject(project: project, moc: modelContext)
         } catch {
             print(error.localizedDescription)
         }

@@ -47,7 +47,10 @@ struct LibraryView: View {
                 }
                 .onDelete(perform: removeProjects)
                 Button(action: {
-                    viewModel.onProjectAddTap(modelContext: moc)
+                    viewModel.onProjectAddTap(
+                        workingProjectState: workingProjectState,
+                        modelContext: moc
+                    )
                 }, label: {
                     HStack {
                         Image(systemName: "plus.circle").foregroundColor(.green)
