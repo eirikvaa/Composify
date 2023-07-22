@@ -28,10 +28,12 @@ final class Recording {
 }
 
 extension Recording {
+    @Transient
     var isFreestanding: Bool {
         project == nil
     }
 
+    @Transient
     var url: URL {
         URL.documentsDirectory
             .appendingPathComponent(id.uuidString)
