@@ -116,7 +116,6 @@ struct LibraryView_Previews: PreviewProvider {
                         .environmentObject(WorkingProjectState())
                         .tabItem {
                             Label("Library", systemImage: "music.note.list")
-                            Text("Library")
                         }
                 }
                 .navigationTitle("Library")
