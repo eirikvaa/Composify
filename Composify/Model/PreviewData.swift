@@ -24,8 +24,8 @@ struct PreviewData {
             )
             (0..<3).forEach {
                 let recording = Recording(
+                    id: UUID(),
                     title: "\(project.title) recording \($0)",
-                    url: URL(fileURLWithPath: ""),
                     project: project
                 )
                 container.mainContext.insert(recording)

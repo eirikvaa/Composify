@@ -49,7 +49,7 @@ class AudioRecorder: ObservableObject {
         }
     }
 
-    func stopRecording() -> URL {
+    func stopRecording() -> UUID {
         audioRecorder.stop()
         isRecording = false
 
@@ -57,7 +57,7 @@ class AudioRecorder: ObservableObject {
         let previousRecordingURL = recordingUrl
         recordingTitle = UUID().uuidString
 
-        return previousRecordingURL
+        return UUID(uuidString: String(previousRecordingURL.lastPathComponent.split(separator: ".")[0]))!
     }
 
     func askForPermission() async -> Bool {

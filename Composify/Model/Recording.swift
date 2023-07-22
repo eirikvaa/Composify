@@ -17,16 +17,14 @@ final class Recording {
     var fileExtension = "caf"
     var index: Int?
     var title: String
-    var url: URL
     var project: Project?
 
-    init(title: String, index: Int? = 0, url: URL, project: Project?) {
-        self.id = UUID()
+    init(id: UUID, title: String, index: Int? = 0, project: Project?) {
+        self.id = id
         self.createdAt = Date()
         self.title = title
         self.fileExtension = fileExtension
         self.index = index
-        self.url = url
         self.project = project
     }
 }
@@ -34,5 +32,11 @@ final class Recording {
 extension Recording {
     var isFreestanding: Bool {
         project == nil
+    }
+
+    var url: URL {
+        URL.documentsDirectory
+            .appendingPathComponent(id.uuidString)
+            .appendingPathExtension("m4a")
     }
 }

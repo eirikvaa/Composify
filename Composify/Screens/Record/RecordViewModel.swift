@@ -38,10 +38,10 @@ class RecordViewModel: ObservableObject {
 
             await MainActor.run {
                 if self.isRecording {
-                    let url = audioRecorder.stopRecording()
+                    let id = audioRecorder.stopRecording()
                     let recording = Recording(
+                        id: id,
                         title: "Recording \(Date().prettyDate)",
-                        url: url,
                         project: workingProjectState.workingProject
                     )
                     modelContext.insert(recording)
