@@ -45,11 +45,7 @@ struct ProjectView: View {
     var body: some View {
         List {
             Section(header: Text("Title")) {
-                TextField("Project title", text: $projectTitle) { _ in
-                    project.title = projectTitle
-                } onCommit: {
-                    try! modelContext.save()
-                }
+                TextField("Project title", text: $projectTitle)
             }
             Section(header: Text("Recordings")) {
                 ForEach(recordings, id: \.id) { recording in
@@ -94,6 +90,10 @@ struct ProjectView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle(project.title)
+        .onDisappear {
+            project.title = projectTitle
+            try! modelContext.save()
+        }
     }
 
     private func removeRecordings(at indexes: IndexSet) {
