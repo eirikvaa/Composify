@@ -32,6 +32,8 @@ final class WorkingProjectState: ObservableObject {
     }
 
     func storeWorkingProject(project: Project, moc: ModelContext) {
+        moc.insert(project)
+        try! moc.save()
         workingProject = project
         userDefaults.set(project.id.description, forKey: "project.id")
     }
