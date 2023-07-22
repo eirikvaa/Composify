@@ -14,7 +14,7 @@ struct ProjectView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var audioPlayer: AudioPlayer
-    @Query(sort: \.createdAt, order: .forward)
+    @Query
     private var recordings: [Recording]
 
     @State private var projectTitle = ""
@@ -24,6 +24,18 @@ struct ProjectView: View {
     init(project: Project) {
         self.project = project
         self._projectTitle = .init(initialValue: project.title)
+
+        // The #Predicate macro returns an error when referencing a model object inside the closure.
+        // Ref: https://stackoverflow.com/a/76632341/5609988.
+        let id = project.id
+
+        self._recordings = .init(
+            filter: #Predicate { recording in
+                recording.project?.id == id
+            },
+            sort: \.createdAt,
+            order: .forward
+        )
     }
 
     private var createdAt: String {
@@ -40,7 +52,7 @@ struct ProjectView: View {
                 }
             }
             Section(header: Text("Recordings")) {
-                ForEach(recordings.filter { $0.project == project }, id: \.id) { recording in
+                ForEach(recordings, id: \.id) { recording in
                     PlayableRowItem(
                         isPlaying: rowIsPlaying(recording: recording),
                         title: recording.title

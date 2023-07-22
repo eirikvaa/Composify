@@ -21,6 +21,16 @@ struct LibraryView: View {
     @Query
     var recordings: [Recording]
 
+    init() {
+        var id: UUID?
+        // The #Predicate macro is quite sensitive to what kind of code can be used.
+        // It's important to not reference model objects, and not reference nil.
+        // Ref: https://stackoverflow.com/a/76632341/5609988.
+        _recordings = .init(filter: #Predicate { recording in
+            recording.project?.id == id
+        })
+    }
+
     var body: some View {
         List {
             Section(header: Text("Projects")) {
@@ -47,12 +57,9 @@ struct LibraryView: View {
                 .buttonStyle(PlainButtonStyle())
             }
 
-            let freestandingRecordings = recordings.filter {
-                $0.isFreestanding
-            }
-            if !freestandingRecordings.isEmpty {
+            if !recordings.isEmpty {
                 Section(header: Text("Standalone recordings")) {
-                    ForEach(freestandingRecordings, id: \.id) { recording in
+                    ForEach(recordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
                             title: recording.title
