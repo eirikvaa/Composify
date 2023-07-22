@@ -12,8 +12,8 @@ extension Date {
     var prettyDate: String {
         let createdAtDate = self
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: createdAtDate)
     }
 }
