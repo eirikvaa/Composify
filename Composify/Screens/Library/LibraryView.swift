@@ -22,7 +22,7 @@ struct LibraryView: View {
     var recordings: [Recording]
 
     init() {
-        var id: UUID?
+        let id: UUID? = nil
         // The #Predicate macro is quite sensitive to what kind of code can be used.
         // It's important to not reference model objects, and not reference nil.
         // Ref: https://stackoverflow.com/a/76632341/5609988.
