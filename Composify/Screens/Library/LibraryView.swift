@@ -52,7 +52,7 @@ struct LibraryView: View {
             }
             if !freestandingRecordings.isEmpty {
                 Section(header: Text("Standalone recordings")) {
-                    ForEach(recordings, id: \.id) { recording in
+                    ForEach(freestandingRecordings, id: \.id) { recording in
                         PlayableRowItem(
                             isPlaying: rowIsPlaying(recording: recording),
                             title: recording.title
